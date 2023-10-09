@@ -100,7 +100,7 @@ submitButton.addEventListener("click", (e) => {
   }
 
   if (result.loginStat && result.passwordStat == true) {
-    fetch(`http://192.168.150.134:3000/users/0?login=${login.value}`, {
+    fetch(`http://${ip}:3000/users/0?login=${login.value}`, {
       method: "GET",
     })
       .then((response) => response.json())
