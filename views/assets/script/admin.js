@@ -88,7 +88,7 @@ const addEntity = (data) => {
     url: `http://${ip}:3000/entity`,
     method: "POST",
     timeout: 0,
-    data: JSON.stringify(data),
+    data: data,
   };
 
   $.ajax(settings).done(function (responseText) {
