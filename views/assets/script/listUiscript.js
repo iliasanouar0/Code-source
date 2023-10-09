@@ -5,6 +5,10 @@ Date.prototype.toDateInputValue = function () {
     return local.toJSON().slice(0, 10);
 };
 
+let storage = { ...localStorage }
+console.log(storage);
+let ip = storage.ip
+
 $(document).ready(function () {
     $("#e_update_date").val(new Date().toDateString())
     $("#e_add_date").val(new Date().toDateInputValue());
@@ -81,7 +85,7 @@ $(document).on('click', '.delete-all-this', () => {
             let check = $("#list_data input:checked")
             for (let i = 0; i < check.length; i++) {
                 let ID = check[i].value
-                fetch(`http://192.168.150.134:3000/lists/${ID}`, {
+                fetch(`http://${ip}:3000/lists/${ID}`, {
                     method: "DELETE",
                     headers: {
                         'Content-Type': 'application/json',
@@ -110,7 +114,7 @@ $(document).on('click', '.delete-all-this', () => {
 
 const addList = (data) => {
     let settings = {
-        "url": "http://192.168.150.134:3000/lists",
+        "url": `http://${ip}:3000/lists`,
         "method": "POST",
         "timeout": 0,
         "data": JSON.stringify(data),
@@ -138,7 +142,7 @@ const addList = (data) => {
 
 const addSeeds = (data) => {
     let settings = {
-        "url": "http://192.168.150.134:3000/seeds",
+        "url": `http://${ip}:3000/seeds`,
         "method": "POST",
         "timeout": 0,
         "data": JSON.stringify(data),
@@ -193,7 +197,7 @@ $(document).on('click', '#l_seeds_add', (ev) => {
     let seeds = []
     let obj = []
     let settings = {
-        "url": `http://192.168.150.134:3000/lists/${listId}`,
+        "url": `http://${ip}:3000/lists/${listId}`,
         "method": "GET",
         "headers": {
             'Content-Type': 'application/json',
@@ -325,7 +329,7 @@ document.getElementById("demo").onchange = evt => {
             let data = event.target.attributes.data.value
             let obj = []
             let settings = {
-                "url": `http://192.168.150.134:3000/lists/${data}`,
+                "url": `http://${ip}:3000/lists/${data}`,
                 "method": "GET",
                 "headers": {
                     'Content-Type': 'application/json',
@@ -363,7 +367,7 @@ $(document).on('click', '.save_edit', event => {
     let data = event.target.attributes[2].value
     let name = $(event.target).parent().parent().children()[2].children.item(0).value
     let settings = {
-        "url": `http://192.168.150.134:3000/lists/${data}?name=${name}`,
+        "url": `http://${ip}:3000/lists/${data}?name=${name}`,
         "method": "PUT",
         "headers": {
             'Content-Type': 'application/json',
@@ -415,7 +419,7 @@ $(document).on('click', '.view', event => {
     let update = $('.updateOptions')[0].dataset.id = data
     $('#searchSeeds')[0].dataset.id = data
     let settings = {
-        "url": `http://192.168.150.134:3000/seeds/${data}`,
+        "url": `http://${ip}:3000/seeds/${data}`,
         "method": "GET",
         "headers": {
             'Content-Type': 'application/json',
@@ -514,7 +518,7 @@ $(document).on('click', '.delete-seeds', () => {
                 let ID = check[i].value
                 ides.push(ID)
             }
-            fetch(`http://192.168.150.134:3000/seeds/`, {
+            fetch(`http://${ip}:3000/seeds/`, {
                 method: "PATCH",
                 body: `${JSON.stringify(ides)}`,
                 headers: {
@@ -561,7 +565,7 @@ $(document).on('click', '.remove-this-seed', event => {
         if (result.isConfirmed) {
             let data = $(event.target).data().id
             $(event.target).parent().parent().remove()
-            fetch(`http://192.168.150.134:3000/seeds/${data}`, {
+            fetch(`http://${ip}:3000/seeds/${data}`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json',
@@ -617,7 +621,7 @@ $(document).on('click', '.edit-this-seed', event => {
             "proxy": `${n_proxy}`,
             "verification": `${n_vrf}`,
         }
-        fetch('http://192.168.150.134:3000/seeds', {
+        fetch(`http://${ip}:3000/seeds`, {
             method: "PUT",
             body: JSON.stringify(seed),
             headers: {
@@ -648,7 +652,7 @@ $(document).on('click', '.edit-this-seed', event => {
 
 const seedsViewRender = data => {
     let settings = {
-        "url": `http://192.168.150.134:3000/seeds/${data}`,
+        "url": `http://${ip}:3000/seeds/${data}`,
         "method": "GET",
         "headers": {
             'Content-Type': 'application/json',
@@ -702,7 +706,7 @@ const seedsViewRender = data => {
 
 const searchRender = (data, id) => {
     let settings = {
-        "url": `http://192.168.150.134:3000/seeds/search/${id}?gmail=${data}`,
+        "url": `http://${ip}:3000/seeds/search/${id}?gmail=${data}`,
         "method": "GET",
         "headers": {
             'Content-Type': 'application/json',
@@ -759,7 +763,7 @@ $(document).on('click', '.submit_proxy', event => {
             })
             return
         }
-        fetch(`http://192.168.150.134:3000/seeds/proxy/${data}?proxy=${oldPVal}`, {
+        fetch(`http://${ip}:3000/seeds/proxy/${data}?proxy=${oldPVal}`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -781,7 +785,7 @@ $(document).on('click', '.submit_proxy', event => {
                     }
                     send.push(proxy)
                 }
-                fetch(`http://192.168.150.134:3000/seeds/proxy/`, {
+                fetch(`http://${ip}:3000/seeds/proxy/`, {
                     method: "PUT",
                     body: JSON.stringify(send),
                     headers: {
@@ -828,7 +832,7 @@ $(document).on('click', '.submit_proxy', event => {
             }
             updateObjects.push(prxUp)
         }
-        fetch(`http://192.168.150.134:3000/seeds/proxy/`, {
+        fetch(`http://${ip}:3000/seeds/proxy/`, {
             method: "PUT",
             body: JSON.stringify(updateObjects),
             headers: {
@@ -896,7 +900,7 @@ $(document).on('click', '.submit_bulk_edit', event => {
                     verification: seed[3]
                 })
             });
-            fetch(`http://192.168.150.134:3000/seeds/bulk/`, {
+            fetch(`http://${ip}:3000/seeds/bulk/`, {
                 method: "PATCH",
                 body: JSON.stringify(objects),
                 headers: {

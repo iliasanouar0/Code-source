@@ -14,6 +14,10 @@ function getRootWebSitePath() {
   return webFolderFullPath;
 }
 
+let storage = { ...localStorage }
+console.log(storage);
+let ip = storage.ip
+
 const root = getRootWebSitePath();
 const mailerSidebarUrl = `${root}/views/layout/mailer_sidebar.html`;
 const mailerNavbarUrl = `${root}/views/layout/mailer_navbar.html`;
@@ -96,7 +100,7 @@ const createRow = (data) => {
 };
 
 if (path == "/views/mailer/lists/") {
-  fetch("http://192.168.150.134:3000/lists", {
+  fetch(`http://${ip}:3000/lists`, {
     method: "GET",
   })
     .then((response) => {

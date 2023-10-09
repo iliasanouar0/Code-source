@@ -9,6 +9,10 @@ $(document).on("click", ".info a", function () {
   $(".user_data").modal("show");
 });
 
+let storage = { ...localStorage }
+console.log(storage);
+let ip = storage.ip
+
 $(document).on("click", "#logout", () => {
   $("#modal-danger").modal("show");
 });
@@ -54,7 +58,7 @@ function getRndInteger(min, max) {
 }
 const addUser = (data) => {
   var settings = {
-    url: "http://192.168.150.134:3000/users",
+    url: `http://${ip}:3000/users`,
     method: "POST",
     timeout: 0,
     data: JSON.stringify(data),
@@ -81,7 +85,7 @@ const addUser = (data) => {
 
 const addEntity = (data) => {
   var settings = {
-    url: "http://192.168.150.134:3000/entity",
+    url: `http://${ip}:3000/entity`,
     method: "POST",
     timeout: 0,
     data: JSON.stringify(data),

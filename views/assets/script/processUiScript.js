@@ -10,6 +10,10 @@ $(document).ready(function () {
     $(".update").val(new Date().toDateInputValue());
 });
 
+let storage = { ...localStorage }
+console.log(storage);
+let ip = storage.ip
+
 const Process_data = document.querySelector('#Process_data')
 
 const createRowProcess = data => {
@@ -37,7 +41,7 @@ const createRowProcess = data => {
 }
 
 const addProcess = data => {
-    fetch(`http://192.168.150.134:3000/process/`, {
+    fetch(`http://${ip}:3000/process/`, {
         method: 'POST',
         body: `${JSON.stringify(data)}`,
         headers: {

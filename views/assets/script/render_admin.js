@@ -7,6 +7,10 @@ function getRootWebSitePath() {
   return webFolderFullPath;
 }
 
+let storage = { ...localStorage }
+console.log(storage);
+let ip = storage.ip
+
 let adminNavbarUrl = ""
 let adminSidebarUrl = ""
 const root = getRootWebSitePath();
@@ -212,7 +216,7 @@ if (path.includes("/admin/users/")) {
   document.querySelector("#add_user").addEventListener("click", () => {
     const select = document.querySelector("#entity_add");
     select.innerHTML = ""
-    fetch("http://192.168.150.134:3000/entity", {
+    fetch(`http://${ip}:3000/entity`, {
       method: "GET",
     })
       .then((response) => {
@@ -227,7 +231,7 @@ if (path.includes("/admin/users/")) {
         });
       });
   });
-  fetch("http://192.168.150.134:3000/users/", {
+  fetch(`http://${ip}:3000/users/`, {
     method: "GET",
   })
     .then((response) => {
@@ -248,7 +252,7 @@ if (path.includes("/admin/users/")) {
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", () => {
           let id = buttons[i].dataset.id;
-          fetch(`http://192.168.150.134:3000/users/${id}`, {
+          fetch(`http://${ip}:3000/users/${id}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
@@ -283,7 +287,7 @@ if (path.includes("/admin/users/")) {
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", () => {
           const select = document.querySelector("#e_entity_add");
-          fetch("http://192.168.150.134:3000/entity", {
+          fetch(`http://${ip}:3000/entity`, {
             method: "GET",
           })
             .then((response) => {
@@ -298,7 +302,7 @@ if (path.includes("/admin/users/")) {
               });
             });
           let id = buttons[i].dataset.id;
-          fetch(`http://192.168.150.134:3000/users/${id}`, {
+          fetch(`http://${ip}:3000/users/${id}`, {
             method: "Get",
             headers: {
               "Content-Type": "application/json",
@@ -403,7 +407,7 @@ if (path.includes("/admin/users/")) {
                   id_entity: `${entity_add}`,
                   isp: `${result}`,
                 };
-                fetch(`http://192.168.150.134:3000/users/${id_user}`, {
+                fetch(`http://${ip}:3000/users/${id_user}`, {
                   method: "PUT",
                   body: JSON.stringify(data),
                   headers: {
@@ -434,7 +438,7 @@ if (path.includes("/admin/users/")) {
       }
     });
 } else if (path.includes("/admin/entities/")) {
-  fetch("http://192.168.150.134:3000/entity/", {
+  fetch(`http://${ip}:3000/entity/`, {
     method: "GET",
   })
     .then((response) => {
@@ -454,7 +458,7 @@ if (path.includes("/admin/users/")) {
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", () => {
           let id = buttons[i].dataset.id;
-          fetch(`http://192.168.150.134:3000/entity/${id}`, {
+          fetch(`http://${ip}:3000/entity/${id}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
@@ -489,7 +493,7 @@ if (path.includes("/admin/users/")) {
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", () => {
           let id = buttons[i].dataset.id;
-          fetch(`http://192.168.150.134:3000/entity/${id}`, {
+          fetch(`http://${ip}:3000/entity/${id}`, {
             method: "Get",
             headers: {
               "Content-Type": "application/json",
@@ -543,7 +547,7 @@ if (path.includes("/admin/users/")) {
                     date_add: `${e_add_date}`,
                     date_update: `${e_update_date}`,
                   };
-                  fetch(`http://192.168.150.134:3000/entity/${id}`, {
+                  fetch(`http://${ip}:3000/entity/${id}`, {
                     method: "PUT",
                     body: JSON.stringify(data),
                     headers: {
@@ -577,7 +581,7 @@ if (path.includes("/admin/users/")) {
   document.querySelector("#add_process").addEventListener("click", () => {
     const select = document.querySelector("#p_list_add");
     select.innerHTML = ""
-    fetch("http://192.168.150.134:3000/lists", {
+    fetch(`http://${ip}:3000/lists`, {
       method: "GET",
     })
       .then((response) => {
@@ -593,7 +597,7 @@ if (path.includes("/admin/users/")) {
       });
   });
 
-  fetch("http://192.168.150.134:3000/process/admin", {
+  fetch(`http://${ip}:3000/process/admin`, {
     method: "GET",
   })
     .then((response) => {
@@ -608,7 +612,7 @@ if (path.includes("/admin/users/")) {
       // createRowProcess(data);
     })
 } else if (path.includes("/admin/lists/")) {
-  fetch("http://192.168.150.134:3000/lists", {
+  fetch(`http://${ip}:3000/lists`, {
     method: "GET",
   })
     .then((response) => {
