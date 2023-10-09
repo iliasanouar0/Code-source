@@ -1,5 +1,5 @@
-// const userData = JSON.parse(sessionStorage.user);
-// let userName = `${userData.f_name} ${userData.l_name}`;
+const userData = JSON.parse(sessionStorage.user);
+let userName = `${userData.f_name} ${userData.l_name}`;
 
 $(document).on("click", ".info a", function () {
   $("#f_name").val(userData.f_name);
@@ -9,9 +9,9 @@ $(document).on("click", ".info a", function () {
   $(".user_data").modal("show");
 });
 
-let storage = { ...localStorage }
-console.log(storage);
-let ip = storage.ip
+// let storage = { ...localStorage }
+// console.log(storage);
+// let ip = storage.ip
 
 $(document).on("click", "#logout", () => {
   $("#modal-danger").modal("show");
