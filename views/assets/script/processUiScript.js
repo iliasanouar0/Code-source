@@ -101,7 +101,6 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: `${start_in}`,
     }
-    // console.log(obj);
     fetch(`http://${ip}:3000/process/`, {
         method: 'PUT',
         body: `${JSON.stringify(obj)}`,
@@ -114,6 +113,25 @@ $(document).on('click', '.start', event => {
     }).then(resp => {
         return resp.json()
     }).then(data => {
-        console.log(data);
+        Swal.fire({
+            title: data,
+            timer: 1500,
+            showConfirmButton: false,
+            icon: 'success'
+        })
+    }).then(() => {
+        const Process_data = document.querySelector('#Process_data')
+        fetch(`http://${ip}:3000/process/admin`, {
+            method: "GET",
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let rows = createRowProcess(data);
+                rows.forEach((row) => {
+                    Process_data.appendChild(row);
+                });
+            })
     })
 })

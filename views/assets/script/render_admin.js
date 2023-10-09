@@ -604,12 +604,10 @@ if (path.includes("/admin/users/")) {
       return response.json();
     })
     .then((data) => {
-      // console.log(data);
       let rows = createRowProcess(data);
       rows.forEach((row) => {
         Process_data.appendChild(row);
       });
-      // createRowProcess(data);
     })
 } else if (path.includes("/admin/lists/")) {
   fetch(`http://${ip}:3000/lists`, {
