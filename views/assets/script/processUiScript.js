@@ -111,7 +111,7 @@ $(document).on('click', '.start', event => {
             'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
         }
     }).then(resp => {
-        return resp.json()
+        return resp.text()
     }).then(data => {
         Swal.fire({
             title: data,
@@ -121,6 +121,7 @@ $(document).on('click', '.start', event => {
         })
     }).then(() => {
         const Process_data = document.querySelector('#Process_data')
+        process.innerHTML = ""
         fetch(`http://${ip}:3000/process/admin`, {
             method: "GET",
         })
