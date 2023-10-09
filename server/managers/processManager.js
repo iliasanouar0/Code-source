@@ -43,10 +43,10 @@ const getAllData = (request, response) => {
 
 const updateProcess = (request, response) => {
     const data = (request.body)
-    let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
-    let values = [data[0].status, data[0].start_in, data[0].id_process]
-    let obj = { query: query, data: values }
-    response.status(200).send(obj)
+    // let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
+    // let values = [data[0].status, data[0].start_in, data[0].id_process]
+    // let obj = { query: query, data: values }
+    response.status(200).send(data)
 }
 
 module.exports = {
