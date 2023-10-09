@@ -95,7 +95,7 @@ $(document).on('click', '.start', event => {
     const id = $(event.target)[0].attributes[2].value
     console.log(id);
     const status = "RUNNING"
-    const start_in = new Date()
+    const start_in = new Date().toDateInputValue()
     let obj = {
         id_process: `${id}`,
         status: `${status}`,
