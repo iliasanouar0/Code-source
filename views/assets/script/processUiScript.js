@@ -101,5 +101,19 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: `${start_in}`,
     }
-    console.log(obj);
+    // console.log(obj);
+    fetch(`http://${ip}:3000/process/`, {
+        method: 'PUT',
+        body: `${JSON.stringify(obj)}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+        }
+    }).then(resp => {
+        return resp.json()
+    }).then(data => {
+        console.log(data);
+    })
 })
