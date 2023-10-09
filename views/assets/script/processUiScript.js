@@ -10,9 +10,9 @@ $(document).ready(function () {
     $(".update").val(new Date().toDateInputValue());
 });
 
-let storage = { ...localStorage }
-console.log(storage);
-let ip = storage.ip
+// let storage = { ...localStorage }
+// console.log(storage);
+// let ip = storage.ip
 
 const Process_data = document.querySelector('#Process_data')
 

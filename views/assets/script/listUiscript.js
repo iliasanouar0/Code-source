@@ -5,9 +5,9 @@ Date.prototype.toDateInputValue = function () {
     return local.toJSON().slice(0, 10);
 };
 
-let storage = { ...localStorage }
-console.log(storage);
-let ip = storage.ip
+// let storage = { ...localStorage }
+// console.log(storage);
+// let ip = storage.ip
 
 $(document).ready(function () {
     $("#e_update_date").val(new Date().toDateString())
