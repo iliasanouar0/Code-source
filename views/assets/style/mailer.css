@@ -1,0 +1,28 @@
+.fa-eye {
+  pointer-events: none;
+}
+
+.fa-edit {
+  pointer-events: none;
+}
+
+.fa-trash-alt {
+  pointer-events: none;
+}
+
+.modal-xl {
+  width: 90%;
+  max-width: 1400px;
+}
+
+@media (min-width: 1200px) {
+  .modal-xl {
+    --bs-modal-width: 1400px;
+  }
+}
+
+mark {
+  background-color: rgba(255, 0, 0, 0.5);
+  color: black;
+  font-weight: bold;
+}

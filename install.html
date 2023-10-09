@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation | Reporting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./views/assets/vendors/AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css">
+    <!-- check bootstrap -->
+    <link rel="stylesheet"
+        href="./views/assets/vendors/AdminLTE-3.2.0/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="./views/assets/vendors/AdminLTE-3.2.0/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="./views/assets/vendors/AdminLTE-3.2.0/plugins/bs-stepper/css/bs-stepper.min.css">
+
+</head>
+
+<body>
+    <style>
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        body {
+            background-color: black
+        }
+
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                border: 3px solid rgb(255, 255, 255);
+                border-radius: 50%;
+            }
+
+            &::before {
+                width: 55px;
+                height: 20px;
+                animation: animate-inner 1.7s linear infinite;
+            }
+
+            &::after {
+                width: 60px;
+                height: 20px;
+                animation: animate-outer 2s linear infinite;
+            }
+        }
+
+        .loader2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                border: 3px solid rgb(243, 3, 163);
+                border-radius: 50%;
+            }
+
+            &::before {
+                animation: animate-inner 1.4s linear infinite;
+            }
+
+            &::after {
+                width: 80px;
+                height: 20px;
+                animation: animate-outer 3s linear infinite;
+            }
+        }
+
+        .loader3 {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &::after {
+                content: "";
+                position: absolute;
+                border: 3px solid rgb(0, 38, 255);
+                border-radius: 50%;
+            }
+
+            &::after {
+                width: 80px;
+                height: 20px;
+                animation: animate-inner 3s linear infinite;
+            }
+        }
+
+        @keyframes animate-inner {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes animate-outer {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+
+        code {
+            display: block;
+            height: 75%;
+            white-space: pre-wrap;
+            /* overflow-y: scroll; */
+            color: lightgreen;
+        }
+    </style>
+    <div class='container'>
+        <!-- <h1>Let's start the installation process</h1> -->
+        <div class="row p-5">
+
+            <div class="card card-default w-100">
+                <div class="card-header">
+                    <h3 class="card-title">Installation process</h3>
+                </div>
+                <div class="card-body p-0">
+                    <div class="bs-stepper linear">
+                        <div class="bs-stepper-header" role="tablist">
+
+                            <div class="step" data-target="#logins-part">
+                                <button type="button" class="step-trigger" role="tab" aria-controls="logins-part"
+                                    id="logins-part-trigger" aria-selected="false" disabled="disabled">
+                                    <span class="bs-stepper-circle">1</span>
+                                    <span class="bs-stepper-label">Logins</span>
+                                </button>
+                            </div>
+                            <div class="line"></div>
+                            <div class="step active" data-target="#information-part">
+                                <button type="button" class="step-trigger" role="tab" aria-controls="information-part"
+                                    id="information-part-trigger" aria-selected="true">
+                                    <span class="bs-stepper-circle">2</span>
+                                    <span class="bs-stepper-label">Database config</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bs-stepper-content">
+                            <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+                                <div class="form-group">
+                                    <label for="f_name_add">First name</label>
+                                    <input type="text" class="form-control" id="f_name_add">
+                                </div>
+                                <div class="form-group">
+                                    <label for="l_name_add">Last name</label>
+                                    <input type="text" class="form-control" id="l_name_add">
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Type</label>
+                                            <select class="form-control" style="width: 100%;" tabindex="-1"
+                                                aria-hidden="true" id="type_add">
+                                                <option value="admin" selected>admin</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Entity</label>
+                                            <select class="form-control entities" style="width: 100%;" tabindex="-1"
+                                                aria-hidden="true" id="entity_add">
+                                                <option value="1" selected>IT</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>ISPs</label>
+                                            <select class="form-control" style="width: 100%;" multiple tabindex="-1"
+                                                aria-hidden="true" id="isp_add">
+                                                <option value="gmail">Gmail</option>
+                                                <option value="yahoo">Yahoo</option>
+                                                <option value="hotmail">Hotmail</option>
+                                                <option value="aol">Aol</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="login_add">
+                                </div>
+                                <button class="btn btn-primary" onclick="stepper.next()">Next</button>
+                            </div>
+                            <div id="information-part" class="content active dstepper-block" role="tabpanel"
+                                aria-labelledby="information-part-trigger">
+                                <div class="form-group">
+                                    <label for="userName">User name</label>
+                                    <input type="text" class="form-control" id="userName">
+                                </div>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="form-group">
+                                            <label for="host">Host</label>
+                                            <input type="address" class="form-control" id="host">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="port">port</label>
+                                            <input type="number" class="form-control" id="port">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Database name</label>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="text" class="form-control" id="password">
+                                </div>
+                                <button class="btn btn-primary previous" onclick="stepper.previous()">Previous</button>
+                                <button type="submit" class="btn btn-primary" id="add">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Reporting
+                </div>
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="col">
+                <div class="loader"></div>
+                <div class="loader2"></div>
+                <div class="loader3"></div>
+            </div>
+            <div class="col">
+                <code id="code"></code>
+            </div>
+        </div>
+    </div>
+    <div class="timer">
+        <h1><time>00:00:00</time></h1>
+    </div>
+    <!-- jQuery -->
+    <script src="./views/assets/vendors/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
+    <script src="./views/assets/vendors/AdminLTE-3.2.0/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="./views/assets/vendors/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="./views/assets/vendors/AdminLTE-3.2.0/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        var h1 = document.getElementsByTagName('h1')[0];
+        // var start = document.getElementById('strt');
+        // var stop = document.getElementById('stp');
+        // var reset = document.getElementById('rst');
+        var sec = 0;
+        var min = 0;
+        var hrs = 0;
+        var t;
+
+        function tick() {
+            sec++;
+            if (sec >= 60) {
+                sec = 0;
+                min++;
+                if (min >= 60) {
+                    min = 0;
+                    hrs++;
+                }
+            }
+        }
+        function add() {
+            tick();
+            h1.textContent = (hrs > 9 ? hrs : "0" + hrs)
+                + ":" + (min > 9 ? min : "0" + min)
+                + ":" + (sec > 9 ? sec : "0" + sec);
+            timer();
+        }
+        function timer() {
+            t = setTimeout(add, 1000);
+        }
+        Date.prototype.toDateInputValue = function () {
+            var local = new Date(this);
+            local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+            return local.toJSON().slice(0, 10);
+        };
+
+        $(document).ready(function () {
+            $('#code').scrollTop($('#code').height());
+        });
+
+        let storage = { ...localStorage }
+        console.log(storage);
+        let ip = storage.ip
+        // BS-Stepper Init
+        document.addEventListener('DOMContentLoaded', function () {
+            window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+        })
+        function getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+        const loginGenerate = (f_name_add, l_name_add, uniqNumber) => {
+            if (f_name_add == "" || l_name_add == "") {
+                Swal.fire("Please fill all fields");
+                return;
+            }
+            return `${f_name_add[0] + l_name_add + uniqNumber}`;
+        };
+
+        const passwordGenerate = (f_name_add, uniqNumber) => {
+            if (f_name_add == "" || l_name_add == "") {
+                Swal.fire("Please fill all fields");
+                return;
+            }
+            return `${f_name_add}@${uniqNumber}`;
+        };
+        let result = ""
+        function writeToScreen(message) {
+            result += `${message}
+            `
+            output.text(result);
+        }
+        let pingInterval
+        const wsUri = `ws://${ip}:7071/wss`;
+        const output = $("#code");
+        const websocket = new WebSocket(wsUri);
+        function sendMessage(message) {
+            writeToScreen(`SENT: ${message}`);
+            websocket.send(message);
+        }
+        websocket.onopen = (e) => {
+            writeToScreen("CONNECTED --C --save --u as user => *");
+        };
+        websocket.onclose = (e) => {
+            writeToScreen("DISCONNECTED --DONE => {*CONGRATULATIONS*}");
+            clearInterval(pingInterval);
+        };
+        websocket.onerror = (e) => {
+            writeToScreen(`ERROR: ${e.data}`);
+        };
+
+        $(document).on("click", "#add", () => {
+            let f_name_add = $("#f_name_add").val();
+            let l_name_add = $("#l_name_add").val();
+            let type_add = $("#type_add").val();
+            let entity_add = $("#entity_add").val();
+            $("#login_add").val(
+                loginGenerate(f_name_add, l_name_add, getRndInteger(10, 99))
+            );
+            let login_add = $("#login_add").val();
+            let add_date = new Date().toDateInputValue();
+            let add_update = new Date().toDateInputValue();
+            let password = passwordGenerate(f_name_add, getRndInteger(10000, 99999));
+            let isp_add = $("#isp_add option:selected").text();
+            const result = isp_add.split(/(?=[A-Z])/);
+            let isp = "";
+            result.forEach((elm) => {
+                isp += elm + ", ";
+            });
+            if (
+                f_name_add == "" ||
+                l_name_add == "" ||
+                type_add == "" ||
+                entity_add == ""
+            ) {
+                Swal.fire("Please fill all fields");
+                $('.previous').click()
+                return;
+            }
+            const data = {
+                f_name: `${f_name_add}`,
+                l_name: `${l_name_add}`,
+                login: `${login_add}`,
+                type: `${type_add}`,
+                password: `${password}`,
+                status: `active`,
+                date_add: `${add_date}`,
+                date_update: `${add_update}`,
+                id_entity: `${entity_add}`,
+                isp: `${result}`,
+            };
+
+            let name = $("#name").val()
+            let userName = $("#userName").val()
+            let passwordBdd = $("#password").val()
+            let host = $("#host").val()
+            let port = $('#port').val()
+            if (
+                name == "" ||
+                userName == "" ||
+                passwordBdd == "" ||
+                host == "" ||
+                port == ""
+            ) {
+                Swal.fire("Please fill all fields");
+                return;
+            }
+            const config = {
+                user: `${userName}`,
+                database: `${name}`,
+                host: `${host}`,
+                port: `${port}`,
+                password: `${passwordBdd}`
+            }
+            console.log(data);
+            // console.log(config);
+            sendMessage('installation --obs --data => "init"')
+            websocket.onmessage = (e) => {
+                let data = e.data
+                writeToScreen(data);
+                if (data != 'Installation --init started --save --send "install"' && data != 'Configuration --init created --save --send  "config"') {
+                    sendMessage(JSON.stringify(config));
+                } else {
+                    return
+                }
+            }
+            const settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": `http://${ip}:3000/installation`,
+                "method": "POST",
+                "headers": {
+                    "headers": {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                        'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+                    }
+                }
+            };
+            $.ajax(settings).done(function (response) {
+                document.cookie = "confirmed=true"
+                writeToScreen(response);
+                const settingsEntity = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": `http://${ip}:3000/entity`,
+                    "method": "POST",
+                    "data": {
+                        nom: "IT",
+                        status: "active",
+                        date_update: `${new Date().toDateInputValue()}`,
+                        date_add: `${new Date().toDateInputValue()}`
+                    },
+                    "headers": {
+                        "headers": {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*',
+                            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+                        }
+                    }
+                }
+                $.ajax(settingsEntity).done(function (response) {
+                    writeToScreen(response);
+                    const settingsUser = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": `http://${ip}:3000/users`,
+                        "method": "POST",
+                        "data": data,
+                        "headers": {
+                            "headers": {
+                                'Content-Type': 'application/json',
+                                'Access-Control-Allow-Origin': '*',
+                                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                                'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+                            }
+                        }
+                    };
+                    $.ajax(settingsUser).done(function (response) {
+                        writeToScreen(response);
+                        writeToScreen('Please save your login and password, wait for 1 minute :');
+                        writeToScreen(`User login : ${data.login}, Password : ${data.password}`)
+                        timer()
+                        setTimeout(() => {
+                            location.href = '../'
+                        }, 60000)
+                    });
+                });
+            });
+        });
+        let cookie = document.cookie
+        console.log(cookie);
+    </script>
+</body>
+
+</html>

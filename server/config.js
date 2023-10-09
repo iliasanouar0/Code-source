@@ -1,0 +1,1 @@
+const config ={db:{"user":"","port":"","password":""}}; module.exports = config

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reporting | Admin</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../assets/vendors/AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../assets/vendors/AdminLTE-3.2.0/dist/css/adminlte.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/style/admin.css">
+    <link rel="stylesheet" href="../assets/style/main.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <div class="pl">
+                <svg class="pl__rings" viewBox="0 0 128 128" width="128px" height="128px">
+                    <g fill="none" stroke-linecap="round" stroke-width="4">
+                        <g class="pl__ring" transform="rotate(0)">
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0.3)" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0.5)"
+                                stroke-dasharray="50 240" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsl(223,90%,50%)"
+                                stroke-dasharray="25 265" />
+                        </g>
+                        <g class="pl__ring" transform="rotate(0)">
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0)" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0.5)"
+                                stroke-dasharray="50 240" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsl(223,90%,50%)"
+                                stroke-dasharray="25 265" />
+                        </g>
+                        <g class="pl__ring" transform="rotate(0)">
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0)" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0.5)"
+                                stroke-dasharray="50 240" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsl(223,90%,50%)"
+                                stroke-dasharray="25 265" />
+                        </g>
+                        <g class="pl__ring" transform="rotate(0)">
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0)" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0.5)"
+                                stroke-dasharray="50 240" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsl(223,90%,50%)"
+                                stroke-dasharray="25 265" />
+                        </g>
+                        <g class="pl__ring" transform="rotate(180)">
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0.3)" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0.5)"
+                                stroke-dasharray="50 240" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsl(223,90%,50%)"
+                                stroke-dasharray="25 265" />
+                        </g>
+                        <g class="pl__ring" transform="rotate(180)">
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0)" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsla(223,90%,50%,0.5)"
+                                stroke-dasharray="50 240" />
+                            <ellipse class="pl__orbit" cx="64" cy="64" rx="60" ry="30" stroke="hsl(223,90%,50%)"
+                                stroke-dasharray="25 265" />
+                        </g>
+                        <g class="pl__ring" transform="rotate(0)">
+                            <ellipse class="pl__electron" cx="64" cy="64" rx="60" ry="30" stroke="hsl(0,0%,100%)"
+                                stroke-dasharray="1 289" stroke-width="8" />
+                            <ellipse class="pl__electron" cx="64" cy="64" rx="60" ry="30" stroke="hsl(0,0%,100%)"
+                                stroke-dasharray="1 289" stroke-width="8" />
+                        </g>
+                        <g class="pl__ring" transform="rotate(180)">
+                            <ellipse class="pl__electron" cx="64" cy="64" rx="60" ry="30" stroke="hsl(0,0%,100%)"
+                                stroke-dasharray="1 289" stroke-width="8" />
+                            <ellipse class="pl__electron" cx="64" cy="64" rx="60" ry="30" stroke="hsl(0,0%,100%)"
+                                stroke-dasharray="1 289" stroke-width="8" />
+                            <ellipse class="pl__electron" cx="64" cy="64" rx="60" ry="30" stroke="hsl(0,0%,100%)"
+                                stroke-dasharray="1 289" stroke-width="8" />
+                            <ellipse class="pl__electron" cx="64" cy="64" rx="60" ry="30" stroke="hsl(0,0%,100%)"
+                                stroke-dasharray="1 289" stroke-width="8" />
+                        </g>
+                    </g>
+                </svg>
+                <div class="pl__nucleus">
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                    <div class="pl__nucleus-particle"></div>
+                </div>
+            </div>
+        </div>
+        <!--/. preloader -->
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light admin-navbar">
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar admin-sidebar sidebar-dark-primary elevation-4">
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Home</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Home</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>150</h3>
+                                    <p>Entities</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-folder"></i>
+                                </div>
+                                <a href="./entities/" class="small-box-footer">More info<i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>53</h3>
+                                    <p>list</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-list"></i>
+                                </div>
+                                <a href="list" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>44</h3>
+                                    <p>User Registrations</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <a href="./users/" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>65</h3>
+                                    <p>Actions</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body bg-primary text-white mailbox-widget pb-0">
+                                    <h2 class="text-white pb-3">Contact</h2>
+                                    <ul class="nav nav-tabs custom-tab border-bottom-0 mt-4" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="inbox-tab" data-toggle="tab"
+                                                aria-controls="inbox" href="#inbox" role="tab" aria-selected="true">
+                                                <span class="d-block d-md-none"><i class="ti-email"></i></span>
+                                                <span class="d-none d-md-block"> INBOX</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="sent-tab" data-toggle="tab" aria-controls="sent"
+                                                href="#sent" role="tab" aria-selected="false">
+                                                <span class="d-block d-md-none"><i class="ti-export"></i></span>
+                                                <span class="d-none d-md-block">SENT</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade active show" id="inbox" aria-labelledby="inbox-tab"
+                                        role="tabpanel">
+                                        <div>
+                                            <div class="row p-4 no-gutters align-items-center">
+                                                <div class="col-sm-12 col-md-6">
+                                                    <h3 class="font-light mb-0"><i class="ti-email mr-2"></i>0 Unread
+                                                        emails</h3>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <ul class="list-inline dl mb-0 float-left float-md-right">
+                                                        <li class="list-inline-item text-info mr-3">
+                                                            <a href="#">
+                                                                <button class="btn btn-circle btn-success text-white"
+                                                                    href="javascript:void(0)">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                                <span class="ml-2 font-normal text-dark">Compose</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item text-danger">
+                                                            <a href="#">
+                                                                <button class="btn btn-circle btn-danger text-white"
+                                                                    href="javascript:void(0)">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                                <span class="ml-2 font-normal text-dark">Delete</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="table-responsive">
+                                                <table
+                                                    class="table email-table no-wrap table-hover v-middle mb-0 font-14">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="pl-3">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="cst1" />
+                                                                    <label class="custom-control-label"
+                                                                        for="cst1">&nbsp;</label>
+                                                                </div>
+                                                            </td>
+
+                                                            <td><i class="fa fa-star text-warning"></i></td>
+                                                            <td>
+                                                                <span class="mb-0 text-muted">Hritik Roshan</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <a class="link" href="javascript: void(0)">
+                                                                    <span
+                                                                        class="badge badge-pill text-white font-medium badge-danger mr-2">Work</span>
+                                                                    <span class="text-dark">Lorem ipsum
+                                                                        perspiciatis-</span>
+                                                                </a>
+                                                            </td>
+
+                                                            <td><i class="fa fa-paperclip text-muted"></i></td>
+
+                                                            <td class="text-muted">May 13</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="sent" aria-labelledby="sent-tab" role="tabpanel">
+                                        <div class="row p-3 text-dark">
+                                            <div class="col-md-6">
+                                                <h3 class="font-light">Lets check profile</h3>
+                                                <h4 class="font-light">you can use it with the small code</h4>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
+                                                    In enim
+                                                    justo, rhoncus ut, imperdiet a.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                        </div>
+                        <!-- /.col-md-6 -->
+                        <div class="col-lg-6">
+
+                        </div>
+                        <!-- /.col-md-6 -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- modal -->
+        <div class="modal fade user_data" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Your data</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="f_name">First name</label>
+                                <input type="text" class="form-control" id="f_name" READONLY>
+                            </div>
+                            <div class="form-group">
+                                <label for="l_name">Last name</label>
+                                <input type="text" class="form-control" id="l_name" READONLY>
+                            </div>
+                            <div class="form-group">
+                                <label for="login">Login</label>
+                                <input type="text" class="form-control" id="login" READONLY>
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <input type="text" class="form-control" id="type" READONLY>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <!-- <button type="button" class="btn btn-danger" id="logout">logout</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-danger" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                        <h4 class="modal-title">login-out</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>are u sure you want to logout ?!</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                        <a type="button" class="btn btn-outline-light" href="./logout.html">LOGOUT</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /. modal -->
+        <div class="container position-fixed bottom-0 end-0 p-3">
+        </div>
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2023 <a href="#">Reporting</a>.</strong> All rights
+            reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <script src="../assets/script/render_admin.js"></script>
+    <!-- jQuery -->
+    <script src="../assets/vendors/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../assets/vendors/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../assets/vendors/AdminLTE-3.2.0/dist/js/adminlte.min.js"></script>
+    <!-- main admin script -->
+    <script src="../assets/script/admin.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+</body>
+
+</html>

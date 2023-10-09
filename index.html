@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./views/assets/style/anima.css">
+    <title>Reporting</title>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+        <div class="ball"></div>
+        <button id="btn-start" role="button">Start now</button>
+        <!-- <a id="btn-start" href="./views/authentication/login.html" role="button">Start now</a> -->
+    </div>
+    <script type="module" src="./views/assets/script/anime.js"></script>
+    <!-- <script src="./views/assets/script/check.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src='https://assets.codepen.io/16327/gsap-latest-beta.min.js'></script>
+    <script type="module">
+        function getIp() {
+            var _location = document.location.toString();
+            var applicationNameIndex = _location.indexOf("/", _location.indexOf("://") + 3);
+            var applicationName = _location.substring(0, applicationNameIndex);
+            var sliceIndex = _location.indexOf("://") + 3;
+            var ipPort = applicationName.substring(sliceIndex);
+            var ip = ipPort.split(':')[0]
+            return ip
+        }
+        let ip = getIp()
+        window.localStorage.setItem('ip', ip)
+        $.ajax({
+            url: `install.html`,
+            type: 'HEAD',
+            error: function () {
+                console.log('installed')
+            },
+            success: function () {
+                if (document.cookie == "confirmed=true") {
+                    const settingsUser = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": `http://${ip}:3000/finish/installation/`,
+                        "method": "POST",
+                        "headers": {
+                            "headers": {
+                                'Content-Type': 'application/json',
+                                'Access-Control-Allow-Origin': '*',
+                                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                                'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+                            }
+                        }
+                    };
+                    $.ajax(settingsUser).done(function (response) { console.log(response); });
+                    return
+                }
+                location.href = 'install.html'
+            }
+        });
+    </script>
+</body>
+
+</html>
