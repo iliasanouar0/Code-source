@@ -46,7 +46,7 @@ const updateProcess = (request, response) => {
     let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
     let values = [data.status, data.start_in, data.id_process]
     let obj = { query: query, data: values }
-    response.status(200).send(obj)
+    // response.status(200).send(obj)
     pool.query(obj.query, obj.data, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
