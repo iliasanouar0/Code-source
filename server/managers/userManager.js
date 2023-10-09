@@ -23,7 +23,7 @@ const getUserByLogin = (request, response) => {
     [id, login],
     (error, results) => {
       if (error) {
-        throw error;
+        response.status(500).json({ name: error.name, stack: error.stack, message: error.message, err: error });
       }
       response.status(200).json(results.rows);
     }

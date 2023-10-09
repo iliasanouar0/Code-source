@@ -7,7 +7,9 @@ togglePassword.addEventListener("click", function (e) {
   // toggle the eye slash icon
   document.querySelector(".fa-eye").classList.toggle("fa-eye-slash");
 });
-
+let storage = { ...localStorage }
+console.log(storage);
+let ip = storage.ip
 /**
  * Patterns =>
  * Login validation pattern : /([A-Za-z])+([0-9]){1}\S/gi
