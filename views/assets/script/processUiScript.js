@@ -94,10 +94,9 @@ $(document).on('click', "#p_add", () => {
 
 $(document).on('click', '.start', event => {
     const id = $(event.target)[0].attributes[2].value
-    let td = $(event.target).parent()[0].children[1]
-    console.log(td);
     console.log(id);
-    console.log($(event.target));
+    $(event.target)[0].classList.toggle("stop");
+    console.log($(event.target)[0]);
     const status = "RUNNING"
     const start_in = new Date().toDateInputValue()
     let obj = {
