@@ -196,15 +196,15 @@ $(document).on('click', '.status', event => {
     let children = $(event.target).parent().parent()[0].children
     $('.count').html(children[1].innerHTML)
     if (children[5].innerHTML == "RUNNING") {
-        $('.status_bg').removeClass()
+        $('.status_bg').removeClass("bg-success bg-danger bg-info")
         $('.status_bg').addClass("badge bg-success")
         $('.status_bg').html(children[5].innerHTML)
     } else if (children[5].innerHTML == "STOPPED") {
-        $('.status_bg').removeClass()
+        $('.status_bg').removeClass("bg-success bg-danger bg-info")
         $('.status_bg').addClass("badge bg-danger")
         $('.status_bg').html(children[5].innerHTML)
     } else {
-        $('.status_bg').removeClass()
+        $('.status_bg').removeClass("bg-success bg-danger bg-info")
         $('.status_bg').addClass("badge bg-info")
         $('.status_bg').html(children[5].innerHTML)
     }
