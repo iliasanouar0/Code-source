@@ -62,6 +62,18 @@ const updateProcess = (data) => {
     })
 }
 
+const stoppedProcess = (data) => {
+    let query = "UPDATE process SET status=($1) WHERE id_process=($2)"
+    let values = [data.status, data.id_process]
+    let obj = { query: query, data: values }
+    pool.query(obj.query, obj.data, (error, result) => {
+        if (error) {
+            return `${error.name, error.stack, error.message, error}`
+        }
+        return 'Process Stopped successfully'
+    })
+}
+
 // const updateProcess = (request, response) => {
 //     const data = request.body
 //     let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
@@ -79,5 +91,6 @@ module.exports = {
     addProcess,
     getAllData,
     updateProcess,
-    getAllProcessSeeds
+    getAllProcessSeeds,
+    stoppedProcess
 }

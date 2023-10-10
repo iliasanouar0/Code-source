@@ -55,6 +55,8 @@ wsp.on('connection', ws => {
   ws.on('message', message => {
     if (message.includes('start')) {
       processManager.updateProcess(JSON.parse(message))
+    } else {
+      processManager.stoppedProcess(JSON.parse(message))
     }
   })
 })
