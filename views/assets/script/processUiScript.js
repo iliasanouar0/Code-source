@@ -97,7 +97,7 @@ $(document).on('click', '.start', event => {
     console.log(id);
     $(event.target)[0].classList.toggle("stop", true);
     $(event.target)[0].innerHTML = `<i class="fa fa-stop"></i>`
-    console.log($(event.target)[0]);
+    console.log($(event.target)[0].innerHTML);
     const status = "RUNNING"
     const start_in = new Date().toDateInputValue()
     let obj = {
