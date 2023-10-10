@@ -123,7 +123,7 @@ $(document).on('click', '.start', event => {
         })
     }).then(() => {
         const Process_data = document.querySelector('#Process_data')
-        // process.innerHTML = ""
+        Process_data.innerHTML = ""
         fetch(`http://${ip}:3000/process/admin`, {
             method: "GET",
         })
