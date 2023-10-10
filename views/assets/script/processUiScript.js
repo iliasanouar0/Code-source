@@ -194,8 +194,14 @@ $(document).on('click', '.stop', event => {
 $(document).on('click', '.status', event => {
     const id = $(event.target)[0].attributes[2].value
     let children = $(event.target).parent().parent()[0].children
-    console.log(children);
-    console.log(id);
+    $('.count').html(children[1].innerHTML)
+    if (children[5].innerHTML == "RUNNING") {
+        $('.status').addClass("bg-success")
+        $('.status').html(children[5].innerHTML)
+    } else {
+        $('.status').addClass("bg-danger")
+        $('.status').html(children[5].innerHTML)
+    }
     $('#p_s').html(id)
     $('#modal-process-view').modal('show')
 
