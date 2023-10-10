@@ -34,26 +34,33 @@
   border-top: 1px solid rgba(120, 130, 140, 0.13);
 }
 
-.font-light {
+/* {
   font-weight: 300;
-}
+} */
 
+/* 
+  {
+  pointer-events: none;
+} */
 
-.fa-eye {
+/* 
+ {
+  pointer-events: none;
+} */
+/* 
+ {
+  pointer-events: none;
+} */
+
+.fa-play,
+.fa-stop,
+.fa-trash-alt,
+.fa-edit,
+.fa-eye,
+.font-light {
   pointer-events: none;
 }
 
-.fa-edit {
-  pointer-events: none;
-}
-
-.fa-trash-alt {
-  pointer-events: none;
-}
-
-.fa-play{
-  pointer-events: none;
-}
 .modal-xl {
   width: 90%;
   max-width: 1400px;
