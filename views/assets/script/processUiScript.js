@@ -246,6 +246,8 @@ $(document).on('click', '.status', event => {
                 $('#seeds_result').html(html);
             }
         })
+    }).then(() => {
+        $('#modal-process-view').modal('show')
     })
     // const status = "STOPPED"
     // const start_in = new Date().toDateInputValue()
@@ -261,5 +263,4 @@ $(document).on('click', '.status', event => {
     //     websocket.send(message);
     // }
     // socket(websocket, sendMessage, obj, pingInterval);
-    $('#modal-process-view').modal('show')
 })
