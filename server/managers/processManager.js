@@ -40,10 +40,16 @@ const getAllData = (request, response) => {
         response.status(200).send(result.rows)
     })
 }
-// /**
-//  * @param {Object} data
-//  * @returns {string}
-//  */
+const getAllProcessSeeds = (request, response) => {
+    const id = (request.params.id)
+    let sql = "SELECT process.id_list, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_list=$1 GROUP BY process.id_list"
+    pool.query(sql, [id], (error, result) => {
+        if (error) {
+            response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
+        }
+        response.status(200).send(result.rows)
+    })
+}
 const updateProcess = (data) => {
     let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
     let values = [data.status, data.start_in, data.id_process]
@@ -73,4 +79,5 @@ module.exports = {
     addProcess,
     getAllData,
     updateProcess,
+    getAllProcessSeeds
 }

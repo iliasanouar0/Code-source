@@ -205,8 +205,6 @@ $(document).on('click', '.status', event => {
         $('.status_bg').html(children[5].innerHTML)
     }
     $('#p_s').html(id)
-    $('#modal-process-view').modal('show')
-
     // const status = "STOPPED"
     // const start_in = new Date().toDateInputValue()
     // let obj = {
@@ -221,4 +219,5 @@ $(document).on('click', '.status', event => {
     //     websocket.send(message);
     // }
     // socket(websocket, sendMessage, obj, pingInterval);
+    $('#modal-process-view').modal('show')
 })
