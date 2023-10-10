@@ -205,6 +205,11 @@ $(document).on('click', '.status', event => {
         $('.status_bg').html(children[5].innerHTML)
     }
     $('#p_s').html(id)
+    fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
+        return response.json
+    }).then(data => {
+        console.log(data);
+    })
     // const status = "STOPPED"
     // const start_in = new Date().toDateInputValue()
     // let obj = {
