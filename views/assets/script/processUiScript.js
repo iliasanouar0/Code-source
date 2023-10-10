@@ -176,7 +176,7 @@ $(document).on('click', '.stop', event => {
     let obj = {
         id_process: `${id}`,
         status: `${status}`,
-        start_in: `${start_in}`,
+        // start_in: `${start_in}`,
     }
     let pingInterval
     const wsUri = `ws://${ip}:7072/wss`;
@@ -189,13 +189,6 @@ $(document).on('click', '.stop', event => {
 
 const createRowProcessSeeds = data => {
     let rows = ""
-    // <th>Email</th>
-    // <th>password</th>
-    // <th>proxy</th>
-    // <th>isp</th>
-    // <th>Status</th>
-    // <th>Duration</th>
-    // <th>Details</th>
     data.forEach(element => {
         let tr =
             `<tr>
