@@ -1,3 +1,4 @@
+
 Date.prototype.toDateInputValue = function () {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -136,10 +137,6 @@ $(document).on('click', "#p_add", () => {
 
 $(document).on('click', '.start', event => {
     const id = $(event.target)[0].attributes[2].value
-    console.log(id);
-    // $(event.target)[0].classList.toggle("stop", true);
-    // $(event.target)[0].innerHTML = `<i class="fa fa-stop"></i>`
-    // console.log($(event.target)[0].innerHTML);
     const status = "RUNNING"
     const start_in = new Date().toDateInputValue()
     let obj = {
@@ -188,7 +185,7 @@ $(document).on('click', '.start', event => {
     }
     websocket.onopen = (e) => {
         console.log("CONNECTED --C --save --u as user => *");
-        sendMessage('hello from report')
+        sendMessage({ data: obj, id: id })
     };
     websocket.onclose = (e) => {
         console.log("DISCONNECTED --DONE => {*CONGRATULATIONS*}");
