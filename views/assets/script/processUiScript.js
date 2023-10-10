@@ -172,7 +172,7 @@ $(document).on('click', '.start', event => {
         websocket.send(message);
     }
     websocket.onopen = async (e) => {
-        await console.log("CONNECTED --C --save --u as user => *").then(console.log('connected'))
+        console.log("CONNECTED --C --save --u as user => *")
         await sendMessage(JSON.stringify(obj)).then(() => {
             const Process_data = document.querySelector('#Process_data')
             Process_data.innerHTML = ""
