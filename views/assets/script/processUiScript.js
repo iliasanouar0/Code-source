@@ -97,6 +97,7 @@ $(document).on('click', '.start', event => {
     let td = $(event.target).parent()[0].children[1]
     console.log(td);
     console.log(id);
+    console.log($(event.target));
     const status = "RUNNING"
     const start_in = new Date().toDateInputValue()
     let obj = {
