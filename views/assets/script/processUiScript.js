@@ -170,20 +170,31 @@ $(document).on('click', '.start', event => {
         Process_data.innerHTML = ""
         fetch(`http://${ip}:3000/process/admin`, {
             method: "GET",
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            let rows = createRowProcess(data);
+            rows.forEach((row) => {
+                Process_data.appendChild(row);
+            });
         })
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                let rows = createRowProcess(data);
-                rows.forEach((row) => {
-                    Process_data.appendChild(row);
-                });
-            })
     })
-    // .then(() => {
-    //     $(event.target)[0].classList.toggle("stop", true);
-    //     $(event.target)[0].innerHTML = `<i class="fa fa-stop"></i>`
-    //     console.log($(event.target)[0]);
-    // })
+    let pingInterval
+    const wsUri = `ws://${ip}:7072/wss`;
+    const websocket = new WebSocket(wsUri);
+    function sendMessage(message) {
+        console.log(`SENT: ${message}`);
+        websocket.send(message);
+    }
+    websocket.onopen = (e) => {
+        console.log("CONNECTED --C --save --u as user => *");
+        sendMessage('hello from report')
+    };
+    websocket.onclose = (e) => {
+        console.log("DISCONNECTED --DONE => {*CONGRATULATIONS*}");
+        clearInterval(pingInterval);
+    };
+    websocket.onerror = (e) => {
+        console.log(`ERROR: ${e.data}`);
+    };
 })

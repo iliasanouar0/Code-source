@@ -6,7 +6,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require('fs')
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 7071 });
+const wsi = new WebSocket.Server({ port: 7071 });
+const wsp = new WebSocket.Server({ port: 7072 })
 
 const userManager = require("./managers/userManager");
 const entityManager = require("./managers/entityManager");
@@ -33,7 +34,7 @@ app.use((req, res, next) => {
 });
 // web socket =>
 
-wss.on('connection', function connection(ws) {
+wsi.on('connection', function connection(ws) {
   console.log('WebSocket connected');
   ws.on('message', function incoming(message) {
     console.log(`received message ${message}`);
@@ -48,6 +49,12 @@ wss.on('connection', function connection(ws) {
     }
   });
 });
+
+wsp.on('connection', ws => {
+  ws.on('message', message => {
+    console.log(`received : ${message}`);
+  })
+})
 
 app.post("/installation/", installation.createTables)
 app.post("/finish/installation/", (request, response) => {
