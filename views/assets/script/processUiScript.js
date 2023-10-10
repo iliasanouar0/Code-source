@@ -190,3 +190,23 @@ $(document).on('click', '.stop', event => {
     }
     socket(websocket, sendMessage, obj, pingInterval);
 })
+
+$(document).on('click', '.status', event => {
+    const id = $(event.target)[0].attributes[2].value
+    console.log(id);
+    // const status = "STOPPED"
+    // const start_in = new Date().toDateInputValue()
+    // let obj = {
+    //     id_process: `${id}`,
+    //     status: `${status}`,
+    //     start_in: `${start_in}`,
+    // }
+    // let pingInterval
+    // const wsUri = `ws://${ip}:7072/wss`;
+    // const websocket = new WebSocket(wsUri);
+    // function sendMessage(message) {
+    //     console.log(`SENT: ${message}`);
+    //     websocket.send(message);
+    // }
+    // socket(websocket, sendMessage, obj, pingInterval);
+})
