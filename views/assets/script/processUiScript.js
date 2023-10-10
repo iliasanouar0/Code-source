@@ -187,6 +187,30 @@ $(document).on('click', '.stop', event => {
     socket(websocket, sendMessage, obj, pingInterval);
 })
 
+const createRowProcessSeeds = data => {
+    let row = ""
+    // <th>Email</th>
+    // <th>password</th>
+    // <th>proxy</th>
+    // <th>isp</th>
+    // <th>Status</th>
+    // <th>Duration</th>
+    // <th>Details</th>
+    data.forEach(element => {
+        let tr =
+            `<tr><td>${element.gmail}</td>
+      <td>${element.password}</td>
+      <td>${element.proxy}</td>
+      <td>${element.isp}</td>
+      <td>${element.status}</td>
+      <td>00:00:00</td>
+      <button type="button" class="btn btn-primary details" data-id="${element.id_seeds}"><i class="far fa-eye"></i></button>
+      </td></tr>`
+        rows += tr
+    });
+    return rows
+}
+
 $(document).on('click', '.status', event => {
     const id = $(event.target)[0].attributes[2].value
     let children = $(event.target).parent().parent()[0].children
@@ -208,7 +232,19 @@ $(document).on('click', '.status', event => {
     fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
         return response.json()
     }).then(data => {
-        console.log(data);
+        $('#pagination-container').pagination({
+            dataSource: data,
+            pageSize: 10,
+            showGoInput: true,
+            showGoButton: true,
+            showSizeChanger: true,
+            showNavigator: true,
+            formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
+            callback: function (data, pagination) {
+                var html = createRowProcessSeeds(data);
+                $('#seeds_result').html(html);
+            }
+        })
     })
     // const status = "STOPPED"
     // const start_in = new Date().toDateInputValue()
