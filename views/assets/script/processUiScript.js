@@ -149,6 +149,7 @@ $(document).on('click', '.start', event => {
     }
     socket(websocket, sendMessage, obj, pingInterval);
 })
+
 function socket(websocket, sendMessage, obj, pingInterval) {
     websocket.onopen = (e) => {
         console.log("CONNECTED --C --save --u as user => *");
@@ -160,10 +161,6 @@ function socket(websocket, sendMessage, obj, pingInterval) {
             return response.json();
         }).then((data) => {
             Process_data.innerHTML = createRowProcess(data)
-            // let rows = createRowProcess(data);
-            // rows.forEach((row) => {
-            //     Process_data.appendChild(row);
-            // });
         });
     };
     websocket.onclose = (e) => {
@@ -175,3 +172,21 @@ function socket(websocket, sendMessage, obj, pingInterval) {
     };
 }
 
+$(document).on('click', '.stop', event => {
+    const id = $(event.target)[0].attributes[2].value
+    const status = "STOPPED"
+    const start_in = new Date().toDateInputValue()
+    let obj = {
+        id_process: `${id}`,
+        status: `${status}`,
+        start_in: `${start_in}`,
+    }
+    let pingInterval
+    const wsUri = `ws://${ip}:7072/wss`;
+    const websocket = new WebSocket(wsUri);
+    function sendMessage(message) {
+        console.log(`SENT: ${message}`);
+        websocket.send(message);
+    }
+    socket(websocket, sendMessage, obj, pingInterval);
+})
