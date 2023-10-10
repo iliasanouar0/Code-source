@@ -351,7 +351,7 @@ document.getElementById("demo").onchange = evt => {
                         "id_list": `${data}`,
                         "date_add": `${date_add}`,
                         "date_update": `${date_update}`,
-                        "status": `active`,
+                        "status": `idel`,
                         "isp": `${isp}`
                     }
                     obj.push(seed)
