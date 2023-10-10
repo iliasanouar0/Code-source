@@ -55,7 +55,7 @@ wsp.on('connection', ws => {
   ws.on('message', message => {
     console.log(`received : ${message}`);
     message
-    let response = express.response
+    let response = app.response
     let request = { body: message }
     processManager.updateProcess(request, response)
   })
