@@ -34,6 +34,7 @@ $(document).on('click', '.updateOptions', event => {
     $('.submit_bulk_edit')[0].dataset.id = $(event.target)[0].dataset.id
     $('.list_s_u').html($(event.target)[0].dataset.id)
 })
+
 $(document).on('click', '#add_list', () => {
     $('.add_list').modal('show');
 })
@@ -234,7 +235,6 @@ $(document).on('click', '#l_seeds_add', (ev) => {
     })
 
 })
-
 
 document.getElementById("demo").onchange = evt => {
     var reader = new FileReader();

@@ -194,6 +194,8 @@ $(document).on('click', '.stop', event => {
 $(document).on('click', '.status', event => {
     const id = $(event.target)[0].attributes[2].value
     console.log(id);
+    $('#modal-process-view').modal('show')
+
     // const status = "STOPPED"
     // const start_in = new Date().toDateInputValue()
     // let obj = {
