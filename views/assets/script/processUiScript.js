@@ -154,7 +154,6 @@ function socket(websocket, sendMessage, obj, pingInterval) {
         console.log("CONNECTED --C --save --u as user => *");
         sendMessage(JSON.stringify(obj));
         const Process_data = document.querySelector('#Process_data');
-        Process_data.innerHTML = "";
         fetch(`http://${ip}:3000/process/admin`, {
             method: "GET",
         }).then((response) => {
