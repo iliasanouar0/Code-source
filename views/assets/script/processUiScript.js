@@ -173,6 +173,20 @@ $(document).on('click', '.start', event => {
     }
     websocket.onopen = (e) => {
         console.log("CONNECTED --C --save --u as user => *");
+        sendMessage(JSON.stringify(obj)).then(() => {
+            const Process_data = document.querySelector('#Process_data')
+            Process_data.innerHTML = ""
+            fetch(`http://${ip}:3000/process/admin`, {
+                method: "GET",
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                let rows = createRowProcess(data);
+                rows.forEach((row) => {
+                    Process_data.appendChild(row);
+                });
+            })
+        })
     };
     websocket.onclose = (e) => {
         console.log("DISCONNECTED --DONE => {*CONGRATULATIONS*}");
@@ -181,20 +195,6 @@ $(document).on('click', '.start', event => {
     websocket.onerror = (e) => {
         console.log(`ERROR: ${e.data}`);
     };
-    sendMessage(JSON.stringify(obj)).then(() => {
-        const Process_data = document.querySelector('#Process_data')
-        Process_data.innerHTML = ""
-        fetch(`http://${ip}:3000/process/admin`, {
-            method: "GET",
-        }).then((response) => {
-            return response.json();
-        }).then((data) => {
-            let rows = createRowProcess(data);
-            rows.forEach((row) => {
-                Process_data.appendChild(row);
-            });
-        })
-    })
 
 
 })
