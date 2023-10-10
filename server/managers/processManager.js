@@ -45,13 +45,13 @@ const getAllData = (request, response) => {
  * @returns
  */
 const updateProcess = (data) => {
-    let results
+    let results = ""
     let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
     let values = [data.status, data.start_in, data.id_process]
     let obj = { query: query, data: values }
     pool.query(obj.query, obj.data, (error, result) => {
         if (error) {
-            results = { name: error.name, stack: error.stack, message: error.message, error: error }
+            results = `${error.name, error.stack, error.message, error}`
             return results
         }
         results = 'Process started successfully'
