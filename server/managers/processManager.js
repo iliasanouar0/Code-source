@@ -40,7 +40,10 @@ const getAllData = (request, response) => {
         response.status(200).send(result.rows)
     })
 }
-
+/**
+ * @param {Object} data 
+ * @returns
+ */
 const updateProcess = (data) => {
     // let results = ""
     // let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
