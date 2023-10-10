@@ -171,9 +171,9 @@ $(document).on('click', '.start', event => {
         console.log(`SENT: ${message}`);
         websocket.send(message);
     }
-    websocket.onopen = async (e) => {
-        console.log("CONNECTED --C --save --u as user => *")
-        await sendMessage(JSON.stringify(obj)).then(() => {
+    websocket.onopen = (e) => {
+        console.log("CONNECTED --C --save --u as user => *");
+        sendMessage(JSON.stringify(obj)).then(() => {
             const Process_data = document.querySelector('#Process_data')
             Process_data.innerHTML = ""
             fetch(`http://${ip}:3000/process/admin`, {
