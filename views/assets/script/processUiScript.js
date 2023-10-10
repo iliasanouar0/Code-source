@@ -163,7 +163,7 @@ $(document).on('click', '.start', event => {
     //         icon: 'success'
     //     })
     // })
-    
+
     let pingInterval
     const wsUri = `ws://${ip}:7072/wss`;
     const websocket = new WebSocket(wsUri);
@@ -173,7 +173,7 @@ $(document).on('click', '.start', event => {
     }
     websocket.onopen = (e) => {
         console.log("CONNECTED --C --save --u as user => *");
-        sendMessage(JSON.stringify({ data: obj, id: id }))
+        sendMessage(JSON.stringify(obj))
     };
     websocket.onclose = (e) => {
         console.log("DISCONNECTED --DONE => {*CONGRATULATIONS*}");
