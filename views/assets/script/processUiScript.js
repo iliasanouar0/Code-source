@@ -206,7 +206,7 @@ const createRowProcessSeeds = data => {
             <td></td>
             <td>00:00:00</td>
             <td class="text-center">
-                <button type="button" class="btn btn-primary details" data-id="${element.id_seeds}"><i class="far fa-eye"></i></button>
+                <button type="button" class="btn btn-primary details" data-id="${element.id_seeds}"><i class="fas fa-eye"></i></button>
             </td>
       </tr>`
         rows += tr
