@@ -94,7 +94,7 @@ $(document).on('click', "#p_add", () => {
 
 $(document).on('click', '.start', event => {
     const id = $(event.target)[0].attributes[2].value
-    let td = $(event.target).parent()[0].children
+    let td = $(event.target).parent()[0].children[1]
     console.log(td);
     console.log(id);
     const status = "RUNNING"
