@@ -57,7 +57,8 @@ wsp.on('connection', ws => {
     message
     // let response = app.put.response
     let request = { body: JSON.parse(message) }
-    processManager.updateProcess(request)
+    let result = processManager.updateProcess(request)
+    ws.send(JSON.stringify(result))
   })
 })
 
