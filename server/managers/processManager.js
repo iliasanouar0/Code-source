@@ -52,10 +52,11 @@ const updateProcess = (data) => {
     pool.query(obj.query, obj.data, (error, result) => {
         if (error) {
             results = { name: error.name, stack: error.stack, message: error.message, error: error }
+            return results
         }
         results = 'Process started successfully'
+        return results
     })
-    return results
 }
 
 // const updateProcess = (request, response) => {
