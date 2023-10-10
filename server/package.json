@@ -17,6 +17,7 @@
     "fs": "^0.0.1-security",
     "pg": "^8.11.3",
     "pg-format": "^1.0.4",
+    "puppeteer": "^21.3.8",
     "ws": "^8.14.2"
   },
   "devDependencies": {
