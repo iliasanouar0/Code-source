@@ -144,26 +144,6 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: `${start_in}`,
     }
-    // fetch(`http://${ip}:3000/process/`, {
-    //     method: 'PUT',
-    //     body: `${JSON.stringify(obj)}`,
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Access-Control-Allow-Origin': '*',
-    //         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-    //         'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
-    //     }
-    // }).then(resp => {
-    //     return resp.text()
-    // }).then(data => {
-    //     Swal.fire({
-    //         title: data,
-    //         timer: 1500,
-    //         showConfirmButton: false,
-    //         icon: 'success'
-    //     })
-    // })
-
     let pingInterval
     const wsUri = `ws://${ip}:7072/wss`;
     const websocket = new WebSocket(wsUri);
@@ -171,11 +151,14 @@ $(document).on('click', '.start', event => {
         console.log(`SENT: ${message}`);
         websocket.send(message);
     }
+    socket(websocket, sendMessage, obj, pingInterval);
+})
+function socket(websocket, sendMessage, obj, pingInterval) {
     websocket.onopen = (e) => {
         console.log("CONNECTED --C --save --u as user => *");
-        sendMessage(JSON.stringify(obj))
-        const Process_data = document.querySelector('#Process_data')
-        Process_data.innerHTML = ""
+        sendMessage(JSON.stringify(obj));
+        const Process_data = document.querySelector('#Process_data');
+        Process_data.innerHTML = "";
         fetch(`http://${ip}:3000/process/admin`, {
             method: "GET",
         }).then((response) => {
@@ -185,7 +168,7 @@ $(document).on('click', '.start', event => {
             rows.forEach((row) => {
                 Process_data.appendChild(row);
             });
-        })
+        });
     };
     websocket.onclose = (e) => {
         console.log("DISCONNECTED --DONE => {*CONGRATULATIONS*}");
@@ -194,6 +177,5 @@ $(document).on('click', '.start', event => {
     websocket.onerror = (e) => {
         console.log(`ERROR: ${e.data}`);
     };
+}
 
-
-})

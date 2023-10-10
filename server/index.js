@@ -53,9 +53,9 @@ wsi.on('connection', function connection(ws) {
 
 wsp.on('connection', ws => {
   ws.on('message', message => {
-    console.log(`received : ${message}`);
-    console.log(processManager.updateProcess(JSON.parse(message)));
-    // ws.send(result)
+    if (message.includes('start')) {
+      processManager.updateProcess(JSON.parse(message))
+    }
   })
 })
 
@@ -73,18 +73,21 @@ app.get("/users/:id", userManager.getUserByLogin);
 app.post("/users", userManager.createUser);
 app.put("/users/:id", userManager.updateUser);
 app.delete("/users/:id", userManager.deleteUser);
+
 // entity API
 app.get("/entity", entityManager.getEntities);
 app.get("/entity/:id", entityManager.getEntityById);
 app.post("/entity", entityManager.createEntity);
 app.put("/entity/:id", entityManager.updateEntity);
 app.delete("/entity/:id", entityManager.deleteEntity);
+
 // lists API
 app.get("/lists", listManager.getLists);
 app.get("/lists/:id", listManager.getListByIdOrCount);
 app.post("/lists", listManager.createList);
 app.put("/lists/:id", listManager.updateName);
 app.delete("/lists/:id", listManager.deleteList);
+
 // seeds and proxy API
 app.patch("/seeds/bulk/", seedManager.updateSeeds);
 app.patch("/seeds/", seedManager.deleteSeeds);
@@ -95,11 +98,11 @@ app.post("/seeds", seedManager.createSeed);
 app.put("/seeds/", seedManager.updateSeed);
 app.put("/seeds/proxy/", seedManager.updateProxy);
 app.delete("/seeds/:id", seedManager.deleteSeed);
+
 // process API
 app.post("/process/", processManager.addProcess)
 app.get("/process/admin", processManager.getAllData)
 app.put("/process/", processManager.updateProcess)
-
 
 app.listen(port, () => {
   console.log(`Server running at ${port}`);
