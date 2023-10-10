@@ -144,7 +144,6 @@ $(document).on('click', '.start', event => {
     const wsUri = `ws://${ip}:7072/wss`;
     const websocket = new WebSocket(wsUri);
     function sendMessage(message) {
-        console.log(`SENT: ${message}`);
         websocket.send(message);
     }
     socket(websocket, sendMessage, obj, pingInterval);
@@ -152,7 +151,6 @@ $(document).on('click', '.start', event => {
 
 function socket(websocket, sendMessage, obj, pingInterval) {
     websocket.onopen = (e) => {
-        console.log("CONNECTED --C --save --u as user => *");
         sendMessage(JSON.stringify(obj));
         const Process_data = document.querySelector('#Process_data');
         fetch(`http://${ip}:3000/process/admin`, {
@@ -164,7 +162,6 @@ function socket(websocket, sendMessage, obj, pingInterval) {
         });
     };
     websocket.onclose = (e) => {
-        console.log("DISCONNECTED --DONE => {*CONGRATULATIONS*}");
         clearInterval(pingInterval);
     };
     websocket.onerror = (e) => {
@@ -185,7 +182,6 @@ $(document).on('click', '.stop', event => {
     const wsUri = `ws://${ip}:7072/wss`;
     const websocket = new WebSocket(wsUri);
     function sendMessage(message) {
-        console.log(`SENT: ${message}`);
         websocket.send(message);
     }
     socket(websocket, sendMessage, obj, pingInterval);
@@ -222,7 +218,6 @@ $(document).on('click', '.status', event => {
     // const wsUri = `ws://${ip}:7072/wss`;
     // const websocket = new WebSocket(wsUri);
     // function sendMessage(message) {
-    //     console.log(`SENT: ${message}`);
     //     websocket.send(message);
     // }
     // socket(websocket, sendMessage, obj, pingInterval);
