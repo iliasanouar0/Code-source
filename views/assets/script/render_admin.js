@@ -190,8 +190,28 @@ const createRow = (data) => {
 const createRowProcess = data => {
   let rows = []
   data.forEach(element => {
-    let tds =
-      `<td>${element.id_process}</td>
+    if (element.status == "RUNNING") {
+      let tds =
+        `<td>${element.id_process}</td>
+        <td>${element.count}</td>
+        <td>${element.f_name} ${element.l_name}</td>
+        <td>${element.list_name}</td>
+        <td>${element.isp}</td>
+        <td>${element.status}</td>
+        <td>${element.action}</td>
+        <td>${element.start_in}</td>
+        <td class="text-center">${element.end_in}</td>
+        <td>
+        <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
+        <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fa fa-stop"></i></button>
+        <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
+        </td>`
+      let tr = document.createElement('tr')
+      tr.innerHTML = tds
+      rows.push(tr)
+    } else {
+      let tds =
+        `<td>${element.id_process}</td>
     <td>${element.count}</td>
     <td>${element.f_name} ${element.l_name}</td>
     <td>${element.list_name}</td>
@@ -200,13 +220,15 @@ const createRowProcess = data => {
     <td>${element.action}</td>
     <td>${element.start_in}</td>
     <td class="text-center">${element.end_in}</td>
-    <td><button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-    <button type="button" class="btn btn-success start"  data-id="${element.id_process}"><i class="fas fa-play"></i></button>
+    <td>
+    <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
+    <button type="button" class="btn btn-danger start"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
     <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
     </td>`
-    let tr = document.createElement('tr')
-    tr.innerHTML = tds
-    rows.push(tr)
+      let tr = document.createElement('tr')
+      tr.innerHTML = tds
+      rows.push(tr)
+    }
   });
   return rows
 }
