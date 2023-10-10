@@ -188,7 +188,7 @@ $(document).on('click', '.stop', event => {
 })
 
 const createRowProcessSeeds = data => {
-    let row = ""
+    let rows = ""
     // <th>Email</th>
     // <th>password</th>
     // <th>proxy</th>
