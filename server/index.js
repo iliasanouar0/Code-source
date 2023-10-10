@@ -54,9 +54,7 @@ wsi.on('connection', function connection(ws) {
 wsp.on('connection', ws => {
   ws.on('message', message => {
     console.log(`received : ${message}`);
-    // let response = app.put.response
-    let request = { body: JSON.parse(message) }
-    let result = processManager.updateProcess(request)
+    let result = processManager.updateProcess(message)
     console.log(`send : ${result}`);
     ws.send(result)
   })
