@@ -72,7 +72,7 @@ const createRowProcess = data => {
       <td class="text-center">${element.end_in}</td>
       <td>
       <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-      <button type="button" class="btn btn-danger start"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
+      <button type="button" class="btn btn-success start"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
       <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
       </td>`
             let tr = document.createElement('tr')
