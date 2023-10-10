@@ -141,6 +141,6 @@ $(document).on('click', '.start', event => {
     }).then(() => {
         $(event.target)[0].classList.toggle("stop", true);
         $(event.target)[0].innerHTML = `<i class="fa fa-stop"></i>`
-        console.log($(event.target)[0].innerHTML);
+        console.log($(event.target)[0]);
     })
 })
