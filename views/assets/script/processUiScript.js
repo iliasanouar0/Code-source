@@ -29,7 +29,8 @@ const createRowProcess = data => {
       <td>${element.action}</td>
       <td>${element.start_in}</td>
       <td class="text-center">${element.end_in}</td>
-      <td><button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
+      <td>
+      <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
       <button type="button" class="btn btn-success start"  data-id="${element.id_process}"><i class="fas fa-play"></i></button>
       <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
       </td>`
@@ -93,7 +94,7 @@ $(document).on('click', "#p_add", () => {
 
 $(document).on('click', '.start', event => {
     const id = $(event.target)[0].attributes[2].value
-    let td = $(event.target).parent()[0]
+    let td = $(event.target).parent().child()
     console.log(td);
     console.log(id);
     const status = "RUNNING"
