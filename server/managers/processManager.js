@@ -52,7 +52,8 @@ const updateProcess = (request, response) => {
     //     }
     //     response.status(200).send('Process started successfully')
     // })
-    response.status(200).send(data)
+    // response.status(200).send(data)
+    return data
 
 }
 
