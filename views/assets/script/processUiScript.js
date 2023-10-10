@@ -206,7 +206,7 @@ $(document).on('click', '.status', event => {
     }
     $('#p_s').html(id)
     fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
-        return response.json
+        return response.json()
     }).then(data => {
         console.log(data);
     })
