@@ -15,7 +15,7 @@ const listManager = require("./managers/listManager");
 const seedManager = require("./managers/seedManager");
 const processManager = require("./managers/processManager");
 const installation = require("./managers/installation");
-const { request } = require("http");
+const gmailManagement = require("./processes/gmailManagement")
 
 const port = 3000;
 const app = express(); // setup express application

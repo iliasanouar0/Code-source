@@ -3,8 +3,12 @@ const puppeteer = require('puppeteer');
 const login = async (gmail, password) => {
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
+    await page.setViewport({ width: 1280, height: 720 });
     const navigationPromise = page.waitForNavigation()
-    await page.goto('https://gmail.com/')
+    await page.goto('https://gmail.com/', { waitUntil: 'networkidle0' })
+    await page.screenshot({
+        path: '../../views/assets/images/process_result/screenshot.jpg'
+    });
     await navigationPromise
     await page.waitForSelector('input[type="email"]')
     await page.click('input[type="email"]')
@@ -21,6 +25,7 @@ const login = async (gmail, password) => {
         page.click('#passwordNext')
     }, 5000);
     await navigationPromise
+    await browser.close();
 }
 
 module.exports = {
