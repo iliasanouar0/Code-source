@@ -185,7 +185,7 @@ $(document).on('click', '.start', event => {
     }
     websocket.onopen = (e) => {
         console.log("CONNECTED --C --save --u as user => *");
-        sendMessage({ data: obj, id: id })
+        sendMessage(JSON.stringify({ data: obj, id: id }))
     };
     websocket.onclose = (e) => {
         console.log("DISCONNECTED --DONE => {*CONGRATULATIONS*}");

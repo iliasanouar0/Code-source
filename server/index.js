@@ -52,7 +52,7 @@ wsi.on('connection', function connection(ws) {
 
 wsp.on('connection', ws => {
   ws.on('message', message => {
-    console.log(`received : ${message.toString()}`);
+    console.log(`received : ${message}`);
   })
 })
 
