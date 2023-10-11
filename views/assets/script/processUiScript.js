@@ -153,7 +153,7 @@ $(document).on('click', '.start', event => {
         return response.json()
     }).then(data => {
         websocket_s.onopen = (e) => {
-            sendMessage(JSON.stringify(data), websocket_s)
+            websocket_s.send(data)
         }
         websocket.onmessage = (message) => {
             console.log(message);
