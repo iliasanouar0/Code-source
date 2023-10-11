@@ -105,7 +105,7 @@ app.delete("/seeds/:id", seedManager.deleteSeed);
 app.post("/process/", processManager.addProcess)
 app.get("/process/admin", processManager.getAllData)
 app.get("/process/seeds/:id", processManager.getAllProcessSeeds)
-app.put("/process/", processManager.updateProcess)
+// app.put("/process/", processManager.updateProcess)
 
 app.listen(port, () => {
   console.log(`Server running at ${port}`);
