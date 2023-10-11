@@ -155,6 +155,9 @@ $(document).on('click', '.start', event => {
         websocket_s.onopen = (e) => {
             sendMessage(JSON.stringify(data), websocket_s)
         }
+        websocket.onmessage = (message) => {
+            console.log(message);
+        }
     })
 })
 
