@@ -385,7 +385,6 @@ if (path.includes("/admin/users/")) {
                 let login_add = $("#e_Password_add").val();
                 let add_update = update;
                 let add_date = date;
-
                 let result;
                 let isp_add = $("#e_isp_add option:selected").text();
                 let result1 = isp_add.split(/(?=[A-Z])/);
@@ -627,6 +626,7 @@ if (path.includes("/admin/users/")) {
     })
     .then((data) => {
       let rows = createRowProcess(data);
+      Process_data.innerHTML = ""
       rows.forEach((row) => {
         Process_data.appendChild(row);
       });
