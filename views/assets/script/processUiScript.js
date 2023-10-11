@@ -175,8 +175,19 @@ $(document).on('click', '.start', event => {
             websocket_s.send(responseText)
         }
     })
-    websocket_s.onmessage = (message) => {
-        console.log(message.data);
+    websocket_s.onmessage = (event) => {
+        // console.log(message.data);
+        if (event.data instanceof Blob) {
+            reader = new FileReader();
+
+            reader.onload = () => {
+                console.log("Result: " + reader.result);
+            };
+
+            reader.readAsText(event.data);
+        } else {
+            console.log("Result: " + event.data);
+        }
     }
 })
 
