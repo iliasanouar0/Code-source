@@ -67,7 +67,7 @@ wss.on('connection', wss => {
   console.log('connected!')
   wss.on('message', message => {
     // console.log(JSON.parse(message));
-    wss.send(message)
+    wss.send(JSON.stringify(message))
     // if (message.includes('start_in')) {
     //   processManager.startedProcess(JSON.parse(message))
     // } else {
