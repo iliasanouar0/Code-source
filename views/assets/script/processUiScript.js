@@ -181,7 +181,7 @@ $(document).on('click', '.start', event => {
             let reader = new FileReader();
 
             reader.onload = () => {
-                console.log("Result: " + reader.result);
+                console.log(JSON.parse(reader.result));
             };
 
             reader.readAsText(event.data);
