@@ -189,8 +189,8 @@ $(document).on('click', '.stop', event => {
     let pingInterval
     const wsUri = `ws://${ip}:7072/wss`;
     const websocket = new WebSocket(wsUri);
-    function sendMessage(message) {
-        websocket.send(message);
+    function sendMessage(message, ws) {
+        ws.send(message);
     }
     socketUpdate(websocket, sendMessage, obj, pingInterval);
 })
