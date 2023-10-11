@@ -16,7 +16,8 @@ const listManager = require("./managers/listManager");
 const seedManager = require("./managers/seedManager");
 const processManager = require("./managers/processManager");
 const installation = require("./managers/installation");
-const gmailManagement = require("./processes/gmailManagement")
+const gmailManagement = require("./processes/gmailManagement");
+const { log } = require("console");
 
 const port = 3000;
 const app = express(); // setup express application
@@ -62,10 +63,11 @@ wsp.on('connection', ws => {
   })
 })
 
-wss.on('connection', ws => {
-  ws.on('message', message => {
+wss.on('connection', wss => {
+  console.log('connected!')
+  wss.on('message', message => {
     // console.log(JSON.parse(message));
-    ws.send(message)
+    wss.send(message)
     // if (message.includes('start_in')) {
     //   processManager.startedProcess(JSON.parse(message))
     // } else {
