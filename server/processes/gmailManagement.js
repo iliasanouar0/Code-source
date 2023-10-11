@@ -5,10 +5,7 @@ const login = async (gmail, password) => {
     const page = await browser.newPage()
     await page.setViewport({ width: 1280, height: 720 });
     const navigationPromise = page.waitForNavigation()
-    await page.goto('https://gmail.com/', { waitUntil: 'networkidle0' })
-    await page.screenshot({
-        path: '../../views/assets/images/process_result/screenshot.jpg'
-    });
+    await page.goto('https://gmail.com/')
     await navigationPromise
     await page.waitForSelector('input[type="email"]')
     await page.click('input[type="email"]')
@@ -25,6 +22,9 @@ const login = async (gmail, password) => {
         page.click('#passwordNext')
     }, 5000);
     await navigationPromise
+    await page.screenshot({
+        path: '../../views/assets/images/process_result/screenshot.jpg'
+    });
     await browser.close();
 }
 
