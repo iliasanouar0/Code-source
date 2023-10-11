@@ -176,11 +176,13 @@ $(document).on('click', '.start', event => {
         }
     })
     websocket_s.onmessage = (event) => {
-        console.log('dddd');
         //^ console.log(message.data);
         var enc = new TextDecoder("utf-8");
+        console.log(enc);
         let data = JSON.parse(event.data)
+        console.log(data);
         let val = new Uint8Array(data.data)
+        console.log(val);
         console.log(enc.decode(val));
     }
 })
