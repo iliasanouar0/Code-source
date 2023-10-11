@@ -181,7 +181,6 @@ $(document).on('click', '.start', event => {
         let data = JSON.parse(event.data)
         let val = new Uint8Array(data.data)
         console.log(JSON.parse(enc.decode(val)));
-
     }
 })
 
