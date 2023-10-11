@@ -177,9 +177,10 @@ $(document).on('click', '.start', event => {
     })
     websocket_s.onmessage = (event) => {
         //^ console.log(message.data);
+        var enc = new TextDecoder("utf-8");
         let data = JSON.parse(event.data)
         let val = data.data
-        console.log(val.toString());
+        console.log(enc.decode(val));
 
     }
 })
