@@ -179,8 +179,8 @@ $(document).on('click', '.start', event => {
         //^ console.log(message.data);
         var enc = new TextDecoder("utf-8");
         let data = JSON.parse(event.data)
-        let val = data.data
-        console.log(enc.decode(data));
+        let val = enc.encoding(data.data)
+        console.log(enc.decode(val));
 
     }
 })
