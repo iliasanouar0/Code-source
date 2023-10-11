@@ -146,10 +146,15 @@ $(document).on('click', '.start', event => {
     function sendMessage(message) {
         websocket.send(message);
     }
-    socket(websocket, sendMessage, obj, pingInterval);
+    socketUpdate(websocket, sendMessage, obj, pingInterval);
+    const wssUri = `ws://${ip}:7073/wss`;
+    const websocket_s = new WebSocket(wssUri);
+    function sendMessage(message) {
+        websocket_s.send(message);
+    }
 })
 
-function socket(websocket, sendMessage, obj, pingInterval) {
+function socketUpdate(websocket, sendMessage, obj, pingInterval) {
     websocket.onopen = (e) => {
         sendMessage(JSON.stringify(obj));
         const Process_data = document.querySelector('#Process_data');
@@ -167,16 +172,15 @@ function socket(websocket, sendMessage, obj, pingInterval) {
     websocket.onerror = (e) => {
         console.log(`ERROR: ${e.data}`);
     };
+    websocket.close()
 }
 
 $(document).on('click', '.stop', event => {
     const id = $(event.target)[0].attributes[2].value
     const status = "STOPPED"
-    const start_in = new Date().toDateInputValue()
     let obj = {
         id_process: `${id}`,
         status: `${status}`,
-        // start_in: `${start_in}`,
     }
     let pingInterval
     const wsUri = `ws://${ip}:7072/wss`;
@@ -184,7 +188,7 @@ $(document).on('click', '.stop', event => {
     function sendMessage(message) {
         websocket.send(message);
     }
-    socket(websocket, sendMessage, obj, pingInterval);
+    socketUpdate(websocket, sendMessage, obj, pingInterval);
 })
 
 const createRowProcessSeeds = data => {

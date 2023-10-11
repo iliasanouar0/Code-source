@@ -326,6 +326,7 @@
         let storage = { ...localStorage }
         console.log(storage);
         let ip = storage.ip
+        $('#host').val(ip)
         // BS-Stepper Init
         document.addEventListener('DOMContentLoaded', function () {
             window.stepper = new Stepper(document.querySelector('.bs-stepper'))

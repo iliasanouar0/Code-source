@@ -74,7 +74,9 @@ const stoppedProcess = (data) => {
     })
 }
 
-
+const process = (data) => {
+    // let sql = 'SELECT '
+}
 
 
 // const updateProcess = (request, response) => {
@@ -95,5 +97,6 @@ module.exports = {
     getAllData,
     startedProcess,
     getAllProcessSeeds,
-    stoppedProcess
+    stoppedProcess,
+    process
 }

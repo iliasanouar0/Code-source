@@ -8,6 +8,7 @@ const fs = require('fs')
 const WebSocket = require('ws');
 const wsi = new WebSocket.Server({ port: 7071 });
 const wsp = new WebSocket.Server({ port: 7072 })
+const wss = new WebSocket.Server({ port: 7073 })
 
 const userManager = require("./managers/userManager");
 const entityManager = require("./managers/entityManager");
@@ -60,6 +61,8 @@ wsp.on('connection', ws => {
     }
   })
 })
+
+
 
 app.post("/installation/", installation.createTables)
 app.post("/finish/installation/", (request, response) => {
