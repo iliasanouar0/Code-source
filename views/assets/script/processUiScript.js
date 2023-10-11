@@ -168,6 +168,8 @@ function socketUpdate(websocket, sendMessage, obj, pingInterval) {
             return response.json();
         }).then((data) => {
             Process_data.innerHTML = createRowProcess(data)
+        }).then(() => {
+            websocket.close()
         })
     };
     websocket.onclose = (e) => {
