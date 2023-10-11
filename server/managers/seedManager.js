@@ -194,8 +194,57 @@ const updateProxy = (request, response) => {
   });
 };
 
+/**
+ * * Proxy management under seeds API => seeds/proxy/
+ */
+
+const runningState = (data) => {
+  let query = []
+  for (let i = 0; i < data.length; i++) {
+    query.push(["running", data[i]])
+  }
+  const sql = 'UPDATE seeds SET status=($1) WHERE id_seeds=($2)'
+  query.forEach(data => {
+    pool.query(sql, data, (error, result) => {
+      if (error) {
+        return error
+      }
+    })
+  })
+}
+
+const waitingState = (data) => {
+  let query = []
+  for (let i = 0; i < data.length; i++) {
+    query.push(["waiting", data[i]])
+  }
+  const sql = 'UPDATE seeds SET status=($1) WHERE id_seeds=($2) AND status=idel OR status=stopped'
+  query.forEach(data => {
+    pool.query(sql, data, (error, result) => {
+      if (error) {
+        return error
+      }
+    })
+  })
+}
+
+const stoppedState = (data) => {
+  let query = []
+  for (let i = 0; i < data.length; i++) {
+    query.push(["stopped", data[i]])
+  }
+  const sql = 'UPDATE seeds SET status=($1) WHERE id_seeds=($2) AND status=idel OR status=stopped'
+  query.forEach(data => {
+    pool.query(sql, data, (error, result) => {
+      if (error) {
+        return error
+      }
+    })
+  })
+}
+
 module.exports = {
-  // Seeds  => /* seeds management functions */
+  //~ Seeds  => /* seeds management functions */
   createSeed,
   getSeedsById,
   deleteSeeds,
@@ -203,8 +252,11 @@ module.exports = {
   updateSeed,
   updateSeeds,
   searchSeeds,
-  // Proxy  => /* proxy management functions */
+  //~ Proxy  => /* proxy management functions */
   checkProxy,
   updateProxy,
   getProxy,
+  //~ Status => /* status management functions */
+  runningState,
+  waitingState
 };

@@ -67,6 +67,15 @@ wss.on('connection', wss => {
   console.log('connected!')
   wss.on('message', message => {
     console.log(message.toString());
+    let data = message.toString()
+    // let count = 0
+    // while (c) {
+    
+    //   for (let i = 0; i < data.length; i++) {
+
+    //   }
+    // }
+    // seedManager.updateState()
     // wss.send(JSON.stringify(message))
     // if (message.includes('start_in')) {
     //   processManager.startedProcess(JSON.parse(message))
