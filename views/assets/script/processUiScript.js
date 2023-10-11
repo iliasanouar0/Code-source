@@ -180,7 +180,7 @@ $(document).on('click', '.start', event => {
         var enc = new TextDecoder("utf-8");
         let data = JSON.parse(event.data)
         let val = new Uint8Array(data.data)
-        console.log(enc.decode(val));
+        console.log(JSON.parse(enc.decode(val)));
 
     }
 })
