@@ -626,7 +626,7 @@ if (path.includes("/admin/users/")) {
     })
     .then((data) => {
       let rows = createRowProcess(data);
-      Process_data.innerHTML = ""
+      // Process_data.innerHTML = ""
       rows.forEach((row) => {
         Process_data.appendChild(row);
       });
