@@ -176,7 +176,7 @@ $(document).on('click', '.start', event => {
         }
     })
     websocket_s.onmessage = (message) => {
-        console.log(message);
+        console.log(message.data);
     }
 })
 
