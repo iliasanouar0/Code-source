@@ -42,7 +42,7 @@ const getAllData = (request, response) => {
 }
 const getAllProcessSeeds = (request, response) => {
     const id = (request.params.id)
-    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,seeds.id_seeds"
+    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds"
     pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
