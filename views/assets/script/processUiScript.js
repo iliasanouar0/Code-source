@@ -177,7 +177,9 @@ $(document).on('click', '.start', event => {
     })
     websocket_s.onmessage = (event) => {
         //^ console.log(message.data);
-        console.log(JSON.parse(event.data));
+        let data = JSON.parse(event.data)
+        console.log(data.data);
+
     }
 })
 
