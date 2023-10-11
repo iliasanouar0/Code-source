@@ -69,17 +69,19 @@ wss.on('connection', wss => {
     console.log("message");
     console.log(message.toString());
     let data = JSON.parse(message.toString())
-    let active
-    let waiting = data.length - 3
-    if (data.length >= 3) {
-      active = 3
-    } else {
-      active = data.length
-      waiting = 0
+    if (data.request == "start") {
+      let active
+      let waiting = data.length - 3
+      if (data.data.length >= 3) {
+        active = 3
+      } else {
+        active = data.data.length
+        waiting = 0
+      }
+      let status = [{ waiting: waiting, active: active, finished: 0, failed: 0 }]
+      console.log(status);
+      wss.send(JSON.stringify(status))
     }
-    let status = [{ waiting: waiting, active: active, finished: 0, failed: 0 }]
-    console.log(status);
-    wss.send(JSON.stringify(status))
     // let count = 0
     // while (c) {
 
