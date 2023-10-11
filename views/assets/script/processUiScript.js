@@ -177,7 +177,6 @@ function socketUpdate(websocket, sendMessage, obj, pingInterval) {
     websocket.onerror = (e) => {
         console.log(`ERROR: ${e.data}`);
     };
-    websocket.close()
 }
 
 $(document).on('click', '.stop', event => {
