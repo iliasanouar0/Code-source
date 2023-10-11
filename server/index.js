@@ -77,7 +77,7 @@ wss.on('connection', wss => {
     }
     let status = { waiting: data.length - 3, active: active, finished: 0, failed: 0 }
     console.log(status);
-    wss.send(status)
+    wss.send(JSON.stringify(status))
     // let count = 0
     // while (c) {
 
