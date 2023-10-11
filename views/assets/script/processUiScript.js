@@ -168,8 +168,6 @@ function socketUpdate(websocket, sendMessage, obj, pingInterval) {
             return response.json();
         }).then((data) => {
             Process_data.innerHTML = createRowProcess(data)
-        }).then(() => {
-            websocket.close()
         })
     };
     websocket.onclose = (e) => {
@@ -178,6 +176,7 @@ function socketUpdate(websocket, sendMessage, obj, pingInterval) {
     websocket.onerror = (e) => {
         console.log(`ERROR: ${e.data}`);
     };
+    websocket.close()
 }
 
 $(document).on('click', '.stop', event => {
