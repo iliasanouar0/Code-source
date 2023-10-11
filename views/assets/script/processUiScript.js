@@ -172,18 +172,12 @@ $(document).on('click', '.start', event => {
     }
     $.ajax(settings).done(function (responseText) {
         if (websocket_s.OPEN == 1) {
-            websocket_s.send(JSON.stringify(responseText))
+            websocket_s.send(JSON.stringify({ request: "start", data: responseText }))
         }
     })
     websocket_s.onmessage = (event) => {
-        //^ console.log(message.data);
-        var enc = new TextDecoder("utf-8");
-        console.log(enc);
         let data = JSON.parse(event.data)
         console.log(data);
-        let val = new Uint8Array(data.data)
-        console.log(val);
-        console.log(enc.decode(val));
     }
 })
 
