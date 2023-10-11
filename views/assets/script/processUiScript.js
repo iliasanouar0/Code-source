@@ -140,30 +140,27 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: `${start_in}`,
     }
+    function sendMessage(message, ws) {
+        ws.send(message);
+    }
     let pingInterval
     const wsUri = `ws://${ip}:7072/wss`;
     const websocket = new WebSocket(wsUri);
-    function sendMessage(message) {
-        websocket.send(message);
-    }
     socketUpdate(websocket, sendMessage, obj, pingInterval);
     const wssUri = `ws://${ip}:7073/wss`;
     const websocket_s = new WebSocket(wssUri);
-    function sendMessage(message) {
-        websocket_s.send(message);
-    }
     fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
         return response.json()
     }).then(data => {
         websocket_s.onopen = (e) => {
-            sendMessage(JSON.stringify(data))
+            sendMessage(JSON.stringify(data), websocket_s)
         }
     })
 })
 
 function socketUpdate(websocket, sendMessage, obj, pingInterval) {
     websocket.onopen = (e) => {
-        sendMessage(JSON.stringify(obj));
+        sendMessage(JSON.stringify(obj), websocket);
         const Process_data = document.querySelector('#Process_data');
         fetch(`http://${ip}:3000/process/admin`, {
             method: "GET",
