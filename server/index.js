@@ -68,9 +68,11 @@ wss.on('connection', wss => {
   wss.on('message', message => {
     console.log(message.toString());
     let data = message.toString()
+    let status = { waiting: data.length - 3, active: 3, finished: 0, failed: 0 }
+    wss.send(status)
     // let count = 0
     // while (c) {
-    
+
     //   for (let i = 0; i < data.length; i++) {
 
     //   }
