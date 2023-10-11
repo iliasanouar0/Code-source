@@ -152,6 +152,11 @@ $(document).on('click', '.start', event => {
     function sendMessage(message) {
         websocket_s.send(message);
     }
+    fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
+        return response.json()
+    }).then(data => {
+        sendMessage(data)
+    })
 })
 
 function socketUpdate(websocket, sendMessage, obj, pingInterval) {
