@@ -176,9 +176,9 @@ $(document).on('click', '.start', event => {
         }
     })
     websocket_s.onmessage = (event) => {
-        // console.log(message.data);
+        //^ console.log(message.data);
         if (event.data instanceof Blob) {
-            reader = new FileReader();
+            let reader = new FileReader();
 
             reader.onload = () => {
                 console.log("Result: " + reader.result);
