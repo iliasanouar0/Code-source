@@ -172,12 +172,12 @@ $(document).on('click', '.start', event => {
     }
     $.ajax(settings).done(function (responseText) {
         if (websocket_s.OPEN == 1) {
-            console.log('i will send');
             websocket_s.send(responseText)
-            console.log('sended');
-            console.log(responseText);
         }
     })
+    websocket_s.onmessage = (message) => {
+        console.log(message);
+    }
 })
 
 function socketUpdate(websocket, sendMessage, obj, pingInterval) {
