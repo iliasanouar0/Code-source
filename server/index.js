@@ -53,8 +53,8 @@ wsi.on('connection', function connection(ws) {
 
 wsp.on('connection', ws => {
   ws.on('message', message => {
-    if (message.includes('start')) {
-      processManager.updateProcess(JSON.parse(message))
+    if (message.includes('start_in')) {
+      processManager.startedProcess(JSON.parse(message))
     } else {
       processManager.stoppedProcess(JSON.parse(message))
     }

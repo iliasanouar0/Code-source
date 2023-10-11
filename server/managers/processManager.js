@@ -50,7 +50,7 @@ const getAllProcessSeeds = (request, response) => {
         response.status(200).send(result.rows)
     })
 }
-const updateProcess = (data) => {
+const startedProcess = (data) => {
     let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
     let values = [data.status, data.start_in, data.id_process]
     let obj = { query: query, data: values }
@@ -74,6 +74,9 @@ const stoppedProcess = (data) => {
     })
 }
 
+
+
+
 // const updateProcess = (request, response) => {
 //     const data = request.body
 //     let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
@@ -90,7 +93,7 @@ const stoppedProcess = (data) => {
 module.exports = {
     addProcess,
     getAllData,
-    updateProcess,
+    startedProcess,
     getAllProcessSeeds,
     stoppedProcess
 }
