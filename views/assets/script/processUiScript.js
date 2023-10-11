@@ -149,15 +149,29 @@ $(document).on('click', '.start', event => {
     socketUpdate(websocket, sendMessage, obj, pingInterval);
     const wssUri = `ws://${ip}:7073/wss`;
     const websocket_s = new WebSocket(wssUri);
-    fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
-        return response.json()
-    }).then(data => {
-        websocket_s.onopen = (e) => {
-            websocket_s.send(data)
+    // fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
+    //     return response.json()
+    // }).then(data => {
+    //     websocket_s.onopen = (e) => {
+    //         websocket_s.send(data)
+    //     }
+    //     websocket_s.onmessage = (message) => {
+    //         console.log(message);
+    //     }
+    // })
+
+    let settings = {
+        "url": `http://209.170.73.224:3000/process/seeds/${id}`,
+        "method": "GET",
+        "headers": {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
         }
-        websocket_s.onmessage = (message) => {
-            console.log(message);
-        }
+    }
+    $.ajax(settings).done(function (responseText) {
+        console.log(responseText);
     })
 })
 
