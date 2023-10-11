@@ -171,6 +171,11 @@ $(document).on('click', '.start', event => {
         }
     }
     $.ajax(settings).done(function (responseText) {
+        websocket_s.onopen = (e) => {
+            console.log('i will send');
+            websocket_s.send(responseText)
+            console.log('sended');
+        }
         console.log(responseText);
     })
 })
