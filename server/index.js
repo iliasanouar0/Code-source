@@ -77,7 +77,7 @@ wss.on('connection', wss => {
       active = data.length
       waiting = 0
     }
-    let status = { waiting: waiting, active: active, finished: 0, failed: 0 }
+    let status = [{ waiting: waiting, active: active, finished: 0, failed: 0 }]
     console.log(status);
     wss.send(JSON.stringify(status))
     // let count = 0
