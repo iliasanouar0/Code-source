@@ -155,7 +155,9 @@ $(document).on('click', '.start', event => {
     fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
         return response.json()
     }).then(data => {
-        sendMessage(data)
+        websocket_s.onopen = (e) => {
+            sendMessage(JSON.stringify(data))
+        }
     })
 })
 
