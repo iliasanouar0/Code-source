@@ -171,12 +171,12 @@ $(document).on('click', '.start', event => {
         }
     }
     $.ajax(settings).done(function (responseText) {
-        websocket_s.onopen = (e) => {
+        if (websocket_s.OPEN == 1) {
             console.log('i will send');
             websocket_s.send(responseText)
             console.log('sended');
+            console.log(responseText);
         }
-        console.log(responseText);
     })
 })
 
