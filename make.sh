@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "write commit : "
-read message
+# echo "write commit : "
+# read message
 
 git add .
-git commit -m "$message"
+git commit -m "adding functions"
 git push
