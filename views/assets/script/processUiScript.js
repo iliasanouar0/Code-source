@@ -314,7 +314,7 @@ function connect(addr, id) {
         $('.ff_seeds').html(data[0].failed)
 
         connection.close();
-        setTimeout(function () { connect(addr); }, 2000);
+        setTimeout(function () { connect(addr, id); }, 2000);
     };
 
 }
