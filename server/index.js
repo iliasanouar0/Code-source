@@ -66,8 +66,6 @@ wsp.on('connection', ws => {
 wss.on('connection', wss => {
   console.log('connected!')
   wss.on('message', message => {
-    console.log("message");
-    console.log(message.toString());
     let data = JSON.parse(message.toString())
     if (data.request == "start") {
       let active
@@ -80,6 +78,13 @@ wss.on('connection', wss => {
       }
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       processStateManager.addState(status)
+      let seeds = data.data
+      let statechangeSeeds = []
+      for (let i = 0; i < seeds.length; i++) {
+        statechangeSeeds.push(seeds[i].id_seeds)
+      }
+      console.log(statechangeSeeds);
+      // seedManager.waitingState()
     }
     // let count = 0
     // while (c) {

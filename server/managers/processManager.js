@@ -17,12 +17,11 @@ const addProcess = (request, response) => {
     let pattern = getRndInteger(100000000, 99999999999999);
     var generator = new IdGenerator({
         len: 4,
-        alphabet: `${pattern}` /*prefix: id_entity, separator: ' '*/,
+        alphabet: `${pattern}`
     });
     let id = generator.get();
     let sql = `INSERT INTO process ( id_process, name ,action ,status ,date_add ,date_update,id_list ,id_user) values ($1,$2,$3,$4,$5,$6,$7,$8) returning id_process`
     let data = [id, obj.name, obj.action, obj.status, obj.date_add, obj.date_update, obj.id_list, obj.id_user]
-    // response.status(200).send({ sql: sql, data: data })
     pool.query(sql, data, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
@@ -40,6 +39,7 @@ const getAllData = (request, response) => {
         response.status(200).send(result.rows)
     })
 }
+
 const getAllProcessSeeds = (request, response) => {
     const id = (request.params.id)
     let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds ORDER BY seeds.status"
@@ -50,6 +50,18 @@ const getAllProcessSeeds = (request, response) => {
         response.status(200).send(result.rows)
     })
 }
+
+const getAllProcessSeedsByState = (data) => {
+    let values = [data.id_process, data.status]
+    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=($1) AND seeds.status=($2) GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds ORDER BY seeds.status"
+    pool.query(sql, values, (error, result) => {
+        if (error) {
+            throw ({ name: error.name, stack: error.stack, message: error.message, error: error })
+        }
+        return result.rows
+    })
+}
+
 const startedProcess = (data) => {
     let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
     let values = [data.status, data.start_in, data.id_process]
@@ -74,9 +86,9 @@ const stoppedProcess = (data) => {
     })
 }
 
-const process = (data, action) => {
+// const process = (data, action) => {
 
-}
+// }
 
 
 // const updateProcess = (request, response) => {
@@ -98,5 +110,6 @@ module.exports = {
     startedProcess,
     getAllProcessSeeds,
     stoppedProcess,
-    process
+    getAllProcessSeedsByState
+    // process
 }
