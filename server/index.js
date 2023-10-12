@@ -12,7 +12,7 @@ const wss = new WebSocket.Server({ port: 7073 })
 // const wsv = new WebSocket.Server({ port: 7074 })
 
 const wsv = new WebSocket.Server({
-  port: 7073,
+  port: 7074,
   perMessageDeflate: {
     zlibDeflateOptions: {
       // See zlib defaults.
