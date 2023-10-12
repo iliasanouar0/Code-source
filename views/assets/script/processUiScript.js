@@ -280,8 +280,12 @@ $(document).on('click', '.status', event => {
     })
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
+    let pingInterval
     websocket.onopen = (e) => {
         websocket.send(`${id}`)
+        pingInterval = setInterval(() => {
+            websocket.send(`${id}`)
+        }, 5000);
     }
     websocket.onmessage = (event) => {
         let data = JSON.parse(event.data)
