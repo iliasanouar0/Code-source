@@ -16,24 +16,25 @@ const addState = (data) => {
     })
 }
 
-const getState = (id) => {
+const getState = async (id) => {
     let sql = 'SELECT * FROM processstate WHERE id_process=($1)'
     let data = [id]
-    // const client = await pool.connect()
-    // const list = await client.query(sql, data);
-    // return list.rows;
-    const results = pool.connect().then(client => {
-        return client.query(sql, data)
-    }).then(list => {
-        return list.rows
-    })
+    const client = await pool.connect()
+    const list = await client.query(sql, data);
+    await client.end()
+    return list.rows;
+    // const results = pool.connect().then(client => {
+    //     return client.query(sql, data)
+    // }).then(list => {
+    //     return list.rows
+    // })
     // pool.query(sql, data, (err, result) => {
     //     if (err) {
     //         throw err
     //     }
     //     return result.rows
     // })
-    return results
+    // return results
 }
 
 const updateState = (data) => {
