@@ -281,27 +281,32 @@ $(document).on('click', '.status', event => {
     const INTERVAL = 2000;
     const URL = `ws://${ip}:7074/wss`;
 
-    connect(URL, id);
+    // connect(URL, id);
 
-    // const wsUri = `ws://${ip}:7074/wss`;
-    // const websocket = new WebSocket(wsUri);
+    const wsUri = `ws://${ip}:7074/wss`;
+    const websocket = new WebSocket(wsUri);
     // websocket.onopen = (e) => {
     //     websocket.send(`${id}`)
     // }
-    // websocket.onmessage = (event) => {
-
-    //     websocket.send(`${id}`)
-    //     websocket.close()
-    // }
-    // websocket.onclose = (event) => {
-    //     console.log(event);
-    //     alert('closed')
-    // }
+    websocket.onopen = (e) => {
+        websocket.send(`ping`)
+        console.log('send : ping');
+        pingInterval = setInterval(async () => {
+            websocket.send(`ping`)
+            console.log('send : ping');
+        }, 2000);
+    }
+    websocket.onmessage = (event) => {
+        console.log(`received : ${event.data}`);
+    }
+    websocket.onclose = (event) => {
+        console.log(event);
+        alert('closed')
+    }
 })
 
 function connect(addr, id) {
     let connection = new WebSocket(addr);
-    // no change to your code
     connection.onopen = function () {
         connection.send(`${id}`)
     };
