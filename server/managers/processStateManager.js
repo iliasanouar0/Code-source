@@ -17,7 +17,7 @@ const addState = (data) => {
 }
 
 const getState = (id) => {
-    // let sql = 'SELECT * FROM processstate WHERE id_process=($1)'
+    let sql = 'SELECT * FROM processstate WHERE id_process=($1)'
     // let data = [id]
     // pool.query(sql, data, (error, result) => {
     //     if (error) {
@@ -25,7 +25,7 @@ const getState = (id) => {
     //     }
     //     return result.rows
     // })
-    return id
+    return sql
 }
 
 const updateState = (data) => {
