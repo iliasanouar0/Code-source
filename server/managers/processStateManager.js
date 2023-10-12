@@ -28,6 +28,7 @@ const getState = async (id) => {
             throw err
         }
         results.push(result.rows)
+        console.log(result.rows);
     })
     return results
 }
