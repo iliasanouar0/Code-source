@@ -139,7 +139,7 @@ const searchSeeds = (request, response) => {
 }
 
 /**
- * Proxy management under seeds API => seeds/proxy/
+ * *Proxy management under seeds API => seeds/proxy/
  */
 
 const checkProxy = (request, response) => {
@@ -195,7 +195,7 @@ const updateProxy = (request, response) => {
 };
 
 /**
- * * Proxy management under seeds API => seeds/proxy/
+ * * status management under seeds API => seeds/proxy/
  */
 
 const runningState = (data) => {
@@ -258,5 +258,6 @@ module.exports = {
   getProxy,
   //~ Status => /* status management functions */
   runningState,
-  waitingState
+  waitingState,
+  stoppedState
 };

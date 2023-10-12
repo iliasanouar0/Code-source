@@ -17,7 +17,7 @@ const seedManager = require("./managers/seedManager");
 const processManager = require("./managers/processManager");
 const installation = require("./managers/installation");
 const gmailManagement = require("./processes/gmailManagement");
-const { log } = require("console");
+const processStateManager = require('./managers/processStateManager')
 
 const port = 3000;
 const app = express(); // setup express application
@@ -78,9 +78,8 @@ wss.on('connection', wss => {
         active = data.data.length
         waiting = 0
       }
-      let status = [{ waiting: waiting, active: active, finished: 0, failed: 0 }]
-      console.log(status);
-      wss.send(JSON.stringify(status))
+      let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
+      processStateManager.addState(status)
     }
     // let count = 0
     // while (c) {

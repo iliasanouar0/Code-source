@@ -172,7 +172,7 @@ $(document).on('click', '.start', event => {
     }
     $.ajax(settings).done(function (responseText) {
         if (websocket_s.OPEN == 1) {
-            websocket_s.send(JSON.stringify({ request: "start", data: responseText }))
+            websocket_s.send(JSON.stringify({ request: "start", data: responseText, id_process: id }))
         }
     })
     websocket_s.onmessage = (event) => {
