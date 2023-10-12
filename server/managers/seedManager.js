@@ -226,7 +226,6 @@ const waitingState = (data) => {
       }
     })
   })
-  return true
 }
 
 const stoppedState = (data) => {
