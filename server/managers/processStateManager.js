@@ -16,10 +16,10 @@ const addState = (data) => {
     })
 }
 
-const getState = (id) => {
+const getState = async (id) => {
     let sql = 'SELECT * FROM processstate WHERE id_process=($1)'
     let data = [id]
-    const client = pool.connect()
+    const client = await pool.connect()
     const list = client.query(sql, data);
     return list.rows;
 }
