@@ -106,7 +106,7 @@ $(document).on('click', '.delete-all-this', () => {
                     })
                 })
             }
-            location.reload()
+            // location.reload()
         } else if (result.isDismissed) {
             console.log("cancelled");
         }
