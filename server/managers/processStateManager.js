@@ -25,15 +25,9 @@ const getState = async (id) => {
     //     }
     //     return result.rows;
     // })
-    const results = pool.query(sql, data, (error, result) => {
-        if (error) {
-            return error;
-        }
-        return result.rows;
-    })
-    return results
-    // const list = await client.query(sql, data);
-    // return list.rows;
+    const client = await pool.connect()
+    const list = await client.query(sql, data);
+    return list.rows;
 }
 
 const updateState = (data) => {
