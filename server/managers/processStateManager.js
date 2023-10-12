@@ -19,11 +19,9 @@ const addState = (data) => {
 const getState = (id) => {
     let sql = 'SELECT * FROM processstate WHERE id_process=($1)'
     let data = [id]
-    const client = pool.connect().then(() => {
-        const list = client.query(sql, data).then(() => {
-            return list.rows;
-        });
-    })
+    const client = pool.connect()
+    const list = client.query(sql, data);
+    return list.rows;
 }
 
 const updateState = (data) => {
