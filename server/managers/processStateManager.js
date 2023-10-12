@@ -16,7 +16,7 @@ const addState = (data) => {
     })
 }
 
-const getState = async (id) => {
+const getState = (id) => {
     let sql = 'SELECT * FROM processstate WHERE id_process=($1)'
     let data = [id]
     // pool.query(sql, data, (error, result) => {
@@ -25,8 +25,8 @@ const getState = async (id) => {
     //     }
     //     return result.rows;
     // })
-    const client = await pool.connect()
-    const list = await client.query(sql, data);
+    const client = pool.connect()
+    const list = client.query(sql, data);
     return list.rows;
 }
 

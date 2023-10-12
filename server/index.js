@@ -93,16 +93,15 @@ wss.on('connection', wss => {
 })
 
 wsv.on('connection', wsv => {
-  console.log(wsv);
-  wsv.on("message", async (event) => {
+  console.log("connected!");
+  wsv.on("message", (event) => {
     data = event.toString()
-    let result = await processStateManager.getState(data)
+    let result = processStateManager.getState(data)
     wsv.send(JSON.stringify(result))
     // pingInterval = setInterval(async () => {
     //   result = await processStateManager.getState(data)
     //   wsv.send(JSON.stringify(result));
     // }, 1000);
-    wsv.ping()
   })
   wsv.on('close', () => {
     console.log('closed');
