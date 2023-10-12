@@ -9,6 +9,7 @@ const WebSocket = require('ws');
 const wsi = new WebSocket.Server({ port: 7071 });
 const wsp = new WebSocket.Server({ port: 7072 })
 const wss = new WebSocket.Server({ port: 7073 })
+const wsv = new WebSocket.Server({ port: 7074 })
 
 const userManager = require("./managers/userManager");
 const entityManager = require("./managers/entityManager");
@@ -89,6 +90,17 @@ wss.on('connection', wss => {
     }
   })
   console.log(request);
+})
+
+wsv.on('connection', wsv => {
+  let pingInterval
+  console.log('connect!');
+  wsv.on("open", event => {
+    wsv.send("ping");
+    pingInterval = setInterval(() => {
+      wsv.send("ping");
+    }, 5000);
+  })
 })
 
 app.post("/installation/", installation.createTables)

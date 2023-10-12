@@ -278,18 +278,10 @@ $(document).on('click', '.status', event => {
     }).then(() => {
         $('#modal-process-view').modal('show')
     })
-    // const status = "STOPPED"
-    // const start_in = new Date().toDateInputValue()
-    // let obj = {
-    //     id_process: `${id}`,
-    //     status: `${status}`,
-    //     start_in: `${start_in}`,
-    // }
-    // let pingInterval
-    // const wsUri = `ws://${ip}:7072/wss`;
-    // const websocket = new WebSocket(wsUri);
-    // function sendMessage(message) {
-    //     websocket.send(message);
-    // }
+    const wsUri = `ws://${ip}:7074/wss`;
+    const websocket = new WebSocket(wsUri);
+    websocket.onmessage(event => {
+        console.log(event.data);
+    })
     // socket(websocket, sendMessage, obj, pingInterval);
 })
