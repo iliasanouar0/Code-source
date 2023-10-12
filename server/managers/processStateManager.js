@@ -22,7 +22,6 @@ const getState = async (id) => {
     const client = await pool.connect()
     const list = await client.query(sql, data);
     await client.end()
-    await pool.end()
     return list.rows;
     // const results = pool.connect().then(client => {
     //     return client.query(sql, data)
