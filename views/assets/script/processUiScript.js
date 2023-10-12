@@ -312,7 +312,6 @@ function connect(addr, id) {
         $('.a_seeds').html(data[0].active)
         $('.f_seeds').html(data[0].finished)
         $('.ff_seeds').html(data[0].failed)
-
         connection.close();
         setTimeout(function () { connect(addr, id); }, 2000);
     };
