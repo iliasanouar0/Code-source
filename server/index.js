@@ -84,7 +84,7 @@ wss.on('connection', wss => {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
       console.log(statechangeSeeds);
-      // seedManager.waitingState()
+      seedManager.waitingState(statechangeSeeds)
     }
     // let count = 0
     // while (c) {
