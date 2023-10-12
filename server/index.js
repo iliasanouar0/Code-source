@@ -97,6 +97,7 @@ wsv.on('connection', wsv => {
   wsv.on("message", async (event) => {
     data = event.toString()
     let result = await processStateManager.getState(data)
+    console.log(result);
     wsv.send(JSON.stringify(result))
     // pingInterval = setInterval(async () => {
     //   result = await processStateManager.getState(data)
