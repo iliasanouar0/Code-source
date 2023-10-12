@@ -224,9 +224,9 @@ const waitingState = (data) => {
       if (error) {
         return error
       }
-      return true
     })
   })
+  return true
 }
 
 const stoppedState = (data) => {
