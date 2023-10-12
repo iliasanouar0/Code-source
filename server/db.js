@@ -6,7 +6,7 @@ let data = {
     database: database,
     password: password,
     port: parseInt(port),
-    max: -1
+    max: 0
 }
 // const pool = new pg.Pool(data);
 
