@@ -97,7 +97,7 @@ wsv.on('connection', wsv => {
   console.log('connect!');
   wsv.on("message", event => {
     // data = JSON.parse(event.toString)
-    console.log(event);
+    console.log(event.toString);
     // processStateManager.getState()
     // pingInterval = setInterval(() => {
     //   wsv.send("ping");
