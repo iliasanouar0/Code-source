@@ -95,7 +95,7 @@ wss.on('connection', wss => {
 wsv.on('connection', wsv => {
   let pingInterval
   console.log('connect!');
-  wsv.on("open", event => {
+  wsv.on("message", event => {
     wsv.send("ping");
     pingInterval = setInterval(() => {
       wsv.send("ping");
