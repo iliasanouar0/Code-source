@@ -102,6 +102,7 @@ wsv.on('connection', wsv => {
     //   result = await processStateManager.getState(data)
     //   wsv.send(JSON.stringify(result));
     // }, 1000);
+    wsv.ping()
   })
   wsv.on('close', () => {
     console.log('closed');
