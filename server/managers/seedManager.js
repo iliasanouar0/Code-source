@@ -218,7 +218,7 @@ const waitingState = (data) => {
   for (let i = 0; i < data.length; i++) {
     query.push(["waiting", data[i]])
   }
-  const sql = 'UPDATE seeds SET status=($1) WHERE id_seeds=($2) AND status="idel" OR status="stopped"'
+  const sql = 'UPDATE seeds SET status=($1) WHERE id_seeds=($2) AND status LIKE "%idel%" OR status LIKE "%stopped%"'
   query.forEach(data => {
     pool.query(sql, data, (error, result) => {
       if (error) {
