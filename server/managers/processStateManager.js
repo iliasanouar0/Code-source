@@ -17,15 +17,16 @@ const addState = (data) => {
 }
 
 const getState = (id) => {
+    let results
     let sql = 'SELECT * FROM processstate WHERE id_process=($1)'
-    // let data = [id]
-    // pool.query(sql, data, (error, result) => {
-    //     if (error) {
-    //         return error
-    //     }
-    //     return result.rows
-    // })
-    return sql
+    let data = [id]
+    pool.query(sql, data, (error, result) => {
+        if (error) {
+            return error
+        }
+        results = result.rows
+    })
+    return results
 }
 
 const updateState = (data) => {
