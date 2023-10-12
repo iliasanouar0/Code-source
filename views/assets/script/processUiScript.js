@@ -278,47 +278,52 @@ $(document).on('click', '.status', event => {
     }).then(() => {
         $('#modal-process-view').modal('show')
     })
-    const INTERVAL = 2000;
-    const URL = `ws://${ip}:7074/wss`;
+    // const INTERVAL = 2000;
+    // const URL = `ws://${ip}:7074/wss`;
 
     // connect(URL, id);
 
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
-    // websocket.onopen = (e) => {
-    //     websocket.send(`${id}`)
-    // }
     websocket.onopen = (e) => {
-        websocket.send(`ping`)
-        console.log('send : ping');
-        pingInterval = setInterval(async () => {
-            websocket.send(`ping`)
-            console.log('send : ping');
-        }, 2000);
+        websocket.send(`${id}`)
     }
-    websocket.onmessage = (event) => {
-        console.log(`received : ${event.data}`);
-    }
-    websocket.onclose = (event) => {
-        console.log(event);
-        alert('closed')
-    }
-})
-
-function connect(addr, id) {
-    let connection = new WebSocket(addr);
-    connection.onopen = function () {
-        connection.send(`${id}`)
-    };
-    connection.onmessage = function (event) {
+    // websocket.onopen = (e) => {
+    //     websocket.send(`ping`)
+    //     console.log('send : ping');
+    //     pingInterval = setInterval(async () => {
+    //         websocket.send(`ping`)
+    //         console.log('send : ping');
+    //     }, 2000);
+    // }
+    websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
         console.log(data);
         $('.w_seeds').html(data[0].waiting)
         $('.a_seeds').html(data[0].active)
         $('.f_seeds').html(data[0].finished)
         $('.ff_seeds').html(data[0].failed)
-        connection.close();
-        setTimeout(function () { connect(addr, id); }, 2000);
+        websocket.send(`${id}`)
     };
+    websocket.onclose = () => {
+        alert('closed')
+    }
+})
 
-}
+// function connect(addr, id) {
+//     let connection = new WebSocket(addr);
+//     connection.onopen = function () {
+//         connection.send(`${id}`)
+//     };
+//     connection.onmessage = function (event) {
+//         let data = JSON.parse(event.data)
+//         console.log(data);
+//         $('.w_seeds').html(data[0].waiting)
+//         $('.a_seeds').html(data[0].active)
+//         $('.f_seeds').html(data[0].finished)
+//         $('.ff_seeds').html(data[0].failed)
+//         connection.close();
+//         setTimeout(function () { connect(addr, id); }, 2000);
+//     };
+
+// }
