@@ -280,6 +280,9 @@ $(document).on('click', '.status', event => {
     })
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
+    websocket.onopen = (e) => {
+        websocket.send("done")
+    }
     websocket.onmessage = (event) => {
         console.log(event.data);
     }
