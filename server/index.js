@@ -24,8 +24,8 @@ const wsv = new WebSocket.Server({
       chunkSize: 10 * 1024
     },
     // Other options settable:
-    clientNoContextTakeover: true, // Defaults to negotiated value.
-    serverNoContextTakeover: true, // Defaults to negotiated value.
+    // clientNoContextTakeover: true, // Defaults to negotiated value.
+    // serverNoContextTakeover: true, // Defaults to negotiated value.
     serverMaxWindowBits: 20, // Defaults to negotiated value.
     // Below options specified as default values.
     concurrencyLimit: 20, // Limits zlib concurrency for perf.
