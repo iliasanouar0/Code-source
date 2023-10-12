@@ -93,7 +93,7 @@ wss.on('connection', wss => {
 })
 
 wsv.on('connection', wsv => {
-  let pingInterval
+  // let pingInterval
   console.log('connect!');
   wsv.on("message", async (event) => {
     data = event.toString()
