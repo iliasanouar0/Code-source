@@ -23,7 +23,7 @@ const getState = (id) => {
         if (error) {
             return error
         }
-        return [result.rows]
+        console.log(result.rows);
     })
 }
 
