@@ -25,9 +25,11 @@ const getState = (id) => {
     //     }
     //     return result.rows;
     // })
-    const client = pool.connect()
-    const list = client.query(sql, data);
-    return list.rows;
+    pool.connect().then(client => {
+        return client.query(sql, data);
+    }).then(list => {
+        return list.rows;
+    })
 }
 
 const updateState = (data) => {
