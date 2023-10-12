@@ -280,8 +280,8 @@ $(document).on('click', '.status', event => {
     })
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
-    websocket.onmessage(event => {
+    websocket.onmessage = (event) => {
         console.log(event.data);
-    })
+    }
     // socket(websocket, sendMessage, obj, pingInterval);
 })
