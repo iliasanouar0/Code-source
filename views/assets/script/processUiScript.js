@@ -278,27 +278,43 @@ $(document).on('click', '.status', event => {
     }).then(() => {
         $('#modal-process-view').modal('show')
     })
-    const wsUri = `ws://${ip}:7074/wss`;
-    const websocket = new WebSocket(wsUri);
-    let pingInterval
-    websocket.onopen = (e) => {
+    const INTERVAL = 2000;
+    const URL = `ws://${ip}:7074/wss`;
+
+    connect(URL, id);
+
+    // const wsUri = `ws://${ip}:7074/wss`;
+    // const websocket = new WebSocket(wsUri);
+    // websocket.onopen = (e) => {
+    //     websocket.send(`${id}`)
+    // }
+    // websocket.onmessage = (event) => {
+
+    //     websocket.send(`${id}`)
+    //     websocket.close()
+    // }
+    // websocket.onclose = (event) => {
+    //     console.log(event);
+    //     alert('closed')
+    // }
+})
+
+function connect(addr, id) {
+    let connection = new WebSocket(addr);
+    // no change to your code
+    connection.onopen = function () {
         websocket.send(`${id}`)
-        // pingInterval = setInterval(() => {
-        //     websocket.send(`${id}`)
-        // }, 2000);
-    }
-    websocket.onmessage = (event) => {
+    };
+    connection.onmessage = function (event) {
         let data = JSON.parse(event.data)
         console.log(data);
         $('.w_seeds').html(data[0].waiting)
         $('.a_seeds').html(data[0].active)
         $('.f_seeds').html(data[0].finished)
         $('.ff_seeds').html(data[0].failed)
-        websocket.send(`${id}`)
-    }
-    websocket.onclose = (event) => {
-        console.log(event);
-        alert('closed')
-    }
-    // socket(websocket, sendMessage, obj, pingInterval);
-})
+
+        connection.close();
+        setTimeout(function () { connect(URL); }, 2000);
+    };
+
+}
