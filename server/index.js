@@ -89,20 +89,6 @@ wss.on('connection', wss => {
       console.log(result);
       wss.send(`${result}`)
     }
-    // let count = 0
-    // while (c) {
-
-    //   for (let i = 0; i < data.length; i++) {
-
-    //   }
-    // }
-    // seedManager.updateState()
-    // wss.send(JSON.stringify(message))
-    // if (message.includes('start_in')) {
-    //   processManager.startedProcess(JSON.parse(message))
-    // } else {
-    //   processManager.stoppedProcess(JSON.parse(message))
-    // }
   })
   console.log(request);
 })
