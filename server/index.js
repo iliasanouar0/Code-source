@@ -93,9 +93,7 @@ wss.on('connection', wss => {
 })
 
 wsv.on('connection', wsv => {
-  wsv.on('open', () => {
-    console.log('connect!');
-  })
+  console.log(wsv);
   wsv.on("message", async (event) => {
     data = event.toString()
     let result = await processStateManager.getState(data)
