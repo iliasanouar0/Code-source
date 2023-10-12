@@ -284,10 +284,12 @@ $(document).on('click', '.status', event => {
         websocket.send(`${id}`)
     }
     websocket.onmessage = (event) => {
-        console.log(event);
-        console.log(event.data);
         let data = JSON.parse(event.data)
         console.log(data);
+        $('.w_seeds').html(data[0].waiting)
+        $('.a_seeds').html(data[0].active)
+        $('.f_seeds').html(data[0].finished)
+        $('.ff_seeds').html(data[0].failed)
     }
     // socket(websocket, sendMessage, obj, pingInterval);
 })
