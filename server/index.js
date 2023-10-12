@@ -101,7 +101,7 @@ wsv.on('connection', wsv => {
     pingInterval = setInterval(async () => {
       result = await processStateManager.getState(data)
       wsv.send(JSON.stringify(result));
-    }, 1000);
+    }, 5000);
   })
   wsv.on('close', () => {
     console.log('closed');
