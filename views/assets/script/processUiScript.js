@@ -292,7 +292,8 @@ $(document).on('click', '.status', event => {
         $('.ff_seeds').html(data[0].failed)
         websocket.send(`${id}`)
     }
-    websocket.onclose = () => {
+    websocket.onclose = (event) => {
+        console.log(event);
         alert('closed')
     }
     // socket(websocket, sendMessage, obj, pingInterval);
