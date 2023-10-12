@@ -285,7 +285,7 @@ $(document).on('click', '.status', event => {
         websocket.send(`${id}`)
         pingInterval = setInterval(() => {
             websocket.send(`${id}`)
-        }, 5000);
+        }, 2000);
     }
     websocket.onmessage = (event) => {
         let data = JSON.parse(event.data)
@@ -294,7 +294,6 @@ $(document).on('click', '.status', event => {
         $('.a_seeds').html(data[0].active)
         $('.f_seeds').html(data[0].finished)
         $('.ff_seeds').html(data[0].failed)
-        websocket.send(`${id}`)
     }
     websocket.onclose = (event) => {
         console.log(event);
