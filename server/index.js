@@ -68,7 +68,7 @@ wss.on('connection', wss => {
   let request = ""
   wss.on('message', message => {
     let data = JSON.parse(message.toString())
-    request = data.requestF
+    request = data.request
     if (request == "start") {
       let active
       let waiting = data.data.length - 3
