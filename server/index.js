@@ -65,9 +65,11 @@ wsp.on('connection', ws => {
 
 wss.on('connection', wss => {
   console.log('connected!')
+  let request = ""
   wss.on('message', message => {
     let data = JSON.parse(message.toString())
-    if (data.request == "start") {
+    request = data.requestF
+    if (request == "start") {
       let active
       let waiting = data.data.length - 3
       if (data.data.length >= 3) {
@@ -102,6 +104,7 @@ wss.on('connection', wss => {
     //   processManager.stoppedProcess(JSON.parse(message))
     // }
   })
+  console.log(request);
 })
 
 app.post("/installation/", installation.createTables)
