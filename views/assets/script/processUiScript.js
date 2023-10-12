@@ -290,6 +290,7 @@ $(document).on('click', '.status', event => {
         $('.a_seeds').html(data[0].active)
         $('.f_seeds').html(data[0].finished)
         $('.ff_seeds').html(data[0].failed)
+        websocket.send(`${id}`)
     }
     // socket(websocket, sendMessage, obj, pingInterval);
 })
