@@ -303,7 +303,7 @@ function connect(addr, id) {
     let connection = new WebSocket(addr);
     // no change to your code
     connection.onopen = function () {
-        websocket.send(`${id}`)
+        connection.send(`${id}`)
     };
     connection.onmessage = function (event) {
         let data = JSON.parse(event.data)
