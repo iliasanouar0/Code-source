@@ -32,8 +32,7 @@ $(document).on("click", "#add_process", () => {
 $(window).on("load", function () {
   console.log("window loaded");
   console.log('%c Reporting!!', 'font-weight: bold; font-size: 50px;color: white; text-shadow: 4px 4px 0 yellow,7px 7px 0 blue');
-  console.log("%c+", "font-size: 1px; padding: 180px 320px; line-height: 360px; background: url(http://i.imgur.com/kZfvHRV.gif); background-size: 640px 360px; color: transparent;");
-  console.log('%c The one', 'font-weight: bold; font-size: 20px; color: green;');
+  console.log('%c The one', 'font-size: 20px; color: green;');
   $(".info a").html(userName);
 });
 
