@@ -117,22 +117,28 @@ wss.on('connection', wss => {
             success++
             seedManager.updateState([toProcess[i].id_seeds], "finished")
             toProcess.shift()
-            if (toProcess.length < active) {
+            if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count + line])
+              count++
+            } else {
+              toProcess.push(seeds[count])
               count++
             }
           } else {
             failed++
             seedManager.updateState(toProcess[i].id_seeds, "failed")
             toProcess.shift()
-            if (toProcess.length < active) {
+            if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count + line])
+              count++
+            } else {
+              toProcess.push(seeds[count])
               count++
             }
           }
         }
 
-        let status = { waiting: waiting - count, active: active, finished: success, failed: failed, id_process: data.id_process }
+        let status = { waiting: waiting - count - line, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
         processStateManager.updateState(status)
         if (length == count) {
           process = true
