@@ -111,7 +111,7 @@ wss.on('connection', wss => {
         toProcess.push(seeds[i])
       }
       for (let i = 0; i < toProcess.length; i++) {
-        console.log(toProcess[0].id_seeds);
+        console.log(toProcess[i].id_seeds);
       }
       // while (process == false) {
       //   for (let i = 0; i < toProcess.length; i++) {
