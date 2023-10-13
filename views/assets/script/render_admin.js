@@ -220,7 +220,7 @@ const createRowProcess = data => {
     <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
     </td></tr>`
       rows += tr
-    } else if (element.status == "STOPPED") {
+    } else {
       let tr =
         `<tr><td>${element.id_process}</td>
     <td>${element.count}</td>
