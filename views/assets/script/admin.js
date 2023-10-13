@@ -31,7 +31,9 @@ $(document).on("click", "#add_process", () => {
 
 $(window).on("load", function () {
   console.log("window loaded");
-  console.log('%c Reporting!!', 'font-weight: bold; font-family:monospace; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8)');
+  console.log('%c Reporting!!', 'font-weight: bold; font-size: 50px;color: red; text-shadow: 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8)');
+  console.log("%c ", "font-size: 1px; padding: 215px 385px; background-size: 770px 430px; background: no-repeat url(https://i0.wp.com/i.giphy.com/media/ZVik7pBtu9dNS/giphy-downsized.gif?w=770&amp;ssl=1);");
+  console.log('%c enjoy ,', 'font-weight: bold; font-size: 20px; color: green; text-shadow:  9px 9px 0 rgb(245,221,8)');
   $(".info a").html(userName);
 });
 
