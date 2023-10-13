@@ -116,6 +116,10 @@ wss.on('connection', wss => {
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
             success++
+            if (toProcess[i].id_seeds == 'undefined') {
+              console.log(toProcess[i]);
+              break
+            }
             seedManager.updateState([toProcess[i].id_seeds], "finished")
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
