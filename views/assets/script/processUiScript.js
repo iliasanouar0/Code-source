@@ -13,31 +13,6 @@ $(document).ready(function () {
 
 const Process_data = document.querySelector('#Process_data')
 
-// const createRowProcess = data => {
-//     let rows = []
-//     data.forEach(element => {
-//         let tds =
-//             `<td>${element.id_process}</td>
-//       <td>${element.count}</td>
-//       <td>${element.f_name} ${element.l_name}</td>
-//       <td>${element.list_name}</td>
-//       <td>${element.isp}</td>
-//       <td>${element.status}</td>
-//       <td>${element.action}</td>
-//       <td>${element.start_in}</td>
-//       <td class="text-center">${element.end_in}</td>
-//       <td>
-//       <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-//       <button type="button" class="btn btn-success start"  data-id="${element.id_process}"><i class="fas fa-play"></i></button>
-//       <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-//       </td>`
-//         let tr = document.createElement('tr')
-//         tr.innerHTML = tds
-//         rows.push(tr)
-//     });
-//     return rows
-// }
-
 const createRowProcess = data => {
     let rows = ""
     data.forEach(element => {
@@ -54,7 +29,7 @@ const createRowProcess = data => {
           <td class="text-center">${element.end_in}</td>
           <td>
           <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-          <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fa fa-stop"></i></button>
+          <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fa fa-stop"></i></button><i class="fas fa-pause"></i>
           <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
           </td></tr>`
             rows += tr
@@ -147,18 +122,9 @@ $(document).on('click', '.start', event => {
     const wsUri = `ws://${ip}:7072/wss`;
     const websocket = new WebSocket(wsUri);
     socketUpdate(websocket, sendMessage, obj, pingInterval);
+
     const wssUri = `ws://${ip}:7073/wss`;
     const websocket_s = new WebSocket(wssUri);
-    // fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
-    //     return response.json()
-    // }).then(data => {
-    //     websocket_s.onopen = (e) => {
-    //         websocket_s.send(data)
-    //     }
-    //     websocket_s.onmessage = (message) => {
-    //         console.log(message);
-    //     }
-    // })
 
     let settings = {
         "url": `http://209.170.73.224:3000/process/seeds/${id}`,
@@ -278,28 +244,24 @@ $(document).on('click', '.status', event => {
     }).then(() => {
         $('#modal-process-view').modal('show')
     })
-    // const INTERVAL = 2000;
-    // const URL = `ws://${ip}:7074/wss`;
-
-    // connect(URL, id);
-
+    /**
+     * * Websocket connection :
+     * ? opening => get data from database render the view. 
+     * ! closing on modal hide
+     */
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
-    // websocket.onopen = (e) => {
-    //     websocket.send(`${id}`)
-    // }
+
     let pingInterval
     websocket.onopen = (e) => {
         websocket.send(`${id}`)
         console.log(`send : ${id}`);
         pingInterval = setInterval(async () => {
             websocket.send(`${id}`)
-            console.log(`send : ${id}`);
-        }, randomRange(500, 2000));
+        }, randomRange(500, 1500));
     }
     websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
-        console.log(data);
         $('.w_seeds').html(data[0].waiting)
         $('.a_seeds').html(data[0].active)
         $('.f_seeds').html(data[0].finished)
@@ -307,7 +269,6 @@ $(document).on('click', '.status', event => {
     };
     websocket.onclose = () => {
         clearInterval(pingInterval);
-        alert('closed')
     }
     $('.btn-close').on('click', () => {
         $('#modal-process-view').modal('hide')
@@ -320,20 +281,3 @@ function randomRange(myMin, myMax) {
         Math.random() * (Math.ceil(myMax) - Math.floor(myMin) + 1) + myMin
     );
 }
-// function connect(addr, id) {
-//     let connection = new WebSocket(addr);
-//     connection.onopen = function () {
-//         connection.send(`${id}`)
-//     };
-//     connection.onmessage = function (event) {
-//         let data = JSON.parse(event.data)
-//         console.log(data);
-//         $('.w_seeds').html(data[0].waiting)
-//         $('.a_seeds').html(data[0].active)
-//         $('.f_seeds').html(data[0].finished)
-//         $('.ff_seeds').html(data[0].failed)
-//         connection.close();
-//         setTimeout(function () { connect(addr, id); }, 2000);
-//     };
-
-// }

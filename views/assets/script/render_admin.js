@@ -8,13 +8,11 @@ function getRootWebSitePath() {
 }
 
 let storage = { ...localStorage }
-console.log(storage);
 let ip = storage.ip
 
 let adminNavbarUrl = ""
 let adminSidebarUrl = ""
 const root = getRootWebSitePath();
-console.log(root);
 if (root.includes('views')) {
   adminNavbarUrl = `${root}/layout/admin_navbar.html`;
   adminSidebarUrl = `${root}/layout/admin_sidebar.html`;
@@ -24,7 +22,6 @@ if (root.includes('views')) {
 }
 const _location = document.location.toString();
 let path = _location.replace(root, "");
-console.log(path);
 fetch(adminSidebarUrl)
   .then((response) => response.text())
   .then((html) => {
@@ -260,7 +257,6 @@ if (path.includes("/admin/users/")) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       let rows = createRow(data);
       rows.forEach((row) => {
         user_data.appendChild(row);

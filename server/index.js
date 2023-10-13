@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require('fs')
 const WebSocket = require('ws');
+
 const wsi = new WebSocket.Server({ port: 7071 });
 const wsp = new WebSocket.Server({ port: 7072 })
 const wss = new WebSocket.Server({ port: 7073 })
@@ -36,8 +37,17 @@ app.use((req, res, next) => {
   );
   next();
 });
-// web socket =>
-
+/**
+ * * Websocket => 
+ * ? wsi :
+ * ~ Installation websocket.
+ * ? wsp :
+ * ~ Process starting state control websocket.
+ * ? wss :
+ * ~ Process status websocket.
+ * ? wsv :
+ * ~ Process view status websocket.
+ */
 wsi.on('connection', function connection(ws) {
   console.log('WebSocket connected');
   ws.on('message', function incoming(message) {
@@ -101,10 +111,6 @@ wsv.on('connection', wsv => {
     let result = await processStateManager.getState(data)
     console.log(i);
     wsv.send(JSON.stringify(result))
-    // pingInterval = setInterval(async () => {
-    //   result = await processStateManager.getState(data)
-    //   wsv.send(JSON.stringify(result));
-    // }, 5000);
   })
   wsv.on('close', () => {
     console.log('closed');
