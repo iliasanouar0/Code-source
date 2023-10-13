@@ -105,6 +105,16 @@ wss.on('connection', wss => {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
       console.log(statechangeSeeds);
+      seedManager.waitingState(statechangeSeeds)
+    } else if (request == "pause") {
+      let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
+      console.log(seeds);
+      let statechangeSeeds = []
+      for (let i = 0; i < seeds.length; i++) {
+        statechangeSeeds.push(seeds[i].id_seeds)
+      }
+      console.log(statechangeSeeds);
+      seedManager.stoppedState(statechangeSeeds)
     }
   })
 })

@@ -242,6 +242,7 @@ const stoppedState = (data) => {
       }
     })
   })
+  return true
 }
 
 module.exports = {
