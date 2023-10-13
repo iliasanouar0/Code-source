@@ -120,7 +120,7 @@ wss.on('connection', wss => {
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
-              seedManager.updateState([seeds[count + line].id_seeds], "running")
+              seedManager.updateState([seeds[count].id_seeds], "running")
               count++
               // console.log('inside length : ' + length);
               console.log('inside count : ' + count);
