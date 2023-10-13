@@ -94,11 +94,12 @@ wss.on('connection', wss => {
 
 wsv.on('connection', wsv => {
   console.log("connected");
+  let i = 0
   wsv.on("message", async (event) => {
-    // wsv.send('pong')
+    i++
     data = event.toString()
     let result = await processStateManager.getState(data)
-    console.log(result);
+    console.log(i);
     wsv.send(JSON.stringify(result))
     // pingInterval = setInterval(async () => {
     //   result = await processStateManager.getState(data)
