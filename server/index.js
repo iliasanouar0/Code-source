@@ -117,7 +117,7 @@ wss.on('connection', wss => {
           if (typeof (toProcess[i])) {
             success++
             console.log(toProcess[i].id_seeds);
-            seedManager.updateState([toProcess[i].id_seeds], "finished")
+            await seedManager.updateState([toProcess[i].id_seeds], "finished")
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
