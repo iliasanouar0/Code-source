@@ -159,7 +159,7 @@ wss.on('connection', wss => {
 wsv.on('connection', wsv => {
   console.log("connected");
   wsv.on("message", async (event) => {
-    data = event.toString()
+    let data = event.toString()
     console.log(data);
     let result = await processStateManager.getState(data)
     console.log(result);
