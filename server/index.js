@@ -112,9 +112,8 @@ wss.on('connection', wss => {
       }
       let gh = 0
       while (process == false) {
-        gh++
-        console.log(gh);
-        console.log(toProcess);
+        console.log('length : ' + length);
+        console.log('count : ' + count);
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
             success++
