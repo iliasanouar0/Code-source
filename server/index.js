@@ -110,7 +110,7 @@ wss.on('connection', wss => {
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
-      while (length >= count) {
+      while (count <= length) {
         console.log('in enter length : ' + length);
         console.log('in enter count : ' + count);
         for (let i = 0; i < toProcess.length; i++) {
