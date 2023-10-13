@@ -19,7 +19,8 @@ const seedManager = require("./managers/seedManager");
 const processManager = require("./managers/processManager");
 const installation = require("./managers/installation");
 const gmailManagement = require("./processes/gmailManagement");
-const processStateManager = require('./managers/processStateManager')
+const processStateManager = require('./managers/processStateManager');
+const { data } = require("./db");
 
 const port = 3000;
 const app = express(); // setup express application
@@ -146,7 +147,6 @@ wss.on('connection', wss => {
       seedManager.updateState(statechangeSeeds, "waiting")
     } else if (request == "pause") {
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-      console.log(seeds);
       let statechangeSeeds = []
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
@@ -160,7 +160,9 @@ wsv.on('connection', wsv => {
   console.log("connected");
   wsv.on("message", async (event) => {
     data = event.toString()
+    console.log(data);
     let result = await processStateManager.getState(data)
+    console.log(result);
     wsv.send(JSON.stringify(result))
   })
   wsv.on('close', () => {
