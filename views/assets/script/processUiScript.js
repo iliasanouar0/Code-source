@@ -288,7 +288,7 @@ $(document).on('click', '.status', event => {
     // websocket.onopen = (e) => {
     //     websocket.send(`${id}`)
     // }
-
+    let pingInterval
     websocket.onopen = (e) => {
         websocket.send(`${id}`)
         console.log(`send : ${id}`);
