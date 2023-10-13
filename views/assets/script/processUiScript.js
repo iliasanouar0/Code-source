@@ -294,7 +294,7 @@ $(document).on('click', '.status', event => {
         pingInterval = setInterval(async () => {
             websocket.send(`${id}`)
             console.log(`send : ${id}`);
-        }, 2000);
+        }, 1200);
     }
     websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
