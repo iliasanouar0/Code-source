@@ -618,10 +618,10 @@ if (path.includes("/admin/users/")) {
     })
     .then((data) => {
       let rows = createRowProcess(data);
-      // Process_data.innerHTML = ""
-      rows.forEach((row) => {
-        Process_data.appendChild(row);
-      });
+      Process_data.innerHTML = rows
+      // rows.forEach((row) => {
+      //   Process_data.appendChild(row);
+      // });
     })
 } else if (path.includes("/admin/lists/")) {
   fetch(`http://${ip}:3000/lists`, {
