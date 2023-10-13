@@ -52,7 +52,7 @@ const getAllProcessSeeds = (request, response) => {
 }
 
 const getAllProcessSeedsServer = async (id) => {
-    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds ORDER BY CASE WHEN seeds.status = 'running' then 1 WHEN seeds.status = 'waiting' then 2  WHEN seeds.status = 'failed' then 3 WHEN seeds.status='stopped' END ASC"
+    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds ORDER BY CASE WHEN seeds.status = 'running' then 1 WHEN seeds.status = 'waiting' then 2  WHEN seeds.status = 'failed' then 3 WHEN seeds.status='stopped' then 4 END ASC"
     const client = await pool.connect()
     const list = await client.query(sql, values);
     client.release()
@@ -92,9 +92,48 @@ const stoppedProcess = (data) => {
     })
 }
 
-// const process = (data, action) => {
 
-// }
+const processing = (data, action) => {
+    return action(data)
+}
+
+const process = async (data, action) => {
+    let success = []
+    let failed = []
+    let line = 1
+    let count = 0
+    let length = data.length
+    let max = 3
+    let toProcess = []
+    let process = false
+    for (let i = 0; i < max; i++) {
+        count++
+        toProcess.push(data[i])
+    }
+    while (process == false) {
+        for (let i = 0; i < toProcess.length; i++) {
+            if (processing(toProcess[i], action)) {
+                success.push(toProcess[i])
+                toProcess.shift()
+                if (toProcess.length < max) {
+                    toProcess.push(data[count + line])
+                    count++
+                }
+            } else {
+                failed.push(toProcess[i])
+                toProcess.shift()
+                if (toProcess.length < max) {
+                    toProcess.push(data[count + line])
+                    count++
+                }
+            }
+        }
+        if (length == count) {
+            process = true
+            return
+        }
+    }
+}
 
 
 module.exports = {
@@ -104,6 +143,7 @@ module.exports = {
     getAllProcessSeeds,
     stoppedProcess,
     getAllProcessSeedsByState,
-    getAllProcessSeedsServer
-    // process
+    getAllProcessSeedsServer,
+    process,
+    processing
 }

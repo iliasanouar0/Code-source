@@ -245,6 +245,39 @@ const stoppedState = (data) => {
   return true
 }
 
+
+const successState = (data) => {
+  let query = []
+  for (let i = 0; i < data.length; i++) {
+    query.push(["success", data[i]])
+  }
+  const sql = `UPDATE seeds SET status=($1) WHERE id_seeds=($2)`
+  query.forEach(data => {
+    pool.query(sql, data, (error, result) => {
+      if (error) {
+        return error
+      }
+    })
+  })
+  return true
+}
+
+const updateState = (data, state) => {
+  let query = []
+  for (let i = 0; i < data.length; i++) {
+    query.push([state, data[i]])
+  }
+  const sql = `UPDATE seeds SET status=($1) WHERE id_seeds=($2)`
+  query.forEach(data => {
+    pool.query(sql, data, (error, result) => {
+      if (error) {
+        return error
+      }
+    })
+  })
+  return true
+}
+
 module.exports = {
   //~ Seeds  => /* seeds management functions */
   createSeed,
@@ -259,7 +292,9 @@ module.exports = {
   updateProxy,
   getProxy,
   //~ Status => /* status management functions */
-  runningState,
-  waitingState,
-  stoppedState
+  // runningState,
+  // waitingState,
+  // stoppedState,
+  // successState
+  updateState
 };
