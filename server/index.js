@@ -115,13 +115,18 @@ wss.on('connection', wss => {
         console.log('in enter count : ' + count);
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
+            let result = await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            if (result) {
+              console.log(result);
+            } else {
+              console.log('notUpdated-!!');
+            }
             success++
-            console.log(toProcess[i].id_seeds);
-            await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            console.log('success : ' + success);
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
-              seedManager.updateState([seeds[count].id_seeds], "running")
+              await seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
           } else {
@@ -145,6 +150,8 @@ wss.on('connection', wss => {
           return
         }
       }
+      status = { waiting: waiting - count + 3, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+      processStateManager.updateState(status)
 
     } else if (request == "resume") {
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "stopped" })
