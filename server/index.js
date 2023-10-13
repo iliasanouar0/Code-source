@@ -112,26 +112,28 @@ wss.on('connection', wss => {
       }
       while (process == false) {
         for (let i = 0; i < toProcess.length; i++) {
-          if (typeof (toProcess[i])) {
-            success++
-            seedManager.updateState(toProcess[i].id_seeds, "finished")
-            toProcess.shift()
-            if (toProcess.length < active) {
-              toProcess.push(data[count + line])
-              count++
-            }
-          } else {
-            failed++
-            seedManager.updateState(toProcess[i].id_seeds, "failed")
-            toProcess.shift()
-            if (toProcess.length < active) {
-              toProcess.push(data[count + line])
-              count++
-            }
-          }
+          console.log(toProcess[i]);
+          // if (typeof (toProcess[i])) {
+          //   // success++
+          //   // seedManager.updateState(toProcess[i].id_seeds, "finished")
+          //   // toProcess.shift()
+          //   // if (toProcess.length < active) {
+          //   //   toProcess.push(data[count + line])
+          //   //   count++
+          //   // }
+          // } 
+          // else {
+          //   failed++
+          //   seedManager.updateState(toProcess[i].id_seeds, "failed")
+          //   toProcess.shift()
+          //   if (toProcess.length < active) {
+          //     toProcess.push(data[count + line])
+          //     count++
+          //   }
+          // }
         }
-        let status = { waiting: waiting - count, active: active, finished: success, failed: failed, id_process: data.id_process }
-        processStateManager.updateState(status)
+        // let status = { waiting: waiting - count, active: active, finished: success, failed: failed, id_process: data.id_process }
+        // processStateManager.updateState(status)
         if (length == count) {
           process = true
           return
