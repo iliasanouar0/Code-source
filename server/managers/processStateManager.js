@@ -17,7 +17,6 @@ const addState = (data) => {
 }
 
 const getState = async (id) => {
-    const pool = new pg.Pool(config);
     let sql = 'SELECT * FROM processstate WHERE id_process=($1)'
     let data = [id]
     // const client = await pool.connect()
@@ -29,7 +28,7 @@ const getState = async (id) => {
     }).then(list => {
         return list.rows
     })
-    pool.end()
+    // pool.end()
     // pool.query(sql, data, (err, result) => {
     //     if (err) {
     //         throw err
