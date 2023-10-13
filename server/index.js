@@ -124,6 +124,10 @@ wss.on('connection', wss => {
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count + line])
+              if (seeds[count + line].id_seeds == 'undefined') {
+                console.log(seeds[count + line].id_seeds);
+                break
+              }
               seedManager.updateState([seeds[count + line].id_seeds], "running")
               count++
             } else {
