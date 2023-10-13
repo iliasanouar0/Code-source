@@ -98,7 +98,7 @@ wss.on('connection', wss => {
       }
       seedManager.waitingState(statechangeSeeds)
     } else if (request == "resume") {
-      let seeds = processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "stopped" })
+      let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "stopped" })
       console.log(seeds);
     }
   })
