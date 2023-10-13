@@ -110,7 +110,7 @@ wss.on('connection', wss => {
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
-      while (process == false) {
+      while (length >= count) {
         console.log('in enter length : ' + length);
         console.log('in enter count : ' + count);
         for (let i = 0; i < toProcess.length; i++) {
@@ -145,9 +145,6 @@ wss.on('connection', wss => {
 
         let status = { waiting: waiting - count + 3, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
         processStateManager.updateState(status)
-        if (length == count) {
-          break
-        }
       }
 
     } else if (request == "resume") {
