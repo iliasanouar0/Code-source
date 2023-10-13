@@ -308,6 +308,9 @@ $(document).on('click', '.status', event => {
     websocket.onclose = () => {
         alert('closed')
     }
+    if ($('#modal-process-view').modal('hide') == true) {
+        websocket.close()
+    }
 })
 
 function randomRange(myMin, myMax) {
