@@ -59,6 +59,10 @@
   pointer-events: none;
 }
 
+.fa-pause {
+  pointer-events: none;
+}
+
 .modal-xl {
   width: 90%;
   max-width: 1400px;
