@@ -306,7 +306,7 @@ $(document).on('click', '.status', event => {
         $('.ff_seeds').html(data[0].failed)
     };
     websocket.onclose = () => {
-        alert('closed')
+        clearInterval(pingInterval);
     }
     if ($('#modal-process-view').modal('hide') == true) {
         websocket.close()
