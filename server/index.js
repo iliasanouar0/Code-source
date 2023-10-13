@@ -116,25 +116,19 @@ wss.on('connection', wss => {
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
             success++
-            if (toProcess[i].id_seeds == 'undefined') {
-              console.log(toProcess[i]);
-              break
-            }
             seedManager.updateState([toProcess[i].id_seeds], "finished")
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count + line])
-              if (seeds[count + line] == 'undefined') {
-                console.log(count);
-                console.log(length);
-                console.log(seeds[count + line]);
-                break
-              }
               seedManager.updateState([seeds[count + line].id_seeds], "running")
+              console.log('length : ' + length);
+              console.log('count : ' + count);
               count++
             } else {
               toProcess.push(seeds[count])
               seedManager.updateState([seeds[count].id_seeds], "running")
+              console.log('length : ' + length);
+              console.log('count : ' + count);
               count++
             }
           } else {
