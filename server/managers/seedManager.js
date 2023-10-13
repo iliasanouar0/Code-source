@@ -275,7 +275,6 @@ const updateState = (data, state) => {
       }
     })
   })
-  return true
 }
 
 module.exports = {
