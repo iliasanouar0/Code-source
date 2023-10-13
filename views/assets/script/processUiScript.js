@@ -285,17 +285,17 @@ $(document).on('click', '.status', event => {
 
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
+    // websocket.onopen = (e) => {
+    //     websocket.send(`${id}`)
+    // }
     websocket.onopen = (e) => {
         websocket.send(`${id}`)
+        console.log(`send : ${id}`);
+        pingInterval = setInterval(async () => {
+            websocket.send(`${id}`)
+            console.log(`send : ${id}`);
+        }, 2000);
     }
-    // websocket.onopen = (e) => {
-    //     websocket.send(`ping`)
-    //     console.log('send : ping');
-    //     pingInterval = setInterval(async () => {
-    //         websocket.send(`ping`)
-    //         console.log('send : ping');
-    //     }, 2000);
-    // }
     websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
         console.log(data);
@@ -303,7 +303,6 @@ $(document).on('click', '.status', event => {
         $('.a_seeds').html(data[0].active)
         $('.f_seeds').html(data[0].finished)
         $('.ff_seeds').html(data[0].failed)
-        websocket.send(`${id}`)
     };
     websocket.onclose = () => {
         alert('closed')
