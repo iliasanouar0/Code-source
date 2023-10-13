@@ -288,13 +288,14 @@ $(document).on('click', '.status', event => {
     // websocket.onopen = (e) => {
     //     websocket.send(`${id}`)
     // }
+
     websocket.onopen = (e) => {
         websocket.send(`${id}`)
         console.log(`send : ${id}`);
         pingInterval = setInterval(async () => {
             websocket.send(`${id}`)
             console.log(`send : ${id}`);
-        }, 1200);
+        }, randomRange(500, 2000));
     }
     websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
@@ -309,6 +310,11 @@ $(document).on('click', '.status', event => {
     }
 })
 
+function randomRange(myMin, myMax) {
+    return Math.floor(
+        Math.random() * (Math.ceil(myMax) - Math.floor(myMin) + 1) + myMin
+    );
+}
 // function connect(addr, id) {
 //     let connection = new WebSocket(addr);
 //     connection.onopen = function () {
