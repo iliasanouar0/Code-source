@@ -33,7 +33,24 @@ const createRowProcess = data => {
           <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
           </td></tr>`
             rows += tr
-        } else {
+        } else if (element.status == "STOPPED") {
+            let tr =
+                `<tr><td>${element.id_process}</td>
+      <td>${element.count}</td>
+      <td>${element.f_name} ${element.l_name}</td>
+      <td>${element.list_name}</td>
+      <td>${element.isp}</td>
+      <td>${element.status}</td>
+      <td>${element.action}</td>
+      <td>${element.start_in}</td>
+      <td class="text-center">${element.end_in}</td>
+      <td>
+      <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
+      <button type="button" class="btn btn-warning resume"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
+      <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
+      </td></tr>`
+            rows += tr
+        } else if (element.status == "STOPPED") {
             let tr =
                 `<tr><td>${element.id_process}</td>
       <td>${element.count}</td>
@@ -163,6 +180,36 @@ function socketUpdate(websocket, sendMessage, obj, pingInterval) {
 $(document).on('click', '.pause', event => {
     const id = $(event.target)[0].attributes[2].value
     const status = "STOPPED"
+    let obj = {
+        id_process: `${id}`,
+        status: `${status}`,
+    }
+    let pingInterval
+    const wsUri = `ws://${ip}:7072/wss`;
+    const websocket = new WebSocket(wsUri);
+    function sendMessage(message, ws) {
+        ws.send(message);
+    }
+    socketUpdate(websocket, sendMessage, obj, pingInterval);
+
+    const wssUri = `ws://${ip}:7073/wss`;
+    const websocket_s = new WebSocket(wssUri);
+
+    websocket_s.onopen = (e) => {
+        websocket_s.send(JSON.stringify({ request: "pause", id_process: id }))
+    }
+
+    websocket_s.onmessage = (event) => {
+        console.log(event);
+        console.log(event.data);
+        let data = JSON.parse(event.data)
+        console.log(data);
+    }
+})
+
+$(document).on('click', '.resume', event => {
+    const id = $(event.target)[0].attributes[2].value
+    const status = "RUNNING"
     let obj = {
         id_process: `${id}`,
         status: `${status}`,

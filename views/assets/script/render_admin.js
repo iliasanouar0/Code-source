@@ -183,7 +183,6 @@ const createRow = (data) => {
   return rows;
 };
 
-
 const createRowProcess = data => {
   let rows = ""
   data.forEach(element => {
@@ -204,7 +203,24 @@ const createRowProcess = data => {
         <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
         </td></tr>`
       rows += tr
-    } else {
+    } else if (element.status == "STOPPED") {
+      let tr =
+        `<tr><td>${element.id_process}</td>
+    <td>${element.count}</td>
+    <td>${element.f_name} ${element.l_name}</td>
+    <td>${element.list_name}</td>
+    <td>${element.isp}</td>
+    <td>${element.status}</td>
+    <td>${element.action}</td>
+    <td>${element.start_in}</td>
+    <td class="text-center">${element.end_in}</td>
+    <td>
+    <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
+    <button type="button" class="btn btn-warning resume"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
+    <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
+    </td></tr>`
+      rows += tr
+    } else if (element.status == "STOPPED") {
       let tr =
         `<tr><td>${element.id_process}</td>
     <td>${element.count}</td>
@@ -619,9 +635,6 @@ if (path.includes("/admin/users/")) {
     .then((data) => {
       let rows = createRowProcess(data);
       Process_data.innerHTML = rows
-      // rows.forEach((row) => {
-      //   Process_data.appendChild(row);
-      // });
     })
 } else if (path.includes("/admin/lists/")) {
   fetch(`http://${ip}:3000/lists`, {
