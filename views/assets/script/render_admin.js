@@ -185,11 +185,11 @@ const createRow = (data) => {
 
 
 const createRowProcess = data => {
-  let rows = []
+  let rows = ""
   data.forEach(element => {
     if (element.status == "RUNNING") {
-      let tds =
-        `<td>${element.id_process}</td>
+      let tr =
+        `<tr><td>${element.id_process}</td>
         <td>${element.count}</td>
         <td>${element.f_name} ${element.l_name}</td>
         <td>${element.list_name}</td>
@@ -200,15 +200,13 @@ const createRowProcess = data => {
         <td class="text-center">${element.end_in}</td>
         <td>
         <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-        <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fa fa-stop"></i></button>
+        <button type="button" class="btn btn-danger pause"  data-id="${element.id_process}"><i class="fas fa-pause"></i></i></button>
         <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-        </td>`
-      let tr = document.createElement('tr')
-      tr.innerHTML = tds
-      rows.push(tr)
+        </td></tr>`
+      rows += tr
     } else {
-      let tds =
-        `<td>${element.id_process}</td>
+      let tr =
+        `<tr><td>${element.id_process}</td>
     <td>${element.count}</td>
     <td>${element.f_name} ${element.l_name}</td>
     <td>${element.list_name}</td>
@@ -221,10 +219,8 @@ const createRowProcess = data => {
     <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
     <button type="button" class="btn btn-success start"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
     <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-    </td>`
-      let tr = document.createElement('tr')
-      tr.innerHTML = tds
-      rows.push(tr)
+    </td></tr>`
+      rows += tr
     }
   });
   return rows
