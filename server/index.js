@@ -77,7 +77,7 @@ wsp.on('connection', ws => {
 wss.on('connection', wss => {
   console.log('connected!')
   let request = ""
-  wss.on('message', message => {
+  wss.on('message', async (message) => {
     let data = JSON.parse(message.toString())
     request = data.request
     if (request == "start") {
@@ -97,19 +97,18 @@ wss.on('connection', wss => {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
       seedManager.waitingState(statechangeSeeds)
+    } else if (request == "resume") {
+      let seeds = processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "stopped" })
+      console.log(seeds);
     }
   })
-  console.log(request);
 })
 
 wsv.on('connection', wsv => {
   console.log("connected");
-  let i = 0
   wsv.on("message", async (event) => {
-    i++
     data = event.toString()
     let result = await processStateManager.getState(data)
-    console.log(i);
     wsv.send(JSON.stringify(result))
   })
   wsv.on('close', () => {

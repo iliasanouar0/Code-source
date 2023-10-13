@@ -29,7 +29,7 @@ const createRowProcess = data => {
           <td class="text-center">${element.end_in}</td>
           <td>
           <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-          <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fa fa-stop"></i></button><i class="fas fa-pause"></i>
+          <button type="button" class="btn btn-danger pause"  data-id="${element.id_process}"><i class="fas fa-pause"></i></i></button>
           <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
           </td></tr>`
             rows += tr
@@ -126,21 +126,10 @@ $(document).on('click', '.start', event => {
     const wssUri = `ws://${ip}:7073/wss`;
     const websocket_s = new WebSocket(wssUri);
 
-    let settings = {
-        "url": `http://209.170.73.224:3000/process/seeds/${id}`,
-        "method": "GET",
-        "headers": {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
-        }
+    websocket_s.onopen = (e) => {
+        websocket_s.send(JSON.stringify({ request: "start", id_process: id }))
     }
-    $.ajax(settings).done(function (responseText) {
-        if (websocket_s.OPEN == 1) {
-            websocket_s.send(JSON.stringify({ request: "start", data: responseText, id_process: id }))
-        }
-    })
+
     websocket_s.onmessage = (event) => {
         console.log(event);
         console.log(event.data);
@@ -171,7 +160,7 @@ function socketUpdate(websocket, sendMessage, obj, pingInterval) {
     };
 }
 
-$(document).on('click', '.stop', event => {
+$(document).on('click', '.pause', event => {
     const id = $(event.target)[0].attributes[2].value
     const status = "STOPPED"
     let obj = {
@@ -185,6 +174,20 @@ $(document).on('click', '.stop', event => {
         ws.send(message);
     }
     socketUpdate(websocket, sendMessage, obj, pingInterval);
+
+    const wssUri = `ws://${ip}:7073/wss`;
+    const websocket_s = new WebSocket(wssUri);
+
+    websocket_s.onopen = (e) => {
+        websocket_s.send(JSON.stringify({ request: "resume", id_process: id }))
+    }
+
+    websocket_s.onmessage = (event) => {
+        console.log(event);
+        console.log(event.data);
+        let data = JSON.parse(event.data)
+        console.log(data);
+    }
 })
 
 const createRowProcessSeeds = data => {

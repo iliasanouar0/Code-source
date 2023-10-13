@@ -42,7 +42,7 @@ const getAllData = (request, response) => {
 
 const getAllProcessSeeds = (request, response) => {
     const id = (request.params.id)
-    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds ORDER BY seeds.status"
+    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds ORDER BY CASE WHEN seeds.status = 'running' then 1 WHEN seeds.status = 'waiting' then 2  WHEN seeds.status = 'failed' then 3 WHEN seeds.status='stopped' END ASC"
     pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -51,15 +51,13 @@ const getAllProcessSeeds = (request, response) => {
     })
 }
 
-const getAllProcessSeedsByState = (data) => {
+const getAllProcessSeedsByState = async (data) => {
     let values = [data.id_process, data.status]
-    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=($1) AND seeds.status=($2) GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds ORDER BY seeds.status"
-    pool.query(sql, values, (error, result) => {
-        if (error) {
-            throw ({ name: error.name, stack: error.stack, message: error.message, error: error })
-        }
-        return result.rows
-    })
+    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=($1) AND seeds.status=($2) GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds"
+    const client = await pool.connect()
+    const list = await client.query(sql, values);
+    client.release()
+    return list.rows;
 }
 
 const startedProcess = (data) => {
@@ -90,19 +88,6 @@ const stoppedProcess = (data) => {
 
 // }
 
-
-// const updateProcess = (request, response) => {
-//     const data = request.body
-//     let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
-//     let values = [data.status, data.start_in, data.id_process]
-//     let obj = { query: query, data: values }
-//     pool.query(obj.query, obj.data, (error, result) => {
-//         if (error) {
-//             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
-//         }
-//         response.status(200).send('Process started successfully')
-//     })
-// }
 
 module.exports = {
     addProcess,
