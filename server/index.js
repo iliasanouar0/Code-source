@@ -21,7 +21,6 @@ const installation = require("./managers/installation");
 const gmailManagement = require("./processes/gmailManagement");
 const processStateManager = require('./managers/processStateManager');
 const { data } = require("./db");
-const { log } = require("console");
 
 const port = 3000;
 const app = express(); // setup express application
@@ -105,30 +104,36 @@ wss.on('connection', wss => {
       let count = 0
       let length = seeds.length
       let toProcess = []
+      let process = false
       for (let i = 0; i < active; i++) {
         count++
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
-      let state = await processManager.getProcessState(data.id_process)
-      while (count <= length && state != 'STOPPED') {
+      while (count <= length) {
+        console.log('in enter length : ' + length);
+        console.log('in enter count : ' + count);
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
             let result = await seedManager.updateState([toProcess[i].id_seeds], "finished")
-            console.log('result : ' + i + ' is ' + result);
+            if (result) {
+              console.log(result);
+            } else {
+              console.log('notUpdated-!!');
+            }
             success++
+            console.log('success : ' + success);
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
               await seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
-            console.log('to process length : ' + toProcess.length);
           } else {
             failed++
             seedManager.updateState(toProcess[i].id_seeds, "failed")
             toProcess.shift()
-            if (toProcess.length < active && count < length) {
+            if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count + line])
               count++
             } else {
@@ -139,10 +144,10 @@ wss.on('connection', wss => {
         }
         let status = { waiting: waiting - count + 3, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
         processStateManager.updateState(status)
-        state = await processManager.getProcessState(data.id_process)
-        // if (count == length) {
-        //   break
-        // }
+        if (count == length) {
+          console.log('done');
+          break
+        }
       }
 
     } else if (request == "resume") {
@@ -222,7 +227,6 @@ app.delete("/seeds/:id", seedManager.deleteSeed);
 app.post("/process/", processManager.addProcess)
 app.get("/process/admin", processManager.getAllData)
 app.get("/process/seeds/:id", processManager.getAllProcessSeeds)
-app.get('/process/status/:id', processManager.getProcessStateServer)
 
 app.listen(port, () => {
   console.log(`Server running at ${port}`);
