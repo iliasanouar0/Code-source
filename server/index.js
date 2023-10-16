@@ -116,13 +116,14 @@ wss.on('connection', wss => {
         console.log('in enter to process : ' + toProcess.length);
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
-            // let result = await seedManager.updateState([toProcess[i].id_seeds], "finished")
-            await seedManager.updateState([toProcess[i].id_seeds], "finished")
-            // if (result) {
-            //   console.log(result);
-            // } else {
-            //   console.log('notUpdated-!!');
-            // }
+            let result = await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            // await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            if (result) {
+              console.log(result);
+            } else {
+              console.log('notUpdated-!!');
+              break
+            }
             success++
             console.log('success : ' + success);
             toProcess.shift()
