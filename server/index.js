@@ -110,7 +110,7 @@ wss.on('connection', wss => {
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
-      while (count <= length) {
+      while (toProcess.length != 0) {
         console.log('in enter length : ' + length);
         console.log('in enter count : ' + count);
         for (let i = 0; i < toProcess.length; i++) {
@@ -150,28 +150,29 @@ wss.on('connection', wss => {
           let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
         }
-        if (count == length) {
+        if (toProcess.length == 0) {
           console.log('done');
-          break
+          // break
         }
       }
-
-    } else if (request == "resume") {
-      let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "stopped" })
-      let statechangeSeeds = []
-      for (let i = 0; i < seeds.length; i++) {
-        statechangeSeeds.push(seeds[i].id_seeds)
-      }
-      seedManager.updateState(statechangeSeeds, "waiting")
-    } else if (request == "pause") {
-      let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-      let statechangeSeeds = []
-      for (let i = 0; i < seeds.length; i++) {
-        statechangeSeeds.push(seeds[i].id_seeds)
-      }
-      seedManager.updateState(statechangeSeeds, "stopped")
     }
-  })
+
+  } else if (request == "resume") {
+    let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "stopped" })
+    let statechangeSeeds = []
+    for (let i = 0; i < seeds.length; i++) {
+      statechangeSeeds.push(seeds[i].id_seeds)
+    }
+    seedManager.updateState(statechangeSeeds, "waiting")
+  } else if (request == "pause") {
+    let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
+    let statechangeSeeds = []
+    for (let i = 0; i < seeds.length; i++) {
+      statechangeSeeds.push(seeds[i].id_seeds)
+    }
+    seedManager.updateState(statechangeSeeds, "stopped")
+  }
+})
 })
 
 wsv.on('connection', wsv => {
