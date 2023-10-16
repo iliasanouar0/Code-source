@@ -87,8 +87,8 @@ const finishedProcess = (data) => {
         if (error) {
             return `${error.name, error.stack, error.message, error}`
         }
-        return true
     })
+    return true
 }
 
 const stoppedProcess = (data) => {

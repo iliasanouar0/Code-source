@@ -121,16 +121,12 @@ wss.on('connection', wss => {
       while (toProcess.length != 0 && state != 'STOPPED') {
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
-           /* let updated = */ seedManager.updateState([toProcess[i].id_seeds], "finished")
-            // if (updated == true) {
-            // } else {
-            //   failed++
-            // }
+            seedManager.updateState([toProcess[i].id_seeds], "finished")
             success++
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
-              await seedManager.updateState([seeds[count].id_seeds], "running")
+              seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
           } else {
@@ -138,37 +134,34 @@ wss.on('connection', wss => {
             seedManager.updateState(toProcess[i].id_seeds, "failed")
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
-              toProcess.push(seeds[count + line])
-              count++
-            } else {
               toProcess.push(seeds[count])
+              seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
           }
         }
-        if (waiting == 0) {
+        // if (waiting == 0) {
+        //   let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+        //   processStateManager.updateState(status)
+        // } else {
+        let w = waiting - count + 3
+        if (w <= 0) {
           let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
         } else {
-          let w = waiting - count + 3
-          if (w < 0) {
-            let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-            processStateManager.updateState(status)
-          } else {
-            let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-            processStateManager.updateState(status)
-          }
+          let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          processStateManager.updateState(status)
         }
+        // }
         state = processManager.getProcessState(data.id_process)
         if (toProcess.length == 0) {
           console.log(toProcess);
           end_in = new Date().toDateInputValue()
-          let result = processManager.finishedProcess({
+          processManager.finishedProcess({
             id_process: `${data.id_process}`,
             status: `FINISHED`,
             end_in: `${end_in}`,
           })
-          console.log(result);
         }
       }
 
