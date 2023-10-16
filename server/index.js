@@ -113,14 +113,16 @@ wss.on('connection', wss => {
       while (toProcess.length != 0) {
         console.log('in enter length : ' + length);
         console.log('in enter count : ' + count);
+        console.log('in enter to process : ' + toProcess.length);
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
-            let result = await seedManager.updateState([toProcess[i].id_seeds], "finished")
-            if (result) {
-              console.log(result);
-            } else {
-              console.log('notUpdated-!!');
-            }
+            // let result = await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            // if (result) {
+            //   console.log(result);
+            // } else {
+            //   console.log('notUpdated-!!');
+            // }
             success++
             console.log('success : ' + success);
             toProcess.shift()
@@ -129,6 +131,7 @@ wss.on('connection', wss => {
               await seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
+            console.log('to process length : ' + toProcess.length);
           } else {
             failed++
             seedManager.updateState(toProcess[i].id_seeds, "failed")
@@ -152,27 +155,25 @@ wss.on('connection', wss => {
         }
         if (toProcess.length == 0) {
           console.log('done');
-          // break
         }
       }
-    }
 
-  } else if (request == "resume") {
-    let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "stopped" })
-    let statechangeSeeds = []
-    for (let i = 0; i < seeds.length; i++) {
-      statechangeSeeds.push(seeds[i].id_seeds)
+    } else if (request == "resume") {
+      let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "stopped" })
+      let statechangeSeeds = []
+      for (let i = 0; i < seeds.length; i++) {
+        statechangeSeeds.push(seeds[i].id_seeds)
+      }
+      seedManager.updateState(statechangeSeeds, "waiting")
+    } else if (request == "pause") {
+      let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
+      let statechangeSeeds = []
+      for (let i = 0; i < seeds.length; i++) {
+        statechangeSeeds.push(seeds[i].id_seeds)
+      }
+      seedManager.updateState(statechangeSeeds, "stopped")
     }
-    seedManager.updateState(statechangeSeeds, "waiting")
-  } else if (request == "pause") {
-    let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-    let statechangeSeeds = []
-    for (let i = 0; i < seeds.length; i++) {
-      statechangeSeeds.push(seeds[i].id_seeds)
-    }
-    seedManager.updateState(statechangeSeeds, "stopped")
-  }
-})
+  })
 })
 
 wsv.on('connection', wsv => {
