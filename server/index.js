@@ -111,12 +111,6 @@ wss.on('connection', wss => {
         toProcess.push(seeds[i])
       }
       while (count <= length) {
-        if (count == length) {
-          console.log('done');
-          console.log('in enter count : ' + count);
-          count++
-          break
-        }
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
             await seedManager.updateState([toProcess[i].id_seeds], "finished")
@@ -143,6 +137,12 @@ wss.on('connection', wss => {
 
         let status = { waiting: waiting - count + 3, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
         processStateManager.updateState(status)
+        if (count == length) {
+          count++
+          console.log('done');
+          console.log('count' + count);
+          console.log('length' + length);
+        }
       }
 
     } else if (request == "resume") {
