@@ -121,8 +121,8 @@ wss.on('connection', wss => {
       while (toProcess.length != 0 && state != 'STOPPED') {
         console.log(length);
         console.log(count);
+        console.log(toProcess);
         for (let i = 0; i < toProcess.length; i++) {
-          console.log(toProcess);
           if (typeof (toProcess[i])) {
             seedManager.updateState([toProcess[i].id_seeds], "finished")
             success++
