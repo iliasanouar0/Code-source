@@ -142,6 +142,10 @@ wss.on('connection', wss => {
             }
           }
         }
+        if (count == length) {
+          console.log('done');
+          count++
+        }
 
         let status = { waiting: waiting - count + 3, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
         processStateManager.updateState(status)
