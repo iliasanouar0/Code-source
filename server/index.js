@@ -116,16 +116,17 @@ wss.on('connection', wss => {
             await seedManager.updateState([toProcess[i].id_seeds], "finished")
             success++
             toProcess.shift()
-            if (count == length) {
-              count++
-              console.log('done');
-              console.log('count' + count);
-              console.log('length' + length);
-            }
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
               await seedManager.updateState([seeds[count].id_seeds], "running")
               count++
+            }
+            console.log('to process length : ' + toProcess.length);
+            if (count == length && toProcess.length == 0) {
+              count++
+              console.log('done');
+              console.log('count' + count);
+              console.log('length' + length);
             }
           } else {
             failed++
