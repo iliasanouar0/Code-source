@@ -165,10 +165,11 @@ $(document).on('click', '.start', event => {
     }
 
     websocket_s.onmessage = (event) => {
-        console.log(event);
-        console.log(event.data);
-        let data = JSON.parse(event.data)
+        let data = event.data
         console.log(data);
+        if (data == 'reload') {
+            location.reload()
+        }
     }
 })
 
