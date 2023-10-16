@@ -116,6 +116,8 @@ wss.on('connection', wss => {
         count++
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
+        console.log('inserted : ' + i);
+        console.log('count : ' + count);
       }
       let state = processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
