@@ -7,6 +7,12 @@ const cors = require("cors");
 const fs = require('fs')
 const WebSocket = require('ws');
 
+Date.prototype.toDateInputValue = function () {
+  var local = new Date(this);
+  local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+  return local.toJSON().slice(0, 10);
+};
+
 const wsi = new WebSocket.Server({ port: 7071 });
 const wsp = new WebSocket.Server({ port: 7072 })
 const wss = new WebSocket.Server({ port: 7073 })
@@ -145,7 +151,12 @@ wss.on('connection', wss => {
         }
         state = processManager.getProcessState(data.id_process)
         if (toProcess.length == 0) {
-          
+          end_in = new Date().toDateInputValue()
+          processManager.finishedProcess({
+            id_process: `${data.id_process}`,
+            status: `FINISHED`,
+            end_in: `${end_in}`,
+          })
           console.log('done');
         }
       }
