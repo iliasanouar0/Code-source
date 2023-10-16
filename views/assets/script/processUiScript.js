@@ -291,9 +291,10 @@ $(document).on('click', '.status', event => {
                 $('#seeds_result').html(html);
             }
         })
-    }).then(() => {
-        $('#modal-process-view').modal('show')
     })
+        .then(() => {
+            $('#modal-process-view').modal('show')
+        })
     /**
      * * Websocket connection :
      * ? opening => get data from database render the view. 
@@ -305,7 +306,6 @@ $(document).on('click', '.status', event => {
     let pingInterval
     websocket.onopen = (e) => {
         websocket.send(`${id}`)
-        console.log(`send : ${id}`);
         pingInterval = setInterval(async () => {
             websocket.send(`${id}`)
         }, randomRange(500, 1500));
@@ -319,6 +319,23 @@ $(document).on('click', '.status', event => {
             $('.a_seeds').html(data[0].active)
             $('.f_seeds').html(data[0].finished)
             $('.ff_seeds').html(data[0].failed)
+            fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
+                return response.json()
+            }).then(data => {
+                $('#pagination-container').pagination({
+                    dataSource: data,
+                    pageSize: 10,
+                    showGoInput: true,
+                    showGoButton: true,
+                    showSizeChanger: true,
+                    showNavigator: true,
+                    formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
+                    callback: function (data, pagination) {
+                        var html = createRowProcessSeeds(data);
+                        $('#seeds_result').html(html);
+                    }
+                })
+            })
         }
     };
     websocket.onclose = () => {
