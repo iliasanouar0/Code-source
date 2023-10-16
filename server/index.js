@@ -128,7 +128,6 @@ wss.on('connection', wss => {
               seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
-            console.log(toProcess);
           } else {
             failed++
             seedManager.updateState(toProcess[i].id_seeds, "failed")
@@ -145,9 +144,11 @@ wss.on('connection', wss => {
         if (w <= 0) {
           status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
+          console.log(status);
         } else {
           status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
+          console.log(status);
         }
         state = await processManager.getProcessState(data.id_process)
         if (toProcess.length == 0) {
