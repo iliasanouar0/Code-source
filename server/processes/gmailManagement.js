@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
 const login = async (gmail, password) => {
-    const browser = await puppeteer.launch({ headless: false })
+    const browser = await puppeteer.launch({ headless: 'new' })
     const page = await browser.newPage()
     await page.setViewport({ width: 1280, height: 720 });
     const navigationPromise = page.waitForNavigation()
