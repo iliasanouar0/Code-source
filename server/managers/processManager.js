@@ -79,6 +79,17 @@ const startedProcess = (data) => {
         return 'Process started successfully'
     })
 }
+const finishedProcess = (data) => {
+    let query = "UPDATE process SET status=($1), end_in=($2) WHERE id_process=($3)"
+    let values = [data.status, data.end_in, data.id_process]
+    let obj = { query: query, data: values }
+    pool.query(obj.query, obj.data, (error, result) => {
+        if (error) {
+            return `${error.name, error.stack, error.message, error}`
+        }
+        return 'Process started successfully'
+    })
+}
 
 const stoppedProcess = (data) => {
     let query = "UPDATE process SET status=($1) WHERE id_process=($2)"
