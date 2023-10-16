@@ -110,7 +110,8 @@ wss.on('connection', wss => {
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
-      while (count <= length) {
+      let state = await processManager.getProcessState(data.id_process)
+      while (count <= length && state != 'STOPPED') {
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
             await seedManager.updateState([toProcess[i].id_seeds], "finished")
@@ -125,7 +126,7 @@ wss.on('connection', wss => {
             failed++
             seedManager.updateState(toProcess[i].id_seeds, "failed")
             toProcess.shift()
-            if (toProcess.length < active && count < seeds.length) {
+            if (toProcess.length < active && count < length) {
               toProcess.push(seeds[count + line])
               count++
             } else {
@@ -134,10 +135,10 @@ wss.on('connection', wss => {
             }
           }
         }
-
         let status = { waiting: waiting - count + 3, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
         processStateManager.updateState(status)
-        if (count == length) {
+        state = await processManager.getProcessState(data.id_process)
+        if (count > length) {
           count++
           console.log('done');
           console.log('count' + count);
@@ -222,6 +223,7 @@ app.delete("/seeds/:id", seedManager.deleteSeed);
 app.post("/process/", processManager.addProcess)
 app.get("/process/admin", processManager.getAllData)
 app.get("/process/seeds/:id", processManager.getAllProcessSeeds)
+app.get('process/:id', processManager.getProcessStateServer)
 
 app.listen(port, () => {
   console.log(`Server running at ${port}`);
