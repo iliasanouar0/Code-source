@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-const login = async (gmail, password) => {
+const login = async (gmail, password, id_process) => {
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
     const page = await browser.newPage()
     await page.setViewport({ width: 1280, height: 720 });
@@ -17,7 +17,6 @@ const login = async (gmail, password) => {
     await page.waitForSelector('#identifierNext')
     await page.click('#identifierNext')
     await page.waitForSelector('input[type="password"]')
-    // await page.type('input[type="password"]', password, { delay: 200 })
     setTimeout(() => {
         page.type('input[type="password"]', password, { delay: 200 })
     }, 2000);
@@ -27,11 +26,11 @@ const login = async (gmail, password) => {
     }, 6000);
     setTimeout(() => {
         page.screenshot({
-            path: './../../views/assets/images/process_result/screenshot' + 4 + '.jpg'
+            path: './../../views/assets/images/process_result/screenshot' + id_process + '.jpg'
         });
-    }, 9000)
+    }, 10000)
 }
-login('iliasanouar0@gmail.com', 'ilias080701')
-// module.exports = {
-//     login,
-// }
+// login('iliasanouar0@gmail.com', 'ilias080701', 55)
+module.exports = {
+    login,
+}
