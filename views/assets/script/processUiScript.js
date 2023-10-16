@@ -312,7 +312,6 @@ $(document).on('click', '.status', event => {
     }
     websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
-        console.log(data);
         if (data.length == 0) {
             return
         } else {
