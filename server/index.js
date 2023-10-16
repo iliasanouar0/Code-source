@@ -140,26 +140,22 @@ wss.on('connection', wss => {
             }
           }
         }
-        // if (waiting == 0) {
-        //   let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-        //   processStateManager.updateState(status)
-        // } else {
+        let status
         let w = waiting - count + 3
         if (w <= 0) {
-          let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
         } else {
-          let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
         }
-        // }
         state = processManager.getProcessState(data.id_process)
         if (toProcess.length == 0) {
           console.log(toProcess);
           end_in = new Date().toDateInputValue()
           processManager.finishedProcess({
             id_process: `${data.id_process}`,
-            status: `FINISHED`,
+            status: "FINISHED",
             end_in: `${end_in}`,
           })
         }
