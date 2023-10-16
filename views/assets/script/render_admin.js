@@ -662,8 +662,8 @@ if (path.includes("/admin/users/")) {
       return response.json();
     })
     .then((data) => {
-      list_data.innerHTML = ""
       let rows = createRowList(data);
+      list_data.innerHTML = ""
       rows.forEach((row) => {
         list_data.appendChild(row);
       });
