@@ -144,7 +144,7 @@ const getProcessState = async (data) => {
 }
 
 const getProcessStateServer = (request, response) => {
-    let data = (request.params)
+    let data = (request.params.id)
     sql = 'SELECT status FROM process WHERE id_process=($1)'
     pool.query(sql, data, (error, result) => {
         if (error) {
