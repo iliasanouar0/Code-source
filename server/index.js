@@ -124,11 +124,6 @@ wss.on('connection', wss => {
               break
             }
             console.log(toProcess[i].status);
-            if (toProcess[i].status == "running") {
-              console.log(toProcess[i]);
-              console.log("didn't updated");
-              break
-            }
             success++
             console.log('success : ' + success);
             toProcess.shift()
