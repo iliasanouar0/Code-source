@@ -150,7 +150,7 @@ const getProcessStateServer = (request, response) => {
         if (error) {
             return `${error.name, error.stack, error.message, error}`
         }
-        response.status(200).send(result.rows[0])
+        response.status(200).send(result.rows[0].status)
     })
 }
 
