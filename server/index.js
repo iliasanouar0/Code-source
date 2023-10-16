@@ -121,7 +121,7 @@ wss.on('connection', wss => {
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
             let updated = await seedManager.updateState([toProcess[i].id_seeds], "finished")
-            if (updated) {
+            if (updated == true) {
               success++
             } else {
               failed++
