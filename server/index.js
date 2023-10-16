@@ -27,7 +27,6 @@ const installation = require("./managers/installation");
 const gmailManagement = require("./processes/gmailManagement");
 const processStateManager = require('./managers/processStateManager');
 const { data } = require("./db");
-const { log } = require("console");
 
 const port = 3000;
 const app = express(); // setup express application
@@ -91,9 +90,8 @@ wss.on('connection', wss => {
     if (request == "start") {
       let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
       let active
-      let waiting
+      let waiting = seeds.length - 3
       if (seeds.length >= 3) {
-        waiting = seeds.length - 3
         active = 3
       } else {
         active = seeds.length
@@ -108,61 +106,57 @@ wss.on('connection', wss => {
       seedManager.updateState(statechangeSeeds, "waiting")
       let success = 0
       let failed = 0
+      let line = 1
       let count = 0
       let length = seeds.length
       let toProcess = []
+      let process = false
       for (let i = 0; i < active; i++) {
         count++
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
-      let state = await processManager.getProcessState(data.id_process)
+      let state = processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
         for (let i = 0; i < toProcess.length; i++) {
-          seedManager.updateState([toProcess[i].id_seeds], "finished")
-          success++
-          toProcess.shift()
-          if (toProcess.length < active && count < length) {
-            toProcess.push(seeds[count])
-            seedManager.updateState([seeds[count].id_seeds], "running")
-            count++
+          if (typeof (toProcess[i])) {
+            await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            success++
+            toProcess.shift()
+            if (toProcess.length < active && count < seeds.length) {
+              toProcess.push(seeds[count])
+              await seedManager.updateState([seeds[count].id_seeds], "running")
+              count++
+            }
+          } else {
+            failed++
+            seedManager.updateState(toProcess[i].id_seeds, "failed")
+            toProcess.shift()
+            if (toProcess.length < active && count < seeds.length) {
+              toProcess.push(seeds[count + line])
+              count++
+            } else {
+              toProcess.push(seeds[count])
+              count++
+            }
           }
-          // if (typeof (toProcess[i])) {
-          //   seedManager.updateState([toProcess[i].id_seeds], "finished")
-          //   success++
-          //   toProcess.shift()
-          //   if (toProcess.length < active && count < seeds.length) {
-          //     toProcess.push(seeds[count])
-          //     seedManager.updateState([seeds[count].id_seeds], "running")
-          //     count++
-          //   }
-          // } else {
-          //   failed++
-          //   seedManager.updateState(toProcess[i].id_seeds, "failed")
-          //   toProcess.shift()
-          //   if (toProcess.length < active && count < seeds.length) {
-          //     toProcess.push(seeds[count])
-          //     seedManager.updateState([seeds[count].id_seeds], "running")
-          //     count++
-          //   }
-          // }
         }
-        let status
         let w = waiting - count + 3
-        console.log('w : ' + w);
-        if (w <= 0) {
-          status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+        if (w < 0) {
+          let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
-          console.log(status);
         } else {
-          status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
-          console.log(status);
         }
-        state = await processManager.getProcessState(data.id_process)
+        state = processManager.getProcessState(data.id_process)
         if (toProcess.length == 0) {
           end_in = new Date().toDateInputValue()
-          processManager.finishedProcess({ id_process: `${data.id_process}`, status: "FINISHED", end_in: `${end_in}` })
+          processManager.finishedProcess({
+            id_process: `${data.id_process}`,
+            status: `FINISHED`,
+            end_in: `${end_in}`,
+          })
         }
       }
 
