@@ -27,6 +27,7 @@ const installation = require("./managers/installation");
 const gmailManagement = require("./processes/gmailManagement");
 const processStateManager = require('./managers/processStateManager');
 const { data } = require("./db");
+const { log } = require("console");
 
 const port = 3000;
 const app = express(); // setup express application
@@ -107,17 +108,13 @@ wss.on('connection', wss => {
       seedManager.updateState(statechangeSeeds, "waiting")
       let success = 0
       let failed = 0
-      let line = 1
       let count = 0
       let length = seeds.length
       let toProcess = []
-      let process = false
       for (let i = 0; i < active; i++) {
         count++
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
-        console.log('inserted : ' + i);
-        console.log('count : ' + count);
       }
       let state = processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
@@ -131,6 +128,7 @@ wss.on('connection', wss => {
             success++
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
+              console.log(count)
               toProcess.push(seeds[count])
               seedManager.updateState([seeds[count].id_seeds], "running")
               count++
