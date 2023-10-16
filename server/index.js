@@ -21,6 +21,7 @@ const installation = require("./managers/installation");
 const gmailManagement = require("./processes/gmailManagement");
 const processStateManager = require('./managers/processStateManager');
 const { data } = require("./db");
+const { log } = require("console");
 
 const port = 3000;
 const app = express(); // setup express application
@@ -113,7 +114,8 @@ wss.on('connection', wss => {
       while (count <= length && state != 'STOPPED') {
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
-            await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            let result = await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            console.log('result : ' + i + ' is ' + result);
             success++
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
@@ -122,12 +124,6 @@ wss.on('connection', wss => {
               count++
             }
             console.log('to process length : ' + toProcess.length);
-            // if (count == length && toProcess.length == 0) {
-            //   count++
-            //   console.log('done');
-            //   console.log('count : ' + count);
-            //   console.log('length : ' + length);
-            // }
           } else {
             failed++
             seedManager.updateState(toProcess[i].id_seeds, "failed")
@@ -144,9 +140,9 @@ wss.on('connection', wss => {
         let status = { waiting: waiting - count + 3, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
         processStateManager.updateState(status)
         state = await processManager.getProcessState(data.id_process)
-        if (count == length) {
-          break
-        }
+        // if (count == length) {
+        //   break
+        // }
       }
 
     } else if (request == "resume") {
