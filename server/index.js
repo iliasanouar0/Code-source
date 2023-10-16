@@ -90,8 +90,9 @@ wss.on('connection', wss => {
     if (request == "start") {
       let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
       let active
-      let waiting = seeds.length - 3
+      let waiting
       if (seeds.length >= 3) {
+        waiting = seeds.length - 3
         active = 3
       } else {
         active = seeds.length
