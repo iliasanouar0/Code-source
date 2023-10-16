@@ -140,7 +140,7 @@ const getProcessState = async (data) => {
     const client = await pool.connect()
     const list = await client.query(sql, [data]);
     client.release()
-    return list.rows;
+    return list.rows[0].status;
 }
 
 const getProcessStateServer = (request, response) => {
