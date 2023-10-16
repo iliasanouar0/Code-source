@@ -119,6 +119,8 @@ wss.on('connection', wss => {
       }
       let state = processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
+        console.log(length);
+        console.log(count);
         for (let i = 0; i < toProcess.length; i++) {
           console.log(toProcess);
           if (typeof (toProcess[i])) {
