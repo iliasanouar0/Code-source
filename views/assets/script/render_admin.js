@@ -130,6 +130,7 @@ const user_data = document.querySelector("#user_data");
 const entity_data = document.querySelector("#entity_data");
 const list_data = document.querySelector("#list_data");
 const Process_data = document.querySelector('#Process_data')
+
 const createRowList = (data) => {
   let rows = [];
   data.forEach((elm) => {
@@ -219,6 +220,23 @@ const createRowProcess = data => {
     <button type="button" class="btn btn-warning resume"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
     <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
     </td></tr>`
+      rows += tr
+    } else if (element.status == "FINISHED") {
+      let tr =
+        `<tr><td>${element.id_process}</td>
+          <td>${element.count}</td>
+          <td>${element.f_name} ${element.l_name}</td>
+          <td>${element.list_name}</td>
+          <td>${element.isp}</td>
+          <td>${element.status}</td>
+          <td>${element.action}</td>
+          <td>${element.start_in}</td>
+          <td class="text-center">${element.end_in}</td>
+          <td>
+          <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
+          <button type="button" class="btn btn-success" disabled data-id="${element.id_process}"><i class="fas fa-check"></i></button>
+          <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
+          </td></tr>`
       rows += tr
     } else {
       let tr =
@@ -644,6 +662,7 @@ if (path.includes("/admin/users/")) {
       return response.json();
     })
     .then((data) => {
+      list_data.innerHTML = ""
       let rows = createRowList(data);
       rows.forEach((row) => {
         list_data.appendChild(row);
