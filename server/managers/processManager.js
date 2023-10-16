@@ -146,10 +146,12 @@ const getProcessState = async (data) => {
 const getProcessStateServer = async (request, response) => {
     let data = (request.params)
     sql = 'SELECT status FROM process WHERE id_process=($1)'
-    const client = await pool.connect()
-    const list = await client.query(sql, [data]);
-    client.release()
-    response.send(list.rows);
+    pool.query(sql, data, (error, result) => {
+        if (error) {
+            return `${error.name, error.stack, error.message, error}`
+        }
+        response.status(200).send(result.rows)
+    })
 }
 
 module.exports = {
