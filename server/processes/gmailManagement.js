@@ -27,7 +27,7 @@ const login = async (gmail, password) => {
     }, 6000);
     setTimeout(() => {
         page.screenshot({
-            path: '../../views/assets/images/process_result/screenshot' + 4 + '.jpg'
+            path: './Code-source/views/assets/images/process_result/screenshot' + 4 + '.jpg'
         });
     }, 9000)
 }
