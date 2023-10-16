@@ -122,12 +122,12 @@ wss.on('connection', wss => {
               count++
             }
             console.log('to process length : ' + toProcess.length);
-            if (count == length && toProcess.length == 0) {
-              count++
-              console.log('done');
-              console.log('count : ' + count);
-              console.log('length : ' + length);
-            }
+            // if (count == length && toProcess.length == 0) {
+            //   count++
+            //   console.log('done');
+            //   console.log('count : ' + count);
+            //   console.log('length : ' + length);
+            // }
           } else {
             failed++
             seedManager.updateState(toProcess[i].id_seeds, "failed")
@@ -144,6 +144,9 @@ wss.on('connection', wss => {
         let status = { waiting: waiting - count + 3, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
         processStateManager.updateState(status)
         state = await processManager.getProcessState(data.id_process)
+        if (count == length) {
+          break
+        }
       }
 
     } else if (request == "resume") {
