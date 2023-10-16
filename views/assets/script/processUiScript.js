@@ -312,6 +312,7 @@ $(document).on('click', '.status', event => {
     }
     websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
+        console.log(data);
         $('.w_seeds').html(data[0].waiting)
         $('.a_seeds').html(data[0].active)
         $('.f_seeds').html(data[0].finished)
