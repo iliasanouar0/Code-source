@@ -125,8 +125,8 @@ wss.on('connection', wss => {
             if (count == length && toProcess.length == 0) {
               count++
               console.log('done');
-              console.log('count' + count);
-              console.log('length' + length);
+              console.log('count : ' + count);
+              console.log('length : ' + length);
             }
           } else {
             failed++
