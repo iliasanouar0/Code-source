@@ -153,11 +153,11 @@ wss.on('connection', wss => {
         if (toProcess.length == 0) {
           console.log(toProcess);
           end_in = new Date().toDateInputValue()
-          // processManager.finishedProcess({
-          //   id_process: `${data.id_process}`,
-          //   status: `FINISHED`,
-          //   end_in: `${end_in}`,
-          // })
+          processManager.finishedProcess({
+            id_process: `${data.id_process}`,
+            status: `FINISHED`,
+            end_in: `${end_in}`,
+          })
           console.log('done');
         }
       }
