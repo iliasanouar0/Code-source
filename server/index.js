@@ -150,6 +150,7 @@ wss.on('connection', wss => {
         }
         let status
         let w = waiting - count + 3
+        console.log('w : ' + w);
         if (w <= 0) {
           status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
