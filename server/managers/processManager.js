@@ -171,6 +171,7 @@ module.exports = {
     startedProcess,
     getAllProcessSeeds,
     stoppedProcess,
+    finishedProcess,
     getAllProcessSeedsByState,
     getAllProcessSeedsServer,
     process,
