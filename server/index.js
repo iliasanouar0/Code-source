@@ -142,8 +142,14 @@ wss.on('connection', wss => {
             }
           }
         }
-        let status = { waiting: waiting - count + 3, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-        processStateManager.updateState(status)
+        let w = waiting - count + 3
+        if (w < 0) {
+          let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          processStateManager.updateState(status)
+        } else {
+          let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          processStateManager.updateState(status)
+        }
         if (count == length) {
           console.log('done');
           break
