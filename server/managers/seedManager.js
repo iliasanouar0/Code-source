@@ -262,15 +262,15 @@ const successState = (data) => {
   return true
 }
 
-const updateState = async (data, state) => {
+const updateState = (data, state) => {
   let query = []
   for (let i = 0; i < data.length; i++) {
     query.push([state, data[i]])
   }
   let success = []
   const sql = `UPDATE seeds SET status=($1) WHERE id_seeds=($2)`
-  const client = await pool.connect()
-  query.forEach((data) => {
+  query.forEach(async (data) => {
+    const client = await pool.connect()
     client.query(sql, data, (err) => {
       if (err) {
         return err;
