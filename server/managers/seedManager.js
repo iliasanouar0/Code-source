@@ -263,22 +263,22 @@ const successState = (data) => {
 }
 
 const updateState = async (data, state) => {
-  // const client = await pool.connect()
   let query = []
   for (let i = 0; i < data.length; i++) {
     query.push([state, data[i]])
   }
   let success = []
   const sql = `UPDATE seeds SET status=($1) WHERE id_seeds=($2)`
+  const client = await pool.connect()
   query.forEach((data) => {
     client.query(sql, data, (err) => {
       if (err) {
         return err;
       } else {
         success.push(true)
-        client.release()
       }
     });
+    client.release()
   })
   if (success.length == query.length) {
     return true
