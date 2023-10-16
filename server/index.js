@@ -145,9 +145,11 @@ wss.on('connection', wss => {
         if (w <= 0) {
           status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
+          console.log(state);
         } else {
           status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
+          console.log(state);
         }
         state = processManager.getProcessState(data.id_process)
         if (toProcess.length == 0) {
