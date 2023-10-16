@@ -158,7 +158,7 @@ wss.on('connection', wss => {
             status: `FINISHED`,
             end_in: `${end_in}`,
           })
-          console.log('done');
+          wss.send('reload')
         }
       }
 
