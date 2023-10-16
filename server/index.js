@@ -111,6 +111,11 @@ wss.on('connection', wss => {
         toProcess.push(seeds[i])
       }
       while (count <= length) {
+        if (count == length) {
+          console.log('done');
+          count++
+          break
+        }
         console.log('in enter length : ' + length);
         console.log('in enter count : ' + count);
         for (let i = 0; i < toProcess.length; i++) {
@@ -141,10 +146,6 @@ wss.on('connection', wss => {
               count++
             }
           }
-        }
-        if (count == length) {
-          console.log('done');
-          count++
         }
 
         let status = { waiting: waiting - count + 3, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
