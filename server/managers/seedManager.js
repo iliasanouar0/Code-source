@@ -267,17 +267,22 @@ const updateState = async (data, state) => {
   for (let i = 0; i < data.length; i++) {
     query.push([state, data[i]])
   }
+  let success = []
   const sql = `UPDATE seeds SET status=($1) WHERE id_seeds=($2)`
   query.forEach(async (data) => {
     const client = await pool.connect()
     client.query(sql, data, (err) => {
       if (err) {
-        throw err;
+        return err;
+      } else {
+        success.push(true)
       }
     });
     client.release()
   })
-  return true
+  if (success.length == query.length) {
+    return true
+  }
 }
 
 module.exports = {
