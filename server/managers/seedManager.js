@@ -282,6 +282,8 @@ const updateState = async (data, state) => {
   })
   if (success.length == query.length) {
     return true
+  } else {
+    return false
   }
 }
 
