@@ -162,7 +162,7 @@ wss.on('connection', wss => {
           toProcess.shift()
           if (toProcess.length < active && count < length) {
             toProcess.push(seeds[count])
-            seedManager.updateState([seeds[count].id_seeds], "running")
+            await seedManager.updateState([seeds[count].id_seeds], "running")
             count++
           }
           // if (toProcess[0]) {
@@ -184,9 +184,6 @@ wss.on('connection', wss => {
           //   }
           // }
         }
-        // toProcess.forEach(process => {
-
-        // });
         let w = waiting - count + 3
         if (w <= 0) {
           let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
