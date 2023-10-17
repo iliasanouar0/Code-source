@@ -114,6 +114,7 @@ wss.on('connection', wss => {
       }
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
+        console.log(seeds.length);
         for (let i = 0; i < toProcess.length; i++) {
           seedManager.updateState([toProcess[0].id_seeds], "finished")
           success++
