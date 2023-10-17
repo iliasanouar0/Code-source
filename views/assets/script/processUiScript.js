@@ -161,7 +161,7 @@ $(document).on('click', '.start', event => {
     const websocket_s = new WebSocket(wssUri);
 
     websocket_s.onopen = (e) => {
-        websocket_s.send(JSON.stringify({ request: "start", id_process: id,data:888 }))
+        websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
     }
 
     websocket_s.onmessage = (event) => {
