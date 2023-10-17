@@ -109,22 +109,13 @@ wss.on('connection', wss => {
       let count = 0
       let length = seeds.length
       let toProcess = []
-      console.log('active : ' + active);
-      console.log(seeds);
       for (let i = 0; i < active; i++) {
         count++
         toProcess.push(seeds[i])
         seedManager.updateState([seeds[i].id_seeds], "running")
       }
       while (toProcess.length != 0) {
-        console.log('count : ' + count);
-        console.log('length : ' + length);
-        console.log('toProcess');
-        console.log(toProcess);
         for (let i = 0; i < toProcess.length; i++) {
-          console.log('loop : ' + i);
-          console.log('toProcess 1');
-          console.log(toProcess[0]);
           success++
           await seedManager.updateState([toProcess[0].id_seeds], "finished")
           await toProcess.shift()
@@ -133,8 +124,6 @@ wss.on('connection', wss => {
             await seedManager.updateState([seeds[count].id_seeds], "running")
             count++
           }
-          console.log('toProcess out');
-          console.log(toProcess);
           // if (toProcess[0]) {
           //   success++
           //   seedManager.updateState([seeds[0].id_seeds], "finished")
