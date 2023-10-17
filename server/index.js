@@ -125,10 +125,12 @@ wss.on('connection', wss => {
         console.log('while : ' + c);
         console.log(toProcess);
         for (let i = 0; i < toProcess.length; i++) {
+          console.log('the length : ' + toProcess.length);
           if (typeof (toProcess[i])) {
             await seedManager.updateState([toProcess[i].id_seeds], "finished")
             success++
-            toProcess.shift()
+            // toProcess.shift()
+            console.log(toProcess.shift());
             console.log('seeds length : ' + seeds.length);
             console.log('count : ' + count);
             if (toProcess.length < active && count < seeds.length) {
