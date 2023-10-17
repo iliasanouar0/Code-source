@@ -176,7 +176,14 @@ $(document).on('click', '.start', event => {
         let data = event.data
         console.log(data);
         if (data == 'reload') {
-            location.reload()
+            const Process_data = document.querySelector('#Process_data');
+            fetch(`http://${ip}:3000/process/admin`, {
+                method: "GET",
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                Process_data.innerHTML = createRowProcess(data)
+            })
         }
     }
 })
