@@ -134,7 +134,7 @@ wss.on('connection', wss => {
               seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
-            console.log('inside for loop N° : ' + i + 1);
+            console.log('loop N° : ' + i);
             console.log(toProcess);
           } else {
             failed++
@@ -166,6 +166,7 @@ wss.on('connection', wss => {
             end_in: `${end_in}`,
           })
         }
+        console.log('while finished ');
       }
 
     } else if (request == "resume") {
