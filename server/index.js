@@ -102,31 +102,31 @@ wss.on('connection', wss => {
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
-      await seedManager.updateState(statechangeSeeds, "waiting")
+      seedManager.updateState(statechangeSeeds, "waiting")
       let success = 0
       let failed = 0
       let count = 0
       let toProcess = []
       for (let i = 0; i < active; i++) {
         count++
-        await seedManager.updateState([seeds[i].id_seeds], "running")
+        seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[0])) {
-            await seedManager.updateState([toProcess[0].id_seeds], "finished")
+            seedManager.updateState([toProcess[0].id_seeds], "finished")
             success++
-            await toProcess.shift()
+            toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
-              await seedManager.updateState([seeds[count].id_seeds], "running")
+              seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
           } else {
             failed++
-            await seedManager.updateState(toProcess[i].id_seeds, "failed")
+            seedManager.updateState(toProcess[i].id_seeds, "failed")
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
@@ -150,7 +150,7 @@ wss.on('connection', wss => {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
           end_in = new Date().toDateInputValue()
-          await processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
+          processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
           console.log("updated is finished now");
         } else {
           console.log('not yet !!');
