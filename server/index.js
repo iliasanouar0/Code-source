@@ -140,6 +140,8 @@ wss.on('connection', wss => {
             failed++
             await seedManager.updateState(toProcess[i].id_seeds, "failed")
             toProcess.shift()
+            console.log('seeds length : ' + seeds.length);
+            console.log('count : ' + count);
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count + line])
               count++
