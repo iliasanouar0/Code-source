@@ -52,7 +52,7 @@ const getAllProcessSeeds = (request, response) => {
 }
 
 const getAllProcessSeedsServer = async (id) => {
-    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds ORDER BY CASE WHEN seeds.status = 'running' then 1 WHEN seeds.status = 'waiting' then 2  WHEN seeds.status = 'failed' then 3 WHEN seeds.status='stopped' then 4 END ASC"
+    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds"
     const client = await pool.connect()
     const list = await client.query(sql, [id]);
     client.release()
