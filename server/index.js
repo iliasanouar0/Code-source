@@ -157,10 +157,13 @@ wss.on('connection', wss => {
         }
         if (toProcess.length == 0) {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
-          await processStateManager.updateState(status)
-          end_in = new Date().toDateInputValue()
-          processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
-          wss.send('reload')
+          await processStateManager.updateState(status).then(result => {
+            if (result == true) {
+              end_in = new Date().toDateInputValue()
+              processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
+              wss.send('reload')
+            }
+          })
         }
       }
 
