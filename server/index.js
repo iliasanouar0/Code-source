@@ -116,21 +116,25 @@ wss.on('connection', wss => {
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
+      let c = 0
       let state = processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
+        c++
+        console.log('first while : ' + c);
+        console.log(toProcess);
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
-            seedManager.updateState([toProcess[i].id_seeds], "finished")
+            await seedManager.updateState([toProcess[i].id_seeds], "finished")
             success++
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
-              await seedManager.updateState([seeds[count].id_seeds], "running")
+              seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
           } else {
             failed++
-            seedManager.updateState(toProcess[i].id_seeds, "failed")
+            await seedManager.updateState(toProcess[i].id_seeds, "failed")
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count + line])
