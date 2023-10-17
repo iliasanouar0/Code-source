@@ -129,6 +129,8 @@ wss.on('connection', wss => {
           console.log('the length : ' + toProcess.length);
           if (typeof (toProcess[i])) {
             await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            console.log('processing element : ');
+            console.log(toProcess[i]);
             success++
             await toProcess.shift()
             // console.log(toProcess.shift());
