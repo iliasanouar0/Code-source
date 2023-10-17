@@ -88,7 +88,7 @@ wss.on('connection', wss => {
     let data = JSON.parse(message.toString())
     request = data.request
     if (request == "start") {
-      console.log(data.obj);
+      console.log(data);
       // processManager.startedProcess(data.obj)
       // processManager.stoppedProcess(JSON.parse(message))
 
