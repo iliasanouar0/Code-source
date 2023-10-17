@@ -158,8 +158,7 @@ wss.on('connection', wss => {
         }
         if (toProcess.length == 0) {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
-          let result = await processStateManager.updateState(status)
-          console.log(result);
+          await processStateManager.updateState(status)
           end_in = new Date().toDateInputValue()
           processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
           wss.send('reload')
