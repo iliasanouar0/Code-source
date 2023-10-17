@@ -157,17 +157,18 @@ wss.on('connection', wss => {
       }
       while (toProcess.length != 0) {
         for (let i = 0; i < toProcess.length; i++) {
-          if (toProcess[i]) {
+          if (toProcess[0]) {
             success++
-            seedManager.updateState([seeds[i].id_seeds], "finished")
+            seedManager.updateState([seeds[0].id_seeds], "finished")
             toProcess.shift()
             if (toProcess.length < active && count < length) {
               toProcess.push(seeds[count])
+              seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
           } else {
             failed++
-            seedManager.updateState(toProcess[i].id_seeds, "failed")
+            seedManager.updateState(toProcess[0].id_seeds, "failed")
             toProcess.shift()
             if (toProcess.length < active && count < length) {
               toProcess.push(data[count])
