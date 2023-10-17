@@ -110,7 +110,7 @@ wss.on('connection', wss => {
       let count = 0
       // let length = seeds.length
       let toProcess = []
-      let process = false
+      // let process = false
       console.log(seeds);
       for (let i = 0; i < active; i++) {
         count++
@@ -124,8 +124,7 @@ wss.on('connection', wss => {
         c++
         console.log('while : ' + c);
         console.log(toProcess);
-        let length = toProcess.length
-        for (let i = 0; i < length; i++) {
+        for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
             await seedManager.updateState([toProcess[i].id_seeds], "finished")
             success++
@@ -135,7 +134,7 @@ wss.on('connection', wss => {
               seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
-            console.log('inside for loop N° : ' + i);
+            console.log('inside for loop N° : ' + i + 1);
             console.log(toProcess);
           } else {
             failed++
