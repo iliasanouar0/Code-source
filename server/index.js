@@ -165,11 +165,13 @@ wss.on('connection', wss => {
         }
         state = await processManager.getProcessState(data.id_process)
         if (toProcess.length == 0) {
+          let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
+          processStateManager.updateState(status)
           end_in = new Date().toDateInputValue()
-          processManager.finishedProcess({ id_process: `${data.id_process}`, status: `FINISHED`, end_in: `${end_in}` })
-          console.log("updated is finished now");
+          await processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` }).then(() => {
+            console.log("updated is finished now");
+          })
         }
-        // console.log('while finished ');
       }
 
     } else if (request == "resume") {
