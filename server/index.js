@@ -119,7 +119,7 @@ wss.on('connection', wss => {
       }
       console.log(seeds[count]);
       let c = 0
-      let state = processManager.getProcessState(data.id_process)
+      let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
         c++
         console.log('while : ' + c);
@@ -163,14 +163,11 @@ wss.on('connection', wss => {
           let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
         }
-        state = processManager.getProcessState(data.id_process)
+        state = await processManager.getProcessState(data.id_process)
         if (toProcess.length == 0) {
           end_in = new Date().toDateInputValue()
-          processManager.finishedProcess({
-            id_process: `${data.id_process}`,
-            status: `FINISHED`,
-            end_in: `${end_in}`,
-          })
+          processManager.finishedProcess({ id_process: `${data.id_process}`, status: `FINISHED`, end_in: `${end_in}` })
+          console.log("updated is finished now");
         }
         console.log('while finished ');
       }
