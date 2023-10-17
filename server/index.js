@@ -100,11 +100,8 @@ wss.on('connection', wss => {
       seedManager.updateState(statechangeSeeds, "waiting")
       let success = 0
       let failed = 0
-      let line = 1
       let count = 0
-      let length = seeds.length
       let toProcess = []
-      let process = false
       for (let i = 0; i < active; i++) {
         count++
         seedManager.updateState([seeds[i].id_seeds], "running")
