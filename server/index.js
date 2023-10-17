@@ -111,37 +111,37 @@ wss.on('connection', wss => {
       // let length = seeds.length
       let toProcess = []
       // let process = false
-      console.log(seeds);
+      // console.log(seeds);
       for (let i = 0; i < active; i++) {
         count++
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
-      console.log(seeds[count]);
+      // console.log(seeds[count]);
       let c = 0
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
         c++
-        console.log('while : ' + c);
-        console.log(toProcess);
+        // console.log('while : ' + c);
+        // console.log(toProcess);
         for (let i = 0; i < toProcess.length; i++) {
-          console.log('loop N° : ' + i);
-          console.log('the first length : ' + toProcess.length);
+          // console.log('loop N° : ' + i);
+          // console.log('the first length : ' + toProcess.length);
           if (typeof (toProcess[0])) {
             await seedManager.updateState([toProcess[0].id_seeds], "finished")
-            console.log('processing element : ');
-            console.log(toProcess[0]);
+            // console.log('processing element : ');
+            // console.log(toProcess[0]);
             success++
             await toProcess.shift()
-            console.log('seeds length : ' + seeds.length);
-            console.log('count : ' + count);
+            // console.log('seeds length : ' + seeds.length);
+            // console.log('count : ' + count);
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
               seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
-            console.log('the length out : ' + toProcess.length);
-            console.log(toProcess);
+            // console.log('the length out : ' + toProcess.length);
+            // console.log(toProcess);
           } else {
             failed++
             await seedManager.updateState(toProcess[i].id_seeds, "failed")
@@ -169,7 +169,7 @@ wss.on('connection', wss => {
           processManager.finishedProcess({ id_process: `${data.id_process}`, status: `FINISHED`, end_in: `${end_in}` })
           console.log("updated is finished now");
         }
-        console.log('while finished ');
+        // console.log('while finished ');
       }
 
     } else if (request == "resume") {
