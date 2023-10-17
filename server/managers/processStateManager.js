@@ -39,7 +39,7 @@ const getState = async (id) => {
     // return results
 }
 
-const updateState = (data) => {
+const updateState = async (data) => {
     let values = [data.waiting, data.active, data.finished, data.failed, data.id_process]
     let sql = 'UPDATE processstate SET waiting=($1), active=($2), finished=($3), failed=($4) WHERE id_process=($5)'
     pool.query(sql, values, (error, result) => {

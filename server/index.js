@@ -1,5 +1,5 @@
-/**
- * @Crossorigin
+/** 
+ * * @Crossorigin
  */
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -26,13 +26,12 @@ const processManager = require("./managers/processManager");
 const installation = require("./managers/installation");
 const gmailManagement = require("./processes/gmailManagement");
 const processStateManager = require('./managers/processStateManager');
-const { data } = require("./db");
 
 const port = 3000;
-const app = express(); // setup express application
+const app = express(); // ! setup express application 
 
 app.options("*", cors());
-// Parse incoming requests data
+// ~ Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 
@@ -103,15 +102,14 @@ wss.on('connection', wss => {
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
-      seedManager.updateState(statechangeSeeds, "waiting")
+      await seedManager.updateState(statechangeSeeds, "waiting")
       let success = 0
       let failed = 0
-      let line = 1
       let count = 0
       let toProcess = []
       for (let i = 0; i < active; i++) {
         count++
-        seedManager.updateState([seeds[i].id_seeds], "running")
+        await seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
       let c = 0
@@ -137,7 +135,7 @@ wss.on('connection', wss => {
             await seedManager.updateState(toProcess[i].id_seeds, "failed")
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
-              toProcess.push(seeds[count + line])
+              toProcess.push(seeds[count])
               count++
             } else {
               toProcess.push(seeds[count])
@@ -156,10 +154,12 @@ wss.on('connection', wss => {
         state = await processManager.getProcessState(data.id_process)
         if (toProcess.length == 0) {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
-          processStateManager.updateState(status)
+          await processStateManager.updateState(status)
           end_in = new Date().toDateInputValue()
-          processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
+          await processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
           console.log("updated is finished now");
+        } else {
+          console.log('not yet !!');
         }
       }
 
