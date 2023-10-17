@@ -112,19 +112,13 @@ wss.on('connection', wss => {
         await seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
-      let c = 0
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
-        c++
-        console.log('while : ' + c);
         for (let i = 0; i < toProcess.length; i++) {
-          console.log('loop N° : ' + i);
           if (typeof (toProcess[0])) {
             await seedManager.updateState([toProcess[0].id_seeds], "finished")
             success++
             await toProcess.shift()
-            console.log('seeds length : ' + seeds.length);
-            console.log('count : ' + count);
             if (toProcess.length < active && count < seeds.length) {
               toProcess.push(seeds[count])
               await seedManager.updateState([seeds[count].id_seeds], "running")
