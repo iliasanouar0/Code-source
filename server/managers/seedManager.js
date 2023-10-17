@@ -273,8 +273,6 @@ const updateState = async (data, state) => {
     client.query(sql, data, (err) => {
       if (err) {
         return err;
-      } else {
-        success.push(true)
       }
     });
     client.release()
