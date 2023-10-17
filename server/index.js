@@ -7,6 +7,13 @@ const cors = require("cors");
 const fs = require('fs')
 const WebSocket = require('ws');
 
+Date.prototype.toDateInputValue = function () {
+  var local = new Date(this);
+  local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+  return local.toJSON().slice(0, 10);
+};
+
+
 const wsi = new WebSocket.Server({ port: 7071 });
 const wsp = new WebSocket.Server({ port: 7072 })
 const wss = new WebSocket.Server({ port: 7073 })
@@ -20,7 +27,6 @@ const processManager = require("./managers/processManager");
 const installation = require("./managers/installation");
 const gmailManagement = require("./processes/gmailManagement");
 const processStateManager = require('./managers/processStateManager');
-const { data } = require("./db");
 
 const port = 3000;
 const app = express(); // setup express application
@@ -193,9 +199,12 @@ wss.on('connection', wss => {
           processStateManager.updateState(status)
         }
         if (toProcess.length == 0) {
-          let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
-          processStateManager.updateState(status)
-          console.log('done');
+          if (toProcess.length == 0) {
+            let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
+            await processStateManager.updateState(status)
+            end_in = new Date().toDateInputValue()
+            processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
+          }
         }
       }
 
