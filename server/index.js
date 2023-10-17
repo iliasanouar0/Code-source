@@ -120,7 +120,7 @@ wss.on('connection', wss => {
       while (toProcess.length != 0 && state != 'STOPPED') {
         for (let i = 0; i < toProcess.length; i++) {
           if (typeof (toProcess[i])) {
-            await seedManager.updateState([toProcess[i].id_seeds], "finished")
+            seedManager.updateState([toProcess[i].id_seeds], "finished")
             success++
             toProcess.shift()
             if (toProcess.length < active && count < seeds.length) {
