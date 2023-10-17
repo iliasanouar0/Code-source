@@ -71,15 +71,15 @@ wsi.on('connection', function connection(ws) {
   });
 });
 
-wsp.on('connection', ws => {
-  ws.on('message', message => {
-    if (message.includes('start_in')) {
-      processManager.startedProcess(JSON.parse(message))
-    } else {
-      processManager.stoppedProcess(JSON.parse(message))
-    }
-  })
-})
+// wsp.on('connection', ws => {
+//   ws.on('message', message => {
+//     if (message.includes('start_in')) {
+//       processManager.startedProcess(JSON.parse(message))
+//     } else {
+//       processManager.stoppedProcess(JSON.parse(message))
+//     }
+//   })
+// })
 
 wss.on('connection', wss => {
   console.log('connected!')
@@ -88,6 +88,9 @@ wss.on('connection', wss => {
     let data = JSON.parse(message.toString())
     request = data.request
     if (request == "start") {
+      processManager.startedProcess(JSON.parse(data.obj))
+      // processManager.stoppedProcess(JSON.parse(message))
+
       let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
       let active
       let waiting = seeds.length - 3

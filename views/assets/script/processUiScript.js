@@ -149,19 +149,19 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: `${start_in}`,
     }
-    function sendMessage(message, ws) {
-        ws.send(message);
-    }
-    let pingInterval
-    const wsUri = `ws://${ip}:7072/wss`;
-    const websocket = new WebSocket(wsUri);
-    socketUpdate(websocket, sendMessage, obj, pingInterval);
+    // function sendMessage(message, ws) {
+    //     ws.send(message);
+    // }
+    // let pingInterval
+    // const wsUri = `ws://${ip}:7072/wss`;
+    // const websocket = new WebSocket(wsUri);
+    // socketUpdate(websocket, sendMessage, obj, pingInterval);
 
     const wssUri = `ws://${ip}:7073/wss`;
     const websocket_s = new WebSocket(wssUri);
 
     websocket_s.onopen = (e) => {
-        websocket_s.send(JSON.stringify({ request: "start", id_process: id }))
+        websocket_s.send(JSON.stringify({ request: "start", id_process: id, obj: obj }))
     }
 
     websocket_s.onmessage = (event) => {
