@@ -88,9 +88,7 @@ wss.on('connection', wss => {
     let data = JSON.parse(message.toString())
     request = data.request
     if (request == "start") {
-      console.log(data);
       processManager.startedProcess(data.data)
-      // processManager.stoppedProcess(JSON.parse(message))
 
       let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
       let active
