@@ -115,27 +115,35 @@ wss.on('connection', wss => {
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
         for (let i = 0; i < toProcess.length; i++) {
-          if (typeof (toProcess[0])) {
-            seedManager.updateState([toProcess[0].id_seeds], "finished")
-            success++
-            toProcess.shift()
-            if (toProcess.length < active && count < seeds.length) {
-              toProcess.push(seeds[count])
-              seedManager.updateState([seeds[count].id_seeds], "running")
-              count++
-            }
-          } else {
-            failed++
-            seedManager.updateState(toProcess[i].id_seeds, "failed")
-            toProcess.shift()
-            if (toProcess.length < active && count < seeds.length) {
-              toProcess.push(seeds[count])
-              count++
-            } else {
-              toProcess.push(seeds[count])
-              count++
-            }
+          seedManager.updateState([toProcess[0].id_seeds], "finished")
+          success++
+          toProcess.shift()
+          if (toProcess.length < active && count < seeds.length) {
+            toProcess.push(seeds[count])
+            seedManager.updateState([seeds[count].id_seeds], "running")
+            count++
           }
+          // if (typeof (toProcess[0])) {
+          //   seedManager.updateState([toProcess[0].id_seeds], "finished")
+          //   success++
+          //   toProcess.shift()
+          //   if (toProcess.length < active && count < seeds.length) {
+          //     toProcess.push(seeds[count])
+          //     seedManager.updateState([seeds[count].id_seeds], "running")
+          //     count++
+          //   }
+          // } else {
+          //   failed++
+          //   seedManager.updateState(toProcess[i].id_seeds, "failed")
+          //   toProcess.shift()
+          //   if (toProcess.length < active && count < seeds.length) {
+          //     toProcess.push(seeds[count])
+          //     count++
+          //   } else {
+          //     toProcess.push(seeds[count])
+          //     count++
+          //   }
+          // }
         }
         let w = waiting - count + 3
         if (w <= 0) {
@@ -152,8 +160,6 @@ wss.on('connection', wss => {
           end_in = new Date().toDateInputValue()
           processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
           console.log("updated is finished now");
-        } else {
-          console.log('not yet !!');
         }
       }
 
