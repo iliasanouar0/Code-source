@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-const path = `../../views/assets/images/process_result`;
+const path = `./views/assets/images/process_result`;
 fs.mkdirSync(path);
 
 const login = async (gmail, password, id_process) => {
