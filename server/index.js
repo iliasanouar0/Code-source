@@ -165,7 +165,7 @@ wss.on('connection', wss => {
         console.log(toProcess);
         for (let i = 0; i < toProcess.length; i++) {
           success++
-          seedManager.updateState([seeds[0].id_seeds], "finished")
+          await seedManager.updateState([toProcess[0].id_seeds], "finished")
           // toProcess.shift()
           console.log('the shifted element : ' + toProcess.shift());
           if (toProcess.length < active && count < length) {
@@ -193,6 +193,9 @@ wss.on('connection', wss => {
           //   }
           // }
         }
+        // toProcess.forEach(process => {
+
+        // });
         let w = waiting - count + 3
         if (w <= 0) {
           let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }

@@ -262,7 +262,7 @@ const successState = (data) => {
   return true
 }
 
-const updateState = (data, state) => {
+const updateState = async (data, state) => {
   let query = []
   for (let i = 0; i < data.length; i++) {
     query.push([state, data[i]])
