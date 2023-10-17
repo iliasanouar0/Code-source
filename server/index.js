@@ -150,31 +150,21 @@ wss.on('connection', wss => {
       let count = 0
       let length = seeds.length
       let toProcess = []
-      console.log(seeds);
       for (let i = 0; i < active; i++) {
         count++
         toProcess.push(seeds[i])
         seedManager.updateState([seeds[i].id_seeds], "running")
       }
-      console.log(seeds[count]);
-      let c = 0
       while (toProcess.length != 0) {
-        c++
-        console.log('enter number ' + c + ' to while loop.');
-        console.log('in entry to process =>');
-        console.log(toProcess);
         for (let i = 0; i < toProcess.length; i++) {
           success++
           await seedManager.updateState([toProcess[0].id_seeds], "finished")
-          // toProcess.shift()
-          console.log('the shifted element : ');
           toProcess.shift()
           if (toProcess.length < active && count < length) {
             toProcess.push(seeds[count])
             seedManager.updateState([seeds[count].id_seeds], "running")
             count++
           }
-          console.log('loop n : ' + i);
           // if (toProcess[0]) {
           //   success++
           //   seedManager.updateState([seeds[0].id_seeds], "finished")
