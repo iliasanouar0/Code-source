@@ -125,7 +125,7 @@ wss.on('connection', wss => {
               await seedManager.updateState([seeds[count].id_seeds], "running")
               count++
             }
-          }, 60000)
+          }, 100000)
           // if (toProcess[0]) {
           //   success++
           //   seedManager.updateState([seeds[0].id_seeds], "finished")
