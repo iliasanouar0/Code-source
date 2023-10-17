@@ -111,11 +111,13 @@ wss.on('connection', wss => {
       let length = seeds.length
       let toProcess = []
       let process = false
+      console.log(seeds);
       for (let i = 0; i < active; i++) {
         count++
         seedManager.updateState([seeds[i].id_seeds], "running")
         toProcess.push(seeds[i])
       }
+      console.log(seeds[count]);
       let c = 0
       let state = processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != 'STOPPED') {
