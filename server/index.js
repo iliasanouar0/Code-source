@@ -116,16 +116,16 @@ wss.on('connection', wss => {
       }
       while (toProcess.length != 0) {
         for (let i = 0; i < toProcess.length; i++) {
-          setTimeout(async () => {
-            success++
-            await seedManager.updateState([toProcess[0].id_seeds], "finished")
-            toProcess.shift()
-            if (toProcess.length < active && count < length) {
-              toProcess.push(seeds[count])
-              await seedManager.updateState([seeds[count].id_seeds], "running")
-              count++
-            }
-          }, 5000)
+
+          success++
+          await seedManager.updateState([toProcess[0].id_seeds], "finished")
+          toProcess.shift()
+          if (toProcess.length < active && count < length) {
+            toProcess.push(seeds[count])
+            await seedManager.updateState([seeds[count].id_seeds], "running")
+            count++
+          }
+
           // if (toProcess[0]) {
           //   success++
           //   seedManager.updateState([seeds[0].id_seeds], "finished")
