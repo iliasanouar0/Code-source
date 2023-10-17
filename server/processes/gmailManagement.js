@@ -8,7 +8,7 @@ const login = async (gmail, password, id_process) => {
     await page.goto('https://gmail.com/')
     await navigationPromise
     await page.screenshot({
-        path: './../../views/assets/images/process_result/img.jpg'
+        path: __dirname + '/views/assets/images/process_result/img.jpg'
     });
     await page.waitForSelector('input[type="email"]')
     await page.click('input[type="email"]')
@@ -26,7 +26,7 @@ const login = async (gmail, password, id_process) => {
     }, 6000);
     setTimeout(() => {
         page.screenshot({
-            path: './../../views/assets/images/process_result/screenshot' + id_process + '.jpg'
+            path: __dirname + '/views/assets/images/process_result/screenshot' + id_process + '.jpg'
         });
     }, 10000)
 }
