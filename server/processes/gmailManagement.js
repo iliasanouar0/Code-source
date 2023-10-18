@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 console.log(__dirname);
-
+let root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
+console.log(root);
 let path = '../../views/assets/images/process_result'
 
 const login = async (gmail, password, id_process) => {
