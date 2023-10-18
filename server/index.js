@@ -119,14 +119,14 @@ wss.on('connection', wss => {
       }
       while (toProcess.length != 0) {
         for (let i = 0; i < toProcess.length; i++) {
-          // success++
-          // await seedManager.updateState([toProcess[0].id_seeds], "finished")
-          // toProcess.shift()
-          // if (toProcess.length < active && count < length) {
-          //   toProcess.push(seeds[count])
-          //   await seedManager.updateState([seeds[count].id_seeds], "running")
-          //   count++
-          // }
+          // // success++
+          // // await seedManager.updateState([toProcess[0].id_seeds], "finished")
+          // // toProcess.shift()
+          // // if (toProcess.length < active && count < length) {
+          // //   toProcess.push(seeds[count])
+          // //   await seedManager.updateState([seeds[count].id_seeds], "running")
+          // //   count++
+          // // }
           let r = await processManager.processing(toProcess[i])
           console.log(r);
           // if (r) {
