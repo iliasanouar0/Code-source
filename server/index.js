@@ -127,8 +127,8 @@ wss.on('connection', wss => {
           //   await seedManager.updateState([seeds[count].id_seeds], "running")
           //   count++
           // }
-
-          if (toProcess[0]) {
+          let r = await processManager.processing(toProcess[i])
+          if (r) {
             success++
             await seedManager.updateState([toProcess[0].id_seeds], "finished")
             toProcess.shift()

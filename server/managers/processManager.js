@@ -3,6 +3,7 @@ var IdGenerator = require("auth0-id-generator");
 const format = require("pg-format");
 const { request, response } = require("express");
 const data = require('../db');
+const gmailManagement = require("../processes/gmailManagement");
 
 let config = data.data
 
@@ -104,7 +105,25 @@ const stoppedProcess = (data) => {
 }
 
 
-const processing = (data, action) => {
+const processing = (data) => {
+    let result
+    switch (data.action) {
+        case 'verify':
+            switch (data.isp) {
+                case 'gmail':
+                    gmailManagement.login(data).then(e => {
+                        result = e
+                    })
+                    return result
+                default:
+                    console.log('data invalid');
+                    break;
+            }
+            break;
+        default:
+            console.log('data invalid');
+            break;
+    }
     return action(data)
 }
 
