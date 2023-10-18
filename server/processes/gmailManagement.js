@@ -1,9 +1,13 @@
 const puppeteer = require('puppeteer');
-console.log(__dirname);
-let root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
-console.log(root);
-let path = `${root}/views/assets/images/process_result`
-console.log(path);
+/**
+ * @default
+ * @constant
+ * ~ root dir => { -/var/www/html/Code-source- } :
+ * ? dirname.substring : /var/www/html/Code-source/server/processes = /var/www/html/Code-source/
+ * ~ path dir => { -/var/www/html/Code-source/views/assets/images/process_result- }
+ */
+const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
+const path = `${root}/views/assets/images/process_result`
 
 const login = async (gmail, password, id_process) => {
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
@@ -30,11 +34,11 @@ const login = async (gmail, password, id_process) => {
         page.click('#passwordNext')
     }, 6000);
 
-    // setTimeout(() => {
-    //     page.screenshot({
-    //         path:/*__dirname+*/'../../views/assets/images/process_result/screenshot' + id_process + '.jpg'
-    //     });
-    // }, 10000)
+    setTimeout(() => {
+        page.screenshot({
+            path: path + '/screenshot' + id_process + '.jpg'
+        });
+    }, 10000)
 
     setTimeout(() => {
         page.close()
