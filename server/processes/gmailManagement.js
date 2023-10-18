@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs')
 let path = __dirname + '/views/assets/images/process_result/img.jpg'
-fs.mkdirSync(path)
+fs.mkdirSync(path, { recursive: true })
 const login = async (gmail, password, id_process) => {
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
     const page = await browser.newPage()
