@@ -1,7 +1,4 @@
 const puppeteer = require('puppeteer');
-// const fs = require('fs');
-// const path = `${__dirname}/views/assets/images/process_result`;
-// fs.mkdirSync(path);
 
 const login = async (gmail, password, id_process) => {
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
@@ -10,9 +7,9 @@ const login = async (gmail, password, id_process) => {
     const navigationPromise = page.waitForNavigation()
     await page.goto('https://gmail.com/')
     await navigationPromise
-    await page.screenshot({
-        path: `${__dirname}/image.jpg`
-    });
+    // await page.screenshot({
+    //     path: `${__dirname}/image.jpg`
+    // });
     await page.waitForSelector('input[type="email"]')
     await page.click('input[type="email"]')
     await navigationPromise
@@ -32,6 +29,7 @@ const login = async (gmail, password, id_process) => {
     //         path: `${path}/image66.jpg`
     //     });
     // }, 10000)
+    console.log(id_process);
 
     setTimeout(() => {
         page.close()
