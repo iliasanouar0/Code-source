@@ -129,38 +129,38 @@ wss.on('connection', wss => {
           // // }
           let r = await processManager.processing(toProcess[i])
           console.log(r);
-          // if (r) {
-          //   success++
-          //   await seedManager.updateState([toProcess[0].id_seeds], "finished")
-          //   toProcess.shift()
-          //   if (toProcess.length < active && count < length) {
-          //     toProcess.push(seeds[count])
-          //     await seedManager.updateState([seeds[count].id_seeds], "running")
-          //     count++
-          //   }
-          // } else {
-          //   failed++
-          //   seedManager.updateState(toProcess[0].id_seeds, "failed")
-          //   toProcess.shift()
-          //   if (toProcess.length < active && count < length) {
-          //     toProcess.push(data[count])
-          //     count++
-          //   }
-          // }
+          if (r) {
+            success++
+            await seedManager.updateState([toProcess[0].id_seeds], "finished")
+            toProcess.shift()
+            if (toProcess.length < active && count < length) {
+              toProcess.push(seeds[count])
+              await seedManager.updateState([seeds[count].id_seeds], "running")
+              count++
+            }
+          } else {
+            failed++
+            seedManager.updateState(toProcess[0].id_seeds, "failed")
+            toProcess.shift()
+            if (toProcess.length < active && count < length) {
+              toProcess.push(data[count])
+              count++
+            }
+          }
         }
-        // let w = waiting - count + 3
-        // if (w <= 0) {
-        //   let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-        //   processStateManager.updateState(status)
-        // } else {
-        //   let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-        //   processStateManager.updateState(status)
-        // }
+        let w = waiting - count + 3
+        if (w <= 0) {
+          let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          processStateManager.updateState(status)
+        } else {
+          let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          processStateManager.updateState(status)
+        }
         if (toProcess.length == 0) {
-          // let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
-          // await processStateManager.updateState(status)
-          // end_in = new Date().toDateInputValue()
-          // processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
+          let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
+          await processStateManager.updateState(status)
+          end_in = new Date().toDateInputValue()
+          processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`, end_in: `${end_in}` })
           wss.send('reload')
         }
       }

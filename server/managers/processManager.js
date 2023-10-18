@@ -105,13 +105,13 @@ const stoppedProcess = (data) => {
 }
 
 
-const processing = (data) => {
+const processing = async (data) => {
     let result
     switch (data.action) {
         case 'verify':
             switch (data.isp) {
                 case 'gmail':
-                    gmailManagement.login(data).then(e => {
+                    await gmailManagement.login(data).then(e => {
                         result = e
                     })
                     return result
