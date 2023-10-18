@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-let path = '../../views/assets/images/process_result/'
+let path = '../../views/assets/images/process_result'
 
 const login = async (gmail, password, id_process) => {
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
@@ -26,12 +26,12 @@ const login = async (gmail, password, id_process) => {
         page.waitForSelector('#passwordNext')
         page.click('#passwordNext')
     }, 6000);
-    
-    setTimeout(() => {
-        page.screenshot({
-            path:/*__dirname+*/'../../views/assets/images/process_result/screenshot' + id_process + '.jpg'
-        });
-    }, 10000)
+
+    // setTimeout(() => {
+    //     page.screenshot({
+    //         path:/*__dirname+*/'../../views/assets/images/process_result/screenshot' + id_process + '.jpg'
+    //     });
+    // }, 10000)
 
     setTimeout(() => {
         page.close()
