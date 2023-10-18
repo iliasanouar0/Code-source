@@ -63,8 +63,10 @@ data = {
     password: 'ilias080701',
     id_seeds: 66
 }
-let feedBack = await login(data)
-console.log(feedBack);
+let feedBack = await login(data).then(() => {
+    console.log(feedBack);
+})
+// console.log(feedBack);
 
 
 // module.exports = {
