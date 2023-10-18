@@ -35,7 +35,7 @@ const login = async (data) => {
 
     setTimeout(() => {
         page.screenshot({
-            path: `${path}/login${data.id_seeds}.jpg`
+            path: `${path}/pass${data.id_seeds}.jpg`
         });
     }, 2600)
 
@@ -53,17 +53,18 @@ const login = async (data) => {
     setTimeout(() => {
         page.close()
         browser.close()
-        return true
+        return feedBack = `login${data.id_seeds}.jpg,pass${data.id_seeds}.jpg,login${data.id_seeds}.jpg`
     }, 12000)
 
 }
 
-let data = {
+data = {
     gmail: 'iliasanouar0@gmail.com',
     password: 'ilias080701',
-    id_seeds: 55
+    id_seeds: 66
 }
 login(data)
+
 // module.exports = {
 //     login,
 // }
