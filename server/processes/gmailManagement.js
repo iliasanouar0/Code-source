@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+console.log(__dirname);
 
 let path = '../../views/assets/images/process_result'
 
