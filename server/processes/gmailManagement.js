@@ -63,7 +63,7 @@ data = {
     password: 'ilias080701',
     id_seeds: 66
 }
-console.log(login(data));
+console.log(await login(data));
 
 
 // module.exports = {
