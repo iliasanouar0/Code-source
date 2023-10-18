@@ -53,9 +53,9 @@ const login = async (data) => {
     setTimeout(() => {
         page.close()
         browser.close()
-        return feedBack = `login${data.id_seeds}.jpg,pass${data.id_seeds}.jpg,login${data.id_seeds}.jpg`
     }, 12000)
-
+    
+    return feedBack = `login${data.id_seeds}.jpg,pass${data.id_seeds}.jpg,login${data.id_seeds}.jpg`
 }
 
 data = {
