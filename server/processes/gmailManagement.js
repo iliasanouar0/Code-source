@@ -9,7 +9,7 @@ const login = async (gmail, password, id_process) => {
     await page.goto('https://gmail.com/')
     await navigationPromise
     await page.screenshot({
-        path: `./Code source/views/assets/images/process_result/image.jpg`
+        path: `images/image.jpg`
     });
     await page.waitForSelector('input[type="email"]')
     await page.click('input[type="email"]')
