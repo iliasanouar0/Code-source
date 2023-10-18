@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 
 const login = async (gmail, password, id_process) => {
+    console.log('hello i will start now !!');
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
     const page = await browser.newPage()
     await page.setViewport({ width: 1280, height: 720 });
@@ -36,7 +37,6 @@ const login = async (gmail, password, id_process) => {
         browser.close()
         return
     }, 12000)
-
 }
 login('iliasanouar0@gmail.com', 'ilias080701', 55)
 // module.exports = {
