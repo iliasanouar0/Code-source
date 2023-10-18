@@ -14,7 +14,7 @@ const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
 const path = `${root}/views/assets/images/process_result`
 
 const login = async (data) => {
-    const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
+    const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
     const page = await browser.newPage()
     await page.setViewport({ width: 1280, height: 720 });
     const navigationPromise = page.waitForNavigation()
