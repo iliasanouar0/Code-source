@@ -2,7 +2,8 @@ const puppeteer = require('puppeteer');
 console.log(__dirname);
 let root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
 console.log(root);
-let path = '../../views/assets/images/process_result'
+let path = `${root}/views/assets/images/process_result`
+console.log(path);
 
 const login = async (gmail, password, id_process) => {
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
