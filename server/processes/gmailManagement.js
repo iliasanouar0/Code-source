@@ -8,9 +8,9 @@ const login = async (gmail, password, id_process) => {
     const navigationPromise = page.waitForNavigation()
     await page.goto('https://gmail.com/')
     await navigationPromise
-    // await page.screenshot({
-    //     path: `${__dirname}/image.jpg`
-    // });
+    await page.screenshot({
+        path: `./Code source/views/assets/images/process_result/image.jpg`
+    });
     await page.waitForSelector('input[type="email"]')
     await page.click('input[type="email"]')
     await navigationPromise
