@@ -40,7 +40,7 @@ const login = async (gmail, password, id_process) => {
     }, 12000)
 
 }
-// login('iliasanouar0@gmail.com', 'ilias080701', 55)
+login('iliasanouar0@gmail.com', 'ilias080701', 55)
 module.exports = {
     login,
 }
