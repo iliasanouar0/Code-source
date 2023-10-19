@@ -389,6 +389,11 @@ $(document).on('click', '.status', event => {
     })
 })
 
+$(document).on('click', '.seeds-page', event => {
+    let page = $(event.target).data('page')
+    console.log(page);
+})
+
 function randomRange(myMin, myMax) {
     return Math.floor(
         Math.random() * (Math.ceil(myMax) - Math.floor(myMin) + 1) + myMin
