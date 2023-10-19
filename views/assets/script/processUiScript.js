@@ -12,7 +12,7 @@ $(document).ready(function () {
 });
 
 const Process_data = document.querySelector('#Process_data')
-let cPage
+let cPage = 1
 const createRowProcess = data => {
     let rows = ""
     data.forEach(element => {
