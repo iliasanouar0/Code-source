@@ -40,9 +40,12 @@ const login = async (data) => {
     await navigationPromise
     await time(3000);
     try {
-        await page.waitForSelector('input[type="password"]')
+        await page.waitForSelector('input[type="password"]', { timeout: 500 })
     } catch (error) {
         if (error) {
+            await page.screenshot({
+                path: `${path}/${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+            });
             await page.close()
             await browser.close()
             return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
