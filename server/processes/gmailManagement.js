@@ -30,6 +30,12 @@ const login = async (data) => {
     await navigationPromise
     await time(1000)
     if (await page.$('[aria-invalid="true"]') != null || await page.$('#next > div > div > a') != null) {
+        if (await page.$('#next > div > div > a') != null) {
+            console.log('the seed is exist but 0');
+            await page.close()
+            await browser.close()
+            return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+        }
         await page.close()
         await browser.close()
         return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
