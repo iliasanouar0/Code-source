@@ -284,7 +284,7 @@ const createRowProcessSeeds = data => {
             <td>${element.gmail}</td>
             <td>${element.proxy}</td>
             <td>${element.isp}</td>
-            <td>${status}</td>
+            <td  class="text-center">${status}</td>
             <td></td>
             <td>00:00:00</td>
             <td class="text-center">
