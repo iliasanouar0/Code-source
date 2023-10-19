@@ -271,14 +271,20 @@ $(document).on('click', '.resume', event => {
 })
 
 const createRowProcessSeeds = data => {
+    let status
     let rows = ""
     data.forEach(element => {
+        if (element.status == 'running') {
+            status = '<img src="../../assets/images/loader/work-in-progress.gif" alt="loader">'
+        } else {
+            status = element.status
+        }
         let tr =
             `<tr>
             <td>${element.gmail}</td>
             <td>${element.proxy}</td>
             <td>${element.isp}</td>
-            <td>${element.status}</td>
+            <td>${status}</td>
             <td></td>
             <td>00:00:00</td>
             <td class="text-center">
