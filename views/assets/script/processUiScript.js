@@ -275,7 +275,8 @@ const createRowProcessSeeds = data => {
     let rows = ""
     data.forEach(element => {
         if (element.status == 'running') {
-            status = '<img src="../../assets/images/loader/work-in-progress.gif" alt="loader" width="10px">'
+            // status = '<img src="../../assets/images/loader/work-in-progress.gif" alt="loader" width="10px">'
+            status = '<i class="fa fa-spinner fa-spin-pulse"></i>'
         } else {
             status = element.status
         }
