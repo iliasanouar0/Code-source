@@ -127,6 +127,7 @@ wss.on('connection', wss => {
           // //   await seedManager.updateState([seeds[count].id_seeds], "running")
           // //   count++
           // // }
+          console.log(toProcess[i]);
           let r = await processManager.processing(toProcess[i])
           console.log(r);
           if (r.indexOf('invalid') == -1) {
