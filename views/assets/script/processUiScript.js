@@ -414,10 +414,15 @@ $(document).on('click', '.status', event => {
         $('.pagination').html(list)
 
     })
-    $('.seeds-page').on('click', event => {
-        console.log('test');
-        // let page = $(event.target).data('page')
-        // console.log(page);
+    // $('.seeds-page').on('click', event => {
+    //     // let page = $(event.target).data('page')
+    //     // console.log(page);
+    //     // ! let endIndex = cPage * max
+    //     // ! let startIndex = endIndex - max
+    // })
+    $(document).on('click', '.seeds-page', event => {
+        let page = $(event.target).data('page')
+        console.log(page);
         // ! let endIndex = cPage * max
         // ! let startIndex = endIndex - max
     })
