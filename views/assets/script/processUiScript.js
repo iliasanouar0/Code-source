@@ -394,6 +394,7 @@ $(document).on('click', '.status', event => {
         console.log('closed');
     }
     // ~~ pagination
+    let max = 10
     let cPage = 1
     pagination(id, cPage)
     $(document).on('click', '.seeds-page', event => {
