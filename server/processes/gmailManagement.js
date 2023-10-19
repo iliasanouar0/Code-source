@@ -35,11 +35,12 @@ const login = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
         });
+        await page.close()
         await browser.close()
         return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
     }
     await navigationPromise
-    await time(3000);
+    await time(4000);
     await page.type('input[type="password"]', data.password, { delay: 200 })
     await page.waitForSelector('#passwordNext')
     await page.click('#passwordNext')
@@ -49,6 +50,7 @@ const login = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
         });
+        await page.close()
         await browser.close()
         return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
     }
@@ -57,20 +59,11 @@ const login = async (data) => {
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     });
+    await page.close()
     await browser.close()
     return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
 }
 
-// data = {
-//     gmail: 'iliasanouar0@gmail.com',
-//     // gmail: '7yy6GV@gmail.com',
-//     password: 'ilias080701',
-//     // password: 'TTTTTTTTT',
-//     id_seeds: 66
-// }
-// login(data).then(feedBack => {
-//     console.log(feedBack);
-// })
 module.exports = {
     login,
 }
