@@ -301,27 +301,27 @@ function getPages(totalPages, currentPage) {
     return result.map(r => { return r + diff });
 }
 
-const pagination = (id) => {
-    let visible
-    let list = ""
-    fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
-        return response.text()
-    }).then(data => {
-        pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
-        visible = pageNum > 5 ? 5 : pageNum
-        for (let i = 1; i <= pageNum; i++) {
-            if (i == cPage) {
-                list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
-            } else {
-                list += `<li class="page-item"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
-            }
-        }
-        return list
-    })
-    // .then(list => {
-    //     $('.pagination').html(list)
-    // })
-}
+// const pagination = (id) => {
+//     let visible
+//     let list = ""
+//     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
+//         return response.text()
+//     }).then(data => {
+//         pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
+//         visible = pageNum > 5 ? 5 : pageNum
+//         for (let i = 1; i <= pageNum; i++) {
+//             if (i == cPage) {
+//                 list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
+//             } else {
+//                 list += `<li class="page-item"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
+//             }
+//         }
+//         return list
+//     })
+//     // .then(list => {
+//     //     $('.pagination').html(list)
+//     // })
+// }
 
 $(document).on('click', '.status', event => {
     const id = $(event.target)[0].attributes[2].value
@@ -397,6 +397,7 @@ $(document).on('click', '.status', event => {
     let max = 10
     let cPage = 1
     let pageNum
+    let list = ""
     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
         return response.text()
     }).then(data => {
@@ -404,6 +405,15 @@ $(document).on('click', '.status', event => {
     }).then(() => {
         let pages = getPages(pageNum, cPage)
         console.log(pages);
+        for (let i = 0; i < pages.length; i++) {
+            if (pages[i] == cPage) {
+                list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${pages[i]}" href="#">${pages[i]}</a></li>`
+            } else {
+                list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pages[i]}" href="#">${pages[i]}</a></li>`
+            }
+        }
+        $('.pagination').html(list)
+
     })
     $('.seeds-page').on('click', event => {
         let page = $(event.target).data('page')
