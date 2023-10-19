@@ -415,8 +415,9 @@ $(document).on('click', '.status', event => {
 
     })
     $('.seeds-page').on('click', event => {
-        let page = $(event.target).data('page')
-        console.log(page);
+        console.log('test');
+        // let page = $(event.target).data('page')
+        // console.log(page);
         // ! let endIndex = cPage * max
         // ! let startIndex = endIndex - max
     })
