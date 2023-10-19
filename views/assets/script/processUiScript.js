@@ -12,7 +12,7 @@ $(document).ready(function () {
 });
 
 const Process_data = document.querySelector('#Process_data')
-
+let cPage
 const createRowProcess = data => {
     let rows = ""
     data.forEach(element => {
@@ -149,13 +149,6 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: `${start_in}`,
     }
-    // function sendMessage(message, ws) {
-    //     ws.send(message);
-    // }
-    // let pingInterval
-    // const wsUri = `ws://${ip}:7072/wss`;
-    // const websocket = new WebSocket(wsUri);
-    // socketUpdate(websocket, sendMessage, obj, pingInterval);
 
     const wssUri = `ws://${ip}:7073/wss`;
     const websocket_s = new WebSocket(wssUri);
@@ -296,6 +289,13 @@ const createRowProcessSeeds = data => {
     return rows
 }
 
+// const pagination = (id) => {
+//     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
+//         return response.json()
+//     })
+//     let links = ""
+// }
+
 $(document).on('click', '.status', event => {
     const id = $(event.target)[0].attributes[2].value
     let children = $(event.target).parent().parent()[0].children
@@ -314,22 +314,10 @@ $(document).on('click', '.status', event => {
         $('.status_bg').html(children[5].innerHTML)
     }
     $('#p_s').html(id)
-    fetch(`http://209.170.73.224:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
+    fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
         return response.json()
     }).then(data => {
-        // $('#pagination-container').pagination({
-        //     dataSource: data,
-        //     pageSize: 10,
-        //     showGoInput: true,
-        //     showGoButton: true,
-        //     showSizeChanger: true,
-        //     showNavigator: true,
-        //     formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
-        //     callback: function (data, pagination) {
-        //         var html = createRowProcessSeeds(data);
-        //         $('#seeds_result').html(html);
-        //     }
-        // })
+        // $('.pagination').html(pagination(id))
         var html = createRowProcessSeeds(data);
         $('#seeds_result').html(html);
     })
@@ -344,13 +332,10 @@ $(document).on('click', '.status', event => {
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
 
-    // let pingInterval
     websocket.onopen = (e) => {
         websocket.send(`${id}`)
-        // pingInterval = setInterval(async () => {
-        //     websocket.send(`${id}`)
-        // }, 1500);
     }
+
     websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
         if (data.length == 0) {

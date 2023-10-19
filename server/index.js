@@ -220,24 +220,20 @@ wsv.on('connection', async wsv => {
     ~~ while the websocket is open :
     */
     while (wsv.readyState != 3 && wsv.readyState != 2) {
-      await time(2000)
       // TODO => - count the request number. 
       c++
-      console.log(c);
       // TODO => - if first request send data to client side (view) and set as the oldV to compare. 
       if (c === 1) {
         oldV = result
         wsv.send(JSON.stringify(oldV))
       } else {
+        await time(2000)
         // TODO => - if not the first get new data and compare with old.
         newV = await processStateManager.getState(data)
-        // console.log(equalsCheck(newV, oldV));
         if (equalsCheck(newV, oldV)) {
-          console.log('like');
           // TODO => - else continue process 
           continue
         } else {
-          console.log('i will send');
           // TODO => - if deferent send the new data to client side (view).
           oldV = newV
           wsv.send(JSON.stringify(newV))
@@ -297,6 +293,7 @@ app.delete("/seeds/:id", seedManager.deleteSeed);
 app.post("/process/", processManager.addProcess)
 app.get("/process/admin", processManager.getAllData)
 app.get("/process/seeds/:id", processManager.getAllProcessSeeds)
+app.get('process/page/:id', processManager.getAllProcessSeedsCount)
 
 app.listen(port, () => {
   console.log(`Server running at ${port}`);
