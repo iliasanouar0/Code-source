@@ -291,8 +291,8 @@ const createRowProcessSeeds = data => {
 
 const pagination = (id) => {
     let max = 10
-    // cPage = 1
     let pageNum
+    let list = ""
     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
         return response.text()
     }).then(data => {
@@ -300,6 +300,14 @@ const pagination = (id) => {
         // let startIndex = endIndex - max
         pageNum = (data % max) == 0 ? data / max : Math.floor(data / max)
         console.log(pageNum);
+        for (let i = 1; i <= pageNum; i++) {
+            if (i == cPage) {
+                list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}">${i}</a></li>`
+            } else {
+                list += `<li class="page-item"><a class="page-link seeds-page" data-page="${i}">${i}</a></li>`
+            }
+        }
+        return list
     })
     // let links = ""
 }
@@ -326,7 +334,7 @@ $(document).on('click', '.status', event => {
         return response.json()
     }).then(data => {
         pagination(id)
-        // $('.pagination').html(pagination(id))
+        $('.pagination').html(pagination(id))
         var html = createRowProcessSeeds(data);
         $('#seeds_result').html(html);
     })
