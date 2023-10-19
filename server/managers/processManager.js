@@ -60,7 +60,7 @@ const getAllProcessSeedsCount = (request, response) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
         }
-        response.send(result.rowCount)
+        response.status(200).send(result.rowCount)
     })
 }
 
