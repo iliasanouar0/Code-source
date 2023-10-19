@@ -235,7 +235,7 @@ wsv.on('connection', async wsv => {
         if (equalsCheck(newV, oldV)) {
           console.log('like');
           // TODO => - else continue process 
-          return
+          continue
         } else {
           console.log('i will send');
           // TODO => - if deferent send the new data to client side (view).
