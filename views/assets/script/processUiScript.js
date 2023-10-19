@@ -357,7 +357,7 @@ $(document).on('click', '.status', event => {
             }).then(data => {
                 $('#pagination-container').pagination({
                     dataSource: data,
-                    pageSize: 50,
+                    pageSize: 10,
                     showGoInput: true,
                     showGoButton: true,
                     showSizeChanger: true,
