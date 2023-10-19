@@ -39,7 +39,15 @@ const login = async (data) => {
     }
     await navigationPromise
     await time(3000);
-    await page.waitForSelector('input[type="password"]', { visible: true })
+    try {
+        await page.waitForSelector('input[type="password"]')
+    } catch (error) {
+        if (error) {
+            await page.close()
+            await browser.close()
+            return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+        }
+    }
     await page.type('input[type="password"]', data.password, { delay: 200 })
     await page.waitForSelector('#passwordNext')
     await page.click('#passwordNext')
