@@ -416,7 +416,6 @@ $(document).on('click', '.status', event => {
 
 const pagination = (id, cPage) => {
     let max = 10
-    let cPage = cPage
     let pageNum
     let list = ""
     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
