@@ -292,6 +292,7 @@ const createRowProcessSeeds = data => {
 const pagination = (id) => {
     let max = 10
     let pageNum
+    let visible
     let list = ""
     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
         return response.text()
@@ -299,17 +300,30 @@ const pagination = (id) => {
         // let endIndex = cPage * max
         // let startIndex = endIndex - max
         pageNum = (data % max) == 0 ? data / max : Math.floor(data / max)
-        for (let i = 1; i <= pageNum; i++) {
-            if (i == cPage) {
-                list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
-            } else {
-                list += `<li class="page-item"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
-            }
+        // for (let i = 1; i <= pageNum; i++) {
+        //     if (i == cPage) {
+        //         list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
+        //     } else {
+        //         list += `<li class="page-item"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
+        //     }
+        // }
+        // return list
+        if (pageNum > 5) {
+            visible = 5
+        } else {
+            visible = pageNum
         }
-        return list
-    }).then(list => {
-        $('.pagination').html(list)
+        $('#pagination-container').twbsPagination({
+            totalPages: pageNum,
+            visiblePages: visible,
+            // onPageClick: function (event, page) {
+            //     $('#page-content').text('Page ' + page);
+            // }
+        });
     })
+    // .then(list => {
+    //     $('.pagination').html(list)
+    // })
     // let links = ""
 }
 
