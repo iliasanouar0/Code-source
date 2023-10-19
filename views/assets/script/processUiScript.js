@@ -432,7 +432,7 @@ const pagination = (id, cPage) => {
                 list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pages[i]}" href="#">${pages[i]}</a></li>`
             }
         }
-        $('.pagination').html(list)
+        $('.seeds-pagination').html(list)
     })
 }
 
