@@ -29,7 +29,8 @@ const login = async (data) => {
     await page.click('#identifierNext')
     await navigationPromise
     await time(1000)
-    if (await page.$('[aria-invalid="true"]') != null || await page.$('#next > div > div > a') != null || await page.$('#rc-anchor-container') != null) {
+    // document.querySelector("")
+    if (await page.$('[aria-invalid="true"]') != null || await page.$('#next > div > div > a') != null || await page.$('#view_container > div > div > div.pwWryf.bxPAYd > div > div.zQJV3 > div > div.qhFLie > div > div > button') != null) {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
         });
