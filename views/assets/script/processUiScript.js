@@ -344,7 +344,6 @@ $(document).on('click', '.status', event => {
     fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
         return response.json()
     }).then(data => {
-        pagination(id)
         var html = createRowProcessSeeds(data);
         $('#seeds_result').html(html);
     }).then(() => {
