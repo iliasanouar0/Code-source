@@ -12,7 +12,6 @@ $(document).ready(function () {
 });
 
 const Process_data = document.querySelector('#Process_data')
-let cPage = 1
 const createRowProcess = data => {
     let rows = ""
     data.forEach(element => {
@@ -289,42 +288,39 @@ const createRowProcessSeeds = data => {
     return rows
 }
 
+function getPages(totalPages, currentPage) {
+    if (totalPages <= 5) return Array.from(Array(totalPages).keys()).map(r => { return r + 1 });
+    let diff = 0;
+    const result = [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2];
+    if (result[0] < 3) {
+        diff = 1 - result[0];
+    }
+    if (result.slice(-1) > totalPages - 2) {
+        diff = totalPages - result.slice(-1);
+    }
+    return result.map(r => { return r + diff });
+}
+
 const pagination = (id) => {
-    let max = 10
-    let pageNum
     let visible
     let list = ""
     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
         return response.text()
     }).then(data => {
-        // let endIndex = cPage * max
-        // let startIndex = endIndex - max
-        pageNum = (data % max) == 0 ? data / max : Math.floor(data / max)
-        // for (let i = 1; i <= pageNum; i++) {
-        //     if (i == cPage) {
-        //         list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
-        //     } else {
-        //         list += `<li class="page-item"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
-        //     }
-        // }
-        // return list
-        if (pageNum > 5) {
-            visible = 5
-        } else {
-            visible = pageNum
+        pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
+        visible = pageNum > 5 ? 5 : pageNum
+        for (let i = 1; i <= pageNum; i++) {
+            if (i == cPage) {
+                list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
+            } else {
+                list += `<li class="page-item"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
+            }
         }
-        $('#pagination-container').twbsPagination({
-            totalPages: pageNum,
-            visiblePages: visible,
-            // onPageClick: function (event, page) {
-            //     $('#page-content').text('Page ' + page);
-            // }
-        });
+        return list
     })
     // .then(list => {
     //     $('.pagination').html(list)
     // })
-    // let links = ""
 }
 
 $(document).on('click', '.status', event => {
@@ -397,16 +393,30 @@ $(document).on('click', '.status', event => {
     websocket.onclose = () => {
         clearInterval(pingInterval);
     }
+    // ~~ pagination
+    let max = 10
+    let cPage = 1
+    let pageNum
+    fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
+        return response.text()
+    }).then(data => {
+        pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
+    }).then(() => {
+        let pages = getPages(pageNum, cPage)
+        console.log(pages);
+    })
+    $('.seeds-page').on('click', event => {
+        let page = $(event.target).data('page')
+        console.log(page);
+        // ! let endIndex = cPage * max
+        // ! let startIndex = endIndex - max
+    })
     $('.btn-close').on('click', () => {
         $('#modal-process-view').modal('hide')
         websocket.close()
     })
 })
 
-$(document).on('click', '.seeds-page', event => {
-    let page = $(event.target).data('page')
-    console.log(page);
-})
 
 function randomRange(myMin, myMax) {
     return Math.floor(
