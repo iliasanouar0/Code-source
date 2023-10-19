@@ -195,6 +195,9 @@ wss.on('connection', wss => {
 })
 // ~ open connection to websocket view :
 wsv.on('connection', async wsv => {
+  const equalsCheck = (a, b) => {
+    return JSON.stringify(a) === JSON.stringify(b);
+  }
   // * Check if open : log the state.
   console.log("connected");
   // ? Need variables :
@@ -228,7 +231,7 @@ wsv.on('connection', async wsv => {
       } else {
         // TODO => - if not the first get new data and compare with old.
         newV = await processStateManager.getState(data)
-        console.log(newV == oldV);
+        console.log(equalsCheck(newV, oldV));
         // if (newV == oldV) {
         //   console.log('like');
         //   // TODO => - else continue process 
