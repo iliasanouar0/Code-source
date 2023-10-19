@@ -290,10 +290,16 @@ const createRowProcessSeeds = data => {
 }
 
 const pagination = (id) => {
+    let max = 10
+    // cPage = 1
+    let pageNum
     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
         return response.text()
     }).then(data => {
-        console.log(data);
+        // let endIndex = cPage * max
+        // let startIndex = endIndex - max
+        pageNum = (data % max) == 0 ? data / max : Math.floor(data / max)
+        console.log(pageNum);
     })
     // let links = ""
 }
