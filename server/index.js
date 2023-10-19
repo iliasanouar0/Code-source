@@ -217,7 +217,7 @@ wsv.on('connection', async wsv => {
     ~~ while the websocket is open :
     */
     while (wsv.readyState != 3 && wsv.readyState != 2) {
-      await time(5000)
+      await time(2000)
       // TODO => - count the request number. 
       c++
       // TODO => - if first request send data to client side (view) and set as the oldV to compare. 
