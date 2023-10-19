@@ -21,7 +21,7 @@ const login = async (data) => {
     await page.goto('https://gmail.com/')
     await navigationPromise
     await page.screenshot({
-        path: `${path}/open${data.id_seeds}.jpg`
+        path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
     });
     await page.waitForSelector('input[type="email"]')
     await page.click('input[type="email"]')
@@ -33,10 +33,10 @@ const login = async (data) => {
     await time(1000)
     if (await page.$('[aria-invalid="true"]') != null) {
         await page.screenshot({
-            path: `${path}/invalidEmail${data.id_seeds}.jpg`
+            path: `${path}/${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
         });
         await browser.close()
-        return feedBack = `open${data.id_seeds}.jpg,invalidEmail${data.id_seeds}.jpg`
+        return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
     }
     await navigationPromise
     await time(3000);
@@ -47,18 +47,18 @@ const login = async (data) => {
     await time(1000)
     if (await page.$('[aria-invalid="true"]') != null) {
         await page.screenshot({
-            path: `${path}/invalidPass${data.id_seeds}.jpg`
+            path: `${path}/${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
         });
         await browser.close()
-        return feedBack = `open${data.id_seeds}.jpg,invalidPass${data.id_seeds}.jpg`
+        return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
     }
     await navigationPromise
     await time(3000)
     await page.screenshot({
-        path: `${path}/login${data.id_seeds}.jpg`
+        path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     });
     await browser.close()
-    return feedBack = `open${data.id_seeds}.jpg,login${data.id_seeds}.jpg`
+    return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
 }
 
 // data = {

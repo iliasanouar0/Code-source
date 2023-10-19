@@ -129,7 +129,7 @@ wss.on('connection', wss => {
           // // }
           let r = await processManager.processing(toProcess[i])
           console.log(r);
-          if (r) {
+          if (r.indexOf('invalid') == -1) {
             success++
             await seedManager.updateState([toProcess[0].id_seeds], "finished")
             toProcess.shift()
