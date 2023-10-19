@@ -228,15 +228,16 @@ wsv.on('connection', async wsv => {
       } else {
         // TODO => - if not the first get new data and compare with old.
         newV = await processStateManager.getState(data)
-        if (newV == oldV) {
-          console.log('like');
-          // TODO => - else continue process 
-          return
-        } else {
-          console.log('i will send');
-          // TODO => - if deferent send the new data to client side (view).
-          wsv.send(JSON.stringify(newV))
-        }
+        console.log(newV == oldV);
+        // if (newV == oldV) {
+        //   console.log('like');
+        //   // TODO => - else continue process 
+        //   return
+        // } else {
+        //   console.log('i will send');
+        //   // TODO => - if deferent send the new data to client side (view).
+        //   wsv.send(JSON.stringify(newV))
+        // }
       }
     }
   })
