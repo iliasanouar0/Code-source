@@ -314,7 +314,7 @@ $(document).on('click', '.status', event => {
         $('.status_bg').html(children[5].innerHTML)
     }
     $('#p_s').html(id)
-    fetch(`http://209.170.73.224:3000/process/seeds/${id},offset=0`, { method: "GET" }).then(response => {
+    fetch(`http://209.170.73.224:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
         return response.json()
     }).then(data => {
         // $('#pagination-container').pagination({
