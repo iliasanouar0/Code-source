@@ -299,7 +299,6 @@ const pagination = (id) => {
         // let endIndex = cPage * max
         // let startIndex = endIndex - max
         pageNum = (data % max) == 0 ? data / max : Math.floor(data / max)
-        console.log(pageNum);
         for (let i = 1; i <= pageNum; i++) {
             if (i == cPage) {
                 list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}">${i}</a></li>`
@@ -308,6 +307,8 @@ const pagination = (id) => {
             }
         }
         return list
+    }).then(list => {
+        $('.pagination').html(list)
     })
     // let links = ""
 }
@@ -334,13 +335,11 @@ $(document).on('click', '.status', event => {
         return response.json()
     }).then(data => {
         pagination(id)
-        $('.pagination').html(pagination(id))
         var html = createRowProcessSeeds(data);
         $('#seeds_result').html(html);
+    }).then(() => {
+        $('#modal-process-view').modal('show')
     })
-        .then(() => {
-            $('#modal-process-view').modal('show')
-        })
     /**
      * * Websocket connection :
      * ? opening => get data from database render the view. 
