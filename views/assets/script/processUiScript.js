@@ -301,9 +301,9 @@ const pagination = (id) => {
         pageNum = (data % max) == 0 ? data / max : Math.floor(data / max)
         for (let i = 1; i <= pageNum; i++) {
             if (i == cPage) {
-                list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}">${i}</a></li>`
+                list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
             } else {
-                list += `<li class="page-item"><a class="page-link seeds-page" data-page="${i}">${i}</a></li>`
+                list += `<li class="page-item"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
             }
         }
         return list
