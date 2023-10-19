@@ -400,7 +400,7 @@ $(document).on('click', '.status', event => {
         let page = $(event.target).data('page')
         cPage = page
         pagination(id, cPage)
-        fetch(`http://${ip}:3000/process/seeds/${id}?offset=${page}`, { method: "GET" }).then(response => {
+        fetch(`http://${ip}:3000/process/seeds/${id}?offset=${page + 1}`, { method: "GET" }).then(response => {
             return response.json()
         }).then(data => {
             var html = createRowProcessSeeds(data);
