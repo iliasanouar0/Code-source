@@ -393,8 +393,30 @@ $(document).on('click', '.status', event => {
         clearInterval(pingInterval);
     }
     // ~~ pagination
-    let max = 10
     let cPage = 1
+    pagination(id, cPage)
+    $(document).on('click', '.seeds-page', event => {
+        let page = $(event.target).data('page')
+        cPage = page
+        pagination(id, cPage)
+        fetch(`http://${ip}:3000/process/seeds/${id}?offset=${page}`, { method: "GET" }).then(response => {
+            return response.json()
+        }).then(data => {
+            var html = createRowProcessSeeds(data);
+            $('#seeds_result').html(html);
+        })
+        // ! let endIndex = cPage * max
+        // ! let startIndex = endIndex - max
+    })
+    $('.btn-close').on('click', () => {
+        $('#modal-process-view').modal('hide')
+        websocket.close()
+    })
+})
+
+const pagination = (id, cPage) => {
+    let max = 10
+    let cPage = cPage
     let pageNum
     let list = ""
     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
@@ -412,32 +434,8 @@ $(document).on('click', '.status', event => {
             }
         }
         $('.pagination').html(list)
-
     })
-    // $('.seeds-page').on('click', event => {
-    //     // let page = $(event.target).data('page')
-    //     // console.log(page);
-    //     // ! let endIndex = cPage * max
-    //     // ! let startIndex = endIndex - max
-    // })
-    $(document).on('click', '.seeds-page', event => {
-        let page = $(event.target).data('page')
-        console.log(page);
-        fetch(`http://${ip}:3000/process/seeds/${id}?offset=${page}`, { method: "GET" }).then(response => {
-            return response.json()
-        }).then(data => {
-            var html = createRowProcessSeeds(data);
-            $('#seeds_result').html(html);
-        })
-        // ! let endIndex = cPage * max
-        // ! let startIndex = endIndex - max
-    })
-    $('.btn-close').on('click', () => {
-        $('#modal-process-view').modal('hide')
-        websocket.close()
-    })
-})
-
+}
 
 function randomRange(myMin, myMax) {
     return Math.floor(
