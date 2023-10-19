@@ -239,6 +239,7 @@ wsv.on('connection', async wsv => {
         } else {
           console.log('i will send');
           // TODO => - if deferent send the new data to client side (view).
+          oldV = newV
           wsv.send(JSON.stringify(newV))
         }
       }
