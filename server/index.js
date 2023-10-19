@@ -220,8 +220,9 @@ wsv.on('connection', async wsv => {
       await time(2000)
       // TODO => - count the request number. 
       c++
+      console.log(c);
       // TODO => - if first request send data to client side (view) and set as the oldV to compare. 
-      if (c == 1) {
+      if (c === 1) {
         oldV = result
         wsv.send(JSON.stringify(oldV))
       } else {
