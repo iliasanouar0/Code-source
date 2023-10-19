@@ -314,22 +314,24 @@ $(document).on('click', '.status', event => {
         $('.status_bg').html(children[5].innerHTML)
     }
     $('#p_s').html(id)
-    fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
+    fetch(`http://209.170.73.224:3000/process/seeds/${id},offset=0`, { method: "GET" }).then(response => {
         return response.json()
     }).then(data => {
-        $('#pagination-container').pagination({
-            dataSource: data,
-            pageSize: 10,
-            showGoInput: true,
-            showGoButton: true,
-            showSizeChanger: true,
-            showNavigator: true,
-            formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
-            callback: function (data, pagination) {
-                var html = createRowProcessSeeds(data);
-                $('#seeds_result').html(html);
-            }
-        })
+        // $('#pagination-container').pagination({
+        //     dataSource: data,
+        //     pageSize: 10,
+        //     showGoInput: true,
+        //     showGoButton: true,
+        //     showSizeChanger: true,
+        //     showNavigator: true,
+        //     formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
+        //     callback: function (data, pagination) {
+        //         var html = createRowProcessSeeds(data);
+        //         $('#seeds_result').html(html);
+        //     }
+        // })
+        var html = createRowProcessSeeds(data);
+        $('#seeds_result').html(html);
     })
         .then(() => {
             $('#modal-process-view').modal('show')
@@ -342,12 +344,12 @@ $(document).on('click', '.status', event => {
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
 
-    let pingInterval
+    // let pingInterval
     websocket.onopen = (e) => {
         websocket.send(`${id}`)
-        pingInterval = setInterval(async () => {
-            websocket.send(`${id}`)
-        }, randomRange(500, 1500));
+        // pingInterval = setInterval(async () => {
+        //     websocket.send(`${id}`)
+        // }, 1500);
     }
     websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
@@ -358,23 +360,23 @@ $(document).on('click', '.status', event => {
             $('.a_seeds').html(data[0].active)
             $('.f_seeds').html(data[0].finished)
             $('.ff_seeds').html(data[0].failed)
-            fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
-                return response.json()
-            }).then(data => {
-                $('#pagination-container').pagination({
-                    dataSource: data,
-                    pageSize: 10,
-                    showGoInput: true,
-                    showGoButton: true,
-                    showSizeChanger: true,
-                    showNavigator: true,
-                    formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
-                    callback: function (data, pagination) {
-                        var html = createRowProcessSeeds(data);
-                        $('#seeds_result').html(html);
-                    }
-                })
-            })
+            // fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
+            //     return response.json()
+            // }).then(data => {
+            //     $('#pagination-container').pagination({
+            //         dataSource: data,
+            //         pageSize: 10,
+            //         showGoInput: true,
+            //         showGoButton: true,
+            //         showSizeChanger: true,
+            //         showNavigator: true,
+            //         formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
+            //         callback: function (data, pagination) {
+            //             var html = createRowProcessSeeds(data);
+            //             $('#seeds_result').html(html);
+            //         }
+            //     })
+            // })
         }
     };
     websocket.onclose = () => {

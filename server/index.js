@@ -191,13 +191,48 @@ wss.on('connection', wss => {
     }
   })
 })
-
+// ~ open connection to websocket view :
 wsv.on('connection', wsv => {
+  // * Check if open : log the state.
   console.log("connected");
+  // ? Need variables :
+  /**
+   * ! oldV => The old value.
+   * ! newV => The new value.
+   * ! c => request count.
+   */
+  let oldV
+  let newV
+  let c = 0
+  // & On message event :
   wsv.on("message", async (event) => {
+    // * get the data from the message event :
     let data = event.toString()
+    // * get the result from database
     let result = await processStateManager.getState(data)
-    wsv.send(JSON.stringify(result))
+    /*
+    ! while loop => 
+    ~~ while the websocket is open :
+    */
+    while (wsv.readyState != 3 && wsv.readyState != 2) {
+      // TODO => - count the request number. 
+      c++
+      // TODO => - if first request send data to client side (view) and set as the oldV to compare. 
+      if (c == 1) {
+        oldV = result
+        wsv.send(JSON.stringify(oldV))
+      } else {
+        // TODO => - if not the first get new data and compare with old.
+        newV = await processStateManager.getState(data)
+        if (newV != oldV) {
+          // TODO => - if deferent send the new data to client side (view).
+          wsv.send(JSON.stringify(newV))
+        } else {
+          // TODO => - else continue process 
+          continue
+        }
+      }
+    }
   })
   wsv.on('close', () => {
     console.log('closed');
