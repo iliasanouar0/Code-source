@@ -275,7 +275,7 @@ const createRowProcessSeeds = data => {
     let rows = ""
     data.forEach(element => {
         if (element.status == 'running') {
-            status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="20px">'
+            status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="30px">'
             // status = '<i class="fa fa-spinner fa-spin-pulse"></i>'
         } else {
             status = element.status
@@ -359,23 +359,23 @@ $(document).on('click', '.status', event => {
             $('.a_seeds').html(data[0].active)
             $('.f_seeds').html(data[0].finished)
             $('.ff_seeds').html(data[0].failed)
-            // fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
-            //     return response.json()
-            // }).then(data => {
-            //     $('#pagination-container').pagination({
-            //         dataSource: data,
-            //         pageSize: 10,
-            //         showGoInput: true,
-            //         showGoButton: true,
-            //         showSizeChanger: true,
-            //         showNavigator: true,
-            //         formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
-            //         callback: function (data, pagination) {
-            //             var html = createRowProcessSeeds(data);
-            //             $('#seeds_result').html(html);
-            //         }
-            //     })
-            // })
+            fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
+                return response.json()
+            }).then(data => {
+                $('#pagination-container').pagination({
+                    dataSource: data,
+                    pageSize: 10,
+                    showGoInput: true,
+                    showGoButton: true,
+                    showSizeChanger: true,
+                    showNavigator: true,
+                    formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
+                    callback: function (data, pagination) {
+                        var html = createRowProcessSeeds(data);
+                        $('#seeds_result').html(html);
+                    }
+                })
+            })
         }
     };
     websocket.onclose = () => {
