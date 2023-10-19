@@ -232,12 +232,12 @@ wsv.on('connection', async wsv => {
         console.log(newV);
         console.log('old');
         console.log(oldV);
-        if (newV != oldV) {
-          // TODO => - if deferent send the new data to client side (view).
-          wsv.send(JSON.stringify(newV))
-        } else {
+        if (newV === oldV) {
           // TODO => - else continue process 
           continue
+        } else {
+          // TODO => - if deferent send the new data to client side (view).
+          wsv.send(JSON.stringify(newV))
         }
       }
     }
