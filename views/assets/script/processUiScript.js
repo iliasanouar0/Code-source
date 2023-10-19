@@ -400,14 +400,15 @@ $(document).on('click', '.status', event => {
         let page = $(event.target).data('page')
         cPage = page
         pagination(id, cPage)
-        fetch(`http://${ip}:3000/process/seeds/${id}?offset=${page + 1}`, { method: "GET" }).then(response => {
+        let endIndex = cPage * max
+        let startIndex = endIndex - max
+        fetch(`http://${ip}:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
             return response.json()
         }).then(data => {
             var html = createRowProcessSeeds(data);
             $('#seeds_result').html(html);
         })
-        // ! let endIndex = cPage * max
-        // ! let startIndex = endIndex - max
+
     })
     $('.btn-close').on('click', () => {
         $('#modal-process-view').modal('hide')
