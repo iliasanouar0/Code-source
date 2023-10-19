@@ -423,6 +423,12 @@ $(document).on('click', '.status', event => {
     $(document).on('click', '.seeds-page', event => {
         let page = $(event.target).data('page')
         console.log(page);
+        fetch(`http://${ip}:3000/process/seeds/${id}?offset=${page}`, { method: "GET" }).then(response => {
+            return response.json()
+        }).then(data => {
+            var html = createRowProcessSeeds(data);
+            $('#seeds_result').html(html);
+        })
         // ! let endIndex = cPage * max
         // ! let startIndex = endIndex - max
     })
