@@ -289,12 +289,14 @@ const createRowProcessSeeds = data => {
     return rows
 }
 
-// const pagination = (id) => {
-//     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
-//         return response.json()
-//     })
-//     let links = ""
-// }
+const pagination = (id) => {
+    fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
+        return response.text()
+    }).then(data => {
+        console.log(data);
+    })
+    // let links = ""
+}
 
 $(document).on('click', '.status', event => {
     const id = $(event.target)[0].attributes[2].value
@@ -317,6 +319,7 @@ $(document).on('click', '.status', event => {
     fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
         return response.json()
     }).then(data => {
+        pagination(id)
         // $('.pagination').html(pagination(id))
         var html = createRowProcessSeeds(data);
         $('#seeds_result').html(html);
