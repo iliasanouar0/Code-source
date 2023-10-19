@@ -370,6 +370,7 @@ $(document).on('click', '.status', event => {
             $('.a_seeds').html(data[0].active)
             $('.f_seeds').html(data[0].finished)
             $('.ff_seeds').html(data[0].failed)
+            console.log(cPage);
             // fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
             //     return response.json()
             // }).then(data => {
@@ -390,7 +391,7 @@ $(document).on('click', '.status', event => {
         }
     };
     websocket.onclose = () => {
-        clearInterval(pingInterval);
+        console.log('closed');
     }
     // ~~ pagination
     let cPage = 1
