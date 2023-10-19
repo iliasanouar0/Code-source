@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require('fs')
 const WebSocket = require('ws');
+const setTimeout = require('timers/promises');
+let time = setTimeout.setTimeout
 
 Date.prototype.toDateInputValue = function () {
   var local = new Date(this);
@@ -192,7 +194,7 @@ wss.on('connection', wss => {
   })
 })
 // ~ open connection to websocket view :
-wsv.on('connection', wsv => {
+wsv.on('connection', async wsv => {
   // * Check if open : log the state.
   console.log("connected");
   // ? Need variables :
@@ -215,6 +217,7 @@ wsv.on('connection', wsv => {
     ~~ while the websocket is open :
     */
     while (wsv.readyState != 3 && wsv.readyState != 2) {
+      await time(5000)
       // TODO => - count the request number. 
       c++
       // TODO => - if first request send data to client side (view) and set as the oldV to compare. 
