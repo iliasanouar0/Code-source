@@ -35,7 +35,7 @@ const login = async (data) => {
         return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
     }
     await navigationPromise
-    await time(4000);
+    await time(3000);
     await page.waitForSelector('input[type="password"]', { visible: true })
     await page.type('input[type="password"]', data.password, { delay: 200 })
     await page.waitForSelector('#passwordNext')
