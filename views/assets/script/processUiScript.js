@@ -419,20 +419,22 @@ $(document).on('click', '.details', event => {
         let feedBack = data.feedback.split(', ')
         console.log(feedBack);
         let variables
+        let card = ""
         feedBack.forEach(element => {
             variables = element.split('-')
             console.log(variables);
+            card += `<div class="col">
+            <div class="card">
+            <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
+            <div class="card-body">
+                <h5 class="card-title">${variables[2]}}</h5>
+                <p class="card-text">${variables[0]}@gmail.com</p>
+            </div>
+            </div>
+        </div>`
         });
-        let card = `<div class="card">
-        <img src="../../assets/images/process_result/" class="card-img-top" alt="feedback">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a
-                natural
-                lead-in to
-                additional content. This content is a little bit longer.</p>
-        </div>
-    </div>`
+        $('.feedback').html(card)
+        $('#modal-result-view').modal('show')
     })
 })
 
