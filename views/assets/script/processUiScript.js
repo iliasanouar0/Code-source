@@ -300,32 +300,11 @@ function getPages(totalPages, currentPage) {
     }
     return result.map(r => { return r + diff });
 }
-
-// const pagination = (id) => {
-//     let visible
-//     let list = ""
-//     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
-//         return response.text()
-//     }).then(data => {
-//         pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
-//         visible = pageNum > 5 ? 5 : pageNum
-//         for (let i = 1; i <= pageNum; i++) {
-//             if (i == cPage) {
-//                 list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
-//             } else {
-//                 list += `<li class="page-item"><a class="page-link seeds-page" data-page="${i}" href="#">${i}</a></li>`
-//             }
-//         }
-//         return list
-//     })
-//     // .then(list => {
-//     //     $('.pagination').html(list)
-//     // })
-// }
-
-$(document).on('click', '.status', async event => {
-    let id = await $(event.target)[0].attributes[2].value
-    let children = await $(event.target).parent().parent()[0].children
+let cPage
+let max = 10
+$(document).on('click', '.status', event => {
+    let id = $(event.target)[0].attributes[2].value
+    let children = $(event.target).parent().parent()[0].children
     $('.count').html(children[1].innerHTML)
     if (children[5].innerHTML == "RUNNING") {
         $('.status_bg').removeClass("bg-success bg-danger bg-info")
@@ -374,30 +353,22 @@ $(document).on('click', '.status', async event => {
             $('.a_seeds').html(data[0].active)
             $('.f_seeds').html(data[0].finished)
             $('.ff_seeds').html(data[0].failed)
-            // fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
-            //     return response.json()
-            // }).then(data => {
-            //     $('#pagination-container').pagination({
-            //         dataSource: data,
-            //         pageSize: 10,
-            //         showGoInput: true,
-            //         showGoButton: true,
-            //         showSizeChanger: true,
-            //         showNavigator: true,
-            //         formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
-            //         callback: function (data, pagination) {
-            //             var html = createRowProcessSeeds(data);
-            //             $('#seeds_result').html(html);
-            //         }
-            //     })
-            // })
+            let endIndex = cPage * max
+            let startIndex = endIndex - max
+            fetch(`http://209.170.73.224:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
+                return response.json()
+            }).then(data => {
+                pagination(id, cPage)
+                var html = createRowProcessSeeds(data);
+                $('#seeds_result').html(html);
+            })
         }
     };
     websocket.onclose = () => {
         console.log('closed');
     }
     // ~~ pagination
-    let cPage = 1
+    cPage = 1
     pagination(id, cPage)
     $('.page-item').on('click', async () => {
         console.log('page');
@@ -411,7 +382,6 @@ $(document).on('click', '.status', async event => {
 
 $(document).on('click', '.seeds-page', event => {
     let max = 10
-    let cPage
     let page = $(event.target).data('page')
     let id = $(event.target).data('id')
     cPage = page
