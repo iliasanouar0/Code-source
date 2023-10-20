@@ -416,7 +416,7 @@ $(document).on('click', '.details', event => {
     }).then(data => {
         console.log(data);
         console.log(data.feedback);
-        let feedBack = data.feedback.split(',')
+        let feedBack = data.feedback.split(', ')
         console.log(feedBack);
     })
 })
