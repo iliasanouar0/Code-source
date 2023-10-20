@@ -123,49 +123,69 @@ wss.on('connection', wss => {
         console.log(state);
         for (let i = 0; i < toProcess.length; i++) {
           let r = await processManager.processing(toProcess[0])
-          if (r.indexOf('invalid') == -1) {
-            success++
-            await seedManager.updateState([toProcess[0].id_seeds], "finished")
-            let end_in = new Date()
-            let result = {
-              id_seeds: toProcess[0].id_seeds,
-              feedback: r,
-              end_in: end_in
-            }
-            console.log(result);
-            await resultManager.updateResult(result)
-            toProcess.shift()
-            state = await processManager.getProcessState(data.id_process)
-            if (toProcess.length < active && count < length && state != "STOPPED") {
-              toProcess.push(seeds[count])
-              await seedManager.updateState([seeds[count].id_seeds], "running")
-              count++
-              let w = waiting - count + 3
-              let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-              processStateManager.updateState(status)
-            }
-          } else {
-            failed++
-            await seedManager.updateState(toProcess[0].id_seeds, "failed")
-            let end_in = new Date()
-            let result = {
-              id_seeds: toProcess[0].id_seeds,
-              feedback: r,
-              end_in: end_in
-            }
-            console.log(result);
-            await resultManager.updateResult(result)
-            toProcess.shift()
-            state = await processManager.getProcessState(data.id_process)
-            if (toProcess.length < active && count < length && state != "STOPPED") {
-              toProcess.push(seeds[count])
-              await seedManager.updateState([seeds[count].id_seeds], "running")
-              count++
-              let w = waiting - count + 3
-              let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-              processStateManager.updateState(status)
-            }
+          success++
+          await seedManager.updateState([toProcess[0].id_seeds], "finished")
+          let end_in = new Date()
+          let result = {
+            id_seeds: toProcess[0].id_seeds,
+            feedback: r,
+            end_in: end_in
           }
+          console.log(result);
+          await resultManager.updateResult(result)
+          toProcess.shift()
+          state = await processManager.getProcessState(data.id_process)
+          if (toProcess.length < active && count < length && state != "STOPPED") {
+            toProcess.push(seeds[count])
+            await seedManager.updateState([seeds[count].id_seeds], "running")
+            count++
+            let w = waiting - count + 3
+            let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+            processStateManager.updateState(status)
+          }
+          // if (r.indexOf('invalid') == -1) {
+          //   success++
+          //   await seedManager.updateState([toProcess[0].id_seeds], "finished")
+          //   let end_in = new Date()
+          //   let result = {
+          //     id_seeds: toProcess[0].id_seeds,
+          //     feedback: r,
+          //     end_in: end_in
+          //   }
+          //   console.log(result);
+          //   await resultManager.updateResult(result)
+          //   toProcess.shift()
+          //   state = await processManager.getProcessState(data.id_process)
+          //   if (toProcess.length < active && count < length && state != "STOPPED") {
+          //     toProcess.push(seeds[count])
+          //     await seedManager.updateState([seeds[count].id_seeds], "running")
+          //     count++
+          //     let w = waiting - count + 3
+          //     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          //     processStateManager.updateState(status)
+          //   }
+          // } else {
+          //   failed++
+          //   await seedManager.updateState(toProcess[0].id_seeds, "failed")
+          //   let end_in = new Date()
+          //   let result = {
+          //     id_seeds: toProcess[0].id_seeds,
+          //     feedback: r,
+          //     end_in: end_in
+          //   }
+          //   console.log(result);
+          //   await resultManager.updateResult(result)
+          //   toProcess.shift()
+          //   state = await processManager.getProcessState(data.id_process)
+          //   if (toProcess.length < active && count < length && state != "STOPPED") {
+          //     toProcess.push(seeds[count])
+          //     await seedManager.updateState([seeds[count].id_seeds], "running")
+          //     count++
+          //     let w = waiting - count + 3
+          //     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          //     processStateManager.updateState(status)
+          //   }
+          // }
         }
         let w = waiting - count + 3
         if (w <= 0) {

@@ -24,7 +24,7 @@ const saveResult = (data) => {
 }
 
 const updateResult = async (data) => {
-    sql = 'UPDATE results set feedback=($1) ,end_in=($2) WHERE id_seeds=($3)'
+    sql = 'UPDATE results SET feedback=($1) ,end_in=($2) WHERE id_seeds=($3)'
     let value = [data.feedback, data.end_in, data.id_seeds]
     // pool.query(sql, value, (error, result) => {
     //     if (error) {
