@@ -428,6 +428,11 @@ const pagination = (id, cPage) => {
     }).then(() => {
         let pages = getPages(pageNum, cPage)
         console.log(pages);
+        if (cPage == 1) {
+            list += `<li class="page-item disabled"><a class="page-link">First</a></li>`
+        } else {
+            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${1}" href="#">First</a></li>`
+        }
         if (cPage == 1 || cPage == 2 || cPage == 3) {
             list += `<li class="page-item disabled"><a class="page-link">Previous</a></li>`
         } else {
@@ -440,7 +445,12 @@ const pagination = (id, cPage) => {
                 list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pages[i]}" href="#">${pages[i]}</a></li>`
             }
         }
-        list += `<li class="page-item"><a class="page-link seeds-page" data-page="${cPage + 1}" href="#">next</a></li>`
+        if (cPage == pageNum) {
+            list += `<li class="page-item disabled"><a class="page-link">Last</a></li>`
+        } else {
+            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${cPage + 1}" href="#">next</a></li>`
+            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pageNum}" href="#">Last</a></li>`
+        }
         $('.seeds-pagination').html(list)
     })
 }
