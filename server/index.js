@@ -135,7 +135,6 @@ wss.on('connection', wss => {
             end_in: end_in
           }
           console.log(result);
-          await resultManager.saveResult(result)
           await seedManager.updateState([toProcess[0].id_seeds], "finished")
           toProcess.shift()
           state = await processManager.getProcessState(data.id_process)
@@ -147,6 +146,7 @@ wss.on('connection', wss => {
             let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
             processStateManager.updateState(status)
           }
+          await resultManager.saveResult(result)
           // if (r.indexOf('invalid') == -1) {
           //   success++
           //   await seedManager.updateState([toProcess[0].id_seeds], "finished")
