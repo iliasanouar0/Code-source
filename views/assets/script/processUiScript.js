@@ -175,6 +175,7 @@ $(document).on('click', '.start', event => {
                 return response.json();
             }).then((data) => {
                 Process_data.innerHTML = createRowProcess(data)
+
             })
         }
     }
@@ -209,14 +210,6 @@ $(document).on('click', '.pause', event => {
         id_process: `${id}`,
         status: `${status}`,
     }
-    // let pingInterval
-    // const wsUri = `ws://${ip}:7072/wss`;
-    // const websocket = new WebSocket(wsUri);
-    // function sendMessage(message, ws) {
-    //     ws.send(message);
-    // }
-    // socketUpdate(websocket, sendMessage, obj, pingInterval);
-
     const wssUri = `ws://${ip}:7073/wss`;
     const websocket_s = new WebSocket(wssUri);
 
@@ -225,10 +218,18 @@ $(document).on('click', '.pause', event => {
     }
 
     websocket_s.onmessage = (event) => {
-        console.log(event);
-        console.log(event.data);
-        let data = JSON.parse(event.data)
+        let data = event.data
         console.log(data);
+        if (data == 'reload') {
+            const Process_data = document.querySelector('#Process_data');
+            fetch(`http://${ip}:3000/process/admin`, {
+                method: "GET",
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                Process_data.innerHTML = createRowProcess(data)
+            })
+        }
     }
 })
 
