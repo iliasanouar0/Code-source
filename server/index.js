@@ -127,7 +127,8 @@ wss.on('connection', wss => {
             success++
             await seedManager.updateState([toProcess[0].id_seeds], "finished")
             toProcess.shift()
-            if (toProcess.length < active && count < length) {
+            state = await processManager.getProcessState(data.id_process)
+            if (toProcess.length < active && count < length && state != "STOPPED") {
               toProcess.push(seeds[count])
               await seedManager.updateState([seeds[count].id_seeds], "running")
               count++
