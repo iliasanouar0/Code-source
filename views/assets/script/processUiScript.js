@@ -427,8 +427,10 @@ $(document).on('click', '.details', event => {
         let variables
         let card = ""
         if (feedBack[0] == '0') {
-            $('.feedback').html("No details yet !")
-            $('#modal-result-view').modal('show')
+            Swal.fire({
+                title: 'NO feedback yet !!',
+                icon: 'info'
+            })
             return
         }
         feedBack.forEach(element => {
