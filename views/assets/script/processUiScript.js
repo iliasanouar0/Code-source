@@ -427,7 +427,7 @@ $(document).on('click', '.details', event => {
             <div class="card">
             <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
             <div class="card-body">
-                <h5 class="card-title">${variables[2]}}</h5>
+                <h5 class="card-title">${variables[2]}</h5>
                 <p class="card-text">${variables[0]}@gmail.com</p>
             </div>
             </div>
