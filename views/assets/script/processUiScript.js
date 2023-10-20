@@ -421,7 +421,7 @@ $(document).on('click', '.status', async event => {
 })
 
 const pagination = (id, cPage) => {
-    let pages
+    let pages = null
     let max = 10
     let pageNum
     let list = ""
@@ -457,7 +457,6 @@ const pagination = (id, cPage) => {
             list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pageNum}" >Last</a></li>`
         }
         $('.seeds-pagination').html(list)
-        pages = []
     })
 }
 
