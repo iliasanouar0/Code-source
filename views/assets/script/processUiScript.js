@@ -325,98 +325,99 @@ function getPages(totalPages, currentPage) {
 
 $(document).on('click', '.status', async event => {
     let id = await $(event.target)[0].attributes[2].value
-    let children = await $(event.target).parent().parent()[0].children
-    $('.count').html(children[1].innerHTML)
-    if (children[5].innerHTML == "RUNNING") {
-        $('.status_bg').removeClass("bg-success bg-danger bg-info")
-        $('.status_bg').addClass("badge bg-success")
-        $('.status_bg').html(children[5].innerHTML)
-    } else if (children[5].innerHTML == "STOPPED") {
-        $('.status_bg').removeClass("bg-success bg-danger bg-info")
-        $('.status_bg').addClass("badge bg-danger")
-        $('.status_bg').html(children[5].innerHTML)
-    } else {
-        $('.status_bg').removeClass("bg-success bg-danger bg-info")
-        $('.status_bg').addClass("badge bg-info")
-        $('.status_bg').html(children[5].innerHTML)
-    }
-    $('#p_s').html(id)
-    fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
-        return response.json()
-    }).then(data => {
-        var html = createRowProcessSeeds(data);
-        $('#seeds_result').html(html);
-    }).then(() => {
-        $('#modal-process-view').modal('show')
-    })
-    /**
-     * * Websocket connection :
-     * ? opening => get data from database render the view. 
-     * ! closing on modal hide
-     */
-    const wsUri = `ws://${ip}:7074/wss`;
-    const websocket = new WebSocket(wsUri);
+    console.log(id);
+    // let children = await $(event.target).parent().parent()[0].children
+    // $('.count').html(children[1].innerHTML)
+    // if (children[5].innerHTML == "RUNNING") {
+    //     $('.status_bg').removeClass("bg-success bg-danger bg-info")
+    //     $('.status_bg').addClass("badge bg-success")
+    //     $('.status_bg').html(children[5].innerHTML)
+    // } else if (children[5].innerHTML == "STOPPED") {
+    //     $('.status_bg').removeClass("bg-success bg-danger bg-info")
+    //     $('.status_bg').addClass("badge bg-danger")
+    //     $('.status_bg').html(children[5].innerHTML)
+    // } else {
+    //     $('.status_bg').removeClass("bg-success bg-danger bg-info")
+    //     $('.status_bg').addClass("badge bg-info")
+    //     $('.status_bg').html(children[5].innerHTML)
+    // }
+    // $('#p_s').html(id)
+    // fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
+    //     return response.json()
+    // }).then(data => {
+    //     var html = createRowProcessSeeds(data);
+    //     $('#seeds_result').html(html);
+    // }).then(() => {
+    //     $('#modal-process-view').modal('show')
+    // })
+    // /**
+    //  * * Websocket connection :
+    //  * ? opening => get data from database render the view. 
+    //  * ! closing on modal hide
+    //  */
+    // const wsUri = `ws://${ip}:7074/wss`;
+    // const websocket = new WebSocket(wsUri);
 
-    websocket.onopen = (e) => {
-        websocket.send(`${id}`)
-    }
+    // websocket.onopen = (e) => {
+    //     websocket.send(`${id}`)
+    // }
 
-    websocket.onmessage = function (event) {
-        let data = JSON.parse(event.data)
-        if (data.length == 0) {
-            return
-        } else {
-            $('.w_seeds').html(data[0].waiting)
-            $('.a_seeds').html(data[0].active)
-            $('.f_seeds').html(data[0].finished)
-            $('.ff_seeds').html(data[0].failed)
-            console.log(cPage);
-            // fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
-            //     return response.json()
-            // }).then(data => {
-            //     $('#pagination-container').pagination({
-            //         dataSource: data,
-            //         pageSize: 10,
-            //         showGoInput: true,
-            //         showGoButton: true,
-            //         showSizeChanger: true,
-            //         showNavigator: true,
-            //         formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
-            //         callback: function (data, pagination) {
-            //             var html = createRowProcessSeeds(data);
-            //             $('#seeds_result').html(html);
-            //         }
-            //     })
-            // })
-        }
-    };
-    websocket.onclose = () => {
-        console.log('closed');
-    }
-    // ~~ pagination
-    let max = 10
-    let cPage = 1
-    pagination(id, cPage)
-    $(document).on('click', '.seeds-page', event => {
-        let page = $(event.target).data('page')
-        cPage = page
-        console.log(id);
-        pagination(id, cPage)
-        let endIndex = cPage * max
-        let startIndex = endIndex - max
-        fetch(`http://${ip}:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
-            return response.json()
-        }).then(data => {
-            var html = createRowProcessSeeds(data);
-            $('#seeds_result').html(html);
-        })
+    // websocket.onmessage = function (event) {
+    //     let data = JSON.parse(event.data)
+    //     if (data.length == 0) {
+    //         return
+    //     } else {
+    //         $('.w_seeds').html(data[0].waiting)
+    //         $('.a_seeds').html(data[0].active)
+    //         $('.f_seeds').html(data[0].finished)
+    //         $('.ff_seeds').html(data[0].failed)
+    //         console.log(cPage);
+    //         // fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
+    //         //     return response.json()
+    //         // }).then(data => {
+    //         //     $('#pagination-container').pagination({
+    //         //         dataSource: data,
+    //         //         pageSize: 10,
+    //         //         showGoInput: true,
+    //         //         showGoButton: true,
+    //         //         showSizeChanger: true,
+    //         //         showNavigator: true,
+    //         //         formatNavigator: '<%= rangeStart %>-<%= rangeEnd %> of <%= totalNumber %> items',
+    //         //         callback: function (data, pagination) {
+    //         //             var html = createRowProcessSeeds(data);
+    //         //             $('#seeds_result').html(html);
+    //         //         }
+    //         //     })
+    //         // })
+    //     }
+    // };
+    // websocket.onclose = () => {
+    //     console.log('closed');
+    // }
+    // // ~~ pagination
+    // let max = 10
+    // let cPage = 1
+    // pagination(id, cPage)
+    // $(document).on('click', '.seeds-page', event => {
+    //     let page = $(event.target).data('page')
+    //     cPage = page
+    //     console.log(id);
+    //     pagination(id, cPage)
+    //     let endIndex = cPage * max
+    //     let startIndex = endIndex - max
+    //     fetch(`http://${ip}:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
+    //         return response.json()
+    //     }).then(data => {
+    //         var html = createRowProcessSeeds(data);
+    //         $('#seeds_result').html(html);
+    //     })
 
-    })
-    $('.btn-close').on('click', () => {
-        cPage = 1
-        $('#modal-process-view').modal('hide')
-        websocket.close()
-    })
+    // })
+    // $('.btn-close').on('click', () => {
+    //     cPage = 1
+    //     $('#modal-process-view').modal('hide')
+    //     websocket.close()
+    // })
 })
 
 const pagination = (id, cPage) => {
