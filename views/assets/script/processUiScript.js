@@ -403,7 +403,6 @@ $(document).on('click', '.status', async event => {
         let idSeed = id
         let page = $(event.target).data('page')
         cPage = page
-        pagination(idSeed, cPage)
         let endIndex = cPage * max
         let startIndex = endIndex - max
         fetch(`http://${ip}:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
@@ -411,6 +410,7 @@ $(document).on('click', '.status', async event => {
         }).then(data => {
             var html = createRowProcessSeeds(data);
             $('#seeds_result').html(html);
+            pagination(idSeed, cPage)
         })
     })
     $('.btn-close').on('click', () => {
@@ -420,7 +420,7 @@ $(document).on('click', '.status', async event => {
     })
 })
 
-const pagination = async (id, cPage) => {
+const pagination = (id, cPage) => {
     let pages
     let max = 10
     let pageNum = 0
