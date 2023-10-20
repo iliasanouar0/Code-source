@@ -428,7 +428,7 @@ const pagination = (id, cPage) => {
     fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
         return response.text()
     }).then(data => {
-        pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
+        pageNum = await(data % max) == 0 ? data / max : Math.ceil(data / max)
     }).then(() => {
         // let pages = pageNum > 5 ? getPages(pageNum, cPage) : [pageNum]
         console.log(pageNum);
