@@ -45,7 +45,7 @@ const getFeedback = (request, response) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
         }
-        response.status(200).send(result.rows[0])
+        response.status(200).send(result.rows)
     })
 }
 
