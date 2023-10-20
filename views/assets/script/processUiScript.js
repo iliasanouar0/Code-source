@@ -420,7 +420,7 @@ $(document).on('click', '.status', async event => {
     })
 })
 
-const pagination = (id, cPage) => {
+const pagination = async (id, cPage) => {
     let pages
     let max = 10
     let pageNum = 0
@@ -431,6 +431,7 @@ const pagination = (id, cPage) => {
         pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
     }).then(() => {
         // let pages = pageNum > 5 ? getPages(pageNum, cPage) : [pageNum]
+        console.log(pageNum);
         pages = getPages(pageNum, cPage)
         console.log(pages);
         if (cPage == 1) {
@@ -452,6 +453,7 @@ const pagination = (id, cPage) => {
         }
         if (cPage == pageNum) {
             list += `<li class="page-item disabled"><a class="page-link">Last</a></li>`
+            list += `<li class="page-item disabled"><a class="page-link">next</a></li>`
         } else {
             list += `<li class="page-item"><a class="page-link seeds-page" data-page="${cPage + 1}" >next</a></li>`
             list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pageNum}" >Last</a></li>`
