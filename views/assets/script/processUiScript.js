@@ -416,43 +416,34 @@ $(document).on('click', '.details', event => {
     let id = $(event.target).data('id')
     console.log(id);
     fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
-        console.log(response)
-        // if (response == "" || response == []) {
-        //     Swal.fire({
-        //         title: 'NO feedback yet !!',
-        //         icon: 'info'
-        //     })
-        //     return
-        // }
-        // return response.json()
+        return response.json()
+    }).then(data => {
+        let feedBack = data[0].feedback.split(', ')
+        let variables
+        let card = ""
+        if (feedBack[0] == '0' || feedBack.length == 0) {
+            Swal.fire({
+                title: 'NO feedback yet !!',
+                icon: 'info'
+            })
+            return
+        }
+        feedBack.forEach(element => {
+            variables = element.split('-')
+            console.log(variables);
+            card += `<div class="col">
+            <div class="card">
+            <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
+            <div class="card-body">
+                <h5 class="card-title">${variables[2]}</h5>
+                <p class="card-text">${variables[0]}@gmail.com</p>
+            </div>
+            </div>
+        </div>`
+        });
+        $('.feedback').html(card)
+        $('#modal-result-view').modal('show')
     })
-    // .then(data => {
-    //     let feedBack = data.feedback.split(', ')
-    //     let variables
-    //     let card = ""
-    //     if (feedBack[0] == '0') {
-    //         Swal.fire({
-    //             title: 'NO feedback yet !!',
-    //             icon: 'info'
-    //         })
-    //         return
-    //     }
-    //     feedBack.forEach(element => {
-    //         variables = element.split('-')
-    //         console.log(variables);
-    //         card += `<div class="col">
-    //         <div class="card">
-    //         <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
-    //         <div class="card-body">
-    //             <h5 class="card-title">${variables[2]}</h5>
-    //             <p class="card-text">${variables[0]}@gmail.com</p>
-    //         </div>
-    //         </div>
-    //     </div>`
-    //     });
-    //     $('.feedback').html(card)
-    //     $('#modal-result-view').modal('show')
-    // })
 })
 
 function randomRange(myMin, myMax) {
