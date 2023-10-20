@@ -419,7 +419,7 @@ $(document).on('click', '.details', event => {
         return response.json()
     }).then(data => {
         console.log(data);
-        if (data.length == 0 || data[0] == '0') {
+        if (data.length == 0 || data[0].feedBack == '0') {
             Swal.fire({
                 title: 'NO feedback yet !!',
                 icon: 'info'
