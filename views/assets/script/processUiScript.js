@@ -416,7 +416,7 @@ $(document).on('click', '.details', event => {
     let id = $(event.target).data('id')
     console.log(id);
     fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
-        if (response == "" && response == []) {
+        if (response == "" || response == []) {
             $('.feedback').html("No details yet !")
             $('#modal-result-view').modal('show')
             return
@@ -426,6 +426,11 @@ $(document).on('click', '.details', event => {
         let feedBack = data.feedback.split(', ')
         let variables
         let card = ""
+        if (feedBack[0] == '0') {
+            $('.feedback').html("No details yet !")
+            $('#modal-result-view').modal('show')
+            return
+        }
         feedBack.forEach(element => {
             variables = element.split('-')
             console.log(variables);
