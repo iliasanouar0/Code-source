@@ -135,6 +135,7 @@ wss.on('connection', wss => {
             await resultManager.updateResult(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
+            let w = waiting - count + 3
             let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
             processStateManager.updateState(status)
             if (toProcess.length < active && count < length && state != "STOPPED") {
@@ -167,6 +168,7 @@ wss.on('connection', wss => {
             await resultManager.updateResult(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
+            let w = waiting - count + 3
             let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
             processStateManager.updateState(status)
             if (toProcess.length < active && count < length && state != "STOPPED") {
