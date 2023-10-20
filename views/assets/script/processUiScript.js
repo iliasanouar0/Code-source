@@ -325,7 +325,6 @@ function getPages(totalPages, currentPage) {
 
 $(document).on('click', '.status', async event => {
     let id = await $(event.target)[0].attributes[2].value
-    console.log(id);
     let children = await $(event.target).parent().parent()[0].children
     $('.count').html(children[1].innerHTML)
     if (children[5].innerHTML == "RUNNING") {
@@ -359,6 +358,10 @@ $(document).on('click', '.status', async event => {
     const websocket = new WebSocket(wsUri);
 
     websocket.onopen = (e) => {
+        $('.w_seeds').html(0)
+        $('.a_seeds').html(0)
+        $('.f_seeds').html(0)
+        $('.ff_seeds').html(0)
         websocket.send(`${id}`)
     }
 
@@ -371,7 +374,6 @@ $(document).on('click', '.status', async event => {
             $('.a_seeds').html(data[0].active)
             $('.f_seeds').html(data[0].finished)
             $('.ff_seeds').html(data[0].failed)
-            console.log(cPage);
             // fetch(`http://209.170.73.224:3000/process/seeds/${id}`, { method: "GET" }).then(response => {
             //     return response.json()
             // }).then(data => {
@@ -397,7 +399,6 @@ $(document).on('click', '.status', async event => {
     // ~~ pagination
     let cPage = 1
     pagination(id, cPage)
-    console.log(id);
     $('.page-item').on('click', async () => {
         console.log('page');
     })
@@ -409,8 +410,6 @@ $(document).on('click', '.status', async event => {
 })
 
 $(document).on('click', '.seeds-page', event => {
-    // let idSeed = id
-    // console.log(idSeed);
     let max = 10
     let cPage
     let page = $(event.target).data('page')
@@ -437,7 +436,6 @@ const pagination = (id, cPage) => {
     }).then(data => {
         return pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
     }).then(() => {
-        // let pages = pageNum > 5 ? getPages(pageNum, cPage) : [pageNum]
         pages = getPages(pageNum, cPage)
         if (cPage == 1) {
             list += `<li class="page-item disabled"><a class="page-link">First</a></li>`
