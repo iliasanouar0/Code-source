@@ -132,6 +132,7 @@ wss.on('connection', wss => {
               feedback: r,
               end_in: end_in
             }
+            console.log(result);
             await resultManager.updateResult(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
@@ -152,6 +153,7 @@ wss.on('connection', wss => {
               feedback: r,
               end_in: end_in
             }
+            console.log(result);
             await resultManager.updateResult(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
