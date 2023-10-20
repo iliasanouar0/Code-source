@@ -179,17 +179,11 @@ wss.on('connection', wss => {
       console.log(data.data);
       processManager.stoppedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-      let seedsR = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
       let statechangeSeeds = []
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
-      let statechangeSeedsR = []
-      for (let i = 0; i < seedsR.length; i++) {
-        statechangeSeedsR.push(seedsR[i].id_seeds)
-      }
       await seedManager.updateState(statechangeSeeds, "stopped")
-      await seedManager.updateState(statechangeSeedsR, "stopped")
       wss.send('reload')
     }
   })
