@@ -400,6 +400,7 @@ $(document).on('click', '.status', event => {
     $(document).on('click', '.seeds-page', event => {
         let page = $(event.target).data('page')
         cPage = page
+        console.log(id);
         pagination(id, cPage)
         let endIndex = cPage * max
         let startIndex = endIndex - max
