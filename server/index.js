@@ -134,6 +134,7 @@ wss.on('connection', wss => {
             start_in: start_in,
             end_in: end_in
           }
+          console.log(result);
           await resultManager.saveResult(result)
           await seedManager.updateState([toProcess[0].id_seeds], "finished")
           toProcess.shift()
