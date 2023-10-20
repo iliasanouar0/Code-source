@@ -123,8 +123,8 @@ wss.on('connection', wss => {
         console.log(state);
         for (let i = 0; i < toProcess.length; i++) {
           let r = await processManager.processing(toProcess[0])
-          // if (r.indexOf('invalid') == -1) {
-          if (r) {
+          if (r.indexOf('invalid') == -1) {
+            // if (r) {
             success++
             await seedManager.updateState([toProcess[0].id_seeds], "finished")
             let end_in = new Date()
