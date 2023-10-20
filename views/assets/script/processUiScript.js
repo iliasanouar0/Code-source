@@ -418,10 +418,7 @@ $(document).on('click', '.details', event => {
     fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
         return response.json()
     }).then(data => {
-        console.log(data);
-        console.log(data.length);
         if (data.length == 0) {
-            console.log('no');
             Swal.fire({
                 title: 'NO feedback yet !!',
                 icon: 'info'
@@ -430,7 +427,6 @@ $(document).on('click', '.details', event => {
         }
         let feedBack = data[0].feedback.split(', ')
         if (feedBack[0] == '0') {
-            console.log('no');
             Swal.fire({
                 title: 'NO feedback yet !!',
                 icon: 'info'
@@ -441,7 +437,6 @@ $(document).on('click', '.details', event => {
         let card = ""
         feedBack.forEach(element => {
             variables = element.split('-')
-            console.log(variables);
             card += `<div class="col">
             <div class="card">
             <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
