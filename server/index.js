@@ -156,7 +156,7 @@ wss.on('connection', wss => {
             }
           } else {
             failed++
-            await seedManager.updateState(toProcess[0].id_seeds, "failed")
+            await seedManager.updateState([toProcess[0].id_seeds], "failed")
             let end_in = new Date()
             let result = {
               id_seeds: toProcess[0].id_seeds,
