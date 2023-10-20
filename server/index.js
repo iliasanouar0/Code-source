@@ -126,6 +126,12 @@ wss.on('connection', wss => {
           if (r.indexOf('invalid') == -1) {
             success++
             await seedManager.updateState([toProcess[0].id_seeds], "finished")
+            let result = {
+              id_seeds: toProcess[0].id_seeds,
+              feedback: r,
+              end_in: new Date()
+            }
+            resultManager.updateResult(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
             if (toProcess.length < active && count < length && state != "STOPPED") {
@@ -139,6 +145,12 @@ wss.on('connection', wss => {
           } else {
             failed++
             await seedManager.updateState(toProcess[0].id_seeds, "failed")
+            let result = {
+              id_seeds: toProcess[0].id_seeds,
+              feedback: r,
+              end_in: new Date()
+            }
+            resultManager.updateResult(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
             if (toProcess.length < active && count < length && state != "STOPPED") {
