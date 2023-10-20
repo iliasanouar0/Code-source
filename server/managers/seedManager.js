@@ -272,7 +272,7 @@ const updateState = async (data, state) => {
     const client = await pool.connect()
     client.query(sql, data, (err) => {
       if (err) {
-        return err;
+        throw err;
       }
     });
     client.release()
