@@ -439,7 +439,9 @@ $(document).on('click', '.details', event => {
             variables = element.split('-')
             card += `<div class="col">
             <div class="card">
+            <a>
             <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
+            </a>
             <div class="card-body">
                 <h5 class="card-title">${variables[2]}</h5>
                 <p class="card-text">${variables[0]}@gmail.com</p>
