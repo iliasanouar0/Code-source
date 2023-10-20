@@ -398,9 +398,9 @@ $(document).on('click', '.status', async event => {
     let max = 10
     let cPage = 1
     pagination(id, cPage)
-    console.log(id);
     $(document).on('click', '.seeds-page', event => {
         let idSeed = id
+        console.log(idSeed);
         let page = $(event.target).data('page')
         cPage = page
         let endIndex = cPage * max
