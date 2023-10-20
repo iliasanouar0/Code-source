@@ -124,7 +124,6 @@ wss.on('connection', wss => {
         for (let i = 0; i < toProcess.length; i++) {
           let r = await processManager.processing(toProcess[0])
           success++
-          await seedManager.updateState([toProcess[0].id_seeds], "finished")
           let end_in = new Date()
           let result = {
             id_seeds: toProcess[0].id_seeds,
@@ -132,13 +131,23 @@ wss.on('connection', wss => {
             end_in: end_in
           }
           console.log(result);
-          let u = await resultManager.updateResult(result)
-          console.log(u);
+          resultManager.updateResult(result)
+          await seedManager.updateState([toProcess[0].id_seeds], "finished")
           toProcess.shift()
           state = await processManager.getProcessState(data.id_process)
           if (toProcess.length < active && count < length && state != "STOPPED") {
             toProcess.push(seeds[count])
             await seedManager.updateState([seeds[count].id_seeds], "running")
+            let start_in = new Date()
+            let result = {
+              id_process: data.id_process,
+              id_list: seeds[count].id_list,
+              id_seeds: seeds[count].id_seeds,
+              feedback: 0,
+              start_in: start_in,
+              end_in: 0
+            }
+            resultManager.saveResult(result)
             count++
             let w = waiting - count + 3
             let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
