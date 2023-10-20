@@ -422,8 +422,8 @@ $(document).on('click', '.seeds-page', event => {
         return response.json()
     }).then(data => {
         var html = createRowProcessSeeds(data);
-        $('#seeds_result').html(html);
         pagination(id, cPage)
+        $('#seeds_result').html(html);
     })
 })
 
