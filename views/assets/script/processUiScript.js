@@ -426,7 +426,8 @@ const pagination = (id, cPage) => {
     }).then(data => {
         pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
     }).then(() => {
-        let pages = pageNum > 5 ? getPages(pageNum, cPage) : [pageNum]
+        // let pages = pageNum > 5 ? getPages(pageNum, cPage) : [pageNum]
+        let pages = getPages(pageNum, cPage)
         console.log(pages);
         if (cPage == 1) {
             list += `<li class="page-item disabled"><a class="page-link">First</a></li>`
