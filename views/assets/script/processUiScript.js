@@ -413,6 +413,8 @@ $(document).on('click', '.status', event => {
 
     })
     $('.btn-close').on('click', () => {
+        id = ""
+        cPage = 1
         $('#modal-process-view').modal('hide')
         websocket.close()
     })
