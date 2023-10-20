@@ -414,10 +414,7 @@ $(document).on('click', '.details', event => {
     fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
         return response.json()
     }).then(data => {
-        console.log(data);
-        console.log(data.feedback);
         let feedBack = data.feedback.split(', ')
-        console.log(feedBack);
         let variables
         let card = ""
         feedBack.forEach(element => {
