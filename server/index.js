@@ -27,9 +27,8 @@ const listManager = require("./managers/listManager");
 const seedManager = require("./managers/seedManager");
 const processManager = require("./managers/processManager");
 const installation = require("./managers/installation");
-const gmailManagement = require("./processes/gmailManagement");
 const processStateManager = require('./managers/processStateManager');
-const { log } = require("console");
+const resultManager = require("./managers/resultManager")
 
 const port = 3000;
 const app = express(); // setup express application
@@ -74,16 +73,6 @@ wsi.on('connection', function connection(ws) {
   });
 });
 
-// wsp.on('connection', ws => {
-//   ws.on('message', message => {
-//     if (message.includes('start_in')) {
-//       processManager.startedProcess(JSON.parse(message))
-//     } else {
-//       processManager.stoppedProcess(JSON.parse(message))
-//     }
-//   })
-// })
-
 wss.on('connection', wss => {
   console.log('connected!')
   let request = ""
@@ -117,7 +106,17 @@ wss.on('connection', wss => {
       for (let i = 0; i < active; i++) {
         count++
         toProcess.push(seeds[i])
+        let start_in = new Date()
         await seedManager.updateState([seeds[i].id_seeds], "running")
+        let result = {
+          id_process: data.id_process,
+          id_list: seeds[i].id_list,
+          id_seeds: seeds[i].id_seeds,
+          feedback: 0,
+          start_in: start_in,
+          end_in: 0
+        }
+        resultManager.saveResult(result)
       }
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
@@ -289,6 +288,10 @@ app.post("/process/", processManager.addProcess)
 app.get("/process/admin", processManager.getAllData)
 app.get("/process/seeds/:id", processManager.getAllProcessSeeds)
 app.get('/process/page/:id', processManager.getAllProcessSeedsCount)
+
+// result API
+app.get("/result/feedback/:id", resultManager.getFeedback)
+app.get("/result/duration/:id", resultManager.getDuration)
 
 app.listen(port, () => {
   console.log(`Server running at ${port}`);

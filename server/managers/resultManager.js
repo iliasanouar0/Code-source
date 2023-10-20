@@ -8,7 +8,7 @@ const pool = new pg.Pool(config);
 
 
 const saveResult = (data) => {
-    let sql = `INSERT INTO results (id_list, id_seeds, id_process, id_result, feedback, start_in, end_in) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id_result`
+    let sql = `INSERT INTO results (id_list, id_seeds, id_process, id_result, feedback, start_in, end_in) VALUES ($1, $2, $3, $4, $5, $6, $7)`
     var generator = new IdGenerator({
         len: 4,
         alphabet: "1234567890"
@@ -19,10 +19,46 @@ const saveResult = (data) => {
         if (error) {
             return { name: error.name, stack: error.stack, message: error.message }
         }
-        return result.rows[0].id_result
+        return true
+    })
+}
+
+const updateResult = (data) => {
+    sql = 'UPDATE results set feedback=($1) ,end_in=($2) WHERE id_seeds=($3)'
+    let value = [data.feedback, data.end_in, data.id_seeds]
+    pool.query(sql, values, (error, result) => {
+        if (error) {
+            return { name: error.name, stack: error.stack, message: error.message }
+        }
+        return true
+    })
+}
+
+const getFeedback = (request, response) => {
+    let id = (request.params.id)
+    sql = `SELECT feedback FROM results WHERE id_seeds=($1)`
+    pool.query(sql, [id], (error, result) => {
+        if (error) {
+            response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
+        }
+        response.status(200).send(result.rows)
+    })
+}
+
+const getDuration = (request, response) => {
+    let id = (request.params.id)
+    sql = `SELECT start_in, end_in FROM results where id_seeds=($1)`
+    pool.query(sql, [id], (error, result) => {
+        if (error) {
+            response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
+        }
+        response.status(200).send(result.rows)
     })
 }
 
 module.exports = {
     saveResult,
+    updateResult,
+    getFeedback,
+    getDuration
 }
