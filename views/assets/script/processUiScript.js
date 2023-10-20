@@ -421,8 +421,7 @@ $(document).on('click', '.details', event => {
         console.log(data);
         console.log(data.length);
         console.log(data[0]);
-        console.log(data[0].feedback);
-        if (data.length === 0 || data[0].feedBack === 0) {
+        if (data.length == 0 || data[0].feedBack == 0) {
             console.log('no');
             Swal.fire({
                 title: 'NO feedback yet !!',
