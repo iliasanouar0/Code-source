@@ -439,7 +439,7 @@ $(document).on('click', '.details', event => {
             variables = element.split('-')
             card += `<div class="col">
             <div class="card">
-            <a class="show">
+            <a class="size">
             <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
             </a>
             <div class="card-body">
@@ -455,7 +455,7 @@ $(document).on('click', '.details', event => {
 })
 
 
-$(document).on('click', '.show', () => {
+$(document).on('click', '.size', () => {
     console.log('ok i will');
 })
 function randomRange(myMin, myMax) {
