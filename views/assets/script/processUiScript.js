@@ -412,11 +412,11 @@ $(document).on('click', '.details', event => {
     let id = $(event.target).data('id')
     console.log(id);
     fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
-        return response.json()
+        return response.text()
     }).then(data => {
         console.log(data);
-        let feedBack = data.feedBack
-        console.log(feedBack);
+        // let feedBack = data
+        // console.log(feedBack);
     })
 })
 
