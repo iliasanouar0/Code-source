@@ -418,8 +418,8 @@ $(document).on('click', '.details', event => {
         console.log(data.feedback);
         let feedBack = data.feedback.split(', ')
         console.log(feedBack);
-        let data = feedBack.split('-')
-        console.log(data);
+        let variables = feedBack.split('-')
+        console.log(variables);
         let card = `<div class="card">
         <img src="../../assets/images/process_result/" class="card-img-top" alt="feedback">
         <div class="card-body">
