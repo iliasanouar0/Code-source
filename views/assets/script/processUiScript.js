@@ -15,9 +15,9 @@ const Process_data = document.querySelector('#Process_data')
 const createRowProcess = data => {
     let rows = ""
     data.forEach(element => {
-        if (element.status == "RUNNING") {
-            let tr =
-                `<tr><td>${element.id_process}</td>
+      if (element.status == "RUNNING") {
+        let tr =
+          `<tr><td>${element.id_process}</td>
           <td>${element.count}</td>
           <td>${element.f_name} ${element.l_name}</td>
           <td>${element.list_name}</td>
@@ -28,14 +28,14 @@ const createRowProcess = data => {
           <td class="text-center">${element.end_in}</td>
           <td>
           <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-          <button type="button" class="btn btn-warning pause"  data-id="${element.id_process}"><i class="fas fa-pause"></i></i></button>
-          <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-stop"></i></i></button>
+          <button type="button" class="btn btn-warning pause"  data-id="${element.id_process}"><i class="fas fa-pause"></i></button>
+          <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
           <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
           </td></tr>`
-            rows += tr
-        } else if (element.status == "STOPPED") {
-            let tr =
-                `<tr><td>${element.id_process}</td>
+        rows += tr
+      } else if (element.status == "STOPPED") {
+        let tr =
+          `<tr><td>${element.id_process}</td>
       <td>${element.count}</td>
       <td>${element.f_name} ${element.l_name}</td>
       <td>${element.list_name}</td>
@@ -47,13 +47,13 @@ const createRowProcess = data => {
       <td>
       <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
       <button type="button" class="btn btn-warning resume"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-stop"></i></i></button>
+      <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
       <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
       </td></tr>`
-            rows += tr
-        } else if (element.status == "FINISHED") {
-            let tr =
-                `<tr><td>${element.id_process}</td>
+        rows += tr
+      } else if (element.status == "FINISHED") {
+        let tr =
+          `<tr><td>${element.id_process}</td>
             <td>${element.count}</td>
             <td>${element.f_name} ${element.l_name}</td>
             <td>${element.list_name}</td>
@@ -65,13 +65,13 @@ const createRowProcess = data => {
             <td>
             <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
             <button type="button" class="btn btn-success" disabled data-id="${element.id_process}"><i class="fas fa-check"></i></button>
-            <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-stop"></i></i></button>
+            <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
             <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
             </td></tr>`
-            rows += tr
-        } else {
-            let tr =
-                `<tr><td>${element.id_process}</td>
+        rows += tr
+      } else {
+        let tr =
+          `<tr><td>${element.id_process}</td>
       <td>${element.count}</td>
       <td>${element.f_name} ${element.l_name}</td>
       <td>${element.list_name}</td>
@@ -83,14 +83,14 @@ const createRowProcess = data => {
       <td>
       <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
       <button type="button" class="btn btn-success start"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-stop"></i></i></button>
+      <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
       <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
       </td></tr>`
-            rows += tr
-        }
+        rows += tr
+      }
     });
     return rows
-}
+  }
 
 const addProcess = data => {
     fetch(`http://${ip}:3000/process/`, {
