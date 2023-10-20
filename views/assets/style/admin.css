@@ -63,6 +63,10 @@
   pointer-events: none;
 }
 
+.seeds-page {
+  cursor: pointer;
+}
+
 .modal-xl {
   width: 90%;
   max-width: 1400px;

@@ -431,25 +431,25 @@ const pagination = (id, cPage) => {
         if (cPage == 1) {
             list += `<li class="page-item disabled"><a class="page-link">First</a></li>`
         } else {
-            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${1}" href="#">First</a></li>`
+            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${1}" >First</a></li>`
         }
         if (cPage == 1 || cPage == 2 || cPage == 3) {
             list += `<li class="page-item disabled"><a class="page-link">Previous</a></li>`
         } else {
-            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${cPage - 1}" href="#">Previous</a></li>`
+            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${cPage - 1}" >Previous</a></li>`
         }
         for (let i = 0; i < pages.length; i++) {
             if (pages[i] == cPage) {
-                list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${pages[i]}" href="#">${pages[i]}</a></li>`
+                list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${pages[i]}" >${pages[i]}</a></li>`
             } else {
-                list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pages[i]}" href="#">${pages[i]}</a></li>`
+                list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pages[i]}" >${pages[i]}</a></li>`
             }
         }
         if (cPage == pageNum) {
             list += `<li class="page-item disabled"><a class="page-link">Last</a></li>`
         } else {
-            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${cPage + 1}" href="#">next</a></li>`
-            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pageNum}" href="#">Last</a></li>`
+            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${cPage + 1}" >next</a></li>`
+            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pageNum}" >Last</a></li>`
         }
         $('.seeds-pagination').html(list)
     })
