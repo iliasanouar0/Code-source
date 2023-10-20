@@ -395,7 +395,6 @@ $(document).on('click', '.status', async event => {
         console.log('closed');
     }
     // ~~ pagination
-    let max = 10
     let cPage = 1
     pagination(id, cPage)
     console.log(id);
@@ -412,6 +411,7 @@ $(document).on('click', '.status', async event => {
 $(document).on('click', '.seeds-page', event => {
     // let idSeed = id
     // console.log(idSeed);
+    let max = 10
     let cPage
     let page = $(event.target).data('page')
     let id = $(event.target).data('id')
