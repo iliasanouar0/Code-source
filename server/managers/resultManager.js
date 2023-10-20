@@ -38,6 +38,7 @@ const updateResult = async (data) => {
             return err;
         }
         client.release()
+        return true
     })
 }
 

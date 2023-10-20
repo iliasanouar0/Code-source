@@ -132,7 +132,8 @@ wss.on('connection', wss => {
             end_in: end_in
           }
           console.log(result);
-          await resultManager.updateResult(result)
+          let u = await resultManager.updateResult(result)
+          console.log(u);
           toProcess.shift()
           state = await processManager.getProcessState(data.id_process)
           if (toProcess.length < active && count < length && state != "STOPPED") {
