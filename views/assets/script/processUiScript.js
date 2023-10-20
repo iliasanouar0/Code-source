@@ -420,19 +420,23 @@ $(document).on('click', '.details', event => {
     }).then(data => {
         console.log(data);
         console.log(data.length);
-        console.log(data[0]);
-        if (data.length == 0 || data[0].feedBack == 0) {
+        if (data.length == 0) {
             console.log('no');
             Swal.fire({
                 title: 'NO feedback yet !!',
                 icon: 'info'
             })
             return
-        } else {
-            console.log('i didn\'t');
-            return
         }
         let feedBack = data[0].feedback.split(', ')
+        if (feedBack[0] == '0') {
+            console.log('no');
+            Swal.fire({
+                title: 'NO feedback yet !!',
+                icon: 'info'
+            })
+            return
+        }
         let variables
         let card = ""
         feedBack.forEach(element => {
