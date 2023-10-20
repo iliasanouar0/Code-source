@@ -398,20 +398,24 @@ $(document).on('click', '.status', async event => {
     let max = 10
     let cPage = 1
     pagination(id, cPage)
-    $(document).on('click', '.seeds-page', event => {
-        let idSeed = id
-        console.log(idSeed);
-        let page = $(event.target).data('page')
-        cPage = page
-        let endIndex = cPage * max
-        let startIndex = endIndex - max
-        fetch(`http://${ip}:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
-            return response.json()
-        }).then(data => {
-            var html = createRowProcessSeeds(data);
-            $('#seeds_result').html(html);
-            pagination(idSeed, cPage)
-        })
+    console.log(id);
+    // $(document).on('click', '.seeds-page', (event) => {
+    //     let idSeed = id
+    //     console.log(idSeed);
+    //     let page = $(event.target).data('page')
+    //     cPage = page
+    //     let endIndex = cPage * max
+    //     let startIndex = endIndex - max
+    //     fetch(`http://${ip}:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
+    //         return response.json()
+    //     }).then(data => {
+    //         var html = createRowProcessSeeds(data);
+    //         $('#seeds_result').html(html);
+    //         pagination(idSeed, cPage)
+    //     })
+    // })
+    $('..seeds-page').on('click', () => {
+        console.log('page');
     })
     $('.btn-close').on('click', () => {
         cPage = 1
@@ -431,9 +435,7 @@ const pagination = (id, cPage) => {
         return pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
     }).then(() => {
         // let pages = pageNum > 5 ? getPages(pageNum, cPage) : [pageNum]
-        console.log(pageNum);
         pages = getPages(pageNum, cPage)
-        console.log(pages);
         if (cPage == 1) {
             list += `<li class="page-item disabled"><a class="page-link">First</a></li>`
         } else {
