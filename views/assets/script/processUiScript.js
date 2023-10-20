@@ -421,8 +421,8 @@ $(document).on('click', '.seeds-page', event => {
     fetch(`http://${ip}:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
         return response.json()
     }).then(data => {
-        var html = createRowProcessSeeds(data);
         pagination(id, cPage)
+        var html = createRowProcessSeeds(data);
         $('#seeds_result').html(html);
     })
 })
