@@ -412,7 +412,7 @@ $(document).on('click', '.details', event => {
     let id = $(event.target).data('id')
     console.log(id);
     fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
-        return response.text()
+        return response.json()
     }).then(data => {
         console.log(data);
         console.log(data.feedback);
