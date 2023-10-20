@@ -181,27 +181,6 @@ $(document).on('click', '.start', event => {
     }
 })
 
-function socketUpdate(websocket, sendMessage, obj, pingInterval) {
-    websocket.onopen = (e) => {
-        sendMessage(JSON.stringify(obj), websocket);
-        const Process_data = document.querySelector('#Process_data');
-        fetch(`http://${ip}:3000/process/admin`, {
-            method: "GET",
-        }).then((response) => {
-            return response.json();
-        }).then((data) => {
-            Process_data.innerHTML = createRowProcess(data)
-        }).then(() => {
-            websocket.close()
-        })
-    };
-    websocket.onclose = (e) => {
-        clearInterval(pingInterval);
-    };
-    websocket.onerror = (e) => {
-        console.log(`ERROR: ${e.data}`);
-    };
-}
 
 $(document).on('click', '.pause', event => {
     const id = $(event.target)[0].attributes[2].value
@@ -240,13 +219,6 @@ $(document).on('click', '.resume', event => {
         id_process: `${id}`,
         status: `${status}`,
     }
-    let pingInterval
-    const wsUri = `ws://${ip}:7072/wss`;
-    const websocket = new WebSocket(wsUri);
-    function sendMessage(message, ws) {
-        ws.send(message);
-    }
-    socketUpdate(websocket, sendMessage, obj, pingInterval);
 
     const wssUri = `ws://${ip}:7073/wss`;
     const websocket_s = new WebSocket(wssUri);
@@ -435,6 +407,11 @@ const pagination = (id, cPage) => {
         $('.seeds-pagination').html(list)
     })
 }
+
+$(document).on('click', '.details', event => {
+    let id = $(event.target).data('id')
+    console.log(id);
+})
 
 function randomRange(myMin, myMax) {
     return Math.floor(

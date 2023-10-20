@@ -34,12 +34,6 @@ const saveResult = async (data) => {
 const updateResult = async (data) => {
     sql = 'UPDATE results SET feedback=($1) ,end_in=($2) WHERE id_seeds=($3)'
     let value = [data.feedback, data.end_in, data.id_seeds]
-    // pool.query(sql, value, (error, result) => {
-    //     if (error) {
-    //         return { name: error.name, stack: error.stack, message: error.message }
-    //     }
-    //     return true
-    // })
     const client = await pool.connect()
     client.query(sql, value, (err) => {
         if (err) {
