@@ -418,16 +418,16 @@ $(document).on('click', '.details', event => {
     fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
         return response.json()
     }).then(data => {
-        let feedBack = data[0].feedback.split(', ')
-        let variables
-        let card = ""
-        if (feedBack[0] == '0' || feedBack.length == 0) {
+        if (data.length == 0 || data[0] == '0') {
             Swal.fire({
                 title: 'NO feedback yet !!',
                 icon: 'info'
             })
             return
         }
+        let feedBack = data[0].feedback.split(', ')
+        let variables
+        let card = ""
         feedBack.forEach(element => {
             variables = element.split('-')
             console.log(variables);
