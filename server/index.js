@@ -175,15 +175,15 @@ wss.on('connection', wss => {
       }
       seedManager.updateState(statechangeSeeds, "waiting")
     } else if (request == "pause") {
-      processManager.stoppedProcess(data.data)
-      let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-      let statechangeSeeds = []
-      for (let i = 0; i < seeds.length; i++) {
-        statechangeSeeds.push(seeds[i].id_seeds)
-      }
-      await seedManager.updateState(statechangeSeeds, "stopped")
-      wss.send('reload')
-
+      console.log(data.data);
+      // processManager.stoppedProcess(data.data)
+      // let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
+      // let statechangeSeeds = []
+      // for (let i = 0; i < seeds.length; i++) {
+      //   statechangeSeeds.push(seeds[i].id_seeds)
+      // }
+      // await seedManager.updateState(statechangeSeeds, "stopped")
+      // wss.send('reload')
     }
   })
 })
