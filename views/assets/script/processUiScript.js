@@ -323,9 +323,9 @@ function getPages(totalPages, currentPage) {
 //     // })
 // }
 
-$(document).on('click', '.status', event => {
-    let id = $(event.target)[0].attributes[2].value
-    let children = $(event.target).parent().parent()[0].children
+$(document).on('click', '.status', async event => {
+    let id = await $(event.target)[0].attributes[2].value
+    let children = await $(event.target).parent().parent()[0].children
     $('.count').html(children[1].innerHTML)
     if (children[5].innerHTML == "RUNNING") {
         $('.status_bg').removeClass("bg-success bg-danger bg-info")
@@ -413,7 +413,6 @@ $(document).on('click', '.status', event => {
 
     })
     $('.btn-close').on('click', () => {
-        id = ""
         cPage = 1
         $('#modal-process-view').modal('hide')
         websocket.close()
