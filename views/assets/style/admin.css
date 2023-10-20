@@ -63,6 +63,10 @@
   pointer-events: none;
 }
 
+.fa-power-off {
+  pointer-events: none;
+}
+
 .seeds-page {
   cursor: pointer;
 }
