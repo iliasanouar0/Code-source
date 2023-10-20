@@ -106,48 +106,51 @@ wss.on('connection', wss => {
       for (let i = 0; i < active; i++) {
         count++
         toProcess.push(seeds[i])
-        let start_in = new Date()
+        // let start_in = new Date()
         await seedManager.updateState([seeds[i].id_seeds], "running")
-        let result = {
-          id_process: data.id_process,
-          id_list: seeds[i].id_list,
-          id_seeds: seeds[i].id_seeds,
-          feedback: 0,
-          start_in: start_in,
-          end_in: 0
-        }
-        resultManager.saveResult(result)
+        // let result = {
+        //   id_process: data.id_process,
+        //   id_list: seeds[i].id_list,
+        //   id_seeds: seeds[i].id_seeds,
+        //   feedback: 0,
+        //   start_in: start_in,
+        //   end_in: 0
+        // }
+        // resultManager.saveResult(result)
       }
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
         console.log(state);
         for (let i = 0; i < toProcess.length; i++) {
+          let start_in = new Date()
           let r = await processManager.processing(toProcess[0])
           success++
           let end_in = new Date()
           let result = {
-            id_seeds: toProcess[0].id_seeds,
+            id_process: data.id_process,
+            id_list: seeds[i].id_list,
+            id_seeds: seeds[i].id_seeds,
             feedback: r,
+            start_in: start_in,
             end_in: end_in
           }
-          console.log(result);
-          resultManager.updateResult(result)
+          resultManager.saveResult(result)
           await seedManager.updateState([toProcess[0].id_seeds], "finished")
           toProcess.shift()
           state = await processManager.getProcessState(data.id_process)
           if (toProcess.length < active && count < length && state != "STOPPED") {
             toProcess.push(seeds[count])
             await seedManager.updateState([seeds[count].id_seeds], "running")
-            let start_in = new Date()
-            let result = {
-              id_process: data.id_process,
-              id_list: seeds[count].id_list,
-              id_seeds: seeds[count].id_seeds,
-              feedback: 0,
-              start_in: start_in,
-              end_in: 0
-            }
-            resultManager.saveResult(result)
+            // let start_in = new Date()
+            // let result = {
+            //   id_process: data.id_process,
+            //   id_list: seeds[count].id_list,
+            //   id_seeds: seeds[count].id_seeds,
+            //   feedback: 0,
+            //   start_in: start_in,
+            //   end_in: 0
+            // }
+            // resultManager.saveResult(result)
             count++
             let w = waiting - count + 3
             let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
