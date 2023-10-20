@@ -119,45 +119,35 @@ wss.on('connection', wss => {
         toProcess.push(seeds[i])
         await seedManager.updateState([seeds[i].id_seeds], "running")
       }
-      while (toProcess.length != 0) {
+      let state = await processManager.getProcessState(data.id_process)
+      while (toProcess.length != 0 && state != "STOPPED") {
         for (let i = 0; i < toProcess.length; i++) {
           let r = await processManager.processing(toProcess[0])
-          success++
-          await seedManager.updateState([toProcess[0].id_seeds], "finished")
-          toProcess.shift()
-          if (toProcess.length < active && count < length) {
-            toProcess.push(seeds[count])
-            await seedManager.updateState([seeds[count].id_seeds], "running")
-            count++
-            let w = waiting - count + 3
-            let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-            processStateManager.updateState(status)
+          if (r.indexOf('invalid') == -1) {
+            success++
+            await seedManager.updateState([toProcess[0].id_seeds], "finished")
+            toProcess.shift()
+            if (toProcess.length < active && count < length) {
+              toProcess.push(seeds[count])
+              await seedManager.updateState([seeds[count].id_seeds], "running")
+              count++
+              let w = waiting - count + 3
+              let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+              processStateManager.updateState(status)
+            }
+          } else {
+            failed++
+            await seedManager.updateState(toProcess[0].id_seeds, "failed")
+            toProcess.shift()
+            if (toProcess.length < active && count < length) {
+              toProcess.push(seeds[count])
+              await seedManager.updateState([seeds[count].id_seeds], "running")
+              count++
+              let w = waiting - count + 3
+              let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+              processStateManager.updateState(status)
+            }
           }
-          // if (r.indexOf('invalid') == -1) {
-          //   success++
-          //   await seedManager.updateState([toProcess[0].id_seeds], "finished")
-          //   toProcess.shift()
-          //   if (toProcess.length < active && count < length) {
-          //     toProcess.push(seeds[count])
-          //     await seedManager.updateState([seeds[count].id_seeds], "running")
-          //     count++
-          //     let w = waiting - count + 3
-          //     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-          //     processStateManager.updateState(status)
-          //   }
-          // } else {
-          //   failed++
-          //   await seedManager.updateState(toProcess[0].id_seeds, "failed")
-          //   toProcess.shift()
-          //   if (toProcess.length < active && count < length) {
-          //     toProcess.push(seeds[count])
-          //     await seedManager.updateState([seeds[count].id_seeds], "running")
-          //     count++
-          //     let w = waiting - count + 3
-          //     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-          //     processStateManager.updateState(status)
-          //   }
-          // }
         }
         let w = waiting - count + 3
         if (w <= 0) {
@@ -167,6 +157,7 @@ wss.on('connection', wss => {
           let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
         }
+        state = await processManager.getProcessState(data.id_process)
         if (toProcess.length == 0) {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
@@ -184,12 +175,15 @@ wss.on('connection', wss => {
       }
       seedManager.updateState(statechangeSeeds, "waiting")
     } else if (request == "pause") {
+      processManager.stoppedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
       let statechangeSeeds = []
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
-      seedManager.updateState(statechangeSeeds, "stopped")
+      await seedManager.updateState(statechangeSeeds, "stopped")
+      wss.send('reload')
+
     }
   })
 })
