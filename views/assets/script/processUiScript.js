@@ -414,7 +414,7 @@ $(document).on('click', '.status', async event => {
     //         pagination(idSeed, cPage)
     //     })
     // })
-    $('.page-item').on('click', () => {
+    $('.page-item').on('click', async () => {
         console.log('page');
     })
     $('.btn-close').on('click', () => {
