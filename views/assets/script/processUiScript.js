@@ -455,8 +455,12 @@ $(document).on('click', '.details', event => {
 })
 
 
-$(document).on('click', '.size', () => {
+$(document).on('click', '.size', event => {
     console.log('ok i will');
+    let children = $(event.target).children()
+    const fullPage = document.querySelector('#fullpage');
+    fullPage.style.backgroundImage = 'url(' + img.src + ')';
+    fullPage.style.display = 'block';
 })
 function randomRange(myMin, myMax) {
     return Math.floor(
