@@ -324,7 +324,7 @@ function getPages(totalPages, currentPage) {
 // }
 
 $(document).on('click', '.status', event => {
-    const id = $(event.target)[0].attributes[2].value
+    let id = $(event.target)[0].attributes[2].value
     let children = $(event.target).parent().parent()[0].children
     $('.count').html(children[1].innerHTML)
     if (children[5].innerHTML == "RUNNING") {
