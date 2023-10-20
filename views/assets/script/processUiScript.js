@@ -439,7 +439,7 @@ $(document).on('click', '.details', event => {
             variables = element.split('-')
             card += `<div class="col">
             <div class="card">
-            <a>
+            <a class="show">
             <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
             </a>
             <div class="card-body">
@@ -454,6 +454,10 @@ $(document).on('click', '.details', event => {
     })
 })
 
+
+$(document).on('click', '.show', () => {
+    console.log('ok i will');
+})
 function randomRange(myMin, myMax) {
     return Math.floor(
         Math.random() * (Math.ceil(myMax) - Math.floor(myMin) + 1) + myMin
