@@ -128,13 +128,14 @@ wss.on('connection', wss => {
           let end_in = new Date()
           let result = {
             id_process: data.id_process,
-            id_list: seeds[i].id_list,
-            id_seeds: seeds[i].id_seeds,
+            id_list: toProcess[0].id_list,
+            id_seeds: toProcess[0].id_seeds,
             feedback: r,
             start_in: start_in,
             end_in: end_in
           }
           console.log(result);
+          await resultManager.saveResult(result)
           await seedManager.updateState([toProcess[0].id_seeds], "finished")
           toProcess.shift()
           state = await processManager.getProcessState(data.id_process)
@@ -146,7 +147,6 @@ wss.on('connection', wss => {
             let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
             processStateManager.updateState(status)
           }
-          await resultManager.saveResult(result)
           // if (r.indexOf('invalid') == -1) {
           //   success++
           //   await seedManager.updateState([toProcess[0].id_seeds], "finished")
