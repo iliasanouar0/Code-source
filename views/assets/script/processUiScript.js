@@ -28,7 +28,8 @@ const createRowProcess = data => {
           <td class="text-center">${element.end_in}</td>
           <td>
           <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-          <button type="button" class="btn btn-danger pause"  data-id="${element.id_process}"><i class="fas fa-pause"></i></i></button>
+          <button type="button" class="btn btn-warning pause"  data-id="${element.id_process}"><i class="fas fa-pause"></i></i></button>
+          <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-stop"></i></i></button>
           <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
           </td></tr>`
             rows += tr
@@ -46,6 +47,7 @@ const createRowProcess = data => {
       <td>
       <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
       <button type="button" class="btn btn-warning resume"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
+      <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-stop"></i></i></button>
       <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
       </td></tr>`
             rows += tr
@@ -63,6 +65,7 @@ const createRowProcess = data => {
             <td>
             <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
             <button type="button" class="btn btn-success" disabled data-id="${element.id_process}"><i class="fas fa-check"></i></button>
+            <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-stop"></i></i></button>
             <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
             </td></tr>`
             rows += tr
@@ -80,6 +83,7 @@ const createRowProcess = data => {
       <td>
       <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
       <button type="button" class="btn btn-success start"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
+      <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-stop"></i></i></button>
       <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
       </td></tr>`
             rows += tr

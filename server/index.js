@@ -124,7 +124,6 @@ wss.on('connection', wss => {
         for (let i = 0; i < toProcess.length; i++) {
           let r = await processManager.processing(toProcess[0])
           if (r.indexOf('invalid') == -1) {
-            // if (r) {
             success++
             await seedManager.updateState([toProcess[0].id_seeds], "finished")
             let end_in = new Date()
@@ -215,11 +214,17 @@ wss.on('connection', wss => {
       console.log(data.data);
       processManager.stoppedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
+      let seedsRunning = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
       let statechangeSeeds = []
+      let statechangeSeedsRunning = []
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
-      await seedManager.updateState(statechangeSeeds, "stopped")
+      for (let i = 0; i < seedsRunning.length; i++) {
+        statechangeSeedsRunning.push(seedsRunning[i].id_seeds)
+      }
+      await seedManager.updateState(statechangeSeeds, "pause")
+      await seedManager.updateState(statechangeSeedsRunning, "pause")
       wss.send('reload')
     }
   })
