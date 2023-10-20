@@ -415,6 +415,7 @@ $(document).on('click', '.details', event => {
         return response.text()
     }).then(data => {
         console.log(data);
+        console.log(data.feedback);
         // let feedBack = data
         // console.log(feedBack);
     })
