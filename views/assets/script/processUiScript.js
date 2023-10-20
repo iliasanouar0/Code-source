@@ -418,6 +418,7 @@ $(document).on('click', '.details', event => {
     fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
         return response.json()
     }).then(data => {
+        console.log(data);
         if (data.length == 0 || data[0] == '0') {
             Swal.fire({
                 title: 'NO feedback yet !!',
