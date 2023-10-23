@@ -389,6 +389,7 @@ wss.on('connection', wss => {
       processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
       wss.send('reload')
     } else if (request == 'reset') {
+      console.log(request);
       processManager.restedProcess(data.data)
       await resultManager.deleteResultsProcess(data.id_process)
       let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
