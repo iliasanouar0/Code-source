@@ -165,6 +165,7 @@ $(document).on('click', '.start', event => {
         console.log(data);
         if (data == 'reload') {
             getData()
+        }
     }
 })
 
@@ -459,3 +460,7 @@ function randomRange(myMin, myMax) {
         Math.random() * (Math.ceil(myMax) - Math.floor(myMin) + 1) + myMin
     );
 }
+
+$(document).on('click', '.stop', event => {
+    console.log('i will stop');
+})
