@@ -508,6 +508,23 @@
                 // },
                 // processing: true,
                 // serverSide: true
+                ajax: {
+                    url: 'http://${ip}:3000/process/admin',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'id_process' },
+                    { data: 'count' },
+                    { data: 'f_name' },
+                    { data: 'list_name' },
+                    { data: 'start_date' },
+                    { data: 'isp' },
+                    { data: 'status' },
+                    { data: 'action' },
+                    { data: 'start_in' },
+                    { data: 'end_in' }
+                ]
+
             })
             // $('#example1').DataTable({
             //     "paging": true,
