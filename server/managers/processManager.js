@@ -74,7 +74,7 @@ const getAllProcessSeedsServer = async (id) => {
 
 const getAllProcessSeedsByState = async (data) => {
     let values = [data.id_process, data.status]
-    let sql = "SELECT process.id_process, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=($1) AND seeds.status=($2) GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds"
+    let sql = "SELECT process.id_process,process.action, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=($1) AND seeds.status=($2) GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds"
     const client = await pool.connect()
     const list = await client.query(sql, values);
     client.release()
