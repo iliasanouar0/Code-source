@@ -648,16 +648,16 @@ if (path.includes("/admin/users/")) {
       });
   });
 
-  fetch(`http://${ip}:3000/process/admin`, {
-    method: "GET",
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      let rows = createRowProcess(data);
-      Process_data.innerHTML = rows
-    })
+  // fetch(`http://${ip}:3000/process/admin`, {
+  //   method: "GET",
+  // })
+  //   .then((response) => {
+  //     return response.json();
+  //   })
+  //   .then((data) => {
+  //     let rows = createRowProcess(data);
+  //     Process_data.innerHTML = rows
+  //   })
 } else if (path.includes("/admin/lists/")) {
   fetch(`http://${ip}:3000/lists`, {
     method: "GET",
