@@ -210,6 +210,14 @@ wss.on('connection', wss => {
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
+      let active
+      let waiting = seeds.length - 3
+      if (seeds.length >= 3) {
+        active = 3
+      } else {
+        active = seeds.length
+        waiting = 0
+      }
       seedManager.updateState(statechangeSeeds, "waiting")
       wss.send('reload')
       let success = 0
