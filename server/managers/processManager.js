@@ -117,13 +117,13 @@ const finishedProcess = (data) => {
     return true
 }
 
-const restedProcess = (data) => {
+const restedProcess = async (data) => {
     let query = "UPDATE process SET status=($1),start_in=($2),end_in=($3) WHERE id_process=($4)"
     let values = [data.status, data.start_in, data.end_in, data.id_process]
     let obj = { query: query, data: values }
     pool.query(obj.query, obj.data, (error, result) => {
         if (error) {
-            return `${error.name, error.stack, error.message, error}`
+            throw `${error.name, error.stack, error.message, error}`
         }
     })
     return true

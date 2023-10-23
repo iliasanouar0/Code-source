@@ -36,7 +36,7 @@ const updateState = async (data) => {
     })
 }
 
-const deleteState = (data) => {
+const deleteState = async (data) => {
     sql = 'DELETE FROM processstate WHERE id_process=($1)'
     pool.query(sql, [data], (error, result) => {
         if (error) {

@@ -390,15 +390,17 @@ wss.on('connection', wss => {
       wss.send('reload')
     } else if (request == 'reset') {
       console.log(request);
-      processManager.restedProcess(data.data)
+      await processManager.restedProcess(data.data)
       await resultManager.deleteResultsProcess(data.id_process)
       let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
+      console.log(seeds);
       let statechangeSeeds = []
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
+      console.log(statechangeSeeds);
       await seedManager.updateState(statechangeSeeds, "idel")
-      processStateManager.deleteState(data.id_process)
+      await processStateManager.deleteState(data.id_process)
       wss.send('reload')
     }
   })
