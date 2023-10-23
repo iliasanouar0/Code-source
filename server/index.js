@@ -244,6 +244,7 @@ wss.on('connection', wss => {
         }
         await resultManager.saveResult(result)
       }
+      console.log(toProcess);
       let stat = { waiting: waiting, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
       processStateManager.updateState(stat)
       let state = await processManager.getProcessState(data.id_process)
