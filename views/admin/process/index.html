@@ -527,18 +527,13 @@
                     }
                 ],
                 "columnDefs": [{
-                    "targets": [3],
+                    "targets": -1,
                     render: function (data, type, row) {
                         if (row.status == 'FINISHED') {
 
                             return '<button class="btn btn-secondary btn-block">view</button>'
 
                         }
-                        //  else if (row.status == 'yes' && row.quantity == 0) {
-
-                        //     return '<button class="btn btn-secondary btn-block">Delete</button>';
-
-                        // }
 
                     }
                 }]
