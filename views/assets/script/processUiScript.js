@@ -159,28 +159,30 @@ $(document).on('click', '.start', event => {
     websocket_s.onopen = (e) => {
         websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
         const Process_data = document.querySelector('#Process_data');
-        fetch(`http://${ip}:3000/process/admin`, {
-            method: "GET",
-        }).then((response) => {
-            return response.json();
-        }).then((data) => {
-            Process_data.innerHTML = createRowProcess(data)
-        })
+        getData()
+        // fetch(`http://${ip}:3000/process/admin`, {
+        //     method: "GET",
+        // }).then((response) => {
+        //     return response.json();
+        // }).then((data) => {
+        //     Process_data.innerHTML = createRowProcess(data)
+        // })
     }
 
     websocket_s.onmessage = (event) => {
         let data = event.data
         console.log(data);
         if (data == 'reload') {
-            const Process_data = document.querySelector('#Process_data');
-            fetch(`http://${ip}:3000/process/admin`, {
-                method: "GET",
-            }).then((response) => {
-                return response.json();
-            }).then((data) => {
-                Process_data.innerHTML = createRowProcess(data)
+            getData()
+            // const Process_data = document.querySelector('#Process_data');
+            // fetch(`http://${ip}:3000/process/admin`, {
+            //     method: "GET",
+            // }).then((response) => {
+            //     return response.json();
+            // }).then((data) => {
+            //     Process_data.innerHTML = createRowProcess(data)
 
-            })
+            // })
         }
     }
 })
@@ -203,14 +205,15 @@ $(document).on('click', '.pause', event => {
     websocket_s.onmessage = (event) => {
         let data = event.data
         if (data == 'reload') {
-            const Process_data = document.querySelector('#Process_data');
-            fetch(`http://${ip}:3000/process/admin`, {
-                method: "GET",
-            }).then((response) => {
-                return response.json();
-            }).then((data) => {
-                Process_data.innerHTML = createRowProcess(data)
-            })
+            getData()
+            // const Process_data = document.querySelector('#Process_data');
+            // fetch(`http://${ip}:3000/process/admin`, {
+            //     method: "GET",
+            // }).then((response) => {
+            //     return response.json();
+            // }).then((data) => {
+            //     Process_data.innerHTML = createRowProcess(data)
+            // })
         }
     }
 })
@@ -233,14 +236,15 @@ $(document).on('click', '.resume', event => {
     websocket_s.onmessage = (event) => {
         let data = event.data
         if (data == 'reload') {
-            const Process_data = document.querySelector('#Process_data');
-            fetch(`http://${ip}:3000/process/admin`, {
-                method: "GET",
-            }).then((response) => {
-                return response.json();
-            }).then((data) => {
-                Process_data.innerHTML = createRowProcess(data)
-            })
+            getData()
+            // const Process_data = document.querySelector('#Process_data');
+            // fetch(`http://${ip}:3000/process/admin`, {
+            //     method: "GET",
+            // }).then((response) => {
+            //     return response.json();
+            // }).then((data) => {
+            //     Process_data.innerHTML = createRowProcess(data)
+            // })
         }
     }
 })
