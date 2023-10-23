@@ -457,7 +457,7 @@ $(document).on('click', '.details', event => {
 
 $(document).on('click', '.size', event => {
     console.log('ok i will');
-    let children = $(event.target).contents().prevObject
+    let children = $(event.target).contents().prevObject[0]
     console.log(children);
     // const fullPage = document.querySelector('#fullpage');
     // fullPage.style.backgroundImage = 'url(' + img.src + ')';
