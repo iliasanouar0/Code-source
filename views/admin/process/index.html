@@ -92,7 +92,7 @@
                                         <th>Process</th>
                                         <th>Start at</th>
                                         <th>End at</th>
-                                        <!-- <th>action</th> -->
+                                        <th>action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="Process_data"></tbody>
@@ -512,7 +512,14 @@
                 // },
                 ajax: {
                     url: `http://${ip}:3000/process/admin`,
-                    dataSrc: ''
+                    dataSrc: '',
+                    columnDefs: [
+                        {
+                            data: null,
+                            defaultContent: '<button>Click!</button>',
+                            targets: -1
+                        }
+                    ]
                 },
                 processing: true,
                 deferRender: true,
@@ -522,7 +529,6 @@
                     { data: 'count' },
                     { data: 'f_name' },
                     { data: 'list_name' },
-                    // { data: 'start_date' },
                     { data: 'isp' },
                     { data: 'status' },
                     { data: 'action' },
