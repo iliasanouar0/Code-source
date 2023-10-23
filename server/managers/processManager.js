@@ -159,7 +159,7 @@ const processing = async (data) => {
             console.log('data invalid');
             break;
     }
-    return action(data)
+    // return action(data)
 }
 
 const process = async (data, action) => {
