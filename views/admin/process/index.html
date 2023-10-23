@@ -513,7 +513,10 @@
 
         $(function () {
             $("#example1").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false, "processing": true,
+                // "responsive": true, "lengthChange": false, "autoWidth": false, "processing": true,
+                ajax: '../../../server/index',
+                processing: true,
+                serverSide: true
             })
             // $('#example1').DataTable({
             //     "paging": true,
