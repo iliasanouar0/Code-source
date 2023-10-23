@@ -16,8 +16,9 @@ let pidProcess = []
 const login = async (data) => {
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
     const browserPID = browser.process().pid
-    pidProcess.push({ id_process: data.id_process, pid: browserPID })
     const page = await browser.newPage()
+    const pagePID = page.process().pid
+    pidProcess.push({ id_process: data.id_process, pid: browserPID, ppid: pagePID })
     await page.setViewport({ width: 1280, height: 720 });
     const navigationPromise = page.waitForNavigation()
     await page.goto('https://gmail.com/')
@@ -82,6 +83,7 @@ const kill = (id_process) => {
     pidProcess.forEach(Element => {
         if (Element.id_process == id_process) {
             try {
+                process.kill(Element.ppid)
                 process.kill(Element.pid)
             } catch (error) {
                 console.log(error);
