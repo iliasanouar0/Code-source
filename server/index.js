@@ -242,8 +242,8 @@ wss.on('connection', wss => {
       }
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
-        console.log(state);
         for (let i = 0; i < toProcess.length; i++) {
+          console.log(toProcess[0]);
           let r = await processManager.processing(toProcess[0])
           if (r.indexOf('invalid') == -1) {
             success++
