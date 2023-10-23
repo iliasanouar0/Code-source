@@ -223,8 +223,8 @@ wss.on('connection', wss => {
       let status = await processStateManager.getState(data.id_process)
       console.log(status);
       wss.send('reload')
-      let success = 0
-      let failed = 0
+      let success = status[0].finished
+      let failed = status[0].failed
       let count = 0
       let length = seeds.length
       let toProcess = []
