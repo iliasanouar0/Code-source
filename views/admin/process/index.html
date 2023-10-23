@@ -508,20 +508,6 @@
                 ajax: {
                     url: `http://${ip}:3000/process/admin`,
                     dataSrc: '',
-                    // columnDefs: [
-                    //     {
-                    //         targets: 5,
-                    //         render: function (data, status, full, meta) {
-                    //             if (status === 'FINISHED') {
-                    //                 data =
-                    //                     '<button class="btn-start" type="button">Start</button>'
-                    //                     + '<button class="btn-stop" type="button">Stop</button>';
-                    //             }
-
-                    //             return data;
-                    //         }
-                    //     }
-                    // ]
                 },
                 processing: true,
                 deferRender: true,
@@ -540,14 +526,28 @@
                         defaultContent: '',
                     }
                 ],
-                "columnDefs": [{
-                    "targets": -1,
-                    "createdCell": function (td, cellData, rowData, row, col) {
-                        $(td).prepend(
-                            "<button>Click!</button>"
-                        );
+                // "columnDefs": [{
+                //     "targets": -1,
+                //     "createdCell": function (td, cellData, rowData, row, col) {
+                //         $(td).prepend(
+                //             "<button>Click!</button>"
+                //         );
+                //     }
+                // }]
+                columnDefs: [
+                    {
+                        targets: 5,
+                        render: function (data, status, full, meta) {
+                            if (status === 'FINISHED') {
+                                data =
+                                    '<button class="btn-start" type="button">Start</button>'
+                                    + '<button class="btn-stop" type="button">Stop</button>';
+                            }
+
+                            return data;
+                        }
                     }
-                }]
+                ]
             })
         };
         getData()
