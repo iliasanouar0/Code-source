@@ -5,10 +5,6 @@ Date.prototype.toDateInputValue = function () {
     return local.toJSON().slice(0, 10);
 };
 
-// let storage = { ...localStorage }
-// console.log(storage);
-// let ip = storage.ip
-
 $(document).ready(function () {
     $("#e_update_date").val(new Date().toDateString())
     $("#e_add_date").val(new Date().toDateInputValue());
@@ -127,7 +123,7 @@ const addList = (data) => {
             'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
         }
     };
-
+    
     $.ajax(settings).done(function (responseText) {
         Swal.fire({
             title: 'list added successfully!',

@@ -220,8 +220,11 @@ wss.on('connection', wss => {
       }
 
     } else if (request == "resume") {
+
       processManager.resumedProcess(data.data)
+
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "pause" })
+
       let active
       let waiting = seeds.length - 3
       if (seeds.length >= 3) {
@@ -234,7 +237,7 @@ wss.on('connection', wss => {
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
-      seedManager.updateState(statechangeSeeds, "waiting")
+      await seedManager.updateState(statechangeSeeds, "waiting")
       let status = await processStateManager.getState(data.id_process)
       console.log(status);
       wss.send('reload')
@@ -243,7 +246,8 @@ wss.on('connection', wss => {
       let count = 0
       let length = seeds.length
       let toProcess = []
-
+      let stat = { waiting: waiting, active: active, finished: success, failed: failed, id_process: data.id_process }
+      processStateManager.updateState(stat)
       for (let i = 0; i < active; i++) {
         count++
         toProcess.push(seeds[i])
@@ -259,11 +263,17 @@ wss.on('connection', wss => {
         }
         await resultManager.saveResult(result)
       }
-      let stat = { waiting: waiting, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-      processStateManager.updateState(stat)
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
+        state = await processManager.getProcessState(data.id_process)
+        if (state == "STOPPED") {
+          break
+        }
         for (let i = 0; i < toProcess.length; i++) {
+          state = await processManager.getProcessState(data.id_process)
+          if (state == "STOPPED") {
+            break
+          }
           let r = await processManager.processing(toProcess[0])
           if (r.indexOf('invalid') == -1) {
             success++
@@ -277,6 +287,9 @@ wss.on('connection', wss => {
             await resultManager.updateResult(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
+            if (state == "STOPPED") {
+              break
+            }
             if (toProcess.length < active && count < length && state != "STOPPED") {
               toProcess.push(seeds[count])
               await seedManager.updateState([seeds[count].id_seeds], "running")
@@ -307,6 +320,9 @@ wss.on('connection', wss => {
             await resultManager.updateResult(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
+            if (state == "STOPPED") {
+              break
+            }
             if (toProcess.length < active && count < length && state != "STOPPED") {
               toProcess.push(seeds[count])
               await seedManager.updateState([seeds[count].id_seeds], "running")
@@ -336,6 +352,9 @@ wss.on('connection', wss => {
           processStateManager.updateState(status)
         }
         state = await processManager.getProcessState(data.id_process)
+        if (state == "STOPPED") {
+          break
+        }
         if (toProcess.length == 0) {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
@@ -344,6 +363,7 @@ wss.on('connection', wss => {
           wss.send('reload')
         }
       }
+
     } else if (request == "pause") {
       executableBrowserPath = '/usr/bin/chromium-browser'
       processManager.stoppedProcess(data.data)
