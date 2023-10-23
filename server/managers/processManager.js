@@ -148,7 +148,7 @@ const processing = async (data) => {
         case 'kill':
             switch (data.isp) {
                 case 'gmail':
-                    await gmailManagement.kill().then(e => {
+                    await gmailManagement.kill(data.id_process).then(e => {
                         result = e
                     })
                     return result

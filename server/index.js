@@ -230,7 +230,6 @@ wss.on('connection', wss => {
         active = seeds.length
         waiting = 0
       }
-      console.log(active);
       let statechangeSeeds = []
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
@@ -365,6 +364,7 @@ wss.on('connection', wss => {
       let failed = state[0].failed
       let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
       await processStateManager.updateState(status)
+      processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
       wss.send('reload')
     }
   })

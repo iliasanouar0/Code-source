@@ -11,8 +11,12 @@ let time = setTimeout.setTimeout
 const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
 const path = `${root}/views/assets/images/process_result`
 
+let pidProcess = []
+
 const login = async (data) => {
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
+    const browserPID = browser.process().pid
+    pidProcess.push({ id_process: data.id_process, pid: browserPID })
     const page = await browser.newPage()
     await page.setViewport({ width: 1280, height: 720 });
     const navigationPromise = page.waitForNavigation()
@@ -74,9 +78,12 @@ const login = async (data) => {
     return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
 }
 
-const kill = () => {
-    var proc = require('child_process').spawn('puppeteer');
-    proc.kill('SIGINT');
+const kill = (id_process) => {
+    pidProcess.forEach(Element => {
+        if (Element.id_process == id_process) {
+            process.kill(Element.pid)
+        }
+    })
 }
 
 // let data = {
