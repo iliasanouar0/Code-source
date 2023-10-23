@@ -333,6 +333,7 @@ wss.on('connection', wss => {
     } else if (request == "pause") {
       executableBrowserPath = '/usr/bin/chromium-browser'
       processManager.stoppedProcess(data.data)
+      processManager.processing.kill()
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
       let seedsRunning = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
       let statechangeSeeds = []
@@ -350,8 +351,8 @@ wss.on('connection', wss => {
       let failed = state[0].failed
       let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
       await processStateManager.updateState(status)
-      processManager.kill('SIGHUP')
       wss.send('reload')
+      process.exit(1);
     }
   })
 })
