@@ -187,6 +187,7 @@ const createRow = (data) => {
 function getData() {
   $("#example1").DataTable({
     responsive: true,
+    retrieve: true,
     ajax: {
       url: `http://${ip}:3000/process/admin`,
       dataSrc: '',
