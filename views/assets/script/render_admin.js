@@ -184,85 +184,69 @@ const createRow = (data) => {
   return rows;
 };
 
-const createRowProcess = data => {
-  let rows = ""
-  data.forEach(element => {
-    if (element.status == "RUNNING") {
-      let tr =
-        `<tr><td>${element.id_process}</td>
-        <td>${element.count}</td>
-        <td>${element.f_name} ${element.l_name}</td>
-        <td>${element.list_name}</td>
-        <td>${element.isp}</td>
-        <td>${element.status}</td>
-        <td>${element.action}</td>
-        <td>${element.start_in}</td>
-        <td class="text-center">${element.end_in}</td>
-        <td>
-        <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-        <button type="button" class="btn btn-warning pause"  data-id="${element.id_process}"><i class="fas fa-pause"></i></button>
-        <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
-        <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-        </td></tr>`
-      rows += tr
-    } else if (element.status == "STOPPED") {
-      let tr =
-        `<tr><td>${element.id_process}</td>
-    <td>${element.count}</td>
-    <td>${element.f_name} ${element.l_name}</td>
-    <td>${element.list_name}</td>
-    <td>${element.isp}</td>
-    <td>${element.status}</td>
-    <td>${element.action}</td>
-    <td>${element.start_in}</td>
-    <td class="text-center">${element.end_in}</td>
-    <td>
-    <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-    <button type="button" class="btn btn-warning resume"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
-    <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
-    <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-    </td></tr>`
-      rows += tr
-    } else if (element.status == "FINISHED") {
-      let tr =
-        `<tr><td>${element.id_process}</td>
-          <td>${element.count}</td>
-          <td>${element.f_name} ${element.l_name}</td>
-          <td>${element.list_name}</td>
-          <td>${element.isp}</td>
-          <td>${element.status}</td>
-          <td>${element.action}</td>
-          <td>${element.start_in}</td>
-          <td class="text-center">${element.end_in}</td>
-          <td>
-          <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-          <button type="button" class="btn btn-success" disabled data-id="${element.id_process}"><i class="fas fa-check"></i></button>
-          <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
-          <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-          </td></tr>`
-      rows += tr
-    } else {
-      let tr =
-        `<tr><td>${element.id_process}</td>
-    <td>${element.count}</td>
-    <td>${element.f_name} ${element.l_name}</td>
-    <td>${element.list_name}</td>
-    <td>${element.isp}</td>
-    <td>${element.status}</td>
-    <td>${element.action}</td>
-    <td>${element.start_in}</td>
-    <td class="text-center">${element.end_in}</td>
-    <td>
-    <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-    <button type="button" class="btn btn-success start"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
-    <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
-    <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-    </td></tr>`
-      rows += tr
-    }
-  });
-  return rows
-}
+function getData() {
+  $("#example1").DataTable({
+    responsive: true,
+    lengthChange: false,
+    autoWidth: false,
+    ajax: {
+      url: `http://${ip}:3000/process/admin`,
+      dataSrc: '',
+    },
+    columns: [
+      { data: 'id_process' },
+      { data: 'count' },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `${row.f_name} ${row.l_name}`
+        },
+      },
+      { data: 'list_name' },
+      { data: 'isp' },
+      { data: 'status' },
+      { data: 'action' },
+      { data: 'start_in' },
+      { data: 'end_in' },
+      {
+        data: null,
+        searchable: false,
+        orderable: false,
+        render: function (data, type, row) {
+          if (row.status == 'FINISHED') {
+            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+  <button type="button" class="btn btn-success" disabled data-id="${row.id_process}"><i class="fas fa-check"></i></button>
+  <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+  <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
+          } else if (row.status == 'RUNNING') {
+            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+<button type="button" class="btn btn-warning pause"  data-id="${row.id_process}"><i class="fas fa-pause"></i></button>
+<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
+          }
+          else if (row.status == 'STOPPED') {
+            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+<button type="button" class="btn btn-warning resume"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
+<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
+          }
+          else if (row.status == 'RESTED') {
+            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+<button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fa fa-arrow-rotate-right"></i></button>
+<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
+          }
+          else {
+            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+<button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
+<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
+          }
+        },
+      }
+    ],
+  })
+};
 
 
 if (path.includes("/admin/users/")) {
@@ -647,6 +631,7 @@ if (path.includes("/admin/users/")) {
         });
       });
   });
+  getData()
 
   // fetch(`http://${ip}:3000/process/admin`, {
   //   method: "GET",

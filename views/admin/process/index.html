@@ -497,79 +497,10 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        // let storage = { ...localStorage }
-        // let ip = storage.ip
-        function getData() {
-            $("#example1").DataTable({
-                responsive: true,
-                lengthChange: false,
-                autoWidth: false,
-                ajax: {
-                    url: `http://${ip}:3000/process/admin`,
-                    dataSrc: '',
-                },
-                columns: [
-                    { data: 'id_process' },
-                    { data: 'count' },
-                    {
-                        data: null,
-                        render: function (data, type, row) {
-                            return `${row.f_name} ${row.l_name}`
-                        },
-                    },
-                    { data: 'list_name' },
-                    { data: 'isp' },
-                    { data: 'status' },
-                    { data: 'action' },
-                    { data: 'start_in' },
-                    { data: 'end_in' },
-                    {
-                        data: null,
-                        searchable: false,
-                        orderable: false,
-                        render: function (data, type, row) {
-                            if (row.status == 'FINISHED') {
-                                return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
-            <button type="button" class="btn btn-success" disabled data-id="${row.id_process}"><i class="fas fa-check"></i></button>
-            <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
-            <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-                            } else if (row.status == 'RUNNING') {
-                                return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
-          <button type="button" class="btn btn-warning pause"  data-id="${row.id_process}"><i class="fas fa-pause"></i></button>
-          <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
-          <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-                            }
-                            else if (row.status == 'STOPPED') {
-                                return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
-      <button type="button" class="btn btn-warning resume"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
-      <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-                            }
-                            else if (row.status == 'RESTED') {
-                                return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
-      <button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fa fa-arrow-rotate-right"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
-      <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-                            }
-                            else {
-                                return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
-      <button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
-      <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-                            }
-                        },
-                    }
-                ],
-                // "columnDefs": [{
-                //     "targets": -1,
+    <!-- <script>
 
-
-                // }]
-            })
-        };
         getData()
-    </script>
+    </script> -->
 </body>
 
 </html>
