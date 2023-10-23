@@ -222,12 +222,12 @@ function getData() {
 <button type="button" class="btn btn-warning pause"  data-id="${row.id_process}"><i class="fas fa-pause"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-          } else if (row.status == 'STOPPED') {
+          } else if (row.status == 'PAUSED') {
             return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-warning resume"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-          } else if (row.status == 'RESTED') {
+          } else if (row.status == 'STOPPED') {
             return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fas fa-redo"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
