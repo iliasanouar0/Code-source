@@ -36,8 +36,19 @@ const updateState = async (data) => {
     })
 }
 
+const deleteState = (data) => {
+    sql = 'DELETE FROM processstate WHERE id_process=($1)'
+    pool.query(sql, [data], (error, result) => {
+        if (error) {
+            return error
+        }
+        return true
+    })
+}
+
 module.exports = {
     addState,
     getState,
-    updateState
+    updateState,
+    deleteState
 }

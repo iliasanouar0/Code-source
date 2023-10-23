@@ -388,6 +388,17 @@ wss.on('connection', wss => {
       await processStateManager.updateState(status)
       processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
       wss.send('reload')
+    } else if (request == 'reset') {
+      processManager.restedProcess(data.data)
+      await resultManager.deleteResultsProcess(data.id_process)
+      let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
+      let statechangeSeeds = []
+      for (let i = 0; i < seeds.length; i++) {
+        statechangeSeeds.push(seeds[i].id_seeds)
+      }
+      await seedManager.updateState(statechangeSeeds, "idel")
+      processStateManager.deleteState(data.id_process)
+      wss.send('reload')
     }
   })
 })

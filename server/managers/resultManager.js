@@ -68,6 +68,15 @@ const deleteResults = async (id) => {
     })
 }
 
+const deleteResultsProcess = async (id) => {
+    let sql = "DELETE FROM results WHERE id_process=($1)"
+    pool.query(sql, [id], (err, res) => {
+        if (err) {
+            throw err
+        }
+    })
+}
+
 const getDuration = (request, response) => {
     let id = (request.params.id)
     sql = `SELECT start_in, end_in FROM results where id_seeds=($1)`
@@ -90,5 +99,6 @@ module.exports = {
     updateResult,
     getFeedback,
     getDuration,
-    deleteResults
+    deleteResults,
+    deleteResultsProcess
 }

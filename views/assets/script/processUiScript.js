@@ -464,5 +464,25 @@ $(document).on('click', '.stop', event => {
     console.log('i will stop');
     let id = $(event.target).data('id')
     console.log(id);
+    const status = "RESTED"
+    let obj = {
+        id_process: `${id}`,
+        start_in: '',
+        end_in: '',
+        status: `${status}`,
+    }
 
+    const wssUri = `ws://${ip}:7073/wss`;
+    const websocket_s = new WebSocket(wssUri);
+
+    websocket_s.onopen = (e) => {
+        websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
+    }
+
+    websocket_s.onmessage = (event) => {
+        let data = event.data
+        if (data == 'reload') {
+            getData()
+        }
+    }
 })
