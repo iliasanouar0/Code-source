@@ -409,7 +409,6 @@ const pagination = (id, cPage) => {
 
 $(document).on('click', '.details', event => {
     let id = $(event.target).data('id')
-    console.log(id);
     fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
         return response.json()
     }).then(data => {
@@ -463,4 +462,7 @@ function randomRange(myMin, myMax) {
 
 $(document).on('click', '.stop', event => {
     console.log('i will stop');
+    let id = $(event.target).data('id')
+    console.log(id);
+
 })
