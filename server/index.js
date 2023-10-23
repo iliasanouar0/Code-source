@@ -120,8 +120,15 @@ wss.on('connection', wss => {
       }
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
-        console.log(state);
+        state = await processManager.getProcessState(data.id_process)
+        if (state == "STOPPED") {
+          break
+        }
         for (let i = 0; i < toProcess.length; i++) {
+          state = await processManager.getProcessState(data.id_process)
+          if (state == "STOPPED") {
+            break
+          }
           let r = await processManager.processing(toProcess[0])
           if (r.indexOf('invalid') == -1) {
             success++
@@ -135,6 +142,9 @@ wss.on('connection', wss => {
             await resultManager.updateResult(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
+            if (state == "STOPPED") {
+              break
+            }
             if (toProcess.length < active && count < length && state != "STOPPED") {
               toProcess.push(seeds[count])
               await seedManager.updateState([seeds[count].id_seeds], "running")
@@ -165,6 +175,9 @@ wss.on('connection', wss => {
             await resultManager.updateResult(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
+            if (state == "STOPPED") {
+              break
+            }
             if (toProcess.length < active && count < length && state != "STOPPED") {
               toProcess.push(seeds[count])
               await seedManager.updateState([seeds[count].id_seeds], "running")
@@ -194,6 +207,9 @@ wss.on('connection', wss => {
           processStateManager.updateState(status)
         }
         state = await processManager.getProcessState(data.id_process)
+        if (state == "STOPPED") {
+          break
+        }
         if (toProcess.length == 0) {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
@@ -244,7 +260,6 @@ wss.on('connection', wss => {
         }
         await resultManager.saveResult(result)
       }
-      console.log(toProcess);
       let stat = { waiting: waiting, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
       processStateManager.updateState(stat)
       let state = await processManager.getProcessState(data.id_process)
