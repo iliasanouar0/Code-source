@@ -521,19 +521,22 @@
                     { data: 'end_in' },
                     {
                         data: null,
+                        searchable: false,
+                        orderable: false,
+                        render: function (data, type, row) {
+                            if (row.status == 'FINISHED') {
+                                return '<button class="btn btn-secondary btn-block">view</button>'
+                            } else {
+                                return '<button class="btn btn-secondary btn-block">test-1</button>'
+                            }
+                        },
                     }
                 ],
-                "columnDefs": [{
-                    "targets": -1,
-                    render: function (data, type, row) {
-                        if (row.status == 'FINISHED') {
-                            return '<button class="btn btn-secondary btn-block">view</button>'
-                        } else {
-                            return '<button class="btn btn-secondary btn-block">test-1</button>'
-                        }
-                    },
+                // "columnDefs": [{
+                //     "targets": -1,
 
-                }]
+
+                // }]
             })
         };
         getData()
