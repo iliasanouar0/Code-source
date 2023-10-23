@@ -224,7 +224,7 @@ wss.on('connection', wss => {
       processManager.resumedProcess(data.data)
 
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "pause" })
-
+      console.log(seeds);
       let active
       let waiting = seeds.length - 3
       if (seeds.length >= 3) {
@@ -263,6 +263,7 @@ wss.on('connection', wss => {
         }
         await resultManager.saveResult(result)
       }
+      console.log(toProcess);
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
         state = await processManager.getProcessState(data.id_process)
