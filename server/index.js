@@ -351,7 +351,7 @@ wss.on('connection', wss => {
       let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
       await processStateManager.updateState(status)
       wss.send('reload')
-      process.exit(1);
+      console.log(process.execPath());
     }
   })
 })
