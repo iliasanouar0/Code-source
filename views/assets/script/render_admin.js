@@ -195,6 +195,7 @@ function getData() {
       { data: 'id_process' },
       { data: 'count' },
       {
+        data: null,
         render: function (data, type, row) {
           return `${row.f_name} ${row.l_name}`
         },
@@ -206,6 +207,7 @@ function getData() {
       { data: 'start_in' },
       { data: 'end_in' },
       {
+        data: null,
         searchable: false,
         orderable: false,
         render: function (data, type, row) {
