@@ -220,6 +220,8 @@ wss.on('connection', wss => {
         statechangeSeeds.push(seeds[i].id_seeds)
       }
       seedManager.updateState(statechangeSeeds, "waiting")
+      let status = await processStateManager.getState(data.id_process)
+      console.log(status);
       wss.send('reload')
       let success = 0
       let failed = 0
@@ -244,7 +246,6 @@ wss.on('connection', wss => {
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
         for (let i = 0; i < toProcess.length; i++) {
-          console.log(toProcess[0]);
           let r = await processManager.processing(toProcess[0])
           if (r.indexOf('invalid') == -1) {
             success++
