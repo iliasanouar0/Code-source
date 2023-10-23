@@ -511,6 +511,8 @@
                     url: 'http://${ip}:3000/process/admin',
                     dataSrc: ''
                 },
+                processing: true,
+
                 columns: [
                     { data: 'id_process' },
                     { data: 'count' },
@@ -523,8 +525,6 @@
                     { data: 'start_in' },
                     { data: 'end_in' }
                 ],
-                processing: true,
-                serverSide: true
 
             })
             // $('#example1').DataTable({
