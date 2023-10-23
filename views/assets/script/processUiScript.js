@@ -228,14 +228,22 @@ $(document).on('click', '.resume', event => {
     const websocket_s = new WebSocket(wssUri);
 
     websocket_s.onopen = (e) => {
-        websocket_s.send(JSON.stringify({ request: "resume", id_process: id }))
+        websocket_s.send(JSON.stringify({ request: "resume", id_process: id, data: obj }))
     }
 
     websocket_s.onmessage = (event) => {
-        console.log(event);
-        console.log(event.data);
-        let data = JSON.parse(event.data)
+        let data = event.data
         console.log(data);
+        if (data == 'reload') {
+            const Process_data = document.querySelector('#Process_data');
+            fetch(`http://${ip}:3000/process/admin`, {
+                method: "GET",
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                Process_data.innerHTML = createRowProcess(data)
+            })
+        }
     }
 })
 
