@@ -214,6 +214,7 @@ wss.on('connection', wss => {
         active = seeds.length
         waiting = 0
       }
+      console.log(active);
       let statechangeSeeds = []
       for (let i = 0; i < seeds.length; i++) {
         statechangeSeeds.push(seeds[i].id_seeds)
