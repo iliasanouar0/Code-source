@@ -67,8 +67,7 @@ const getDuration = (request, response) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
         }
-        response.status(200).send(result)
-        if (result.rowCount == 0 || result.rows.end_in == '0') {
+        if (result.rowCount == 0 || result.rows[0].end_in == '0') {
             response.status(200).send({ dr: '00:00:00' })
         }
         // let start = new Date(result.rows[0].start_in)
