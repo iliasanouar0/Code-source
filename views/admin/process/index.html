@@ -512,7 +512,12 @@
                 columns: [
                     { data: 'id_process' },
                     { data: 'count' },
-                    { data: null },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            return `${row.f_name} ${row.l_name}`
+                        },
+                    },
                     { data: 'list_name' },
                     { data: 'isp' },
                     { data: 'status' },
