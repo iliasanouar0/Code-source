@@ -365,7 +365,6 @@ wss.on('connection', wss => {
       }
 
     } else if (request == "pause") {
-      executableBrowserPath = '/usr/bin/chromium-browser'
       processManager.stoppedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
       let seedsRunning = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
