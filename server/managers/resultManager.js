@@ -59,6 +59,14 @@ function msToMnSc(ms) {
     );
 }
 
+const deleteResults = async (id) => {
+    let sql = "DELETE * FROM results WHERE id_seeds=($1)"
+    pool.query(sql, [id], (err, res) => {
+        if (err) {
+            throw err
+        }
+    })
+}
 
 const getDuration = (request, response) => {
     let id = (request.params.id)
@@ -81,5 +89,6 @@ module.exports = {
     saveResult,
     updateResult,
     getFeedback,
-    getDuration
+    getDuration,
+    deleteResults
 }
