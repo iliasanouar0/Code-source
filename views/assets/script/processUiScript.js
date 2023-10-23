@@ -467,8 +467,8 @@ $(document).on('click', '.stop', event => {
     const status = "RESTED"
     let obj = {
         id_process: `${id}`,
-        start_in: '',
-        end_in: '',
+        start_in: null,
+        end_in: null,
         status: `${status}`,
     }
 
