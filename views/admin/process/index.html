@@ -521,7 +521,6 @@
                     { data: 'end_in' },
                     {
                         data: null,
-                        defaultContent: '',
                     }
                 ],
                 "columnDefs": [{
@@ -533,14 +532,8 @@
                             return '<button class="btn btn-secondary btn-block">test-1</button>'
                         }
                     },
-                    "targets": [2],
-                    render: function (row) {
-                        return `${row.f_name} ${row.l_name}`
-                    }
-                }],
-                // "columnDefs": [{
 
-                // }]
+                }]
             })
         };
         getData()
