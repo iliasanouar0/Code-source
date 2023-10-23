@@ -86,13 +86,6 @@ const kill = (id_process) => {
     })
 }
 
-// let data = {
-//     gmail: 'j965408@gmail.com',
-//     password: '11111111',
-//     id_process: 44
-// }
-
-// login(data)
 module.exports = {
     login,
     kill
