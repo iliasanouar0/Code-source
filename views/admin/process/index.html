@@ -502,21 +502,15 @@
         let ip = storage.ip
         $(function () {
             $("#example1").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false, "processing": true,
-                // ajax: {
-                //     URL: `http://${ip}:3000/process/admin`,
-                //     dataType: 'json'
-                // },
-                // search: {
-                //     return: true
-                // },
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
                 ajax: {
                     url: `http://${ip}:3000/process/admin`,
                     dataSrc: '',
                 },
                 processing: true,
                 deferRender: true,
-
                 columns: [
                     { data: 'id_process' },
                     { data: 'count' },
@@ -533,17 +527,7 @@
                         targets: -1
                     }
                 ],
-
             })
-            // $('#example1').DataTable({
-            //     "paging": true,
-            //     "lengthChange": false,
-            //     "searching": false,
-            //     "ordering": true,
-            //     "info": true,
-            //     "autoWidth": false,
-            //     "responsive": true,
-            // });
         });
     </script>
 </body>
