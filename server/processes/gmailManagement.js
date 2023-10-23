@@ -74,6 +74,11 @@ const login = async (data) => {
     return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
 }
 
+const kill = () => {
+    var proc = require('child_process').spawn('puppeteer');
+    proc.kill('SIGINT');
+}
+
 // let data = {
 //     gmail: 'j965408@gmail.com',
 //     password: '11111111',
@@ -83,4 +88,5 @@ const login = async (data) => {
 // login(data)
 module.exports = {
     login,
+    kill
 }

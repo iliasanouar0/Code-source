@@ -145,6 +145,18 @@ const processing = async (data) => {
                     break;
             }
             break;
+        case 'kill':
+            switch (data.isp) {
+                case 'gmail':
+                    await gmailManagement.kill().then(e => {
+                        result = e
+                    })
+                    return result
+                default:
+                    console.log('data invalid');
+                    break;
+            }
+            break;
         default:
             console.log('data invalid');
             break;
