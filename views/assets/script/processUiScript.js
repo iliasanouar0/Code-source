@@ -474,9 +474,7 @@ $(document).on('click', '.details', event => {
 })
 
 $(document).on('click', '.size', event => {
-    console.log('ok i will');
     let img = $(event.target).contents().prevObject[0]
-    console.log(img);
     const fullPage = document.querySelector('#fullpage');
     fullPage.style.backgroundImage = 'url(' + img.src + ')';
     fullPage.style.display = 'block';
