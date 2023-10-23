@@ -49,6 +49,17 @@ const getFeedback = (request, response) => {
     })
 }
 
+function msToMnSc(ms) {
+    var minutes = Math.floor(ms / 60000);
+    var seconds = ((ms % 60000) / 1000).toFixed(0);
+    return (
+        seconds == 60 ?
+            (minutes + 1) + ":00" :
+            minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+    );
+}
+
+
 const getDuration = (request, response) => {
     let id = (request.params.id)
     sql = `SELECT start_in, end_in FROM results where id_seeds=($1)`
@@ -59,7 +70,8 @@ const getDuration = (request, response) => {
         let start = new Date(result.rows[0].start_in)
         let end = new Date(result.rows[0].end_in)
         let duration = end - start
-        response.status(200).send({ start: start, end: end, d: duration })
+        let dr = msToMnSc(duration)
+        response.status(200).send({ start: start, end: end, d: duration, dr: dr })
     })
 }
 
