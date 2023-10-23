@@ -513,13 +513,6 @@
                 ajax: {
                     url: `http://${ip}:3000/process/admin`,
                     dataSrc: '',
-                    columnDefs: [
-                        {
-                            data: null,
-                            defaultContent: '<button>Click!</button>',
-                            targets: -1
-                        }
-                    ]
                 },
                 processing: true,
                 deferRender: true,
@@ -533,7 +526,16 @@
                     { data: 'status' },
                     { data: 'action' },
                     { data: 'start_in' },
-                    { data: 'end_in' }
+                    { data: 'end_in' },
+                    {
+                        columnDefs: [
+                            {
+                                data: null,
+                                defaultContent: '<button>Click!</button>',
+                                targets: -1
+                            }
+                        ]
+                    }
                 ],
 
             })
