@@ -239,6 +239,7 @@ module.exports = {
     stoppedProcess,
     finishedProcess,
     resumedProcess,
+    restedProcess,
     getAllProcessSeedsByState,
     getAllProcessSeedsServer,
     process,
