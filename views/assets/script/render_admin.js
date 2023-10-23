@@ -187,8 +187,6 @@ const createRow = (data) => {
 function getData() {
   $("#example1").DataTable({
     responsive: true,
-    lengthChange: false,
-    autoWidth: false,
     ajax: {
       url: `http://${ip}:3000/process/admin`,
       dataSrc: '',
@@ -197,7 +195,6 @@ function getData() {
       { data: 'id_process' },
       { data: 'count' },
       {
-        data: null,
         render: function (data, type, row) {
           return `${row.f_name} ${row.l_name}`
         },
@@ -209,7 +206,6 @@ function getData() {
       { data: 'start_in' },
       { data: 'end_in' },
       {
-        data: null,
         searchable: false,
         orderable: false,
         render: function (data, type, row) {
@@ -223,20 +219,17 @@ function getData() {
 <button type="button" class="btn btn-warning pause"  data-id="${row.id_process}"><i class="fas fa-pause"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-          }
-          else if (row.status == 'STOPPED') {
+          } else if (row.status == 'STOPPED') {
             return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-warning resume"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-          }
-          else if (row.status == 'RESTED') {
+          } else if (row.status == 'RESTED') {
             return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fa fa-arrow-rotate-right"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-          }
-          else {
+          } else {
             return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
