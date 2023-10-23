@@ -530,7 +530,10 @@
                         orderable: false,
                         render: function (data, type, row) {
                             if (row.status == 'FINISHED') {
-                                return '<button class="btn btn-secondary btn-block">view</button>'
+                                return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+            <button type="button" class="btn btn-success" disabled data-id="${row.id_process}"><i class="fas fa-check"></i></button>
+            <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+            <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
                             } else {
                                 return '<button class="btn btn-secondary btn-block">test-1</button>'
                             }
