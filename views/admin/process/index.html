@@ -513,7 +513,7 @@
                 columns: [
                     { data: 'id_process' },
                     { data: 'count' },
-                    { data: 'f_name', data: 'l_name' },
+                    { data: null },
                     { data: 'list_name' },
                     { data: 'isp' },
                     { data: 'status' },
@@ -536,6 +536,12 @@
                             return '<button class="btn btn-secondary btn-block">test-1</button>'
                         }
 
+                    }
+                }],
+                "columnDefs": [{
+                    "targets": [2],
+                    render: function (data, type, row) {
+                        return `${row.f_name} ${row.l_name}`
                     }
                 }]
             })
