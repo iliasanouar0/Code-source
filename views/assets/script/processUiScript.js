@@ -202,7 +202,6 @@ $(document).on('click', '.pause', event => {
 
     websocket_s.onmessage = (event) => {
         let data = event.data
-        console.log(data);
         if (data == 'reload') {
             const Process_data = document.querySelector('#Process_data');
             fetch(`http://${ip}:3000/process/admin`, {
@@ -233,7 +232,6 @@ $(document).on('click', '.resume', event => {
 
     websocket_s.onmessage = (event) => {
         let data = event.data
-        console.log(data);
         if (data == 'reload') {
             const Process_data = document.querySelector('#Process_data');
             fetch(`http://${ip}:3000/process/admin`, {
