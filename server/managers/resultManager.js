@@ -60,7 +60,7 @@ function msToMnSc(ms) {
 }
 
 const deleteResults = async (id) => {
-    let sql = "DELETE * FROM results WHERE id_seeds=($1)"
+    let sql = "DELETE FROM results WHERE id_seeds=($1)"
     pool.query(sql, [id], (err, res) => {
         if (err) {
             throw err
