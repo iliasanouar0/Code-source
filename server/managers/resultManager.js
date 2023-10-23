@@ -72,8 +72,7 @@ const getDuration = (request, response) => {
         }
         let start = new Date(result.rows[0].start_in)
         let end = new Date(result.rows[0].end_in)
-        let duration = end - start
-        let dr = msToMnSc(duration)
+        let duration = msToMnSc(end - start)
         response.status(200).send({ duration: duration })
     })
 }
