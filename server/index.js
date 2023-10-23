@@ -331,6 +331,10 @@ wss.on('connection', wss => {
         }
       }
     } else if (request == "pause") {
+      executableBrowserPath = '/usr/bin/chromium-browser'
+      cmdKill = 'kill -s SIGKILL '
+      exec(cmdKill + browser_pid, (error, stdout, stderr) => { console.log(error); console.log(stdout); console.log(stderr); });
+
       processManager.stoppedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
       let seedsRunning = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
