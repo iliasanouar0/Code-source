@@ -506,8 +506,7 @@
                 //     URL: `http://${ip}:3000/process/admin`,
                 //     dataType: 'json'
                 // },
-                // processing: true,
-                // serverSide: true
+
                 ajax: {
                     url: 'http://${ip}:3000/process/admin',
                     dataSrc: ''
@@ -523,7 +522,9 @@
                     { data: 'action' },
                     { data: 'start_in' },
                     { data: 'end_in' }
-                ]
+                ],
+                processing: true,
+                serverSide: true
 
             })
             // $('#example1').DataTable({
