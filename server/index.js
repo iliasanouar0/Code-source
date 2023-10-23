@@ -228,6 +228,7 @@ wss.on('connection', wss => {
       let count = 0
       let length = seeds.length
       let toProcess = []
+
       for (let i = 0; i < active; i++) {
         count++
         toProcess.push(seeds[i])
@@ -243,6 +244,8 @@ wss.on('connection', wss => {
         }
         await resultManager.saveResult(result)
       }
+      let stat = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+      processStateManager.updateState(stat)
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
         for (let i = 0; i < toProcess.length; i++) {
