@@ -206,10 +206,6 @@ wss.on('connection', wss => {
     } else if (request == "resume") {
       processManager.resumedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "pause" })
-      let statechangeSeeds = []
-      for (let i = 0; i < seeds.length; i++) {
-        statechangeSeeds.push(seeds[i].id_seeds)
-      }
       let active
       let waiting = seeds.length - 3
       if (seeds.length >= 3) {
@@ -217,6 +213,10 @@ wss.on('connection', wss => {
       } else {
         active = seeds.length
         waiting = 0
+      }
+      let statechangeSeeds = []
+      for (let i = 0; i < seeds.length; i++) {
+        statechangeSeeds.push(seeds[i].id_seeds)
       }
       seedManager.updateState(statechangeSeeds, "waiting")
       wss.send('reload')
