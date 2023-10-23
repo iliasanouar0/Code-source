@@ -67,17 +67,15 @@ const getDuration = (request, response) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
         }
-        response.status(200).send(result)
-
-        // if (result.rows == undefined) {
-        //     response.status(200).send({ dr: '00:00:00' })
-        //     return
-        // }
-        // let start = new Date(result.rows[0].start_in)
-        // let end = new Date(result.rows[0].end_in)
-        // let duration = end - start
-        // let dr = msToMnSc(duration)
-        // response.status(200).send({ start: start, end: end, d: duration, dr: dr })
+        // response.status(200).send(result)
+        if (result.rowCount == 0) {
+            response.status(200).send({ dr: '00:00:00' })
+        }
+        let start = new Date(result.rows[0].start_in)
+        let end = new Date(result.rows[0].end_in)
+        let duration = end - start
+        let dr = msToMnSc(duration)
+        response.status(200).send({ start: start, end: end, d: duration, dr: dr })
     })
 }
 
