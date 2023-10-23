@@ -344,6 +344,11 @@ wss.on('connection', wss => {
       }
       await seedManager.updateState(statechangeSeeds, "pause")
       await seedManager.updateState(statechangeSeedsRunning, "pause")
+      let state = await processStateManager.getState(data.id_process)
+      let success = state[0].finished
+      let failed = state[0].failed
+      let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
+      await processStateManager.updateState(status)
       wss.send('reload')
     }
   })
