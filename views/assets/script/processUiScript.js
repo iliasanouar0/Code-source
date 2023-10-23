@@ -239,10 +239,29 @@ $(document).on('click', '.resume', event => {
     }
 })
 
+function msToMnSc(ms) {
+    var minutes = Math.floor(ms / 60000);
+    var seconds = ((ms % 60000) / 1000).toFixed(0);
+    return (
+        seconds == 60 ?
+            (minutes + 1) + ":00" :
+            minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+    );
+}
+
+
 const createRowProcessSeeds = data => {
+    let duration
     let status
     let rows = ""
     data.forEach(element => {
+        if (element.start_in == null || element.end_in == '0') {
+            duration = '00:00:00'
+        } else {
+            let start = new Date(element.start_in)
+            let end = new Date(element.end_in)
+            duration = msToMnSc(end - start)
+        }
         if (element.status == 'running') {
             status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="30px">'
         } else {
@@ -255,7 +274,7 @@ const createRowProcessSeeds = data => {
             <td>${element.isp}</td>
             <td  class="text-center">${status}</td>
             <td></td>
-            <td>00:00:00</td>
+            <td>${duration}</td>
             <td class="text-center">
                 <button type="button" class="btn btn-dark details" data-id="${element.id_seeds}"><i class="fas fa-eye"></i></button>
             </td>
