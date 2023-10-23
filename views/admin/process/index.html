@@ -500,7 +500,7 @@
     <script>
         let storage = { ...localStorage }
         let ip = storage.ip
-        $(function () {
+        function getData() {
             $("#example1").DataTable({
                 responsive: true,
                 lengthChange: false,
@@ -528,7 +528,7 @@
                     }
                 ],
             })
-        });
+        };
     </script>
 </body>
 
