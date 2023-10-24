@@ -282,5 +282,5 @@ module.exports = {
   // waitingState,
   // stoppedState,
   // successState
-  updateState
+  // updateState
 };
