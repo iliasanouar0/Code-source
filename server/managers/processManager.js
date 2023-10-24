@@ -105,7 +105,7 @@ const deleteProcess = (request, response) => {
             if (err) { response.status(409).send(err) } else { console.log(`records deleted`) }
         });
     });
-    response.status(200).send('seeds deleted');
+    response.status(200).send('process deleted');
 }
 
 const startedProcess = (data) => {

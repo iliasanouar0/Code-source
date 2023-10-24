@@ -522,6 +522,7 @@ $(document).on('click', '.delete-all-this', () => {
                     timer: 3000
                 })
             }).then(() => {
+                $('.checkAll').prop('checked', 'false')
                 getData()
             })
         } else if (result.isDismissed) {
