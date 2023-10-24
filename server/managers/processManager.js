@@ -66,9 +66,13 @@ const getAllProcessSeedsCount = (request, response) => {
 const getAllProcessSeedsServer = async (id) => {
     let sql = "SELECT process.id_process,process.action, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds"
     const client = await pool.connect()
-    const list = await client.query(sql, [id]);
-    client.release()
-    return list.rows;
+    const list = client.query(sql, [id], (err, res) => {
+        if (err) {
+            throw err.message
+        }
+        client.release()
+        return list.rows;
+    });
 }
 
 const getAllProcessSeedsByState = async (data) => {
