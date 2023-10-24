@@ -78,7 +78,7 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: start_in,
     }
-
+    console.log(obj);
     const wssUri = `ws://${ip}:7073/wss`;
     const websocket_s = new WebSocket(wssUri);
 
