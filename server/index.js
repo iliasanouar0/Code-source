@@ -391,7 +391,6 @@ wss.on('connection', wss => {
 
     } else if (request == 'reset') {
       console.log(request);
-      // await processManager.restedProcess(data.data)
       processManager.stoppedProcess(data.data)
 
       await resultManager.deleteResultsProcess(data.id_process)
