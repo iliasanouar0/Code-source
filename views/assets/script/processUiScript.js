@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 $(document).on('click', '.edit', event => {
     let id = $(event.target).data('id')
-    console.log(id);
+
     $('#edit_action').modal('show')
     $('#p_a_add').data('id', id)
 })
@@ -411,10 +411,12 @@ $(document).on('click', '.stop', event => {
     }
 })
 
+const editActions = (data) => {
+    console.log(data);
+}
 
 $(document).on('click', '#p_a_add', event => {
     let id = $(event.target).data('id')
-    console.log(id);
     let selected = $('.actions input:checked')
     if (selected.length == 0) {
         swal.fire({
@@ -427,5 +429,9 @@ $(document).on('click', '#p_a_add', event => {
     for (let i = 0; i < selected.length; i++) {
         valueSelect.push(selected[i].value)
     }
-    console.log(valueSelect);
+    let data = {
+        id_process: `${id}`,
+        actions: `${valueSelect}`
+    }
+    editActions(data)
 })
