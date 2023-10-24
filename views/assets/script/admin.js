@@ -14,6 +14,7 @@ $(document).on("click", ".info a", function () {
 // let ip = storage.ip
 
 $(document).on("click", "#logout", () => {
+  console.log('test');
   $("#modal-danger").modal("show");
 });
 
