@@ -8,13 +8,13 @@ const pool = new pg.Pool(config);
 
 
 const saveResult = async (data) => {
-    let sql = `INSERT INTO results (id_list, id_seeds, id_process, id_result, feedback, start_in, end_in) VALUES ($1, $2, $3, $4, $5, $6, $7)`
+    let sql = `INSERT INTO results (id_list, id_seeds, id_process, id_result, feedback, start_in, end_in, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
     var generator = new IdGenerator({
         len: 4,
         alphabet: "1234567890"
     });
     let id = generator.get();
-    let values = [data.id_list, data.id_seeds, data.id_process, id, data.feedback, data.start_in, data.end_in]
+    let values = [data.id_list, data.id_seeds, data.id_process, id, data.feedback, data.start_in, data.end_in, data.status]
     const client = await pool.connect()
     client.query(sql, values, (err) => {
         if (err) {
