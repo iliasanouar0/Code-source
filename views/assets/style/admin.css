@@ -67,6 +67,10 @@ i.reset {
   pointer-events: none;
 }
 
+i.fa-redo {
+  pointer-events: none;
+}
+
 .seeds-page {
   cursor: pointer;
 }
