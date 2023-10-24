@@ -77,9 +77,8 @@ const getAllProcessSeedsByState = async (data) => {
     const client = await pool.connect()
     const list = await client.query(sql, values);
     client.release()
-    return {
-        data: list.rows, count: list.rowCount
-    }
+    return list.rows
+
 }
 
 const updateActions = (request, response) => {
