@@ -82,10 +82,17 @@ const getAllProcessSeedsByState = async (data) => {
 }
 
 const updateActions = (request, response) => {
+    let query = "UPDATE process SET action=($1) WHERE id_process=($2)"
     const id = (request.params.id)
     const actions = (request.body)
     let val = [id, actions.actions]
-    response.status(200).send(val)
+    pool.query(query, val, (err, res) => {
+        if (err) {
+            response.status(500).send(err.message)
+        }
+        response.status(200).send('action updated')
+    })
+
 }
 
 const startedProcess = (data) => {
