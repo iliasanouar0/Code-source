@@ -72,7 +72,7 @@ $(document).on('click', "#p_add", () => {
 $(document).on('click', '.start', event => {
     const id = $(event.target)[0].attributes[2].value
     const status = "RUNNING"
-    const start_in = new Date().toLocaleString();
+    const start_in = new Date()
     let obj = {
         id_process: `${id}`,
         status: `${status}`,
