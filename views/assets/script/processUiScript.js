@@ -427,6 +427,7 @@ const editActions = (data) => {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        getData()
     });
 }
 
