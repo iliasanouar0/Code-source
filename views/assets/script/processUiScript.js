@@ -493,6 +493,7 @@ $(document).on('click', '.edit', event => {
     $('#p_a_add').data('id', id)
 })
 
-// $(document).on('click', '#p_a_add', event => {
-
-// })
+$(document).on('click', '#p_a_add', event => {
+    let id = $(event.target).data('id')
+    console.log(id);
+})
