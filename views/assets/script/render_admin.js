@@ -217,10 +217,11 @@ function getData() {
             return row.date_add
           }
           let date = row.start_in.split('T')
-          let time  = date[1].split('.')
+          let time = date[1].split('.')
           console.log(date);
           console.log(time);
-          return row.start_in
+          let start = `${date[0]} ${time[0]}`
+          return start
         }
 
       },
