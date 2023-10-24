@@ -93,7 +93,6 @@ wss.on('connection', wss => {
       }
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       processStateManager.addState(status)
-      let statechangeSeeds = []
       for (let i = 0; i < seeds.length; i++) {
         let result = {
           id_process: data.id_process,

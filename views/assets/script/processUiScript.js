@@ -78,7 +78,6 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: start_in,
     }
-    console.log(obj);
     const wssUri = `ws://${ip}:7073/wss`;
     const websocket_s = new WebSocket(wssUri);
 
@@ -204,18 +203,18 @@ $(document).on('click', '.status', event => {
     let id = $(event.target)[0].attributes[2].value
     let children = $(event.target).parent().parent()[0].children
     $('.count').html(children[2].innerHTML)
-    if (children[5].innerHTML == "RUNNING") {
+    if (children[6].innerHTML == "RUNNING") {
         $('.status_bg').removeClass("bg-success bg-danger bg-info")
         $('.status_bg').addClass("badge bg-success")
-        $('.status_bg').html(children[5].innerHTML)
-    } else if (children[5].innerHTML == "STOPPED") {
+        $('.status_bg').html(children[6].innerHTML)
+    } else if (children[6].innerHTML == "STOPPED") {
         $('.status_bg').removeClass("bg-success bg-danger bg-info")
         $('.status_bg').addClass("badge bg-danger")
-        $('.status_bg').html(children[5].innerHTML)
+        $('.status_bg').html(children[6].innerHTML)
     } else {
         $('.status_bg').removeClass("bg-success bg-danger bg-info")
         $('.status_bg').addClass("badge bg-info")
-        $('.status_bg').html(children[5].innerHTML)
+        $('.status_bg').html(children[6].innerHTML)
     }
     $('#p_s').html(id)
     fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
