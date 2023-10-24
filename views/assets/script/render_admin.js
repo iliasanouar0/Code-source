@@ -195,9 +195,11 @@ function getData() {
     },
     columns: [
       {
+        data: null,
         searchable: false,
         orderable: false,
-        data: function (data, type, row) {
+        defaultContent: "",
+        render: function (data, type, row) {
           return `<input type="checkbox" class="check" value="${row.id_process}">`
         }
       },
