@@ -195,7 +195,7 @@ function getData() {
     },
     columns: [
       {
-        data: 'null',
+        data: null,
         searchable: false,
         orderable: false,
       },
