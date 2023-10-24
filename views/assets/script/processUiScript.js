@@ -165,7 +165,9 @@ const createRowProcessSeeds = data => {
         }
         if (element.rstatus == 'running') {
             status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="30px">'
-        } else {
+        } else if (element.rstatus != 'running' || element.rstatus != 'waiting' || element.rstatus != 'paused' || element.rstatus != 'stopped') {
+            status = 'idel'
+        }else{
             status = element.rstatus
         }
         let tr =
