@@ -165,8 +165,8 @@ const createRowProcessSeeds = data => {
         }
         if (element.rstatus == 'running') {
             status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="30px">'
-            // } else if (element.rstatus == 'null') {
-            //     status = 'idel'
+        } else if (element.rstatus == null) {
+            status = 'idel'
         } else {
             status = element.rstatus
         }
