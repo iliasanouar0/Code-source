@@ -197,7 +197,7 @@ function getData() {
       {
         searchable: false,
         orderable: false,
-        render: function (data, type, row) {
+        data: function (data, type, row) {
           return `<input type="checkbox" class="check" value="${row.id_process}">`
         }
       },
