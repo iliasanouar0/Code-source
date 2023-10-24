@@ -36,6 +36,7 @@ const addProcess = data => {
             showConfirmButton: false,
             icon: 'success'
         }).then(() => {
+            $(".add_process").modal("hide");
             getData()
         })
     })
@@ -65,7 +66,6 @@ $(document).on('click', "#p_add", () => {
         "id_user": `${userData['id_user']}`,
         "id_list": `${p_list_add}`
     };
-    console.log(data);
     addProcess(data)
 })
 
