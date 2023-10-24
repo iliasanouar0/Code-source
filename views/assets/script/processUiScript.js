@@ -162,7 +162,9 @@ const createRowProcessSeeds = data => {
             let start = new Date(element.start_in)
             let end = new Date(element.end_in)
             duration = msToMnSc(end - start)
-        }
+        } 
+        console.log(typeof (element.rstatus));
+        console.log(element.rstatus);
         if (element.rstatus == 'running') {
             status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="30px">'
         } else if (element.rstatus == null) {
