@@ -75,7 +75,7 @@ $(document).on('click', '.start', event => {
     let obj = {
         id_process: `${id}`,
         status: `${status}`,
-        start_in: `${start_in}`,
+        start_in: start_in,
     }
 
     const wssUri = `ws://${ip}:7073/wss`;
