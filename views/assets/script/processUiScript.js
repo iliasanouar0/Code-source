@@ -11,86 +11,12 @@ $(document).ready(function () {
     $(".update").val(new Date().toDateInputValue());
 });
 
-const Process_data = document.querySelector('#Process_data')
-const createRowProcess = data => {
-    let rows = ""
-    data.forEach(element => {
-        if (element.status == "RUNNING") {
-            let tr =
-                `<tr><td>${element.id_process}</td>
-          <td>${element.count}</td>
-          <td>${element.f_name} ${element.l_name}</td>
-          <td>${element.list_name}</td>
-          <td>${element.isp}</td>
-          <td>${element.status}</td>
-          <td>${element.action}</td>
-          <td>${element.start_in}</td>
-          <td class="text-center">${element.end_in}</td>
-          <td>
-          <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-          <button type="button" class="btn btn-warning pause"  data-id="${element.id_process}"><i class="fas fa-pause"></i></button>
-          <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
-          <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-          </td></tr>`
-            rows += tr
-        } else if (element.status == "STOPPED") {
-            let tr =
-                `<tr><td>${element.id_process}</td>
-      <td>${element.count}</td>
-      <td>${element.f_name} ${element.l_name}</td>
-      <td>${element.list_name}</td>
-      <td>${element.isp}</td>
-      <td>${element.status}</td>
-      <td>${element.action}</td>
-      <td>${element.start_in}</td>
-      <td class="text-center">${element.end_in}</td>
-      <td>
-      <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-      <button type="button" class="btn btn-warning resume"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
-      <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-      </td></tr>`
-            rows += tr
-        } else if (element.status == "FINISHED") {
-            let tr =
-                `<tr><td>${element.id_process}</td>
-            <td>${element.count}</td>
-            <td>${element.f_name} ${element.l_name}</td>
-            <td>${element.list_name}</td>
-            <td>${element.isp}</td>
-            <td>${element.status}</td>
-            <td>${element.action}</td>
-            <td>${element.start_in}</td>
-            <td class="text-center">${element.end_in}</td>
-            <td>
-            <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-            <button type="button" class="btn btn-success" disabled data-id="${element.id_process}"><i class="fas fa-check"></i></button>
-            <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
-            <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-            </td></tr>`
-            rows += tr
-        } else {
-            let tr =
-                `<tr><td>${element.id_process}</td>
-      <td>${element.count}</td>
-      <td>${element.f_name} ${element.l_name}</td>
-      <td>${element.list_name}</td>
-      <td>${element.isp}</td>
-      <td>${element.status}</td>
-      <td>${element.action}</td>
-      <td>${element.start_in}</td>
-      <td class="text-center">${element.end_in}</td>
-      <td>
-      <button type="button" class="btn btn-primary status" data-id="${element.id_process}"><i class="far fa-eye"></i></button>
-      <button type="button" class="btn btn-success start"  data-id="${element.id_process}"><i class="fa fa-play"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${element.id_process}"><i class="fas fa-power-off"></i></button>
-      <button type="button" class="btn btn-info edit"  data-id="${element.id_process}"><i class="fas fa-edit"></i></button>
-      </td></tr>`
-            rows += tr
-        }
-    });
-    return rows
-}
+$(document).on('click', '.edit', event => {
+    let id = $(event.target).data('id')
+    console.log(id);
+    $('#edit_action').modal('show')
+    $('#p_a_add').data('id', id)
+})
 
 const addProcess = data => {
     fetch(`http://${ip}:3000/process/`, {
@@ -486,14 +412,14 @@ $(document).on('click', '.stop', event => {
 })
 
 
-$(document).on('click', '.edit', event => {
-    let id = $(event.target).data('id')
-    console.log(id);
-    $('#edit_action').modal('show')
-    $('#p_a_add').data('id', id)
-})
-
 $(document).on('click', '#p_a_add', event => {
     let id = $(event.target).data('id')
     console.log(id);
+    let selected = $('.actions input:checked')
+    console.log(selected);
+    let valueSelect = []
+    for (let i = 0; i < selected.length; i++) {
+        valueSelect.push(selected[i].value)
+    }
+    console.log(valueSelect);
 })
