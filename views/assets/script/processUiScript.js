@@ -463,7 +463,7 @@ $(".checkAll").change(function () {
         let action = `<button type="button" class="btn btn-danger delete-all-this"><i class="far fa-trash-alt"></i></button>`
         $('#action').html(action)
     } else {
-        $('#action').html('action')
+        $('#action').html('')
     }
 });
 
@@ -475,7 +475,7 @@ $(document).on('click', '.check', () => {
         let action = `<button type="button" class="btn btn-danger delete-all-this"><i class="far fa-trash-alt"></i></button>`
         $('#action').html(action)
     } else {
-        $('#action').html('action')
+        $('#action').html('')
     }
     console.log(check, allCheck.length);
     if (check.length == allCheck.length) {
@@ -483,4 +483,55 @@ $(document).on('click', '.check', () => {
     } else {
         $(".checkAll").prop("checked", false);
     }
+})
+
+$(document).on('click', '.delete-seeds', () => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: 'black',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let check = $("#Process_data input:checked")
+            const ides = []
+            for (let i = 0; i < check.length; i++) {
+                let ID = check[i].value
+                ides.push(ID)
+            }
+            fetch(`http://${ip}:3000/process/`, {
+                method: "PATCH",
+                body: `${JSON.stringify(ides)}`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                    'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH'
+                }
+            }).then(response => {
+                return response.text()
+            }).then(data => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: data,
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            }).then(() => {
+                getData()
+            })
+        } else if (result.isDismissed) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Cancelled',
+                showConfirmButton: false,
+                timer: 3000
+            })
+        }
+    })
 })

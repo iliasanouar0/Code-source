@@ -509,6 +509,7 @@ app.post("/process/actions/:id", processManager.updateActions)
 app.get("/process/admin", processManager.getAllData)
 app.get("/process/seeds/:id", processManager.getAllProcessSeeds)
 app.get('/process/page/:id', processManager.getAllProcessSeedsCount)
+app.patch("/process/", processManager.deleteProcess);
 
 // result API
 app.get("/result/feedback/:id", resultManager.getFeedback)
