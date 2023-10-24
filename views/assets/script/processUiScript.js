@@ -416,10 +416,9 @@ $(document).on('click', '#p_a_add', event => {
     let id = $(event.target).data('id')
     console.log(id);
     let selected = $('.actions input:checked')
-    console.log(selected);
     if (selected.length == 0) {
         swal.fire({
-            title: 'please select actions',
+            title: 'NO action selected',
             icon: 'error'
         })
         return
