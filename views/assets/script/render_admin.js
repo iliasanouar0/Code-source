@@ -216,7 +216,7 @@ function getData() {
           if (row.status == 'idel') {
             return row.date_add
           }
-          let date = row.start_in.split('T.')
+          let date = row.start_in.split('T')
           console.log(date);
           return row.start_in
         }
