@@ -200,7 +200,7 @@ wss.on('connection', wss => {
 
     } else if (request == "resume") {
       processManager.resumedProcess(data.data)
-      let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "pause" })
+      let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "paused" })
       console.log(seeds);
       // let active
       // let waiting = seeds.length - 3
