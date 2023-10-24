@@ -218,8 +218,6 @@ function getData() {
           }
           let date = row.start_in.split('T')
           let time = date[1].split('.')
-          console.log(date);
-          console.log(time);
           let start = `${date[0]} ${time[0]}`
           return start
         }
@@ -231,7 +229,11 @@ function getData() {
           if (row.end_in == null) {
             return `<i class="fas fa-minus"></i>`
           }
-          return row.end_in
+          // return row.end_in
+          let date = row.end_in.split('T')
+          let time = date[1].split('.')
+          let end = `${date[0]} ${time[0]}`
+          return end
         }
       },
       {
