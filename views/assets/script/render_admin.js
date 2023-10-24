@@ -195,7 +195,6 @@ function getData() {
     },
     columns: [
       {
-        data: null,
         searchable: false,
         orderable: false,
         render: function (data, type, row) {
