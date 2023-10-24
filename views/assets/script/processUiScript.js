@@ -167,7 +167,7 @@ const createRowProcessSeeds = data => {
             status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="30px">'
         } else if (element.rstatus != 'running' || element.rstatus != 'waiting' || element.rstatus != 'paused' || element.rstatus != 'stopped') {
             status = 'idel'
-        }else{
+        } else {
             status = element.rstatus
         }
         let tr =
@@ -389,12 +389,11 @@ function randomRange(myMin, myMax) {
 
 $(document).on('click', '.stop', event => {
     let id = $(event.target).data('id')
-    console.log(id);
     const status = "STOPPED"
+    let end_in = new Date()
     let obj = {
         id_process: `${id}`,
-        start_in: null,
-        end_in: null,
+        end_in: end_in,
         status: `${status}`,
     }
 
