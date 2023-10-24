@@ -477,6 +477,7 @@ $(document).on('click', '.check', () => {
     } else {
         $('#action').html('action')
     }
+    console.log(check.length, allCheck.length);
     if (check.length == allCheck.length) {
         $(".checkAll").prop("checked", true);
     } else {
