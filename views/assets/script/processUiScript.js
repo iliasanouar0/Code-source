@@ -162,7 +162,7 @@ const createRowProcessSeeds = data => {
             let start = new Date(element.start_in)
             let end = new Date(element.end_in)
             duration = msToMnSc(end - start)
-        } 
+        }
         if (element.rstatus == 'running') {
             status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="30px">'
         } else if (element.rstatus === null) {
@@ -521,7 +521,7 @@ $(document).on('click', '.delete-all-this', () => {
                     timer: 3000
                 })
             }).then(() => {
-                $('.checkAll').prop('checked', 'false')
+                console.log($('.checkAll').attributes)
                 getData()
             })
         } else if (result.isDismissed) {
