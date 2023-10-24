@@ -13,7 +13,6 @@ $(document).ready(function () {
 
 $(document).on('click', '.edit', event => {
     let id = $(event.target).data('id')
-
     $('#edit_action').modal('show')
     $('#p_a_add').data('id', id)
 })
@@ -37,7 +36,7 @@ const addProcess = data => {
             showConfirmButton: false,
             icon: 'success'
         }).then(() => {
-            location.reload()
+            getData()
         })
     })
 }
@@ -46,8 +45,8 @@ $(document).on('click', "#p_add", () => {
     let p_name = $('#p_name').val().toString()
     let p_list_add = $('#p_list_add').val().toString()
     let p_status = $('#p_status').val().toString()
-    let p_add_date = $('#p_add_date').val().toString()
-    let p_update_date = $('#p_update_date').val().toString()
+    let p_add_date = new Date()
+    let p_update_date = new Date()
     let selected = $('.actions input:checked')
     if (p_name == "" || p_list_add == "" || p_status == "" || p_add_date == "" || p_update_date == "" || selected.length == 0) {
         Swal.fire('Please fill all fields')
@@ -72,7 +71,7 @@ $(document).on('click', "#p_add", () => {
 $(document).on('click', '.start', event => {
     const id = $(event.target)[0].attributes[2].value
     const status = "RUNNING"
-    const start_in = new Date().toDateInputValue()
+    const start_in = new Date()
     let obj = {
         id_process: `${id}`,
         status: `${status}`,
