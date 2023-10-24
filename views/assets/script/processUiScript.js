@@ -415,7 +415,7 @@ const editActions = (data) => {
     console.log(data);
     fetch(`http://${ip}:3000/process/actions/${data.id_process}`, {
         method: "POST",
-        body: JSON.stringify({ actions: data.actions }),
+        body: JSON.stringify({ "actions": `${data.actions}` }),
     }).then(response => {
         return response.json()
     }).then(data => {
