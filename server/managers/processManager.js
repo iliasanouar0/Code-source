@@ -83,9 +83,9 @@ const getAllProcessSeedsByState = async (data) => {
 
 const updateActions = (request, response) => {
     const id = (request.params.id)
-    const actions = request.body
+    const actions = (request.body)
     let val = [id, actions]
-    response.status(200).send(request.body)
+    response.status(200).send(val)
 }
 
 const startedProcess = (data) => {
