@@ -172,7 +172,7 @@ $(document).on('click', '.start', event => {
 
 $(document).on('click', '.pause', event => {
     const id = $(event.target)[0].attributes[2].value
-    const status = "STOPPED"
+    const status = "PAUSED"
     let obj = {
         id_process: `${id}`,
         status: `${status}`,
@@ -464,7 +464,7 @@ $(document).on('click', '.stop', event => {
     console.log('i will stop');
     let id = $(event.target).data('id')
     console.log(id);
-    const status = "RESTED"
+    const status = "STOPPED"
     let obj = {
         id_process: `${id}`,
         start_in: null,
