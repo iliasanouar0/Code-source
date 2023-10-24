@@ -60,13 +60,13 @@ $(document).on('click', "#p_add", () => {
         "name": `${p_name}`,
         "action": `${valueSelect}`,
         "status": `${p_status}`,
-        "date_add": p_add_date,
-        "date_update": p_update_date,
+        "date_add": `${p_add_date}`,
+        "date_update": `${p_update_date}`,
         "id_user": `${userData['id_user']}`,
         "id_list": `${p_list_add}`
     };
     console.log(data);
-    // addProcess(data)
+    addProcess(data)
 })
 
 $(document).on('click', '.start', event => {
