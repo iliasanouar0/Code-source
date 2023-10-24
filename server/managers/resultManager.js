@@ -94,11 +94,42 @@ const getDuration = (request, response) => {
     })
 }
 
+const updateState = async (data, state) => {
+    let query = []
+    for (let i = 0; i < data.length; i++) {
+        query.push([state, data[i]])
+    }
+    const sql = `UPDATE results SET status=($1) WHERE id_seeds=($2)`
+    query.forEach(async (data) => {
+        const client = await pool.connect()
+        client.query(sql, data, (err) => {
+            if (err) {
+                throw err;
+            }
+        });
+        client.release()
+    })
+}
+
+const startNow = async (data) => {
+    let start_in = new Date()
+    const sql = `UPDATE results SET start_in=($2) WHERE id_seeds=($1)`
+    const client = await pool.connect()
+    client.query(sql, [data, start_in], (err) => {
+        if (err) {
+            throw err;
+        }
+        client.release()
+    });
+}
+
 module.exports = {
     saveResult,
     updateResult,
     getFeedback,
     getDuration,
     deleteResults,
-    deleteResultsProcess
+    deleteResultsProcess,
+    updateState,
+    startNow
 }

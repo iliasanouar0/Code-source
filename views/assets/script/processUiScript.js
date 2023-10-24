@@ -467,7 +467,6 @@ $(".checkAll").change(function () {
     }
 });
 
-
 $(document).on('click', '.check', () => {
     let check = $("#Process_data input:checked")
     let allCheck = $("#Process_data input:checkbox")
