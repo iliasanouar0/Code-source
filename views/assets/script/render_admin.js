@@ -196,18 +196,30 @@ function getData() {
     columns: [
       { data: 'id_process' },
       { data: 'count' },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `${row.f_name} ${row.l_name}`
-        },
-      },
+      { data: 'login' },
       { data: 'list_name' },
       { data: 'isp' },
       { data: 'status' },
       { data: 'action' },
-      { data: 'start_in' },
-      { data: 'end_in' },
+      {
+        data: null,
+        render: function (data, type, row) {
+          if (row.status == 'idel') {
+            return row.add_date
+          }
+          return row.start_in
+        }
+
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          if (row.end_in == null) {
+            return `<i class="fas fa-minus"></i>`
+          }
+          return row.end_in
+        }
+      },
       {
         data: null,
         searchable: false,
