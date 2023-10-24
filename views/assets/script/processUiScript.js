@@ -163,10 +163,10 @@ const createRowProcessSeeds = data => {
             let end = new Date(element.end_in)
             duration = msToMnSc(end - start)
         }
-        if (element.status == 'running') {
+        if (element.rstatus == 'running') {
             status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="30px">'
         } else {
-            status = element.status
+            status = element.rstatus
         }
         let tr =
             `<tr>
