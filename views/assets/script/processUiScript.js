@@ -65,7 +65,8 @@ $(document).on('click', "#p_add", () => {
         "id_user": `${userData['id_user']}`,
         "id_list": `${p_list_add}`
     };
-    addProcess(data)
+    console.log(data);
+    // addProcess(data)
 })
 
 $(document).on('click', '.start', event => {
