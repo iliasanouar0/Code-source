@@ -79,6 +79,7 @@ const login = async (data) => {
 }
 
 const kill = (id_process) => {
+    console.log(pidProcess);
     pidProcess.forEach(Element => {
         if (Element.id_process == id_process) {
             try {
