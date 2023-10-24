@@ -186,9 +186,7 @@ const createRow = (data) => {
 
 function getData() {
   $("#example1").DataTable({
-    // responsive: true,
-    // retrieve: true,
-    stateSave: true,
+    responsive: true,
     deferRender: true,
     destroy: true,
     ajax: {
