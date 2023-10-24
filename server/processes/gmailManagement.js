@@ -82,10 +82,13 @@ const kill = (id_process) => {
     console.log(pidProcess);
     pidProcess.forEach(Element => {
         if (Element.id_process == id_process) {
-            try {
-                process.kill(Element.pid, 'SIGINT')
-            } catch (error) {
-                console.log(error);
+            let state = require('is-running')(Element.pid)
+            if (state) {
+                try {
+                    process.kill(Element.pid, 'SIGINT')
+                } catch (error) {
+                    console.log(error);
+                }
             }
         }
     })
