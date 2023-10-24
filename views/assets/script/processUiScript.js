@@ -521,7 +521,8 @@ $(document).on('click', '.delete-all-this', () => {
                     timer: 3000
                 })
             }).then(() => {
-                console.log($('.checkAll')[0].checked = false)
+                $('.checkAll')[0].checked = false
+                $('#action').html('')
                 getData()
             })
         } else if (result.isDismissed) {
