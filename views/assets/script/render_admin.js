@@ -229,10 +229,9 @@ function getData() {
           if (row.end_in == null) {
             return `<i class="fas fa-minus"></i>`
           }
-          // return row.end_in
           let date = row.end_in.split('T')
           let time = date[1].split('.')
-          let end = `${date[0]} ${time[0]} <span class="text-danger">[${row.start_in - row.end_in}]</span>`
+          let end = `${date[0]} ${time[0]} <span class="text-danger">[test-test]</span>`
           return end
         }
       },
