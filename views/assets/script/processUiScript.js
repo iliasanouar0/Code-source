@@ -485,7 +485,7 @@ $(document).on('click', '.check', () => {
     }
 })
 
-$(document).on('click', '.delete-seeds', () => {
+$(document).on('click', '.delete-all-this', () => {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
