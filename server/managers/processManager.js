@@ -81,6 +81,13 @@ const getAllProcessSeedsByState = async (data) => {
     return list.rows;
 }
 
+const updateActions = (request, response) => {
+    const id = (request.params.id)
+    const actions = (request.body)
+    let val = [id, actions]
+    response.status(200).send(val)
+}
+
 const startedProcess = (data) => {
     let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
     let values = [data.status, data.start_in, data.id_process]
@@ -234,6 +241,7 @@ const getProcessStateServer = (request, response) => {
 module.exports = {
     addProcess,
     getAllData,
+    updateActions,
     startedProcess,
     getAllProcessSeeds,
     stoppedProcess,

@@ -413,6 +413,20 @@ $(document).on('click', '.stop', event => {
 
 const editActions = (data) => {
     console.log(data);
+    fetch(`http://${ip}:3000/process/actions/${data.id_process}`, {
+        method: "POST",
+        body: `${data.actions}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+        }
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        console.log(data);
+    })
 }
 
 $(document).on('click', '#p_a_add', event => {
