@@ -228,18 +228,8 @@ wss.on('connection', wss => {
       for (let i = 0; i < active; i++) {
         count++
         toProcess.push(seeds[i])
-        let start_in = new Date()
-        await seedManager.updateState([seeds[i].id_seeds], "running")
-        await resultManager.deleteResults(seeds[i].id_seeds)
-        let result = {
-          id_process: data.id_process,
-          id_list: seeds[i].id_list,
-          id_seeds: seeds[i].id_seeds,
-          feedback: 0,
-          start_in: start_in,
-          end_in: 0
-        }
-        await resultManager.saveResult(result)
+        await resultManager.updateState([seeds[i].id_seeds], "running")
+        await resultManager.startNow(seeds[i].id_seeds)
       }
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
@@ -255,7 +245,7 @@ wss.on('connection', wss => {
           let r = await processManager.processing(toProcess[0])
           if (r.indexOf('invalid') == -1) {
             success++
-            await seedManager.updateState([toProcess[0].id_seeds], "finished")
+            await resultManager.updateState([toProcess[0].id_seeds], "finished")
             let end_in = new Date()
             let result = {
               id_seeds: toProcess[0].id_seeds,
@@ -270,18 +260,8 @@ wss.on('connection', wss => {
             }
             if (toProcess.length < active && count < length && state != "STOPPED") {
               toProcess.push(seeds[count])
-              await seedManager.updateState([seeds[count].id_seeds], "running")
-              await resultManager.deleteResults(seeds[count].id_seeds)
-              let start_in = new Date()
-              let result = {
-                id_process: data.id_process,
-                id_list: seeds[count].id_list,
-                id_seeds: seeds[count].id_seeds,
-                feedback: 0,
-                start_in: start_in,
-                end_in: 0
-              }
-              await resultManager.saveResult(result)
+              await resultManager.updateState([seeds[count].id_seeds], "running")
+              await resultManager.startNow(seeds[count].id_seeds)
               count++
               let w = waiting - count + 3
               let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
@@ -289,7 +269,7 @@ wss.on('connection', wss => {
             }
           } else {
             failed++
-            await seedManager.updateState([toProcess[0].id_seeds], "failed")
+            await resultManager.updateState([toProcess[0].id_seeds], "failed")
             let end_in = new Date()
             let result = {
               id_seeds: toProcess[0].id_seeds,
@@ -304,18 +284,8 @@ wss.on('connection', wss => {
             }
             if (toProcess.length < active && count < length && state != "STOPPED") {
               toProcess.push(seeds[count])
-              await seedManager.updateState([seeds[count].id_seeds], "running")
-              await resultManager.deleteResults(seeds[count].id_seeds)
-              let start_in = new Date()
-              let result = {
-                id_process: data.id_process,
-                id_list: seeds[count].id_list,
-                id_seeds: seeds[count].id_seeds,
-                feedback: 0,
-                start_in: start_in,
-                end_in: 0
-              }
-              await resultManager.saveResult(result)
+              await resultManager.updateState([seeds[count].id_seeds], "running")
+              await resultManager.startNow(seeds[count].id_seeds)
               count++
               let w = waiting - count + 3
               let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
