@@ -243,7 +243,7 @@ function getData() {
         },
       }
     ],
-    "bDestroy": true
+    Destroy: true
   })
 };
 
