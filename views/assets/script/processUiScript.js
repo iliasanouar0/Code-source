@@ -461,9 +461,7 @@ function randomRange(myMin, myMax) {
 }
 
 $(document).on('click', '.stop', event => {
-    console.log('i will stop');
     let id = $(event.target).data('id')
-    console.log(id);
     const status = "STOPPED"
     let obj = {
         id_process: `${id}`,
