@@ -387,27 +387,28 @@ function randomRange(myMin, myMax) {
 
 $(document).on('click', '.stop', event => {
     let id = $(event.target).data('id')
+    console.log(id);
     const status = "STOPPED"
-    let obj = {
-        id_process: `${id}`,
-        start_in: null,
-        end_in: null,
-        status: `${status}`,
-    }
+    // let obj = {
+    //     id_process: `${id}`,
+    //     start_in: null,
+    //     end_in: null,
+    //     status: `${status}`,
+    // }
 
-    const wssUri = `ws://${ip}:7073/wss`;
-    const websocket_s = new WebSocket(wssUri);
+    // const wssUri = `ws://${ip}:7073/wss`;
+    // const websocket_s = new WebSocket(wssUri);
 
-    websocket_s.onopen = (e) => {
-        websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
-    }
+    // websocket_s.onopen = (e) => {
+    //     websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
+    // }
 
-    websocket_s.onmessage = (event) => {
-        let data = event.data
-        if (data == 'reload') {
-            getData()
-        }
-    }
+    // websocket_s.onmessage = (event) => {
+    //     let data = event.data
+    //     if (data == 'reload') {
+    //         getData()
+    //     }
+    // }
 })
 
 const editActions = (data) => {
