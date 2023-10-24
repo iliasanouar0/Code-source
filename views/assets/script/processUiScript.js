@@ -424,9 +424,13 @@ const editActions = (data) => {
             "actions": `${data.actions}`
         }),
     };
-
     $.ajax(settings).done(function (response) {
         console.log(response);
+        $('#edit_action').modal('hide')
+        swal.fire({
+            title: response,
+            icon: 'success'
+        })
         getData()
     });
 }
