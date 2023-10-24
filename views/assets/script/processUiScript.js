@@ -469,8 +469,8 @@ $(".checkAll").change(function () {
 
 
 $(document).on('click', '.check', () => {
-    let check = $("#process_data input:checked")
-    let allCheck = $("#process_data input:checkbox")
+    let check = $("#Process_data input:checked")
+    let allCheck = $("#Process_data input:checkbox")
     if (check.length > 0) {
         let action = `<button type="button" class="btn btn-danger delete-all-this"><i class="far fa-trash-alt"></i></button>`
         $('#action').html(action)
