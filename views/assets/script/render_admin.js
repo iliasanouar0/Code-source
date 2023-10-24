@@ -194,6 +194,11 @@ function getData() {
       dataSrc: '',
     },
     columns: [
+      {
+        data: 'null',
+        searchable: false,
+        orderable: false,
+      },
       { data: 'id_process' },
       { data: 'count' },
       { data: 'login' },
