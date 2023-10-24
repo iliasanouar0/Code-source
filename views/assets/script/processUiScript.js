@@ -204,7 +204,7 @@ $(document).on('click', '.status', event => {
     let id = $(event.target)[0].attributes[2].value
     let children = $(event.target).parent().parent()[0].children
     console.log(children);
-    $('.count').html(children[1].innerHTML)
+    $('.count').html(children[2].innerHTML)
     if (children[5].innerHTML == "RUNNING") {
         $('.status_bg').removeClass("bg-success bg-danger bg-info")
         $('.status_bg').addClass("badge bg-success")
