@@ -417,6 +417,10 @@ $(document).on('click', '#p_a_add', event => {
     console.log(id);
     let selected = $('.actions input:checked')
     console.log(selected);
+    if (selected.length == 0) {
+        swal.fire('please select actions')
+        return
+    }
     let valueSelect = []
     for (let i = 0; i < selected.length; i++) {
         valueSelect.push(selected[i].value)
