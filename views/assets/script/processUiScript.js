@@ -418,7 +418,10 @@ $(document).on('click', '#p_a_add', event => {
     let selected = $('.actions input:checked')
     console.log(selected);
     if (selected.length == 0) {
-        swal.fire('please select actions')
+        swal.fire({
+            title: 'please select actions',
+            icon: 'error'
+        })
         return
     }
     let valueSelect = []
