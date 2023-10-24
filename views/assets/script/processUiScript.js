@@ -45,8 +45,8 @@ $(document).on('click', "#p_add", () => {
     let p_name = $('#p_name').val().toString()
     let p_list_add = $('#p_list_add').val().toString()
     let p_status = $('#p_status').val().toString()
-    let p_add_date = new Date()
-    let p_update_date = new Date()
+    let p_add_date = new Date().toLocaleString();
+    let p_update_date = new Date().toLocaleString();
     let selected = $('.actions input:checked')
     if (p_name == "" || p_list_add == "" || p_status == "" || p_add_date == "" || p_update_date == "" || selected.length == 0) {
         Swal.fire('Please fill all fields')
