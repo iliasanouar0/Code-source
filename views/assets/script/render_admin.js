@@ -232,7 +232,7 @@ function getData() {
           // return row.end_in
           let date = row.end_in.split('T')
           let time = date[1].split('.')
-          let end = `${date[0]} ${time[0]}`
+          let end = `${date[0]} ${time[0]} <span class="text-danger">[test]</span>`
           return end
         }
       },
