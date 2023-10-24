@@ -481,7 +481,6 @@ $(document).on('click', '.stop', event => {
         let data = event.data
         if (data == 'reload') {
             $('#example1').DataTable({ "deferRender": true }).ajax.reload();
-            // getData()
         }
     }
 })
