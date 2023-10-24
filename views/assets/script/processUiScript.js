@@ -489,4 +489,5 @@ $(document).on('click', '.stop', event => {
 $(document).on('click', '.edit', event => {
     let id = $(event.target).data('id')
     console.log(id);
+    $('#edit_action').modal('show')
 })
