@@ -213,9 +213,17 @@ wss.on('connection', wss => {
       }
       let statechangeSeeds = []
       for (let i = 0; i < seeds.length; i++) {
-        statechangeSeeds.push(seeds[i].id_seeds)
+        let result = {
+          id_process: data.id_process,
+          id_list: seeds[i].id_list,
+          id_seeds: seeds[i].id_seeds,
+          feedback: 0,
+          start_in: 0,
+          end_in: 0,
+          status: 'waiting'
+        }
+        await resultManager.saveResult(result)
       }
-      await resultManager.updateState(statechangeSeeds, "waiting")
       let status = await processStateManager.getState(data.id_process)
       wss.send('reload')
       let success = status[0].finished
