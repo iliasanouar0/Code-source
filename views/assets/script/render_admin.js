@@ -214,7 +214,7 @@ function getData() {
         data: null,
         render: function (data, type, row) {
           if (row.status == 'idel') {
-            return row.add_date
+            return row.date_add
           }
           return row.start_in
         }
