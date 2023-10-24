@@ -188,8 +188,8 @@ function getData() {
   $("#example1").DataTable({
     // responsive: true,
     // retrieve: true,
+    stateSave: true,
     deferRender: true,
-    destroy: true,
     ajax: {
       url: `http://${ip}:3000/process/admin`,
       dataSrc: '',
@@ -243,6 +243,7 @@ function getData() {
         },
       }
     ],
+    "bDestroy": true
   })
 };
 
