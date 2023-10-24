@@ -1,7 +1,6 @@
 const pg = require("pg");
 var IdGenerator = require("auth0-id-generator");
 const format = require("pg-format");
-const { request, response } = require("express");
 const data = require('../db');
 const gmailManagement = require("../processes/gmailManagement");
 
