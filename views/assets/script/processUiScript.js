@@ -455,3 +455,31 @@ $(document).on('click', '#p_a_add', event => {
     }
     editActions(data)
 })
+
+$(".checkAll").change(function () {
+    let status = $(this).is(":checked") ? true : false;
+    $(".check").prop("checked", status);
+    if (status) {
+        let action = `<button type="button" class="btn btn-danger delete-all-this"><i class="far fa-trash-alt"></i></button>`
+        $('#action').html(action)
+    } else {
+        $('#action').html('action')
+    }
+});
+
+
+$(document).on('click', '.check', () => {
+    let check = $("#list_data input:checked")
+    let allCheck = $("#list_data input:checkbox")
+    if (check.length > 0) {
+        let action = `<button type="button" class="btn btn-danger delete-all-this"><i class="far fa-trash-alt"></i></button>`
+        $('#action').html(action)
+    } else {
+        $('#action').html('action')
+    }
+    if (check.length == allCheck.length) {
+        $(".checkAll").prop("checked", true);
+    } else {
+        $(".checkAll").prop("checked", false);
+    }
+})
