@@ -224,7 +224,7 @@ function getData() {
           if (row.status == 'FINISHED') {
             return `<div class="card">
             <div class="card-body">
-              This is some text within a card body.
+            test
             </div>
           </div>`
           } else if (row.status == 'RUNNING') {
