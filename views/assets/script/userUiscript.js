@@ -131,6 +131,7 @@ $(document).on('click', '.delete', event => {
     });
 });
 
+let isp
 $(document).on('click', '.edit', event => {
     $('#e_entity_add').html('')
     fetch(`http://${ip}:3000/entity`, {
@@ -148,59 +149,44 @@ $(document).on('click', '.edit', event => {
 
     let id = $(event.target).data('id')
     console.log(id);
-    // .then(() => {
-    //     $(".edit_user").modal("show");
-    // })
+    fetch(`http://${ip}:3000/users/${id}`, {
+        method: "Get",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+                "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+            "Access-Control-Allow-Methods":
+                "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+        },
+    }).then((response) => {
+        return response.json();
+    }).then(data => {
+        $("#e_f_name_add").val(data[0].f_name)
+        $("#e_l_name_add").val(data[0].l_name)
+        $("#e_login_add").val(data[0].login)
+        $("#e_Password_add").val(data[0].password)
+        let options = document.querySelector("#e_type_add").children;
+        let optionsE = document.querySelector("#e_entity_add").children;
+        for (let i = 0; i < options.length; i++) {
+            if (options.item(i).value == data[0].type) {
+                options.item(i).setAttribute("selected", "true");
+            }
+        }
+        for (let i = 0; i < optionsE.length; i++) {
+            if (optionsE.item(i).value == data[0].id_entity) {
+                optionsE.item(i).setAttribute("selected", "true");
+            }
+        }
+    }).then(() => {
+        isp = data[0].isp
+        $(".edit_user").modal("show");
+    })
 })
 
 
 
 
-//         let id = buttons[i].dataset.id;
-//         fetch(`http://${ip}:3000/users/${id}`, {
-//           method: "Get",
-//           headers: {
-//             "Content-Type": "application/json",
-//             "Access-Control-Allow-Origin": "*",
-//             "Access-Control-Allow-Headers":
-//               "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
-//             "Access-Control-Allow-Methods":
-//               "GET, HEAD, POST, PUT, DELETE, OPTIONS",
-//           },
-//         })
-//           .then((response) => {
-//             return response.json();
-//           })
-//           .then((data) => {
-//             document.querySelector("#e_f_name_add").value = data[0].f_name;
-//             document.querySelector("#e_l_name_add").value = data[0].l_name;
-//             document.querySelector("#e_login_add").value = data[0].login;
-//             document.querySelector("#e_Password_add").value =
-//               data[0].password;
-//             // let select = document.querySelector('#e_isp_add')
-//             let add_date = data[0].date_add;
-//             let options = document.querySelector("#e_type_add").children;
-//             let optionsE = document.querySelector("#e_entity_add").children;
-//             for (let i = 0; i < options.length; i++) {
-//               if (options.item(i).value == data[0].type) {
-//                 options.item(i).setAttribute("selected", "true");
-//               }
-//             }
-//             for (let i = 0; i < optionsE.length; i++) {
-//               if (optionsE.item(i).value == data[0].id_entity) {
-//                 optionsE.item(i).setAttribute("selected", "true");
-//               }
-//             }
-//             const myModal = new bootstrap.Modal(
-//               document.querySelector(".edit_user")
-//             );
-//             myModal.show();
-//             return {
-//               date: add_date,
-//               id_user: data[0].id_user,
-//               isp: data[0].isp,
-//             };
-//           })
 //           .then((data) => {
 //             let date = data.date;
 //             let id_user = data.id_user;
