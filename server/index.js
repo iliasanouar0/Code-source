@@ -193,7 +193,7 @@ wss.on('connection', wss => {
         if (toProcess.length == 0) {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
-          processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`})
+          processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
           wss.send('reload')
         }
       }
@@ -306,7 +306,7 @@ wss.on('connection', wss => {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
           let end_in = new Date();
-          processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED`})
+          processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
           wss.send('reload')
         }
       }
@@ -314,7 +314,6 @@ wss.on('connection', wss => {
     } else if (request == "pause") {
       processManager.stoppedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-      console.log(seeds);
       let seedsRunning = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
       let statechangeSeeds = []
       let statechangeSeedsRunning = []
@@ -343,7 +342,12 @@ wss.on('connection', wss => {
       }
       await resultManager.updateState(statechangeSeeds, "stopped")
       await processStateManager.deleteState(data.id_process)
-      processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
+      if (seeds.length > 0) {
+        processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
+      } else {
+        processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
+
+      }
       wss.send('reload')
     }
   })
