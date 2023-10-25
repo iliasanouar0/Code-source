@@ -1,3 +1,11 @@
+// $(document).on('click', '.password_show', event => [
+//    .t
+// ])
+$(document).ready(function () {
+    $(".password_show").click(event => {
+        $(event.target).toggleClass("blur");
+    });
+});
 
 $(document).on('click', '#add_user', () => {
     $('#entity_add').html('')
