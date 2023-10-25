@@ -24,7 +24,7 @@ const addEntity = (data) => {
             icon: "success",
             confirmButtonText: "ok",
         }).then(() => {
-            location.reload();
+            getDataEntity()
         });
     });
 };
