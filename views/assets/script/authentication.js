@@ -28,21 +28,11 @@ const passwordPattern = /([A-Za-z])+@([0-9]){4}\S/i;
  * *  passwordTest => in case passed : password = passed ? password = null
  */
 
-const validation = (login, password) => {
+const validation = (password) => {
   let result = {
-    loginStat: false,
     passwordStat: false,
   };
-  let loginTest = loginPattern.test(login);
   let passwordTest = passwordPattern.test(password);
-  switch (loginTest) {
-    case true:
-      result.loginStat = true;
-      break;
-    default:
-      result.loginStat = false;
-      break;
-  }
   switch (passwordTest) {
     case true:
       result.passwordStat = true;
@@ -76,18 +66,7 @@ submitButton.addEventListener("click", (e) => {
   } else {
     error.innerHTML = "";
   }
-  let result = validation(login.value, password.value);
-  switch (result.loginStat) {
-    case true:
-      login.classList.remove("is-invalid");
-      login.classList.add("is-valid");
-      break;
-    default:
-      login.classList.remove("is-valid");
-      login.classList.add("is-invalid");
-      break;
-  }
-
+  let result = validation(password.value);
   switch (result.passwordStat) {
     case true:
       password.classList.remove("is-invalid");
@@ -99,7 +78,7 @@ submitButton.addEventListener("click", (e) => {
       break;
   }
 
-  if (result.loginStat && result.passwordStat == true) {
+  if (result.passwordStat == true) {
     fetch(`http://${ip}:3000/users/0?login=${login.value}`, {
       method: "GET",
     })
