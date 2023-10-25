@@ -131,34 +131,6 @@ const entity_data = document.querySelector("#entity_data");
 const list_data = document.querySelector("#list_data");
 const Process_data = document.querySelector('#Process_data')
 
-const createRowList = (data) => {
-  let rows = [];
-  data.forEach((elm) => {
-    let tr = document.createElement("tr");
-    let td = document.createElement("td");
-    td.innerHTML = `<input type="checkbox" class="check" value="${elm.id_list}">`;
-    tr.appendChild(td);
-    for (let val in elm) {
-      let td = document.createElement("td");
-      td.innerText = elm[val];
-      tr.appendChild(td);
-    }
-    for (let val in elm) {
-      if (val.includes("id")) {
-        let td_actions = document.createElement("td");
-        td_actions.innerHTML = `<button type="button" class="btn btn-primary add_seeds" data-id="${elm[val]}"><i class="fa fa-plus"></i></button>
-                    <button type="button" class="btn btn-success edit" data-id="${elm[val]}"><i class="fas fa-edit"></i></button>
-                  <button type="button" class="btn btn-info view" data-id="${elm[val]}"><i class="fa fa-eye" disabled></i></button>`;
-        td_actions.classList.add("text-center");
-        tr.appendChild(td_actions);
-      }
-      break;
-    }
-    rows.push(tr);
-  });
-  return rows;
-};
-
 function msToMnSc(ms) {
   var minutes = Math.floor(ms / 60000);
   var seconds = ((ms % 60000) / 1000).toFixed(0);

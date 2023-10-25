@@ -1,4 +1,12 @@
-
+const wssUri = `ws://${ip}:7073/wss`;
+const websocket_s = new WebSocket(wssUri);
+websocket_s.onmessage = (event) => {
+    let data = event.data
+    console.log(data);
+    if (data == 'reload') {
+        getData()
+    }
+}
 Date.prototype.toDateInputValue = function () {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -78,19 +86,9 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: start_in,
     }
-    const wssUri = `ws://${ip}:7073/wss`;
-    const websocket_s = new WebSocket(wssUri);
-
     websocket_s.onopen = (e) => {
         websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
         getData()
-    }
-    websocket_s.onmessage = (event) => {
-        let data = event.data
-        console.log(data);
-        if (data == 'reload') {
-            getData()
-        }
     }
 })
 
@@ -102,18 +100,8 @@ $(document).on('click', '.pause', event => {
         id_process: `${id}`,
         status: `${status}`,
     }
-    const wssUri = `ws://${ip}:7073/wss`;
-    const websocket_s = new WebSocket(wssUri);
-
     websocket_s.onopen = (e) => {
         websocket_s.send(JSON.stringify({ request: "pause", id_process: id, data: obj }))
-    }
-
-    websocket_s.onmessage = (event) => {
-        let data = event.data
-        if (data == 'reload') {
-            getData()
-        }
     }
 })
 
@@ -125,18 +113,8 @@ $(document).on('click', '.resume', event => {
         status: `${status}`,
     }
 
-    const wssUri = `ws://${ip}:7073/wss`;
-    const websocket_s = new WebSocket(wssUri);
-
     websocket_s.onopen = (e) => {
         websocket_s.send(JSON.stringify({ request: "resume", id_process: id, data: obj }))
-    }
-
-    websocket_s.onmessage = (event) => {
-        let data = event.data
-        if (data == 'reload') {
-            getData()
-        }
     }
 })
 
@@ -396,19 +374,8 @@ $(document).on('click', '.stop', event => {
         end_in: end_in,
         status: `${status}`,
     }
-
-    const wssUri = `ws://${ip}:7073/wss`;
-    const websocket_s = new WebSocket(wssUri);
-
     websocket_s.onopen = (e) => {
         websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
-    }
-
-    websocket_s.onmessage = (event) => {
-        let data = event.data
-        if (data == 'reload') {
-            getData()
-        }
     }
 })
 

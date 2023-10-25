@@ -123,7 +123,7 @@ const addList = (data) => {
             'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
         }
     };
-    
+
     $.ajax(settings).done(function (responseText) {
         Swal.fire({
             title: 'list added successfully!',
@@ -131,7 +131,7 @@ const addList = (data) => {
             icon: 'success',
             confirmButtonText: 'ok'
         }).then(() => {
-            location.reload()
+            getDatalist()
         })
     });
 }
@@ -158,7 +158,7 @@ const addSeeds = (data) => {
             icon: 'success',
             confirmButtonText: 'ok'
         }).then(() => {
-            location.reload()
+            getDatalist()
         })
     });
     // })
@@ -380,7 +380,7 @@ $(document).on('click', '.save_edit', event => {
             icon: 'success',
             confirmButtonText: 'ok'
         }).then(() => {
-            location.reload()
+            getDatalist()
         })
     })
 })
