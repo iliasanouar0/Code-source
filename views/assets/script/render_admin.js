@@ -570,8 +570,10 @@ function getDataUser() {
       },
       {
         data: null,
+        searchable: false,
+        orderable: false,
         render: function (data, type, row) {
-          return `<div class="card m-0 bg-danger blur password">
+          return `<div class="card m-0 bg-danger blur password_show">
           <div class="card-body p-0 text-center text-light">
           ${row.password}
           </div>
@@ -584,7 +586,7 @@ function getDataUser() {
           switch (row.status) {
             case 'active':
               return `<div class="card m-0">
-              <div class="card-body p-0 text-center text-success">
+              <div class="card-body p-0 text-center text-success status_change">
               ${row.status}
               </div>
             </div>`
@@ -641,9 +643,10 @@ function getDataUser() {
         searchable: false,
         orderable: false,
         render: function (data, type, row) {
-          return `<button type="button" class="btn btn-primary status" data-id="${row.id_user}"><i class="far fa-eye"></i></button>
+          return `<div class="text-center">
           <button type="button" class="btn btn-success edit"  data-id="${row.id_user}"><i class="fas fa-edit"></i></button>
-        <button type="button" class="btn btn-danger delete" data-id="${row.id_user}"><i class="far fa-trash-alt"></i></button>`
+        <button type="button" class="btn btn-danger delete" data-id="${row.id_user}"><i class="far fa-trash-alt"></i></button>
+          </div>`
         }
       },
 
