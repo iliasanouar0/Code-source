@@ -68,12 +68,14 @@ $(document).on("click", "#add", () => {
     let l_name_add = $("#l_name_add").val();
     let type_add = $("#type_add").val();
     let entity_add = $("#entity_add").val();
-    console.log($("#login_add").val()=='')
-    console.log(typeof ($("#login_add").val()))
-    // $("#login_add").val(
-    //     loginGenerate(f_name_add, l_name_add, getRndInteger(10, 99))
-    // );
-    // let login_add = $("#login_add").val();
+    if ($("#login_add").val() == '') {
+        $("#login_add").val(
+            loginGenerate(f_name_add, l_name_add, getRndInteger(10, 99))
+        );
+    }
+    let login_add = $("#login_add").val();
+    console.log(login_add)
+
     // let add_date = new Date().toDateInputValue();
     // let add_update = new Date().toDateInputValue();
     // let password = passwordGenerate(f_name_add, getRndInteger(10000, 99999));
