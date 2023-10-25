@@ -118,11 +118,16 @@ $(document).on('click', '.edit', event => {
                 options.item(i).setAttribute("selected", "true");
             }
         }
+        $('#e_e_add').data('id', id)
         $(".edit_entity").modal('show')
         date = add_date
     })
 })
 
+$(document).on('click', '#e_e_add', event => {
+    let id = $(event.target).data('id')
+    console.log(id);
+})
 
 //                     .then((data) => {
 //                         let date = data.data;
