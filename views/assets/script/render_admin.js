@@ -367,7 +367,7 @@ function getData() {
 };
 
 function getDatalist() {
-  $("#example1").DataTable({
+  $("#listTable").DataTable({
     responsive: true,
     deferRender: true,
     destroy: true,
