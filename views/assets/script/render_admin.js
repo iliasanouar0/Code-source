@@ -325,7 +325,6 @@ function getDatalist() {
           return `<input type="checkbox" class="check" value="${row.id_list}">`
         }
       },
-      { data: 'id_list' },
       {
         data: null,
         searchable: false,
