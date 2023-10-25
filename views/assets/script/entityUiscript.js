@@ -124,7 +124,45 @@ $(document).on('click', '.edit', event => {
 
 $(document).on('click', '#e_e_add', event => {
     let id = $(event.target).data('id')
-    console.log(id);
+    let e_name = $("#e_e_name").val().toString();
+    let e_status = $("#e_e_status").val().toString();
+    let e_update_date = $("#e_e_update_date").val().toString();
+    if (
+        e_name == "" ||
+        e_status == "" ||
+        e_update_date == ""
+    ) {
+        Swal.fire("Please fill all fields");
+        return;
+    }
+    const data = {
+        nom: `${e_name}`,
+        status: `${e_status}`,
+        date_update: `${e_update_date}`,
+    };
+    fetch(`http://${ip}:3000/entity/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+                "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+            "Access-Control-Allow-Methods":
+                "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+        },
+    }).then((response) => {
+        return response.text();
+    }).then((data) => {
+        Swal.fire({
+            title: "entity Updated successfully!",
+            text: data,
+            icon: "success",
+            confirmButtonText: "ok",
+        }).then(() => {
+            getDataEntity()
+        });
+    });
 })
 
 //                     .then((data) => {
