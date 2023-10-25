@@ -466,13 +466,6 @@ function getDataEntity() {
       url: `http://${ip}:3000/entity/`,
       dataSrc: '',
     },
-    data: {
-      "id_entity": 1,
-      "nom": "IT",
-      "status": "active",
-      "date_add": "2023-10-09T04:00:00.000Z",
-      "date_update": "2023-10-09T04:00:00.000Z"
-    },
     columns: [
       { data: 'id_entity' },
       {
@@ -480,7 +473,7 @@ function getDataEntity() {
         searchable: false,
         render: function (data, type, row) {
           return `<div class="card m-0">
-          <div class="card-body p-0 text-center text-light">
+          <div class="card-body p-0 text-center">
           ${row.nom}
           </div>
         </div>`
