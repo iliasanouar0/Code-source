@@ -35,7 +35,6 @@ const addUser = (data) => {
             "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
         },
     };
-
     $.ajax(settings).done(function (responseText) {
         Swal.fire({
             title: "user added successfully!",
@@ -43,7 +42,7 @@ const addUser = (data) => {
             icon: "success",
             confirmButtonText: "ok",
         }).then(() => {
-            location.reload();
+            getDataUser()
         });
     });
 };
@@ -106,20 +105,12 @@ $(document).on("click", "#add", () => {
     $(".add_user").modal("hide");
 });
 
+$(document).on('click', '.delete', event => {
+    let id = $(event.target).data('id')
+    console.log(id);
+})
 
-// fetch(`http://${ip}:3000/users/`, {
-//   method: "GET",
-// })
-//   .then((response) => {
-//     return response.json();
-//   })
-//   .then((data) => {
-//     let rows = createRow(data);
-//     rows.forEach((row) => {
-//       user_data.appendChild(row);
-//     });
-//   })
-//   .then(() => {
+
 //     const deleteBtn = document.querySelectorAll(".delete");
 //     return deleteBtn;
 //   })
