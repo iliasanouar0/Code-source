@@ -315,16 +315,6 @@ function getDatalist() {
       url: `http://${ip}:3000/lists`,
       dataSrc: '',
     },
-    data: {
-      "id_list": 1213,
-      "name": "test-4",
-      "isp": "gmail",
-      "status": "active",
-      "date_add": "2023-10-17T04:00:00.000Z",
-      "date_update": "2023-10-17T04:00:00.000Z",
-      "id_user": 1,
-      "seeds_count": "3"
-    },
     columns: [
       {
         data: null,
@@ -374,17 +364,6 @@ function getDatalist() {
           return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${add}
-          </div>
-        </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          let update = new Date(row.date_update).toLocaleString()
-          return `<div class="b-action card m-0">
-          <div class="card-body p-0 text-center text-dark">
-          ${update}
           </div>
         </div>`
         }
