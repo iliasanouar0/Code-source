@@ -80,6 +80,11 @@ i.fa-redo {
   max-width: 1400px;
 }
 
+.b-action {
+  border: 1px solid orange;
+  background-color: #ffa50029;
+}
+
 #fullpage {
   display: none;
   position: absolute;
