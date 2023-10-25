@@ -223,7 +223,7 @@ function getData() {
         render: function (data, type, row) {
           if (row.status == 'FINISHED') {
             return `<div class="card border-success">
-            <div class="card-body p-1">
+            <div class="card-body p-1 test-center">
             test
             </div>
           </div>`
