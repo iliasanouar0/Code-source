@@ -84,10 +84,10 @@ $(document).on('click', '.delete', event => {
                     text: data,
                     icon: "warning",
                     confirmButtonText: "ok",
-                }).then(() => {
-                    getDataEntity();
-                });
-            })
+                })
+            }).then(() => {
+                getDataEntity();
+            });
         } else if (result.isDismissed) {
             console.log("cancelled");
         }
