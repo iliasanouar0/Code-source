@@ -229,7 +229,7 @@ function getData() {
           if (row.end_in == null) {
             return `<i class="fas fa-minus"></i>`
           }
-          let end_in = new Date(row.end_in)
+          let end_in = new Date(row.end_in).toLocaleString()
           console.log(end_in);
           let date = row.end_in.split('T')
           let time = date[1].split('.')
