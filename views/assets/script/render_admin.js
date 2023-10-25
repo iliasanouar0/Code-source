@@ -526,6 +526,86 @@ function getDataEntity() {
   })
 };
 
+function getDataUser() {
+  $("#userTable").DataTable({
+    responsive: true,
+    deferRender: true,
+    destroy: true,
+    autoWidth: false,
+    ajax: {
+      url: `http://${ip}:3000/users/`,
+      dataSrc: '',
+    },
+    data: {
+      "id_user": 1,
+      "f_name": "ilias",
+      "l_name": "anouar",
+      "login": "ianouar52",
+      "type": "admin",
+      "password": "ilias@24739",
+      "status": "active",
+      "date_add": "2023-10-09T04:00:00.000Z",
+      "date_update": "2023-09-09T04:00:00.000Z",
+      "id_entity": 1,
+      "isp": "Gmail"
+    },
+    columns: [
+      { data: 'id_user' },
+      {
+        data: null,
+        searchable: false,
+        render: function (data, type, row) {
+          return 
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.status}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          let add = new Date(row.date_add).toLocaleString()
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${add}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          let update = new Date(row.date_update).toLocaleString()
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${update}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        searchable: false,
+        orderable: false,
+        render: function (row) {
+          return `<div class="text-center">
+          <button type="button" class="btn btn-success edit"  data-id="${row.id_entity}"><i class="fas fa-edit"></i></button>
+        <button type="button" class="btn btn-danger delete" data-id="${row.id_entity}"><i class="far fa-trash-alt"></i></button>
+          </div>`
+        }
+      }
+    ],
+  })
+};
+
+
 if (path.includes("/admin/users/")) {
   document.querySelector("#add_user").addEventListener("click", () => {
     const select = document.querySelector("#entity_add");
