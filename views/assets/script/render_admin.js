@@ -237,7 +237,16 @@ function getData() {
         }
       },
       { data: 'list_name' },
-      { data: 'isp' },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="card bg-lime">
+          <div class="card-body p-0 text-center text-light">
+          ${row.login}
+          </div>
+        </div>`
+        }
+      },
       {
         data: null,
         render: function (data, type, row) {
