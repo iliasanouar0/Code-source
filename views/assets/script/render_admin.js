@@ -368,36 +368,19 @@ function getDatalist() {
         }
       },
       {
-        "id_list": 3221,
-        "name": "test-11",
-        "isp": "all",
-        "status": "active",
-        "date_add": "2023-10-17T04:00:00.000Z",
-        "date_update": "Wed Oct 25 2023 17:59:29 GMT+0100 (UTC+01:00)",
-        "id_user": 1,
-        "seeds_count": "12",
-        "f_name": "ilias",
-        "l_name": "anouar",
-        "login": "ianouar52",
-        "type": "admin",
-        "password": "ilias@24739",
-        "id_entity": 1,
-        "nom": "IT"
-      },
-      {
         data: null,
         render: function (data, type, row) {
-          return `<div class="row g-1">
+          return `<div class="row gap-2">
+          </div>
+          <div class="bg-purple card m-0 col">
+          <div class="card-body p-0 text-center text-light">
+          ${row.nom}
+          </div>
+        </div>
           <div class="b-action card m-0 col">
           <div class="card-body p-0 text-center text-dark">
           ${row.login}
           </div>
-        </div>
-        <div class="bg-purple card m-0 col">
-        <div class="card-body p-0 text-center text-light">
-        ${row.nom}
-        </div>
-      </div>
           </div>
          `
         }
