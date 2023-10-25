@@ -516,9 +516,10 @@ function getDataEntity() {
         searchable: false,
         orderable: false,
         render: function (row) {
-          return `<button type="button" class="btn btn-primary status" data-id="${row.id_entity}"><i class="far fa-eye"></i></button>
+          return `<div class="text-center">
           <button type="button" class="btn btn-success edit"  data-id="${row.id_entity}"><i class="fas fa-edit"></i></button>
-        <button type="button" class="btn btn-danger delete" data-id="${row.id_entity}"><i class="far fa-trash-alt"></i></button>`
+        <button type="button" class="btn btn-danger delete" data-id="${row.id_entity}"><i class="far fa-trash-alt"></i></button>
+          </div>`
         }
       }
     ],
