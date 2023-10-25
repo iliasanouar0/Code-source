@@ -470,7 +470,6 @@ function getDataEntity() {
       { data: 'id_entity' },
       {
         data: null,
-        searchable: false,
         render: function (data, type, row) {
           return `<div class="card m-0">
           <div class="card-body p-0 text-center">
@@ -535,19 +534,6 @@ function getDataUser() {
     ajax: {
       url: `http://${ip}:3000/users/`,
       dataSrc: '',
-    },
-    data: {
-      "id_user": 1,
-      "f_name": "ilias",
-      "l_name": "anouar",
-      "login": "ianouar52",
-      "type": "admin",
-      "password": "ilias@24739",
-      "status": "active",
-      "date_add": "2023-10-09T04:00:00.000Z",
-      "date_update": "2023-09-09T04:00:00.000Z",
-      "id_entity": 1,
-      "isp": "Gmail"
     },
     columns: [
       { data: 'id_user' },
@@ -652,6 +638,8 @@ function getDataUser() {
       },
       {
         data: null,
+        searchable: false,
+        orderable: false,
         render: function (data, type, row) {
           return `<button type="button" class="btn btn-primary status" data-id="${row.id_user}"><i class="far fa-eye"></i></button>
           <button type="button" class="btn btn-success edit"  data-id="${row.id_user}"><i class="fas fa-edit"></i></button>
