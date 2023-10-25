@@ -218,7 +218,42 @@ function getData() {
       { data: 'login' },
       { data: 'list_name' },
       { data: 'isp' },
-      { data: 'status' },
+      {
+        data: null,
+        render: function (data, type, row) {
+          if (row.status == 'FINISHED') {
+            return `<div class="card">
+            <div class="card-body">
+              This is some text within a card body.
+            </div>
+          </div>`
+          } else if (row.status == 'RUNNING') {
+            return `<div class="card">
+            <div class="card-body">
+              This is some text within a card body.
+            </div>
+          </div>`
+          } else if (row.status == 'PAUSED') {
+            return `<div class="card">
+            <div class="card-body">
+              This is some text within a card body.
+            </div>
+          </div>`
+          } else if (row.status == 'STOPPED') {
+            return `<div class="card">
+            <div class="card-body">
+              This is some text within a card body.
+            </div>
+          </div>`
+          } else {
+            return `<div class="card">
+            <div class="card-body">
+              This is some text within a card body.
+            </div>
+          </div>`
+          }
+        }
+      },
       { data: 'action' },
       {
         data: null,
