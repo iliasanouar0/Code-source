@@ -555,7 +555,11 @@ function getDataUser() {
         data: null,
         searchable: false,
         render: function (data, type, row) {
-          return `${row.f_name} ${row.l_name}`
+          return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.f_name} ${row.l_name}
+          </div>
+        </div>`
         }
       },
       {
