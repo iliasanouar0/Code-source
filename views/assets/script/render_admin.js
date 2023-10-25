@@ -260,8 +260,30 @@ function getData() {
                 ${row.status}
                 </div>
               </div>`
+            case 'RUNNING':
+              return `<div class="card border-primary">
+                  <div class="card-body p-1 text-center text-primary">
+                  ${row.status}
+                  </div>
+                </div>`
+            case 'PAUSED':
+              return `<div class="card border-warning">
+                      <div class="card-body p-1 text-center text-warning">
+                      ${row.status}
+                      </div>
+                    </div>`
+            case 'STOPPED':
+              return `<div class="card border-danger">
+                       <div class="card-body p-1 text-center text-danger">
+                        ${row.status}
+                        </div>
+                      </div>`
             default:
-              break;
+              return `<div class="card border-info">
+                         <div class="card-body p-1 text-center text-info">
+                          ${row.status}
+                          </div>
+                        </div>`
           }
         }
       },
