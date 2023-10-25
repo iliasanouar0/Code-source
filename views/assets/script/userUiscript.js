@@ -1,5 +1,5 @@
 $(document).on('click', '.password_show', event => {
-    console.log('test');
+    console.log( $(event.target));
     $(event.target).toggleClass("blur")
 })
 // $(document).ready(function () {
