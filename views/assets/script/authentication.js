@@ -15,12 +15,10 @@ let ip = storage.ip
  * Login validation pattern : /([A-Za-z])+([0-9]){1}\S/gi
  * Password validation pattern : /([A-Za-z])+@([0-9]){4}\S/gi
  */
-const loginPattern = /([A-Za-z])+([0-9]){1}\S/i;
 const passwordPattern = /([A-Za-z])+@([0-9]){4}\S/i;
 
 /**
  *
- * @param {string} login
  * @param {string} password
  *
  * Validation the password and login =>
