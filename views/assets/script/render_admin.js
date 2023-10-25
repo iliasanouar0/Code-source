@@ -629,7 +629,7 @@ function getDataUser() {
       {
         data: null,
         render: function (data, type, row) {
-          return `<div class="bg-lightblue card m-0">
+          return `<div class="bg-teal card m-0">
           <div class="card-body p-0 text-center text-light">
           ${row.isp}
           </div>
