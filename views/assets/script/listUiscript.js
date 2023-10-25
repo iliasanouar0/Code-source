@@ -147,7 +147,7 @@ const addList = (data) => {
 $(document).on('click', '.edit', event => {
     let id = $(event.target).data('id')
     $(event.target).html('<i class="fas fa-check"></i>')
-    $(event.target).toggleClass('save')
+    $(event.target).toggleClass('save edit')
 
 })
 
