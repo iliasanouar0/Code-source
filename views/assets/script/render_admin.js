@@ -293,7 +293,16 @@ function getData() {
           }
         }
       },
-      { data: 'action' },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="card b-action">
+          <div class="card-body p-0 text-center">
+          ${row.action}
+          </div>
+        </div>`
+        }
+      },
       {
         data: null,
         render: function (data, type, row) {
