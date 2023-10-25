@@ -870,16 +870,4 @@ if (path.includes("/admin/users/")) {
   //     }
   //   })
   getDatalist()
-  let addBtn = document.querySelectorAll(".add_seeds");
-  for (let i = 0; i < addBtn.length; i++) {
-    addBtn[i].addEventListener("click", () => {
-      let id = addBtn[i].dataset.id;
-      document.querySelector("#l_seeds_add").dataset.id = id;
-      document.querySelector(".bulk").dataset.id = id;
-      const myModal = new bootstrap.Modal(
-        document.querySelector(".add_seeds_md")
-      );
-      myModal.show();
-    });
-  }
 }

@@ -10,6 +10,25 @@ $(document).ready(function () {
     $("#e_add_date").val(new Date().toDateInputValue());
     $(".update").val(new Date().toDateInputValue());
 });
+
+// let addBtn = document.querySelectorAll(".add_seeds");
+// for (let i = 0; i < addBtn.length; i++) {
+//     addBtn[i].addEventListener("click", () => {
+//         let id = addBtn[i].dataset.id;
+//         document.querySelector("#l_seeds_add").dataset.id = id;
+//         document.querySelector(".bulk").dataset.id = id;
+//         const myModal = new bootstrap.Modal(
+//             document.querySelector(".add_seeds_md")
+//         );
+//         myModal.show();
+//     });
+// }
+
+$(document).on('click', '.add_seeds', event => {
+    id = $(event.target).data('id')
+    console.log(id);
+})
+
 $(document).on('click', '.bulk', event => {
     $('.add_seeds_md').modal('hide');
     $('#modal-bulk-add').modal('show');
