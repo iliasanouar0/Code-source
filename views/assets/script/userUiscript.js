@@ -164,8 +164,6 @@ $(document).on('click', '.edit', event => {
     }).then(data => {
         $("#e_f_name_add").val(data[0].f_name)
         $("#e_l_name_add").val(data[0].l_name)
-        $("#e_login_add").val(data[0].login)
-        $("#e_Password_add").val(data[0].password)
         let options = document.querySelector("#e_type_add").children;
         let optionsE = document.querySelector("#e_entity_add").children;
         for (let i = 0; i < options.length; i++) {
@@ -179,6 +177,7 @@ $(document).on('click', '.edit', event => {
             }
         }
         isp = data[0].isp
+        console.log(isp);
     }).then(() => {
         $(".edit_user").modal("show");
     })
@@ -186,11 +185,6 @@ $(document).on('click', '.edit', event => {
 
 
 
-
-//           .then((data) => {
-//             let date = data.date;
-//             let id_user = data.id_user;
-//             let isp = data.isp;
 //             document.querySelector("#edit").addEventListener("click", () => {
 //               let objectDate = new Date();
 //               let day = objectDate.getDate();
