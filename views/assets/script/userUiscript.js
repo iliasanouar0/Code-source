@@ -76,7 +76,7 @@ $(document).on("click", "#add", () => {
     let add_date = new Date().toDateInputValue();
     let add_update = new Date().toDateInputValue();
     let password = passwordGenerate(f_name_add, getRndInteger(10000, 99999));
-    let isp_add = $("#isp_add option:selected").text();
+    let isp_add = $("#isp_add option:selected");
     console.log(isp_add);
     // const result = isp_add.split(/(?=[A-Z])/);
     // let isp = "";
