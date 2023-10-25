@@ -84,7 +84,6 @@
                                         <th><input type="checkbox" name="checkbox" class="checkAll"></th>
                                         <th>Name</th>
                                         <th>ISP</th>
-                                        <th>Status</th>
                                         <th>Add date</th>
                                         <th>User</th>
                                         <th>Count</th>
@@ -125,12 +124,11 @@
                                 <label for="la_name">Name</label>
                                 <input type="text" class="form-control" id="la_name">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 <label>Status</label>
                                 <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true"
                                     id="l_status">
-                                    <option value="" selected>-_-_SELECT STATUS_-_-</option>
-                                    <option value="active">active</option>
+                                    <option value="active" selected>active</option>
                                     <option value="pending">pending</option>
                                     <option value="inactive">inactive</option>
                                 </select>
@@ -664,8 +662,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.6.0/pagination.min.js"
-    integrity="sha512-GzbaI5EsNzdEUq6/2XLYpr1y9CUZRIVsUeWTAFgULtQa5jZ3Nug8i0nZKM6jp9NffBCZhymPPQFcF0DK+JkRpw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-GzbaI5EsNzdEUq6/2XLYpr1y9CUZRIVsUeWTAFgULtQa5jZ3Nug8i0nZKM6jp9NffBCZhymPPQFcF0DK+JkRpw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../assets/script/listUiscript.js" defer></script>
     <script src="../../assets/script/admin.js" defer></script>
 </body>

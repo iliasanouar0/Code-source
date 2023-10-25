@@ -146,7 +146,7 @@ const addList = (data) => {
 
 $(document).on('click', '.edit', event => {
     let id = $(event.target).data('id')
-    console.log(id);
+    $(event.target).html('test')
 })
 
 const addSeeds = (data) => {
