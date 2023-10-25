@@ -23,9 +23,9 @@ const addEntity = (data) => {
             text: responseText.message,
             icon: "success",
             confirmButtonText: "ok",
-        }).then(() => {
-            getDataEntity()
-        });
+        })
+    }).then(() => {
+        getDataEntity()
     });
 };
 
