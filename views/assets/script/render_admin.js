@@ -229,11 +229,11 @@ function getData() {
           if (row.end_in == null) {
             return `<i class="fas fa-minus"></i>`
           }
-          let end_in = new Date(row.end_in).toLocaleString()
+          let end_in = new Date(row.end_in)
           console.log(end_in);
           let date = row.end_in.split('T')
           let time = date[1].split('.')
-          let end = `${date[0]} ${time[0]} <span class="text-danger">[test-test]</span>`
+          let end = `${end_in.toLocaleString()} <span class="text-danger">[test-test]</span>`
           return end
         }
       },
