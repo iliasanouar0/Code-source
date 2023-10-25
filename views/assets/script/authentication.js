@@ -99,7 +99,7 @@ submitButton.addEventListener("click", (e) => {
         }
         sessionStorage.setItem("user", JSON.stringify(data[0]));
         if (data[0].type == "admin" && data[0].status == "active") {
-          window.location.href = "../admin/";
+          window.location.href = "../admin/process";
         } else if (data[0].type == "sup") {
           document.location.href = "../supervisor/";
         } else {
