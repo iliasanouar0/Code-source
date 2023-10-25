@@ -148,7 +148,12 @@ $(document).on('click', '.edit', event => {
     let id = $(event.target).data('id')
     $(event.target).html('<i class="fas fa-check"></i>')
     $(event.target).toggleClass('save edit')
+})
 
+$(document).on('click', '.save', event => {
+    let id = $(event.target).data('id')
+    $(event.target).html('<i class="fas fa-check"></i>')
+    $(event.target).toggleClass('save edit')
 })
 
 const addSeeds = (data) => {
