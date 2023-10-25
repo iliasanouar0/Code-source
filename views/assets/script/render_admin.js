@@ -581,7 +581,7 @@ function getDataUser() {
       {
         data: null,
         render: function (data, type, row) {
-          return `<div class="card m-0 bg-danger">
+          return `<div class="card m-0 bg-danger blur">
           <div class="card-body p-0 text-center text-light">
           ${row.password}
           </div>
