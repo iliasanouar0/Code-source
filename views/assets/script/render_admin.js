@@ -219,7 +219,7 @@ function getData() {
         data: null,
         searchable: false,
         render: function (data, type, row) {
-          return `<div class="card bg-info">
+          return `<div class="card bg-info w-50">
           <div class="card-body p-0 px-0 text-center text-light">
           ${row.count}
           </div>
