@@ -371,7 +371,7 @@ function getDatalist() {
         data: null,
         render: function (data, type, row) {
           return `<div class="row gap-2 m-1">
-          <div class="bg-purple card m-0 col w-25">
+          <div class="bg-purple card m-0 col-md-auto">
             <div class="card-body p-0 text-center text-light">
             ${row.nom}
           </div>
