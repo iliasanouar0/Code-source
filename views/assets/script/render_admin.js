@@ -226,9 +226,8 @@ function getData() {
           if (row.status == 'idel') {
             return row.date_add
           }
-          let date = row.start_in.split('T')
-          let time = date[1].split('.')
-          let start = `${date[0]} ${time[0]}`
+          let start_in = new Date(row.start_in)
+          let start = `${start_in.toLocaleString()}`
           return start
         }
 
@@ -243,7 +242,7 @@ function getData() {
           let start_in = new Date(row.start_in)
           console.log(end_in);
           console.log(start_in);
-          let end = `${end_in.toLocaleString()} <span class="text-danger">[${msToMnSc(end_in - start_in)} min]</span>`
+          let end = `${end_in.toLocaleString()} <span class="text-danger">[ ${msToMnSc(end_in - start_in)} min ]</span>`
           return end
         }
       },
