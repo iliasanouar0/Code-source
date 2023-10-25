@@ -199,6 +199,7 @@ function getData() {
     responsive: true,
     deferRender: true,
     destroy: true,
+    autoWidth: false,
     ajax: {
       url: `http://${ip}:3000/process/admin`,
       dataSrc: '',
