@@ -3,7 +3,7 @@ let userName = `${userData.f_name} ${userData.l_name}`;
 console.log(userData);
 console.log(userName);
 console.log($(".info a"));
-$(".info>.row>.col>a").html(userName);
+$(".info a").html(userName);
 $(document).on("click", ".info a", function () {
   $("#f_name").val(userData.f_name);
   $("#l_name").val(userData.l_name);
