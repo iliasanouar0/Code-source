@@ -222,7 +222,7 @@ function getData() {
         data: null,
         render: function (data, type, row) {
           if (row.status == 'FINISHED') {
-            return `<div class="card">
+            return `<div class="card border-success">
             <div class="card-body">
             test
             </div>
