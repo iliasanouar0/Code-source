@@ -35,8 +35,9 @@ $(document).on('click', '.add_seeds', event => {
 $(document).on('click', '.bulk', event => {
     $('.add_seeds_md').modal('hide');
     $('#modal-bulk-add').modal('show');
-    let data = event.target.attributes[1].value
-    $('.preview').attr("data", data)
+    let data = $(event.target).data('id')
+    console.log(data);
+    $('.preview').data("id", data)
 })
 
 $(document).on('click', '.switch_inp', () => {
