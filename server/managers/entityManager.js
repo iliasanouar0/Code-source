@@ -72,11 +72,11 @@ const deleteEntity = (request, response) => {
 
 const updateEntity = (request, response) => {
   const id = parseInt(request.params.id);
-  const { nom, status, date_update, date_add } = request.body;
+  const { nom, status, date_update } = request.body;
 
   pool.query(
-    "UPDATE entity SET id_entity=$1, nom=$2, status=$3, date_update=$4, date_add=$5 WHERE id_entity = $1",
-    [id, nom, status, date_update, date_add],
+    "UPDATE entity SET id_entity=$1, nom=$2, status=$3, date_update=$4 WHERE id_entity = $1",
+    [id, nom, status, date_update],
     (error, results) => {
       if (error) {
         throw error;

@@ -93,7 +93,7 @@ $(document).on('click', '.delete', event => {
         }
     })
 })
-let date
+
 $(document).on('click', '.edit', event => {
     let id = $(event.target).data('id')
     console.log(id);
@@ -111,7 +111,6 @@ $(document).on('click', '.edit', event => {
         return response.json();
     }).then((data) => {
         $("#e_e_name").val(data[0].nom)
-        let add_date = data[0].date_add;
         let options = document.querySelector("#e_e_status").children;
         for (let i = 0; i < options.length; i++) {
             if (options.item(i).value == data[0].status) {
@@ -120,7 +119,6 @@ $(document).on('click', '.edit', event => {
         }
         $('#e_e_add').data('id', id)
         $(".edit_entity").modal('show')
-        date = add_date
     })
 })
 
