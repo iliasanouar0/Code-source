@@ -221,36 +221,46 @@ function getData() {
       {
         data: null,
         render: function (data, type, row) {
-          if (row.status == 'FINISHED') {
-            return `<div class="card border-success">
-            <div class="card-body p-1 text-center">
-            test
-            </div>
-          </div>`
-          } else if (row.status == 'RUNNING') {
-            return `<div class="card">
-            <div class="card-body">
-              This is some text within a card body.
-            </div>
-          </div>`
-          } else if (row.status == 'PAUSED') {
-            return `<div class="card">
-            <div class="card-body">
-              This is some text within a card body.
-            </div>
-          </div>`
-          } else if (row.status == 'STOPPED') {
-            return `<div class="card">
-            <div class="card-body">
-              This is some text within a card body.
-            </div>
-          </div>`
-          } else {
-            return `<div class="card">
-            <div class="card-body">
-              This is some text within a card body.
-            </div>
-          </div>`
+          // if (row.status == 'FINISHED') {
+          //   return `<div class="card border-success">
+          //   <div class="card-body p-1 text-center">
+          //   ${row.status}
+          //   </div>
+          // </div>`
+          // } else if (row.status == 'RUNNING') {
+          //   return `<div class="card">
+          //   <div class="card-body">
+          //     This is some text within a card body.
+          //   </div>
+          // </div>`
+          // } else if (row.status == 'PAUSED') {
+          //   return `<div class="card">
+          //   <div class="card-body">
+          //     This is some text within a card body.
+          //   </div>
+          // </div>`
+          // } else if (row.status == 'STOPPED') {
+          //   return `<div class="card">
+          //   <div class="card-body">
+          //     This is some text within a card body.
+          //   </div>
+          // </div>`
+          // } else {
+          //   return `<div class="card">
+          //   <div class="card-body">
+          //     This is some text within a card body.
+          //   </div>
+          // </div>`
+          // }
+          switch (row.status) {
+            case 'FINISHED':
+              return `<div class="card border-success">
+                <div class="card-body p-1 text-center">
+                ${row.status}
+                </div>
+              </div>`
+            default:
+              break;
           }
         }
       },
