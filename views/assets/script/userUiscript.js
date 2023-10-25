@@ -177,6 +177,7 @@ $(document).on('click', '.edit', event => {
         }
         isp = data[0].isp
         $('#edit').data('id', id)
+        console.log(isp);
     }).then(() => {
         $(".edit_user").modal("show");
     })
@@ -184,23 +185,22 @@ $(document).on('click', '.edit', event => {
 
 $(document).on('click', '#edit', event => {
     id = $(event.target).data('id')
-    console.log(id);
+    let update = new Date();
+    let f_name_add = $("#e_f_name_add").val();
+    let l_name_add = $("#e_l_name_add").val();
+    let type_add = $("#e_type_add").val();
+    let entity_add = $("#e_entity_add").val();
+    let add_update = update;
+    let isp_add = $("#isp_add option:selected");
+    let isp = []
+    for (let i = 0; i < isp_add.length; i++) {
+        isp.push(isp_add[i].value)
+    }
 })
 
-//             document.querySelector("#edit").addEventListener("click", () => {
-//               let objectDate = new Date();
-//               let day = objectDate.getDate();
-//               let month = objectDate.getMonth();
-//               let year = objectDate.getFullYear();
-//               let update = `${year}-${month}-${day}`;
-//               let f_name_add = $("#e_f_name_add").val();
-//               let l_name_add = $("#e_l_name_add").val();
-//               let type_add = $("#e_type_add").val();
-//               let entity_add = $("#e_entity_add").val();
-//               let login_add = $("#e_Password_add").val();
-//               let add_update = update;
-//               let add_date = date;
-//               let result;
+
+
+
 //               let isp_add = $("#e_isp_add option:selected").text();
 //               let result1 = isp_add.split(/(?=[A-Z])/);
 //               let result2 = null;
