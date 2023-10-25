@@ -236,7 +236,16 @@ function getData() {
         </div>`
         }
       },
-      { data: 'list_name' },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="card border-secondary">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.list_name}
+          </div>
+        </div>`
+        }
+      },
       {
         data: null,
         render: function (data, type, row) {
