@@ -215,44 +215,23 @@ function getData() {
         }
       },
       { data: 'id_process' },
-      { data: 'count' },
+      {
+        data: null,
+        searchable: false,
+        render: function (data, type, row) {
+          return `<div class="card bg-maroon">
+          <div class="card-body p-1 text-center text-light">
+          ${row.count}
+          </div>
+        </div>`
+        }
+      },
       { data: 'login' },
       { data: 'list_name' },
       { data: 'isp' },
       {
         data: null,
         render: function (data, type, row) {
-          // if (row.status == 'FINISHED') {
-          //   return `<div class="card border-success">
-          //   <div class="card-body p-1 text-center">
-          //   ${row.status}
-          //   </div>
-          // </div>`
-          // } else if (row.status == 'RUNNING') {
-          //   return `<div class="card">
-          //   <div class="card-body">
-          //     This is some text within a card body.
-          //   </div>
-          // </div>`
-          // } else if (row.status == 'PAUSED') {
-          //   return `<div class="card">
-          //   <div class="card-body">
-          //     This is some text within a card body.
-          //   </div>
-          // </div>`
-          // } else if (row.status == 'STOPPED') {
-          //   return `<div class="card">
-          //   <div class="card-body">
-          //     This is some text within a card body.
-          //   </div>
-          // </div>`
-          // } else {
-          //   return `<div class="card">
-          //   <div class="card-body">
-          //     This is some text within a card body.
-          //   </div>
-          // </div>`
-          // }
           switch (row.status) {
             case 'FINISHED':
               return `<div class="card border-success">
@@ -268,22 +247,22 @@ function getData() {
                 </div>`
             case 'PAUSED':
               return `<div class="card border-warning">
-                      <div class="card-body p-1 text-center text-warning">
+                    <div class="card-body p-1 text-center text-warning">
+                    ${row.status}
+                     </div>
+                  </div>`
+            case 'STOPPED':
+              return `<div class="card border-danger">
+                     <div class="card-body p-1 text-center text-danger">
                       ${row.status}
                       </div>
                     </div>`
-            case 'STOPPED':
-              return `<div class="card border-danger">
-                       <div class="card-body p-1 text-center text-danger">
-                        ${row.status}
-                        </div>
-                      </div>`
             default:
               return `<div class="card border-info">
-                         <div class="card-body p-1 text-center text-info">
-                          ${row.status}
-                          </div>
-                        </div>`
+                      <div class="card-body p-1 text-center text-info">
+                      ${row.status}
+                      </div>
+                    </div>`
           }
         }
       },
