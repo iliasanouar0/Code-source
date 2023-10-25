@@ -107,66 +107,55 @@ $(document).on("click", "#add", () => {
 
 $(document).on('click', '.delete', event => {
     let id = $(event.target).data('id')
+    fetch(`http://${ip}:3000/users/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+                "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+            "Access-Control-Allow-Methods":
+                "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+        },
+    }).then((response) => {
+        return response.text();
+    }).then((data) => {
+        Swal.fire({
+            title: "User deleted successfully!",
+            text: data,
+            icon: "warning",
+            confirmButtonText: "ok",
+        })
+    }).then(() => {
+        getDataUser()
+    });
+});
+
+$(document).on('click', '.edit', event => {
+    $('#e_entity_add').html('')
+    fetch(`http://${ip}:3000/entity`, {
+        method: "GET",
+    }).then((response) => {
+        return response.json();
+    }).then((data) => {
+        data.forEach((elm) => {
+            let option = document.createElement("option");
+            option.innerHTML = elm["nom"];
+            option.setAttribute("value", elm["id_entity"]);
+            $('#e_entity_add').append(option);
+        });
+    })
+
+    let id = $(event.target).data('id')
     console.log(id);
+    // .then(() => {
+    //     $(".edit_user").modal("show");
+    // })
 })
 
 
-//     const deleteBtn = document.querySelectorAll(".delete");
-//     return deleteBtn;
-//   })
-//   .then((buttons) => {
-//     for (let i = 0; i < buttons.length; i++) {
-//       buttons[i].addEventListener("click", () => {
-//         let id = buttons[i].dataset.id;
-//         fetch(`http://${ip}:3000/users/${id}`, {
-//           method: "DELETE",
-//           headers: {
-//             "Content-Type": "application/json",
-//             "Access-Control-Allow-Origin": "*",
-//             "Access-Control-Allow-Headers":
-//               "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
-//             "Access-Control-Allow-Methods":
-//               "GET, HEAD, POST, PUT, DELETE, OPTIONS",
-//           },
-//         })
-//           .then((response) => {
-//             return response.text();
-//           })
-//           .then((data) => {
-//             Swal.fire({
-//               title: "User deleted successfully!",
-//               text: data,
-//               icon: "warning",
-//               confirmButtonText: "ok",
-//             }).then(() => {
-//               location.reload();
-//             });
-//           });
-//       });
-//     }
-//   })
-//   .then(() => {
-//     const editBtn = document.querySelectorAll(".edit");
-//     return editBtn;
-//   })
-//   .then((buttons) => {
-//     for (let i = 0; i < buttons.length; i++) {
-//       buttons[i].addEventListener("click", () => {
-//         const select = document.querySelector("#e_entity_add");
-//         fetch(`http://${ip}:3000/entity`, {
-//           method: "GET",
-//         })
-//           .then((response) => {
-//             return response.json();
-//           })
-//           .then((data) => {
-//             data.forEach((elm) => {
-//               let option = document.createElement("option");
-//               option.innerHTML = elm["nom"];
-//               option.setAttribute("value", elm["id_entity"]);
-//               select.appendChild(option);
-//             });
-//           });
+
+
 //         let id = buttons[i].dataset.id;
 //         fetch(`http://${ip}:3000/users/${id}`, {
 //           method: "Get",
