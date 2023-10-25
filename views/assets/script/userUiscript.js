@@ -78,9 +78,9 @@ $(document).on("click", "#add", () => {
     let password = passwordGenerate(f_name_add, getRndInteger(10000, 99999));
     let isp_add = $("#isp_add option:selected");
     console.log(isp_add);
-    isp_add.forEach((elm) => {
-        elm.value;
-    });
+    for (let i = 0; i < isp_add.length; i++) {
+        console.log(isp_add[i]);
+    }
     // if (
     //     f_name_add == "" ||
     //     l_name_add == "" ||
