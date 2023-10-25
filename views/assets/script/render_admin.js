@@ -581,7 +581,7 @@ function getDataUser() {
       {
         data: null,
         render: function (data, type, row) {
-          return `<div class="card m-0 bg-danger blur">
+          return `<div class="card m-0 bg-danger blur password">
           <div class="card-body p-0 text-center text-light">
           ${row.password}
           </div>
@@ -603,7 +603,29 @@ function getDataUser() {
           }
 
         }
-      }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          let add = new Date(row.date_add).toLocaleString()
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${add}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          let update = new Date(row.date_update).toLocaleString()
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${update}
+          </div>
+        </div>`
+        }
+      },
     ],
   })
 };
