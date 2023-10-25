@@ -255,7 +255,6 @@ function getData() {
           let start = `${start_in.toLocaleString()}`
           return start
         }
-
       },
       {
         data: null,
@@ -265,8 +264,6 @@ function getData() {
           }
           let end_in = new Date(row.end_in)
           let start_in = new Date(row.start_in)
-          console.log(end_in);
-          console.log(start_in);
           let end = `${end_in.toLocaleString()} <span class="text-danger">[ ${msToMnSc(end_in - start_in)} min ]</span>`
           return end
         }
