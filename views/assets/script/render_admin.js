@@ -219,8 +219,8 @@ function getData() {
         data: null,
         searchable: false,
         render: function (data, type, row) {
-          return `<div class="card bg-info w-50">
-          <div class="card-body p-0 px-0 text-center text-light">
+          return `<div class="card m-0 bg-info w-50">
+          <div class="card-body p-0 text-center text-light">
           ${row.count}
           </div>
         </div>`
@@ -229,7 +229,7 @@ function getData() {
       {
         data: null,
         render: function (data, type, row) {
-          return `<div class="card border-dark">
+          return `<div class="card m-0 border-dark">
           <div class="card-body p-0 text-center text-dark">
           ${row.login}
           </div>
@@ -239,7 +239,7 @@ function getData() {
       {
         data: null,
         render: function (data, type, row) {
-          return `<div class="card border-secondary">
+          return `<div class="card m-0 border-secondary">
           <div class="card-body p-0 text-center text-dark">
           ${row.list_name}
           </div>
@@ -249,7 +249,7 @@ function getData() {
       {
         data: null,
         render: function (data, type, row) {
-          return `<div class="card border-light">
+          return `<div class="card m-0 border-light">
           <div class="card-body p-0 text-center text-secondary">
           ${row.isp}
           </div>
@@ -261,31 +261,31 @@ function getData() {
         render: function (data, type, row) {
           switch (row.status) {
             case 'FINISHED':
-              return `<div class="card border-success">
+              return `<div class="card m-0 border-success">
                 <div class="card-body p-0 text-center text-success">
                 ${row.status}
                 </div>
               </div>`
             case 'RUNNING':
-              return `<div class="card border-primary">
+              return `<div class="card m-0 border-primary">
                   <div class="card-body p-0 text-center text-primary">
                   ${row.status}
                   </div>
                 </div>`
             case 'PAUSED':
-              return `<div class="card border-warning">
+              return `<div class="card m-0 border-warning">
                     <div class="card-body p-0 text-center text-warning">
                     ${row.status}
                      </div>
                   </div>`
             case 'STOPPED':
-              return `<div class="card border-danger">
+              return `<div class="card m-0 border-danger">
                      <div class="card-body p-0 text-center text-danger">
                       ${row.status}
                       </div>
                     </div>`
             default:
-              return `<div class="card border-info">
+              return `<div class="card m-0 border-info">
                       <div class="card-body p-0 text-center text-info">
                       ${row.status}
                       </div>
@@ -296,7 +296,7 @@ function getData() {
       {
         data: null,
         render: function (data, type, row) {
-          return `<div class="card b-action">
+          return `<div class="card m-0 b-action">
           <div class="card-body p-0 text-center">
           ${row.action}
           </div>
