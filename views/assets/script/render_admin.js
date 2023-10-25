@@ -591,11 +591,17 @@ function getDataUser() {
       {
         data: null,
         render: function (row) {
-          return `<div class="card m-0">
-          <div class="card-body p-0 text-center">
-          ${row.status}
-          </div>
-        </div>`
+          switch (row.status) {
+            case 'active':
+              return `<div class="card m-0">
+              <div class="card-body p-0 text-center text-success">
+              ${row.status}
+              </div>
+            </div>`
+            default:
+              return `<span class="text-danger">non !!</span>`
+          }
+
         }
       }
     ],
