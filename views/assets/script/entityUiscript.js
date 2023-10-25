@@ -53,7 +53,7 @@ $(document).on("click", "#e_add", () => {
 });
 
 $(document).on('click', '.delete', event => {
-    id = (event.target).data('id')
+    id = $(event.target).data('id')
     console.log(id);
 })
 
