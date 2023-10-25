@@ -1,12 +1,6 @@
 $(document).on('click', '.password_show', event => {
-    console.log( $(event.target));
     $(event.target).toggleClass("blur")
 })
-// $(document).ready(function () {
-//     $(".password_show").click(event => {
-//         $(event.target).toggleClass("blur");
-//     });
-// });
 
 $(document).on('click', '#add_user', () => {
     $('#entity_add').html('')
@@ -143,7 +137,6 @@ $(document).on('click', '.delete', event => {
     });
 });
 
-let isp
 $(document).on('click', '.edit', event => {
     $('#e_entity_add').html('')
     fetch(`http://${ip}:3000/entity`, {
@@ -187,7 +180,6 @@ $(document).on('click', '.edit', event => {
                 optionsE.item(i).setAttribute("selected", "true");
             }
         }
-        isp = data[0].isp
         $('#edit').data('id', id)
     }).then(() => {
         $(".edit_user").modal("show");
@@ -247,6 +239,7 @@ $(document).on('click', '#edit', event => {
             confirmButtonText: "ok",
         })
     }).then(() => {
+        $(".edit_user").modal("hide");
         getDataUser()
     });
 });
