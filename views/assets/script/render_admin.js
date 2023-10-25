@@ -366,6 +366,82 @@ function getData() {
   })
 };
 
+function getDatalist() {
+  $("#example1").DataTable({
+    responsive: true,
+    deferRender: true,
+    destroy: true,
+    autoWidth: false,
+    ajax: {
+      url: `http://${ip}:3000/lists`,
+      dataSrc: '',
+    },
+    data: {
+      "id_list": 1213,
+      "name": "test-4",
+      "isp": "gmail",
+      "status": "active",
+      "date_add": "2023-10-17T04:00:00.000Z",
+      "date_update": "2023-10-17T04:00:00.000Z",
+      "id_user": 1,
+      "seeds_count": "3"
+    },
+    columns: [
+      {
+        data: null,
+        searchable: false,
+        orderable: false,
+        defaultContent: "",
+        render: function (data, type, row) {
+          return `<input type="checkbox" class="check" value="${row.id_list}">`
+        }
+      },
+      { data: 'id_list' },
+      {
+        data: null,
+        searchable: false,
+        render: function (data, type, row) {
+          return `<div class="card m-0 bg-info">
+          <div class="card-body p-0 text-center text-light">
+          ${row.name}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.isp}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="card m-0 border-secondary">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.status}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.id_user}
+          </div>
+        </div>`
+        }
+      },
+    ],
+  })
+};
+
 
 if (path.includes("/admin/users/")) {
   document.querySelector("#add_user").addEventListener("click", () => {
@@ -751,42 +827,33 @@ if (path.includes("/admin/users/")) {
   });
   getData()
 
-  // fetch(`http://${ip}:3000/process/admin`, {
+} else if (path.includes("/admin/lists/")) {
+  // fetch(`http://${ip}:3000/lists`, {
   //   method: "GET",
   // })
   //   .then((response) => {
   //     return response.json();
   //   })
   //   .then((data) => {
-  //     let rows = createRowProcess(data);
-  //     Process_data.innerHTML = rows
+  //     let rows = createRowList(data);
+  //     list_data.innerHTML = ""
+  //     rows.forEach((row) => {
+  //       list_data.appendChild(row);
+  //     });
   //   })
-} else if (path.includes("/admin/lists/")) {
-  fetch(`http://${ip}:3000/lists`, {
-    method: "GET",
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      let rows = createRowList(data);
-      list_data.innerHTML = ""
-      rows.forEach((row) => {
-        list_data.appendChild(row);
-      });
-    })
-    .then(() => {
-      let addBtn = document.querySelectorAll(".add_seeds");
-      for (let i = 0; i < addBtn.length; i++) {
-        addBtn[i].addEventListener("click", () => {
-          let id = addBtn[i].dataset.id;
-          document.querySelector("#l_seeds_add").dataset.id = id;
-          document.querySelector(".bulk").dataset.id = id;
-          const myModal = new bootstrap.Modal(
-            document.querySelector(".add_seeds_md")
-          );
-          myModal.show();
-        });
-      }
-    })
+  //   .then(() => {
+  //     let addBtn = document.querySelectorAll(".add_seeds");
+  //     for (let i = 0; i < addBtn.length; i++) {
+  //       addBtn[i].addEventListener("click", () => {
+  //         let id = addBtn[i].dataset.id;
+  //         document.querySelector("#l_seeds_add").dataset.id = id;
+  //         document.querySelector(".bulk").dataset.id = id;
+  //         const myModal = new bootstrap.Modal(
+  //           document.querySelector(".add_seeds_md")
+  //         );
+  //         myModal.show();
+  //       });
+  //     }
+  //   })
+  getDatalist()
 }
