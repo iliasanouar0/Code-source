@@ -111,8 +111,9 @@ const deleteProcess = (request, response) => {
 
 const startedProcess = (data) => {
     let start_in = new Date()
-    let query = "UPDATE process SET status=($1), start_in=($2) WHERE id_process=($3)"
-    let values = [data.status, start_in, data.id_process]
+    let end_in = ''
+    let query = "UPDATE process SET status=($1), start_in=($2), end_in=($3) WHERE id_process=($4)"
+    let values = [data.status, start_in, end_in, data.id_process]
     let obj = { query: query, data: values }
     pool.query(obj.query, obj.data, (error, result) => {
         if (error) {
