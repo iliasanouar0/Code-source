@@ -77,10 +77,8 @@ $(document).on("click", "#add", () => {
     let add_update = new Date().toDateInputValue();
     let password = passwordGenerate(f_name_add, getRndInteger(10000, 99999));
     let isp_add = $("#isp_add option:selected");
-    console.log(isp_add);
     let isp = []
     for (let i = 0; i < isp_add.length; i++) {
-        console.log(isp_add[i]);
         isp.push(isp_add[i].value)
     }
     if (
