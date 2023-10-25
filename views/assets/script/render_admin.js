@@ -630,6 +630,35 @@ function getDataUser() {
         </div>`
         }
       },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.entity_name}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="bg-info card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.isp}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<button type="button" class="btn btn-primary status" data-id="${row.id_user}"><i class="far fa-eye"></i></button>
+          <button type="button" class="btn btn-success edit"  data-id="${row.id_user}"><i class="fas fa-edit"></i></button>
+        <button type="button" class="btn btn-danger delete" data-id="${row.id_user}"><i class="far fa-trash-alt"></i></button>`
+        }
+      },
+
     ],
   })
 };
