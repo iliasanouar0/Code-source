@@ -148,7 +148,6 @@ $(document).on('click', '.edit', event => {
     })
 
     let id = $(event.target).data('id')
-    console.log(id);
     fetch(`http://${ip}:3000/users/${id}`, {
         method: "Get",
         headers: {
@@ -177,13 +176,16 @@ $(document).on('click', '.edit', event => {
             }
         }
         isp = data[0].isp
-        console.log(isp);
+        $('#edit').data('id', id)
     }).then(() => {
         $(".edit_user").modal("show");
     })
 })
 
-
+$(document).on('click', '#edit', event => {
+    id = $(event.target).data('id')
+    console.log(id);
+})
 
 //             document.querySelector("#edit").addEventListener("click", () => {
 //               let objectDate = new Date();
