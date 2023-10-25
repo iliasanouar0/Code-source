@@ -159,6 +159,16 @@ const createRowList = (data) => {
   return rows;
 };
 
+function msToMnSc(ms) {
+  var minutes = Math.floor(ms / 60000);
+  var seconds = ((ms % 60000) / 1000).toFixed(0);
+  return (
+    seconds == 60 ?
+      (minutes + 1) + ":00" :
+      minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+  );
+}
+
 const createRow = (data) => {
   let rows = [];
   data.forEach((elm) => {
@@ -230,10 +240,10 @@ function getData() {
             return `<i class="fas fa-minus"></i>`
           }
           let end_in = new Date(row.end_in)
+          let start_in = new Date(row.start_in)
           console.log(end_in);
-          let date = row.end_in.split('T')
-          let time = date[1].split('.')
-          let end = `${end_in.toLocaleString()} <span class="text-danger">[test-test]</span>`
+          console.log(start_in);
+          let end = `${end_in.toLocaleString()} <span class="text-danger">[${msToMnSc(end_in - start_in)} min]</span>`
           return end
         }
       },
