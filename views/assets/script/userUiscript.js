@@ -185,7 +185,7 @@ $(document).on('click', '.edit', event => {
 
 $(document).on('click', '#edit', event => {
     id = $(event.target).data('id')
-    let update = new Date().toDateInputValue();
+    let update = new Date()
     let f_name_add = $("#e_f_name_add").val();
     let l_name_add = $("#e_l_name_add").val();
     let type_add = $("#e_type_add").val();
