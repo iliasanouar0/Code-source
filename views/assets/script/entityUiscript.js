@@ -55,48 +55,50 @@ $(document).on("click", "#e_add", () => {
 });
 
 $(document).on('click', '.delete', event => {
-    id = $(event.target).data('id')
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: 'black',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            id = $(event.target).data('id')
+            fetch(`http://${ip}:3000/entity/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers":
+                        "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+                    "Access-Control-Allow-Methods":
+                        "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+                },
+            }).then((response) => {
+                return response.text();
+            }).then((data) => {
+                Swal.fire({
+                    title: "entity deleted successfully!",
+                    text: data,
+                    icon: "warning",
+                    confirmButtonText: "ok",
+                }).then(() => {
+                    getDataEntity();
+                });
+            })
+        } else if (result.isDismissed) {
+            console.log("cancelled");
+        }
+    })
+})
+
+$(document).on('click', '.edit', event => {
+    let id = $(event.target).data('id')
     console.log(id);
 })
 
-
-// const deleteBtn = document.querySelectorAll(".delete");
-//     })
-//     .then((buttons) => {
-//     for (let i = 0; i < buttons.length; i++) {
-//         buttons[i].addEventListener("click", () => {
-//             let id = buttons[i].dataset.id;
-//             fetch(`http://${ip}:3000/entity/${id}`, {
-//                 method: "DELETE",
-//                 headers: {
-//                     "Content-Type": "application/json",
-//                     "Access-Control-Allow-Origin": "*",
-//                     "Access-Control-Allow-Headers":
-//                         "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
-//                     "Access-Control-Allow-Methods":
-//                         "GET, HEAD, POST, PUT, DELETE, OPTIONS",
-//                 },
-//             })
-//                 .then((response) => {
-//                     return response.text();
-//                 })
-//                 .then((data) => {
-//                     Swal.fire({
-//                         title: "entity deleted successfully!",
-//                         text: data,
-//                         icon: "warning",
-//                         confirmButtonText: "ok",
-//                     }).then(() => {
-//                         location.reload();
-//                     });
-//                 });
-//         });
-//     }
-// })
-//     .then(() => {
-//         const editBtn = document.querySelectorAll(".edit");
-//         return editBtn;
-//     })
 //     .then((buttons) => {
 //         for (let i = 0; i < buttons.length; i++) {
 //             buttons[i].addEventListener("click", () => {
