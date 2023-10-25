@@ -68,9 +68,7 @@ const updateUser = (request, response) => {
   const {
     f_name,
     l_name,
-    login,
     type,
-    password,
     status,
     date_update,
     id_entity,
@@ -78,14 +76,12 @@ const updateUser = (request, response) => {
   } = request.body;
 
   pool.query(
-    "UPDATE users SET id_user=$1, f_name=$2, l_name=$3, login=$4, type=$5, password=$6, status=$7, date_update=$9, id_entity=$10, isp=$11 WHERE id_user = $1",
+    "UPDATE users SET f_name=$2, l_name=$3, type=$4, status=$5, date_update=$6, id_entity=$7, isp=$8 WHERE id_user = $1",
     [
       id,
       f_name,
       l_name,
-      login,
       type,
-      password,
       status,
       date_update,
       id_entity,
