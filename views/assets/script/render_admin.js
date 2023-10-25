@@ -298,7 +298,7 @@ function getData() {
         render: function (data, type, row) {
           return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
-          ${row.action} test, test, test
+          ${row.action}
           </div>
         </div>`
         }
