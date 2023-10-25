@@ -38,6 +38,9 @@
   font-weight: 300;
 }
 
+.fa-plus {
+  pointer-events: none;
+}
 
 .fa-eye {
   pointer-events: none;
