@@ -540,8 +540,8 @@ function getDataUser() {
         searchable: false,
         orderable: false,
         render: function (data, type, row) {
-          return `<div class="card m-0 bg-danger blur password_show">
-          <div class="card-body p-0 text-center text-light">
+          return `<div class="card m-0 bg-danger password_show">
+          <div class="card-body p-0 text-center blur text-light">
           ${row.password}
           </div>
         </div>`
