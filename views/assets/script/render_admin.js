@@ -256,7 +256,7 @@ function getData() {
           switch (row.status) {
             case 'FINISHED':
               return `<div class="card border-success">
-                <div class="card-body p-1 text-center">
+                <div class="card-body p-1 text-center text-success">
                 ${row.status}
                 </div>
               </div>`
