@@ -1,7 +1,6 @@
 const userData = JSON.parse(sessionStorage.user);
 let userName = `${userData.f_name} ${userData.l_name}`;
-console.log(userData);
-console.log(userName);
+
 $(document).on("click", ".info a", function () {
   $("#f_name").val(userData.f_name);
   $("#l_name").val(userData.l_name);
@@ -17,14 +16,6 @@ $(document).on("click", "#logout", () => {
 
 $(document).on("click", "#add_user", () => {
   $(".add_user").modal("show");
-});
-
-$(document).on("click", "#add_entity", () => {
-  $(".add_entity").modal("show");
-});
-
-$(document).on("click", "#add_process", () => {
-  $(".add_process").modal("show");
 });
 
 $(window).on("load", function () {
@@ -83,25 +74,6 @@ const addUser = (data) => {
   });
 };
 
-const addEntity = (data) => {
-  var settings = {
-    url: `http://${ip}:3000/entity`,
-    method: "POST",
-    timeout: 0,
-    data: data,
-  };
-
-  $.ajax(settings).done(function (responseText) {
-    Swal.fire({
-      title: "Entity added successfully!",
-      text: responseText.message,
-      icon: "success",
-      confirmButtonText: "ok",
-    }).then(() => {
-      location.reload();
-    });
-  });
-};
 
 const loginGenerate = (f_name_add, l_name_add, uniqNumber) => {
   if (f_name_add == "" || l_name_add == "") {
@@ -161,28 +133,4 @@ $(document).on("click", "#add", () => {
   };
   addUser(data);
   $(".add_user").modal("hide");
-});
-
-$(document).on("click", "#e_add", () => {
-  let e_name = $("#e_name").val().toString();
-  let e_status = $("#e_status").val().toString();
-  let e_add_date = $("#e_add_date").val().toString();
-  let e_update_date = $("#e_update_date").val().toString();
-  if (
-    e_name == "" ||
-    e_status == "" ||
-    e_add_date == "" ||
-    e_update_date == ""
-  ) {
-    Swal.fire("Please fill all fields");
-    return;
-  }
-  const data = {
-    nom: `${e_name}`,
-    status: `${e_status}`,
-    date_add: `${e_add_date}`,
-    date_update: `${e_update_date}`,
-  };
-  addEntity(data);
-  $(".add_entity").modal("hide");
 });

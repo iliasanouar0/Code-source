@@ -456,6 +456,81 @@ function getDatalist() {
   })
 };
 
+function getDataEntity() {
+  $("#entityTable").DataTable({
+    responsive: true,
+    deferRender: true,
+    destroy: true,
+    autoWidth: false,
+    ajax: {
+      url: `http://${ip}:3000/entity/`,
+      dataSrc: '',
+    },
+    data: {
+      "id_entity": 1,
+      "nom": "IT",
+      "status": "active",
+      "date_add": "2023-10-09T04:00:00.000Z",
+      "date_update": "2023-10-09T04:00:00.000Z"
+    },
+    columns: [
+      { data: 'id_entity' },
+      {
+        data: null,
+        searchable: false,
+        render: function (data, type, row) {
+          return `<div class="card m-0">
+          <div class="card-body p-0 text-center text-light">
+          ${row.nom}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.status}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          let add = new Date(row.date_add).toLocaleString()
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${add}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          let update = new Date(row.date_update).toLocaleString()
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${update}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        searchable: false,
+        orderable: false,
+        render: function (row) {
+          return `<button type="button" class="btn btn-primary add_seeds" data-id="${row.id_entity}"><i class="fa fa-plus"></i></button>
+          <button type="button" class="btn btn-success edit" data-id="${row.id_entity}"><i class="fas fa-edit"></i></button>
+        <button type="button" class="btn btn-info view" data-id="${row.id_entity}"><i class="fa fa-eye" disabled></i></button>`
+        }
+      }
+    ],
+  })
+};
 
 if (path.includes("/admin/users/")) {
   document.querySelector("#add_user").addEventListener("click", () => {
@@ -820,6 +895,7 @@ if (path.includes("/admin/users/")) {
         });
       }
     });
+  getDataEntity()
 } else if (path.includes("/admin/process/")) {
   document.querySelector("#add_process").addEventListener("click", () => {
     const select = document.querySelector("#p_list_add");

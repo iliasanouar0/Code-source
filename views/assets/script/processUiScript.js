@@ -13,6 +13,10 @@ Date.prototype.toDateInputValue = function () {
     return local.toJSON().slice(0, 10);
 };
 
+$(document).on("click", "#add_process", () => {
+    $(".add_process").modal("show");
+});
+
 $(document).ready(function () {
     $("#p_update_date").val(new Date().toDateString())
     $("#p_add_date").val(new Date().toDateInputValue());
