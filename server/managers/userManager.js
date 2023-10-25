@@ -7,7 +7,7 @@ let config = data.data
 const pool = new pg.Pool(config);
 
 const getUsers = (request, response) => {
-  pool.query("SELECT *,entity.nom AS entity_name FROM users JOIN entity ON users.id_entity=entity.id_entity GROUP BY users.id_entity,entity.id_entity ORDER BY id_user ASC", (error, results) => {
+  pool.query("SELECT *,entity.nom AS entity_name FROM users JOIN entity ON users.id_entity=entity.id_entity,users.id_user GROUP BY users.id_entity,entity.id_entity ORDER BY id_user ASC", (error, results) => {
     if (error) {
       throw error;
     }
