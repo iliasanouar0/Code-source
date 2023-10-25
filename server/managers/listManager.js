@@ -41,7 +41,7 @@ const getLists = (request, response) => {
     "SELECT list.*, COUNT(id_seeds) AS seeds_count, users.* FROM list LEFT JOIN seeds ON seeds.id_list = list.id_list JOIN users ON list.id_user=users.id_user GROUP BY 1",
     (error, results) => {
       if (error) {
-        response.status(500).json(error);
+        response.status(500).json(error.message);
       }
       response.status(200).json(results.rows);
     }
