@@ -4,6 +4,8 @@ Date.prototype.toDateInputValue = function () {
     return local.toJSON().slice(0, 10);
 };
 
+$('#e_update_date').val(new Date().toDateInputValue())
+
 $(document).on("click", "#add_entity", () => {
     $(".add_entity").modal("show");
 });
