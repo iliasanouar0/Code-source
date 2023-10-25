@@ -433,16 +433,6 @@ function getDatalist() {
         render: function (data, type, row) {
           return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
-          ${row.id_user}
-          </div>
-        </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="b-action card m-0">
-          <div class="card-body p-0 text-center text-dark">
           ${row.date_add}
           </div>
         </div>`
@@ -463,7 +453,17 @@ function getDatalist() {
         render: function (data, type, row) {
           return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
-          ${row.count}
+          ${row.id_user}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.seeds_count}
           </div>
         </div>`
         }
