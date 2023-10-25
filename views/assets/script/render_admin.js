@@ -438,6 +438,46 @@ function getDatalist() {
         </div>`
         }
       },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.date_add}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.date_update}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.count}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        searchable: false,
+        orderable: false,
+        render: function (row) {
+          return `<button type="button" class="btn btn-primary add_seeds" data-id="${row.id_list}"><i class="fa fa-plus"></i></button>
+          <button type="button" class="btn btn-success edit" data-id="${row.id_list}"><i class="fas fa-edit"></i></button>
+        <button type="button" class="btn btn-info view" data-id="${row.id_list}"><i class="fa fa-eye" disabled></i></button>`
+        }
+      }
     ],
   })
 };
