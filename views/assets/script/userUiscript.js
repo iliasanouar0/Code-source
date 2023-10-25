@@ -178,8 +178,8 @@ $(document).on('click', '.edit', event => {
                 optionsE.item(i).setAttribute("selected", "true");
             }
         }
-    }).then(() => {
         isp = data[0].isp
+    }).then(() => {
         $(".edit_user").modal("show");
     })
 })
