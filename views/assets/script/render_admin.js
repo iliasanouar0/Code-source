@@ -447,17 +447,6 @@ function getDataEntity() {
       },
       {
         data: null,
-        render: function (data, type, row) {
-          let update = new Date(row.date_update).toLocaleString()
-          return `<div class="b-action card m-0">
-          <div class="card-body p-0 text-center text-dark">
-          ${update}
-          </div>
-        </div>`
-        }
-      },
-      {
-        data: null,
         searchable: false,
         orderable: false,
         render: function (row) {
