@@ -84,7 +84,8 @@ $(document).on("click", "#add", () => {
         f_name_add == "" ||
         l_name_add == "" ||
         type_add == "" ||
-        entity_add == ""
+        entity_add == "" ||
+        isp.length <= 0
     ) {
         Swal.fire("Please fill all fields");
         return;
@@ -177,7 +178,6 @@ $(document).on('click', '.edit', event => {
         }
         isp = data[0].isp
         $('#edit').data('id', id)
-        console.log(isp);
     }).then(() => {
         $(".edit_user").modal("show");
     })
@@ -191,85 +191,52 @@ $(document).on('click', '#edit', event => {
     let type_add = $("#e_type_add").val();
     let entity_add = $("#e_entity_add").val();
     let add_update = update;
-    let isp_add = $("#isp_add option:selected");
-    let isp = []
+    let isp_add = $("#e_isp_add option:selected");
+    let ispA = []
     for (let i = 0; i < isp_add.length; i++) {
-        isp.push(isp_add[i].value)
+        ispA.push(isp_add[i].value)
     }
-})
-
-
-
-
-//               let isp_add = $("#e_isp_add option:selected").text();
-//               let result1 = isp_add.split(/(?=[A-Z])/);
-//               let result2 = null;
-//               let dat = isp;
-//               if (dat == null) {
-//                 result = result1;
-//               } else {
-//                 result2 = dat.split(/(?=[A-Z])/);
-//               }
-//               if (result2 != null) {
-//                 if (result1.length > result2.length) {
-//                   result = result1;
-//                 } else {
-//                   result = result2;
-//                 }
-//               } else {
-//                 result = result1;
-//               }
-
-//               let password = $("#e_Password_add").val();
-//               if (
-//                 f_name_add == "" ||
-//                 l_name_add == "" ||
-//                 type_add == "" ||
-//                 entity_add == "" ||
-//                 password == ""
-//               ) {
-//                 Swal.fire("Please fill all fields");
-//                 return;
-//               }
-//               const data = {
-//                 f_name: `${f_name_add}`,
-//                 l_name: `${l_name_add}`,
-//                 login: `${login_add}`,
-//                 type: `${type_add}`,
-//                 password: `${password}`,
-//                 status: `active`,
-//                 date_add: `${add_date}`,
-//                 date_update: `${add_update}`,
-//                 id_entity: `${entity_add}`,
-//                 isp: `${result}`,
-//               };
-//               fetch(`http://${ip}:3000/users/${id_user}`, {
-//                 method: "PUT",
-//                 body: JSON.stringify(data),
-//                 headers: {
-//                   "Content-Type": "application/json",
-//                   "Access-Control-Allow-Origin": "*",
-//                   "Access-Control-Allow-Headers":
-//                     "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
-//                   "Access-Control-Allow-Methods":
-//                     "GET, HEAD, POST, PUT, DELETE, OPTIONS",
-//                 },
-//               })
-//                 .then((response) => {
-//                   return response.text();
-//                 })
-//                 .then((data) => {
-//                   Swal.fire({
-//                     title: "entity Updated successfully!",
-//                     text: data,
-//                     icon: "success",
-//                     confirmButtonText: "ok",
-//                   }).then(() => {
-//                     location.reload();
-//                   });
-//                 });
-//             });
-//           });
-//       });
-//     }
-//   });
+    if (
+        f_name_add == "" ||
+        l_name_add == "" ||
+        type_add == "" ||
+        entity_add == "" ||
+        password == "" ||
+        ispA.length <= 0
+    ) {
+        Swal.fire("Please fill all fields");
+        return;
+    }
+    const data = {
+        f_name: `${f_name_add}`,
+        l_name: `${l_name_add}`,
+        type: `${type_add}`,
+        status: `active`,
+        date_update: `${add_update}`,
+        id_entity: `${entity_add}`,
+        isp: `${ispA}`,
+    };
+    fetch(`http://${ip}:3000/users/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+                "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+            "Access-Control-Allow-Methods":
+                "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+        },
+    }).then((response) => {
+        return response.text();
+    }).then((data) => {
+        Swal.fire({
+            title: "User Updated successfully!",
+            text: data,
+            icon: "success",
+            confirmButtonText: "ok",
+        })
+    }).then(() => {
+        getDataUser()
+    });
+});
