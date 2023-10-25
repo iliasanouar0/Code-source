@@ -842,32 +842,5 @@ if (path.includes("/admin/users/")) {
   getData()
 
 } else if (path.includes("/admin/lists/")) {
-  // fetch(`http://${ip}:3000/lists`, {
-  //   method: "GET",
-  // })
-  //   .then((response) => {
-  //     return response.json();
-  //   })
-  //   .then((data) => {
-  //     let rows = createRowList(data);
-  //     list_data.innerHTML = ""
-  //     rows.forEach((row) => {
-  //       list_data.appendChild(row);
-  //     });
-  //   })
-  //   .then(() => {
-  //     let addBtn = document.querySelectorAll(".add_seeds");
-  //     for (let i = 0; i < addBtn.length; i++) {
-  //       addBtn[i].addEventListener("click", () => {
-  //         let id = addBtn[i].dataset.id;
-  //         document.querySelector("#l_seeds_add").dataset.id = id;
-  //         document.querySelector(".bulk").dataset.id = id;
-  //         const myModal = new bootstrap.Modal(
-  //           document.querySelector(".add_seeds_md")
-  //         );
-  //         myModal.show();
-  //       });
-  //     }
-  //   })
   getDatalist()
 }

@@ -1,6 +1,7 @@
 const userData = JSON.parse(sessionStorage.user);
 let userName = `${userData.f_name} ${userData.l_name}`;
-
+console.log(userData);
+console.log(userName);
 $(document).on("click", ".info a", function () {
   $("#f_name").val(userData.f_name);
   $("#l_name").val(userData.l_name);
@@ -8,10 +9,6 @@ $(document).on("click", ".info a", function () {
   $("#type").val(userData.type);
   $(".user_data").modal("show");
 });
-
-// let storage = { ...localStorage }
-// console.log(storage);
-// let ip = storage.ip
 
 $(document).on("click", "#logout", () => {
   console.log('test');
@@ -106,7 +103,6 @@ const addEntity = (data) => {
   });
 };
 
-// console.log();
 const loginGenerate = (f_name_add, l_name_add, uniqNumber) => {
   if (f_name_add == "" || l_name_add == "") {
     Swal.fire("Please fill all fields");
@@ -190,34 +186,3 @@ $(document).on("click", "#e_add", () => {
   addEntity(data);
   $(".add_entity").modal("hide");
 });
-
-// const wsUri = "ws://localhost:7071/wss";
-// const output = document.querySelector("#output");
-// const websocket = new WebSocket(wsUri);
-// function sendMessage(message) {
-//   console.log(`SENT: ${message}`);
-//   websocket.send(message);
-// }
-
-// websocket.onopen = (e) => {
-//   console.log("CONNECTED");
-//   sendMessage("ping");
-//   pingInterval = setInterval(() => {
-//     sendMessage("ping");
-//   }, 500);
-// };
-
-// websocket.onclose = (e) => {
-//   console.log("DISCONNECTED");
-//   clearInterval(pingInterval);
-// };
-
-// websocket.onmessage = (e) => {
-//   console.log(`RECEIVED: ${e.data}`);
-// };
-
-// websocket.onerror = (e) => {
-//   console.log(`ERROR: ${e.data}`);
-// };
-
-
