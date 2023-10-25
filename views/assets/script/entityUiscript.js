@@ -159,9 +159,10 @@ $(document).on('click', '#e_e_add', event => {
             text: data,
             icon: "success",
             confirmButtonText: "ok",
-        }).then(() => {
-            getDataEntity()
-        });
+        })
+    }).then(() => {
+        $(".edit_entity").modal('hide')
+        getDataEntity()
     });
 })
 
