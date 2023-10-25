@@ -68,7 +68,7 @@ $(document).on("click", "#add", () => {
     let l_name_add = $("#l_name_add").val();
     let type_add = $("#type_add").val();
     let entity_add = $("#entity_add").val();
-    console.log($("#login_add").val())
+    console.log($("#login_add").val()=='')
     console.log(typeof ($("#login_add").val()))
     // $("#login_add").val(
     //     loginGenerate(f_name_add, l_name_add, getRndInteger(10, 99))
