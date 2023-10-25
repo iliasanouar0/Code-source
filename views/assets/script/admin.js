@@ -1,6 +1,8 @@
 const userData = JSON.parse(sessionStorage.user);
 let userName = `${userData.f_name} ${userData.l_name}`;
-
+console.log(userData);
+console.log(userName);
+$(".info a").html(userName);
 $(document).on("click", ".info a", function () {
   $("#f_name").val(userData.f_name);
   $("#l_name").val(userData.l_name);
@@ -10,7 +12,6 @@ $(document).on("click", ".info a", function () {
 });
 
 $(document).on("click", "#logout", () => {
-  console.log('test');
   $("#modal-danger").modal("show");
 });
 
@@ -18,7 +19,6 @@ $(window).on("load", function () {
   console.log("window loaded");
   console.log('%c Reporting!!', 'font-weight: bold; font-size: 50px;color: white; text-shadow: 4px 4px 0 yellow,7px 7px 0 blue');
   console.log('%c TheOne', 'font-size: 20px; color: green;');
-  $(".info a").html(userName);
 });
 
 Date.prototype.toDateInputValue = function () {
