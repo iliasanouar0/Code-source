@@ -431,7 +431,7 @@ function getDatalist() {
       {
         data: null,
         render: function (data, type, row) {
-          let add = new Date(row.add_update).toLocaleString()
+          let add = new Date(row.date_add).toLocaleString()
           return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${add}
