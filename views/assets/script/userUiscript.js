@@ -201,7 +201,6 @@ $(document).on('click', '#edit', event => {
         l_name_add == "" ||
         type_add == "" ||
         entity_add == "" ||
-        password == "" ||
         ispA.length <= 0
     ) {
         Swal.fire("Please fill all fields");
