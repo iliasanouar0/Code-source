@@ -86,10 +86,10 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: start_in,
     }
-    websocket_s.onopen = (e) => {
-        websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
-        getData()
-    }
+    // websocket_s.onopen = (e) => {
+    websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
+    getData()
+    // }
 })
 
 
@@ -100,9 +100,9 @@ $(document).on('click', '.pause', event => {
         id_process: `${id}`,
         status: `${status}`,
     }
-    websocket_s.onopen = (e) => {
-        websocket_s.send(JSON.stringify({ request: "pause", id_process: id, data: obj }))
-    }
+    // websocket_s.onopen = (e) => {
+    websocket_s.send(JSON.stringify({ request: "pause", id_process: id, data: obj }))
+    // }
 })
 
 $(document).on('click', '.resume', event => {
@@ -113,9 +113,9 @@ $(document).on('click', '.resume', event => {
         status: `${status}`,
     }
 
-    websocket_s.onopen = (e) => {
-        websocket_s.send(JSON.stringify({ request: "resume", id_process: id, data: obj }))
-    }
+    // websocket_s.onopen = (e) => {
+    websocket_s.send(JSON.stringify({ request: "resume", id_process: id, data: obj }))
+    // }
 })
 
 function msToMnSc(ms) {
@@ -374,9 +374,9 @@ $(document).on('click', '.stop', event => {
         end_in: end_in,
         status: `${status}`,
     }
-    websocket_s.onopen = (e) => {
-        websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
-    }
+    // websocket_s.onopen = (e) => {
+    websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
+    // }
 })
 
 const editActions = (data) => {
