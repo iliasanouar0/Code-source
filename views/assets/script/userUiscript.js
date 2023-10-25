@@ -83,30 +83,29 @@ $(document).on("click", "#add", () => {
         console.log(isp_add[i]);
         isp.push(isp_add[i].value)
     }
-    console.log(isp);
-    // if (
-    //     f_name_add == "" ||
-    //     l_name_add == "" ||
-    //     type_add == "" ||
-    //     entity_add == ""
-    // ) {
-    //     Swal.fire("Please fill all fields");
-    //     return;
-    // }
-    // const data = {
-    //     f_name: `${f_name_add}`,
-    //     l_name: `${l_name_add}`,
-    //     login: `${login_add}`,
-    //     type: `${type_add}`,
-    //     password: `${password}`,
-    //     status: `active`,
-    //     date_add: `${add_date}`,
-    //     date_update: `${add_update}`,
-    //     id_entity: `${entity_add}`,
-    //     isp: `${result}`,
-    // };
-    // addUser(data);
-    // $(".add_user").modal("hide");
+    if (
+        f_name_add == "" ||
+        l_name_add == "" ||
+        type_add == "" ||
+        entity_add == ""
+    ) {
+        Swal.fire("Please fill all fields");
+        return;
+    }
+    const data = {
+        f_name: `${f_name_add}`,
+        l_name: `${l_name_add}`,
+        login: `${login_add}`,
+        type: `${type_add}`,
+        password: `${password}`,
+        status: `active`,
+        date_add: `${add_date}`,
+        date_update: `${add_update}`,
+        id_entity: `${entity_add}`,
+        isp: `${isp}`,
+    };
+    addUser(data);
+    $(".add_user").modal("hide");
 });
 
 

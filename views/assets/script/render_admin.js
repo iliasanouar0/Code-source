@@ -126,11 +126,6 @@ fetch(adminNavbarUrl)
     navbarContainer.innerHTML = html;
   });
 
-const user_data = document.querySelector("#user_data");
-const entity_data = document.querySelector("#entity_data");
-const list_data = document.querySelector("#list_data");
-const Process_data = document.querySelector('#Process_data')
-
 function msToMnSc(ms) {
   var minutes = Math.floor(ms / 60000);
   var seconds = ((ms % 60000) / 1000).toFixed(0);
@@ -140,31 +135,6 @@ function msToMnSc(ms) {
       minutes + ":" + (seconds < 10 ? "0" : "") + seconds
   );
 }
-
-const createRow = (data) => {
-  let rows = [];
-  data.forEach((elm) => {
-    let tr = document.createElement("tr");
-    for (let val in elm) {
-      let td = document.createElement("td");
-      td.innerText = elm[val];
-      tr.appendChild(td);
-    }
-    for (let val in elm) {
-      if (val.includes("id")) {
-        let td_actions = document.createElement("td");
-        td_actions.innerHTML = `<button type="button" class="btn btn-primary status" data-id="${elm[val]}"><i class="far fa-eye"></i></button>
-                <button type="button" class="btn btn-success edit"  data-id="${elm[val]}"><i class="fas fa-edit"></i></button>
-              <button type="button" class="btn btn-danger delete" data-id="${elm[val]}"><i class="far fa-trash-alt"></i></button>`;
-        td_actions.classList.add("text-center");
-        tr.appendChild(td_actions);
-      }
-      break;
-    }
-    rows.push(tr);
-  });
-  return rows;
-};
 
 function getData() {
   $("#example1").DataTable({
