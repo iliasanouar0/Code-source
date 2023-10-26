@@ -335,8 +335,16 @@ function getDatalist() {
 };
 
 if (path == "/views/mailer/lists/") {
+  const select = document.querySelector("#l_isp_add");
+  select.innerHTML = ""
   let isp = user.isp.split(',')
   console.log(isp);
+  isp.forEach((elm) => {
+    let option = document.createElement("option");
+    option.innerHTML = elm.toUpperCase();
+    option.setAttribute("value", elm);
+    select.appendChild(option);
+  });
   getDatalist()
 } else if (path.includes("/mailer/process/")) {
   document.querySelector("#add_process").addEventListener("click", () => {
