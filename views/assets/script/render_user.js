@@ -30,7 +30,8 @@ fetch(mailerSidebarUrl)
   .then((response) => response.text())
   .then((html) => {
     const sidebarContainer = document.querySelector(".mailer-sidebar");
-    sidebarContainer.innerHTML = html;
+    console.log(sidebarContainer);
+    // sidebarContainer.innerHTML = html;
   })
   .then(() => {
     const imgUrlLogo = `${root}/views/assets/images/R.jpg`;
