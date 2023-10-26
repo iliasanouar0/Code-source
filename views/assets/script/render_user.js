@@ -100,13 +100,13 @@ const createRow = (data) => {
 };
 
 function getData() {
-  $("#example1").DataTable({
+  $("#processDate").DataTable({
     responsive: true,
     deferRender: true,
     destroy: true,
     autoWidth: false,
     ajax: {
-      url: `http://${ip}:3000/process/mailer`,
+      url: `http://${ip}:3000/process/mailer/${userData.id_user}`,
       dataSrc: '',
     },
     columns: [
