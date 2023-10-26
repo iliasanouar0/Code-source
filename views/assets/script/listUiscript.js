@@ -156,31 +156,29 @@ $(document).on('click', '.edit', event => {
 $(document).on('click', '.save', event => {
     let id = $(event.target).data('id')
     let name = $('#list_new_name').val()
-    console.log(name);
-    // let settings = {
-    //     "url": `http://${ip}:3000/lists/${id}?name=${name}`,
-    //     "method": "PUT",
-    //     "headers": {
-    //         'Content-Type': 'application/json',
-    //         'Access-Control-Allow-Origin': '*',
-    //         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-    //         'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
-    //     }
-    // }
-    // $.ajax(settings).done(function (responseText) {
-    //     Swal.fire({
-    //         title: 'list updated successfully!',
-    //         text: responseText,
-    //         icon: 'success',
-    //         confirmButtonText: 'ok'
-    //     }).then(() => {
-    //         getDatalist()
-    //     })
-    // })
+    let settings = {
+        "url": `http://${ip}:3000/lists/${id}?name=${name}`,
+        "method": "PUT",
+        "headers": {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+        }
+    }
+    $.ajax(settings).done(function (responseText) {
+        Swal.fire({
+            title: 'list updated successfully!',
+            text: responseText,
+            icon: 'success',
+            confirmButtonText: 'ok'
+        })
+    }).then(() => {
+        getDatalist()
+    })
 })
 
 // $(document).on('click', '.save', event => {
-
 //     $(event.target).html('<i class="fas fa-edit"></i>')
 //     $(event.target).toggleClass('edit save')
 // })
