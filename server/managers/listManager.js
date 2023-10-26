@@ -118,7 +118,6 @@ module.exports = {
   createList,
   getLists,
   deleteList,
-  getListByIdOrCount,
   updateName,
   getUserLists
 };
