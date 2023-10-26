@@ -1,4 +1,3 @@
-// import readXlsxFile from 'read-excel-file'
 const userData = JSON.parse(sessionStorage.user)
 let userName = `${userData.f_name} ${userData.l_name}`
 
