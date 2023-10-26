@@ -149,6 +149,7 @@ $(document).on('click', '.edit', event => {
     let td = children[1].children[0].children[0]
     console.log(td);
     let name = td.innerText
+    td.innerHTML = `<input type="text" class="form-control" id="list_new_name" value="${name}"/>`
     console.log(name);
     let id = $(event.target).data('id')
     console.log(id);
