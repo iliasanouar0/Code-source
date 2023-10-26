@@ -260,5 +260,11 @@ $(document).on('click', '.save_pass', event => {
     console.log(new_pass);
     console.log(c_new_pass);
     let check_state = new_pass == c_new_pass
-    console.log(check_state);
+    fetch(`http://${ip}:3000/users/${id}`, {
+        method: "GET",
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        console.log(data);
+    })
 })
