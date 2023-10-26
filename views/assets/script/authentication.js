@@ -83,7 +83,7 @@ submitButton.addEventListener("click", (e) => {
         } else if (data[0].type == "sup") {
           document.location.href = "../supervisor/";
         } else {
-          document.location.href = "../mailer/";
+          document.location.href = "../mailer/process";
         }
       });
   }
