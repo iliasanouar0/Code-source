@@ -12,7 +12,7 @@ $(document).ready(function () {
 });
 
 $(document).on('click', '.add_seeds', event => {
-    id = $(event.target).data('id')
+    let id = $(event.target).data('id')
     $('#l_seeds_add').data('id', id)
     $('.bulk').data('id', id)
     $(".add_seeds_md").modal('show')
