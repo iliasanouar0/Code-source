@@ -26,3 +26,43 @@ mark {
   color: black;
   font-weight: bold;
 }
+
+.fa-plus {
+  pointer-events: none;
+}
+
+.fa-check {
+  pointer-events: none;
+}
+
+.fa-eye {
+  pointer-events: none;
+}
+
+.fa-edit {
+  pointer-events: none;
+}
+
+.fa-trash-alt {
+  pointer-events: none;
+}
+
+.fa-play {
+  pointer-events: none;
+}
+
+.fa-stop {
+  pointer-events: none;
+}
+
+.fa-pause {
+  pointer-events: none;
+}
+
+i.fa-power-off {
+  pointer-events: none;
+}
+
+i.fa-redo {
+  pointer-events: none;
+}
