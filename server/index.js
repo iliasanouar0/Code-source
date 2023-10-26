@@ -17,7 +17,7 @@ Date.prototype.toDateInputValue = function () {
 };
 
 
-const wsi = new WebSocket.Server({ port: 7071 });
+const wsi = new WebSocket.Server({ port: 7071 })
 const wsp = new WebSocket.Server({ port: 7072 })
 const wss = new WebSocket.Server({ port: 7073 })
 const wsv = new WebSocket.Server({ port: 7074 })
@@ -75,6 +75,7 @@ wsi.on('connection', function connection(ws) {
 });
 
 wss.on('connection', wss => {
+  console.log(wss);
   console.log('connected!')
   let request = ""
   wss.on('message', async (message) => {
@@ -146,8 +147,8 @@ wss.on('connection', wss => {
             }
             if (toProcess.length < active && count < length && state != "STOPPED") {
               toProcess.push(seeds[count])
-              await resultManager.updateState([seeds[count].id_seeds], "running")
               await resultManager.startNow(seeds[count].id_seeds)
+              await resultManager.updateState([seeds[count].id_seeds], "running")
               count++
               let w = waiting - count + 3
               let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
