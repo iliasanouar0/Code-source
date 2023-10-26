@@ -29,8 +29,12 @@ let path = _location.replace(root, "");
 fetch(mailerSidebarUrl)
   .then((response) => response.text())
   .then((html) => {
+    $.fn.exists = function () {
+      return this.length !== 0;
+    }
     // const sidebarContainer = document.querySelector(".mailer-sidebar");
-    $(".mailer-sidebar").html(html)
+    let state = $(".mailer-sidebar").exists();
+    console.log(state);
     // console.log(sidebarContainer);
     // sidebarContainer.innerHTML = html;
   })
