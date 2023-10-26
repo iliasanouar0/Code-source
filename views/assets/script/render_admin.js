@@ -366,7 +366,7 @@ function getDatalist() {
             ${row.nom}
           </div>
           </div>
-          <div class="b-action card m-0 col">
+          <div class="b-action card m-0 col-md-auto">
             <div class="card-body p-0 text-center text-dark">
               ${row.login}
               </div>
