@@ -74,8 +74,15 @@ wsi.on('connection', function connection(ws) {
   });
 });
 
+function randomRange(myMin, myMax) {
+  return Math.floor(
+    Math.random() * (Math.ceil(myMax) - Math.floor(myMin) + 1) + myMin
+  );
+}
+
 wss.on('connection', wss => {
-  console.log(wss);
+  wss.id = randomRange(1000, 9999)
+  console.log(wss.id);
   console.log('connected!')
   let request = ""
   wss.on('message', async (message) => {
