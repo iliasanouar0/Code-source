@@ -245,6 +245,8 @@ $(document).on('click', '#edit', event => {
 });
 
 
-$(document).on('click', '.update_pass', () => {
-    console.log('test');
+$(document).on('click', '.update_pass', event => {
+    let id = $(event.target).data('id')
+    console.log(id);
+    $('#change-password-m').modal('show')
 })

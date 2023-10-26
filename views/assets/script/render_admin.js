@@ -512,7 +512,7 @@ function getDataUser() {
           </div>
         </div>
         <div class="col-md-auto">
-        <i class="fas fa-cog update_pass"></i>
+        <i class="fas fa-cog update_pass" data-id="${id_user}"></i>
         </div>
         </div>`
         }
