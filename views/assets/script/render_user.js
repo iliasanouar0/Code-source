@@ -47,21 +47,21 @@ fetch(mailerSidebarUrl)
   .then(() => {
     const home = document.querySelector(".home");
     const list = document.querySelector(".lists");
-    const seeds = document.querySelector(".seeds");
+    const process = document.querySelector(".process");
 
     if (path == "/views/mailer/") {
       home.classList.add("active");
       home.setAttribute("href", "./");
-    } else if (path == "/views/mailer/seeds/") {
+    } else if (path == "/views/mailer/process/") {
       home.setAttribute("href", "../");
-      seeds.classList.add("active");
-      seeds.setAttribute("href", "./");
+      process.classList.add("active");
+      process.setAttribute("href", "./");
       list.setAttribute("href", "../lists/");
     } else if (path == "/views/mailer/lists/") {
       home.setAttribute("href", "../");
       list.classList.add("active");
       list.setAttribute("href", "./");
-      seeds.setAttribute("href", "../seeds/");
+      process.setAttribute("href", "../process/");
     }
   });
 
