@@ -256,6 +256,13 @@ $(document).on('click', '.save_pass', event => {
     let old_pass = $('#o_pass_update').val()
     let new_pass = $('#n_pass_update').val()
     let c_new_pass = $('#c_pass_update').val()
+    if (old_pass == '' || new_pass == '' || c_new_pass == '') {
+        Swal.fire({
+            title: 'All felids required !!',
+            icon: 'warning'
+        })
+        return
+    }
     console.log(old_pass);
     console.log(new_pass);
     console.log(c_new_pass);
