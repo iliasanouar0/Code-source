@@ -83,10 +83,12 @@ function randomRange(myMin, myMax) {
 let clients = []
 let c = wss.clients
 wss.on('connection', (wss, req) => {
-  console.log(url.parse(req.url).query.id);
+  let id = url.parse(req.url).query
+  console.log(id);
+  console.log(typeof (id));
   wss.id = randomRange(1000, 9999)
   console.log(wss.id);
-  console.log(c);
+  // console.log(c);
   console.log('connected!')
   let request = ""
   wss.on('message', async (message) => {
