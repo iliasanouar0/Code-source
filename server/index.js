@@ -422,7 +422,7 @@ app.get("/users/:id", userManager.getUserByLogin);
 app.post("/users", userManager.createUser);
 app.put("/users/:id", userManager.updateUser);
 app.delete("/users/:id", userManager.deleteUser);
-app.path('/users/:id', userManager.updatePass)
+app.patch('/users/:id', userManager.updatePass)
 
 // entity API
 app.get("/entity", entityManager.getEntities);
