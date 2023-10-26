@@ -148,7 +148,7 @@ $(document).on('click', '.edit', event => {
     let children = $(event.target).parent().parent()[0].children
     let td = children[1].children[0].children[0]
     console.log(td);
-    let name = td.innerHTML
+    let name = td.innerText
     console.log(name);
     let id = $(event.target).data('id')
     console.log(id);
