@@ -21,6 +21,9 @@ Date.prototype.toDateInputValue = function () {
 const wsi = new WebSocket.Server({ port: 7071 })
 const wsp = new WebSocket.Server({ port: 7072 })
 const wss = new WebSocket.Server({ port: 7073 })
+wss.broadcast = data => {
+  wss.clients.forEach(client => client.send(data));
+};
 const wsv = new WebSocket.Server({ port: 7074 })
 
 const userManager = require("./managers/userManager");
@@ -80,15 +83,18 @@ function randomRange(myMin, myMax) {
     Math.random() * (Math.ceil(myMax) - Math.floor(myMin) + 1) + myMin
   );
 }
+
+const sendToAll = (c, m) => {
+  c.forEach(client => {
+    client.send(m)
+  });
+}
 let clients = []
 let c = wss.clients
 wss.on('connection', (wss, req) => {
   let id = parseInt(url.parse(req.url).query.split('=')[1])
-  console.log(id);
-  console.log(typeof (id));
-  wss.id = randomRange(1000, 9999)
-  console.log(wss.id);
-  // console.log(c);
+  wss.id = id
+  clients.push(wss)
   console.log('connected!')
   let request = ""
   wss.on('message', async (message) => {
@@ -209,7 +215,8 @@ wss.on('connection', (wss, req) => {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
           processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
-          wss.send('reload')
+          // wss.send('reload')
+          sendToAll(clients,'reload')
         }
       }
 
