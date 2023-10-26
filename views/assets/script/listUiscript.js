@@ -237,6 +237,11 @@ $(document).on('click', "#l_add", () => {
 
 $(document).on('click', '#l_seeds_add', event => {
     let listId = $(event.target).data('id')
+    let data = $('#FormControlTextarea').val();
+    if (data.val() == '') {
+        Swal.fire('no data provided')
+        return
+    }
     let seeds = []
     let obj = []
     let settings = {
@@ -250,8 +255,8 @@ $(document).on('click', '#l_seeds_add', event => {
         }
     };
     $.ajax(settings).done(function (responseText) {
+        console.log(responseText);
         let isp = responseText[0].isp
-        let data = $('#FormControlTextarea').val();
         let dataArray = data.split(`\n`);
         for (let i = 0; i < dataArray.length; i++) {
             let clean = dataArray[i].split(',')
