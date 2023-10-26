@@ -243,3 +243,8 @@ $(document).on('click', '#edit', event => {
         getDataUser()
     });
 });
+
+
+$(document).on('click', '.update_pass', () => {
+    console.log('test');
+})
