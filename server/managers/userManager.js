@@ -106,10 +106,24 @@ const deleteUser = (request, response) => {
   });
 };
 
+const updatePass = (request, response) => {
+  const id = parseInt(request.params.id)
+  const pass = (request.query.pass);
+  let sql = 'UPDATE users SET password=($1) WHERE id_user = $2'
+  let data = [pass, id]
+  pool.query(sql, data, (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).send(`User deleted with ID: ${id}`);
+  });
+}
+
 module.exports = {
   getUsers,
   getUserByLogin,
   createUser,
   updateUser,
   deleteUser,
+  updatePass
 };

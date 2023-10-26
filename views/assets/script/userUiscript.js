@@ -263,9 +263,6 @@ $(document).on('click', '.save_pass', event => {
         })
         return
     }
-    console.log(old_pass);
-    console.log(new_pass);
-    console.log(c_new_pass);
     fetch(`http://${ip}:3000/users/${id}`, {
         method: "GET",
     }).then(response => {
@@ -273,7 +270,29 @@ $(document).on('click', '.save_pass', event => {
     }).then(data => {
         let new_check_state = new_pass == c_new_pass
         let old_check_state = old_pass == data[0].password
-        console.log(new_check_state);
-        console.log(old_check_state);
+        if (!old_check_state) {
+            Swal.fire({
+                title: 'The old password is wrong',
+                icon: 'error'
+            })
+            return
+        } else if (!new_check_state) {
+            Swal.fire({
+                title: 'The new password confirmation is wrong',
+                icon: 'error'
+            })
+            return
+        }
+        fetch(`http://${ip}:3000/users/${id}?pass=${new_pass}`, {
+            method: "PATCH",
+        }).then(response => {
+            return response.text()
+        }).then(data => {
+            Swal.fire({
+                title: 'updated',
+                text: data,
+                icon: 'success'
+            })
+        }).finally(() => { getDataUser() })
     })
 })
