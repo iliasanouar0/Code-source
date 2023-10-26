@@ -244,9 +244,13 @@ $(document).on('click', '#edit', event => {
     });
 });
 
-
 $(document).on('click', '.update_pass', event => {
     let id = $(event.target).data('id')
-    console.log(id);
+    $('.save_pass').data('id', id)
     $('#change-password-m').modal('show')
+})
+
+$(document).on('click', '.save_pass', event => {
+    let id = $(event.target).data('id')
+    console.log(id);
 })
