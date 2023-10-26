@@ -215,7 +215,7 @@ $(document).on('click', "#l_add", () => {
     let e_add_date = $('#l_add_date').val().toString()
     let e_update_date = $('#l_update_date').val().toString()
     let l_isp_add = $('#l_isp_add').val().toString()
-    if (e_name == "" || e_status == "" || e_add_date == "" || e_update_date == "" || l_isp_add == "") {
+    if (e_name == "" || e_add_date == "" || e_update_date == "" || l_isp_add == "") {
         Swal.fire('Please fill all fields')
         return
     }
