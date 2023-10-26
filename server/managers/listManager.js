@@ -9,14 +9,16 @@ const pool = new pg.Pool(config);
 
 const createList = (request, response) => {
   let obj = request.body;
+  let add = new Date()
+  let update = new Date()
   pool.query(
     "INSERT INTO list ( name, isp, status,  date_update, date_add, id_user)  VALUES ($1, $2, $3, $4, $5, $6) RETURNING id_list",
     [
       obj.nom,
       obj.isp,
       obj.status,
-      obj.date_update,
-      obj.date_add,
+      update,
+      add,
       obj.id_user,
     ],
     (error, results) => {
