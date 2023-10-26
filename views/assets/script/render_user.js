@@ -335,52 +335,14 @@ function getDatalist() {
 };
 
 if (path == "/views/mailer/lists/") {
-  // fetch(`http://${ip}:3000/lists`, {
-  //   method: "GET",
-  // })
-  //   .then((response) => {
-  //     return response.json();
-  //   })
-  //   .then((data) => {
-  //     let rows = createRow(data);
-  //     rows.forEach((row) => {
-  //       list_data.appendChild(row);
-  //     });
-  //   })
-  //   .then(() => {
-  //     let addBtn = document.querySelectorAll(".add_seeds");
-  //     for (let i = 0; i < addBtn.length; i++) {
-  //       addBtn[i].addEventListener("click", () => {
-  //         let id = addBtn[i].dataset.id;
-  //         document.querySelector("#l_seeds_add").dataset.id = id;
-  //         document.querySelector(".bulk").dataset.id = id;
-  //         const myModal = new bootstrap.Modal(
-  //           document.querySelector(".add_seeds_md")
-  //         );
-  //         myModal.show();
-  //       });
-  //     }
-  //   })
-  //   .then(() => {
-  //     let editBtn = document.querySelectorAll(".edit");
-  //     for (let i = 0; i < editBtn.length; i++) {
-  //       editBtn[i].addEventListener("click", () => {
-  //         let id = editBtn[i].dataset.id;
-  //         let name = editBtn[i].parentElement.parentElement.children[2];
-  //         let currentName = name.innerHTML;
-  //         name.innerHTML = `<input type="text" class="form-control name_change" value="${currentName}">`;
-  //         editBtn[
-  //           i
-  //         ].parentElement.innerHTML = `<button type="button" class="btn btn-success save_edit" data-id="${id}">save</button>`;
-  //       });
-  //     }
-  //   });
+  let isp = user.isp.split(',')
+  console.log(isp);
   getDatalist()
 } else if (path.includes("/mailer/process/")) {
   document.querySelector("#add_process").addEventListener("click", () => {
     const select = document.querySelector("#p_list_add");
     select.innerHTML = ""
-    fetch(`http://${ip}:3000/lists`, {
+    fetch(`http://${ip}:3000/lists/${user.id_user}`, {
       method: "GET",
     })
       .then((response) => {
