@@ -536,7 +536,9 @@ function getDataUser() {
       {
         data: null,
         render: function (data, type, row) {
+          console.log(row.date_add);
           let add = new Date(row.date_add).toLocaleString()
+          console.log(add);
           return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${add}
