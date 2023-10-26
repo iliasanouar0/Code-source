@@ -253,4 +253,10 @@ $(document).on('click', '.update_pass', event => {
 $(document).on('click', '.save_pass', event => {
     let id = $(event.target).data('id')
     console.log(id);
+    let old_pass = $('#o_pass_update').val() 
+    let new_pass = $('#n_pass_update').val()
+    let c_new_pass = $('#c_pass_update').val()
+    console.log(old_pass);
+    console.log(new_pass);
+    console.log(c_new_pass);
 })
