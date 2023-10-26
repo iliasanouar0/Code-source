@@ -212,7 +212,6 @@ const addSeeds = (data) => {
 
 $(document).on('click', "#l_add", () => {
     let e_name = $('#la_name').val().toString()
-    let e_status = $('#l_status').val().toString()
     let e_add_date = $('#l_add_date').val().toString()
     let e_update_date = $('#l_update_date').val().toString()
     let l_isp_add = $('#l_isp_add').val().toString()
@@ -223,7 +222,7 @@ $(document).on('click', "#l_add", () => {
     const data = {
         "nom": `${e_name}`,
         "isp": `${l_isp_add}`,
-        "status": `${e_status}`,
+        "status": `active`,
         "date_add": `${e_add_date}`,
         "date_update": `${e_update_date}`,
         "id_user": `${userData.id_user}`,
@@ -420,8 +419,6 @@ const templateSeeds = (data) => {
         let tr = document.createElement('tr')
         tr.appendChild(tdCheck)
         for (let val in object) {
-            console.log(object[val]);
-            console.log(typeof (object[val]));
             if (object[val] == 'undefined') {
                 let td = document.createElement('td')
                 td.innerHTML = 'none'
