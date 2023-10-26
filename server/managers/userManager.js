@@ -31,13 +31,9 @@ const getUserByLogin = (request, response) => {
 };
 
 const createUser = (request, response) => {
-  // let key = Object.keys(request.body)
   let obj = request.body;
-  var generator = new IdGenerator({
-    len: 4,
-    alphabet: "1234567890" /*prefix: id_entity, separator: ' '*/,
-  });
-  let id = generator.get();
+  let add = new Date()
+  let update = new Date()
   pool.query(
     "INSERT INTO users (f_name, l_name, login, type, password, status, date_add, date_update, id_entity, isp) VALUES ($1, $2, $3,$4,$5,$6,$7,$8, $9, $10) RETURNING id_user",
     [
@@ -47,8 +43,8 @@ const createUser = (request, response) => {
       obj.type,
       obj.password,
       obj.status,
-      obj.date_add,
-      obj.date_update,
+      add,
+      update,
       obj.id_entity,
       obj.isp,
     ],
