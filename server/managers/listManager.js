@@ -114,10 +114,22 @@ const updateName = (request, response) => {
   // response.status(200).send(request)
 };
 
+const getIspList = (request, response) => {
+  let id = (request.params.id)
+  let sql = 'SELECT isp FROM list WHERE id_list=($1)'
+  pool.query(sql, [id], (err, res) => {
+    if (err) {
+      response.status(500).send(err.message)
+    }
+    response.status(200).send(res.rows[0])
+  })
+}
+
 module.exports = {
   createList,
   getLists,
   deleteList,
   updateName,
-  getUserLists
+  getUserLists,
+  getIspList,
 };

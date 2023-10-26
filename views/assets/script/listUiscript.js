@@ -245,7 +245,7 @@ $(document).on('click', '#l_seeds_add', event => {
     let seeds = []
     let obj = []
     let settings = {
-        "url": `http://${ip}:3000/lists/${listId}`,
+        "url": `http://${ip}:3000/lists/isp/${listId}`,
         "method": "GET",
         "headers": {
             'Content-Type': 'application/json',

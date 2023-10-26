@@ -434,6 +434,7 @@ app.delete("/entity/:id", entityManager.deleteEntity);
 // lists API
 app.get("/lists", listManager.getLists);
 app.get("/lists/:id", listManager.getUserLists);
+app.get("/lists/isp/:id", listManager.getIspList);
 app.post("/lists", listManager.createList);
 app.put("/lists/:id", listManager.updateName);
 app.delete("/lists/:id", listManager.deleteList);
