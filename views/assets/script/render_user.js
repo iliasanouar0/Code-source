@@ -13,6 +13,8 @@ function getRootWebSitePath() {
 
   return webFolderFullPath;
 }
+const userData = JSON.parse(sessionStorage.user)
+
 
 let storage = { ...localStorage }
 console.log(storage);
