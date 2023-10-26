@@ -29,8 +29,9 @@ let path = _location.replace(root, "");
 fetch(mailerSidebarUrl)
   .then((response) => response.text())
   .then((html) => {
-    const sidebarContainer = document.querySelector(".mailer-sidebar");
-    console.log(sidebarContainer);
+    // const sidebarContainer = document.querySelector(".mailer-sidebar");
+    $(".mailer-sidebar").html(html)
+    // console.log(sidebarContainer);
     // sidebarContainer.innerHTML = html;
   })
   .then(() => {
