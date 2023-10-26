@@ -42,6 +42,10 @@
   pointer-events: none;
 }
 
+.fa-check {
+  pointer-events: none;
+}
+
 .blur {
   -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
