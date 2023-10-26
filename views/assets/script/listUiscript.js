@@ -144,14 +144,14 @@ const addList = (data) => {
     });
 }
 
-// $(document).on('click', '.edit', event => {
-//     let children = $(event.target).parent().parent()[0].children
-//     let td = children[1].children[0].children[0]
-//     let name = td.innerText
-//     td.innerHTML = `<input type="text" class="form-control" id="list_new_name" value="${name}"/>`
-//     $(event.target).html('<i class="fas fa-check"></i>')
-//     $(event.target).toggleClass('save edit')
-// })
+$(document).on('click', '.edit', event => {
+    let children = $(event.target).parent().parent()[0].children
+    let td = children[1].children[0].children[0]
+    let name = td.innerText
+    td.innerHTML = `<input type="text" class="form-control" id="list_new_name" value="${name}"/>`
+    $(event.target).html('<i class="fas fa-check"></i>')
+    $(event.target).toggleClass('save edit')
+})
 
 $(document).on('click', '.save', event => {
     let id = $(event.target).data('id')
@@ -179,11 +179,11 @@ $(document).on('click', '.save', event => {
     // })
 })
 
-$(document).on('click', '.save', event => {
+// $(document).on('click', '.save', event => {
 
-    $(event.target).html('<i class="fas fa-edit"></i>')
-    $(event.target).toggleClass('edit save')
-})
+//     $(event.target).html('<i class="fas fa-edit"></i>')
+//     $(event.target).toggleClass('edit save')
+// })
 
 const addSeeds = (data) => {
     let settings = {
