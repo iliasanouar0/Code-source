@@ -422,9 +422,9 @@ const templateSeeds = (data) => {
         for (let val in object) {
             console.log(object[val]);
             console.log(typeof (object[val]));
-            if (object[val] == undefined) {
+            if (object[val] == 'undefined') {
                 let td = document.createElement('td')
-                td.innerHTML = object[val]
+                td.innerHTML = 'none'
                 tr.appendChild(td)
             } else {
                 let td = document.createElement('td')
