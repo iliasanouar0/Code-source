@@ -40,6 +40,17 @@ const getAllData = (request, response) => {
     })
 }
 
+const getAllUserDate = (request, response) => {
+    const id = (request.params.id)
+    let sql = "SELECT process.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM process JOIN list ON list.id_list=process.id_list JOIN users ON process.id_user=users.id_user JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_user=($1) GROUP BY process.id_process,list.id_list,users.id_user"
+    pool.query(sql, [id], (error, result) => {
+        if (error) {
+            response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
+        }
+        response.status(200).send(result.rows)
+    })
+}
+
 const getAllProcessSeeds = (request, response) => {
     const id = (request.params.id)
     const OFFSET = (request.query.offset)
@@ -279,5 +290,6 @@ module.exports = {
     processing,
     getProcessState,
     getProcessStateServer,
-    getAllProcessSeedsCount
+    getAllProcessSeedsCount,
+    getAllUserDate
 }

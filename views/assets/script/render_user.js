@@ -99,6 +99,175 @@ const createRow = (data) => {
   return rows;
 };
 
+function getData() {
+  $("#example1").DataTable({
+    responsive: true,
+    deferRender: true,
+    destroy: true,
+    autoWidth: false,
+    ajax: {
+      url: `http://${ip}:3000/process/mailer`,
+      dataSrc: '',
+    },
+    columns: [
+      {
+        data: null,
+        searchable: false,
+        orderable: false,
+        defaultContent: "",
+        render: function (data, type, row) {
+          return `<input type="checkbox" class="check" value="${row.id_process}">`
+        }
+      },
+      { data: 'id_process' },
+      {
+        data: null,
+        searchable: false,
+        render: function (data, type, row) {
+          return `<div class="card m-0 bg-info w-50">
+          <div class="card-body p-0 text-center text-light">
+          ${row.count}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.login}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="card m-0 border-secondary">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.list_name}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="card m-0 border-light">
+          <div class="card-body p-0 text-center text-secondary">
+          ${row.isp}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          switch (row.status) {
+            case 'FINISHED':
+              return `<div class="card m-0 border-success">
+                <div class="card-body p-0 text-center text-success">
+                ${row.status}
+                </div>
+              </div>`
+            case 'RUNNING':
+              return `<div class="card m-0 border-primary">
+                  <div class="card-body p-0 text-center text-primary">
+                  ${row.status}
+                  </div>
+                </div>`
+            case 'PAUSED':
+              return `<div class="card m-0 border-warning">
+                    <div class="card-body p-0 text-center text-warning">
+                    ${row.status}
+                     </div>
+                  </div>`
+            case 'STOPPED':
+              return `<div class="card m-0 border-danger">
+                     <div class="card-body p-0 text-center text-danger">
+                      ${row.status}
+                      </div>
+                    </div>`
+            default:
+              return `<div class="card m-0 border-info">
+                      <div class="card-body p-0 text-center text-info">
+                      ${row.status}
+                      </div>
+                    </div>`
+          }
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.action}
+          </div>
+        </div>`
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          if (row.status == 'idel') {
+            return row.date_add
+          }
+          let start_in = new Date(row.start_in)
+          let start = `${start_in.toLocaleString()}`
+          return start
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          if (row.end_in == null) {
+            return `<i class="fas fa-minus"></i>`
+          }
+          let end_in = new Date(row.end_in)
+          let start_in = new Date(row.start_in)
+          let end = `${end_in.toLocaleString()} <span class="text-danger">[ ${msToMnSc(end_in - start_in)} min ]</span>`
+          return end
+        }
+      },
+      {
+        data: null,
+        searchable: false,
+        orderable: false,
+        render: function (data, type, row) {
+          if (row.status == 'FINISHED') {
+            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+  <button type="button" class="btn btn-success" disabled data-id="${row.id_process}"><i class="fas fa-check"></i></button>
+  <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+  <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
+          } else if (row.status == 'RUNNING') {
+            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+<button type="button" class="btn btn-warning pause"  data-id="${row.id_process}"><i class="fas fa-pause"></i></button>
+<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
+          } else if (row.status == 'PAUSED') {
+            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+<button type="button" class="btn btn-warning resume"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
+<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
+          } else if (row.status == 'STOPPED') {
+            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+<button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fas fa-redo"></i></button>
+<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off reset"></i></button>
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
+          } else {
+            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+<button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
+<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
+          }
+        },
+      }
+    ],
+  })
+};
+
 if (path == "/views/mailer/lists/") {
   fetch(`http://${ip}:3000/lists`, {
     method: "GET",
@@ -140,4 +309,24 @@ if (path == "/views/mailer/lists/") {
         });
       }
     });
+} else if (path.includes("/mailer/process/")) {
+  document.querySelector("#add_process").addEventListener("click", () => {
+    const select = document.querySelector("#p_list_add");
+    select.innerHTML = ""
+    fetch(`http://${ip}:3000/lists`, {
+      method: "GET",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        data.forEach((elm) => {
+          let option = document.createElement("option");
+          option.innerHTML = elm["name"];
+          option.setAttribute("value", elm["id_list"]);
+          select.appendChild(option);
+        });
+      });
+  });
+  getData()
 }

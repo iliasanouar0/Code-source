@@ -453,6 +453,7 @@ app.delete("/seeds/:id", seedManager.deleteSeed);
 app.post("/process/", processManager.addProcess)
 app.post("/process/actions/:id", processManager.updateActions)
 app.get("/process/admin", processManager.getAllData)
+app.get("/process/mailer/:id", processManager.getAllUserDate)
 app.get("/process/seeds/:id", processManager.getAllProcessSeeds)
 app.get('/process/page/:id', processManager.getAllProcessSeedsCount)
 app.patch("/process/", processManager.deleteProcess);
