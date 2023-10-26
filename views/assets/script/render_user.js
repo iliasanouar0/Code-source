@@ -14,10 +14,8 @@ function getRootWebSitePath() {
   return webFolderFullPath;
 }
 let user = JSON.parse(sessionStorage.user)
-console.log(user);
 
 let storage = { ...localStorage }
-console.log(storage);
 let ip = storage.ip
 
 const root = getRootWebSitePath();
@@ -29,10 +27,7 @@ let path = _location.replace(root, "");
 fetch(mailerSidebarUrl)
   .then((response) => response.text())
   .then((html) => {
-    // const sidebarContainer = document.querySelector(".mailer-sidebar");
     $(".mailer-sidebar").html(html)
-    // console.log(sidebarContainer);
-    // sidebarContainer.innerHTML = html;
   })
   .then(() => {
     const imgUrlLogo = `${root}/views/assets/images/R.jpg`;
