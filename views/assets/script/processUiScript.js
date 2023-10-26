@@ -1,4 +1,4 @@
-const wssUri = `ws://${ip}:7073/wss`;
+const wssUri = `ws://${ip}:7073/wss?id=${userData.id_user}`;
 const websocket_s = new WebSocket(wssUri);
 websocket_s.onmessage = (event) => {
     let data = event.data

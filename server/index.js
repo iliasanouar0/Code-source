@@ -9,6 +9,7 @@ const fs = require('fs')
 const WebSocket = require('ws');
 const setTimeout = require('timers/promises');
 let time = setTimeout.setTimeout
+const url = require('node:url');
 
 Date.prototype.toDateInputValue = function () {
   var local = new Date(this);
@@ -81,7 +82,7 @@ function randomRange(myMin, myMax) {
 }
 let clients = []
 wss.on('connection', (wss, req) => {
-  console.log(req.resourceURL);
+  console.log(url.parse(req.url));
   wss.id = randomRange(1000, 9999)
   console.log(wss.id);
   console.log('connected!')
