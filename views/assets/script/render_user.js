@@ -69,7 +69,15 @@ fetch(mailerNavbarUrl)
 
 const list_data = document.querySelector("#list_data");
 // const entity_data = document.querySelector('#entity_data')
-
+function msToMnSc(ms) {
+  var minutes = Math.floor(ms / 60000);
+  var seconds = ((ms % 60000) / 1000).toFixed(0);
+  return (
+    seconds == 60 ?
+      (minutes + 1) + ":00" :
+      minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+  );
+}
 
 function getData() {
   $("#processDate").DataTable({
