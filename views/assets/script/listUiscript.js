@@ -145,11 +145,12 @@ const addList = (data) => {
 }
 
 $(document).on('click', '.edit', event => {
-    let id = $(event.target).data('id')
-    $(event.target).html('<i class="fas fa-check"></i>')
-    $(event.target).toggleClass('save edit')
     let children = $(event.target).parent().parent()[0].children
     console.log(children);
+    let id = $(event.target).data('id')
+    console.log(id);
+    $(event.target).html('<i class="fas fa-check"></i>')
+    $(event.target).toggleClass('save edit')
 })
 
 $(document).on('click', '.save', event => {
