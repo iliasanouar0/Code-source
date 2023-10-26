@@ -147,6 +147,8 @@ const addList = (data) => {
 $(document).on('click', '.edit', event => {
     let children = $(event.target).parent().parent()[0].children
     console.log(children[1].children[0].children[0]);
+    let name = children[1].children[0].children[0].innerHTML
+    console.log(name);
     let id = $(event.target).data('id')
     console.log(id);
     $(event.target).html('<i class="fas fa-check"></i>')
