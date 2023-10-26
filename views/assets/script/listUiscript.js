@@ -420,9 +420,15 @@ const templateSeeds = (data) => {
         let tr = document.createElement('tr')
         tr.appendChild(tdCheck)
         for (let val in object) {
-            let td = document.createElement('td')
-            td.innerHTML = object[val]
-            tr.appendChild(td)
+            if (object[val] == undefined) {
+                let td = document.createElement('td')
+                td.innerHTML = object[val]
+                tr.appendChild(td)
+            } else {
+                let td = document.createElement('td')
+                td.innerHTML = object[val]
+                tr.appendChild(td)
+            }
         }
         let td_action = document.createElement('td')
         td_action.innerHTML =
