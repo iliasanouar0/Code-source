@@ -235,8 +235,8 @@ $(document).on('click', "#l_add", () => {
 
 
 
-$(document).on('click', '#l_seeds_add', (ev) => {
-    let listId = ev.target.attributes[3].nodeValue
+$(document).on('click', '#l_seeds_add', event => {
+    let listId = $(event.target).data('id')
     let seeds = []
     let obj = []
     let settings = {
