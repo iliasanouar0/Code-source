@@ -241,7 +241,7 @@ function getData() {
 };
 
 function getDatalist() {
-  $("#listsTable").DataTable({
+  $("#listsDate").DataTable({
     responsive: true,
     deferRender: true,
     destroy: true,
