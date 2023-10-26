@@ -80,8 +80,8 @@ function randomRange(myMin, myMax) {
   );
 }
 let clients = []
-wss.on('connection', (wss, request) => {
-  console.log(request);
+wss.on('connection', (wss, req) => {
+  console.log(req);
   wss.id = randomRange(1000, 9999)
   console.log(wss.id);
   console.log('connected!')
