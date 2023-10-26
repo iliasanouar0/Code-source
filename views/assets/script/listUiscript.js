@@ -238,7 +238,7 @@ $(document).on('click', "#l_add", () => {
 $(document).on('click', '#l_seeds_add', event => {
     let listId = $(event.target).data('id')
     let data = $('#FormControlTextarea').val();
-    if (data.val() == '') {
+    if (data == '') {
         Swal.fire('no data provided')
         return
     }
