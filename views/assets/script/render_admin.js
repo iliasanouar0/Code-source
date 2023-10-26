@@ -509,6 +509,7 @@ function getDataUser() {
           <div class="card-body p-0 text-center blur text-light">
           ${row.password}
           </div>
+          <i class="fas fa-cog"></i>
         </div>`
         }
       },
