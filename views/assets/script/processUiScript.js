@@ -136,6 +136,7 @@ function msToMnSc(ms) {
 const createRowProcessSeeds = data => {
     let duration
     let status
+    let proxy
     let rows = ""
     data.forEach(element => {
         if (element.start_in == null || element.end_in == '0') {
@@ -152,10 +153,15 @@ const createRowProcessSeeds = data => {
         } else {
             status = element.rstatus
         }
+        if (element.proxy == 'undefined') {
+            proxy = 'none'
+        } else {
+            proxy = element.proxy
+        }
         let tr =
             `<tr>
             <td>${element.gmail}</td>
-            <td>${element.proxy}</td>
+            <td>${proxy}</td>
             <td>${element.isp}</td>
             <td  class="text-center">${status}</td>
             <td></td>
