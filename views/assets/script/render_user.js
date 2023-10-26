@@ -70,33 +70,6 @@ fetch(mailerNavbarUrl)
 const list_data = document.querySelector("#list_data");
 // const entity_data = document.querySelector('#entity_data')
 
-const createRow = (data) => {
-  let rows = [];
-  data.forEach((elm) => {
-    let tr = document.createElement("tr");
-    let td = document.createElement("td");
-    td.innerHTML = `<input type="checkbox" class="check" value="${elm.id_list}">`;
-    tr.appendChild(td);
-    for (let val in elm) {
-      let td = document.createElement("td");
-      td.innerText = elm[val];
-      tr.appendChild(td);
-    }
-    for (let val in elm) {
-      if (val.includes("id")) {
-        let td_actions = document.createElement("td");
-        td_actions.innerHTML = `<button type="button" class="btn btn-primary add_seeds" data-id="${elm[val]}"><i class="fa fa-plus"></i></button>
-                    <button type="button" class="btn btn-success edit" data-id="${elm[val]}"><i class="fas fa-edit"></i></button>
-                  <button type="button" class="btn btn-info view" data-id="${elm[val]}"><i class="fa fa-eye" disabled></i></button>`;
-        td_actions.classList.add("text-center");
-        tr.appendChild(td_actions);
-      }
-      break;
-    }
-    rows.push(tr);
-  });
-  return rows;
-};
 
 function getData() {
   $("#processDate").DataTable({
@@ -268,7 +241,7 @@ function getData() {
 };
 
 function getDatalist() {
-  $("#listTable").DataTable({
+  $("#listsTable").DataTable({
     responsive: true,
     deferRender: true,
     destroy: true,
@@ -362,46 +335,47 @@ function getDatalist() {
 };
 
 if (path == "/views/mailer/lists/") {
-  fetch(`http://${ip}:3000/lists`, {
-    method: "GET",
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      let rows = createRow(data);
-      rows.forEach((row) => {
-        list_data.appendChild(row);
-      });
-    })
-    .then(() => {
-      let addBtn = document.querySelectorAll(".add_seeds");
-      for (let i = 0; i < addBtn.length; i++) {
-        addBtn[i].addEventListener("click", () => {
-          let id = addBtn[i].dataset.id;
-          document.querySelector("#l_seeds_add").dataset.id = id;
-          document.querySelector(".bulk").dataset.id = id;
-          const myModal = new bootstrap.Modal(
-            document.querySelector(".add_seeds_md")
-          );
-          myModal.show();
-        });
-      }
-    })
-    .then(() => {
-      let editBtn = document.querySelectorAll(".edit");
-      for (let i = 0; i < editBtn.length; i++) {
-        editBtn[i].addEventListener("click", () => {
-          let id = editBtn[i].dataset.id;
-          let name = editBtn[i].parentElement.parentElement.children[2];
-          let currentName = name.innerHTML;
-          name.innerHTML = `<input type="text" class="form-control name_change" value="${currentName}">`;
-          editBtn[
-            i
-          ].parentElement.innerHTML = `<button type="button" class="btn btn-success save_edit" data-id="${id}">save</button>`;
-        });
-      }
-    });
+  // fetch(`http://${ip}:3000/lists`, {
+  //   method: "GET",
+  // })
+  //   .then((response) => {
+  //     return response.json();
+  //   })
+  //   .then((data) => {
+  //     let rows = createRow(data);
+  //     rows.forEach((row) => {
+  //       list_data.appendChild(row);
+  //     });
+  //   })
+  //   .then(() => {
+  //     let addBtn = document.querySelectorAll(".add_seeds");
+  //     for (let i = 0; i < addBtn.length; i++) {
+  //       addBtn[i].addEventListener("click", () => {
+  //         let id = addBtn[i].dataset.id;
+  //         document.querySelector("#l_seeds_add").dataset.id = id;
+  //         document.querySelector(".bulk").dataset.id = id;
+  //         const myModal = new bootstrap.Modal(
+  //           document.querySelector(".add_seeds_md")
+  //         );
+  //         myModal.show();
+  //       });
+  //     }
+  //   })
+  //   .then(() => {
+  //     let editBtn = document.querySelectorAll(".edit");
+  //     for (let i = 0; i < editBtn.length; i++) {
+  //       editBtn[i].addEventListener("click", () => {
+  //         let id = editBtn[i].dataset.id;
+  //         let name = editBtn[i].parentElement.parentElement.children[2];
+  //         let currentName = name.innerHTML;
+  //         name.innerHTML = `<input type="text" class="form-control name_change" value="${currentName}">`;
+  //         editBtn[
+  //           i
+  //         ].parentElement.innerHTML = `<button type="button" class="btn btn-success save_edit" data-id="${id}">save</button>`;
+  //       });
+  //     }
+  //   });
+  getDatalist()
 } else if (path.includes("/mailer/process/")) {
   document.querySelector("#add_process").addEventListener("click", () => {
     const select = document.querySelector("#p_list_add");
