@@ -13,8 +13,8 @@ function getRootWebSitePath() {
 
   return webFolderFullPath;
 }
-let userData = JSON.parse(sessionStorage.user)
-
+let user = JSON.parse(sessionStorage.user)
+console.log(user);
 
 let storage = { ...localStorage }
 console.log(storage);
@@ -108,7 +108,7 @@ function getData() {
     destroy: true,
     autoWidth: false,
     ajax: {
-      url: `http://${ip}:3000/process/mailer/${userData.id_user}`,
+      url: `http://${ip}:3000/process/mailer/${user.id_user}`,
       dataSrc: '',
     },
     columns: [
