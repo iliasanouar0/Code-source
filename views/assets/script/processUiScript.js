@@ -230,6 +230,7 @@ $(document).on('click', '.status', event => {
         if (data.length == 0) {
             return
         } else {
+            $('.status_bg').html(children[6].innerHTML)
             $('.w_seeds').html(data[0].waiting)
             $('.a_seeds').html(data[0].active)
             $('.f_seeds').html(data[0].finished)
