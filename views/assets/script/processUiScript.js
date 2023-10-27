@@ -51,7 +51,7 @@ const addProcess = data => {
             icon: 'success'
         }).then(() => {
             $(".add_process").modal("hide");
-            getData()
+            getData().ajax.reload(null, false)
         })
     })
 }
@@ -94,7 +94,7 @@ $(document).on('click', '.start', event => {
     }
     // websocket_s.onopen = (e) => {
     websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
-    getData()
+    getData().ajax.reload(null, false)
     // }
 })
 
@@ -403,7 +403,7 @@ const editActions = (data) => {
             title: response,
             icon: 'success'
         })
-        getData()
+        getData().ajax.reload(null, false)
     });
 }
 
@@ -494,7 +494,7 @@ $(document).on('click', '.delete-all-this', () => {
             }).then(() => {
                 $('.checkAll')[0].checked = false
                 $('#action').html('')
-                getData()
+                getData().ajax.reload(null, false)
             })
         } else if (result.isDismissed) {
             Swal.fire({
