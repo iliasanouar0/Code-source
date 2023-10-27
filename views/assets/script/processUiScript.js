@@ -167,7 +167,7 @@ const createRowProcessSeeds = (data, id) => {
             <td>${element.gmail}</td>
             <td>${proxy}</td>
             <td>${element.isp}</td>
-            <td  class="text-center justify-content-center">${status}</td>
+            <td  class="text-center d-flex justify-content-center align-items-center">${status}</td>
             <td></td>
             <td>${duration}</td>
             <td class="text-center">
