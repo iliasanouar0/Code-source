@@ -94,7 +94,7 @@ const updateState = async (data, state) => {
     for (let i = 0; i < data.length; i++) {
         query.push([data[i].id_seeds, data[i].id_process, state])
     }
-    const sql = `UPDATE results SET status=($3) WHERE id_seeds=($1) AND id=process=($2)`
+    const sql = `UPDATE results SET status=($3) WHERE id_seeds=($1) AND id_process=process=($2)`
     query.forEach(async (elm) => {
         const client = await pool.connect()
         client.query(sql, elm, (err) => {
