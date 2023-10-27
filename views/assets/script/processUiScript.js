@@ -174,15 +174,27 @@ const createRowProcessSeeds = (data, id) => {
         }
         let tr =
             `<tr>
-            <td><div class="card-body p-0 text-center text-dark">
-            ${element.gmail}
-            </div></td>
-            <td><div class="card-body p-0 text-center text-dark">
+            <td>
+            <div class="card m-0">
+             <div class="card-body p-0 text-center text-dark">
+             ${element.gmail}
+             </div>
+            </div>
+            </td>
+            <td>    
+            <div class="card m-0">
+            <div class="card-body p-0 text-center text-dark">
             ${proxy}
-            </div></td>
-            <td><div class="card-body p-0 text-center text-dark">
-            ${element.isp}
-            </div></td>
+            </div>
+           </div>>
+           </td>
+            <td>
+            <div class="card m-0">
+             <div class="card-body p-0 text-center text-dark">
+             ${element.isp}
+             </div>
+            </div>
+            </td>
             <td class="text-center">${status}</td>
             <td class="text-center"><p class="placeholder-glow"><span class="placeholder col mb-1"></span></p></td>
             <td class="text-center">${duration}</td>
