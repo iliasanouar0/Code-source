@@ -6,7 +6,7 @@ websocket_s.onmessage = (event) => {
     let data = event.data
     console.log(data);
     if (data == 'reload') {
-        getData().ajax.reload(null, false)
+        getData.ajax.reload(null, false)
     }
 }
 Date.prototype.toDateInputValue = function () {
@@ -51,7 +51,7 @@ const addProcess = data => {
             icon: 'success'
         }).then(() => {
             $(".add_process").modal("hide");
-            getData().ajax.reload(null, false)
+            getData.ajax.reload(null, false)
         })
     })
 }
@@ -94,7 +94,7 @@ $(document).on('click', '.start', event => {
     }
     // websocket_s.onopen = (e) => {
     websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
-    getData().ajax.reload(null, false)
+    getData.ajax.reload(null, false)
     // }
 })
 
@@ -403,7 +403,7 @@ const editActions = (data) => {
             title: response,
             icon: 'success'
         })
-        getData().ajax.reload(null, false)
+        getData.ajax.reload(null, false)
     });
 }
 
@@ -494,7 +494,7 @@ $(document).on('click', '.delete-all-this', () => {
             }).then(() => {
                 $('.checkAll')[0].checked = false
                 $('#action').html('')
-                getData().ajax.reload(null, false)
+                getData.ajax.reload(null, false)
             })
         } else if (result.isDismissed) {
             Swal.fire({
