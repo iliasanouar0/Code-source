@@ -156,12 +156,12 @@ const createRowProcessSeeds = (data, id) => {
           </div>`
         } else if (element.rstatus == 'waiting') {
             status = `<span>&#9203;</span>`
+        } else if (element.rstatus == 'failed') {
+            status = `<span>&#10060;</span>`
         } else if (element.rstatus === null && element.pstatus != 'STOPPED') {
             status = 'idel'
         } else if (element.rstatus === null && element.pstatus === 'STOPPED') {
             status = `<span class="text-danger">${element.pstatus}</span>`
-        } else if (element.status === 'failed') {
-            status = `<span>&#10060;</span>`
         } else {
             status = element.rstatus
         }
