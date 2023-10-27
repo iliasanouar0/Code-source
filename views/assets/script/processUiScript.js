@@ -189,8 +189,10 @@ function getPages(totalPages, currentPage) {
     }
     return result.map(r => { return r + diff });
 }
+
 let cPage
 let max = 10
+
 $(document).on('click', '.status', event => {
     let id = $(event.target)[0].attributes[2].value
     let children = $(event.target).parent().parent()[0].children
@@ -359,6 +361,7 @@ $(document).on('click', '.size', event => {
     fullPage.style.backgroundImage = 'url(' + img.src + ')';
     fullPage.style.display = 'block';
 })
+
 function randomRange(myMin, myMax) {
     return Math.floor(
         Math.random() * (Math.ceil(myMax) - Math.floor(myMin) + 1) + myMin
