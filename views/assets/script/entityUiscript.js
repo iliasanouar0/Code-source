@@ -25,7 +25,7 @@ const addEntity = (data) => {
             confirmButtonText: "ok",
         })
     }).then(() => {
-        getDataEntity()
+        getDataEntity.ajax.reload(null, false)
     });
 };
 
@@ -85,7 +85,7 @@ $(document).on('click', '.delete', event => {
                     confirmButtonText: "ok",
                 })
             }).then(() => {
-                getDataEntity();
+                getDataEntity.ajax.reload(null, false)
             });
         } else if (result.isDismissed) {
             console.log("cancelled");
@@ -161,6 +161,6 @@ $(document).on('click', '#e_e_add', event => {
         })
     }).then(() => {
         $(".edit_entity").modal('hide')
-        getDataEntity()
+        getDataEntity.ajax.reload(null, false)
     });
 })

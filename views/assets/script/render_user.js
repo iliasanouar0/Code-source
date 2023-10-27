@@ -67,8 +67,7 @@ fetch(mailerNavbarUrl)
     navbarContainer.innerHTML = html;
   });
 
-const list_data = document.querySelector("#list_data");
-// const entity_data = document.querySelector('#entity_data')
+
 function msToMnSc(ms) {
   var minutes = Math.floor(ms / 60000);
   var seconds = ((ms % 60000) / 1000).toFixed(0);
@@ -78,6 +77,7 @@ function msToMnSc(ms) {
       minutes + ":" + (seconds < 10 ? "0" : "") + seconds
   );
 }
+
 
 const getData = $("#processDate").DataTable({
   responsive: true,
@@ -245,62 +245,62 @@ const getData = $("#processDate").DataTable({
   ],
 })
 
-function getDatalist() {
-  $("#listsDate").DataTable({
-    responsive: true,
-    deferRender: true,
-    destroy: true,
-    autoWidth: false,
-    ajax: {
-      url: `http://${ip}:3000/lists/${user.id_user}`,
-      dataSrc: '',
+
+const getDatalist = $("#listsDate").DataTable({
+  responsive: true,
+  deferRender: true,
+  destroy: true,
+  autoWidth: false,
+  ajax: {
+    url: `http://${ip}:3000/lists/${user.id_user}`,
+    dataSrc: '',
+  },
+  columns: [
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      defaultContent: "",
+      render: function (data, type, row) {
+        return `<input type="checkbox" class="check" value="${row.id_list}">`
+      }
     },
-    columns: [
-      {
-        data: null,
-        searchable: false,
-        orderable: false,
-        defaultContent: "",
-        render: function (data, type, row) {
-          return `<input type="checkbox" class="check" value="${row.id_list}">`
-        }
-      },
-      {
-        data: null,
-        searchable: false,
-        render: function (data, type, row) {
-          return `<div class="card m-0 bg-info">
+    {
+      data: null,
+      searchable: false,
+      render: function (data, type, row) {
+        return `<div class="card m-0 bg-info">
           <div class="card-body p-0 text-center text-light">
           ${row.name}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="card m-0 border-dark">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
           <div class="card-body p-0 text-center text-dark">
           ${row.isp}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          let add = new Date(row.date_add).toLocaleString()
-          return `<div class="b-action card m-0">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        let add = new Date(row.date_add).toLocaleString()
+        return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${add}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="row gap-2 m-1 justify-content-center">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="row gap-2 m-1 justify-content-center">
           <div class="bg-purple card m-0 col-md-auto">
             <div class="card-body p-0 text-center text-light">
             ${row.nom}
@@ -313,31 +313,31 @@ function getDatalist() {
             </div>
           </div>
          `
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="b-action card m-0">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${row.seeds_count}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        searchable: false,
-        orderable: false,
-        render: function (row) {
-          return `<button type="button" class="btn btn-primary add_seeds" data-id="${row.id_list}"><i class="fa fa-plus"></i></button>
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (row) {
+        return `<button type="button" class="btn btn-primary add_seeds" data-id="${row.id_list}"><i class="fa fa-plus"></i></button>
           <button type="button" class="btn btn-success edit" data-id="${row.id_list}"><i class="fas fa-edit"></i></button>
         <button type="button" class="btn btn-info view" data-id="${row.id_list}"><i class="fa fa-eye" disabled></i></button>`
-        }
       }
-    ],
-  })
-};
+    }
+  ],
+})
+
 
 if (path == "/views/mailer/lists/") {
   const select = document.querySelector("#l_isp_add");
@@ -350,7 +350,7 @@ if (path == "/views/mailer/lists/") {
     option.setAttribute("value", elm);
     select.appendChild(option);
   });
-  getDatalist()
+  getDatalist
 } else if (path.includes("/mailer/process/")) {
   document.querySelector("#add_process").addEventListener("click", () => {
     const select = document.querySelector("#p_list_add");

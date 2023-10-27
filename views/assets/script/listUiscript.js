@@ -109,7 +109,7 @@ $(document).on('click', '.delete-all-this', () => {
                         timer: 3000
                     })
                 }).then(() => {
-                    location.reload()
+                    getDatalist.ajax.reload(null, false)
                 })
             }
         } else if (result.isDismissed) {
@@ -139,7 +139,7 @@ const addList = (data) => {
             icon: 'success',
             confirmButtonText: 'ok'
         }).then(() => {
-            getDatalist()
+            getDatalist.ajax.reload(null, false)
         })
     });
 }
@@ -174,7 +174,7 @@ $(document).on('click', '.save', event => {
             confirmButtonText: 'ok'
         })
     }).then(() => {
-        getDatalist()
+        getDatalist.ajax.reload(null, false)
     })
 })
 
@@ -203,7 +203,7 @@ const addSeeds = (data) => {
             icon: 'success',
             confirmButtonText: 'ok'
         }).then(() => {
-            getDatalist()
+            getDatalist.ajax.reload(null, false)
         })
     });
     // })

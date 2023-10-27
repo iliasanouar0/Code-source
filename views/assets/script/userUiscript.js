@@ -45,7 +45,7 @@ const addUser = (data) => {
             icon: "success",
             confirmButtonText: "ok",
         }).then(() => {
-            getDataUser()
+            getDataUser.ajax.reload(null, false)
         });
     });
 };
@@ -133,7 +133,7 @@ $(document).on('click', '.delete', event => {
             confirmButtonText: "ok",
         })
     }).then(() => {
-        getDataUser()
+        getDataUser.ajax.reload(null, false)
     });
 });
 
@@ -240,7 +240,7 @@ $(document).on('click', '#edit', event => {
         })
     }).then(() => {
         $(".edit_user").modal("hide");
-        getDataUser()
+        getDataUser.ajax.reload(null, false)
     });
 });
 
@@ -293,6 +293,6 @@ $(document).on('click', '.save_pass', event => {
                 text: data,
                 icon: 'success'
             })
-        }).finally(() => { getDataUser() })
+        }).finally(() => { getDataUser.ajax.reload(null, false) })
     })
 })

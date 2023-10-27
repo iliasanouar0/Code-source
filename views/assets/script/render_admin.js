@@ -20,6 +20,7 @@ if (root.includes('views')) {
   adminNavbarUrl = `${root}/views/layout/admin_navbar.html`;
   adminSidebarUrl = `${root}/views/layout/admin_sidebar.html`;
 }
+
 const _location = document.location.toString();
 let path = _location.replace(root, "");
 fetch(adminSidebarUrl)
@@ -119,12 +120,14 @@ fetch(adminSidebarUrl)
     }
   });
 
+
 fetch(adminNavbarUrl)
   .then((response) => response.text())
   .then((html) => {
     const navbarContainer = document.querySelector(".admin-navbar");
     navbarContainer.innerHTML = html;
   });
+
 
 function msToMnSc(ms) {
   var minutes = Math.floor(ms / 60000);
@@ -136,231 +139,230 @@ function msToMnSc(ms) {
   );
 }
 
-function getData() {
-  $("#example1").DataTable({
-    responsive: true,
-    deferRender: true,
-    destroy: true,
-    autoWidth: false,
-    ajax: {
-      url: `http://${ip}:3000/process/admin`,
-      dataSrc: '',
+
+const getData = $("#example1").DataTable({
+  responsive: true,
+  deferRender: true,
+  destroy: true,
+  autoWidth: false,
+  ajax: {
+    url: `http://${ip}:3000/process/admin`,
+    dataSrc: '',
+  },
+  columns: [
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      defaultContent: "",
+      render: function (data, type, row) {
+        return `<input type="checkbox" class="check" value="${row.id_process}">`
+      }
     },
-    columns: [
-      {
-        data: null,
-        searchable: false,
-        orderable: false,
-        defaultContent: "",
-        render: function (data, type, row) {
-          return `<input type="checkbox" class="check" value="${row.id_process}">`
-        }
-      },
-      { data: 'id_process' },
-      {
-        data: null,
-        searchable: false,
-        render: function (data, type, row) {
-          return `<div class="card m-0 bg-info w-50">
+    { data: 'id_process' },
+    {
+      data: null,
+      searchable: false,
+      render: function (data, type, row) {
+        return `<div class="card m-0 bg-info w-50">
           <div class="card-body p-0 text-center text-light">
           ${row.count}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="card m-0 border-dark">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
           <div class="card-body p-0 text-center text-dark">
           ${row.login}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="card m-0 border-secondary">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-secondary">
           <div class="card-body p-0 text-center text-dark">
           ${row.list_name}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="card m-0 border-light">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-light">
           <div class="card-body p-0 text-center text-secondary">
           ${row.isp}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          switch (row.status) {
-            case 'FINISHED':
-              return `<div class="card m-0 border-success">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        switch (row.status) {
+          case 'FINISHED':
+            return `<div class="card m-0 border-success">
                 <div class="card-body p-0 text-center text-success">
                 ${row.status}
                 </div>
               </div>`
-            case 'RUNNING':
-              return `<div class="card m-0 border-primary">
+          case 'RUNNING':
+            return `<div class="card m-0 border-primary">
                   <div class="card-body p-0 text-center text-primary">
                   ${row.status}
                   </div>
                 </div>`
-            case 'PAUSED':
-              return `<div class="card m-0 border-warning">
+          case 'PAUSED':
+            return `<div class="card m-0 border-warning">
                     <div class="card-body p-0 text-center text-warning">
                     ${row.status}
                      </div>
                   </div>`
-            case 'STOPPED':
-              return `<div class="card m-0 border-danger">
+          case 'STOPPED':
+            return `<div class="card m-0 border-danger">
                      <div class="card-body p-0 text-center text-danger">
                       ${row.status}
                       </div>
                     </div>`
-            default:
-              return `<div class="card m-0 border-info">
+          default:
+            return `<div class="card m-0 border-info">
                       <div class="card-body p-0 text-center text-info">
                       ${row.status}
                       </div>
                     </div>`
-          }
         }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="b-action card m-0">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${row.action}
           </div>
         </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        if (row.status == 'idel') {
+          return row.date_add
         }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          if (row.status == 'idel') {
-            return row.date_add
-          }
-          let start_in = new Date(row.start_in)
-          let start = `${start_in.toLocaleString()}`
-          return start
+        let start_in = new Date(row.start_in)
+        let start = `${start_in.toLocaleString()}`
+        return start
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        if (row.end_in == null) {
+          return `<i class="fas fa-minus"></i>`
         }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          if (row.end_in == null) {
-            return `<i class="fas fa-minus"></i>`
-          }
-          let end_in = new Date(row.end_in)
-          let start_in = new Date(row.start_in)
-          let end = `${end_in.toLocaleString()} <span class="text-danger">[ ${msToMnSc(end_in - start_in)} min ]</span>`
-          return end
-        }
-      },
-      {
-        data: null,
-        searchable: false,
-        orderable: false,
-        render: function (data, type, row) {
-          if (row.status == 'FINISHED') {
-            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+        let end_in = new Date(row.end_in)
+        let start_in = new Date(row.start_in)
+        let end = `${end_in.toLocaleString()} <span class="text-danger">[ ${msToMnSc(end_in - start_in)} min ]</span>`
+        return end
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (data, type, row) {
+        if (row.status == 'FINISHED') {
+          return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
   <button type="button" class="btn btn-success" disabled data-id="${row.id_process}"><i class="fas fa-check"></i></button>
   <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
   <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-          } else if (row.status == 'RUNNING') {
-            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+        } else if (row.status == 'RUNNING') {
+          return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-warning pause"  data-id="${row.id_process}"><i class="fas fa-pause"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-          } else if (row.status == 'PAUSED') {
-            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+        } else if (row.status == 'PAUSED') {
+          return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-warning resume"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-          } else if (row.status == 'STOPPED') {
-            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+        } else if (row.status == 'STOPPED') {
+          return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fas fa-redo"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off reset"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-          } else {
-            return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
+        } else {
+          return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
-          }
-        },
-      }
-    ],
-  })
-};
-
-function getDatalist() {
-  $("#listTable").DataTable({
-    responsive: true,
-    deferRender: true,
-    destroy: true,
-    autoWidth: false,
-    ajax: {
-      url: `http://${ip}:3000/lists`,
-      dataSrc: '',
-    },
-    columns: [
-      {
-        data: null,
-        searchable: false,
-        orderable: false,
-        defaultContent: "",
-        render: function (data, type, row) {
-          return `<input type="checkbox" class="check" value="${row.id_list}">`
         }
       },
-      {
-        data: null,
-        searchable: false,
-        render: function (data, type, row) {
-          return `<div class="card m-0 bg-info">
+    }
+  ],
+})
+
+
+const getDatalist = $("#listTable").DataTable({
+  responsive: true,
+  deferRender: true,
+  destroy: true,
+  autoWidth: false,
+  ajax: {
+    url: `http://${ip}:3000/lists`,
+    dataSrc: '',
+  },
+  columns: [
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      defaultContent: "",
+      render: function (data, type, row) {
+        return `<input type="checkbox" class="check" value="${row.id_list}">`
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      render: function (data, type, row) {
+        return `<div class="card m-0 bg-info">
           <div class="card-body p-0 text-center text-light">
           ${row.name}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="card m-0 border-dark">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
           <div class="card-body p-0 text-center text-dark">
           ${row.isp}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          let add = new Date(row.date_add).toLocaleString()
-          return `<div class="b-action card m-0">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        let add = new Date(row.date_add).toLocaleString()
+        return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${add}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="row gap-2 m-1 justify-content-center">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="row gap-2 m-1 justify-content-center">
           <div class="bg-purple card m-0 col-md-auto">
             <div class="card-body p-0 text-center text-light">
             ${row.nom}
@@ -373,139 +375,137 @@ function getDatalist() {
             </div>
           </div>
          `
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="b-action card m-0">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${row.seeds_count}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        searchable: false,
-        orderable: false,
-        render: function (row) {
-          return `<button type="button" class="btn btn-primary add_seeds" data-id="${row.id_list}"><i class="fa fa-plus"></i></button>
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (row) {
+        return `<button type="button" class="btn btn-primary add_seeds" data-id="${row.id_list}"><i class="fa fa-plus"></i></button>
           <button type="button" class="btn btn-success edit" data-id="${row.id_list}"><i class="fas fa-edit"></i></button>
         <button type="button" class="btn btn-info view" data-id="${row.id_list}"><i class="fa fa-eye" disabled></i></button>`
-        }
       }
-    ],
-  })
-};
+    }
+  ],
+})
 
-function getDataEntity() {
-  $("#entityTable").DataTable({
-    responsive: true,
-    deferRender: true,
-    destroy: true,
-    autoWidth: false,
-    ajax: {
-      url: `http://${ip}:3000/entity/`,
-      dataSrc: '',
-    },
-    columns: [
-      { data: 'id_entity' },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="card m-0">
+
+const getDataEntity = $("#entityTable").DataTable({
+  responsive: true,
+  deferRender: true,
+  destroy: true,
+  autoWidth: false,
+  ajax: {
+    url: `http://${ip}:3000/entity/`,
+    dataSrc: '',
+  },
+  columns: [
+    { data: 'id_entity' },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0">
           <div class="card-body p-0 text-center">
           ${row.nom}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="card m-0 border-dark">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
           <div class="card-body p-0 text-center text-dark">
           ${row.status}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          let add = new Date(row.date_add).toLocaleString()
-          return `<div class="b-action card m-0">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        let add = new Date(row.date_add).toLocaleString()
+        return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${add}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        searchable: false,
-        orderable: false,
-        render: function (row) {
-          return `<div class="text-center">
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (row) {
+        return `<div class="text-center">
           <button type="button" class="btn btn-success edit"  data-id="${row.id_entity}"><i class="fas fa-edit"></i></button>
         <button type="button" class="btn btn-danger delete" data-id="${row.id_entity}"><i class="far fa-trash-alt"></i></button>
           </div>`
-        }
       }
-    ],
-  })
-};
+    }
+  ],
+})
 
-function getDataUser() {
-  $("#userTable").DataTable({
-    responsive: true,
-    deferRender: true,
-    destroy: true,
-    autoWidth: false,
-    ajax: {
-      url: `http://${ip}:3000/users/`,
-      dataSrc: '',
-    },
-    columns: [
-      { data: 'id_user' },
-      {
-        data: null,
-        searchable: false,
-        render: function (data, type, row) {
-          return `<div class="card m-0 border-dark">
+
+const getDataUser = $("#userTable").DataTable({
+  responsive: true,
+  deferRender: true,
+  destroy: true,
+  autoWidth: false,
+  ajax: {
+    url: `http://${ip}:3000/users/`,
+    dataSrc: '',
+  },
+  columns: [
+    { data: 'id_user' },
+    {
+      data: null,
+      searchable: false,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
           <div class="card-body p-0 text-center text-dark">
           ${row.f_name} ${row.l_name}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="card m-0 border-dark">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
           <div class="card-body p-0 text-center text-dark">
           ${row.login}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="b-action card m-0">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${row.type}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        searchable: false,
-        orderable: false,
-        render: function (data, type, row) {
-          return `<div class="row m-0 justify-content-center">
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (data, type, row) {
+        return `<div class="row m-0 justify-content-center">
           <div class="card m-0 bg-danger password_show col">
           <div class="card-body p-0 text-center blur text-light">
           ${row.password}
@@ -515,78 +515,77 @@ function getDataUser() {
         <i class="fas fa-cog update_pass" data-id="${row.id_user}"></i>
         </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (row) {
-          switch (row.status) {
-            case 'active':
-              return `<div class="card m-0">
+      }
+    },
+    {
+      data: null,
+      render: function (row) {
+        switch (row.status) {
+          case 'active':
+            return `<div class="card m-0">
               <div class="card-body p-0 text-center text-success status_change">
               ${row.status}
               </div>
             </div>`
-            default:
-              return `<span class="text-danger">non !!</span>`
-          }
-
+          default:
+            return `<span class="text-danger">non !!</span>`
         }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          console.log(row.date_add);
-          let add = new Date(row.date_add).toLocaleString()
-          console.log(add);
-          return `<div class="b-action card m-0">
+
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        console.log(row.date_add);
+        let add = new Date(row.date_add).toLocaleString()
+        console.log(add);
+        return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${add}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="b-action card m-0">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${row.entity_name}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return `<div class="bg-teal card m-0">
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="bg-teal card m-0">
           <div class="card-body p-0 text-center text-light">
           ${row.isp}
           </div>
         </div>`
-        }
-      },
-      {
-        data: null,
-        searchable: false,
-        orderable: false,
-        render: function (data, type, row) {
-          return `<div class="text-center">
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (data, type, row) {
+        return `<div class="text-center">
           <button type="button" class="btn btn-success edit"  data-id="${row.id_user}"><i class="fas fa-edit"></i></button>
         <button type="button" class="btn btn-danger delete" data-id="${row.id_user}"><i class="far fa-trash-alt"></i></button>
           </div>`
-        }
-      },
+      }
+    },
 
-    ],
-  })
-};
+  ],
+})
 
 
 if (path.includes("/admin/users/")) {
   getDataUser()
 } else if (path.includes("/admin/entities/")) {
-  getDataEntity()
+  getDataEntity
 } else if (path.includes("/admin/process/")) {
   document.querySelector("#add_process").addEventListener("click", () => {
     const select = document.querySelector("#p_list_add");
@@ -606,7 +605,7 @@ if (path.includes("/admin/users/")) {
         });
       });
   });
-  getData()
+  getData
 } else if (path.includes("/admin/lists/")) {
-  getDatalist()
+  getDatalist
 }
