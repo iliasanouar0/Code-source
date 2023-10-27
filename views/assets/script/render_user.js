@@ -190,7 +190,7 @@ const getData = $("#processDate").DataTable({
       data: null,
       render: function (data, type, row) {
         if (row.status == 'idel') {
-          return row.date_add
+          return `${row.date_add} (Create at)`
         }
         let start_in = new Date(row.start_in)
         let start = `${start_in.toLocaleString()}`
@@ -200,7 +200,7 @@ const getData = $("#processDate").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        if (row.end_in == null) {
+        if (row.end_in == null || row.status) {
           return `<i class="fas fa-minus"></i>`
         }
         let end_in = new Date(row.end_in)
