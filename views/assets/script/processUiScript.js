@@ -150,8 +150,10 @@ const createRowProcessSeeds = (data, id) => {
         }
         if (element.rstatus == 'running') {
             status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="30px">'
-        } else if (element.rstatus === null) {
+        } else if (element.rstatus === null && element.pstatus != 'STOPPED') {
             status = 'idel'
+        } else if (element.rstatus === null && element.pstatus === 'STOPPED') {
+            status = element.pstatus
         } else {
             status = element.rstatus
         }

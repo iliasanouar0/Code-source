@@ -178,11 +178,6 @@ $(document).on('click', '.save', event => {
     })
 })
 
-// $(document).on('click', '.save', event => {
-//     $(event.target).html('<i class="fas fa-edit"></i>')
-//     $(event.target).toggleClass('edit save')
-// })
-
 const addSeeds = (data) => {
     let settings = {
         "url": `http://${ip}:3000/seeds`,
