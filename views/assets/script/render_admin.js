@@ -262,7 +262,7 @@ const getData = $("#example1").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        if (row.end_in == null) {
+        if (row.end_in == null || row.status == 'STOPPED') {
           return `<i class="fas fa-minus"></i>`
         }
         let end_in = new Date(row.end_in)
@@ -294,7 +294,7 @@ const getData = $("#example1").DataTable({
         } else if (row.status == 'STOPPED') {
           return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fas fa-redo"></i></button>
-<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off reset"></i></button>
+<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" disabled><i class="fas fa-power-off reset"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
         } else {
           return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
