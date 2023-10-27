@@ -172,7 +172,7 @@ const createRowProcessSeeds = (data, id) => {
             <td>${proxy}</td>
             <td>${element.isp}</td>
             <td class="text-center">${status}</td>
-            <td class="text-center"><p class="placeholder-glow"><span class="placeholder col mb-1"></span> <span class="placeholder col mb1"></span> <span class="placeholder col"></span></p></td>
+            <td class="text-center"><p class="placeholder-glow"><span class="placeholder col mb-1"></span><span class="placeholder col mb1"></p></td>
             <td>${duration}</td>
             <td class="text-center">
                 <button type="button" class="btn btn-dark details" data-id="${element.id_seeds}" data-id_process="${id}"><i class="fas fa-eye"></i></button>
