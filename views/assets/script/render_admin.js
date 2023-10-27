@@ -583,7 +583,7 @@ const getDataUser = $("#userTable").DataTable({
 
 
 if (path.includes("/admin/users/")) {
-  getDataUser()
+  getDataUser
 } else if (path.includes("/admin/entities/")) {
   getDataEntity
 } else if (path.includes("/admin/process/")) {
