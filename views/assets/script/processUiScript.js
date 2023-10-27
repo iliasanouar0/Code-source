@@ -176,21 +176,21 @@ const createRowProcessSeeds = (data, id) => {
             `<tr>
             <td>
             <div class="card m-0">
-             <div class="card-body p-0 text-center text-dark">
+             <div class="card-body p-1 text-center text-dark">
              ${element.gmail}
              </div>
             </div>
             </td>
             <td>    
             <div class="card m-0">
-            <div class="card-body p-0 text-center text-dark">
+            <div class="card-body p-1 text-center text-dark">
             ${proxy}
             </div>
            </div>
            </td>
             <td>
             <div class="card m-0">
-             <div class="card-body p-0 text-center text-dark">
+             <div class="card-body p-1 text-center text-dark">
              ${element.isp}
              </div>
             </div>
