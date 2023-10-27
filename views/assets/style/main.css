@@ -9,15 +9,12 @@
 .loading {
   height: 0;
   width: 0;
-  padding: 15px;
+  padding: 5px;
   border: 6px solid #ccc;
-  border-right-color: #888;
+  border-right-color: #eeff00;
+  border-top-color:rgb(0, 4, 255)f;
   border-radius: 22px;
   animation: rotate 1s infinite linear;
-  /* left, top and position just for the demo! */
-  /* position: absolute;
-  left: 50%;
-  top: 50%; */
 }
 
 @keyframes rotate {
