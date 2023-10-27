@@ -189,7 +189,7 @@ const getData = $("#processDate").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        if (row.status == 'idel') {
+        if (row.status == 'idel' || row.status == 'STOPPED') {
           return `${row.date_add} (Create at)`
         }
         let start_in = new Date(row.start_in)
