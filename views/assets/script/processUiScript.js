@@ -149,7 +149,11 @@ const createRowProcessSeeds = (data, id) => {
             duration = msToMnSc(end - start)
         }
         if (element.rstatus == 'running') {
-            status = '<div class="spinner-border spinner-border-sm text-primary m-auto" role="status"><span class="visually-hidden">Loading...</span></div>'
+            status = `<div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>`
         } else if (element.rstatus === null && element.pstatus != 'STOPPED') {
             status = 'idel'
         } else if (element.rstatus === null && element.pstatus === 'STOPPED') {
@@ -167,7 +171,7 @@ const createRowProcessSeeds = (data, id) => {
             <td>${element.gmail}</td>
             <td>${proxy}</td>
             <td>${element.isp}</td>
-            <td  class="text-center d-flex justify-content-center">${status}</td>
+            <td>${status}</td>
             <td></td>
             <td>${duration}</td>
             <td class="text-center">
