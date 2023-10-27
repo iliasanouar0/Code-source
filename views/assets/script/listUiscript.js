@@ -353,7 +353,7 @@ document.getElementById("demo").onchange = evt => {
                 tbody.append(tr)
             })
             $('.count').html(count)
-            let data = btn.attributes.data.value
+            let data = $(btn).data('id')
             $('.save-bulk-data').attr("data", data)
         })
 
