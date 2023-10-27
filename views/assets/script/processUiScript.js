@@ -150,7 +150,7 @@ const createRowProcessSeeds = (data, id) => {
         }
         if (element.rstatus == 'running') {
             status = `<div class="d-flex justify-content-center">
-            <div class="spinner-border spinner-border-sm bg-primary" role="status">
+            <div class="spinner-border spinner-border-sm text-primary" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>`
