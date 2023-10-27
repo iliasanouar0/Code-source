@@ -6,7 +6,7 @@ websocket_s.onmessage = (event) => {
     let data = event.data
     console.log(data);
     if (data == 'reload') {
-        getData()
+        getData().ajax.reload(null, false)
     }
 }
 Date.prototype.toDateInputValue = function () {
