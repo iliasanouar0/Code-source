@@ -270,7 +270,7 @@ $(document).on('click', '.seeds-page', event => {
         return response.json()
     }).then(data => {
         pagination(id, cPage)
-        var html = createRowProcessSeeds(data);
+        var html = createRowProcessSeeds(data, id);
         $('#seeds_result').html(html);
     })
 })
