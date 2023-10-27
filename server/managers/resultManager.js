@@ -92,12 +92,12 @@ const getDuration = (request, response) => {
 const updateState = async (data, state) => {
     let query = []
     for (let i = 0; i < data.length; i++) {
-        query.push([state, data[i]])
+        query.push([data[i].id_seeds, data[i].id_process, state])
     }
-    const sql = `UPDATE results SET status=($1) WHERE id_seeds=($2)`
-    query.forEach(async (data) => {
+    const sql = `UPDATE results SET status=($3) WHERE id_seeds=($1) AND id=process=($2)`
+    query.forEach(async (elm) => {
         const client = await pool.connect()
-        client.query(sql, data, (err) => {
+        client.query(sql, elm, (err) => {
             if (err) {
                 throw err;
             }
@@ -108,9 +108,9 @@ const updateState = async (data, state) => {
 
 const startNow = async (data) => {
     let start_in = new Date()
-    const sql = `UPDATE results SET start_in=($2) WHERE id_seeds=($1)`
+    const sql = `UPDATE results SET start_in=($3) WHERE id_seeds=($1) AND id_process=($2)`
     const client = await pool.connect()
-    client.query(sql, [data, start_in], (err) => {
+    client.query(sql, [data.id_seeds, data.id_process, start_in], (err) => {
         if (err) {
             throw err;
         }
