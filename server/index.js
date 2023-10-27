@@ -155,7 +155,8 @@ wss.on('connection', (wss, req) => {
             let result = {
               id_seeds: toProcess[0].id_seeds,
               feedback: r,
-              end_in: end_in
+              end_in: end_in,
+              id_process: data.id_process
             }
             await resultManager.updateResult(result)
             toProcess.shift()
@@ -179,7 +180,8 @@ wss.on('connection', (wss, req) => {
             let result = {
               id_seeds: toProcess[0].id_seeds,
               feedback: r,
-              end_in: end_in
+              end_in: end_in,
+              id_process: data.id_process
             }
             await resultManager.updateResult(result)
             toProcess.shift()
@@ -218,7 +220,7 @@ wss.on('connection', (wss, req) => {
         }
       }
 
-      
+
     } else if (request == "resume") {
       processManager.resumedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "paused" })
@@ -268,7 +270,8 @@ wss.on('connection', (wss, req) => {
             let result = {
               id_seeds: toProcess[0].id_seeds,
               feedback: r,
-              end_in: end_in
+              end_in: end_in,
+              id_process: data.id_process
             }
             await resultManager.updateResult(result)
             toProcess.shift()
@@ -292,7 +295,8 @@ wss.on('connection', (wss, req) => {
             let result = {
               id_seeds: toProcess[0].id_seeds,
               feedback: r,
-              end_in: end_in
+              end_in: end_in,
+              id_process: data.id_process
             }
             await resultManager.updateResult(result)
             toProcess.shift()
