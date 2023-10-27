@@ -186,7 +186,7 @@ const createRowProcessSeeds = (data, id) => {
             <div class="card-body p-0 text-center text-dark">
             ${proxy}
             </div>
-           </div>>
+           </div>
            </td>
             <td>
             <div class="card m-0">
