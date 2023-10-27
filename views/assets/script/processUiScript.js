@@ -171,8 +171,8 @@ const createRowProcessSeeds = (data, id) => {
             <td>${element.gmail}</td>
             <td>${proxy}</td>
             <td>${element.isp}</td>
-            <td>${status}</td>
-            <td></td>
+            <td class="text-center">${status}</td>
+            <td class="text-center"><p class="placeholder-glow"><span class="placeholder"></span></p></td>
             <td>${duration}</td>
             <td class="text-center">
                 <button type="button" class="btn btn-dark details" data-id="${element.id_seeds}" data-id_process="${id}"><i class="fas fa-eye"></i></button>
