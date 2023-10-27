@@ -48,7 +48,7 @@ const getAllUserDate = (request, response) => {
 const getAllProcessSeeds = (request, response) => {
     const id = (request.params.id)
     const OFFSET = (request.query.offset)
-    let sql = "SELECT process.id_process,process.action,process.status as pstatus, seeds.*,results.start_in, results.end_in, results.status as rStatus FROM process JOIN seeds ON seeds.id_list=process.id_list  LEFT JOIN results ON results.id_process=process.id_process AND results.id_seeds=seeds.id_seeds  WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds,results.start_in,results.end_in, results.status ORDER BY CASE WHEN results.status = 'running' then 1 WHEN results.status = 'finished' then 2  WHEN results.status = 'failed' then 3 WHEN results.status='waiting' then 4 END ASC LIMIT 10 OFFSET $2"
+    let sql = "SELECT process.id_process,process.action,process.status as pstatus, seeds.*,results.start_in, results.end_in, results.status as rStatus FROM process JOIN seeds ON seeds.id_list=process.id_list  LEFT JOIN results ON results.id_process=process.id_process AND results.id_seeds=seeds.id_seeds  WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds,results.start_in,results.end_in, results.status,process.status ORDER BY CASE WHEN results.status = 'running' then 1 WHEN results.status = 'finished' then 2  WHEN results.status = 'failed' then 3 WHEN results.status='waiting' then 4 END ASC LIMIT 10 OFFSET $2"
     pool.query(sql, [id, OFFSET], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
