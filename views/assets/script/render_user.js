@@ -370,5 +370,5 @@ if (path == "/views/mailer/lists/") {
         });
       });
   });
-  getData()
+  getData
 }
