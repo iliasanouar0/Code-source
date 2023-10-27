@@ -149,7 +149,7 @@ const createRowProcessSeeds = (data, id) => {
             duration = msToMnSc(end - start)
         }
         if (element.rstatus == 'running') {
-            status = '<img src="../../assets/images/loader/load.gif" alt="loader" width="30px">'
+            status = '<div class="loading"></div>'
         } else if (element.rstatus === null && element.pstatus != 'STOPPED') {
             status = 'idel'
         } else if (element.rstatus === null && element.pstatus === 'STOPPED') {
