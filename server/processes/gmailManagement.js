@@ -79,7 +79,6 @@ const login = async (data) => {
 }
 
 const kill = (id_process) => {
-    console.log(pidProcess);
     pidProcess.forEach(Element => {
         if (Element.id_process == id_process) {
             let state = require('is-running')(Element.pid)
@@ -88,6 +87,8 @@ const kill = (id_process) => {
                     process.kill(Element.pid, 'SIGINT')
                 } catch (error) {
                     console.log(error);
+                } finally {
+                    pidProcess.splice(indexOf(Element.pid), 1)
                 }
             }
         }
