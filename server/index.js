@@ -218,6 +218,7 @@ wss.on('connection', (wss, req) => {
         }
       }
 
+      
     } else if (request == "resume") {
       processManager.resumedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "paused" })
@@ -330,6 +331,7 @@ wss.on('connection', (wss, req) => {
         }
       }
 
+
     } else if (request == "pause") {
       processManager.stoppedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
@@ -351,6 +353,8 @@ wss.on('connection', (wss, req) => {
       await processStateManager.updateState(status)
       processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
       sendToAll(clients, 'reload')
+
+
     } else if (request == 'reset') {
       await processManager.restedProcess(data.data)
       await resultManager.deleteResultsProcess(data.id_process)
