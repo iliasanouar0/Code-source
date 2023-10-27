@@ -135,7 +135,7 @@ function msToMnSc(ms) {
 }
 
 
-const createRowProcessSeeds = (data,id) => {
+const createRowProcessSeeds = (data, id) => {
     let duration
     let status
     let proxy
@@ -317,45 +317,43 @@ const pagination = (id, cPage) => {
 $(document).on('click', '.details', event => {
     let id = $(event.target).data('id')
     let id_process = $(event.target).data('id_process')
-    console.log(id);
-    console.log(id_process);
-    // fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
-    //     return response.json()
-    // }).then(data => {
-    //     if (data.length == 0) {
-    //         Swal.fire({
-    //             title: 'NO feedback yet !!',
-    //             icon: 'info'
-    //         })
-    //         return
-    //     }
-    //     let feedBack = data[0].feedback.split(', ')
-    //     if (feedBack[0] == '0') {
-    //         Swal.fire({
-    //             title: 'NO feedback yet !!',
-    //             icon: 'info'
-    //         })
-    //         return
-    //     }
-    //     let variables
-    //     let card = ""
-    //     feedBack.forEach(element => {
-    //         variables = element.split('-')
-    //         card += `<div class="col">
-    //         <div class="card">
-    //         <a class="size">
-    //         <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
-    //         </a>
-    //         <div class="card-body">
-    //             <h5 class="card-title">${variables[2]}</h5>
-    //             <p class="card-text">${variables[0]}@gmail.com</p>
-    //         </div>
-    //         </div>
-    //     </div>`
-    //     });
-    //     $('.feedback').html(card)
-    //     $('#modal-result-view').modal('show')
-    // })
+    fetch(`http://${ip}:3000/result/feedback/${id}?id_process=${id_process}`).then(response => {
+        return response.json()
+    }).then(data => {
+        if (data.length == 0) {
+            Swal.fire({
+                title: 'NO feedback yet !!',
+                icon: 'info'
+            })
+            return
+        }
+        let feedBack = data[0].feedback.split(', ')
+        if (feedBack[0] == '0') {
+            Swal.fire({
+                title: 'NO feedback yet !!',
+                icon: 'info'
+            })
+            return
+        }
+        let variables
+        let card = ""
+        feedBack.forEach(element => {
+            variables = element.split('-')
+            card += `<div class="col">
+            <div class="card">
+            <a class="size">
+            <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">${variables[2]}</h5>
+                <p class="card-text">${variables[0]}@gmail.com</p>
+            </div>
+            </div>
+        </div>`
+        });
+        $('.feedback').html(card)
+        $('#modal-result-view').modal('show')
+    })
 })
 
 $(document).on('click', '.size', event => {
