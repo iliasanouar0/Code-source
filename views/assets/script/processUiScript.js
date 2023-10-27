@@ -195,7 +195,6 @@ let max = 10
 
 $(document).on('click', '.status', event => {
     let id = $(event.target).data('id')
-    id_process = $(event.target).data('id_process')
     let children = $(event.target).parent().parent()[0].children
     $('.count').html(children[2].innerHTML)
     $('.status_bg').html(children[6].innerHTML)
