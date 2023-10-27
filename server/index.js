@@ -231,7 +231,7 @@ wss.on('connection', (wss, req) => {
         waiting = 0
       }
       for (let i = 0; i < seeds.length; i++) {
-        await resultManager.updateState([seeds[i].id_seeds], "waiting")
+        await resultManager.updateState([{ id_seeds: seeds[i].id_seeds, id_process: data.id_process }], "waiting")
       }
       let status = await processStateManager.getState(data.id_process)
       sendToAll(clients, 'reload')
