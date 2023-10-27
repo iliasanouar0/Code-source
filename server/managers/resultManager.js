@@ -35,8 +35,8 @@ const updateResult = async (data) => {
 
 const getFeedback = (request, response) => {
     let id = (request.params.id)
-    sql = `SELECT feedback FROM results WHERE id_seeds=($1)`
-    pool.query(sql, [id], (error, result) => {
+    sql = `SELECT feedback FROM results WHERE id_seeds=($1) AND id_process=($2)`
+    pool.query(sql, [id, id_process], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
         }
