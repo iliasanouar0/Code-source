@@ -14,14 +14,8 @@ function getRndInteger(min, max) {
 
 const addProcess = (request, response) => {
     const obj = (request.body)
-    let pattern = getRndInteger(100000000, 99999999999999);
-    var generator = new IdGenerator({
-        len: 4,
-        alphabet: `${pattern}`
-    });
-    let id = generator.get();
-    let sql = `INSERT INTO process ( id_process, name ,action ,status ,date_add ,date_update,id_list ,id_user) values ($1,$2,$3,$4,$5,$6,$7,$8) returning id_process`
-    let data = [id, obj.name, obj.action, obj.status, obj.date_add, obj.date_update, obj.id_list, obj.id_user]
+    let sql = `INSERT INTO process (name ,action ,status ,date_add ,date_update,id_list ,id_user) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
+    let data = [obj.name, obj.action, obj.status, obj.date_add, obj.date_update, obj.id_list, obj.id_user]
     pool.query(sql, data, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
