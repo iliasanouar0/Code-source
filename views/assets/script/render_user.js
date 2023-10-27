@@ -237,7 +237,7 @@ const getData = $("#processDate").DataTable({
         } else {
           return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-success start"  data-id="${row.id_process}"><i class="fa fa-play"></i></button>
-<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}"><i class="fas fa-power-off"></i></button>
+<button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" disabled><i class="fas fa-power-off"></i></button>
 <button type="button" class="btn btn-info edit"  data-id="${row.id_process}"><i class="fas fa-edit"></i></button>`
         }
       },
