@@ -11,8 +11,8 @@
   width: 0;
   padding: 5px;
   border: 6px solid #ccc;
-  border-right-color: #eeff00;
-  border-top-color:rgb(0, 4, 255);
+  border-bottom-color: #eeff00;
+  border-top-color: rgb(0, 4, 255);
   border-radius: 22px;
   animation: rotate 1s infinite linear;
 }
