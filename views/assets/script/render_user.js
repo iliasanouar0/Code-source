@@ -190,7 +190,7 @@ const getData = $("#processDate").DataTable({
       data: null,
       render: function (data, type, row) {
         if (row.status == 'idel' || row.status == 'STOPPED') {
-          return `${row.date_add} (Create at)`
+          return `${row.date_add} <span class="text-danger">(Create at)</span>`
         }
         let start_in = new Date(row.start_in)
         let start = `${start_in.toLocaleString()}`
