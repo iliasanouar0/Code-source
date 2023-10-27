@@ -158,6 +158,8 @@ const createRowProcessSeeds = (data, id) => {
             status = `<span>&#9203;</span>`
         } else if (element.rstatus == 'failed') {
             status = `<span>&#10060;</span>`
+        } else if (element.rstatus == 'finished') {
+            status = `<span>&#9989;</span>`
         } else if (element.rstatus === null && element.pstatus != 'STOPPED') {
             status = 'idel'
         } else if (element.rstatus === null && element.pstatus === 'STOPPED') {
@@ -172,12 +174,18 @@ const createRowProcessSeeds = (data, id) => {
         }
         let tr =
             `<tr>
-            <td>${element.gmail}</td>
-            <td>${proxy}</td>
-            <td>${element.isp}</td>
+            <td><div class="card-body p-0 text-center text-dark">
+            ${element.gmail}
+            </div></td>
+            <td><div class="card-body p-0 text-center text-dark">
+            ${proxy}
+            </div></td>
+            <td><div class="card-body p-0 text-center text-dark">
+            ${element.isp}
+            </div></td>
             <td class="text-center">${status}</td>
             <td class="text-center"><p class="placeholder-glow"><span class="placeholder col mb-1"></span></p></td>
-            <td>${duration}</td>
+            <td class="text-center">${duration}</td>
             <td class="text-center">
                 <button type="button" class="btn btn-dark details" data-id="${element.id_seeds}" data-id_process="${id}"><i class="fas fa-eye"></i></button>
             </td>
