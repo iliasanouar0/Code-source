@@ -135,7 +135,7 @@ function msToMnSc(ms) {
 }
 
 
-const createRowProcessSeeds = (data, id) => {
+const createRowProcessSeeds = (data,id) => {
     let duration
     let status
     let proxy
@@ -195,71 +195,69 @@ let max = 10
 
 $(document).on('click', '.status', event => {
     let id = $(event.target).data('id')
-    let id_process = $(event.target).data('id_process')
-    console.log(id);
-    console.log(id_process);
-    // let children = $(event.target).parent().parent()[0].children
-    // $('.count').html(children[2].innerHTML)
-    // $('.status_bg').html(children[6].innerHTML)
-    // $('#p_s').html(id)
-    // fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
-    //     return response.json()
-    // }).then(data => {
-    //     var html = createRowProcessSeeds(data);
-    //     $('#seeds_result').html(html);
-    // }).then(() => {
-    //     $('#modal-process-view').modal('show')
-    // })
-    // /**
-    //  * * Websocket connection :
-    //  * ? opening => get data from database render the view. 
-    //  * ! closing on modal hide
-    //  */
-    // const wsUri = `ws://${ip}:7074/wss`;
-    // const websocket = new WebSocket(wsUri);
+    id_process = $(event.target).data('id_process')
+    let children = $(event.target).parent().parent()[0].children
+    $('.count').html(children[2].innerHTML)
+    $('.status_bg').html(children[6].innerHTML)
+    $('#p_s').html(id)
+    fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
+        return response.json()
+    }).then(data => {
+        var html = createRowProcessSeeds(data);
+        $('#seeds_result').html(html);
+    }).then(() => {
+        $('#modal-process-view').modal('show')
+    })
+    /**
+     * * Websocket connection :
+     * ? opening => get data from database render the view. 
+     * ! closing on modal hide
+     */
+    const wsUri = `ws://${ip}:7074/wss`;
+    const websocket = new WebSocket(wsUri);
 
-    // websocket.onopen = (e) => {
-    //     $('.w_seeds').html(0)
-    //     $('.a_seeds').html(0)
-    //     $('.f_seeds').html(0)
-    //     $('.ff_seeds').html(0)
-    //     websocket.send(`${id}`)
-    // }
+    websocket.onopen = (e) => {
+        $('.w_seeds').html(0)
+        $('.a_seeds').html(0)
+        $('.f_seeds').html(0)
+        $('.ff_seeds').html(0)
+        websocket.send(`${id}`)
+    }
 
-    // websocket.onmessage = function (event) {
-    //     let data = JSON.parse(event.data)
-    //     if (data.length == 0) {
-    //         return
-    //     } else {
-    //         $('.w_seeds').html(data[0].waiting)
-    //         $('.a_seeds').html(data[0].active)
-    //         $('.f_seeds').html(data[0].finished)
-    //         $('.ff_seeds').html(data[0].failed)
-    //         let endIndex = cPage * max
-    //         let startIndex = endIndex - max
-    //         fetch(`http://209.170.73.224:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
-    //             return response.json()
-    //         }).then(data => {
-    //             pagination(id, cPage)
-    //             var html = createRowProcessSeeds(data, id);
-    //             $('#seeds_result').html(html);
-    //         })
-    //     }
-    // };
-    // websocket.onclose = () => {
-    //     console.log('closed');
-    // }
-    // // ~~ pagination
-    // cPage = 1
-    // pagination(id, cPage)
-    // $('.page-item').on('click', async () => {
-    //     console.log('page');
-    // })
-    // $('.btn-close').on('click', () => {
-    //     cPage = 1
-    //     $('#modal-process-view').modal('hide')
-    //     websocket.close()
-    // })
+    websocket.onmessage = function (event) {
+        let data = JSON.parse(event.data)
+        if (data.length == 0) {
+            return
+        } else {
+            $('.w_seeds').html(data[0].waiting)
+            $('.a_seeds').html(data[0].active)
+            $('.f_seeds').html(data[0].finished)
+            $('.ff_seeds').html(data[0].failed)
+            let endIndex = cPage * max
+            let startIndex = endIndex - max
+            fetch(`http://209.170.73.224:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
+                return response.json()
+            }).then(data => {
+                pagination(id, cPage)
+                var html = createRowProcessSeeds(data, id);
+                $('#seeds_result').html(html);
+            })
+        }
+    };
+    websocket.onclose = () => {
+        console.log('closed');
+    }
+    // ~~ pagination
+    cPage = 1
+    pagination(id, cPage)
+    $('.page-item').on('click', async () => {
+        console.log('page');
+    })
+    $('.btn-close').on('click', () => {
+        cPage = 1
+        $('#modal-process-view').modal('hide')
+        websocket.close()
+    })
 })
 
 $(document).on('click', '.seeds-page', event => {
@@ -319,43 +317,46 @@ const pagination = (id, cPage) => {
 
 $(document).on('click', '.details', event => {
     let id = $(event.target).data('id')
-    fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
-        return response.json()
-    }).then(data => {
-        if (data.length == 0) {
-            Swal.fire({
-                title: 'NO feedback yet !!',
-                icon: 'info'
-            })
-            return
-        }
-        let feedBack = data[0].feedback.split(', ')
-        if (feedBack[0] == '0') {
-            Swal.fire({
-                title: 'NO feedback yet !!',
-                icon: 'info'
-            })
-            return
-        }
-        let variables
-        let card = ""
-        feedBack.forEach(element => {
-            variables = element.split('-')
-            card += `<div class="col">
-            <div class="card">
-            <a class="size">
-            <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
-            </a>
-            <div class="card-body">
-                <h5 class="card-title">${variables[2]}</h5>
-                <p class="card-text">${variables[0]}@gmail.com</p>
-            </div>
-            </div>
-        </div>`
-        });
-        $('.feedback').html(card)
-        $('#modal-result-view').modal('show')
-    })
+    let id_process = $(event.target).data('id_process')
+    console.log(id);
+    console.log(id_process);
+    // fetch(`http://${ip}:3000/result/feedback/${id}`).then(response => {
+    //     return response.json()
+    // }).then(data => {
+    //     if (data.length == 0) {
+    //         Swal.fire({
+    //             title: 'NO feedback yet !!',
+    //             icon: 'info'
+    //         })
+    //         return
+    //     }
+    //     let feedBack = data[0].feedback.split(', ')
+    //     if (feedBack[0] == '0') {
+    //         Swal.fire({
+    //             title: 'NO feedback yet !!',
+    //             icon: 'info'
+    //         })
+    //         return
+    //     }
+    //     let variables
+    //     let card = ""
+    //     feedBack.forEach(element => {
+    //         variables = element.split('-')
+    //         card += `<div class="col">
+    //         <div class="card">
+    //         <a class="size">
+    //         <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
+    //         </a>
+    //         <div class="card-body">
+    //             <h5 class="card-title">${variables[2]}</h5>
+    //             <p class="card-text">${variables[0]}@gmail.com</p>
+    //         </div>
+    //         </div>
+    //     </div>`
+    //     });
+    //     $('.feedback').html(card)
+    //     $('#modal-result-view').modal('show')
+    // })
 })
 
 $(document).on('click', '.size', event => {
