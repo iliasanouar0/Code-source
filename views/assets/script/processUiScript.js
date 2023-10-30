@@ -155,12 +155,6 @@ const createRowProcessSeeds = (data, id) => {
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>`
-        } else if (element.rstatus == 'waiting') {
-            status = `<span>&#9203;</span>`
-        } else if (element.rstatus == 'failed') {
-            status = `<span>&#10060;</span>`
-        } else if (element.rstatus == 'finished') {
-            status = `<span>&#9989;</span>`
         } else if (element.rstatus === null && element.pstatus != 'STOPPED') {
             status = 'idel'
         } else if (element.rstatus === null && element.pstatus === 'STOPPED') {
