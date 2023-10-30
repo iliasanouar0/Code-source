@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const setTimeout = require('timers/promises');
 const resultsManager = require('../managers/resultManager')
 let time = setTimeout.setTimeout
+
 /**
  * @default
  * @constant
@@ -9,10 +10,11 @@ let time = setTimeout.setTimeout
  * ? dirname.substring : /var/www/html/Code-source/server/processes = /var/www/html/Code-source/
  * ~ path dir => { -/var/www/html/Code-source/views/assets/images/process_result- }
  */
+
 const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
 const path = `${root}/views/assets/images/process_result`
-
 let pidProcess = []
+
 const login = async (data) => {
     let feedback = ''
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
@@ -99,7 +101,7 @@ const kill = (id_process) => {
                 } catch (error) {
                     console.log(error);
                 } finally {
-                    pidProcess.splice(indexOf(Element.pid), 1)
+                    pidProcess.splice(pidProcess.indexOf(Element.pid), 1)
                 }
             }
         }
