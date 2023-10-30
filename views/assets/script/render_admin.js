@@ -206,31 +206,31 @@ const getData = $("#example1").DataTable({
       render: function (data, type, row) {
         switch (row.status) {
           case 'FINISHED':
-            return `<div class="card status m-0 border-success ">
+            return `<div class="card status-p-${row.id_process} m-0 border-success ">
                 <div class="card-body p-0 text-center text-success">
                 ${row.status}
                 </div>
               </div>`
           case 'RUNNING':
-            return `<div class="card status m-0 border-primary">
+            return `<div class="card status-p-${row.id_process} m-0 border-primary">
                   <div class="card-body p-0 text-center text-primary">
                   ${row.status}
                   </div>
                 </div>`
           case 'PAUSED':
-            return `<div class="card status m-0 border-warning">
+            return `<div class="card status-p-${row.id_process} m-0 border-warning">
                     <div class="card-body p-0 text-center text-warning">
                     ${row.status}
                      </div>
                   </div>`
           case 'STOPPED':
-            return `<div class="card status m-0 border-danger">
+            return `<div class="card status-p-${row.id_process} m-0 border-danger">
                      <div class="card-body p-0 text-center text-danger">
                       ${row.status}
                       </div>
                     </div>`
           default:
-            return `<div class="card status m-0 border-info">
+            return `<div class="card status-p-${row.id_process} m-0 border-info">
                       <div class="card-body p-0 text-center text-info">
                       ${row.status}
                       </div>
@@ -241,7 +241,7 @@ const getData = $("#example1").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="b-action card status m-0">
+        return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
           ${row.action}
           </div>
