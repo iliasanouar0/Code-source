@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const setTimeout = require('timers/promises');
+const resultsManager = require('../managers/resultManager')
 let time = setTimeout.setTimeout
 /**
  * @default
@@ -39,7 +40,9 @@ const login = async (data) => {
         });
         await page.close()
         await browser.close()
-        return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+        let feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedBack: feedBack, id_seeds: data.id_seeds, id_process: data.id_process })
+        return feedBack
     }
     await navigationPromise
     await time(3000);
@@ -52,7 +55,9 @@ const login = async (data) => {
             });
             await page.close()
             await browser.close()
-            return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+            let feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+            await resultsManager.saveFeedback({ feedBack: feedBack, id_seeds: data.id_seeds, id_process: data.id_process })
+            return feedBack
         }
     }
     await page.type('input[type="password"]', data.password, { delay: 200 })
@@ -66,7 +71,9 @@ const login = async (data) => {
         });
         await page.close()
         await browser.close()
-        return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+        let feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedBack: feedBack, id_seeds: data.id_seeds, id_process: data.id_process })
+        return feedBack
     }
     await navigationPromise
     await time(3000)
@@ -75,7 +82,9 @@ const login = async (data) => {
     });
     await page.close()
     await browser.close()
-    return feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+    let feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedBack: feedBack, id_seeds: data.id_seeds, id_process: data.id_process })
+    return feedBack
 }
 
 const kill = (id_process) => {
