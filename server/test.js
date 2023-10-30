@@ -16,7 +16,7 @@ const login = async (data) => {
   await page.waitForSelector('#identifierNext')
   await page.click('#identifierNext')
   await navigationPromise
-  await time(30000)
+  // await time(30000)
   if (await page.$('[aria-invalid="true"]') != null || await page.$('#next > div > div > a') != null) {
     await page.close()
     await browser.close()
@@ -36,11 +36,11 @@ const login = async (data) => {
   await page.click('#passwordNext')
   await navigationPromise
   await time(1000)
-  // if (await page.$('[aria-invalid="true"]') != null) {
-  //   console.log('test');
-  //   // await page.close()
-  //   // await browser.close()
-  // }
+  if (await page.$('[aria-invalid="true"]') != null) {
+    console.log('test');
+    // await page.close()
+    // await browser.close()
+  }
   // await navigationPromise
   // await time(3000)
   // await page.close()
@@ -49,7 +49,7 @@ const login = async (data) => {
 
 
 let data = {
-  gmail: "mersadseyedi1211@gmail.com",
+  gmail: "iliasanouar0@gmail.com",
   password: "1cSybx0q98id"
 }
 

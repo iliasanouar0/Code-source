@@ -37,7 +37,7 @@ const login = async (data) => {
     await page.waitForSelector('#identifierNext')
     await page.click('#identifierNext')
     await navigationPromise
-    await time(30000)
+    await time(10000)
     if (await page.$('[aria-invalid="true"]') != null || await page.$('#next > div > div > a') != null) {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
@@ -68,11 +68,14 @@ const login = async (data) => {
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-test1-${data.id_process}.png`
     });
+    await page.waitForSelector('#passwordNext')
+    await page.click('#passwordNext')
+    await navigationPromise
     await time(1000)
-    await page.waitForSelector('#passwordNext', { timeout: 1000 })
-    await page.$eval('#passwordNext', elm => {
-        elm.click()
-    })
+    // await page.waitForSelector('#passwordNext', { timeout: 1000 })
+    // await page.$eval('#passwordNext', elm => {
+    //     elm.click()
+    // })
     await time(1000)
     await page.click('#passwordNext')
     await navigationPromise
