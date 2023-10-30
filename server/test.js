@@ -32,10 +32,10 @@ const login = async (data) => {
     }
   }
   await page.type('input[type="password"]', data.password, { delay: 200 })
-  // // await page.waitForSelector('#passwordNext')
-  // // await page.click('#passwordNext')
-  // await navigationPromise
-  // await time(1000)
+  await page.waitForSelector('#passwordNext')
+  await page.click('#passwordNext')
+  await navigationPromise
+  await time(1000)
   // if (await page.$('[aria-invalid="true"]') != null) {
   //   console.log('test');
   //   // await page.close()
@@ -49,8 +49,8 @@ const login = async (data) => {
 
 
 let data = {
-  gmail: "iliasanouar0@gmail.com",
-  password: "ilias080701"
+  gmail: "mersadseyedi1211@gmail.com",
+  password: "1cSybx0q98id"
 }
 
 login(data)
