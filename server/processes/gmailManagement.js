@@ -13,8 +13,8 @@ const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
 const path = `${root}/views/assets/images/process_result`
 
 let pidProcess = []
-let feedback = ''
 const login = async (data) => {
+    let feedback = ''
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
     const browserPID = browser.process().pid
     const page = await browser.newPage()
