@@ -139,12 +139,12 @@ function msToMnSc(ms) {
   );
 }
 
-const getTool = () => {
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  console.log(tooltipTriggerList);
-  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-  return tooltipList
-}
+// const getTool = () => {
+//   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+//   console.log(tooltipTriggerList);
+//   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+//   return tooltipList
+// }
 
 const getData = $("#example1").DataTable({
   responsive: true,
@@ -311,7 +311,6 @@ const getData = $("#example1").DataTable({
       },
     }
   ],
-  render: getTool()
 })
 
 
@@ -613,6 +612,14 @@ if (path.includes("/admin/users/")) {
       });
   });
   getData
+  $(function () {
+    /*var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+    */
+    $('[data-bs-toggle="tooltip"]').tooltip();
+  })
 } else if (path.includes("/admin/lists/")) {
   getDatalist
 }
