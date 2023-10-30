@@ -103,6 +103,8 @@ wss.on('connection', (wss, req) => {
     if (request == "start") {
       processManager.startedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
+      console.log(seeds);
+      console.log(seeds.length);
       let active
       let waiting = seeds.length - 3
       if (seeds.length >= 3) {
@@ -111,6 +113,7 @@ wss.on('connection', (wss, req) => {
         active = seeds.length
         waiting = 0
       }
+      console.log('active : ' + active);
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       processStateManager.addState(status)
       for (let i = 0; i < seeds.length; i++) {
