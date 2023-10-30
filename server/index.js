@@ -135,8 +135,10 @@ wss.on('connection', (wss, req) => {
       let toProcess = []
       try {
         for (let i = 0; i < active; i++) {
-          await resultManager.updateState([{ id_seeds: seeds[i].id_seeds, id_process: data.id_process }], "running")
-          await resultManager.startNow({ id_seeds: seeds[i].id_seeds, id_process: data.id_process })
+          await Promise.all([
+            await resultManager.startNow({ id_seeds: seeds[i].id_seeds, id_process: data.id_process }),
+            await resultManager.updateState([{ id_seeds: seeds[i].id_seeds, id_process: data.id_process }], "running")
+          ])
           count++
           toProcess.push(seeds[i])
         }
@@ -189,7 +191,7 @@ wss.on('connection', (wss, req) => {
               let end_in = new Date()
               let result
               await Promise.all([
-                await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "finished"),
+                await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "failed"),
                 result = {
                   id_seeds: toProcess[0].id_seeds,
                   end_in: end_in,
