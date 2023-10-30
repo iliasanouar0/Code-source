@@ -499,7 +499,7 @@ $(document).on('click', '.checkSeed', () => {
         let action = `<button type="button" class="btn btn-danger  delete-seeds"><i class="far fa-trash-alt"></i></button>`
         $('#actionSeeds').html(action)
     } else {
-        $('#actionSeeds').html('action')
+        $('#actionSeeds').html('Action')
     }
     if (check.length == allCheck.length) {
         $(".checkAllSeeds").prop("checked", true);
