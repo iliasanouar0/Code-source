@@ -1,7 +1,9 @@
 const user = JSON.parse(sessionStorage.user);
-
+let cPage
+let max = 10
 const wssUri = `ws://${ip}:7073/wss?id=${user.id_user}`;
 const websocket_s = new WebSocket(wssUri);
+
 websocket_s.onmessage = (event) => {
     let data = event.data
     console.log(data);
@@ -9,6 +11,7 @@ websocket_s.onmessage = (event) => {
         getData.ajax.reload(null, false)
     }
 }
+
 Date.prototype.toDateInputValue = function () {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -98,7 +101,6 @@ $(document).on('click', '.start', event => {
     // }
 })
 
-
 $(document).on('click', '.pause', event => {
     const id = $(event.target)[0].attributes[2].value
     const status = "PAUSED"
@@ -133,7 +135,6 @@ function msToMnSc(ms) {
             minutes + ":" + (seconds < 10 ? "0" : "") + seconds
     );
 }
-
 
 const createRowProcessSeeds = (data, id) => {
     let duration
@@ -213,9 +214,6 @@ function getPages(totalPages, currentPage) {
     }
     return result.map(r => { return r + diff });
 }
-
-let cPage
-let max = 10
 
 $(document).on('click', '.status', event => {
     let id = $(event.target).data('id')

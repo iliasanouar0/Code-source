@@ -67,7 +67,6 @@ fetch(mailerNavbarUrl)
     navbarContainer.innerHTML = html;
   });
 
-
 function msToMnSc(ms) {
   var minutes = Math.floor(ms / 60000);
   var seconds = ((ms % 60000) / 1000).toFixed(0);
@@ -77,7 +76,6 @@ function msToMnSc(ms) {
       minutes + ":" + (seconds < 10 ? "0" : "") + seconds
   );
 }
-
 
 const getData = $("#processDate").DataTable({
   responsive: true,
@@ -245,7 +243,6 @@ const getData = $("#processDate").DataTable({
   ],
 })
 
-
 const getDatalist = $("#listsDate").DataTable({
   responsive: true,
   deferRender: true,
@@ -337,7 +334,6 @@ const getDatalist = $("#listsDate").DataTable({
     }
   ],
 })
-
 
 if (path == "/views/mailer/lists/") {
   const select = document.querySelector("#l_isp_add");

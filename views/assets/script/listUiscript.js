@@ -29,9 +29,11 @@ $(document).on('click', '.switch_inp', () => {
     $('.input_way, .text_way').toggle(200)
     $('.switch_inp i').toggleClass(`fa-keyboard fa-list`)
 })
+
 $(document).on('click', "#info", () => {
     $('#info_bulk_update').modal('show')
 })
+
 $(document).on('click', '.updateOptions', event => {
     $('#updateOptions').modal('show');
     $('.submit_proxy')[0].dataset.id = $(event.target)[0].dataset.id
@@ -42,6 +44,7 @@ $(document).on('click', '.updateOptions', event => {
 $(document).on('click', '#add_list', () => {
     $('.add_list').modal('show');
 })
+
 $(document).ready(function () {
     $('#l_add_date').val(new Date().toDateInputValue());
     $('.update').val(new Date().toDateInputValue());
@@ -58,7 +61,6 @@ $(".checkAll").change(function () {
     }
 });
 
-
 $(document).on('click', '.check', () => {
     let check = $("#list_data input:checked")
     let allCheck = $("#list_data input:checkbox")
@@ -74,7 +76,6 @@ $(document).on('click', '.check', () => {
         $(".checkAll").prop("checked", false);
     }
 })
-
 
 $(document).on('click', '.delete-all-this', () => {
     Swal.fire({
@@ -204,7 +205,6 @@ const addSeeds = (data) => {
     // })
 }
 
-
 $(document).on('click', "#l_add", () => {
     let e_name = $('#la_name').val().toString()
     let e_add_date = $('#l_add_date').val().toString()
@@ -226,8 +226,6 @@ $(document).on('click', "#l_add", () => {
     addList(data)
     $('.add_list').modal('hide');
 })
-
-
 
 $(document).on('click', '#l_seeds_add', event => {
     let listId = $(event.target).data('id')
@@ -404,7 +402,6 @@ document.getElementById("demo").onchange = evt => {
     reader.readAsArrayBuffer(evt.target.files[0]);
 };
 
-
 const templateSeeds = (data) => {
     let tbody = $('#seeds')
     tbody.empty()
@@ -434,7 +431,6 @@ const templateSeeds = (data) => {
     })
     return tbody
 }
-
 
 $(document).on('click', '.view', event => {
     let data = event.target.attributes[2].value
@@ -496,7 +492,6 @@ $(document).on('click', '.view', event => {
     })
 })
 
-
 $(document).on('click', '.checkSeed', () => {
     let check = $("#seeds input:checked")
     let allCheck = $("#seeds input:checkbox")
@@ -512,6 +507,7 @@ $(document).on('click', '.checkSeed', () => {
         $(".checkAllSeeds").prop("checked", false);
     }
 })
+
 $(".checkAllSeeds").change(function () {
     let status = $(this).is(":checked") ? true : false;
     $(".checkSeed").prop("checked", status);
@@ -574,6 +570,7 @@ $(document).on('click', '.delete-seeds', () => {
         }
     })
 })
+
 $(document).on('click', '.remove-this-seed', event => {
     Swal.fire({
         title: 'Are you sure?',
