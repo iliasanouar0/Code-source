@@ -265,7 +265,7 @@ $(document).on('click', '.status', event => {
                 pagination(id, cPage)
                 var html = createRowProcessSeeds(data, id);
                 $('#seeds_result').html(html);
-                $('.status_bg').html($('.status'))
+                $('.status_bg').html($('.status').html())
             })
         }
     };
