@@ -75,7 +75,7 @@ const login = async (data) => {
         });
         await page.close()
         await browser.close()
-        feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }
@@ -86,7 +86,7 @@ const login = async (data) => {
     });
     await page.close()
     await browser.close()
-    feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+    feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     return feedback
 }
