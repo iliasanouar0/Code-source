@@ -68,9 +68,9 @@ const login = async (data) => {
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-test1-${data.id_process}.png`
     });
-    await page.waitForSelector('#passwordNext')
-    await page.click('#passwordNext',)
-    await navigationPromise
+    // await page.waitForSelector('#passwordNext')
+    // await page.click('#passwordNext',)
+    // await navigationPromise
     await time(1000)
     await Promise.all([
         page.$eval(`#passwordNext`, element =>
