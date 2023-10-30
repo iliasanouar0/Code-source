@@ -68,9 +68,8 @@ const login = async (data) => {
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-test1-${data.id_process}.png`
     });
-    // await page.waitForSelector('#passwordNext')
-    // await page.click('#passwordNext',)
-    // await navigationPromise
+    feedback += `, ${data.gmail.split('@')[0]}-@-test1-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(1000)
     await Promise.all([
         page.$eval(`#passwordNext`, element =>
@@ -78,42 +77,32 @@ const login = async (data) => {
         ),
         await page.waitForNavigation(),
     ]);
-
-    // await page.waitForSelector('#passwordNext', { timeout: 1000 })
-    // await page.$eval('#passwordNext', elm => {
-    //     elm.click()
-    // })
-    // await time(1000)
-    // await page.click('#passwordNext')
-    // await navigationPromise
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-test2-${data.id_process}.png`
     });
-    feedback += `, ${data.gmail.split('@')[0]}-@-test1-${data.id_process}.png`
     feedback += `, ${data.gmail.split('@')[0]}-@-test2-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    await time(1000)
+    if (await page.$('[aria-invalid="true"]') != null) {
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+        });
+        await page.close()
+        await browser.close()
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        return feedback
+    }
+    await navigationPromise
+    await time(3000)
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+    });
+    await page.close()
+    await browser.close()
+    feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     return feedback
-    // await time(1000)
-    // if (await page.$('[aria-invalid="true"]') != null) {
-    //     await page.screenshot({
-    //         path: `${path}/${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
-    //     });
-    //     await page.close()
-    //     await browser.close()
-    //     feedback += `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
-    //     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    //     return feedback
-    // }
-    // await navigationPromise
-    // await time(3000)
-    // await page.screenshot({
-    //     path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-    // });
-    // await page.close()
-    // await browser.close()
-    // feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-    // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    // return feedback
 }
 
 const kill = (id_process) => {

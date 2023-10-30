@@ -157,14 +157,17 @@ wss.on('connection', (wss, req) => {
             let r = await processManager.processing(toProcess[0])
             if (r.indexOf('invalid') == -1) {
               success++
-              await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "finished")
               let end_in = new Date()
-              let result = {
-                id_seeds: toProcess[0].id_seeds,
-                end_in: end_in,
-                id_process: data.id_process
-              }
-              await resultManager.endNow(result)
+              let result
+              await Promise.all([
+                await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "finished"),
+                result = {
+                  id_seeds: toProcess[0].id_seeds,
+                  end_in: end_in,
+                  id_process: data.id_process
+                },
+                await resultManager.endNow(result)
+              ]);
               toProcess.shift()
               state = await processManager.getProcessState(data.id_process)
               if (state == "STOPPED") {
@@ -181,14 +184,17 @@ wss.on('connection', (wss, req) => {
               }
             } else {
               failed++
-              await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "failed")
               let end_in = new Date()
-              let result = {
-                id_seeds: toProcess[0].id_seeds,
-                end_in: end_in,
-                id_process: data.id_process
-              }
-              await resultManager.endNow(result)
+              let result
+              await Promise.all([
+                await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "finished"),
+                result = {
+                  id_seeds: toProcess[0].id_seeds,
+                  end_in: end_in,
+                  id_process: data.id_process
+                },
+                await resultManager.endNow(result)
+              ]);
               toProcess.shift()
               state = await processManager.getProcessState(data.id_process)
               if (state == "STOPPED") {
