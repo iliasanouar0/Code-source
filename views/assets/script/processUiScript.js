@@ -147,6 +147,7 @@ const createRowProcessSeeds = (data, id) => {
             let start = new Date(element.start_in)
             let end = new Date(element.end_in)
             duration = msToMnSc(end - start)
+            console.log(duration);
         }
         if (element.rstatus == 'running') {
             status = `<div class="d-flex justify-content-center">
