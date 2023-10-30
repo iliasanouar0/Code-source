@@ -16,25 +16,6 @@ const login = async (data) => {
   await page.waitForSelector('#identifierNext')
   await page.click('#identifierNext')
   await navigationPromise
-  // await time(3000)
-  // await navigationPromise
-  // await time(3000);
-  // try {
-  //   await page.waitForSelector('input[type="password"]', { timeout: 500 })
-  // } catch (error) {
-  //   if (error) {
-  //     console.log(error);
-  //   }
-  // }
-  // await page.type('input[type="password"]', data.password, { delay: 200 })
-  // await page.waitForSelector('#passwordNext')
-  // await page.click('#passwordNext')
-  // await navigationPromise
-  // await time(1000)
-  // await navigationPromise
-  // await time(3000)
-  // await page.close()
-  // await browser.close()
 }
 
 
