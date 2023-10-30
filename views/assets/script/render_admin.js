@@ -194,8 +194,8 @@ const getData = $("#example1").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="card m-0 border-light">
-          <div class="card-body p-0 text-center text-secondary">
+        return `<div class="card m-0 border-danger">
+          <div class="card-body p-0 text-center text-danger text-capitalize">
           ${row.isp}
           </div>
         </div>`
