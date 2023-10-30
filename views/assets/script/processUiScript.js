@@ -141,8 +141,6 @@ const createRowProcessSeeds = (data, id) => {
     let proxy
     let rows = ""
     data.forEach(element => {
-        console.log('start in' + element.start_in);
-        console.log('end in' + element.end_in);
         if (element.start_in == null || element.end_in == '0') {
             duration = '00:00:00'
         } else {
@@ -150,7 +148,6 @@ const createRowProcessSeeds = (data, id) => {
             let end = new Date(element.end_in)
             duration = msToMnSc(end - start)
         }
-        console.log(duration);
         if (element.rstatus == 'running') {
             status = `<div class="d-flex justify-content-center">
             <div class="spinner-border spinner-border-sm text-primary m-auto" role="status">
