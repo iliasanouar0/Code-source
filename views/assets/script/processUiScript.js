@@ -265,7 +265,6 @@ $(document).on('click', '.status', event => {
                 var html = createRowProcessSeeds(data, id);
                 $('#seeds_result').html(html);
                 console.log($(`.status-p-${id}`));
-                // $('.status_bg').html($(`.status-p-${id}`)[0])
             })
         }
     };
