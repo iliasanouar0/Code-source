@@ -134,14 +134,12 @@ wss.on('connection', (wss, req) => {
       let length = seeds.length
       let toProcess = []
       for (let i = 0; i < active; i++) {
-        let process = new Promise((res, rej) => {
-          resultManager.startNow({ id_seeds: seeds[i].id_seeds, id_process: data.id_process })
-          resultManager.updateState([{ id_seeds: seeds[i].id_seeds, id_process: data.id_process }], "running")
-        })
-        process.then(() => {
-          count++
-          toProcess.push(seeds[i])
-        })
+        await Promise.all([
+          await resultManager.startNow({ id_seeds: seeds[i].id_seeds, id_process: data.id_process }),
+          await resultManager.updateState([{ id_seeds: seeds[i].id_seeds, id_process: data.id_process }], "running")
+        ])
+        count++
+        toProcess.push(seeds[i])
       }
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
