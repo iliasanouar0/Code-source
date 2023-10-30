@@ -142,7 +142,7 @@ const createRowProcessSeeds = (data, id) => {
     let rows = ""
     data.forEach(element => {
         console.log('start in' + element.start_in);
-        console.log('end in' = element.end_in);
+        console.log('end in' + element.end_in);
         if (element.start_in == null || element.end_in == '0') {
             duration = '00:00:00'
         } else {
