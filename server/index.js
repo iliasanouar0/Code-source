@@ -154,11 +154,10 @@ wss.on('connection', (wss, req) => {
             let end_in = new Date()
             let result = {
               id_seeds: toProcess[0].id_seeds,
-              feedback: r,
               end_in: end_in,
               id_process: data.id_process
             }
-            await resultManager.updateResult(result)
+            await resultManager.endNow(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
@@ -179,11 +178,10 @@ wss.on('connection', (wss, req) => {
             let end_in = new Date()
             let result = {
               id_seeds: toProcess[0].id_seeds,
-              feedback: r,
               end_in: end_in,
               id_process: data.id_process
             }
-            await resultManager.updateResult(result)
+            await resultManager.endNow(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
@@ -269,11 +267,10 @@ wss.on('connection', (wss, req) => {
             let end_in = new Date()
             let result = {
               id_seeds: toProcess[0].id_seeds,
-              feedback: r,
               end_in: end_in,
               id_process: data.id_process
             }
-            await resultManager.updateResult(result)
+            await resultManager.endNow(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
@@ -294,11 +291,10 @@ wss.on('connection', (wss, req) => {
             let end_in = new Date()
             let result = {
               id_seeds: toProcess[0].id_seeds,
-              feedback: r,
               end_in: end_in,
               id_process: data.id_process
             }
-            await resultManager.updateResult(result)
+            await resultManager.endNow(result)
             toProcess.shift()
             state = await processManager.getProcessState(data.id_process)
             if (state == "STOPPED") {

@@ -20,11 +20,24 @@ const saveResult = async (data) => {
     })
 }
 
-const updateResult = async (data) => {
-    sql = 'UPDATE results SET feedback=($1) ,end_in=($2) WHERE id_seeds=($3) AND id_process=($4)'
-    let value = [data.feedback, data.end_in, data.id_seeds, data.id_process]
+const endNow = async (data) => {
+    let sql = 'UPDATE results SET feedback=($1) ,end_in=($2) WHERE id_seeds=($3) AND id_process=($4)'
+    let value = [data.end_in, data.id_seeds, data.id_process]
     const client = await pool.connect()
     client.query(sql, value, (err) => {
+        if (err) {
+            return err;
+        }
+        client.release()
+        return true
+    })
+}
+
+const saveFeedback = async (data) => {
+    let sql = `UPDATE results SET feedback=($1) WHERE id_seeds=($2) AND id_process=($3)`
+    let values = [data.feedback, data.id_seeds, data.id_process]
+    const client = await pool.connect()
+    client.query(sql, values, (err) => {
         if (err) {
             return err;
         }
@@ -121,11 +134,12 @@ const startNow = async (data) => {
 
 module.exports = {
     saveResult,
-    updateResult,
+    endNow,
     getFeedback,
     getDuration,
     deleteResults,
     deleteResultsProcess,
     updateState,
-    startNow
+    startNow,
+    saveFeedback
 }
