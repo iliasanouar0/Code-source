@@ -111,6 +111,7 @@ wss.on('connection', (wss, req) => {
         active = seeds.length
         waiting = 0
       }
+      console.log(active);
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       processStateManager.addState(status)
       for (let i = 0; i < seeds.length; i++) {
@@ -136,6 +137,7 @@ wss.on('connection', (wss, req) => {
         count++
         toProcess.push(seeds[i])
       }
+      console.log(toProcess);
       let state = await processManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
         state = await processManager.getProcessState(data.id_process)
