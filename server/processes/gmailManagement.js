@@ -13,7 +13,7 @@ const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
 const path = `${root}/views/assets/images/process_result`
 
 let pidProcess = []
-
+let feedback = ''
 const login = async (data) => {
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
     const browserPID = browser.process().pid
@@ -26,6 +26,8 @@ const login = async (data) => {
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
     });
+    feedback += `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await page.waitForSelector('input[type="email"]')
     await page.click('input[type="email"]')
     await navigationPromise
@@ -40,9 +42,9 @@ const login = async (data) => {
         });
         await page.close()
         await browser.close()
-        let feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
-        await resultsManager.saveFeedback({ feedBack: feedBack, id_seeds: data.id_seeds, id_process: data.id_process })
-        return feedBack
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        return feedback
     }
     await navigationPromise
     await time(3000);
@@ -55,9 +57,9 @@ const login = async (data) => {
             });
             await page.close()
             await browser.close()
-            let feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedBack: feedBack, id_seeds: data.id_seeds, id_process: data.id_process })
-            return feedBack
+            feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+            return feedback
         }
     }
     await page.type('input[type="password"]', data.password, { delay: 200 })
@@ -71,9 +73,9 @@ const login = async (data) => {
         });
         await page.close()
         await browser.close()
-        let feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
-        await resultsManager.saveFeedback({ feedBack: feedBack, id_seeds: data.id_seeds, id_process: data.id_process })
-        return feedBack
+        feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        return feedback
     }
     await navigationPromise
     await time(3000)
@@ -82,9 +84,9 @@ const login = async (data) => {
     });
     await page.close()
     await browser.close()
-    let feedBack = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-    await resultsManager.saveFeedback({ feedBack: feedBack, id_seeds: data.id_seeds, id_process: data.id_process })
-    return feedBack
+    feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    return feedback
 }
 
 const kill = (id_process) => {
