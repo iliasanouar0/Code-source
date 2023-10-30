@@ -422,6 +422,7 @@ const templateSeeds = (data) => {
             }
         }
         let td_action = document.createElement('td')
+        td_action.classList.add('d-flex gap-1')
         td_action.innerHTML =
             `<button data-id="${object.id_seeds}" type="button" class="btn btn-danger remove-this-seed"><i class="far fa-trash-alt"></button>`
         td_action.innerHTML += `<button data-id="${object.id_seeds}" type="button" class="btn btn-success edit-this-seed"><i class="fas fa-edit"></button>`
