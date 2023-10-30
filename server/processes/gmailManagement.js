@@ -65,8 +65,12 @@ const login = async (data) => {
         }
     }
     await page.type('input[type="password"]', data.password, { delay: 200 })
-    await page.waitForSelector('#passwordNext', { timeout: 2000 })
-    await page.click('#passwordNext')
+    await time(1000)
+    // await page.waitForSelector('#passwordNext')
+    await page.$eval('#passwordNext', elm => {
+        elm.click()
+    })
+    // await page.click('#passwordNext')
     await navigationPromise
     await time(1000)
     if (await page.$('[aria-invalid="true"]') != null) {
