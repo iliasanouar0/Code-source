@@ -69,16 +69,23 @@ const login = async (data) => {
         path: `${path}/${data.gmail.split('@')[0]}-@-test1-${data.id_process}.png`
     });
     await page.waitForSelector('#passwordNext')
-    await page.click('#passwordNext')
+    await page.click('#passwordNext',)
     await navigationPromise
     await time(1000)
+    await Promise.all([
+        page.$eval(`#passwordNext`, element =>
+            element.click()
+        ),
+        await page.waitForNavigation(),
+    ]);
+
     // await page.waitForSelector('#passwordNext', { timeout: 1000 })
     // await page.$eval('#passwordNext', elm => {
     //     elm.click()
     // })
     // await time(1000)
     // await page.click('#passwordNext')
-    await navigationPromise
+    // await navigationPromise
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-test2-${data.id_process}.png`
     });
