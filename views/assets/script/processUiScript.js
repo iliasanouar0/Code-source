@@ -221,7 +221,7 @@ $(document).on('click', '.status', event => {
     let id = $(event.target).data('id')
     let children = $(event.target).parent().parent()[0].children
     $('.count').html(children[2].innerHTML)
-    $('.status_bg').html($(`.status-p-${id}`).html())
+    $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
     $('#p_s').html(id)
     fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
         return response.json()
