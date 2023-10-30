@@ -65,15 +65,19 @@ const login = async (data) => {
         }
     }
     await page.type('input[type="password"]', data.password, { delay: 200 })
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-test1-${data.id_process}.png`
+    });
     await time(1000)
     await page.waitForSelector('#passwordNext', { timeout: 1000 })
     await time(1000)
     await page.click('#passwordNext')
     await navigationPromise
     await page.screenshot({
-        path: `${path}/${data.gmail.split('@')[0]}-@-test-${data.id_process}.png`
+        path: `${path}/${data.gmail.split('@')[0]}-@-test2-${data.id_process}.png`
     });
-    feedback += `, ${data.gmail.split('@')[0]}-@-test-${data.id_process}.png`
+    feedback += `, ${data.gmail.split('@')[0]}-@-test1-${data.id_process}.png`
+    feedback += `, ${data.gmail.split('@')[0]}-@-test2-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     return feedback
     // await time(1000)
