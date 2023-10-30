@@ -26,7 +26,7 @@ const login = async (data) => {
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
     });
-    feedback += `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+    feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await page.waitForSelector('input[type="email"]')
     await page.click('input[type="email"]')
@@ -35,7 +35,7 @@ const login = async (data) => {
     await page.waitForSelector('#identifierNext')
     await page.click('#identifierNext')
     await navigationPromise
-    await time(60000)
+    await time(4000)
     if (await page.$('[aria-invalid="true"]') != null || await page.$('#next > div > div > a') != null) {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
