@@ -133,6 +133,7 @@ wss.on('connection', (wss, req) => {
       let count = 0
       let length = seeds.length
       let toProcess = []
+      await time(10000)
       for (let i = 0; i < active; i++) {
         await Promise.all([
           await resultManager.startNow({ id_seeds: seeds[i].id_seeds, id_process: data.id_process }),
