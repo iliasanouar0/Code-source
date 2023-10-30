@@ -351,10 +351,12 @@ wss.on('connection', (wss, req) => {
       let failed = state[0].failed
       let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
       await processStateManager.updateState(status)
-      processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
+      if (seeds.length == 0) {
+        processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
+      } else {
+        processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
+      }
       sendToAll(clients, 'reload')
-
-
     } else if (request == 'reset') {
       await processManager.restedProcess(data.data)
       await resultManager.deleteResultsProcess(data.id_process)
