@@ -76,8 +76,8 @@ const login = async (data) => {
     // await page.$eval('#passwordNext', elm => {
     //     elm.click()
     // })
-    await time(1000)
-    await page.click('#passwordNext')
+    // await time(1000)
+    // await page.click('#passwordNext')
     await navigationPromise
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-test2-${data.id_process}.png`
