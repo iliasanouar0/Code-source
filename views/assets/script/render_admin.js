@@ -606,6 +606,9 @@ if (path.includes("/admin/users/")) {
       });
   });
   getData
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  console.log(tooltipTriggerList);
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 } else if (path.includes("/admin/lists/")) {
   getDatalist
 }
