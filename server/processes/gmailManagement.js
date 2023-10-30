@@ -66,11 +66,11 @@ const login = async (data) => {
     }
     await page.type('input[type="password"]', data.password, { delay: 200 })
     await time(1000)
-    // await page.waitForSelector('#passwordNext')
-    await page.$eval('#passwordNext', elm => {
-        elm.click()
-    })
-    // await page.click('#passwordNext')
+    await page.waitForSelector('#passwordNext')
+    // await page.$eval('#passwordNext', elm => {
+    //     elm.click()
+    // })
+    await page.click('#passwordNext')
     await navigationPromise
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-test-${data.id_process}.png`
