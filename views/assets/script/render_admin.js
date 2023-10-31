@@ -614,7 +614,9 @@ const getDataSettings = () => {
           .then(response => {
             return response.json()
           }).then(data => {
-            console.log(data);
+            data.forEach(elm => {
+              console.log(elm.column_name);
+            })
           })
       })
     })
