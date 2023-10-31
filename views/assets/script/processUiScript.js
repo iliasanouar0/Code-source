@@ -281,13 +281,14 @@ $(document).on('click', '.status', event => {
         websocket.close()
     })
     let i = 0
-    console.log($('#modal-process-view').modal("show"));
+    console.log($('#modal-process-view'));
     // while ($('#modal-process-view').modal("show")) {
     //     i++
     //     console.log(i);
     // }
 
     $('#modal-process-view').on('click', () => {
+        console.log($('#modal-process-view'));
         cPage = 1
         $('#modal-process-view').modal('hide')
         websocket.close()
