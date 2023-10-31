@@ -258,7 +258,7 @@ $(document).on('click', '#l_seeds_add', event => {
         let date_update = new Date().toDateInputValue()
         seeds.forEach(one => {
             let seed = {
-                "email": `${one[0]}`,
+                "email": `${one[0].toLowerCase()}`,
                 "password": `${one[1]}`,
                 "proxy": `${one[2]}`,
                 "verification": `${one[3]}`,
