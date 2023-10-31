@@ -616,10 +616,10 @@ const getDataSettings = () => {
             return response.json()
           }).then(data => {
             tables.push({ table_name: elm.tablename, data: data })
+          }).then(() => {
+            console.log(tables.length);
           })
       })
-    }).then(() => {
-      console.log(tables.length);
     })
 }
 
