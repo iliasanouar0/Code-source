@@ -18,7 +18,7 @@ Date.prototype.toDateInputValue = function () {
     return local.toJSON().slice(0, 10);
 };
 
-$(document).on('ready', () => {
+$(document).ready(() => {
     $('[data-bs-toggle="tooltip"]').tooltip();
 })
 
