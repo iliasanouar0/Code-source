@@ -1,7 +1,7 @@
 const userData = JSON.parse(sessionStorage.user);
 let userName = `${userData.f_name} ${userData.l_name}`;
 
-$(document).ready(() => {
+$(window).ready(() => {
   $('[data-bs-toggle="tooltip"]').tooltip();
   console.log($('[data-bs-toggle="tooltip"]').tooltip());
   console.log($('[data-bs-toggle="tooltip"]'))
