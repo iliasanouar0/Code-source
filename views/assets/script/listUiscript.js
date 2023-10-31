@@ -201,6 +201,7 @@ const addSeeds = (data) => {
                 confirmButtonText: 'ok'
             })
         } else {
+            $('#FormControlTextarea').val('');
             $('#modal-preview-data').modal('hide')
             $(".add_seeds_md").modal('hide')
             Swal.fire({
