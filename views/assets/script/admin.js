@@ -1,16 +1,6 @@
 const userData = JSON.parse(sessionStorage.user);
 let userName = `${userData.f_name} ${userData.l_name}`;
 
-$(window).ready(() => {
-  $('[data-bs-toggle="tooltip"]').tooltip();
-  console.log($('[data-bs-toggle="tooltip"]').tooltip());
-  console.log($('[data-bs-toggle="tooltip"]'))
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  console.log(tooltipTriggerList);
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-  });
-})
 
 $(document).on("click", ".info a", function () {
   $("#f_name").val(userData.f_name);
