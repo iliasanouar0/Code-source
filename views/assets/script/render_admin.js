@@ -618,8 +618,8 @@ const getDataSettings = () => {
           }).then(data => {
             tables.push({ table_name: table_name, data: data })
           })
-        console.log(tables);
       })
+      console.log(tables);
     })
 }
 
