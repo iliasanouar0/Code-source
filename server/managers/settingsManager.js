@@ -13,7 +13,7 @@ const getTables = (request, response) => {
     // let data = `SELECT  table_name,  column_name,  data_type  FROM  information_schema.columns `
     pool.query(sql, (err, res) => {
         if (err) {
-            response.status(500).send(err.name)
+            response.status(500).send({ name: err.name, message: err.message, stack: err.stack })
         }
         response.send(res.rows)
     })
