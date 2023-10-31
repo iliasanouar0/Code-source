@@ -281,10 +281,11 @@ $(document).on('click', '.status', event => {
         websocket.close()
     })
     let i = 0
-    while ($('#modal-process-view')) {
-        i++
-        console.log(i);
-    }
+    console.log($('#modal-process-view').modal("show"));
+    // while ($('#modal-process-view').modal("show")) {
+    //     i++
+    //     console.log(i);
+    // }
 
     $('#modal-process-view').on('click', () => {
         cPage = 1
