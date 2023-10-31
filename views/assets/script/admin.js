@@ -1,6 +1,17 @@
 const userData = JSON.parse(sessionStorage.user);
 let userName = `${userData.f_name} ${userData.l_name}`;
 
+$(document).ready(() => {
+  $('[data-bs-toggle="tooltip"]').tooltip();
+  console.log($('[data-bs-toggle="tooltip"]').tooltip());
+  console.log($('[data-bs-toggle="tooltip"]'))
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  console.log(tooltipTriggerList);
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  });
+})
+
 $(document).on("click", ".info a", function () {
   $("#f_name").val(userData.f_name);
   $("#l_name").val(userData.l_name);
@@ -18,14 +29,6 @@ $(window).on("load", function () {
   console.log('%c Reporting!!', 'font-weight: bold; font-size: 50px;color: white; text-shadow: 4px 4px 0 yellow,7px 7px 0 blue');
   console.log('%c TheOne', 'font-size: 20px; color: green;');
   $(".user_name").html(userName);
-  $('[data-bs-toggle="tooltip"]').tooltip();
-  console.log($('[data-bs-toggle="tooltip"]').tooltip());
-  console.log($('[data-bs-toggle="tooltip"]'))
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  console.log(tooltipTriggerList);
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-  });
 });
 
 Date.prototype.toDateInputValue = function () {
