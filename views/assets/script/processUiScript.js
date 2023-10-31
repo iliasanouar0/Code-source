@@ -1,6 +1,4 @@
 const user = JSON.parse(sessionStorage.user);
-let cPage
-let max = 10
 const wssUri = `ws://${ip}:7073/wss?id=${user.id_user}`;
 const websocket_s = new WebSocket(wssUri);
 
@@ -263,15 +261,18 @@ $(document).on('click', '.status', event => {
             $('.f_seeds').html(data[0].finished)
             $('.ff_seeds').html(data[0].failed)
             $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
-            state.ajax.reload(null, false)
+
         }
+        state.ajax.reload(null, false)
     };
     websocket.onclose = () => {
         console.log('closed');
     }
-    // ~~ pagination
+    $('.btn-close').on('click', () => {
+        websocket.close()
+        $('#modal-process-view').modal('hide')
+    })
     $('#modal-process-view').on('hide.bs.modal', () => {
-        cPage = 1
         websocket.close()
     })
 })
