@@ -615,7 +615,7 @@ const getDataSettings = () => {
           .then(response => {
             return response.json()
           }).then(data => {
-            tables.push({ table_name: table_name, data: data })
+            tables.push({ table_name: elm.tablename, data: data })
           })
       })
       console.log(tables);
