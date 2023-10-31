@@ -34,6 +34,7 @@ const processManager = require("./managers/processManager");
 const installation = require("./managers/installation");
 const processStateManager = require('./managers/processStateManager');
 const resultManager = require("./managers/resultManager")
+const settingsManager = require("./managers/settingsManager")
 
 const port = 3000;
 const app = express(); // setup express application
@@ -500,6 +501,10 @@ app.patch("/process/", processManager.deleteProcess);
 // result API
 app.get("/result/feedback/:id", resultManager.getFeedback)
 app.get("/result/duration/:id", resultManager.getDuration)
+
+// setting API
+app.get("/settings/tables/", settingsManager.getTables)
+
 
 app.listen(port, () => {
   console.log(`Server running at ${port}`);
