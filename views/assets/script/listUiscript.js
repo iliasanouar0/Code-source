@@ -415,6 +415,15 @@ document.getElementById("demo").onchange = evt => {
     reader.readAsArrayBuffer(evt.target.files[0]);
 };
 
+$(document).ready(function () {
+    $("#search_preview").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#bulk_add_table tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+
 const templateSeeds = (data) => {
     let tbody = $('#seeds')
     tbody.empty()
