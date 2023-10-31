@@ -221,6 +221,15 @@ $(document).on('click', '.status', event => {
     $('.count').html(children[2].innerHTML)
     $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
     $('#p_s').html(id)
+    const state = $('#process_result').dataTable({
+        responsive: true,
+        destroy: true,
+        autoWidth: false,
+        ajax: {
+            url: `http://${ip}:3000/process/seeds/${id}`,
+            dataSrc: '',
+        },
+    })
     fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
         return response.json()
     }).then(data => {
