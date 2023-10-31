@@ -216,33 +216,34 @@ const getData = $("#processDate").DataTable({
           return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="View status"><i class="far fa-eye"></i></button>
   <button type="button" class="btn btn-success" disabled data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Default tooltip"><i class="fas fa-check"></i></button>
   <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Reset process"><i class="fas fa-power-off"></i></button>
-  <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Edit process"><i class="fas fa-edit"></i></button>`
+  <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Edit process action"><i class="fas fa-edit"></i></button>`
         } else if (row.status == 'RUNNING') {
           return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="View status"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-warning pause"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Pause process"><i class="fas fa-pause"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Reset process"><i class="fas fa-power-off"></i></button>
-<button type="button" class="btn btn-info edit"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Edit process"><i class="fas fa-edit"></i></button>`
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Edit process action"><i class="fas fa-edit"></i></button>`
         } else if (row.status == 'PAUSED') {
           return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="View status"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-warning resume"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Resume process"><i class="fa fa-play"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Reset process"><i class="fas fa-power-off"></i></button>
-<button type="button" class="btn btn-info edit"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Edit process"><i class="fas fa-edit"></i></button>`
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Edit process action"><i class="fas fa-edit"></i></button>`
         } else if (row.status == 'STOPPED') {
           return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="View status"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-success start"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Restart process"><i class="fas fa-redo"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" disabled data-bs-toggle="tooltip" data-bs-title="Reset process"><i class="fas fa-power-off reset"></i></button>
-<button type="button" class="btn btn-info edit"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Edit process"><i class="fas fa-edit"></i></button>`
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Edit process action"><i class="fas fa-edit"></i></button>`
         } else {
           return `<button type="button" class="btn btn-primary status" data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="View status"><i class="far fa-eye"></i></button>
 <button type="button" class="btn btn-success start"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Start process"><i class="fa fa-play"></i></button>
 <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" disabled data-bs-toggle="tooltip" data-bs-title="Reset process"><i class="fas fa-power-off"></i></button>
-<button type="button" class="btn btn-info edit"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Edit process"><i class="fas fa-edit"></i></button>`
+<button type="button" class="btn btn-info edit"  data-id="${row.id_process}" data-bs-toggle="tooltip" data-bs-title="Edit process action action"><i class="fas fa-edit"></i></button>`
         }
       },
     }
   ],
   drawCallback: function () {
-    console.log('Table redrawn ' + new Date());
+    $('body').tooltip('dispose');
+    $('[data-bs-toggle="tooltip"]').tooltip({ trigger: "hover" });
   }
 })
 
