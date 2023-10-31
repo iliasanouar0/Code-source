@@ -142,6 +142,7 @@ $(document).on('click', '.status', event => {
     $('#p_s').html(id)
     const state = $('#process_result').dataTable({
         responsive: true,
+        deferRender: true,
         destroy: true,
         autoWidth: false,
         ajax: {
