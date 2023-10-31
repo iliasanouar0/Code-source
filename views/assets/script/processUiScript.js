@@ -229,15 +229,97 @@ $(document).on('click', '.status', event => {
             url: `http://${ip}:3000/process/seeds/${id}`,
             dataSrc: '',
         },
+        //Email
+        // Proxy
+        // ISP
+        // Status
+        // Status
+        // details
+        // Duration
+        // Details
+        columns: [
+            {
+                data: null,
+                render: function (row) {
+                    return `<div class="card m-0">
+                    <div class="card-body p-1 text-center text-dark">
+                    ${row.gmail}
+                    </div>
+                   </div>`
+                }
+            },
+            {
+                data: null,
+                render: function (row) {
+                    let proxy
+                    if (row.proxy == 'undefined') {
+                        proxy = 'none'
+                    } else {
+                        proxy = row.proxy
+                    }
+                    return `<div class="card m-0">
+                    <div class="card-body p-1 text-center text-dark">
+                    ${proxy}
+                    </div>
+                   </div>`
+                }
+            },
+            {
+                data: null,
+                render: function (row) {
+                    let status
+                    if (row.rstatus == 'running') {
+                        status = `<div class="d-flex justify-content-center">
+                        <div class="spinner-border spinner-border-sm text-primary m-auto" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div>`
+                    } else if (row.rstatus === null && row.pstatus != 'STOPPED') {
+                        status = 'idel'
+                    } else if (row.rstatus === null && row.pstatus === 'STOPPED') {
+                        status = `<span class="text-danger">${row.pstatus}</span>`
+                    } else {
+                        status = row.rstatus
+                    }
+                    return status
+                }
+            },
+            {
+                data: null,
+                render: function (row) {
+                    return `<p class="placeholder-glow"><span class="placeholder col mb-1"></span></p>`
+                }
+            },
+            {
+                data: null,
+                render: function (row) {
+                    let duration
+                    if (row.start_in == null || row.end_in == '0') {
+                        duration = '00:00:00'
+                    } else {
+                        let start = new Date(row.start_in)
+                        let end = new Date(row.end_in)
+                        duration = msToMnSc(end - start)
+                    }
+                    return duration
+                }
+            },
+            {
+                data: null,
+                render: function (row) {
+                    return `<button type="button" class="btn btn-dark details" data-id="${row.id_seeds}" data-id_process="${id}"><i class="fas fa-eye"></i></button>`
+                }
+            }
+        ]
     })
-    fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
-        return response.json()
-    }).then(data => {
-        var html = createRowProcessSeeds(data);
-        $('#seeds_result').html(html);
-    }).then(() => {
-        $('#modal-process-view').modal('show')
-    })
+    // fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
+    //     return response.json()
+    // }).then(data => {
+    //     var html = createRowProcessSeeds(data);
+    //     $('#seeds_result').html(html);
+    // }).then(() => {
+    $('#modal-process-view').modal('show')
+    // })
     /**
      * * Websocket connection :
      * ? opening => get data from database render the view. 
@@ -254,41 +336,41 @@ $(document).on('click', '.status', event => {
         websocket.send(`${id}`)
     }
 
-    websocket.onmessage = function (event) {
-        let data = JSON.parse(event.data)
-        if (data.length == 0) {
-            return
-        } else {
-            $('.w_seeds').html(data[0].waiting)
-            $('.a_seeds').html(data[0].active)
-            $('.f_seeds').html(data[0].finished)
-            $('.ff_seeds').html(data[0].failed)
-            let endIndex = cPage * max
-            let startIndex = endIndex - max
-            fetch(`http://209.170.73.224:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
-                return response.json()
-            }).then(data => {
-                pagination(id, cPage)
-                var html = createRowProcessSeeds(data, id);
-                $('#seeds_result').html(html);
-                $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
-            })
-        }
-    };
+    // websocket.onmessage = function (event) {
+    //     let data = JSON.parse(event.data)
+    //     if (data.length == 0) {
+    //         return
+    //     } else {
+    //         $('.w_seeds').html(data[0].waiting)
+    //         $('.a_seeds').html(data[0].active)
+    //         $('.f_seeds').html(data[0].finished)
+    //         $('.ff_seeds').html(data[0].failed)
+    //         let endIndex = cPage * max
+    //         let startIndex = endIndex - max
+    //         fetch(`http://209.170.73.224:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
+    //             return response.json()
+    //         }).then(data => {
+    //             pagination(id, cPage)
+    //             var html = createRowProcessSeeds(data, id);
+    //             $('#seeds_result').html(html);
+    //             $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
+    //         })
+    //     }
+    // };
     websocket.onclose = () => {
         console.log('closed');
     }
     // ~~ pagination
-    cPage = 1
-    pagination(id, cPage)
-    $('.page-item').on('click', async () => {
-        console.log('page');
-    })
-    $('.btn-close').on('click', () => {
-        cPage = 1
-        $('#modal-process-view').modal('hide')
-        websocket.close()
-    })
+    // cPage = 1
+    // pagination(id, cPage)
+    // $('.page-item').on('click', async () => {
+    //     console.log('page');
+    // })
+    // $('.btn-close').on('click', () => {
+    //     cPage = 1
+    //     $('#modal-process-view').modal('hide')
+    //     websocket.close()
+    // })
 
     $('#modal-process-view').on('hide.bs.modal', () => {
         cPage = 1
