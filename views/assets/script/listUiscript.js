@@ -970,6 +970,6 @@ $(document).on('click', '.submit_bulk_edit', event => {
     }
 })
 
-$(document).on('hide-bs-modal', () => {
+$(window).on('hide-bs-modal', () => {
     getDatalist.ajax.reload(null, false)
 })
