@@ -570,7 +570,11 @@ const getDataSettings = () => {
     .then(response => {
       return response.json()
     }).then(data => {
-      console.log(data);
+      data.forEach(elm => {
+        let table_name = elm.tablename
+        console.log(table_name);
+        // fetch(`http://${ip}:3000/settings/columns/${}`)
+      })
     })
 }
 
