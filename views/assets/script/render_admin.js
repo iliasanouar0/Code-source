@@ -141,7 +141,7 @@ function msToMnSc(ms) {
 
 const getData = $("#example1").DataTable({
   responsive: true,
-  deferRender: true,
+  // deferRender: true,
   destroy: true,
   autoWidth: false,
   ajax: {
