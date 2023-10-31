@@ -611,15 +611,16 @@ if (path.includes("/admin/users/")) {
         });
       });
   });
-  getData
-  $('[data-bs-toggle="tooltip"]').tooltip();
-  console.log($('[data-bs-toggle="tooltip"]').tooltip());
-  console.log($('[data-bs-toggle="tooltip"]'))
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  console.log(tooltipTriggerList);
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-  });
+  await Promise.all([getData]).then(() => {
+    $('[data-bs-toggle="tooltip"]').tooltip();
+    console.log($('[data-bs-toggle="tooltip"]').tooltip());
+    console.log($('[data-bs-toggle="tooltip"]'))
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    console.log(tooltipTriggerList);
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+  })
 } else if (path.includes("/admin/lists/")) {
   getDatalist
 }
