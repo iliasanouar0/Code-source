@@ -305,6 +305,7 @@ const getData = $("#example1").DataTable({
     }
   ],
   drawCallback: function () {
+    $('body').tooltip('dispose');
     $('[data-bs-toggle="tooltip"]').tooltip();
   }
 })
