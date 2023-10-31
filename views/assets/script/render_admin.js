@@ -618,8 +618,9 @@ const getDataSettings = () => {
             tables.push({ table_name: elm.tablename, data: data })
           })
       })
+    }).then(() => {
+      console.log(tables);
     })
-  console.log(tables[0]);
 }
 
 if (path.includes("/admin/users/")) {
