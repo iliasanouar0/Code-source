@@ -193,7 +193,11 @@ const addSeeds = (data) => {
         }
     };
     $.ajax(settings).done(function (responseText) {
-        console.log(responseText);
+        if (responseText.includes('already exists')) {
+            console.log(responseText);
+        } else {
+            console.log('test');
+        }
         // Swal.fire({
         //     title: 'seeds added successfully!',
         //     text: responseText,
