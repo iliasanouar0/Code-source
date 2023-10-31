@@ -611,7 +611,7 @@ if (path.includes("/admin/users/")) {
         });
       });
   });
-  await Promise.all([getData]).then(() => {
+  Promise.all([getData]).then(() => {
     $('[data-bs-toggle="tooltip"]').tooltip();
     console.log($('[data-bs-toggle="tooltip"]').tooltip());
     console.log($('[data-bs-toggle="tooltip"]'))
