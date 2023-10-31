@@ -424,7 +424,7 @@ const templateSeeds = (data) => {
         let tr = document.createElement('tr')
         tr.appendChild(tdCheck)
         for (let val in object) {
-            if (object[val] == 'undefined' || object[val] == 'null' || object[val == null] || object[val] == '') {
+            if (object[val] == 'undefined' || object[val] == 'null' || object[val] == null || object[val] == '') {
                 let td = document.createElement('td')
                 td.innerHTML = 'none'
                 tr.appendChild(td)
