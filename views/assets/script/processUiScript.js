@@ -18,17 +18,6 @@ Date.prototype.toDateInputValue = function () {
     return local.toJSON().slice(0, 10);
 };
 
-$('[data-bs-toggle="tooltip"]').tooltip();
-console.log($('[data-bs-toggle="tooltip"]').tooltip());
-console.log($('[data-bs-toggle="tooltip"]'))
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-console.log(tooltipTriggerList);
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-});
-
-
-
 $(document).on("click", "#add_process", () => {
     $(".add_process").modal("show");
 });

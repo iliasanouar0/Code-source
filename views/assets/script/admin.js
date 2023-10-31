@@ -19,6 +19,13 @@ $(window).on("load", function () {
   console.log('%c TheOne', 'font-size: 20px; color: green;');
   $(".user_name").html(userName);
   $('[data-bs-toggle="tooltip"]').tooltip();
+  console.log($('[data-bs-toggle="tooltip"]').tooltip());
+  console.log($('[data-bs-toggle="tooltip"]'))
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  console.log(tooltipTriggerList);
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  });
 });
 
 Date.prototype.toDateInputValue = function () {
