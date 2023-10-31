@@ -139,13 +139,6 @@ function msToMnSc(ms) {
   );
 }
 
-// const getTool = () => {
-//   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-//   console.log(tooltipTriggerList);
-//   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-//   return tooltipList
-// }
-
 const getData = $("#example1").DataTable({
   responsive: true,
   deferRender: true,
@@ -611,7 +604,7 @@ if (path.includes("/admin/users/")) {
         });
       });
   });
-  Promise.all([getData]).then(() => {
+  Promise(getData).then(() => {
     $('[data-bs-toggle="tooltip"]').tooltip();
     console.log($('[data-bs-toggle="tooltip"]').tooltip());
     console.log($('[data-bs-toggle="tooltip"]'))
