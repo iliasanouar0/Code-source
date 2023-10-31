@@ -346,6 +346,7 @@ document.getElementById("demo").onchange = evt => {
             })
             $('.count').html(count)
             let data = $(btn).data('id')
+            console.log(data);
             $('.save-bulk-data').data('id', data)
         })
 
@@ -365,6 +366,7 @@ document.getElementById("demo").onchange = evt => {
         })
         $(document).on('click', '.save-bulk-data', event => {
             let data = $(event.target).data('id')
+            console.log(data);
             let obj = []
             let settings = {
                 "url": `http://${ip}:3000/lists/${data}`,
