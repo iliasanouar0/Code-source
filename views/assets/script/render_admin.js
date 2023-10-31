@@ -619,7 +619,7 @@ const getDataSettings = () => {
           })
       })
     }).then(() => {
-      console.log(tables);
+      console.log(tables[0]);
     })
 }
 
