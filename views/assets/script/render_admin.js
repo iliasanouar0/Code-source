@@ -605,6 +605,7 @@ const getDataUser = $("#userTable").DataTable({
 
 
 const getDataSettings = () => {
+  let collapse = ''
   fetch(`http://${ip}:3000/settings/tables/`, { method: "GET" })
     .then(response => {
       return response.json()
@@ -614,8 +615,10 @@ const getDataSettings = () => {
           .then(response => {
             return response.json()
           }).then(data => {
+            let rows = ''
             data.forEach(elm => {
               console.log(elm.column_name);
+              rows += `<tr><td>${elm.column_name}</td><td>${elm.data_type}</td></tr>`
             })
           })
       })
