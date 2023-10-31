@@ -202,19 +202,6 @@ const createRowProcessSeeds = (data, id) => {
     return rows
 }
 
-function getPages(totalPages, currentPage) {
-    if (totalPages <= 5) return Array.from(Array(totalPages).keys()).map(r => { return r + 1 });
-    let diff = 0;
-    const result = [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2];
-    if (result[0] < 3) {
-        diff = 1 - result[0];
-    }
-    if (result.slice(-1) > totalPages - 2) {
-        diff = totalPages - result.slice(-1);
-    }
-    return result.map(r => { return r + diff });
-}
-
 $(document).on('click', '.status', event => {
     let id = $(event.target).data('id')
     let children = $(event.target).parent().parent()[0].children
@@ -229,14 +216,6 @@ $(document).on('click', '.status', event => {
             url: `http://${ip}:3000/process/seeds/${id}`,
             dataSrc: '',
         },
-        //Email
-        // Proxy
-        // ISP
-        // Status
-        // Status
-        // details
-        // Duration
-        // Details
         columns: [
             {
                 data: null,
@@ -262,6 +241,16 @@ $(document).on('click', '.status', event => {
                     ${proxy}
                     </div>
                    </div>`
+                }
+            },
+            {
+                data: null,
+                render: function (row) {
+                    return `<div class="card m-0">
+                        <div class="card-body p-1 text-center text-dark">
+                            ${row.isp}
+                        </div>
+                    </div>`
                 }
             },
             {
@@ -312,14 +301,7 @@ $(document).on('click', '.status', event => {
             }
         ]
     })
-    // fetch(`http://${ip}:3000/process/seeds/${id}?offset=0`, { method: "GET" }).then(response => {
-    //     return response.json()
-    // }).then(data => {
-    //     var html = createRowProcessSeeds(data);
-    //     $('#seeds_result').html(html);
-    // }).then(() => {
     $('#modal-process-view').modal('show')
-    // })
     /**
      * * Websocket connection :
      * ? opening => get data from database render the view. 
@@ -327,7 +309,6 @@ $(document).on('click', '.status', event => {
      */
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
-
     websocket.onopen = (e) => {
         $('.w_seeds').html(0)
         $('.a_seeds').html(0)
@@ -336,103 +317,28 @@ $(document).on('click', '.status', event => {
         websocket.send(`${id}`)
     }
 
-    // websocket.onmessage = function (event) {
-    //     let data = JSON.parse(event.data)
-    //     if (data.length == 0) {
-    //         return
-    //     } else {
-    //         $('.w_seeds').html(data[0].waiting)
-    //         $('.a_seeds').html(data[0].active)
-    //         $('.f_seeds').html(data[0].finished)
-    //         $('.ff_seeds').html(data[0].failed)
-    //         let endIndex = cPage * max
-    //         let startIndex = endIndex - max
-    //         fetch(`http://209.170.73.224:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
-    //             return response.json()
-    //         }).then(data => {
-    //             pagination(id, cPage)
-    //             var html = createRowProcessSeeds(data, id);
-    //             $('#seeds_result').html(html);
-    //             $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
-    //         })
-    //     }
-    // };
+    websocket.onmessage = function (event) {
+        let data = JSON.parse(event.data)
+        if (data.length == 0) {
+            return
+        } else {
+            $('.w_seeds').html(data[0].waiting)
+            $('.a_seeds').html(data[0].active)
+            $('.f_seeds').html(data[0].finished)
+            $('.ff_seeds').html(data[0].failed)
+            $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
+            state.ajax.reload(null, false)
+        }
+    };
     websocket.onclose = () => {
         console.log('closed');
     }
     // ~~ pagination
-    // cPage = 1
-    // pagination(id, cPage)
-    // $('.page-item').on('click', async () => {
-    //     console.log('page');
-    // })
-    // $('.btn-close').on('click', () => {
-    //     cPage = 1
-    //     $('#modal-process-view').modal('hide')
-    //     websocket.close()
-    // })
-
     $('#modal-process-view').on('hide.bs.modal', () => {
         cPage = 1
-        // $('#modal-process-view').modal('hide')
         websocket.close()
     })
 })
-
-$(document).on('click', '.seeds-page', event => {
-    let max = 10
-    let page = $(event.target).data('page')
-    let id = $(event.target).data('id')
-    cPage = page
-    let endIndex = cPage * max
-    let startIndex = endIndex - max
-    fetch(`http://${ip}:3000/process/seeds/${id}?offset=${startIndex}`, { method: "GET" }).then(response => {
-        return response.json()
-    }).then(data => {
-        pagination(id, cPage)
-        var html = createRowProcessSeeds(data, id);
-        $('#seeds_result').html(html);
-    })
-})
-
-const pagination = (id, cPage) => {
-    let pages
-    let max = 10
-    let pageNum = 0
-    let list = ""
-    fetch(`http://${ip}:3000/process/page/${id}`, { method: "GET" }).then(response => {
-        return response.text()
-    }).then(data => {
-        return pageNum = (data % max) == 0 ? data / max : Math.ceil(data / max)
-    }).then(() => {
-        pages = getPages(pageNum, cPage)
-        if (cPage == 1) {
-            list += `<li class="page-item disabled"><a class="page-link">First</a></li>`
-        } else {
-            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${1}" data-id="${id}"  >First</a></li>`
-        }
-        if (cPage == 1 || cPage == 2 || cPage == 3) {
-            list += `<li class="page-item disabled"><a class="page-link">Previous</a></li>`
-        } else {
-            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${cPage - 1}"data-id="${id}" >Previous</a></li>`
-        }
-        for (let i = 0; i < pages.length; i++) {
-            if (pages[i] == cPage) {
-                list += `<li class="page-item active"><a class="page-link seeds-page" data-page="${pages[i]}" data-id="${id}">${pages[i]}</a></li>`
-            } else {
-                list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pages[i]}"data-id="${id}" >${pages[i]}</a></li>`
-            }
-        }
-        if (cPage == pageNum) {
-            list += `<li class="page-item disabled"><a class="page-link">next</a></li>`
-            list += `<li class="page-item disabled"><a class="page-link">Last</a></li>`
-        } else {
-            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${cPage + 1}" data-id="${id}">next</a></li>`
-            list += `<li class="page-item"><a class="page-link seeds-page" data-page="${pageNum}" data-id="${id}">Last</a></li>`
-        }
-        $('.seeds-pagination').html(list)
-    })
-}
 
 $(document).on('click', '.details', event => {
     let id = $(event.target).data('id')
