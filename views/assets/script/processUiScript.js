@@ -140,7 +140,7 @@ $(document).on('click', '.status', event => {
     $('.count').html(children[2].innerHTML)
     $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
     $('#p_s').html(id)
-    const state = $('#process_result').dataTable({
+    $('#process_result').dataTable({
         responsive: true,
         deferRender: true,
         destroy: true,
@@ -263,9 +263,8 @@ $(document).on('click', '.status', event => {
             $('.f_seeds').html(data[0].finished)
             $('.ff_seeds').html(data[0].failed)
             $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
-
+            $('#process_result').dataTable().ajax.reload(null, false)
         }
-        state.ajax.reload(null, false)
     };
     websocket.onclose = () => {
         console.log('closed');
