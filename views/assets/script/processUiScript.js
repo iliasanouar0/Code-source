@@ -229,6 +229,8 @@ $(document).on('click', '.status', event => {
             },
             {
                 data: null,
+                searchable: false,
+                orderable: false,
                 render: function (row) {
                     return `<button type="button" class="btn btn-dark details" data-id="${row.id_seeds}" data-id_process="${id}"><i class="fas fa-eye"></i></button>`
                 }
