@@ -281,7 +281,7 @@ $(document).on('click', '.status', event => {
         websocket.close()
     })
     let i = 0
-    while ($('#modal-process-view')[0].style.display == 'block') {
+    while ($('#modal-process-view')[0].classlist.includes('show')) {
         i++
         console.log(i);
     }
