@@ -194,18 +194,24 @@ const addSeeds = (data) => {
     };
     $.ajax(settings).done(function (responseText) {
         if (responseText.includes('already exists')) {
-            console.log(responseText);
+            Swal.fire({
+                title: 'Duplicated!',
+                text: responseText,
+                icon: 'error',
+                confirmButtonText: 'ok'
+            })
         } else {
-            console.log('test');
+            $('#modal-preview-data').modal('hide')
+            $('.add_list').modal('hide');
+            Swal.fire({
+                title: 'seeds added successfully!',
+                text: responseText,
+                icon: 'success',
+                confirmButtonText: 'ok'
+            }).then(() => {
+                getDatalist.ajax.reload(null, false)
+            })
         }
-        // Swal.fire({
-        //     title: 'seeds added successfully!',
-        //     text: responseText,
-        //     icon: 'success',
-        //     confirmButtonText: 'ok'
-        // }).then(() => {
-        //     getDatalist.ajax.reload(null, false)
-        // })
     });
     // })
 }
