@@ -51,6 +51,7 @@ fetch(adminSidebarUrl)
     const users = document.querySelector(".users");
     const process = document.querySelector(".process");
     const lists = document.querySelector(".lists");
+    const settings = document.querySelector('.setting')
     if (path.includes('views')) {
       if (path == "/views/admin/") {
         home.classList.add("active");
@@ -62,6 +63,7 @@ fetch(adminSidebarUrl)
         users.setAttribute("href", "../users/");
         process.setAttribute('href', '../process/')
         lists.setAttribute('href', '../lists/')
+        settings.setAttribute("href", '../database/')
       } else if (path == "/views/admin/users/") {
         home.setAttribute("href", "../");
         users.classList.add("active");
@@ -69,6 +71,7 @@ fetch(adminSidebarUrl)
         entities.setAttribute("href", "../entities/");
         process.setAttribute('href', '../process/')
         lists.setAttribute('href', '../lists/')
+        settings.setAttribute("href", '../database/')
       } else if (path == "/views/admin/process/") {
         home.setAttribute("href", "../");
         process.classList.add("active");
@@ -76,6 +79,7 @@ fetch(adminSidebarUrl)
         entities.setAttribute("href", "../entities/");
         users.setAttribute("href", "../users/");
         lists.setAttribute('href', '../lists/')
+        settings.setAttribute("href", '../database/')
       } else if (path == "/views/admin/lists/") {
         home.setAttribute("href", "../");
         lists.classList.add("active");
@@ -83,39 +87,15 @@ fetch(adminSidebarUrl)
         entities.setAttribute("href", "../entities/");
         process.setAttribute('href', '../process/')
         users.setAttribute('href', '../users/')
-      }
-    } else {
-      if (path == "/admin/") {
-        home.classList.add("active");
-        home.setAttribute("href", "./");
-      } else if (path == "/admin/entities/") {
+        settings.setAttribute("href", '../database/')
+      } else if (path == "/views/admin/database/") {
         home.setAttribute("href", "../");
-        entities.classList.add("active");
-        entities.setAttribute("href", "./");
-        users.setAttribute("href", "../users/");
-        process.setAttribute('href', '../process/')
-        lists.setAttribute('href', '../lists/')
-      } else if (path == "/admin/users/") {
-        home.setAttribute("href", "../");
-        users.classList.add("active");
-        users.setAttribute("href", "./");
-        entities.setAttribute("href", "../entities/");
-        process.setAttribute('href', '../process/')
-        lists.setAttribute('href', '../lists/')
-      } else if (path == "/admin/process/") {
-        home.setAttribute("href", "../");
-        process.classList.add("active");
-        process.setAttribute("href", "./");
-        entities.setAttribute("href", "../entities/");
-        users.setAttribute("href", "../users/");
-        lists.setAttribute('href', '../lists/')
-      } else if (path == "/admin/lists/") {
-        home.setAttribute("href", "../");
-        lists.classList.add("active");
-        lists.setAttribute("href", "./");
+        settings.classList.add("active");
+        settings.setAttribute("href", "./");
         entities.setAttribute("href", "../entities/");
         process.setAttribute('href', '../process/')
         users.setAttribute('href', '../users/')
+        lists.setAttribute("href", '../lists/')
       }
     }
   });
@@ -138,6 +118,7 @@ function msToMnSc(ms) {
       minutes + ":" + (seconds < 10 ? "0" : "") + seconds
   );
 }
+
 
 const getData = $("#example1").DataTable({
   responsive: true,
