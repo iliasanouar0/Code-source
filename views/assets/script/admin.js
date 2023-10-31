@@ -18,6 +18,7 @@ $(window).on("load", function () {
   console.log('%c Reporting!!', 'font-weight: bold; font-size: 50px;color: white; text-shadow: 4px 4px 0 yellow,7px 7px 0 blue');
   console.log('%c TheOne', 'font-size: 20px; color: green;');
   $(".user_name").html(userName);
+  $('[data-bs-toggle="tooltip"]').tooltip();
 });
 
 Date.prototype.toDateInputValue = function () {

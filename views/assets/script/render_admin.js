@@ -612,6 +612,7 @@ if (path.includes("/admin/users/")) {
       });
   });
   getData
+  $('[data-bs-toggle="tooltip"]').tooltip();
 } else if (path.includes("/admin/lists/")) {
   getDatalist
 }
