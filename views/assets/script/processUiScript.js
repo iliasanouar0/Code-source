@@ -282,10 +282,10 @@ $(document).on('click', '.status', event => {
     })
     let i = 0
     console.log($('#modal-process-view'));
-    // while ($('#modal-process-view').modal("show")) {
-    //     i++
-    //     console.log(i);
-    // }
+    while ($('#modal-process-view')[0].ariaHidden != 'true') {
+        i++
+        console.log(i);
+    }
 
     $('#modal-process-view').on('click', () => {
         console.log($('#modal-process-view'));
