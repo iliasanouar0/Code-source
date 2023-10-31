@@ -565,6 +565,14 @@ const getDataUser = $("#userTable").DataTable({
   ],
 })
 
+const getDataSettings = () => {
+  fetch(`http://${ip}:3000/settings/tables/`, { method: "GET" })
+    .then(response => {
+      return response.json()
+    }).then(data => {
+      console.log(data);
+    })
+}
 
 if (path.includes("/admin/users/")) {
   getDataUser
@@ -591,4 +599,7 @@ if (path.includes("/admin/users/")) {
   })
 } else if (path.includes("/admin/lists/")) {
   getDatalist
+} else if (path.includes("/admin/database/")) {
+
 }
+
