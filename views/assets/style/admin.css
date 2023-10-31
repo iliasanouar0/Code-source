@@ -135,3 +135,7 @@ i.fa-redo {
 #sqlCreateTable::placeholder {
   color: #fff;
 }
+
+ul.ui-autocomplete {
+  z-index: 1100;
+}
