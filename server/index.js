@@ -503,7 +503,8 @@ app.get("/result/feedback/:id", resultManager.getFeedback)
 app.get("/result/duration/:id", resultManager.getDuration)
 
 // setting API
-app.get("/settings/tables/", settingsManager.getTables)
+app.get("/settings/tables/", settingsManager.getTablesNames)
+app.get("/settings/columns/:t", settingsManager.getTablesNames)
 
 
 app.listen(port, () => {
