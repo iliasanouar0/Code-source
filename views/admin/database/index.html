@@ -44,12 +44,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Teams</h1>
+                            <h1 class="m-0">Settings</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Teams</li>
+                                <li class="breadcrumb-item active">Settings</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -63,27 +63,13 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col">
-                                    <h3 class="card-title">Teams</h3>
-                                </div>
                                 <div class="col text-right">
-                                    <button class="btn btn-success" id="add_entity">Add Team</button>
+                                    <button class="btn btn-success" id="add_table">Add Table</button>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="entityTable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Id Team</th>
-                                        <th>Name</th>
-                                        <th>Status</th>
-                                        <th>Add date</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="entity_data"></tbody>
-                            </table>
+
                         </div>
                     </div>
                     <!-- /.container-fluid -->
@@ -143,41 +129,6 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade edit_entity" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="card card-info">
-                        <div class="card-header">
-                            <h3 class="card-title">Edit Team</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="f_name">Name</label>
-                                <input type="text" class="form-control" id="e_e_name">
-                            </div>
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true"
-                                    id="e_e_status">
-                                    <option value="" selected>-_-_SELECT STATUS_-_-</option>
-                                    <option value="active">active</option>
-                                    <option value="pending">pending</option>
-                                    <option value="inactive">inactive</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="login">Update date</label>
-                                <input type="date" class="form-control update" id="e_e_update_date" readonly>
-                            </div>
-                        </div>
-
-                        <div class="card-footer text-center">
-                            <button type="button" class="btn btn-success" id="e_e_add">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="modal fade user_data" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -211,7 +162,6 @@
                 </div>
             </div>
         </div>
-
         <div class="modal fade" id="modal-danger" style="display: none;" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content bg-danger">
@@ -234,9 +184,6 @@
 
         </div>
         <!-- /. modal -->
-
-        <div class="container position-fixed bottom-0 end-0 p-3">
-        </div>
         <!-- Main Footer -->
         <footer class="main-footer">
             <!-- To the right -->
@@ -263,10 +210,10 @@
     <!-- AdminLTE App -->
     <script src="../../assets/vendors/AdminLTE-3.2.0/dist/js/adminlte.min.js"></script>
     <!-- main admin script -->
+    <script src="../../assets/script/settingUiscript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../../assets/script/entityUiscript.js"></script>
     <script src="../../assets/script/admin.js" defer></script>
 </body>
 
