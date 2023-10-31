@@ -305,7 +305,7 @@ const getData = $("#example1").DataTable({
     }
   ],
   drawCallback: function () {
-    console.log('Table redrawn ' + new Date());
+    $('[data-bs-toggle="tooltip"]').tooltip();
   }
 })
 
