@@ -612,14 +612,6 @@ if (path.includes("/admin/users/")) {
       });
   });
   getData
-  $(function () {
-    /*var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-    */
-    $('[data-bs-toggle="tooltip"]').tooltip();
-  })
 } else if (path.includes("/admin/lists/")) {
   getDatalist
 }
