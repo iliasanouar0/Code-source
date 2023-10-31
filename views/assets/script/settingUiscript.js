@@ -12,28 +12,7 @@ $(document).on('click', '.switch_inp', () => {
 
 $(function () {
     var availableTags = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
-        "BASIC",
-        "C",
-        "C++",
-        "Clojure",
-        "COBOL",
-        "ColdFusion",
-        "Erlang",
-        "Fortran",
-        "Groovy",
-        "Haskell",
-        "Java",
-        "JavaScript",
-        "Lisp",
-        "Perl",
-        "PHP",
-        "Python",
-        "Ruby",
-        "Scala",
-        "Scheme"
+        "CREATE TABLE IF NOT EXIST --name-- (--column-name-- DATATYPE,...) ",
     ];
     $("#sqlCreateTable").autocomplete({
         source: availableTags
