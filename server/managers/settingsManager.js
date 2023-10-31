@@ -11,7 +11,7 @@ const getTables = (request, response) => {
     let sql = `SELECT tablename,information_schema.columns.* FROM pg_catalog.pg_tables JOIN information_schema.columns ON information_schema.columns.table_name=pg_catalog.pg_tables.tablename WHERE schemaname != 'pg_catalog'`
     let data = `SELECT  *  FROM  information_schema.columns`
     // let data = `SELECT  table_name,  column_name,  data_type  FROM  information_schema.columns `
-    pool.query(data, (err, res) => {
+    pool.query(sql, (err, res) => {
         if (err) {
             response.status(500).send(err.details)
         }
