@@ -18,6 +18,10 @@ Date.prototype.toDateInputValue = function () {
     return local.toJSON().slice(0, 10);
 };
 
+$(document).on('ready', () => {
+    $('[data-bs-toggle="tooltip"]').tooltip();
+})
+
 $(document).on("click", "#add_process", () => {
     $(".add_process").modal("show");
 });
