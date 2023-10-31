@@ -15,8 +15,8 @@ const getTables = (request, response) => {
         res.rows.forEach(elm => {
             names.push(elm.tablename)
         })
+        response.send(names)
     })
-    response.send(names)
 }
 
 module.exports = {
