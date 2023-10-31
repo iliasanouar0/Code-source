@@ -140,7 +140,7 @@ $(document).on('click', '.status', event => {
     $('.count').html(children[2].innerHTML)
     $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
     $('#p_s').html(id)
-    $('#process_result').dataTable({
+    $('#process_result').DataTable({
         responsive: true,
         deferRender: true,
         destroy: true,
@@ -237,6 +237,7 @@ $(document).on('click', '.status', event => {
         ],
         order: [[3, 'asc']]
     })
+
     $('#modal-process-view').modal('show')
     /**
      * * Websocket connection :
@@ -263,7 +264,7 @@ $(document).on('click', '.status', event => {
             $('.f_seeds').html(data[0].finished)
             $('.ff_seeds').html(data[0].failed)
             $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
-            $('#process_result').dataTable().ajax.reload(null, false)
+            $('#process_result').DataTable().ajax.reload(null, false)
         }
     };
     websocket.onclose = () => {
