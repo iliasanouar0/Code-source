@@ -234,7 +234,8 @@ $(document).on('click', '.status', event => {
                     return `<button type="button" class="btn btn-dark details" data-id="${row.id_seeds}" data-id_process="${id}"><i class="fas fa-eye"></i></button>`
                 }
             }
-        ]
+        ],
+        order: [[3, 'asc']]
     })
     $('#modal-process-view').modal('show')
     /**
