@@ -281,9 +281,9 @@ $(document).on('click', '.status', event => {
         websocket.close()
     })
 
-    $('#modal-process-view').on('click', () => {
+    $('#modal-process-view').on('hide.bs.modal', () => {
         cPage = 1
-        $('#modal-process-view').modal('hide')
+        // $('#modal-process-view').modal('hide')
         websocket.close()
     })
 })
