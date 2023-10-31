@@ -280,6 +280,11 @@ $(document).on('click', '.status', event => {
         $('#modal-process-view').modal('hide')
         websocket.close()
     })
+    let i = 0
+    while ($('#modal-process-view')[0].style.display == 'block') {
+        i++
+        console.log(i);
+    }
 
     $('#modal-process-view').on('click', () => {
         cPage = 1
