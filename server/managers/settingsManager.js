@@ -9,8 +9,8 @@ const getTables = (request, response) => {
     let result = []
     // let sql = `SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog'`
     let sql = `SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema'`
-    let data = `SELECT  table_name,  column_name,  data_type  FROM  information_schema.columns WHERE  table_name = $1`
-    pool.query(sql, (err, res) => {
+    let data = `SELECT  table_name,  column_name,  data_type  FROM  information_schema.columns`
+    pool.query(data, (err, res) => {
         if (err) {
             response.status(500).send(err.details)
         }
