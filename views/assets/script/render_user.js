@@ -241,6 +241,9 @@ const getData = $("#processDate").DataTable({
       },
     }
   ],
+  drawCallback: function () {
+    console.log('Table redrawn ' + new Date());
+  }
 })
 
 const getDatalist = $("#listsDate").DataTable({
