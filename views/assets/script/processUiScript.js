@@ -280,15 +280,8 @@ $(document).on('click', '.status', event => {
         $('#modal-process-view').modal('hide')
         websocket.close()
     })
-    let i = 0
-    console.log($('#modal-process-view'));
-    while ($('#modal-process-view')[0].ariaHidden != 'true') {
-        i++
-        console.log(i);
-    }
 
     $('#modal-process-view').on('click', () => {
-        console.log($('#modal-process-view'));
         cPage = 1
         $('#modal-process-view').modal('hide')
         websocket.close()
