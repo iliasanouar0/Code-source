@@ -253,7 +253,7 @@ $(document).on('click', '#l_seeds_add', event => {
             let clean = dataArray[i].split(',')
             seeds.push(clean)
         }
-        console.log(seeds);
+        console.log(seeds[0].toLowerCase());
         let date_add = new Date().toDateInputValue()
         let date_update = new Date().toDateInputValue()
         seeds.forEach(one => {
