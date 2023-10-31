@@ -906,9 +906,7 @@ $(document).on('click', '.submit_bulk_edit', event => {
             }
         });
         let valid = false
-        // textResult.forEach(result => {
 
-        // })
         for (let i = 0; i < textResult.length; i++) {
             if (textResult[i].includes('***')) {
                 valid = false
@@ -970,4 +968,8 @@ $(document).on('click', '.submit_bulk_edit', event => {
             timer: 700
         })
     }
+})
+
+$(document).on('hide-bs-modal', () => {
+    getDatalist.ajax.reload(null, false)
 })
