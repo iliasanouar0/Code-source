@@ -559,6 +559,13 @@
     <script type="text/javascript">
         $(function () {
             $('[data-bs-toggle="tooltip"]').tooltip();
+            console.log($('[data-bs-toggle="tooltip"]').tooltip());
+            console.log($('[data-bs-toggle="tooltip"]'))
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            console.log(tooltipTriggerList);
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
         })
     </script>
 </body>
