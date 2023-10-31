@@ -603,7 +603,7 @@ if (path.includes("/admin/users/")) {
           select.appendChild(option);
         });
       }).then(() => {
-        getData
+        // getData
         $('[data-bs-toggle="tooltip"]').tooltip();
         console.log($('[data-bs-toggle="tooltip"]').tooltip());
         console.log($('[data-bs-toggle="tooltip"]'))
