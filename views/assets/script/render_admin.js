@@ -600,6 +600,6 @@ if (path.includes("/admin/users/")) {
 } else if (path.includes("/admin/lists/")) {
   getDatalist
 } else if (path.includes("/admin/database/")) {
-
+  getDataSettings()
 }
 
