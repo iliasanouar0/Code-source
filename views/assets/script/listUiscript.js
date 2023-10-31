@@ -346,7 +346,7 @@ document.getElementById("demo").onchange = evt => {
             })
             $('.count').html(count)
             let data = $(btn).data('id')
-            $('.save-bulk-data').data("id", data)
+            $('.save-bulk-data').data('id', data)
         })
 
         $(document).on('click', '.remove-data', evt => {
