@@ -969,7 +969,3 @@ $(document).on('click', '.submit_bulk_edit', event => {
         })
     }
 })
-
-$(document).on('hide-bs-modal', '.modal', () => {
-    getDatalist.ajax.reload(null, false)
-})
