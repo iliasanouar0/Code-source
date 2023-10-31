@@ -369,7 +369,7 @@ document.getElementById("demo").onchange = evt => {
             console.log(data);
             let obj = []
             let settings = {
-                "url": `http://${ip}:3000/lists/${data}`,
+                "url": `http://${ip}:3000/lists/isp/${data}`,
                 "method": "GET",
                 "headers": {
                     'Content-Type': 'application/json',
@@ -379,7 +379,7 @@ document.getElementById("demo").onchange = evt => {
                 }
             };
             $.ajax(settings).done(function (responseText) {
-                let isp = responseText[0].isp
+                let isp = responseText.isp
                 let date_add = new Date().toDateInputValue()
                 let date_update = new Date().toDateInputValue()
                 objects.forEach(one => {
