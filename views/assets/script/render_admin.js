@@ -618,12 +618,15 @@ const getDataSettings = () => {
             tables.push({ table_name: elm.tablename, data: data })
           })
       })
-      console.log(tables);
-      tables.forEach(table => {
-        console.log(table);
-        let table_name = table.table_name
-        console.log(table_name);
-      })
+      // console.log(tables);
+      // tables.forEach(table => {
+      //   console.log(table);
+      //   let table_name = table.table_name
+      //   console.log(table_name);
+      // })
+      for (let i = 0; i < tables.length; i++) {
+        console.log(tables[i]);
+      }
     })
 }
 
