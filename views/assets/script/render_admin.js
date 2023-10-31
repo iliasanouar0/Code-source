@@ -611,8 +611,7 @@ const getDataSettings = () => {
       return response.json()
     }).then(data => {
       data.forEach(elm => {
-        let table_name = elm.tablename
-        fetch(`http://${ip}:3000/settings/columns/${table_name}`, { method: "GET" })
+        fetch(`http://${ip}:3000/settings/columns/${elm.tablename}`, { method: "GET" })
           .then(response => {
             return response.json()
           }).then(data => {
@@ -620,6 +619,10 @@ const getDataSettings = () => {
           })
       })
       console.log(tables);
+      tables.forEach(table => {
+        let table_name = table.table_name
+        console.log(table_name);
+      })
     })
 }
 
