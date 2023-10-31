@@ -202,7 +202,7 @@ const addSeeds = (data) => {
             })
         } else {
             $('#modal-preview-data').modal('hide')
-            $('.add_list').modal('hide');
+            $(".add_seeds_md").modal('hide')
             Swal.fire({
                 title: 'seeds added successfully!',
                 text: responseText,
