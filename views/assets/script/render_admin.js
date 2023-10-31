@@ -605,7 +605,6 @@ const getDataUser = $("#userTable").DataTable({
 
 
 const getDataSettings = () => {
-  let tables = []
   fetch(`http://${ip}:3000/settings/tables/`, { method: "GET" })
     .then(response => {
       return response.json()
@@ -615,9 +614,7 @@ const getDataSettings = () => {
           .then(response => {
             return response.json()
           }).then(data => {
-            tables.push({ table_name: elm.tablename, data: data })
-          }).then(() => {
-            console.log(tables.length);
+            console.log(data);
           })
       })
     })
