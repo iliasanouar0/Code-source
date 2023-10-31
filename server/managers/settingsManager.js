@@ -17,7 +17,7 @@ const getTablesNames = (request, response) => {
 
 const getTableColumns = (request, response) => {
     let table = (request.params.t)
-    let sql = `SELECT  table_name,  column_name,  data_type  FROM  information_schema.columns WHERE table_name=($1)`
+    let sql = `SELECT column_name,  data_type  FROM  information_schema.columns WHERE table_name=($1)`
     pool.query(sql, [table], (err, res) => {
         if (err) {
             response.status(500).send({ name: err.name, message: err.message, stack: err.stack })
