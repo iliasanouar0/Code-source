@@ -565,46 +565,43 @@ const getDataUser = $("#userTable").DataTable({
   ],
 })
 
-let lay = `
-<div class="card card-primary card-outline">
-<a class="d-block w-100 collapsed" data-toggle="collapse" href="#${table_name}"
-    aria-expanded="false">
-    <div class="card-header">
-        <h4 class="card-title w-100">
-            ${table_name}
-        </h4 >
-    </div >
-</a >
-  <div id="${table_name}" class="collapse" data-parent="#accordion">
-    <div class="card-body">
-      <div class="row text-right mb-3">
-        <div class="col">
-          <button class="btn btn-primary">action-1</button>
-          <button class="btn btn-primary">action-2</button>
-          <button class="btn btn-primary">action-3</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Column name</th>
-                <th scope="col">Data type</th>
-              </tr>
-            </thead>
-            <tbody class="columns">
-            ${rows}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div >
-
-
-  `
+// let lay = `
+// <div class="card card-primary card-outline">
+// <a class="d-block w-100 collapsed" data-toggle="collapse" href="#${table_name}"
+//     aria-expanded="false">
+//     <div class="card-header">
+//         <h4 class="card-title w-100">
+//             ${table_name}
+//         </h4 >
+//     </div >
+// </a >
+//   <div id="${table_name}" class="collapse" data-parent="#accordion">
+//     <div class="card-body">
+//       <div class="row text-right mb-3">
+//         <div class="col">
+//           <button class="btn btn-primary">action-1</button>
+//           <button class="btn btn-primary">action-2</button>
+//           <button class="btn btn-primary">action-3</button>
+//         </div>
+//       </div>
+//       <div class="row">
+//         <div class="col">
+//           <table class="table">
+//             <thead>
+//               <tr>
+//                 <th scope="col">Column name</th>
+//                 <th scope="col">Data type</th>
+//               </tr>
+//             </thead>
+//             <tbody class="columns">
+//             ${rows}
+//             </tbody>
+//           </table>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div >`
 
 
 const getDataSettings = () => {
