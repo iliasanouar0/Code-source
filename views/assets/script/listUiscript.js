@@ -247,16 +247,15 @@ $(document).on('click', '#l_seeds_add', event => {
         }
     };
     $.ajax(settings).done(function (responseText) {
-        console.log(responseText);
         let isp = responseText.isp
         let dataArray = data.split(`\n`);
         for (let i = 0; i < dataArray.length; i++) {
             let clean = dataArray[i].split(',')
             seeds.push(clean)
         }
+        console.log(seeds);
         let date_add = new Date().toDateInputValue()
         let date_update = new Date().toDateInputValue()
-        console.log(seeds);
         seeds.forEach(one => {
             let seed = {
                 "email": `${one[0].toLowerCase()}`,
