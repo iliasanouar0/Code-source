@@ -193,14 +193,15 @@ const addSeeds = (data) => {
         }
     };
     $.ajax(settings).done(function (responseText) {
-        Swal.fire({
-            title: 'seeds added successfully!',
-            text: responseText,
-            icon: 'success',
-            confirmButtonText: 'ok'
-        }).then(() => {
-            getDatalist.ajax.reload(null, false)
-        })
+        console.log(responseText);
+        // Swal.fire({
+        //     title: 'seeds added successfully!',
+        //     text: responseText,
+        //     icon: 'success',
+        //     confirmButtonText: 'ok'
+        // }).then(() => {
+        //     getDatalist.ajax.reload(null, false)
+        // })
     });
     // })
 }
