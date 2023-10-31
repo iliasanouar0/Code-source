@@ -20,8 +20,8 @@ const getTables = (request, response) => {
                 }
                 result.push(res.rows[0])
             })
+            response.send(result)
         })
-        response.send(result)
     })
 }
 
