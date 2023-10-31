@@ -619,7 +619,7 @@ const getDataSettings = () => {
           })
       })
     })
-  console.log(tables);
+  console.log(tables[0]);
 }
 
 if (path.includes("/admin/users/")) {
