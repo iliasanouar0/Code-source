@@ -281,11 +281,11 @@ $(document).on('click', '.status', event => {
         websocket.close()
     })
 
-    $('.modal-dialog').on('click', () => {
-        cPage = 1
-        $('#modal-process-view').modal('hide')
-        websocket.close()
-    })
+    // $('.').on('click', () => {
+    //     cPage = 1
+    //     $('#modal-process-view').modal('hide')
+    //     websocket.close()
+    // })
 })
 
 $(document).on('click', '.seeds-page', event => {
