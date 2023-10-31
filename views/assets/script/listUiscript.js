@@ -253,7 +253,6 @@ $(document).on('click', '#l_seeds_add', event => {
             let clean = dataArray[i].split(',')
             seeds.push(clean)
         }
-        console.log(seeds[0][0].toLowerCase());
         let date_add = new Date().toDateInputValue()
         let date_update = new Date().toDateInputValue()
         seeds.forEach(one => {
@@ -365,7 +364,7 @@ document.getElementById("demo").onchange = evt => {
             row.remove()
         })
         $(document).on('click', '.save-bulk-data', event => {
-            let data = event.target.attributes.data.value
+            let data = $(event.target).data('id')
             let obj = []
             let settings = {
                 "url": `http://${ip}:3000/lists/${data}`,
@@ -383,7 +382,7 @@ document.getElementById("demo").onchange = evt => {
                 let date_update = new Date().toDateInputValue()
                 objects.forEach(one => {
                     let seed = {
-                        "email": `${one.email}`,
+                        "email": `${one.email.toLowerCase()}`,
                         "password": `${one.password}`,
                         "proxy": `${one.proxy}`,
                         "verification": `${one.vrf}`,
