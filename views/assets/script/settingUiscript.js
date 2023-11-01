@@ -258,7 +258,7 @@ $(document).on('click', '#show_table', e => {
     console.log(table_name);
     console.log(column_number);
     console.log(typeof (column_number));
-    if (table_name == '' || column_number == '' || column_number == 'NaN') {
+    if (table_name == '' || column_number == '' || typeof (column_number) != 'number') {
         Swal.fire('All fields required')
         return
     }
