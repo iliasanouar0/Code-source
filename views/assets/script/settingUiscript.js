@@ -278,6 +278,10 @@ $(document).on('click', '#t_add', () => {
             props.push(val)
         }
     }
+    if ($('.textfield').val() == '') {
+        swal.fire('all field required')
+        return
+    }
     console.log(props);
     for (let x = 0; x < rows.length; x++) {
         let start = props.indexOf(x)
