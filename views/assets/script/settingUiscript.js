@@ -349,14 +349,13 @@ $(document).on('click', '#t_add', () => {
         return
     } else {
         var settings = {
-            "url": "http://209.170.73.224:3000/settings/create/",
+            "url": `http://${ip}:3000/settings/create/`,
             "method": "POST",
             "timeout": 0,
             "data": JSON.stringify({
                 "sql": `${sql}`
             }),
         };
-
         $.ajax(settings).done(function (response) {
             swal.fire({
                 title: 'Created',
