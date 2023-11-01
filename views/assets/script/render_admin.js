@@ -566,6 +566,7 @@ const getDataUser = $("#userTable").DataTable({
 })
 
 const getDataSettings = () => {
+  $('.tables').empty()
   fetch(`http://${ip}:3000/settings/tables/`, { method: "GET" })
     .then(response => {
       return response.json()
@@ -617,6 +618,7 @@ const getDataSettings = () => {
                 </div>
               </div>
             </div >`
+
             $('.tables').append(collapse)
           })
       })

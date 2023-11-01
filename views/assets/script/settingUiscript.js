@@ -372,6 +372,7 @@ $(document).on('click', '#t_add', () => {
                     text: response,
                     icon: 'success'
                 })
+                getDataSettings()
             }
         });
     }
