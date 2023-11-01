@@ -291,9 +291,37 @@ $(document).on('click', '#t_add', () => {
         c++
         if (c == length) {
             if (column[2] == 'VARCHAR') {
-                sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]})`
+                if (column[4] == 'CURRENT_TIMESTAMP') {
+                    swal.fire({
+                        title: 'INVALID VALUE',
+                        text: 'CURRENT_TIMESTAMP for VARCHAR type column :(',
+                        icon: 'error',
+                        showConfirmButton: false
+                    })
+                    error = true
+                } else if (column[4] == 'NULL' || column[4] == 'NONE') {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]})`
+                } else if (column[5] == 'none_0') {
+                    sql += `${column[1]} ${column[2]}(${column[3]}))`
+                } else {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]})`
+                }
+            } else if (column[2] == 'TIMESTAMP') {
+                if (column[4] == 'CURRENT_TIMESTAMP') {
+                    if (column[5] == 'none_0') {
+                        sql += `${column[1]} ${column[2]} DEFAULT ${column[4]})`
+                    } else {
+                        sql += `${column[1]} ${column[2]} DEFAULT ${column[4]} ${column[5]})`
+                    }
+                }
             } else {
-                sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]})`
+                if (column[4] == 'NULL' || column[4] == 'NONE') {
+                    sql += `${column[1]} ${column[2]} ${column[5]})`
+                } else if (column[5] == 'none_0') {
+                    sql += `${column[1]} ${column[2]})`
+                } else {
+                    sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]})`
+                }
             }
         } else {
             if (column[2] == 'VARCHAR') {
@@ -311,6 +339,14 @@ $(document).on('click', '#t_add', () => {
                     sql += `${column[1]} ${column[2]}(${column[3]}),`
                 } else {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
+                }
+            } else if (column[2] == 'TIMESTAMP') {
+                if (column[4] == 'CURRENT_TIMESTAMP') {
+                    if (column[5] == 'none_0') {
+                        sql += `${column[1]} ${column[2]} DEFAULT ${column[4]},`
+                    } else {
+                        sql += `${column[1]} ${column[2]} DEFAULT ${column[4]} ${column[5]},`
+                    }
                 }
             } else {
                 if (column[4] == 'NULL' || column[4] == 'NONE') {
