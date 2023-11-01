@@ -12,7 +12,7 @@ $(document).on('click', '.switch_inp', () => {
 
 $(function () {
     var availableTags = [
-        "CREATE TABLE IF NOT EXIST --name-- (--column-name-- DATATYPE,...) ",
+        "CREATE TABLE IF NOT EXIST --name-- (id SERIAL NOT NULL ,--column-name-- DATATYPE,...) ",
     ];
     $("#sqlCreateTable").autocomplete({
         source: availableTags
