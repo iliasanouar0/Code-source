@@ -298,7 +298,8 @@ $(document).on('click', '#t_add', () => {
             if (column[2] == 'VARCHAR') {
                 if (column[4] == 'CURRENT_TIMESTAMP') {
                     swal.fire({
-                        title: 'CURRENT_TIMESTAMP for VARCHAR :(',
+                        title: 'INVALID VALUE',
+                        message:'CURRENT_TIMESTAMP for VARCHAR type column :(',
                         icon: 'error'
                     })
                     return
