@@ -334,9 +334,10 @@ $(document).on('click', '#t_add', () => {
     let length = result.length
     let error = false
     result.forEach(column => {
+        c++
+        console.log(c);
         console.log(column[4]);
         console.log(column[5]);
-        c++
         if (c == length) {
             if (column[2] == 'VARCHAR') {
                 if (column[4] == 'CURRENT_TIMESTAMP') {
