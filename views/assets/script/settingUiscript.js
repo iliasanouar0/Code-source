@@ -286,6 +286,7 @@ $(document).on('click', '#t_add', () => {
     let sql = `CREATE TABLE IF NOT EXISTS ${table_name} (`
     let c = 0
     let length = result.length
+    let error = false
     result.forEach(column => {
         c++
         if (c == length) {
@@ -303,14 +304,22 @@ $(document).on('click', '#t_add', () => {
                         icon: 'error',
                         showConfirmButton: false
                     })
-                    return
+                    error = true
                 } else if (column[4] == 'NULL' || column[4] == 'NONE') {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]},`
+                } else if (column[5] == 'none_0') {
+                    sql += `${column[1]} ${column[2]}(${column[3]}),`
                 } else {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
                 }
             } else {
-                sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]},`
+                if (column[4] == 'NULL' || column[4] == 'NONE') {
+                    sql += `${column[1]} ${column[2]} ${column[5]},`
+                } else if (column[5] == 'none_0') {
+                    sql += `${column[1]} ${column[2]},`
+                } else {
+                    sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]},`
+                }
             }
         }
     });
