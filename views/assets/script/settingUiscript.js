@@ -207,6 +207,8 @@ const tableDate = (num) => {
     <td class="text-center">
         <select name="field_default_type[${num}]" id="field_${num}_4"
             class="default_type form-control mb-1">
+            <option value="NOT NULL">
+            NOT NULL</option>
             <option value="NONE">
                 None </option>
             <option value="NULL">
@@ -221,7 +223,7 @@ const tableDate = (num) => {
         <select name="field_key[${num}]" id="field_${num}_5"
             class="form-select index_default" data-index="">
             <option value="none_0">---</option>
-            <option value="PRIMARY" title="Primary">
+            <option value="PRIMARY KEY" title="Primary key">
                 PRIMARY
             </option>
             <option value="UNIQUE" title="Unique">
