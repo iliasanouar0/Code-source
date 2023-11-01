@@ -296,7 +296,17 @@ $(document).on('click', '#t_add', () => {
             }
         } else {
             if (column[2] == 'VARCHAR') {
-                sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
+                if (column[4] == 'CURRENT_TIMESTAMP') {
+                    swal.fire({
+                        title: 'CURRENT_TIMESTAMP for VARCHAR :(',
+                        icon: 'error'
+                    })
+                    return
+                } else if (column[4] == 'NULL' || column[4] == 'NONE') {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]},`
+                } else {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
+                }
             } else {
                 sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]},`
             }
