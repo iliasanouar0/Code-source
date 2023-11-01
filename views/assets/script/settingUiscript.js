@@ -264,6 +264,7 @@ $(document).on('click', '#show_table', e => {
 })
 
 $(document).on('click', '#t_add', () => {
+    let table_name = $('#tname').val()
     let textfield = $('.textfield')
     for (let i = 0; i < textfield.length; i++) {
         if ($(textfield[i]).val() == '') {
@@ -274,7 +275,6 @@ $(document).on('click', '#t_add', () => {
     let props = []
     let result = []
     let rows = $('#table_columns').children()
-    console.log(rows);
     for (let i = 0; i < rows.length; i++) {
         let td = $(rows[i]).children()
         props.push(i)
@@ -283,19 +283,15 @@ $(document).on('click', '#t_add', () => {
             props.push(val)
         }
     }
-    console.log(props);
     for (let x = 0; x < rows.length; x++) {
         let start = props.indexOf(x)
         let end = props.indexOf(x + 1)
-        console.log(start);
-        console.log(end);
         if (end < 0) {
-            console.log(props.slice(start));
+            result.push(props.slice(start));
         } else {
-            console.log(props.slice(start, end));
+            result.push(props.slice(start, end));
         }
-        // result.push(props.slice(start, end))
     }
-    // console.log(result);
+    console.log(result);
 })
 
