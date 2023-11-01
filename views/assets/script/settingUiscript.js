@@ -38,6 +38,8 @@ $(document).on('change', '.default_type', event => {
 
 $(document).on('change', '.allow_null', event => {
     console.log(('test'));
+    let status = $(event.target).is(":checked") ? true : false;
+    console.log(status);
     // if ($(event.target).val() == 'USER_DEFINED') {
     //     $(event.target).closest('tr').find('.default_value').css('display', 'block')
     // } else {
