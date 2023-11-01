@@ -259,14 +259,14 @@ $(document).on('click', '#show_table', e => {
     console.log(column_number);
     console.log(typeof (column_number));
     if (table_name == '' || column_number == '' || isNaN(column_number)) {
-        Swal.fire('All fields required')
+        Swal.fire('field is empty or invalid value')
         return
     }
-    // for (let i = 0; i < column_number; i++) {
-    //     console.log(i);
-    //     let tr = tableDate(i)
-    //     $('#table_columns').append(tr)
-    // }
+    for (let i = 0; i < column_number; i++) {
+        console.log(i);
+        // let tr = tableDate(i)
+        // $('#table_columns').append(tr)
+    }
     // $('.Columns').css('display', 'block')
 })
 
