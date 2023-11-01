@@ -252,14 +252,12 @@ const tableDate = (num) => {
 }
 
 $(document).on('click', '#show_table', e => {
-    // e.preventDefault()
     let table_name = $('#tname').val()
     let column_number = $('#cnum').val()
     if (table_name != '' && column_number != '') {
-        e.preventDefault()
+        Swal.fire('All fields required')
         return
     }
-
     for (let i = 0; i < column_number; i++) {
         console.log(i);
         let tr = tableDate(i)
