@@ -25,7 +25,7 @@ $(document).on('change', '.default_type', () => {
     // } else {
     //     $('.default_value').css('display', 'none')
     // }
-    console.log($('.default_type').parent());
+    console.log($('.default_type').val());
 })
 
 const tableDate = (num) => {
