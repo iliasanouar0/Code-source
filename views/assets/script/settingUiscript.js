@@ -252,6 +252,7 @@ const tableDate = (num) => {
 }
 
 $(document).on('click', '#show_table', e => {
+    e.preventDefault()
     let table_name = $('#tname').val()
     let column_number = $('#cnum').val()
     console.log(table_name);
