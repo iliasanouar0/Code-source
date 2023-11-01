@@ -29,10 +29,11 @@ $(document).on('change', '.default_type', event => {
 
 
 $('.allow_null').change(event => {
-    let status = $(this).is(":checked") ? true : false;
-    if (status) {
-        console.log($(this));
-    }
+    console.log('test');
+    // let status = $(this).is(":checked") ? true : false;
+    // if (status) {
+    //     console.log($(this));
+    // }
 })
 
 // $(document).on('change', , event => {
