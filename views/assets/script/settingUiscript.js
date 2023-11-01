@@ -357,11 +357,19 @@ $(document).on('click', '#t_add', () => {
             }),
         };
         $.ajax(settings).done(function (response) {
-            swal.fire({
-                title: 'Created',
-                text: response,
-                icon: 'success'
-            })
+            if (response.indexOf('error') > 0) {
+                swal.fire({
+                    title: 'Error',
+                    text: response,
+                    icon: 'error'
+                })
+            } else {
+                swal.fire({
+                    title: 'Created',
+                    text: response,
+                    icon: 'success'
+                })
+            }
         });
     }
 })
