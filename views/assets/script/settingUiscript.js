@@ -19,7 +19,7 @@ $(function () {
     });
 });
 
-$(document).on('change', '.default_type', event => {
+$(document).on('change', '.default_type', () => {
     if ($('.default_type').val() == 'USER_DEFINED') {
         $('.default_value').css('display', 'block')
     } else {
@@ -255,7 +255,7 @@ $(document).on('click', '#show_table', e => {
     e.preventDefault()
     let table_name = $('#tname').val()
     let column_number = parseInt($('#cnum').val())
-    if (table_name == '' || column_number == '' || isNaN(column_number)) {
+    if (table_name == '' || column_number == '' || isNaN(column_number) || column_number < 0) {
         Swal.fire('field is empty or invalid value')
         return
     }
