@@ -47,7 +47,6 @@ $(document).on('change', '.a_i', event => {
     }
 })
 
-
 const tableDate = (num) => {
     let tr = `<tr>
     <td class="text-center">
@@ -290,7 +289,12 @@ $(document).on('click', '#show_table', e => {
 })
 
 $(document).on('click', '#t_add', () => {
+    let props = []
     let rows = $('#table_columns').children()
     console.log(rows);
+    rows.forEach(row => {
+        let td = $(row).children()
+        console.log(td);
+    });
 })
 
