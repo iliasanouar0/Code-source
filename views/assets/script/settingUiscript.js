@@ -433,6 +433,7 @@ $(document).on('click', '#t_add', () => {
                     icon: 'success'
                 })
                 getDataSettings()
+                $('.add_table').modal('hide')
             }
         });
     }
