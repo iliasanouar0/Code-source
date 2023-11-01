@@ -1,6 +1,66 @@
 const user = JSON.parse(sessionStorage.user);
 console.log('welcome to settings');
 
+const getDataSettings = () => {
+    $('.tables').empty()
+    fetch(`http://${ip}:3000/settings/tables/`, { method: "GET" })
+      .then(response => {
+        return response.json()
+      }).then(data => {
+        data.forEach(elm => {
+          fetch(`http://${ip}:3000/settings/columns/${elm.tablename}`, { method: "GET" })
+            .then(response => {
+              return response.json()
+            }).then(data => {
+              let rows = ''
+              let table_name
+              data.forEach(elm => {
+                table_name = elm.table_name
+                rows += `<tr><td>${elm.column_name}</td><td>${elm.data_type}</td></tr>`
+              })
+              let collapse = `<div class="card card-primary card-outline">
+              <a class="d-block w-100 collapsed" data-toggle="collapse" href="#${table_name}"
+                  aria-expanded="false">
+                  <div class="card-header">
+                      <h4 class="card-title w-100">
+                          ${table_name}
+                      </h4 >
+                  </div >
+              </a >
+                <div id="${table_name}" class="collapse" data-parent="#accordion">
+                  <div class="card-body">
+                    <div class="row text-right mb-3">
+                      <div class="col">
+                        <button class="btn btn-primary">action-1</button>
+                        <button class="btn btn-primary">action-2</button>
+                        <button class="btn btn-primary">action-3</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Column name</th>
+                              <th scope="col">Data type</th>
+                            </tr>
+                          </thead>
+                          <tbody class="columns">
+                          ${rows}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div >`
+  
+              $('.tables').append(collapse)
+            })
+        })
+      })
+  }
+
 $(document).on('click', '#add_table', () => {
     $('.add_table').modal('show')
 })
