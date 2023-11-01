@@ -293,7 +293,7 @@ $(document).on('click', '#t_add', () => {
     let rows = $('#table_columns').children()
     console.log(rows);
     for (let i = 0; i < rows.length; i++) {
-        let td = $(row).children()
+        let td = $(rows[i]).children()
         console.log(td);
     }
 })
