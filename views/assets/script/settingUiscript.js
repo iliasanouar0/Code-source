@@ -189,21 +189,16 @@ const tableDate = (num) => {
     </td>
     <td class="text-center">
         <input id="field_${num}_3" type="text"
-            name="field_length[${num}]" size="8" value=""
+            name="field_length[${num}]" size="8" value="1"
             class="textfield form-control">
-        <p class="enum_notice" id="enum_notice_${num}_3"
-            style="display: none;">
-            <a href="#" class="open_enum_editor">Edit
-                ENUM/SET values</a>
-        </p>
     </td>
     <td class="text-center">
         <select name="field_default_type[${num}]" id="field_${num}_4"
             class="default_type form-control mb-1">
-            <option value="NOT NULL">
-            NOT NULL</option>
             <option value="NONE">
                 None </option>
+            <option value="NOT NULL">
+            NOT NULL</option>
             <option value="NULL">
                 NULL
             </option>
@@ -221,15 +216,6 @@ const tableDate = (num) => {
             </option>
             <option value="UNIQUE" title="Unique">
                 UNIQUE
-            </option>
-            <option value="INDEX" title="Index">
-                INDEX
-            </option>
-            <option value="FULLTEXT" title="Fulltext">
-                FULLTEXT
-            </option>
-            <option value="SPATIAL" title="Spatial">
-                SPATIAL
             </option>
         </select>
     </td>
