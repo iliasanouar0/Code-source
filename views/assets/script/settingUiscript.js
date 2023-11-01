@@ -371,7 +371,7 @@ $(document).on('click', '#t_add', () => {
                 if (column[5] == 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
                     sql += `${column[1]} ${column[2]} ${column[4]})`
                 } else if (column[5] == 'none_0' && (column[4] == 'NULL' || column[4] == 'NONE')) {
-                    sql += `${column[1]} ${column[2]},`
+                    sql += `${column[1]} ${column[2]})`
                 } else if (column[5] != 'none_0' && (column[4] == 'NULL' || column[4] == 'NONE')) {
                     sql += `${column[1]} ${column[2]} ${column[5]})`
                 } else if (column[5] != 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
@@ -391,15 +391,15 @@ $(document).on('click', '#t_add', () => {
                     })
                     error = true
                 } else if (column[5] == 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
-                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]})`
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]},`
                 } else if (column[5] == 'none_0' && (column[4] == 'NULL' || column[4] == 'NONE')) {
-                    sql += `${column[1]} ${column[2]}(${column[3]}))`
+                    sql += `${column[1]} ${column[2]}(${column[3]}),`
                 } else if (column[5] != 'none_0' && (column[4] == 'NONE' || column[4] == 'NULL')) {
-                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]})`
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]},`
                 } else if (column[5] != 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
-                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]})`
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
                 } else {
-                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]})`
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
                 }
             } else if (column[2] == 'TIMESTAMP') {
                 if (column[4] == 'CURRENT_TIMESTAMP') {
