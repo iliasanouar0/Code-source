@@ -41,7 +41,7 @@ $(document).on('change', '.allow_null', event => {
     let status = $(event.target).is(":checked") ? true : false;
     console.log(status);
     if (status) {
-        console.log($(event.target).closest('tr').find('.default_type'))
+        console.log($(event.target).closest('tr').find('.default_type').children('[value="NULL"]'))
     }
     // if ($(event.target).val() == 'USER_DEFINED') {
     //     $(event.target).closest('tr').find('.default_value').css('display', 'block')
