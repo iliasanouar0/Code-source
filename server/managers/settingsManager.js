@@ -26,7 +26,13 @@ const getTableColumns = (request, response) => {
     })
 }
 
+const createTable = (request, response) => {
+    let sql = (request.body)
+    response.status(200).send(sql)
+}
+
 module.exports = {
     getTablesNames,
-    getTableColumns
+    getTableColumns,
+    createTable
 }

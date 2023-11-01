@@ -505,6 +505,7 @@ app.get("/result/duration/:id", resultManager.getDuration)
 // setting API
 app.get("/settings/tables/", settingsManager.getTablesNames)
 app.get("/settings/columns/:t", settingsManager.getTableColumns)
+app.post("/settings/create/", settingsManager.createTable)
 
 
 app.listen(port, () => {
