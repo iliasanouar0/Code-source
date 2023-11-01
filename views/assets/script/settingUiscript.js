@@ -307,7 +307,11 @@ $(document).on('click', '#t_add', () => {
         let end = props.indexOf(x + 1)
         console.log(start);
         console.log(end);
-        console.log(props.slice(start, end));
+        if (end < 0) {
+            console.log(props.slice(start));
+        } else {
+            console.log(props.slice(start, end));
+        }
         // result.push(props.slice(start, end))
     }
     // console.log(result);
