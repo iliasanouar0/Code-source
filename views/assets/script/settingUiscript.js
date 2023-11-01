@@ -381,8 +381,10 @@ $(document).on('click', '#t_add', () => {
                     error = true
                 } else if (column[4] == 'NULL' || column[4] == 'NONE') {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]},`
-                } else if (column[4] == 'none_0') {
-                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]},`
+                } else if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]},`
+                } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
+                    sql += `${column[1]} ${column[2]}(${column[3]}),`
                 } else {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
                 }
@@ -408,34 +410,35 @@ $(document).on('click', '#t_add', () => {
     if (error) {
         return
     } else {
-        var settings = {
-            "url": `http://${ip}:3000/settings/create/`,
-            "method": "POST",
-            "timeout": 0,
-            "data": JSON.stringify({
-                sql: `${sql}`
-            }),
-            "headers": {
-                "Content-Type": "application/json",
-            },
-        };
-        $.ajax(settings).done(function (response) {
-            if (response.indexOf('error') > 0) {
-                swal.fire({
-                    title: 'Error',
-                    text: response,
-                    icon: 'error'
-                })
-            } else {
-                swal.fire({
-                    title: 'Created',
-                    text: response,
-                    icon: 'success'
-                })
-                getDataSettings()
-                $('.add_table').modal('hide')
-            }
-        });
+        console.log(sql);
+        // var settings = {
+        //     "url": `http://${ip}:3000/settings/create/`,
+        //     "method": "POST",
+        //     "timeout": 0,
+        //     "data": JSON.stringify({
+        //         sql: `${sql}`
+        //     }),
+        //     "headers": {
+        //         "Content-Type": "application/json",
+        //     },
+        // };
+        // $.ajax(settings).done(function (response) {
+        //     if (response.indexOf('error') > 0) {
+        //         swal.fire({
+        //             title: 'Error',
+        //             text: response,
+        //             icon: 'error'
+        //         })
+        //     } else {
+        //         swal.fire({
+        //             title: 'Created',
+        //             text: response,
+        //             icon: 'success'
+        //         })
+        //         getDataSettings()
+        //         $('.add_table').modal('hide')
+        //     }
+        // });
     }
 })
 
