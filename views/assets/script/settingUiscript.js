@@ -254,15 +254,17 @@ const tableDate = (num) => {
 $(document).on('click', '#show_table', e => {
     let table_name = $('#tname').val()
     let column_number = $('#cnum').val()
-    if (table_name != '' && column_number != '') {
-        Swal.fire('All fields required')
-        return
-    }
-    for (let i = 0; i < column_number; i++) {
-        console.log(i);
-        let tr = tableDate(i)
-        $('#table_columns').append(tr)
-    }
-    $('.Columns').css('display', 'block')
+    console.log(table_name);
+    console.log(column_number);
+    // if (table_name != '' && column_number != '') {
+    //     Swal.fire('All fields required')
+    //     return
+    // }
+    // for (let i = 0; i < column_number; i++) {
+    //     console.log(i);
+    //     let tr = tableDate(i)
+    //     $('#table_columns').append(tr)
+    // }
+    // $('.Columns').css('display', 'block')
 })
 
