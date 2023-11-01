@@ -209,8 +209,6 @@ const tableDate = (num) => {
             class="default_type form-control mb-1">
             <option value="NONE">
                 None </option>
-            <option value="USER_DEFINED">
-                As defined: </option>
             <option value="NULL">
                 NULL
             </option>
@@ -218,10 +216,6 @@ const tableDate = (num) => {
                 CURRENT_TIMESTAMP
             </option>
         </select>
-        <input type="text" name="field_default_value[${num}]"
-            size="12" value=""
-            class="textfield default_value form-control"
-            style="display: none;">
     </td>
     <td class="text-center">
         <select name="field_key[${num}]" id="field_${num}_5"
@@ -268,9 +262,6 @@ $(document).on('click', '#show_table', e => {
 $(document).on('click', '#t_add', () => {
     let textfield = $('.textfield')
     for (let i = 0; i < textfield.length; i++) {
-        console.log(i);
-        console.log($(textfield[i]))
-        console.log($(textfield[i]).val());
         if ($(textfield[i]).val() == '') {
             swal.fire('all field required')
             return
