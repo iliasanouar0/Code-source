@@ -236,37 +236,37 @@ const tableDate = (num) => {
             class="textfield default_value form-control"
             style="display: none;">
     </td>
+    // <td class="text-center">
+    //     <input name="field_null[${num}]" id="field_${num}_5"
+    //         type="checkbox" value="YES"
+    //         class="allow_null form-check">
+    // </td>
     <td class="text-center">
-        <input name="field_null[${num}]" id="field_${num}_5"
-            type="checkbox" value="YES"
-            class="allow_null form-check">
-    </td>
-    <td class="text-center">
-        <select name="field_key[${num}]" id="field_${num}_6"
+        <select name="field_key[${num}]" id="field_${num}_5"
             class="form-select index_default" data-index="">
             <option value="none_0">---</option>
-            <option value="primary_0" title="Primary">
+            <option value="PRIMARY" title="Primary">
                 PRIMARY
             </option>
-            <option value="unique_0" title="Unique">
+            <option value="UNIQUE" title="Unique">
                 UNIQUE
             </option>
-            <option value="index_0" title="Index">
+            <option value="INDEX" title="Index">
                 INDEX
             </option>
-            <option value="fulltext_0" title="Fulltext">
+            <option value="FULLTEXT" title="Fulltext">
                 FULLTEXT
             </option>
-            <option value="spatial_0" title="Spatial">
+            <option value="SPATIAL" title="Spatial">
                 SPATIAL
             </option>
         </select>
     </td>
-    <td class="text-center">
-        <input name="field_extra[${num}]" id="field_${num}_7"
-            class="form-check a_i" type="checkbox"
-            value="AUTO_INCREMENT">
-    </td>
+    // <td class="text-center">
+    //     <input name="field_extra[${num}]" id="field_${num}_6"
+    //         class="form-check a_i" type="checkbox"
+    //         value="AUTO_INCREMENT">
+    // </td>
     </tr>`
     return tr
 }
