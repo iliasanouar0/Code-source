@@ -1,7 +1,7 @@
 const user = JSON.parse(sessionStorage.user);
 console.log('welcome to settings');
 
-const getDataSettings = () => {
+let getDataSettings = () => {
     $('.tables').empty()
     fetch(`http://${ip}:3000/settings/tables/`, { method: "GET" })
       .then(response => {
