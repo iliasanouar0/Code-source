@@ -257,6 +257,11 @@ $(document).on('click', '#show_table', e => {
     let column_number = $('#cnum').val()
     if (table_name != '' && column_number != '') {
         e.preventDefault()
+        return
+    }
+    for (let i = 0; i < column_number; i++) {
+        let tr = tableDate(i)
+        $('#table_columns').append(tr)
     }
 })
 
