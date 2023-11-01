@@ -353,7 +353,7 @@ $(document).on('click', '#t_add', () => {
             "method": "POST",
             "timeout": 0,
             "data": JSON.stringify({
-                "sql": `${sql}`
+                sql: `${sql}`
             }),
         };
         $.ajax(settings).done(function (response) {
