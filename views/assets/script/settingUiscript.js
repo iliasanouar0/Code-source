@@ -304,8 +304,11 @@ $(document).on('click', '#t_add', () => {
     for (let x = 0; x < rows.length; x++) {
         let start = props.findIndex((elm) => { elm == x })
         let end = props.findIndex((elm) => { elm == x + 1 })
-        result.push(props.slice(start, end))
+        console.log(start);
+        console.log(end);
+        console.log(props.slice(start, end));
+        // result.push(props.slice(start, end))
     }
-    console.log(result);
+    // console.log(result);
 })
 
