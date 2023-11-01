@@ -252,7 +252,7 @@ const tableDate = (num) => {
 }
 
 $(document).on('click', '#show_table', e => {
-    e.preventDefault()
+    // e.preventDefault()
     console.log('test');
 })
 
