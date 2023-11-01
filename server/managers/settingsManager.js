@@ -30,9 +30,9 @@ const createTable = (request, response) => {
     let data = (request.body)
     pool.query(`${data.sql}`, (err, res) => {
         if (err) {
-            response.status(200).send(err)
+            response.status(200).send(err.message)
         }
-        response.status(200).send(res)
+        response.status(200).send('Table created successfully')
     })
 }
 
