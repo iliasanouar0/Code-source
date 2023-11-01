@@ -306,6 +306,6 @@ $(document).on('click', '#t_add', () => {
         let end = props.findIndex((elm) => { elm == x + 1 })
         result.push(props.slice(start, end))
     }
-    console.log(props);
+    console.log(result);
 })
 
