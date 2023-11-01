@@ -253,6 +253,10 @@ const tableDate = (num) => {
 
 $(document).on('click', '#show_table', e => {
     // e.preventDefault()
-    console.log('test');
+    let table_name = $('#tname').val()
+    let column_number = $('#cnum').val()
+    if (table_name != '' && column_number != '') {
+        e.preventDefault()
+    }
 })
 
