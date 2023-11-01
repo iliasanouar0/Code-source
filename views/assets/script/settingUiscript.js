@@ -345,10 +345,10 @@ $(document).on('click', '#t_add', () => {
                         showConfirmButton: false
                     })
                     error = true
-                } else if (column[4] == 'NULL' || column[4] == 'NONE') {
-                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]})`
-                } else if (column[4] == 'none_0') {
-                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]})`
+                } else if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]})`
+                } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
+                    sql += `${column[1]} ${column[2]}(${column[3]}))`
                 } else {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]})`
                 }
@@ -359,12 +359,20 @@ $(document).on('click', '#t_add', () => {
                     } else {
                         sql += `${column[1]} ${column[2]} DEFAULT ${column[4]} ${column[5]})`
                     }
+                } else {
+                    if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
+                        sql += `${column[1]} ${column[2]} ${column[4]})`
+                    } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
+                        sql += `${column[1]} ${column[2]})`
+                    } else {
+                        sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]})`
+                    }
                 }
             } else {
-                if (column[4] == 'NULL' || column[4] == 'NONE') {
-                    sql += `${column[1]} ${column[2]} ${column[5]})`
-                } else if (column[4] == 'none_0') {
-                    sql += `${column[1]} ${column[2]} ${column[5]})`
+                if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]})`
+                } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
+                    sql += `${column[1]} ${column[2]})`
                 } else {
                     sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]})`
                 }
@@ -379,9 +387,7 @@ $(document).on('click', '#t_add', () => {
                         showConfirmButton: false
                     })
                     error = true
-                } /*else if (column[4] == 'NULL' || column[4] == 'NONE') {
-                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]},`
-                }*/ else if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
+                } else if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]},`
                 } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
                     sql += `${column[1]} ${column[2]}(${column[3]}),`
