@@ -29,7 +29,7 @@ const getTableColumns = (request, response) => {
 const createTable = (request, response) => {
     let data = (request.body)
     let sql = data.sql
-    pool.query(sql, (err, res) => {
+    pool.query(`${sql}`, (err, res) => {
         if (err) {
             response.status(200).send(err.message)
         }
