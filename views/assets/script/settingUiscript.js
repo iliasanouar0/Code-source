@@ -347,7 +347,7 @@ $(document).on('click', '#t_add', () => {
                     error = true
                 } else if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]})`
-                } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
+                } else if (column[5] == 'none_0' && column[4] == 'NULL' || column[4] == 'NONE') {
                     sql += `${column[1]} ${column[2]}(${column[3]}))`
                 } else {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]})`
@@ -362,7 +362,7 @@ $(document).on('click', '#t_add', () => {
                 } else {
                     if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
                         sql += `${column[1]} ${column[2]} ${column[4]})`
-                    } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
+                    } else if (column[5] == 'none_0' && column[4] == 'NULL' || column[4] == 'NONE') {
                         sql += `${column[1]} ${column[2]})`
                     } else {
                         sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]})`
@@ -371,7 +371,7 @@ $(document).on('click', '#t_add', () => {
             } else {
                 if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]})`
-                } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
+                } else if (column[5] == 'none_0' && column[4] == 'NULL' || column[4] == 'NONE') {
                     sql += `${column[1]} ${column[2]})`
                 } else {
                     sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]})`
@@ -389,7 +389,7 @@ $(document).on('click', '#t_add', () => {
                     error = true
                 } else if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]},`
-                } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
+                } else if (column[5] == 'none_0' && column[4] == 'NULL' || column[4] == 'NONE') {
                     sql += `${column[1]} ${column[2]}(${column[3]}),`
                 } else {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
@@ -404,7 +404,7 @@ $(document).on('click', '#t_add', () => {
                 } else {
                     if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
                         sql += `${column[1]} ${column[2]} ${column[4]},`
-                    } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
+                    } else if (column[5] == 'none_0' && column[4] == 'NULL' || column[4] == 'NONE') {
                         sql += `${column[1]} ${column[2]},`
                     } else {
                         sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]},`
@@ -413,7 +413,7 @@ $(document).on('click', '#t_add', () => {
             } else {
                 if (column[5] == 'none_0' && column[4] != 'NULL' && column[4] != 'NONE') {
                     sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]},`
-                } else if (column[5] == 'none_0' && column[4] != 'NULL' || column[4] != 'NONE') {
+                } else if (column[5] == 'none_0' && column[4] == 'NULL' || column[4] == 'NONE') {
                     sql += `${column[1]} ${column[2]},`
                 } else {
                     sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]},`
