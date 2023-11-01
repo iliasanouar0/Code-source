@@ -283,8 +283,25 @@ $(document).on('click', '#t_add', () => {
             result.push(props.slice(start, end));
         }
     }
+    let sql = `CREATE TABLE IF NOT EXISTS ${table_name} (`
+    let c = 0
+    let length = result.length
     result.forEach(column => {
-        console.log(column);
+        c++
+        if (c == length) {
+            if (column[2] == 'VARCHAR') {
+                sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]})`
+            } else {
+                sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]})`
+            }
+        } else {
+            if (column[2] == 'VARCHAR') {
+                sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
+            } else {
+                sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]},`
+            }
+        }
     });
+    console.log(sql);
 })
 
