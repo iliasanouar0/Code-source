@@ -268,7 +268,7 @@ $(document).on('click', '#show_table', e => {
 $(document).on('click', '#t_add', () => {
     let textfield = $('.textfield')
     for (let i = 0; i < textfield.length; i++) {
-        if (textfield.val() == '') {
+        if (textfield[i].val() == '') {
             swal.fire('all field required')
             return
         }
