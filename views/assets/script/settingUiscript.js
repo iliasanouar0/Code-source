@@ -359,6 +359,10 @@ $(document).on('click', '#t_add', () => {
             }
         }
     });
-    console.log(sql);
+    if (error) {
+        return
+    } else {
+        console.log(sql);
+    }
 })
 
