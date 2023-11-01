@@ -20,11 +20,12 @@ $(function () {
 });
 
 $(document).on('change', '.default_type', () => {
-    if ($('.default_type').val() == 'USER_DEFINED') {
-        $('.default_value').css('display', 'block')
-    } else {
-        $('.default_value').css('display', 'none')
-    }
+    // if ($('.default_type').val() == 'USER_DEFINED') {
+    //     $('.default_value').css('display', 'block')
+    // } else {
+    //     $('.default_value').css('display', 'none')
+    // }
+    console.log($('.default_type').parent());
 })
 
 const tableDate = (num) => {
