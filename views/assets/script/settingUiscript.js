@@ -27,17 +27,8 @@ $(document).on('change', '.default_type', event => {
     }
 })
 
-$(document).on('change', '.allow_null', event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    console.log(status);
-    if (status) {
-        $(event.target).closest('tr').find('.default_type').children('[value="NULL"]').attr('selected', 'selected')
-    } else {
-        $(event.target).closest('tr').find('.default_type').children('[value="NONE"]').attr('selected', 'selected')
-    }
-})
-
 $(document).on('change', '.index_default', event => {
+    console.log('test');
     if ($(event.target).val() == 'PRIMARY') {
         $(event.target).closest('tr').find('.default_type').children('[value="NONE"]').attr('selected', 'selected')
     }
