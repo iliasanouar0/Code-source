@@ -18,3 +18,7 @@ $(function () {
         source: availableTags
     });
 });
+
+$(document).on('change', '.default_type', event => {
+    console.log('I\'m selecting');
+})
