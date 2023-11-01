@@ -595,9 +595,9 @@ const getDataSettings = () => {
                 <div class="card-body">
                   <div class="row text-right mb-3">
                     <div class="col">
-                      <button class="btn btn-primary">action-1</button>
-                      <button class="btn btn-primary">action-2</button>
-                      <button class="btn btn-primary">action-3</button>
+                      <button class="btn btn-danger" data-name="${table_name}">delete</button>
+                      <button class="btn btn-success" data-name="${table_name}">add column</button>
+                     <!-- <button class="btn btn-primary" data-name="${table_name}">action-3</button>-->
                     </div>
                   </div>
                   <div class="row">
