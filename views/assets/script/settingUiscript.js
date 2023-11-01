@@ -292,9 +292,9 @@ $(document).on('click', '#t_add', () => {
     let props = []
     let rows = $('#table_columns').children()
     console.log(rows);
-    rows.forEach(row => {
+    for (let i = 0; i < rows.length; i++) {
         let td = $(row).children()
         console.log(td);
-    });
+    }
 })
 
