@@ -19,13 +19,13 @@ $(function () {
     });
 });
 
-$(document).on('change', '.default_type', () => {
+$(document).on('change', '.default_type', event => {
     // if ($('.default_type').val() == 'USER_DEFINED') {
     //     $('.default_value').css('display', 'block')
     // } else {
     //     $('.default_value').css('display', 'none')
     // }
-    console.log($('.default_type').val());
+    console.log($(event.target).val());
 })
 
 const tableDate = (num) => {
