@@ -20,8 +20,9 @@ $(function () {
 });
 
 $(document).on('change', '.default_type', event => {
-    // if () {
-
-    // }
-    console.log($('.default_type').val());
+    if ($('.default_type').val() == 'USER_DEFINED') {
+        $('.default_value').css('display', 'block')
+    } else {
+        $('.default_value').css('display', 'none')
+    }
 })
