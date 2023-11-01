@@ -268,3 +268,8 @@ $(document).on('click', '#show_table', e => {
     $('.Columns').css('display', 'block')
 })
 
+$(document).on('click', '#t_add', () => {
+    let rows = $('#table_columns').children()
+    console.log(rows);
+})
+
