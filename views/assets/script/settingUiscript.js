@@ -257,7 +257,7 @@ $(document).on('click', '#show_table', e => {
     let column_number = parseInt($('#cnum').val())
     console.log(table_name);
     console.log(column_number);
-    if (table_name != '' && column_number != '') {
+    if (table_name == '' || column_number == '' || column_number == NaN) {
         Swal.fire('All fields required')
         return
     }
