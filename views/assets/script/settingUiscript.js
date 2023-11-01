@@ -263,5 +263,6 @@ $(document).on('click', '#show_table', e => {
         let tr = tableDate(i)
         $('#table_columns').append(tr)
     }
+    $('.Columns').css('display', 'block')
 })
 
