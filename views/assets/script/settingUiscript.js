@@ -27,28 +27,24 @@ $(document).on('change', '.default_type', event => {
     }
 })
 
-
-// $('.allow_null').change(event => {
-//     console.log('test');
-//     // let status = $(this).is(":checked") ? true : false;
-//     // if (status) {
-//     //     console.log($(this));
-//     // }
-// })
-
 $(document).on('change', '.allow_null', event => {
-    console.log(('test'));
     let status = $(event.target).is(":checked") ? true : false;
     console.log(status);
     if (status) {
         $(event.target).closest('tr').find('.default_type').children('[value="NULL"]').attr('selected', 'selected')
-        console.log($(event.target).closest('tr').find('.default_type').children('[value="NULL"]').attr('selected', 'selected'))
+    } else {
+        $(event.target).closest('tr').find('.default_type').children('[value="NONE"]').attr('selected', 'selected')
     }
-    // if ($(event.target).val() == 'USER_DEFINED') {
-    //     $(event.target).closest('tr').find('.default_value').css('display', 'block')
-    // } else {
-    //     $(event.target).closest('tr').find('.default_value').css('display', 'none')
-    // }
+})
+
+$(document).on('change', '.a_i', event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    console.log(status);
+    if (status) {
+        $(event.target).closest('tr').find('.index_default').children('[value="primary_0"]').attr('selected', 'selected')
+    } else {
+        $(event.target).closest('tr').find('.index_default').children('[value="none_0"]').attr('selected', 'selected')
+    }
 })
 
 
@@ -248,7 +244,7 @@ const tableDate = (num) => {
     </td>
     <td class="text-center">
         <select name="field_key[${num}]" id="field_${num}_8"
-            class="form-select" data-index="">
+            class="form-select index_default" data-index="">
             <option value="none_0">---</option>
             <option value="primary_0" title="Primary">
                 PRIMARY
@@ -269,7 +265,7 @@ const tableDate = (num) => {
     </td>
     <td class="text-center">
         <input name="field_extra[${num}]" id="field_${num}_9"
-            class="form-check" type="checkbox"
+            class="form-check a_i" type="checkbox"
             value="AUTO_INCREMENT">
     </td>
     </tr>`
