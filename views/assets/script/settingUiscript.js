@@ -355,6 +355,9 @@ $(document).on('click', '#t_add', () => {
             "data": JSON.stringify({
                 sql: `${sql}`
             }),
+            "headers": {
+                "Content-Type": "application/json",
+            },
         };
         $.ajax(settings).done(function (response) {
             if (response.indexOf('error') > 0) {
