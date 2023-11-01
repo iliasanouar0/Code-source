@@ -237,12 +237,12 @@ const tableDate = (num) => {
             style="display: none;">
     </td>
     <td class="text-center">
-        <input name="field_null[${num}]" id="field_${num}_7"
+        <input name="field_null[${num}]" id="field_${num}_5"
             type="checkbox" value="YES"
             class="allow_null form-check">
     </td>
     <td class="text-center">
-        <select name="field_key[${num}]" id="field_${num}_8"
+        <select name="field_key[${num}]" id="field_${num}_6"
             class="form-select index_default" data-index="">
             <option value="none_0">---</option>
             <option value="primary_0" title="Primary">
@@ -263,7 +263,7 @@ const tableDate = (num) => {
         </select>
     </td>
     <td class="text-center">
-        <input name="field_extra[${num}]" id="field_${num}_9"
+        <input name="field_extra[${num}]" id="field_${num}_7"
             class="form-check a_i" type="checkbox"
             value="AUTO_INCREMENT">
     </td>
@@ -294,7 +294,12 @@ $(document).on('click', '#t_add', () => {
     console.log(rows);
     for (let i = 0; i < rows.length; i++) {
         let td = $(rows[i]).children()
-        console.log(td);
+        props.push(i)
+        for (let j = 0; j < td.length; j++) {
+            let val = $(`#field_${i}_${j + 1}`).val()
+            props.push(val)
+        }
     }
+    console.log(props);
 })
 
