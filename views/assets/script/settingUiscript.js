@@ -290,6 +290,7 @@ $(document).on('click', '#show_table', e => {
 
 $(document).on('click', '#t_add', () => {
     let props = []
+    let result = []
     let rows = $('#table_columns').children()
     console.log(rows);
     for (let i = 0; i < rows.length; i++) {
@@ -299,6 +300,11 @@ $(document).on('click', '#t_add', () => {
             let val = $(`#field_${i}_${j + 1}`).val()
             props.push(val)
         }
+    }
+    for (let x = 0; x < rows.length; x++) {
+        let start = props.findIndex((elm) => { elm == x })
+        let end = props.findIndex((elm) => { elm == x + 1 })
+        result.push(props.slice(start, end))
     }
     console.log(props);
 })
