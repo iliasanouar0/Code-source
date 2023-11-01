@@ -28,7 +28,12 @@ const getTableColumns = (request, response) => {
 
 const createTable = (request, response) => {
     let data = (request.body)
-    response.status(200).send(data.sql)
+    pool.query(`${data.sql}`, (err, res) => {
+        if (err) {
+            response.status(200).send(err)
+        }
+        response.status(200).send(res)
+    })
 }
 
 module.exports = {
