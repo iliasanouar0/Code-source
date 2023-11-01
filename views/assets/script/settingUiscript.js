@@ -262,6 +262,7 @@ $(document).on('click', '#show_table', e => {
         Swal.fire('field is empty or invalid value')
         return
     }
+    $('#table_columns').empty()
     for (let i = 0; i < column_number; i++) {
         console.log(i);
         let tr = tableDate(i)
