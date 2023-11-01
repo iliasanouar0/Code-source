@@ -304,7 +304,7 @@ $(document).on('click', '#t_add', () => {
     console.log(props);
     for (let x = 0; x < rows.length; x++) {
         let start = props.indexOf(x)
-        let end = props.indexOf(x + 1) - 1
+        let end = props.indexOf(x + 1)
         console.log(start);
         console.log(end);
         console.log(props.slice(start, end));
