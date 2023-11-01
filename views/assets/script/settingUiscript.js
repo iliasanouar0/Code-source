@@ -20,5 +20,8 @@ $(function () {
 });
 
 $(document).on('change', '.default_type', event => {
-    console.log('I\'m selecting');
+    // if () {
+
+    // }
+    console.log($('.default_type').val());
 })
