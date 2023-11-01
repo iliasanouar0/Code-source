@@ -48,6 +48,8 @@ const tableDate = (num) => {
             <option data-length-restricted="1"
                 title="A 4-byte integer, signed range is -2,147,483,648 to 2,147,483,647, unsigned range is 0 to 4,294,967,295">
                 INT</option>
+            <option data-length-restricted="1">
+                SERIAL</option>
             <option data-length-restricted="0"
                 title="A variable-length (0-65,535) string, the effective maximum length is subject to the maximum row size">
                 VARCHAR</option>
