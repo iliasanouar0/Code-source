@@ -236,11 +236,6 @@ const tableDate = (num) => {
             class="textfield default_value form-control"
             style="display: none;">
     </td>
-    // <td class="text-center">
-    //     <input name="field_null[${num}]" id="field_${num}_5"
-    //         type="checkbox" value="YES"
-    //         class="allow_null form-check">
-    // </td>
     <td class="text-center">
         <select name="field_key[${num}]" id="field_${num}_5"
             class="form-select index_default" data-index="">
@@ -262,11 +257,6 @@ const tableDate = (num) => {
             </option>
         </select>
     </td>
-    // <td class="text-center">
-    //     <input name="field_extra[${num}]" id="field_${num}_6"
-    //         class="form-check a_i" type="checkbox"
-    //         value="AUTO_INCREMENT">
-    // </td>
     </tr>`
     return tr
 }
