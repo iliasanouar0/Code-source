@@ -28,21 +28,22 @@ $(document).on('change', '.default_type', event => {
 })
 
 
-$('.allow_null').change(event => {
-    console.log('test');
-    // let status = $(this).is(":checked") ? true : false;
-    // if (status) {
-    //     console.log($(this));
+// $('.allow_null').change(event => {
+//     console.log('test');
+//     // let status = $(this).is(":checked") ? true : false;
+//     // if (status) {
+//     //     console.log($(this));
+//     // }
+// })
+
+$(document).on('change', '.allow_null', event => {
+    console.log(('test'));
+    // if ($(event.target).val() == 'USER_DEFINED') {
+    //     $(event.target).closest('tr').find('.default_value').css('display', 'block')
+    // } else {
+    //     $(event.target).closest('tr').find('.default_value').css('display', 'none')
     // }
 })
-
-// $(document).on('change', , event => {
-//     if ($(event.target).val() == 'USER_DEFINED') {
-//         $(event.target).closest('tr').find('.default_value').css('display', 'block')
-//     } else {
-//         $(event.target).closest('tr').find('.default_value').css('display', 'none')
-//     }
-// })
 
 
 const tableDate = (num) => {
