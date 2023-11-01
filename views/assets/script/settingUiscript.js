@@ -266,6 +266,13 @@ $(document).on('click', '#show_table', e => {
 })
 
 $(document).on('click', '#t_add', () => {
+    let textfield = $('.textfield')
+    for (let i = 0; i < textfield.length; i++) {
+        if (textfield.val() == '') {
+            swal.fire('all field required')
+            return
+        }
+    }
     let props = []
     let result = []
     let rows = $('#table_columns').children()
@@ -277,10 +284,6 @@ $(document).on('click', '#t_add', () => {
             let val = $(`#field_${i}_${j + 1}`).val()
             props.push(val)
         }
-    }
-    if ($('.textfield').val() == '') {
-        swal.fire('all field required')
-        return
     }
     console.log(props);
     for (let x = 0; x < rows.length; x++) {
