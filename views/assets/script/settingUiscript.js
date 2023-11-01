@@ -301,6 +301,7 @@ $(document).on('click', '#t_add', () => {
             props.push(val)
         }
     }
+    console.log(props);
     for (let x = 0; x < rows.length; x++) {
         let start = props.findIndex((elm) => { elm == `${x}` })
         let end = props.findIndex((elm) => { elm == `${x + 1}` })
