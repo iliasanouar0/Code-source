@@ -21,7 +21,7 @@ $(function () {
 
 $(document).on('change', '.default_type', event => {
     if ($(event.target).val() == 'USER_DEFINED') {
-        console.log($(event.target).closest("input"));
+        console.log($(event.target).closest(".default_value "));
         // $(event.target).closest('input').css('display', 'block')
     } else {
         $(event.target).closest('input').css('display', 'none')
