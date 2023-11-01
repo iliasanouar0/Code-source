@@ -425,34 +425,34 @@ $(document).on('click', '#t_add', () => {
         return
     } else {
         console.log(sql);
-        var settings = {
-            "url": `http://${ip}:3000/settings/create/`,
-            "method": "POST",
-            "timeout": 0,
-            "data": JSON.stringify({
-                sql: `${sql}`
-            }),
-            "headers": {
-                "Content-Type": "application/json",
-            },
-        };
-        $.ajax(settings).done(function (response) {
-            if (response.indexOf('error') > 0) {
-                swal.fire({
-                    title: 'Error',
-                    text: response,
-                    icon: 'error'
-                })
-            } else {
-                swal.fire({
-                    title: 'Created',
-                    text: response,
-                    icon: 'success'
-                })
-                getDataSettings()
-                $('.add_table').modal('hide')
-            }
-        });
+        //     var settings = {
+        //         "url": `http://${ip}:3000/settings/create/`,
+        //         "method": "POST",
+        //         "timeout": 0,
+        //         "data": JSON.stringify({
+        //             sql: `${sql}`
+        //         }),
+        //         "headers": {
+        //             "Content-Type": "application/json",
+        //         },
+        //     };
+        //     $.ajax(settings).done(function (response) {
+        //         if (response.indexOf('error') > 0) {
+        //             swal.fire({
+        //                 title: 'Error',
+        //                 text: response,
+        //                 icon: 'error'
+        //             })
+        //         } else {
+        //             swal.fire({
+        //                 title: 'Created',
+        //                 text: response,
+        //                 icon: 'success'
+        //             })
+        //             getDataSettings()
+        //             $('.add_table').modal('hide')
+        //         }
+        //     });
     }
 })
 
