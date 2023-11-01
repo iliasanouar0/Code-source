@@ -27,6 +27,23 @@ $(document).on('change', '.default_type', event => {
     }
 })
 
+
+$('.allow_null').change(event => {
+    let status = $(this).is(":checked") ? true : false;
+    if (status) {
+        console.log($(this));
+    }
+})
+
+// $(document).on('change', , event => {
+//     if ($(event.target).val() == 'USER_DEFINED') {
+//         $(event.target).closest('tr').find('.default_value').css('display', 'block')
+//     } else {
+//         $(event.target).closest('tr').find('.default_value').css('display', 'none')
+//     }
+// })
+
+
 const tableDate = (num) => {
     let tr = `<tr>
     <td class="text-center">
