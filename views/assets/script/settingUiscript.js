@@ -254,13 +254,13 @@ const tableDate = (num) => {
 $(document).on('click', '#show_table', e => {
     e.preventDefault()
     let table_name = $('#tname').val()
-    let column_number = $('#cnum').val()
+    let column_number = parseInt($('#cnum').val())
     console.log(table_name);
     console.log(column_number);
-    // if (table_name != '' && column_number != '') {
-    //     Swal.fire('All fields required')
-    //     return
-    // }
+    if (table_name != '' && column_number != '') {
+        Swal.fire('All fields required')
+        return
+    }
     // for (let i = 0; i < column_number; i++) {
     //     console.log(i);
     //     let tr = tableDate(i)
