@@ -256,6 +256,7 @@ $(document).on('click', '#show_table', e => {
     let table_name = $('#tname').val()
     let column_number = parseInt($('#cnum').val())
     if (table_name == '' || column_number == '' || isNaN(column_number) || column_number < 0) {
+        $('#table_columns').empty()
         Swal.fire('field is empty or invalid value')
         return
     }
