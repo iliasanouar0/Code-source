@@ -28,6 +28,7 @@ const getTableColumns = (request, response) => {
 
 const createTable = (request, response) => {
     let data = (request.body)
+    console.log(data);
     let sql = data.sql
     console.log(sql);
     pool.query(`${sql}`, (err, res) => {
