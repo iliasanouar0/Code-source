@@ -34,6 +34,7 @@ const createTable = (request, response) => {
     console.log(sql);
     pool.query(`${sql}`, (err, res) => {
         if (err) {
+            console.log(err);
             response.status(200).send(err.message)
         }
         response.status(200).send('Table created successfully')
