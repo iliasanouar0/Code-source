@@ -428,9 +428,10 @@ $(document).on('click', '.delete', event => {
                     showConfirmButton: false,
                     timer: 3000
                 })
-            }).then(() => {
-                getDatalist.ajax.reload(null, false)
             })
+            // .then(() => {
+            //     getDatalist.ajax.reload(null, false)
+            // })
         } else if (result.isDismissed) {
             console.log("cancelled");
         }
