@@ -408,7 +408,6 @@ $(document).on('click', '.delete', event => {
         if (result.isConfirmed) {
             let table = $(event.target).data('name')
             let sql = `DROP TABLE ${table}`
-            console.log(sql);
             var settings = {
                 "url": `http://${ip}:3000/settings/delete/`,
                 "method": "POST",
@@ -442,4 +441,9 @@ $(document).on('click', '.delete', event => {
             console.log("cancelled");
         }
     })
+})
+
+$(document).on('click', '.add', event => {
+    let table = $(event.target).date('name')
+    console.log(table);
 })
