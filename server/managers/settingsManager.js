@@ -42,7 +42,6 @@ const createTable = (request, response) => {
 const deleteTable = (request, response) => {
     let data = (request.body)
     let sql = data.sql
-    response.status(200).send(data)
     pool.query(`${sql}`, (err, res) => {
         if (err) {
             console.log(err);
