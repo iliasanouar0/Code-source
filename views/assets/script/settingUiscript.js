@@ -621,3 +621,9 @@ $(document).on('click', '.add', event => {
     $('#a_tname').val(table)
     $('.add_column').modal('show')
 })
+
+
+$(document).on('click', '.column-drop', event => {
+    let column = $(event.target).data('name')
+    console.log(column);
+})
