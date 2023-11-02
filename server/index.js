@@ -505,7 +505,7 @@ app.get("/settings/columns/:t", settingsManager.getTableColumns)
 app.post("/settings/create/", settingsManager.createTable)
 app.post("/settings/delete/", settingsManager.deleteTable)
 app.post("/settings/add/", settingsManager.addColumns)
-app.post("/settings/delete/column", settingsManager.deleteColumn)
+app.post("/settings/delete/column/", settingsManager.deleteColumn)
 
 
 app.listen(port, () => {

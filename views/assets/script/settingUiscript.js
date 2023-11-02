@@ -638,7 +638,7 @@ $(document).on('click', '.column-drop', event => {
             let table = $(event.target).data('table')
             let sql = `ALTER TABLE ${table} DROP ${column}`
             var settings = {
-                "url": `http://${ip}:3000/settings/delete/`,
+                "url": `http://${ip}:3000/settings/delete/column`,
                 "method": "POST",
                 "timeout": 0,
                 "data": JSON.stringify({
