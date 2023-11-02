@@ -410,8 +410,8 @@ $(document).on('click', '.delete', event => {
             let sql = `DROP TABLE ${table}`
             console.log(sql);
             var settings = {
-                "url": `http://${ip}:3000/settings/`,
-                "method": "PATCH",
+                "url": `http://${ip}:3000/settings/delete/`,
+                "method": "POST",
                 "timeout": 0,
                 "data": JSON.stringify({
                     sql: `${sql}`
