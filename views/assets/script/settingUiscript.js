@@ -409,26 +409,56 @@ $(document).on('click', '.delete', event => {
             let table = $(event.target).data('name')
             let sql = `DROP TABLE ${table}`
             console.log(sql);
-            fetch(`http://${ip}:3000/settings/`, {
-                method: "PATCH",
-                body: JSON.stringify({ sql: `${sql}` }),
-                // headers: {
-                //     'Content-Type': 'application/json',
-                // }
-            }).then(response => {
-                return response.text()
-            }).then(data => {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: data,
-                    showConfirmButton: false,
-                    timer: 3000
-                })
-            })
-            // .then(() => {
-            //     getDatalist.ajax.reload(null, false)
+            var settings = {
+                "url": `http://${ip}:3000/settings/`,
+                "method": "PATCH",
+                "timeout": 0,
+                "data": JSON.stringify({
+                    sql: `${sql}`
+                }),
+                "headers": {
+                    "Content-Type": "application/json",
+                },
+            };
+            $.ajax(settings).done(function (response) {
+                if (response.indexOf('error') > 0) {
+                    swal.fire({
+                        title: 'Error',
+                        text: response,
+                        icon: 'error'
+                    })
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response,
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    getDataSettings()
+                    $('.add_table').modal('hide')
+                }
+            });
+            // fetch(`http://${ip}:3000/settings/`, {
+            //     method: "PATCH",
+            //     body: JSON.stringify({ sql: `${sql}` }),
+            //     // headers: {
+            //     //     'Content-Type': 'application/json',
+            //     // }
+            // }).then(response => {
+            //     return response.text()
+            // }).then(data => {
+            //     Swal.fire({
+            //         position: 'top-end',
+            //         icon: 'success',
+            //         title: data,
+            //         showConfirmButton: false,
+            //         timer: 3000
+            //     })
             // })
+            // // .then(() => {
+            // //     getDatalist.ajax.reload(null, false)
+            // // })
         } else if (result.isDismissed) {
             console.log("cancelled");
         }
