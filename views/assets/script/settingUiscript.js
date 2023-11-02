@@ -240,6 +240,23 @@ $(document).on('click', '#show_table', e => {
     $('.Columns').css('display', 'block')
 })
 
+$(document).on('click', '#a_show_table', e => {
+    e.preventDefault()
+    let table_name = $('#a_tname').val()
+    let column_number = parseInt($('#a_cnum').val())
+    if (table_name == '' || column_number == '' || isNaN(column_number) || column_number < 0) {
+        $('#table_columns').empty()
+        Swal.fire('field is empty or invalid value')
+        return
+    }
+    $('#a_table_columns').empty()
+    for (let i = 0; i < column_number; i++) {
+        let tr = tableDate(i)
+        $('#a_table_columns').append(tr)
+    }
+    $('.Columns').css('display', 'block')
+})
+
 $(document).on('click', '#t_add', () => {
     let table_name = $('#tname').val()
     let textfield = $('.textfield')
@@ -395,6 +412,162 @@ $(document).on('click', '#t_add', () => {
     }
 })
 
+$(document).on('click', '#c_add', () => {
+    let table_name = $('#a_tname').val()
+    let textfield = $('.textfield')
+    for (let i = 0; i < textfield.length; i++) {
+        if ($(textfield[i]).val() == '') {
+            swal.fire('all field required')
+            return
+        }
+    }
+    let props = []
+    let result = []
+    let rows = $('#a_table_columns').children()
+    for (let i = 0; i < rows.length; i++) {
+        let td = $(rows[i]).children()
+        props.push(i)
+        for (let j = 0; j < td.length; j++) {
+            let val = $(`#field_${i}_${j + 1}`).val()
+            props.push(val)
+        }
+    }
+    for (let x = 0; x < rows.length; x++) {
+        let start = props.indexOf(x)
+        let end = props.indexOf(x + 1)
+        if (end < 0) {
+            result.push(props.slice(start));
+        } else {
+            result.push(props.slice(start, end));
+        }
+    }
+    let sql = `ALTER TABLE ${table_name} ADD `
+    let c = 0
+    let length = result.length
+    let error = false
+    result.forEach(column => {
+        c++
+        if (c == length) {
+            if (column[2] == 'VARCHAR') {
+                if (column[4] == 'CURRENT_TIMESTAMP') {
+                    swal.fire({
+                        title: 'INVALID VALUE',
+                        text: 'CURRENT_TIMESTAMP for VARCHAR type column :(',
+                        icon: 'error',
+                        showConfirmButton: false
+                    })
+                    error = true
+                } else if (column[5] == 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]})`
+                } else if (column[5] == 'none_0' && (column[4] == 'NULL' || column[4] == 'NONE')) {
+                    sql += `${column[1]} ${column[2]}(${column[3]}))`
+                } else if (column[5] != 'none_0' && (column[4] == 'NONE' || column[4] == 'NULL')) {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]})`
+                } else if (column[5] != 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]})`
+                } else {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]})`
+                }
+            } else if (column[2] == 'TIMESTAMP') {
+                if (column[4] == 'CURRENT_TIMESTAMP') {
+                    if (column[5] == 'none_0') {
+                        sql += `${column[1]} ${column[2]} DEFAULT ${column[4]})`
+                    } else {
+                        sql += `${column[1]} ${column[2]} DEFAULT ${column[4]} ${column[5]})`
+                    }
+                }
+            } else {
+                if (column[5] == 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
+                    sql += `${column[1]} ${column[2]} ${column[4]})`
+                } else if (column[5] == 'none_0' && (column[4] == 'NULL' || column[4] == 'NONE')) {
+                    sql += `${column[1]} ${column[2]})`
+                } else if (column[5] != 'none_0' && (column[4] == 'NULL' || column[4] == 'NONE')) {
+                    sql += `${column[1]} ${column[2]} ${column[5]})`
+                } else if (column[5] != 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
+                    sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]})`
+                } else {
+                    sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]})`
+                }
+            }
+        } else {
+            if (column[2] == 'VARCHAR') {
+                if (column[4] == 'CURRENT_TIMESTAMP') {
+                    swal.fire({
+                        title: 'INVALID VALUE',
+                        text: 'CURRENT_TIMESTAMP for VARCHAR type column :(',
+                        icon: 'error',
+                        showConfirmButton: false
+                    })
+                    error = true
+                } else if (column[5] == 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]},`
+                } else if (column[5] == 'none_0' && (column[4] == 'NULL' || column[4] == 'NONE')) {
+                    sql += `${column[1]} ${column[2]}(${column[3]}),`
+                } else if (column[5] != 'none_0' && (column[4] == 'NONE' || column[4] == 'NULL')) {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[5]},`
+                } else if (column[5] != 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
+                } else {
+                    sql += `${column[1]} ${column[2]}(${column[3]}) ${column[4]} ${column[5]},`
+                }
+            } else if (column[2] == 'TIMESTAMP') {
+                if (column[4] == 'CURRENT_TIMESTAMP') {
+                    if (column[5] == 'none_0') {
+                        sql += `${column[1]} ${column[2]} DEFAULT ${column[4]},`
+                    } else {
+                        sql += `${column[1]} ${column[2]} DEFAULT ${column[4]} ${column[5]},`
+                    }
+                }
+            } else {
+                if (column[5] == 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
+                    sql += `${column[1]} ${column[2]} ${column[4]},`
+                } else if (column[5] == 'none_0' && (column[4] == 'NULL' || column[4] == 'NONE')) {
+                    sql += `${column[1]} ${column[2]},`
+                } else if (column[5] != 'none_0' && (column[4] == 'NULL' || column[4] == 'NONE')) {
+                    sql += `${column[1]} ${column[2]} ${column[5]},`
+                } else if (column[5] != 'none_0' && (column[4] != 'NULL' && column[4] != 'NONE')) {
+                    sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]},`
+                } else {
+                    sql += `${column[1]} ${column[2]} ${column[4]} ${column[5]},`
+                }
+            }
+        }
+    });
+    if (error) {
+        return
+    } else {
+        // var settings = {
+        //     "url": `http://${ip}:3000/settings/add/`,
+        //     "method": "POST",
+        //     "timeout": 0,
+        //     "data": JSON.stringify({
+        //         sql: `${sql}`
+        //     }),
+        //     "headers": {
+        //         "Content-Type": "application/json",
+        //     },
+        // };
+        // $.ajax(settings).done(function (response) {
+        //     if (response.indexOf('error') > 0) {
+        //         swal.fire({
+        //             title: 'Error',
+        //             text: response,
+        //             icon: 'error'
+        //         })
+        //     } else {
+        //         swal.fire({
+        //             title: 'Created',
+        //             text: response,
+        //             icon: 'success'
+        //         })
+        //         getDataSettings()
+        //         $('.add_column').modal('hide')
+        //     }
+        // });
+        console.log(sql);
+    }
+})
+
 $(document).on('click', '.delete', event => {
     Swal.fire({
         title: 'Are you sure?',
@@ -445,5 +618,6 @@ $(document).on('click', '.delete', event => {
 
 $(document).on('click', '.add', event => {
     let table = $(event.target).data('name')
-    console.log(table);
+    $('#a_tname').val(table)
+    $('.add_column').modal('show')
 })
