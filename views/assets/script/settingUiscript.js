@@ -622,7 +622,6 @@ $(document).on('click', '.add', event => {
     $('.add_column').modal('show')
 })
 
-
 $(document).on('click', '.column-drop', event => {
     Swal.fire({
         title: 'Are you sure?',
