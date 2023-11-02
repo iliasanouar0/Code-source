@@ -580,7 +580,7 @@ const getDataSettings = () => {
             let table_name
             data.forEach(elm => {
               table_name = elm.table_name
-              rows += `<tr><td>${elm.column_name}</td><td>${elm.data_type}</td></tr>`
+              rows += `<tr><td>${elm.column_name}</td><td>${elm.data_type}</td><td class="text-danger column-drop" data-name="${elm.column_name}">drop</td></tr>`
             })
             let collapse = `<div class="card card-primary card-outline">
             <a class="d-block w-100 collapsed" data-toggle="collapse" href="#${table_name}"
@@ -595,7 +595,7 @@ const getDataSettings = () => {
                 <div class="card-body">
                   <div class="row text-right mb-3">
                     <div class="col">
-                      <button class="btn btn-danger delete" data-name="${table_name}">Delete table</button>
+                      <button class="btn btn-danger delete" data-name="${table_name}">DROP table</button>
                       <button class="btn btn-success add" data-name="${table_name}">Add column</button>
                      <!-- <button class="btn btn-primary" data-name="${table_name}">action-3</button>-->
                     </div>
@@ -607,6 +607,7 @@ const getDataSettings = () => {
                           <tr>
                             <th scope="col">Column name</th>
                             <th scope="col">Data type</th>
+                            <th scope="col">action</th>
                           </tr>
                         </thead>
                         <tbody class="columns">
