@@ -412,9 +412,9 @@ $(document).on('click', '.delete', event => {
             fetch(`http://${ip}:3000/settings/`, {
                 method: "PATCH",
                 body: { sql: `${sql}` },
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+                // headers: {
+                //     'Content-Type': 'application/json',
+                // }
             }).then(response => {
                 return response.text()
             }).then(data => {
