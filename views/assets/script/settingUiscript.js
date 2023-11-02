@@ -436,29 +436,8 @@ $(document).on('click', '.delete', event => {
                         timer: 3000
                     })
                     getDataSettings()
-                    $('.add_table').modal('hide')
                 }
             });
-            // fetch(`http://${ip}:3000/settings/`, {
-            //     method: "PATCH",
-            //     body: JSON.stringify({ sql: `${sql}` }),
-            //     // headers: {
-            //     //     'Content-Type': 'application/json',
-            //     // }
-            // }).then(response => {
-            //     return response.text()
-            // }).then(data => {
-            //     Swal.fire({
-            //         position: 'top-end',
-            //         icon: 'success',
-            //         title: data,
-            //         showConfirmButton: false,
-            //         timer: 3000
-            //     })
-            // })
-            // // .then(() => {
-            // //     getDatalist.ajax.reload(null, false)
-            // // })
         } else if (result.isDismissed) {
             console.log("cancelled");
         }
