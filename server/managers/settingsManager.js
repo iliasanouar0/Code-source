@@ -1,5 +1,6 @@
 const pg = require("pg");
 const data = require('../db');
+const { response } = require("express");
 
 let config = data.data
 
@@ -28,10 +29,7 @@ const getTableColumns = (request, response) => {
 
 const createTable = (request, response) => {
     let data = (request.body)
-    console.log(data);
-    console.log(data.sql);
     let sql = data.sql
-    console.log(sql);
     pool.query(`${sql}`, (err, res) => {
         if (err) {
             console.log(err);
@@ -41,8 +39,21 @@ const createTable = (request, response) => {
     })
 }
 
+const deleteTable = (request, response) => {
+    let table = (request.params.t)
+    let sql = 'DROP TABLE $1'
+    pool.query(sql, [table], (err, res) => {
+        if (err) {
+            console.log(err);
+            response.status(200).send(err.message)
+        }
+        response.status(200).send('Table deleted successfully')
+    })
+}
+
 module.exports = {
     getTablesNames,
     getTableColumns,
-    createTable
+    createTable,
+    deleteTable
 }
