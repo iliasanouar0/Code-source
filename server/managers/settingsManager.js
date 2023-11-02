@@ -41,7 +41,7 @@ const createTable = (request, response) => {
 
 const deleteTable = (request, response) => {
     let table = (request.params.t)
-    let sql = 'DROP TABLE $1'
+    let sql = 'DROP TABLE ($1)'
     pool.query(sql, [table], (err, res) => {
         if (err) {
             console.log(err);
