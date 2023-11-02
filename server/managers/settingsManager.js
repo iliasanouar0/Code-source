@@ -42,13 +42,14 @@ const createTable = (request, response) => {
 const deleteTable = (request, response) => {
     let data = (request.body)
     let sql = data.sql
-    pool.query(sql, (err, res) => {
-        if (err) {
-            console.log(err);
-            response.status(200).send(err.message)
-        }
-        response.status(200).send('Table deleted successfully')
-    })
+    console.log(sql);
+    // pool.query(sql, (err, res) => {
+    //     if (err) {
+    //         console.log(err);
+    //         response.status(200).send(err.message)
+    //     }
+    //     response.status(200).send('Table deleted successfully')
+    // })
 }
 
 module.exports = {
