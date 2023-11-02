@@ -536,6 +536,7 @@ $(document).on('click', '#c_add', () => {
     if (error) {
         return
     } else {
+        console.log(sql);
         var settings = {
             "url": `http://${ip}:3000/settings/add/`,
             "method": "POST",
@@ -564,7 +565,6 @@ $(document).on('click', '#c_add', () => {
                 $('.add_column').modal('hide')
             }
         });
-        // console.log(sql);
     }
 })
 
