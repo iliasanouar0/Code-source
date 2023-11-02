@@ -395,3 +395,7 @@ $(document).on('click', '#t_add', () => {
     }
 })
 
+$(document).on('click', '.delete', event => {
+    let table = $(event.target).data('name')
+    console.log(table);
+})
