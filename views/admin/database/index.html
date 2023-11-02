@@ -291,7 +291,7 @@
 
         <div class="modal fade" id="notes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                <div class="modal-content bg-dark text-light">
+                <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Create table notes</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -302,8 +302,95 @@
                                 <h4>Manual</h4>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <h6>* Required files after adding a table :</h6>
+                            <div class="col">
+                                <ul class="list-group list-group-flush bg-dark">
+                                    <li class="list-group-item">Server manager :
+                                        <code class="bg-dark">/server/managers/--filename--Manager.js</code>, The config
+                                        files and dependencies of managers .
+                                    </li>
+                                    <li class="list-group-item">Exporting the CRUD and management function from manager
+                                        .</li>
+                                    <li class="list-group-item">Adding app methods in main express app
+                                        <span class="text-danger">'API'</span> : <code
+                                            class="bg-dark">/server/index.js</code> .
+                                    </li>
+                                    <li class="list-group-item">User interface manager :
+                                        <code class="bg-dark">/views/assets/script/--filename--Uiscript.js</code> .
+                                    </li>
+                                    <li class="list-group-item">View folder and index file : <code
+                                            class="bg-dark">/views/admin/--filename--/index.html</code> , dependencies
+                                        adding .</li>
+                                    <li class="list-group-item">Sidebar link : <code
+                                            class="bg-dark">/views/layout/admin_sidebar.html</code> , customized icon
+                                        and
+                                        order .</li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="row">
-                            <h5>Required files after adding a table</h5>
+                            <h6>* <strong class="text-success">config.sh</strong> and automatic table configuration :
+                            </h6>
+                            <div class="col">
+                                <p>To automatically add the needed files and folder in the application main root :</p>
+                                <ol>
+                                    <li class="mb-3">Having the application main folder locally .</li>
+                                    <li class="list-group-item mb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="../../assets/images/test.png" alt="show">
+                                            </div>
+                                            <div class="col">
+                                                <img src="../../assets/images/test2.png" alt="show">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3">Open terminal <span class="bg-dark text-success">(GIT ,CMD
+                                            ,SHELL)</span> and go
+                                        to folder direction .</li>
+                                    <li class="list-group-item mb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>CMD (Command Prompt)</p>
+                                                <img src="../../assets/images/cmd.png" alt="show">
+                                            </div>
+                                            <div class="col">
+                                                <p>GIT</p>
+                                                <img src="../../assets/images/git.png" alt="show">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3">Run the <strong class="text-success">config.sh</strong> script
+                                        using <strong>sh</strong> command</li>
+                                    <li class="list-group-item mb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>CMD (Command Prompt)</p>
+                                                <img src="../../assets/images/sh.png" alt="show">
+                                            </div>
+                                            <div class="col">
+                                                <p>GIT</p>
+                                                <img src="../../assets/images/sh-git.png" alt="show">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3">Write filename or table name you added.</li>
+                                    <li class="mb-3">after finishing without errors run <strong class="text-success">make.sh</strong> to commit and push changes.</li>
+                                    <li class="list-group-item mb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>CMD (Command Prompt)</p>
+                                                <img src="../../assets/images/sh-cmd-make.png" alt="show">
+                                            </div>
+                                            <div class="col">
+                                                <p>GIT</p>
+                                                <img src="../../assets/images/sh-git-make.png" alt="show">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -1,4 +1,4 @@
-let user = JSON.parse(sessionStorage.user);
+// let user = JSON.parse(sessionStorage.user);
 console.log('welcome to settings');
 
 $(document).on('click', '#refresh', () => {
