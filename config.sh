@@ -1,4 +1,4 @@
-#!/bin/bash
+d#!/bin/bash
 
 echo "write file name : "
 read filename
@@ -13,6 +13,7 @@ echo 'const pool = new pg.Pool(config)' >>server/managers/$filename'Manager.js'
 mkdir views/admin/$filename
 touch views/admin/$filename/index.html
 touch views/assets/script/$filename'Uiscript.js'
-index=$(grep -ob "</li>" views/layout/admin_sidebar.html | grep -oE '[0-9]+' | tail -2)
+index=$(wc -l <views/layout/admin_sidebar.html)
+n=$(($index - 4))
 t=$(mktemp)
-sed "$index'iline' $index" views/layout/admin_sidebar.html >"$t" && mv "$t" views/layout/admin_sidebar.html
+sed "$n i <li class='nav-item'><a href='./$filename/' class='nav-link $filename'><i class='fas fa-database nav-icon'></i><p>$filename</p></a></li>" views/layout/admin_sidebar.html >"$t" && mv "$t" views/layout/admin_sidebar.html
