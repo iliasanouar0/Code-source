@@ -16,4 +16,4 @@ touch views/assets/script/$filename'Uiscript.js'
 index=$(wc -l <views/layout/admin_sidebar.html)
 n=$(($index - 4))
 t=$(mktemp)
-sed "$n i <li class='nav-item'><a href='./$filename/' class='nav-link $filename'><i class='fas fa-database nav-icon'></i><p>$filename</p></a></li>" views/layout/admin_sidebar.html >"$t" && mv "$t" views/layout/admin_sidebar.html
+sed "$n i <li class='nav-item'><a href='./$filename/' class='nav-link $filename'><i class='fas fa-database nav-icon'></i><p>$filename</p></a></li>" views/layout/admin_sidebar.html > "$t" && mv "$t" views/layout/admin_sidebar.html
