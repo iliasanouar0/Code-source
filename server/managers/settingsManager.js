@@ -40,9 +40,9 @@ const createTable = (request, response) => {
 }
 
 const deleteTable = (request, response) => {
-    let table = (request.params.t)
-    let sql = 'DROP TABLE ($1)'
-    pool.query(sql, [table], (err, res) => {
+    let data = (request.body)
+    let sql = data.sql
+    pool.query(sql, (err, res) => {
         if (err) {
             console.log(err);
             response.status(200).send(err.message)
