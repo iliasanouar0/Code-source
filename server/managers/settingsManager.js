@@ -40,7 +40,9 @@ const createTable = (request, response) => {
 }
 
 const deleteTable = (request, response) => {
+    console.log(request);
     let data = (request.body)
+    console.log(data);
     let sql = data.sql
     console.log(sql);
     // pool.query(sql, (err, res) => {
