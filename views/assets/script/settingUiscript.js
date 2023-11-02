@@ -536,35 +536,35 @@ $(document).on('click', '#c_add', () => {
     if (error) {
         return
     } else {
-        // var settings = {
-        //     "url": `http://${ip}:3000/settings/add/`,
-        //     "method": "POST",
-        //     "timeout": 0,
-        //     "data": JSON.stringify({
-        //         sql: `${sql}`
-        //     }),
-        //     "headers": {
-        //         "Content-Type": "application/json",
-        //     },
-        // };
-        // $.ajax(settings).done(function (response) {
-        //     if (response.indexOf('error') > 0) {
-        //         swal.fire({
-        //             title: 'Error',
-        //             text: response,
-        //             icon: 'error'
-        //         })
-        //     } else {
-        //         swal.fire({
-        //             title: 'Created',
-        //             text: response,
-        //             icon: 'success'
-        //         })
-        //         getDataSettings()
-        //         $('.add_column').modal('hide')
-        //     }
-        // });
-        console.log(sql);
+        var settings = {
+            "url": `http://${ip}:3000/settings/add/`,
+            "method": "POST",
+            "timeout": 0,
+            "data": JSON.stringify({
+                sql: `${sql}`
+            }),
+            "headers": {
+                "Content-Type": "application/json",
+            },
+        };
+        $.ajax(settings).done(function (response) {
+            if (response.indexOf('error') > 0) {
+                swal.fire({
+                    title: 'Error',
+                    text: response,
+                    icon: 'error'
+                })
+            } else {
+                swal.fire({
+                    title: 'Created',
+                    text: response,
+                    icon: 'success'
+                })
+                getDataSettings()
+                $('.add_column').modal('hide')
+            }
+        });
+        // console.log(sql);
     }
 })
 
