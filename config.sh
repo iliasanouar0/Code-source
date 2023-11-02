@@ -13,4 +13,6 @@ echo 'const pool = new pg.Pool(config)' >>server/managers/$filename'Manager.js'
 mkdir views/admin/$filename
 touch views/admin/$filename/index.html
 touch views/assets/script/$filename'Uiscript.js'
-cat views/layout/admin_sidebar.html | awk '{print index($0, "a")}'
+index=$(grep -ob "</li>" views/layout/admin_sidebar.html | grep -oE '[0-9]+' | tail -2)
+t=$(mktemp)
+sed "$index'iline' $index" views/layout/admin_sidebar.html >"$t" && mv "$t" views/layout/admin_sidebar.html
