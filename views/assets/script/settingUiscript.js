@@ -5,6 +5,10 @@ $(document).on('click', '#refresh', () => {
     getDataSettings()
 })
 
+$(document).on('click', '.notes', () => {
+    $('#notes').modal('show')
+})
+
 $(document).on('click', '#add_table', () => {
     $('.add_table').modal('show')
 })
