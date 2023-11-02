@@ -409,28 +409,28 @@ $(document).on('click', '.delete', event => {
             let table = $(event.target).data('name')
             let sql = `DROP TABLE ${table}`
             console.log(sql);
-            // fetch(`http://${ip}:3000/settings/`, {
-            //     method: "PATCH",
-            //     body: { sql: `${sql}` },
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Access-Control-Allow-Origin': '*',
-            //         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-            //         'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS,PATCH'
-            //     }
-            // }).then(response => {
-            //     return response.text()
-            // }).then(data => {
-            //     Swal.fire({
-            //         position: 'top-end',
-            //         icon: 'success',
-            //         title: data,
-            //         showConfirmButton: false,
-            //         timer: 3000
-            //     })
-            // }).then(() => {
-            //     getDatalist.ajax.reload(null, false)
-            // })
+            fetch(`http://${ip}:3000/settings/`, {
+                method: "PATCH",
+                body: { sql: `${sql}` },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                    'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS,PATCH'
+                }
+            }).then(response => {
+                return response.text()
+            }).then(data => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: data,
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            }).then(() => {
+                getDatalist.ajax.reload(null, false)
+            })
         } else if (result.isDismissed) {
             console.log("cancelled");
         }
