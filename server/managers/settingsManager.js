@@ -45,6 +45,7 @@ const deleteTable = (request, response) => {
     console.log(data);
     let sql = data.sql
     console.log(sql);
+    response.status(200).send(data)
     // pool.query(sql, (err, res) => {
     //     if (err) {
     //         console.log(err);
