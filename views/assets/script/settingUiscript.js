@@ -444,6 +444,6 @@ $(document).on('click', '.delete', event => {
 })
 
 $(document).on('click', '.add', event => {
-    let table = $(event.target).date('name')
+    let table = $(event.target).data('name')
     console.log(table);
 })
