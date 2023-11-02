@@ -624,6 +624,50 @@ $(document).on('click', '.add', event => {
 
 
 $(document).on('click', '.column-drop', event => {
-    let column = $(event.target).data('name')
-    console.log(column);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: 'black',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let column = $(event.target).data('name')
+            let table = $(event.target).data('table')
+            let sql = `ALTER TABLE ${table} DROP ${column}`
+            var settings = {
+                "url": `http://${ip}:3000/settings/delete/`,
+                "method": "POST",
+                "timeout": 0,
+                "data": JSON.stringify({
+                    sql: `${sql}`
+                }),
+                "headers": {
+                    "Content-Type": "application/json",
+                },
+            };
+            $.ajax(settings).done(function (response) {
+                if (response.indexOf('error') > 0) {
+                    swal.fire({
+                        title: 'Error',
+                        text: response,
+                        icon: 'error'
+                    })
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response,
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    getDataSettings()
+                }
+            });
+        } else if (result.isDismissed) {
+            console.log("cancelled");
+        }
+    })
 })

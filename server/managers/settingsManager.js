@@ -63,10 +63,23 @@ const addColumns = (request, response) => {
     })
 }
 
+const deleteColumn = (request, response) => {
+    let data = (request.body)
+    let sql = data.sql
+    pool.query(`${sql}`, (err, res) => {
+        if (err) {
+            console.log(err);
+            response.status(200).send(err.message)
+        }
+        response.status(200).send('Columns deleted successfully')
+    })
+}
+
 module.exports = {
     getTablesNames,
     getTableColumns,
     createTable,
     deleteTable,
-    addColumns
+    addColumns,
+    deleteColumn
 }
