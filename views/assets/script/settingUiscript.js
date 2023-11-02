@@ -411,7 +411,7 @@ $(document).on('click', '.delete', event => {
             console.log(sql);
             fetch(`http://${ip}:3000/settings/`, {
                 method: "PATCH",
-                body: { sql: `${sql}` },
+                body: JSON.stringify({ sql: `${sql}` }),
                 // headers: {
                 //     'Content-Type': 'application/json',
                 // }
