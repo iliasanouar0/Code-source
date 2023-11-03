@@ -29,7 +29,23 @@ const getIps = (req, res) => {
     })
 }
 
+const deleteIp = (request, response) => {
+    const ides = (request.body);
+    const sql = "DELETE FROM authorizedips WHERE id=$1";
+    const params = [];
+    for (let i = 0; i < ides.length; i++) {
+        params.push([ides[i]])
+    }
+    params.forEach(param => {
+        pool.query(sql, param, (err, result) => {
+            if (err) { response.status(409).send(err) } else { console.log(`records deleted`) }
+        });
+    });
+    response.status(200).send('ip deleted');
+}
+
 module.exports = {
     addIp,
-    getIps
+    getIps,
+    deleteIp
 }
