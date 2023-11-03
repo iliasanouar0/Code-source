@@ -25,5 +25,7 @@ $(document).on('click', '#add', () => {
     let note_add = $('#note_add')
     if (ip_add == '' || type_add == '' || entity_add == '' || note_add == '') {
         swal.fire('all felids required')
+        return
     }
+    
 })

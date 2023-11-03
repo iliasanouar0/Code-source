@@ -35,6 +35,7 @@ const installation = require("./managers/installation");
 const processStateManager = require('./managers/processStateManager');
 const resultManager = require("./managers/resultManager")
 const settingsManager = require("./managers/settingsManager")
+const authorizationManager = require('./managers/authorizationManager')
 
 const port = 3000;
 const app = express(); // setup express application
@@ -506,7 +507,8 @@ app.post("/settings/create/", settingsManager.createTable)
 app.post("/settings/delete/", settingsManager.deleteTable)
 app.post("/settings/add/", settingsManager.addColumns)
 app.post("/settings/delete/column/", settingsManager.deleteColumn)
-
+// IP API
+app.post('/ip/', authorizationManager.addIp)
 
 app.listen(port, () => {
   console.log(`Server running at ${port}`);
