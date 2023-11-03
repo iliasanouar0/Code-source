@@ -57,6 +57,10 @@ if (result.error) {
 let mode = result.parsed.NODE_ENV
 console.log(mode);
 
+app.use(
+  ipFilter(ips, { mode: 'allow' })
+)
+
 app.use((err, res, req, _next) => {
   console.log('Error handler', err)
   if (err instanceof IpDeniedError) {
@@ -70,6 +74,7 @@ app.use((err, res, req, _next) => {
   })
 }
 )
+
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
