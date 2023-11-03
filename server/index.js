@@ -67,7 +67,7 @@ app.use((err, req, res, _next) => {
   } else {
     res.status(err.status || 500)
   }
-  res.send('error', {
+  res.send({
     message: 'You shall not pass',
     error: err
   })
