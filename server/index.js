@@ -42,7 +42,9 @@ const nodeEnvManager = require('./managers/nodeEnvManager')
 
 const port = 3000;
 const app = express(); // setup express application
+
 app.set('trust proxy', true)
+
 app.options("*", cors());
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -50,13 +52,8 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 // Allow the following IPs
 const ips = ['127.0.0.1', '209.170.73.224' /*, '196.70.254.73'*/]
 
-const filterIp = (ips) => {
-  // if (process.env.NODE_ENV) {
-
-  // }
-  console.log(process.env.NODE_ENV);
-  console.log(ips);
-}
+console.log(process.env.NODE_ENV);
+console.log(ips);
 
 
 app.use(
