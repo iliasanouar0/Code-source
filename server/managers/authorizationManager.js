@@ -9,7 +9,7 @@ const pool = new pg.Pool(config);
 
 const addIp = (req, res) => {
     let data = (req.body)
-    let sql = 'INSERT INTO authorizedips (ip,type,status,note,createdat,updatedat,entetyid) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id'
+    let sql = 'INSERT INTO authorizedips (ip,type,status,note,createdat,updatedat,entityid) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id'
     let values = [data.ip, data.type, data.status, data.note, data.created, data.updated, data.entity]
     pool.query(sql, values, (e, r) => {
         if (e) {

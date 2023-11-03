@@ -34,12 +34,11 @@ const addIp = (data) => {
     };
     $.ajax(settings).done(function (responseText) {
         console.log(responseText);
-        // Swal.fire({
-        //     title: "ip added successfully!",
-        //     text: responseText,
-        //     icon: "success",
-        //     confirmButtonText: "ok",
-        // }).then(() => {
+        Swal.fire({
+            text: responseText,
+            confirmButtonText: "ok",
+        })
+        // .then(() => {
         //     // getDataIP.ajax.reload(null, false)
         // });
     });
