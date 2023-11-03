@@ -55,9 +55,22 @@ const deleteIp = (request, response) => {
     response.status(200).send('ip deleted');
 }
 
+const editIp = (req, res) => {
+    let data = (req.body)
+    let sql = 'UPDATE authorizedips SET ip=($1),type=($2),status=($3),note=($4),entityid=($5),updatedat=(CURRENT_TIMESTAMP) WHERE id=$(6)'
+    let values = [data.ip, data.type, data.status, data.note, data.entity, data.id]
+    pool.query(sql, values, (e, r) => {
+        if (e) {
+            res.status(200).send(e.message)
+        }
+        res.status(200).send(`IP updated with ID: ${data.id}`)
+    })
+}
+
 module.exports = {
     addIp,
     getIps,
     deleteIp,
-    getIpById
+    getIpById,
+    editIp
 }

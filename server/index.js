@@ -512,6 +512,7 @@ app.post('/ip/', authorizationManager.addIp)
 app.get('/ip/', authorizationManager.getIps)
 app.get('/ip/:id', authorizationManager.getIpById)
 app.patch('/ip/', authorizationManager.deleteIp)
+app.put('/ip/', authorizationManager.editIp)
 
 app.listen(port, () => {
   console.log(`Server running at ${port}`);

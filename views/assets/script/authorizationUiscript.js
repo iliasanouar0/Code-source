@@ -173,7 +173,6 @@ $(document).on('click', '.edit', ev => {
         },
     };
     $.ajax(settings).done(function (responseText) {
-        console.log(responseText);
         $("#ip_edit").val(responseText[0].ip)
         $("#note_edit").val(responseText[0].note)
         let options = document.querySelector("#type_edit").children;
@@ -193,7 +192,28 @@ $(document).on('click', '.edit', ev => {
     });
 })
 
+
+
 $(document).on('click', '#edit', ev => {
     let id = $(ev.target).data('id')
     console.log(id);
+    let ip_edit = $('#ip_edit').val()
+    let type_edit = $("#type_edit").val();
+    let entity_edit = $("#entity_edit").val();
+    let note_edit = $('#note_edit').val()
+    if (ip_edit == '' || type_edit == '' || entity_edit == '' || note_edit == '') {
+        swal.fire('all felids required')
+        return
+    }
+    let data = {
+        ip: `${ip_edit}`,
+        type: `${type_edit}`,
+        entity: `${entity_edit}`,
+        note: `${note_edit}`,
+        status: `idel`,
+        created: `${new Date()}`,
+        updated: `${new Date()}`
+    }
+    console.log(data);
+    // addIp(data)
 })
