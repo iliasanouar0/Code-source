@@ -58,7 +58,7 @@ $(document).on('click', '#add', () => {
         type: `${type_add}`,
         entity: `${entity_add}`,
         note: `${note_add}`,
-        status: `idel`,
+        status: `active`,
         created: `${new Date()}`,
         updated: `${new Date()}`
     }
@@ -224,7 +224,7 @@ $(document).on('click', '#edit', ev => {
     let type_edit = $("#type_edit").val();
     let entity_edit = $("#entity_edit").val();
     let note_edit = $('#note_edit').val()
-    if (ip_edit == '' || type_edit == '' || entity_edit == '' || note_edit == '') {
+    if (ip_edit == '' || type_edit == '' || entity_edit == '' {
         swal.fire('all felids required')
         return
     }
@@ -234,7 +234,7 @@ $(document).on('click', '#edit', ev => {
         type: `${type_edit}`,
         entity: `${entity_edit}`,
         note: `${note_edit}`,
-        status: `idel`,
+        status: `active`,
         created: `${new Date()}`,
         updated: `${new Date()}`
     }
