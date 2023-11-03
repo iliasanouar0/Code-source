@@ -20,7 +20,7 @@ const getMode = (req, res) => {
         throw result.error
     }
     // let mode = process.env.NODE_ENV
-    res.status(200).send(result.parsed)
+    res.status(200).send(result.parsed.NODE_ENV)
 }
 
 module.exports = {
