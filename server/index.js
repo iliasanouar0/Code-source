@@ -52,7 +52,7 @@ app.use((req, res, next) => {
   next();
 });
 app.get('/ap/ip/', (req, res) => {
-  res.status(200).send(req.ip)
+  res.status(200).send(req.ips)
 })
 /**
  * * Websocket => 
