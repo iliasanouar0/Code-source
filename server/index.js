@@ -10,6 +10,7 @@ const WebSocket = require('ws');
 const setTimeout = require('timers/promises');
 let time = setTimeout.setTimeout
 const url = require('node:url');
+const ipfilter = require('express-ipfilter').IpFilter
 
 Date.prototype.toDateInputValue = function () {
   var local = new Date(this);
@@ -40,17 +41,21 @@ const nodeEnvManager = require('./managers/nodeEnvManager')
 
 const port = 3000;
 const app = express(); // setup express application
-// app.set('trust proxy', true)
-// app.options("*", cors());
+app.set('trust proxy', true)
+app.options("*", cors());
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
+// Allow the following IPs
+const ips = ['127.0.0.1']
 
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
-//   next();
-// });
+// Create the server
+app.use(ipfilter(ips, { mode: 'allow' }))
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.get('/ap/ip/', (req, res) => {
   res.status(200).send(req.ip)
 })
