@@ -732,6 +732,22 @@ const getDataIP = $("#ipAuthorization").DataTable({
   ],
 })
 
+const getMode = () => {
+  var settings = {
+    url: `http://${ip}:3000/node/env/`,
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+      "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+    }
+  };
+  $.ajax(settings).done(function (responseText) {
+    $('.mode').html(responseText)
+  });
+}
+
 if (path.includes("/admin/users/")) {
   getDataUser
 } else if (path.includes("/admin/entities/")) {
@@ -760,19 +776,6 @@ if (path.includes("/admin/users/")) {
 } else if (path.includes("/admin/database/")) {
   getDataSettings()
 } else if (path.includes("/admin/authorization/")) {
-  var settings = {
-    url: `http://${ip}:3000/node/env/`,
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
-      "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
-    }
-  };
-  $.ajax(settings).done(function (responseText) {
-    console.log($('.mode').html(responseText))
-    console.log(responseText);
-  });
   getDataIP
+  getMode()
 }
