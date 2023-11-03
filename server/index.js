@@ -62,12 +62,11 @@ app.use(
 )
 
 app.use((err, req, res, _next) => {
-  console.log('Error handler', err)
-  // if (err instanceof IpDeniedError) {
-  //   res.status(401)
-  // } else {
-  //   res.status(err.status || 500)
-  // }
+  if (err instanceof IpDeniedError) {
+    res.status(401)
+  } else {
+    res.status(err.status || 500)
+  }
   res.send('error', {
     message: 'You shall not pass',
     error: err
