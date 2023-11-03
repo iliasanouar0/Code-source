@@ -773,8 +773,8 @@ if (path.includes("/admin/users/")) {
     },
   };
   $.ajax(settings).done(function (responseText) {
-    console.log(responseText);
     $('#c_mode').val(responseText)
+    console.log(responseText);
   });
   getDataIP
 }
