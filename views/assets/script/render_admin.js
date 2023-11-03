@@ -771,8 +771,7 @@ if (path.includes("/admin/users/")) {
     }
   };
   $.ajax(settings).done(function (responseText) {
-    console.log(typeof (responseText));
-    $('.mode').val(responseText)
+    console.log($('.mode'))
     console.log(responseText);
   });
   getDataIP
