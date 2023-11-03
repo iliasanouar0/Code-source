@@ -37,10 +37,9 @@ const addIp = (data) => {
         Swal.fire({
             text: responseText,
             confirmButtonText: "ok",
-        })
-        // .then(() => {
-        //     // getDataIP.ajax.reload(null, false)
-        // });
+        }).then(() => {
+            getDataIP.ajax.reload(null, false)
+        });
     });
 };
 

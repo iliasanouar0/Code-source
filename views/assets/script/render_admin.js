@@ -646,25 +646,6 @@ const getDataIP = $("#ipAuthorization").DataTable({
     url: `http://${ip}:3000/ip/`,
     dataSrc: '',
   },
-  //   <th><input type="checkbox" name="checkbox" class="checkAll"></th>
-  //   <th>IP</th>
-  //   <th>Team</th>
-  //   <th>status</th>
-  //   <th>Created</th>
-  //   <th>Updated</th>
-  //   <th>Action</th>
-  // </tr>
-  // {
-  //   "id": 1,
-  //   "ip": "111.111.111.111",
-  //   "type": "local",
-  //   "status": "idel",
-  //   "note": "test",
-  //   "entityid": 1,
-  //   "createdat": "2023-11-03T10:03:46.225Z",
-  //   "updatedat": "2023-11-03T10:03:46.225Z",
-  //   "nom": "GM2"
-  // },
   columns: [
     {
       data: null,
@@ -743,8 +724,7 @@ const getDataIP = $("#ipAuthorization").DataTable({
       orderable: false,
       render: function (row) {
         return `<div class="text-center">
-          <button type="button" class="btn btn-success edit"  data-id="${row.id_entity}"><i class="fas fa-edit"></i></button>
-        <button type="button" class="btn btn-danger delete" data-id="${row.id_entity}"><i class="far fa-trash-alt"></i></button>
+          <button type="button" class="btn btn-success edit"  data-id="${row.id}"><i class="fas fa-edit"></i></button>
           </div>`
       }
     }
@@ -779,6 +759,6 @@ if (path.includes("/admin/users/")) {
 } else if (path.includes("/admin/database/")) {
   getDataSettings()
 } else if (path.includes("/admin/authorization/")) {
-  console.log('test');
+  getDataIP
 }
 
