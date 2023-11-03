@@ -11,7 +11,6 @@ if (result.error) {
   throw result.error
 }
 
-fs.writeFile('./.env', '', function () { console.log('done') })
 fs.writeFile('./.env', `NODE_ENV=${test}`, function () { console.log('done') })
 
 console.log(result.parsed)

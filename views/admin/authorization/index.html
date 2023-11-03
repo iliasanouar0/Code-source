@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reporting | Admin | settings-panel</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../../assets/vendors/AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../assets/vendors/AdminLTE-3.2.0/dist/css/adminlte.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style/admin.css">
+    <link rel="stylesheet" href="../../assets/style/main.css">
+    <link
+        href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.1/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light admin-navbar">
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar admin-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Settings</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Settings</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col text-left">
+                                    <h4>Tables</h4>
+                                </div>
+                                <div class="col text-right">
+                                    <button class="btn btn-primary" id="refresh">Refresh</button>
+                                    <button class="btn btn-success" id="add_table">Add Table</button>
+                                    <button class="btn btn-outline-dark notes" role="button">Create table notes</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-12 tables" id="accordion">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+        </div>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- modal -->
+        <div class="modal fade add_table" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Add Table</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-pane fade active show">
+                                <p><strong>Add Table Form GUI/CLI</strong></p>
+                                <div class="row">
+                                    <form class="justify-content-center text-center">
+                                        <div class="input_way">
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-5">
+                                                    <input type="text" class="form-control" id="tname"
+                                                        placeholder="Enter Table name">
+                                                </div>
+                                                <div class="col-5">
+                                                    <input type="number" class="form-control" id="cnum"
+                                                        placeholder="Enter Column number">
+                                                </div>
+                                                <div class="col-2">
+                                                    <button class="btn btn-primary" id="show_table">Create</button>
+                                                </div>
+                                            </div>
+                                            <div class="row w-100 mb-3">
+                                                <div class="col Columns" style="display: none;">
+                                                    <table class="table table-striped align-middle">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Type</th>
+                                                                <th>Length/Values</th>
+                                                                <th>Default</th>
+                                                                <th>Index</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="table_columns">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div style="display: none;" class="text_way mb-3">
+                                            <textarea class="form-control" name="sqlTable" id="sqlCreateTable"
+                                                placeholder="CREATE TABLE ..." cols="30" rows="10"></textarea>
+                                        </div> -->
+                                        <!-- <div class="row">
+                                            <div class="col text-right">
+                                                <button type="button" class="btn btn-outline-dark switch_inp">
+                                                    <i class="fa fa-list"></i>
+                                                </button>
+                                            </div>
+                                        </div> -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="button" class="btn btn-outline-success" id="t_add">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade add_column" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Add Columns</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-pane fade active show">
+                                <p><strong>Add Columns Form GUI/CLI</strong></p>
+                                <div class="row">
+                                    <form class="justify-content-center text-center">
+                                        <div class="input_way">
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-5">
+                                                    <input type="text" class="form-control" id="a_tname"
+                                                        placeholder="Enter Table name" readonly>
+                                                </div>
+                                                <div class="col-5">
+                                                    <input type="number" class="form-control" id="a_cnum"
+                                                        placeholder="Enter Column number">
+                                                </div>
+                                                <div class="col-2">
+                                                    <button class="btn btn-primary" id="a_show_table">Create</button>
+                                                </div>
+                                            </div>
+                                            <div class="row w-100 mb-3">
+                                                <div class="col Columns" style="display: none;">
+                                                    <table class="table table-striped align-middle">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Type</th>
+                                                                <th>Length/Values</th>
+                                                                <th>Default</th>
+                                                                <th>Index</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="a_table_columns">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div style="display: none;" class="text_way mb-3">
+                                            <textarea class="form-control" name="sqlTable" id="sqlCreateTable"
+                                                placeholder="CREATE TABLE ..." cols="30" rows="10"></textarea>
+                                        </div> -->
+                                        <!-- <div class="row">
+                                            <div class="col text-right">
+                                                <button type="button" class="btn btn-outline-dark switch_inp">
+                                                    <i class="fa fa-list"></i>
+                                                </button>
+                                            </div>
+                                        </div> -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="button" class="btn btn-outline-success" id="c_add">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade user_data" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Your data</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="f_name">First name</label>
+                                <input type="text" class="form-control" id="f_name" READONLY>
+                            </div>
+                            <div class="form-group">
+                                <label for="l_name">Last name</label>
+                                <input type="text" class="form-control" id="l_name" READONLY>
+                            </div>
+                            <div class="form-group">
+                                <label for="login">Login</label>
+                                <input type="text" class="form-control" id="login" READONLY>
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <input type="text" class="form-control" id="type" READONLY>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-danger" id="logout">logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-danger" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                        <h4 class="modal-title">login-out</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>are u sure you want to logout ?!</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                        <a type="button" class="btn btn-outline-light" href="../logout.html">LOGOUT</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal fade" id="notes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Create table notes</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col text-center">
+                                <h4>Manual</h4>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <h6>* Required files after adding a table :</h6>
+                            <div class="col">
+                                <ul class="list-group list-group-flush bg-dark">
+                                    <li class="list-group-item">Server manager :
+                                        <code class="bg-dark">/server/managers/--filename--Manager.js</code>, The config
+                                        files and dependencies of managers .
+                                    </li>
+                                    <li class="list-group-item">Exporting the CRUD and management function from manager
+                                        .</li>
+                                    <li class="list-group-item">Adding app methods in main express app
+                                        <span class="text-danger">'API'</span> : <code
+                                            class="bg-dark">/server/index.js</code> .
+                                    </li>
+                                    <li class="list-group-item">User interface manager :
+                                        <code class="bg-dark">/views/assets/script/--filename--Uiscript.js</code> .
+                                    </li>
+                                    <li class="list-group-item">View folder and index file : <code
+                                            class="bg-dark">/views/admin/--filename--/index.html</code> , dependencies
+                                        adding .</li>
+                                    <li class="list-group-item">Sidebar link : <code
+                                            class="bg-dark">/views/layout/admin_sidebar.html</code> , customized icon
+                                        and
+                                        order .</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <h6>* <strong class="text-success">config.sh</strong> and automatic table configuration :
+                            </h6>
+                            <div class="col">
+                                <p>To automatically add the needed files and folder in the application main root :</p>
+                                <ol>
+                                    <li class="mb-3">Having the application main folder locally .</li>
+                                    <li class="list-group-item mb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="../../assets/images/test.png" alt="show">
+                                            </div>
+                                            <div class="col">
+                                                <img src="../../assets/images/test2.png" alt="show">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3">Open terminal <span class="bg-dark text-success">(GIT ,CMD
+                                            ,SHELL)</span> and go
+                                        to folder direction .</li>
+                                    <li class="list-group-item mb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>CMD (Command Prompt)</p>
+                                                <img src="../../assets/images/cmd.png" alt="show">
+                                            </div>
+                                            <div class="col">
+                                                <p>GIT</p>
+                                                <img src="../../assets/images/git.png" alt="show">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3">Run the <strong class="text-success">config.sh</strong> script
+                                        using <strong>sh</strong> command</li>
+                                    <li class="list-group-item mb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>CMD (Command Prompt)</p>
+                                                <img src="../../assets/images/sh.png" alt="show">
+                                            </div>
+                                            <div class="col">
+                                                <p>GIT</p>
+                                                <img src="../../assets/images/sh-git.png" alt="show">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3">Write filename or table name you added.</li>
+                                    <li class="mb-3">After finishing without errors run <strong
+                                            class="text-success">make.sh</strong> to commit and push changes.</li>
+                                    <li class="list-group-item mb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>CMD (Command Prompt)</p>
+                                                <img src="../../assets/images/sh -cmd-make.png" alt="show">
+                                            </div>
+                                            <div class="col">
+                                                <p>GIT</p>
+                                                <img src="../../assets/images/sh-git-make.png" alt="show">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3">You can now pull the modifications to server with your secure shell
+                                        terminal</li>
+                                    <li class="list-group-item mb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>ZOK terminal</p>
+                                                <img src="../../assets/images/app.png" alt="show">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <h6>** <strong class="text-danger">Notes</strong> !!</h6>
+                                <ul>
+                                    <li>Never run the scripts in server side in case of errors (errors in server side
+                                        may cause a crush in system)</li>
+                                    <li>In local we can control if we will push the changes or not !!</li>
+                                    <li>Be sure before running the config script</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /. modal -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2023 <a href="#">Reporting</a>.</strong> All rights
+            reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <!-- <script src="../../assets/vendors/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script> -->
+    <script
+        src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.1/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.js"></script>
+
+    <script src="../../assets/vendors/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../assets/vendors/AdminLTE-3.2.0/dist/js/adminlte.min.js"></script>
+
+    <script src="../../assets/script/render_admin.js"></script>
+    <!-- main admin script -->
+    <script src="../../assets/script/settingUiscript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../assets/script/admin.js" defer></script>
+</body>
+
+</html>
