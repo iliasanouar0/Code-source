@@ -111,6 +111,7 @@ fetch(adminSidebarUrl)
         process.setAttribute('href', '../process/')
         users.setAttribute('href', '../users/')
         lists.setAttribute("href", '../lists/')
+        settings.setAttribute("href", '../database/')
       }
     }
   });
@@ -663,5 +664,7 @@ if (path.includes("/admin/users/")) {
   getDatalist
 } else if (path.includes("/admin/database/")) {
   getDataSettings()
+} else if (path.includes("/admin/authorization/")) {
+  console.log('test');
 }
 
