@@ -57,7 +57,7 @@ const deleteIp = (request, response) => {
 
 const editIp = (req, res) => {
     let data = (req.body)
-    let sql = 'UPDATE authorizedips SET ip=($1),type=($2),status=($3),note=($4),entityid=($5),updatedat=(CURRENT_TIMESTAMP) WHERE id=$(6)'
+    let sql = 'UPDATE authorizedips SET ip=($1),type=($2),status=($3),note=($4),entityid=($5),updatedat=(CURRENT_TIMESTAMP) WHERE id=($6)'
     let values = [data.ip, data.type, data.status, data.note, data.entity, data.id]
     pool.query(sql, values, (e, r) => {
         if (e) {
