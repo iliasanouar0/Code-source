@@ -47,17 +47,13 @@ app.options("*", cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 // Allow the following IPs
-const ips = ['127.0.0.1', '209.170.73.224', '196.70.254.73', '::ffff:196.70.254.73']
+const ips = ['127.0.0.1', '209.170.73.224', '196.70.254.73']
 
 let clientIp = function (req, res) {
   return req.headers['x-forwarded-for'] ? (req.headers['x-forwarded-for']).split(',')[0] : ""
 }
 app.use(
-  ipFilter({
-    detectIp: clientIp,
-    forbidden: 'You are not authorized to access this page.',
-    filter: ips,
-  })
+  ipFilter(ips, { mode: 'allow' })
 )
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -549,6 +545,6 @@ app.put('/ip/', authorizationManager.editIp)
 //node API 
 app.get('/node/env/', nodeEnvManager.getMode)
 app.post('/node/env/', nodeEnvManager.setMode)
-app.listen(port,'0.0.0.0', () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server running at ${port}`);
 });
