@@ -763,16 +763,15 @@ if (path.includes("/admin/users/")) {
   var settings = {
     url: `http://${ip}:3000/node/env/`,
     method: "GET",
-    timeout: 0,
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers":
-        "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
       "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
-    },
+    }
   };
   $.ajax(settings).done(function (responseText) {
+    console.log(typeof (responseText));
     $('.mode').val(responseText)
     console.log(responseText);
   });
