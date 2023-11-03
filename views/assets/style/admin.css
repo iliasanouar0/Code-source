@@ -142,7 +142,7 @@ ul.ui-autocomplete {
 
 .custom-control-input:focus~.custom-control-label::before {
   border-color: green !important;
-  box-shadow: 0 0 0 0.2rem rgba(255, 47, 69, 0.25) !important;
+  box-shadow: 0 0 0 0.2rem rgb(122, 255, 122)  !important;
 }
 
 .custom-control-input:checked~.custom-control-label::before {
