@@ -240,3 +240,19 @@ $(document).on('click', '#edit', ev => {
     }
     editIp(data)
 })
+
+$('#mode').change(() => {
+    var settings = {
+        url: `http://${ip}:3000/node/env/`,
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+            "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+        }
+    };
+    $.ajax(settings).done(function (responseText) {
+        $('.mode').html(responseText)
+    });
+})
