@@ -47,7 +47,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">IP authorization</h1>
+                            <h1 class="m-0">Authorization</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -70,7 +70,7 @@
                                     <h4>IP authorization</h4>
                                 </div>
                                 <div class="col text-right">
-                                    <button class="btn btn-success" id="add_table">Add IP</button>
+                                    <button class="btn btn-success" id="add_ip">Add IP</button>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody id="Process_data"></tbody>
+                                <tbody id="ip_data"></tbody>
 
                             </table>
                         </div>
@@ -163,6 +163,58 @@
 
             </div>
 
+        </div>
+        <div class="modal fade add_ip" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">add user</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="f_name">First name</label>
+                                <input type="text" class="form-control" id="f_name_add">
+                            </div>
+                            <div class="form-group">
+                                <label for="l_name">Last name</label>
+                                <input type="text" class="form-control" id="l_name_add">
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        <select class="form-control" style="width: 100%;" tabindex="-1"
+                                            aria-hidden="true" id="type_add">
+                                            <option value="" selected>-_-_SELECT USER TYPE_-_-</option>
+                                            <option value="admin">admin</option>
+                                            <option value="sup">supervisor</option>
+                                            <option value="mailer">mailer</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Entity</label>
+                                        <select class="form-control entities" style="width: 100%;" tabindex="-1"
+                                            aria-hidden="true" id="entity_add">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="login">Login</label>
+                                <input type="text" class="form-control" id="login_add">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <button type="button" class="btn btn-success" id="add">Submit</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /. modal -->
         <!-- Main Footer -->
