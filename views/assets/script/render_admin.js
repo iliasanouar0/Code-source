@@ -698,6 +698,26 @@ const getDataIP = $("#ipAuthorization").DataTable({
     {
       data: null,
       render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.type}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.status}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
         let add = new Date(row.createdat).toLocaleString()
         return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
