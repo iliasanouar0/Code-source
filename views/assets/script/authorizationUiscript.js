@@ -192,3 +192,8 @@ $(document).on('click', '.edit', ev => {
         $(".edit_ip").modal("show");
     });
 })
+
+$(document).on('click', '#edit', ev => {
+    let id = $(ev.target).data('id')
+    console.log(id);
+})
