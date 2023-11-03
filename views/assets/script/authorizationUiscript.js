@@ -39,7 +39,7 @@ const addIp = (data) => {
             confirmButtonText: "ok",
         })
         getDataIP.ajax.reload(null, false)
-        // $(".add_ip").modal("show");
+        $(".add_ip").modal("hide");
         $('.add_ip input').val('');
     });
 };
@@ -63,4 +63,31 @@ $(document).on('click', '#add', () => {
         updated: `${new Date()}`
     }
     addIp(data)
+})
+
+$(".checkAll").change(function () {
+    let status = $(this).is(":checked") ? true : false;
+    $(".check").prop("checked", status);
+    if (status) {
+        let action = `<button type="button" class="btn btn-danger delete-all-this"><i class="far fa-trash-alt"></i></button>`
+        $('#action').html(action)
+    } else {
+        $('#action').html('')
+    }
+});
+
+$(document).on('click', '.check', () => {
+    let check = $("#Process_data input:checked")
+    let allCheck = $("#Process_data input:checkbox")
+    if (check.length > 0) {
+        let action = `<button type="button" class="btn btn-danger delete-all-this"><i class="far fa-trash-alt"></i></button>`
+        $('#action').html(action)
+    } else {
+        $('#action').html('')
+    }
+    if (check.length == allCheck.length) {
+        $(".checkAll").prop("checked", true);
+    } else {
+        $(".checkAll").prop("checked", false);
+    }
 })
