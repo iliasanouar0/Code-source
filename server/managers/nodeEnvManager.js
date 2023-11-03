@@ -15,9 +15,12 @@ let dotenv = require('dotenv')
 // console.log(result.parsed)
 
 const getMode = (req, res) => {
-    // const result = dotenv.config()
-    let mode = process.env.NODE_ENV
-    res.status(200).send(mode)
+    const result = dotenv.config()
+    if (result.error) {
+        throw result.error
+    }
+    // let mode = process.env.NODE_ENV
+    res.status(200).send(result.parsed)
 }
 
 module.exports = {
