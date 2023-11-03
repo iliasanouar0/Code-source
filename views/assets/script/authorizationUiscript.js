@@ -147,6 +147,19 @@ $(document).on('click', '.delete-all-this', () => {
 })
 
 $(document).on('click', '.edit', ev => {
+    $('#entity_edit').html('')
+    fetch(`http://${ip}:3000/entity`, {
+        method: "GET",
+    }).then((response) => {
+        return response.json();
+    }).then((data) => {
+        data.forEach((elm) => {
+            let option = document.createElement("option");
+            option.innerHTML = elm["nom"];
+            option.setAttribute("value", elm["id_entity"]);
+            $('#entity_edit').append(option);
+        });
+    })
     let id = $(ev.target).data('id')
     var settings = {
         url: `http://${ip}:3000/ip/${id}`,
@@ -161,5 +174,20 @@ $(document).on('click', '.edit', ev => {
     };
     $.ajax(settings).done(function (responseText) {
         console.log(responseText);
+        $("#ip_edit").val(data[0].ip)
+        let options = document.querySelector("#type_edit").children;
+        let optionsE = document.querySelector("#entity_edit").children;
+        for (let i = 0; i < options.length; i++) {
+            if (options.item(i).value == data[0].type) {
+                options.item(i).setAttribute("selected", "true");
+            }
+        }
+        for (let i = 0; i < optionsE.length; i++) {
+            if (optionsE.item(i).value == data[0].id_entity) {
+                optionsE.item(i).setAttribute("selected", "true");
+            }
+        }
+        $('#edit').data('id', id)
+        $(".edit_ip").modal("show");
     });
 })
