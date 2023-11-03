@@ -760,5 +760,21 @@ if (path.includes("/admin/users/")) {
 } else if (path.includes("/admin/database/")) {
   getDataSettings()
 } else if (path.includes("/admin/authorization/")) {
+  var settings = {
+    url: `http://${ip}:3000/node/env/`,
+    method: "GET",
+    timeout: 0,
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+      "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+    },
+  };
+  $.ajax(settings).done(function (responseText) {
+    console.log(responseText);
+    $('.c_mode').val(responseText)
+  });
   getDataIP
 }
