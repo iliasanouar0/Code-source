@@ -49,7 +49,7 @@ $(document).on('click', '#add', () => {
     let ip_add = $('#ip_add').val()
     let type_add = $("#type_add").val();
     let entity_add = $("#entity_add").val();
-    let note_add = $('#note_add')
+    let note_add = $('#note_add').val()
     if (ip_add == '' || type_add == '' || entity_add == '' || note_add == '') {
         swal.fire('all felids required')
         return
