@@ -641,6 +641,8 @@ const getDataIP = $("#ipAuthorization").DataTable({
   deferRender: true,
   destroy: true,
   autoWidth: false,
+  pageLength: 5,
+  lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
   ajax: {
     url: `http://${ip}:3000/ip/`,
     dataSrc: '',
