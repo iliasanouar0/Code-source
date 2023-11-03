@@ -10,7 +10,7 @@ const WebSocket = require('ws');
 const setTimeout = require('timers/promises');
 let time = setTimeout.setTimeout
 const url = require('node:url');
-const ipfilter = require('express-ipfilter').IpFilter
+const ipFilter = require('express-ipfilter').IpFilter
 
 Date.prototype.toDateInputValue = function () {
   var local = new Date(this);
@@ -47,19 +47,16 @@ app.options("*", cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 // Allow the following IPs
-const ips = ['127.0.0.1', '209.170.73.224']
-// Create the server
-let clientIp = function (req, res) {
-  let ip = req.headers['x-forwarded-for'] ? (req.headers['x-forwarded-for']).split(',')[0] : ""
-  if (ip.startsWith('::ffff:')) { return ip.substring(7) }
-  return ip
-}
+const ips = ['127.0.0.1', '209.170.73.224', '196.70.254.73', '::ffff:196.70.254.73']
 
+let clientIp = function (req, res) {
+  return req.headers['x-forwarded-for'] ? (req.headers['x-forwarded-for']).split(',')[0] : "" // this should pick the first x-forwarded-for ip address
+}
 app.use(
-  ipfilter({
+  ipFilter({
     detectIp: clientIp,
     forbidden: 'You are not authorized to access this page.',
-    filter: ips,
+    filter: allowlist_ips,
   })
 )
 app.use((req, res, next) => {
