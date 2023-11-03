@@ -18,6 +18,33 @@ $(document).on('click', '#add_ip', () => {
     })
 })
 
+const addIp = (data) => {
+    var settings = {
+        url: `http://${ip}:3000/ip/`,
+        method: "POST",
+        timeout: 0,
+        data: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+                "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+            "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+        },
+    };
+    $.ajax(settings).done(function (responseText) {
+        console.log(responseText);
+        // Swal.fire({
+        //     title: "ip added successfully!",
+        //     text: responseText,
+        //     icon: "success",
+        //     confirmButtonText: "ok",
+        // }).then(() => {
+        //     // getDataIP.ajax.reload(null, false)
+        // });
+    });
+};
+
 $(document).on('click', '#add', () => {
     let ip_add = $('#ip_add').val()
     let type_add = $("#type_add").val();
@@ -27,5 +54,14 @@ $(document).on('click', '#add', () => {
         swal.fire('all felids required')
         return
     }
-    
+    let data = {
+        ip: `${ip_add}`,
+        type: `${type_add}`,
+        entity: `${entity_add}`,
+        note: `${note_add}`,
+        status: `idel`,
+        created: `${new Date()}`,
+        updated: `${new Date()}`
+    }
+    addIp(data)
 })
