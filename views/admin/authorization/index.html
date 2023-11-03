@@ -47,12 +47,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Settings</h1>
+                            <h1 class="m-0">IP authorization</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Settings</li>
+                                <li class="breadcrumb-item active">authorization</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -70,15 +70,30 @@
                                     <h4>Tables</h4>
                                 </div>
                                 <div class="col text-right">
-                                    <button class="btn btn-primary" id="refresh">Refresh</button>
-                                    <button class="btn btn-success" id="add_table">Add Table</button>
-                                    <button class="btn btn-outline-dark notes" role="button">Create table notes</button>
+                                    <button class="btn btn-success" id="add_table">Add IP</button>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="col-12 tables" id="accordion">
-                            </div>
+                            <table id="example1" style="width:100%" class="display">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" name="checkbox" class="checkAll"></th>
+                                        <th>ID</th>
+                                        <th>Count</th>
+                                        <th>User</th>
+                                        <th>List</th>
+                                        <th>ISP</th>
+                                        <th>Status</th>
+                                        <th>Process</th>
+                                        <th>Start at</th>
+                                        <th>End at</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="Process_data"></tbody>
+
+                            </table>
                         </div>
                     </div>
                     <!-- /.container-fluid -->
@@ -98,139 +113,6 @@
         <!-- /.control-sidebar -->
 
         <!-- modal -->
-        <div class="modal fade add_table" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Add Table</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-pane fade active show">
-                                <p><strong>Add Table Form GUI/CLI</strong></p>
-                                <div class="row">
-                                    <form class="justify-content-center text-center">
-                                        <div class="input_way">
-                                            <div class="row align-items-center mb-3">
-                                                <div class="col-5">
-                                                    <input type="text" class="form-control" id="tname"
-                                                        placeholder="Enter Table name">
-                                                </div>
-                                                <div class="col-5">
-                                                    <input type="number" class="form-control" id="cnum"
-                                                        placeholder="Enter Column number">
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-primary" id="show_table">Create</button>
-                                                </div>
-                                            </div>
-                                            <div class="row w-100 mb-3">
-                                                <div class="col Columns" style="display: none;">
-                                                    <table class="table table-striped align-middle">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Type</th>
-                                                                <th>Length/Values</th>
-                                                                <th>Default</th>
-                                                                <th>Index</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="table_columns">
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- <div style="display: none;" class="text_way mb-3">
-                                            <textarea class="form-control" name="sqlTable" id="sqlCreateTable"
-                                                placeholder="CREATE TABLE ..." cols="30" rows="10"></textarea>
-                                        </div> -->
-                                        <!-- <div class="row">
-                                            <div class="col text-right">
-                                                <button type="button" class="btn btn-outline-dark switch_inp">
-                                                    <i class="fa fa-list"></i>
-                                                </button>
-                                            </div>
-                                        </div> -->
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-center">
-                            <button type="button" class="btn btn-outline-success" id="t_add">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade add_column" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Add Columns</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-pane fade active show">
-                                <p><strong>Add Columns Form GUI/CLI</strong></p>
-                                <div class="row">
-                                    <form class="justify-content-center text-center">
-                                        <div class="input_way">
-                                            <div class="row align-items-center mb-3">
-                                                <div class="col-5">
-                                                    <input type="text" class="form-control" id="a_tname"
-                                                        placeholder="Enter Table name" readonly>
-                                                </div>
-                                                <div class="col-5">
-                                                    <input type="number" class="form-control" id="a_cnum"
-                                                        placeholder="Enter Column number">
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-primary" id="a_show_table">Create</button>
-                                                </div>
-                                            </div>
-                                            <div class="row w-100 mb-3">
-                                                <div class="col Columns" style="display: none;">
-                                                    <table class="table table-striped align-middle">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Type</th>
-                                                                <th>Length/Values</th>
-                                                                <th>Default</th>
-                                                                <th>Index</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="a_table_columns">
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- <div style="display: none;" class="text_way mb-3">
-                                            <textarea class="form-control" name="sqlTable" id="sqlCreateTable"
-                                                placeholder="CREATE TABLE ..." cols="30" rows="10"></textarea>
-                                        </div> -->
-                                        <!-- <div class="row">
-                                            <div class="col text-right">
-                                                <button type="button" class="btn btn-outline-dark switch_inp">
-                                                    <i class="fa fa-list"></i>
-                                                </button>
-                                            </div>
-                                        </div> -->
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-center">
-                            <button type="button" class="btn btn-outline-success" id="c_add">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="modal fade user_data" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -286,139 +168,6 @@
             </div>
 
         </div>
-
-        <div class="modal fade" id="notes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Create table notes</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row justify-content-center">
-                            <div class="col text-center">
-                                <h4>Manual</h4>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <h6>* Required files after adding a table :</h6>
-                            <div class="col">
-                                <ul class="list-group list-group-flush bg-dark">
-                                    <li class="list-group-item">Server manager :
-                                        <code class="bg-dark">/server/managers/--filename--Manager.js</code>, The config
-                                        files and dependencies of managers .
-                                    </li>
-                                    <li class="list-group-item">Exporting the CRUD and management function from manager
-                                        .</li>
-                                    <li class="list-group-item">Adding app methods in main express app
-                                        <span class="text-danger">'API'</span> : <code
-                                            class="bg-dark">/server/index.js</code> .
-                                    </li>
-                                    <li class="list-group-item">User interface manager :
-                                        <code class="bg-dark">/views/assets/script/--filename--Uiscript.js</code> .
-                                    </li>
-                                    <li class="list-group-item">View folder and index file : <code
-                                            class="bg-dark">/views/admin/--filename--/index.html</code> , dependencies
-                                        adding .</li>
-                                    <li class="list-group-item">Sidebar link : <code
-                                            class="bg-dark">/views/layout/admin_sidebar.html</code> , customized icon
-                                        and
-                                        order .</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <h6>* <strong class="text-success">config.sh</strong> and automatic table configuration :
-                            </h6>
-                            <div class="col">
-                                <p>To automatically add the needed files and folder in the application main root :</p>
-                                <ol>
-                                    <li class="mb-3">Having the application main folder locally .</li>
-                                    <li class="list-group-item mb-3">
-                                        <div class="row">
-                                            <div class="col">
-                                                <img src="../../assets/images/test.png" alt="show">
-                                            </div>
-                                            <div class="col">
-                                                <img src="../../assets/images/test2.png" alt="show">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">Open terminal <span class="bg-dark text-success">(GIT ,CMD
-                                            ,SHELL)</span> and go
-                                        to folder direction .</li>
-                                    <li class="list-group-item mb-3">
-                                        <div class="row">
-                                            <div class="col">
-                                                <p>CMD (Command Prompt)</p>
-                                                <img src="../../assets/images/cmd.png" alt="show">
-                                            </div>
-                                            <div class="col">
-                                                <p>GIT</p>
-                                                <img src="../../assets/images/git.png" alt="show">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">Run the <strong class="text-success">config.sh</strong> script
-                                        using <strong>sh</strong> command</li>
-                                    <li class="list-group-item mb-3">
-                                        <div class="row">
-                                            <div class="col">
-                                                <p>CMD (Command Prompt)</p>
-                                                <img src="../../assets/images/sh.png" alt="show">
-                                            </div>
-                                            <div class="col">
-                                                <p>GIT</p>
-                                                <img src="../../assets/images/sh-git.png" alt="show">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">Write filename or table name you added.</li>
-                                    <li class="mb-3">After finishing without errors run <strong
-                                            class="text-success">make.sh</strong> to commit and push changes.</li>
-                                    <li class="list-group-item mb-3">
-                                        <div class="row">
-                                            <div class="col">
-                                                <p>CMD (Command Prompt)</p>
-                                                <img src="../../assets/images/sh -cmd-make.png" alt="show">
-                                            </div>
-                                            <div class="col">
-                                                <p>GIT</p>
-                                                <img src="../../assets/images/sh-git-make.png" alt="show">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">You can now pull the modifications to server with your secure shell
-                                        terminal</li>
-                                    <li class="list-group-item mb-3">
-                                        <div class="row">
-                                            <div class="col">
-                                                <p>ZOK terminal</p>
-                                                <img src="../../assets/images/app.png" alt="show">
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <h6>** <strong class="text-danger">Notes</strong> !!</h6>
-                                <ul>
-                                    <li>Never run the scripts in server side in case of errors (errors in server side
-                                        may cause a crush in system)</li>
-                                    <li>In local we can control if we will push the changes or not !!</li>
-                                    <li>Be sure before running the config script</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- /. modal -->
         <!-- Main Footer -->
         <footer class="main-footer">
@@ -448,7 +197,7 @@
 
     <script src="../../assets/script/render_admin.js"></script>
     <!-- main admin script -->
-    <script src="../../assets/script/settingUiscript.js"></script>
+    <script src="../../assets/script/authorizationUiscript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
