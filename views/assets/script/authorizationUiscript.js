@@ -174,16 +174,17 @@ $(document).on('click', '.edit', ev => {
     };
     $.ajax(settings).done(function (responseText) {
         console.log(responseText);
-        $("#ip_edit").val(data[0].ip)
+        $("#ip_edit").val(responseText[0].ip)
+        $("#note_edit").val(responseText[0].note)
         let options = document.querySelector("#type_edit").children;
         let optionsE = document.querySelector("#entity_edit").children;
         for (let i = 0; i < options.length; i++) {
-            if (options.item(i).value == data[0].type) {
+            if (options.item(i).value == responseText[0].type) {
                 options.item(i).setAttribute("selected", "true");
             }
         }
         for (let i = 0; i < optionsE.length; i++) {
-            if (optionsE.item(i).value == data[0].id_entity) {
+            if (optionsE.item(i).value == responseText[0].id_entity) {
                 optionsE.item(i).setAttribute("selected", "true");
             }
         }
