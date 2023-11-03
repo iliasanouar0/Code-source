@@ -56,7 +56,7 @@ app.use(
   ipFilter({
     detectIp: clientIp,
     forbidden: 'You are not authorized to access this page.',
-    filter: allowlist_ips,
+    filter: ips,
   })
 )
 app.use((req, res, next) => {
