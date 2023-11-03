@@ -19,6 +19,17 @@ const addIp = (req, res) => {
     })
 }
 
+const getIps = (req, res) => {
+    let sql = 'SELECT authorizedips.*,entity.nom FROM authorizedips JOIN entity ON entity.id_entity=authorizedips.entityid'
+    pool.query(sql, (e, r) => {
+        if (e) {
+            res.status(200).send(e.message)
+        }
+        res.status(200).send(r.rows)
+    })
+}
+
 module.exports = {
     addIp,
+    getIps
 }
