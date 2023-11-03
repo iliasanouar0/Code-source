@@ -49,8 +49,18 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 // Allow the following IPs
 const ips = ['127.0.0.1', '209.170.73.224' /*, '196.70.254.73'*/]
 
+const filterIp = (ips) => {
+  // if (process.env.NODE_ENV) {
+
+  // }
+  console.log(process.env.NODE_ENV);
+  console.log(ips);
+}
+
+
 app.use(
-  ipFilter(ips, { mode: 'allow' })
+  filterIp(ips)
+  // ipFilter(ips, { mode: 'allow' })
 )
 
 app.use((req, res, next) => {
