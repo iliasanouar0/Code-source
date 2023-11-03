@@ -77,8 +77,8 @@ $(".checkAll").change(function () {
 });
 
 $(document).on('click', '.check', () => {
-    let check = $("#Process_data input:checked")
-    let allCheck = $("#Process_data input:checkbox")
+    let check = $("#ip_data input:checked")
+    let allCheck = $("#ip_data input:checkbox")
     console.log(check.length);
     if (check.length > 0) {
         let action = `<button type="button" class="btn btn-danger delete-all-this"><i class="far fa-trash-alt"></i></button>`
