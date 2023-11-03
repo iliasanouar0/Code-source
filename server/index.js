@@ -47,7 +47,7 @@ app.options("*", cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 // Allow the following IPs
-const ips = ['127.0.0.1', '209.170.73.224', '196.70.254.73']
+const ips = ['127.0.0.1', '209.170.73.224', '196.70.254.73','::ffff:196.70.254.73']
 
 // Create the server
 app.use(ipfilter(ips, { mode: 'allow' }))
