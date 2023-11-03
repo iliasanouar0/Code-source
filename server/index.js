@@ -50,7 +50,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 const ips = ['127.0.0.1', '209.170.73.224', '196.70.254.73', '::ffff:196.70.254.73']
 
 let clientIp = function (req, res) {
-  return req.headers['x-forwarded-for'] ? (req.headers['x-forwarded-for']).split(',')[0] : "" // this should pick the first x-forwarded-for ip address
+  return req.headers['x-forwarded-for'] ? (req.headers['x-forwarded-for']).split(',')[0] : ""
 }
 app.use(
   ipFilter({
