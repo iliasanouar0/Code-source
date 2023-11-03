@@ -72,13 +72,12 @@ app.get('/ap/ip/', (req, res) => {
   res.status(200).send(req.ip)
 })
 
-app.get("/ip", (req, res) => {
+app.get("/ip/test/", (req, res) => {
   console.log(req.ip)
   let ip = req.ip.split(':');
   let ip_details = req.socket.address();
   console.log(ip_details);
   // { address: '::ffff:127.0.0.1', family: 'IPv6', port: 3001 
-
   console.log(ip[3]);//127.0.0.1
   res.json(ip[3]);
 })
