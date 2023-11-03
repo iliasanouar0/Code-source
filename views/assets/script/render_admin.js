@@ -52,6 +52,8 @@ fetch(adminSidebarUrl)
     const process = document.querySelector(".process");
     const lists = document.querySelector(".lists");
     const settings = document.querySelector('.setting')
+    const authorization = document.querySelector('.authorization')
+
     if (path.includes('views')) {
       if (path == "/views/admin/") {
         home.classList.add("active");
@@ -96,6 +98,14 @@ fetch(adminSidebarUrl)
         process.setAttribute('href', '../process/')
         users.setAttribute('href', '../users/')
         lists.setAttribute("href", '../lists/')
+      } else if (path == "/views/admin/authorization/") {
+        home.setAttribute("href", "../");
+        authorization.classList.add("active");
+        authorization.setAttribute("href", "./");
+        entities.setAttribute("href", "../entities/");
+        process.setAttribute('href', '../process/')
+        users.setAttribute('href', '../users/')
+        lists.setAttribute("href", '../lists/')
       }
     }
   });
@@ -108,7 +118,6 @@ fetch(adminNavbarUrl)
     navbarContainer.innerHTML = html;
   });
 
-
 function msToMnSc(ms) {
   var minutes = Math.floor(ms / 60000);
   var seconds = ((ms % 60000) / 1000).toFixed(0);
@@ -118,7 +127,6 @@ function msToMnSc(ms) {
       minutes + ":" + (seconds < 10 ? "0" : "") + seconds
   );
 }
-
 
 const getData = $("#example1").DataTable({
   responsive: true,
@@ -291,7 +299,6 @@ const getData = $("#example1").DataTable({
   }
 })
 
-
 const getDatalist = $("#listTable").DataTable({
   responsive: true,
   deferRender: true,
@@ -384,7 +391,6 @@ const getDatalist = $("#listTable").DataTable({
   ],
 })
 
-
 const getDataEntity = $("#entityTable").DataTable({
   responsive: true,
   deferRender: true,
@@ -440,7 +446,6 @@ const getDataEntity = $("#entityTable").DataTable({
     }
   ],
 })
-
 
 const getDataUser = $("#userTable").DataTable({
   responsive: true,
