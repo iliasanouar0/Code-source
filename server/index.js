@@ -57,9 +57,9 @@ if (result.error) {
 let mode = result.parsed.NODE_ENV
 console.log(mode);
 
-app.use((err, req, res, _next) => {
-  ipFilter(ips, { mode: 'allow' }),
-    console.log('Error handler', err)
+app.use(() => {
+  ipFilter(ips, { mode: 'allow' })
+  console.log('Error handler', err)
   if (err instanceof IpDeniedError) {
     res.status(401)
   } else {
