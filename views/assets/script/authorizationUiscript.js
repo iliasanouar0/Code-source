@@ -38,8 +38,9 @@ const addIp = (data) => {
             text: responseText,
             confirmButtonText: "ok",
         })
-        $('input').val('');
         getDataIP.ajax.reload(null, false)
+        $(".add_ip").modal("show");
+        $('input').val('');
     });
 };
 
