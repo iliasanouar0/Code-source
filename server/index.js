@@ -65,6 +65,7 @@ app.use((err, req, res, _next) => {
   if (err instanceof IpDeniedError) {
     res.status(401)
   } else {
+    location.href='test'
     res.status(err.status || 500)
   }
   res.send({
