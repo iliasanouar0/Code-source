@@ -52,7 +52,7 @@ const ips = ['127.0.0.1', '209.170.73.224']
 // Create the server
 app.use(ipfilter(ips, { mode: 'allow' }))
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
   next();
 });
