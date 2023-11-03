@@ -1,4 +1,4 @@
-let user = JSON.parse(sessionStorage.user);
+// let user = JSON.parse(sessionStorage.user);
 console.log('welcome to settings');
 
 $(document).on('click', '#refresh', () => {
@@ -479,9 +479,9 @@ $(document).on('click', '#c_add', () => {
             } else if (column[2] == 'TIMESTAMP') {
                 if (column[4] == 'CURRENT_TIMESTAMP') {
                     if (column[5] == 'none_0') {
-                        sql += `${column[1]} ${column[2]} DEFAULT ${column[4]}`
+                        sql += `ADD ${column[1]} ${column[2]} DEFAULT ${column[4]}`
                     } else {
-                        sql += `${column[1]} ${column[2]} DEFAULT ${column[4]} ${column[5]}`
+                        sql += `ADD ${column[1]} ${column[2]} DEFAULT ${column[4]} ${column[5]}`
                     }
                 }
             } else {

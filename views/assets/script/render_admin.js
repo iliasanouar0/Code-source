@@ -52,6 +52,8 @@ fetch(adminSidebarUrl)
     const process = document.querySelector(".process");
     const lists = document.querySelector(".lists");
     const settings = document.querySelector('.setting')
+    const authorization = document.querySelector('.authorization')
+
     if (path.includes('views')) {
       if (path == "/views/admin/") {
         home.classList.add("active");
@@ -64,6 +66,7 @@ fetch(adminSidebarUrl)
         process.setAttribute('href', '../process/')
         lists.setAttribute('href', '../lists/')
         settings.setAttribute("href", '../database/')
+        authorization.setAttribute("href", '../authorization/')
       } else if (path == "/views/admin/users/") {
         home.setAttribute("href", "../");
         users.classList.add("active");
@@ -72,6 +75,7 @@ fetch(adminSidebarUrl)
         process.setAttribute('href', '../process/')
         lists.setAttribute('href', '../lists/')
         settings.setAttribute("href", '../database/')
+        authorization.setAttribute("href", '../authorization/')
       } else if (path == "/views/admin/process/") {
         home.setAttribute("href", "../");
         process.classList.add("active");
@@ -80,6 +84,7 @@ fetch(adminSidebarUrl)
         users.setAttribute("href", "../users/");
         lists.setAttribute('href', '../lists/')
         settings.setAttribute("href", '../database/')
+        authorization.setAttribute("href", '../authorization/')
       } else if (path == "/views/admin/lists/") {
         home.setAttribute("href", "../");
         lists.classList.add("active");
@@ -88,6 +93,7 @@ fetch(adminSidebarUrl)
         process.setAttribute('href', '../process/')
         users.setAttribute('href', '../users/')
         settings.setAttribute("href", '../database/')
+        authorization.setAttribute("href", '../authorization/')
       } else if (path == "/views/admin/database/") {
         home.setAttribute("href", "../");
         settings.classList.add("active");
@@ -96,10 +102,19 @@ fetch(adminSidebarUrl)
         process.setAttribute('href', '../process/')
         users.setAttribute('href', '../users/')
         lists.setAttribute("href", '../lists/')
+        authorization.setAttribute("href", '../authorization/')
+      } else if (path == "/views/admin/authorization/") {
+        home.setAttribute("href", "../");
+        authorization.classList.add("active");
+        authorization.setAttribute("href", "./");
+        entities.setAttribute("href", "../entities/");
+        process.setAttribute('href', '../process/')
+        users.setAttribute('href', '../users/')
+        lists.setAttribute("href", '../lists/')
+        settings.setAttribute("href", '../database/')
       }
     }
   });
-
 
 fetch(adminNavbarUrl)
   .then((response) => response.text())
@@ -107,7 +122,6 @@ fetch(adminNavbarUrl)
     const navbarContainer = document.querySelector(".admin-navbar");
     navbarContainer.innerHTML = html;
   });
-
 
 function msToMnSc(ms) {
   var minutes = Math.floor(ms / 60000);
@@ -118,7 +132,6 @@ function msToMnSc(ms) {
       minutes + ":" + (seconds < 10 ? "0" : "") + seconds
   );
 }
-
 
 const getData = $("#example1").DataTable({
   responsive: true,
@@ -291,7 +304,6 @@ const getData = $("#example1").DataTable({
   }
 })
 
-
 const getDatalist = $("#listTable").DataTable({
   responsive: true,
   deferRender: true,
@@ -384,7 +396,6 @@ const getDatalist = $("#listTable").DataTable({
   ],
 })
 
-
 const getDataEntity = $("#entityTable").DataTable({
   responsive: true,
   deferRender: true,
@@ -440,7 +451,6 @@ const getDataEntity = $("#entityTable").DataTable({
     }
   ],
 })
-
 
 const getDataUser = $("#userTable").DataTable({
   responsive: true,
@@ -626,6 +636,121 @@ const getDataSettings = () => {
     })
 }
 
+const getDataIP = $("#ipAuthorization").DataTable({
+  responsive: true,
+  deferRender: true,
+  destroy: true,
+  autoWidth: false,
+  pageLength: 5,
+  lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+  ajax: {
+    url: `http://${ip}:3000/ip/`,
+    dataSrc: '',
+  },
+  columns: [
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      defaultContent: "",
+      render: function (data, type, row) {
+        return `<input type="checkbox" class="check" value="${row.id}">`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0">
+          <div class="card-body p-0 text-center">
+          ${row.ip}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.nom}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.type}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.status}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        let add = new Date(row.createdat).toLocaleString()
+        return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${add}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        let add = new Date(row.updatedat).toLocaleString()
+        return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${add}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (row) {
+        return `<div class="text-center">
+          <button type="button" class="btn btn-success edit"  data-id="${row.id}"><i class="fas fa-edit"></i></button>
+          </div>`
+      }
+    }
+  ],
+})
+
+const getMode = () => {
+  var settings = {
+    url: `http://${ip}:3000/node/env/`,
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+      "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+    }
+  };
+  $.ajax(settings).done(function (responseText) {
+    if (responseText == 'production') {
+      $('#mode').attr('checked','true')
+    }
+    $('.mode').html(responseText)
+  });
+}
+
 if (path.includes("/admin/users/")) {
   getDataUser
 } else if (path.includes("/admin/entities/")) {
@@ -653,5 +778,7 @@ if (path.includes("/admin/users/")) {
   getDatalist
 } else if (path.includes("/admin/database/")) {
   getDataSettings()
+} else if (path.includes("/admin/authorization/")) {
+  getDataIP
+  getMode()
 }
-

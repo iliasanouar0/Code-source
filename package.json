@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "auth0-id-generator": "^0.2.0",
-    "gsap": "^3.12.2"
+    "gsap": "^3.12.2",
+    "inputmask": "^5.0.8"
   }
 }

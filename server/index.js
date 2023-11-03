@@ -10,6 +10,7 @@ const WebSocket = require('ws');
 const setTimeout = require('timers/promises');
 let time = setTimeout.setTimeout
 const url = require('node:url');
+const ipFilter = require('express-ipfilter').IpFilter
 
 Date.prototype.toDateInputValue = function () {
   var local = new Date(this);
@@ -35,20 +36,39 @@ const installation = require("./managers/installation");
 const processStateManager = require('./managers/processStateManager');
 const resultManager = require("./managers/resultManager")
 const settingsManager = require("./managers/settingsManager")
+const authorizationManager = require('./managers/authorizationManager')
+const nodeEnvManager = require('./managers/nodeEnvManager')
 
 const port = 3000;
 const app = express(); // setup express application
-
+app.set('trust proxy', true)
 app.options("*", cors());
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
+// Allow the following IPs
+const ips = ['127.0.0.1', '209.170.73.224', '196.70.254.73', '::ffff:196.70.254.73']
 
+let clientIp = function (req, res) {
+  return req.headers['x-forwarded-for'] ? (req.headers['x-forwarded-for']).split(',')[0] : ""
+}
+app.use(
+  ipFilter({
+    detectIp: clientIp,
+    forbidden: 'You are not authorized to access this page.',
+    filter: ips,
+  })
+)
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With, Content-Type, Accept");
   next();
 });
+app.get('/ap/ip/', (req, res) => {
+  let ip = req.headers['x-forwarded-for'] ? (req.headers['x-forwarded-for']).split(',')[0] : ""
+  console.log(ip);
+  res.status(200).send(req.ip)
+})
 /**
  * * Websocket => 
  * ? wsi :
@@ -507,7 +527,16 @@ app.post("/settings/delete/", settingsManager.deleteTable)
 app.post("/settings/add/", settingsManager.addColumns)
 app.post("/settings/delete/column/", settingsManager.deleteColumn)
 
+// IP API
+app.post('/ip/', authorizationManager.addIp)
+app.get('/ip/', authorizationManager.getIps)
+app.get('/ip/:id', authorizationManager.getIpById)
+app.patch('/ip/', authorizationManager.deleteIp)
+app.put('/ip/', authorizationManager.editIp)
 
+//node API 
+app.get('/node/env/', nodeEnvManager.getMode)
+app.post('/node/env/', nodeEnvManager.setMode)
 app.listen(port, () => {
   console.log(`Server running at ${port}`);
 });

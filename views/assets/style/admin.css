@@ -139,3 +139,27 @@ i.fa-redo {
 ul.ui-autocomplete {
   z-index: 1100;
 }
+
+.custom-control-input:focus~.custom-control-label::before {
+  border-color: green !important;
+  box-shadow: 0 0 0 0.2rem rgb(122, 255, 122) !important;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  border-color: green !important;
+  background-color: green !important;
+}
+
+.custom-control-input:active~.custom-control-label::before {
+  background-color: green !important;
+  border-color: green !important;
+}
+
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+  border-color: green !important;
+}
+
+.custom-control-input-green:not(:disabled):active~.custom-control-label::before {
+  background-color: green !important;
+  border-color: green !important;
+}
