@@ -40,7 +40,7 @@ const nodeEnvManager = require('./managers/nodeEnvManager')
 
 const port = 3000;
 const app = express(); // setup express application
-
+app.set('trust proxy', true)
 app.options("*", cors());
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -51,6 +51,9 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+app.get('/ap/ip/', (req, res) => {
+  res.status(200).send(req.ip)
+})
 /**
  * * Websocket => 
  * ? wsi :
