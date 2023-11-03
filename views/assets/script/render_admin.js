@@ -116,7 +116,6 @@ fetch(adminSidebarUrl)
     }
   });
 
-
 fetch(adminNavbarUrl)
   .then((response) => response.text())
   .then((html) => {
@@ -761,4 +760,3 @@ if (path.includes("/admin/users/")) {
 } else if (path.includes("/admin/authorization/")) {
   getDataIP
 }
-
