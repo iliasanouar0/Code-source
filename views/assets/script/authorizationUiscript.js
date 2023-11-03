@@ -148,5 +148,18 @@ $(document).on('click', '.delete-all-this', () => {
 
 $(document).on('click', '.edit', ev => {
     let id = $(ev.target).data('id')
-    console.log(id);
+    var settings = {
+        url: `http://${ip}:3000/ip/${id}`,
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+                "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+            "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+        },
+    };
+    $.ajax(settings).done(function (responseText) {
+        console.log(responseText);
+    });
 })
