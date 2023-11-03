@@ -66,6 +66,7 @@ fetch(adminSidebarUrl)
         process.setAttribute('href', '../process/')
         lists.setAttribute('href', '../lists/')
         settings.setAttribute("href", '../database/')
+        authorization.setAttribute("href", '../authorization/')
       } else if (path == "/views/admin/users/") {
         home.setAttribute("href", "../");
         users.classList.add("active");
@@ -74,6 +75,7 @@ fetch(adminSidebarUrl)
         process.setAttribute('href', '../process/')
         lists.setAttribute('href', '../lists/')
         settings.setAttribute("href", '../database/')
+        authorization.setAttribute("href", '../authorization/')
       } else if (path == "/views/admin/process/") {
         home.setAttribute("href", "../");
         process.classList.add("active");
@@ -82,6 +84,7 @@ fetch(adminSidebarUrl)
         users.setAttribute("href", "../users/");
         lists.setAttribute('href', '../lists/')
         settings.setAttribute("href", '../database/')
+        authorization.setAttribute("href", '../authorization/')
       } else if (path == "/views/admin/lists/") {
         home.setAttribute("href", "../");
         lists.classList.add("active");
@@ -90,6 +93,7 @@ fetch(adminSidebarUrl)
         process.setAttribute('href', '../process/')
         users.setAttribute('href', '../users/')
         settings.setAttribute("href", '../database/')
+        authorization.setAttribute("href", '../authorization/')
       } else if (path == "/views/admin/database/") {
         home.setAttribute("href", "../");
         settings.classList.add("active");
@@ -98,6 +102,7 @@ fetch(adminSidebarUrl)
         process.setAttribute('href', '../process/')
         users.setAttribute('href', '../users/')
         lists.setAttribute("href", '../lists/')
+        authorization.setAttribute("href", '../authorization/')
       } else if (path == "/views/admin/authorization/") {
         home.setAttribute("href", "../");
         authorization.classList.add("active");
