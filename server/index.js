@@ -3,6 +3,7 @@
  */
 'use strict'
 const express = require("express");
+let dotenv = require('dotenv')
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require('fs')
@@ -59,8 +60,8 @@ const filterIp = (ips) => {
 
 
 app.use(
-  filterIp(ips)
-  // ipFilter(ips, { mode: 'allow' })
+  // filterIp(ips),
+  ipFilter(ips, { mode: 'allow' })
 )
 
 app.use((req, res, next) => {
