@@ -145,3 +145,7 @@ $(document).on('click', '.delete-all-this', () => {
         }
     })
 })
+
+$(document).on('click', '.edit', ev => {
+    let id = $(ev.target).data('id')
+})

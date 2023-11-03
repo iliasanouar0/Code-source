@@ -510,6 +510,7 @@ app.post("/settings/delete/column/", settingsManager.deleteColumn)
 // IP API
 app.post('/ip/', authorizationManager.addIp)
 app.get('/ip/', authorizationManager.getIps)
+app.get('/ip/:id', authorizationManager.getIpById)
 app.patch('/ip/', authorizationManager.deleteIp)
 
 app.listen(port, () => {

@@ -29,6 +29,17 @@ const getIps = (req, res) => {
     })
 }
 
+const getIpById = (req, res) => {
+    let id = (req.params.id)
+    let sql = 'SELECT authorizedips.*,entity.nom FROM authorizedips JOIN entity ON entity.id_entity=authorizedips.entityid WHERE id=$1'
+    pool.query(sql, [id], (e, r) => {
+        if (e) {
+            res.status(200).send(e.message)
+        }
+        res.status(200).send(r.rows)
+    })
+}
+
 const deleteIp = (request, response) => {
     const ides = (request.body);
     const sql = "DELETE FROM authorizedips WHERE id=$1";
@@ -47,5 +58,6 @@ const deleteIp = (request, response) => {
 module.exports = {
     addIp,
     getIps,
-    deleteIp
+    deleteIp,
+    getIpById
 }
