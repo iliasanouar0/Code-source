@@ -220,7 +220,6 @@ const editIp = (data) => {
 
 $(document).on('click', '#edit', ev => {
     let id = $(ev.target).data('id')
-    console.log(id);
     let ip_edit = $('#ip_edit').val()
     let type_edit = $("#type_edit").val();
     let entity_edit = $("#entity_edit").val();
@@ -239,6 +238,5 @@ $(document).on('click', '#edit', ev => {
         created: `${new Date()}`,
         updated: `${new Date()}`
     }
-    console.log(data);
     editIp(data)
 })
