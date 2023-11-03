@@ -56,24 +56,25 @@ if (result.error) {
 }
 let mode = result.parsed.NODE_ENV
 console.log(mode);
+if (mode != 'development') {
+  app.use(
+    ipFilter(ips, { mode: 'allow' })
+  )
 
-app.use(
-  ipFilter(ips, { mode: 'allow' })
-)
-
-app.use((err, req, res, _next) => {
-  if (err instanceof IpDeniedError) {
-    res.status(401)
-  } else {
-    location.href='test'
-    res.status(err.status || 500)
+  app.use((err, req, res, _next) => {
+    if (err instanceof IpDeniedError) {
+      res.status(401)
+    } else {
+      location.href = 'test'
+      res.status(err.status || 500)
+    }
+    res.send({
+      message: 'You shall not pass',
+      error: err
+    })
   }
-  res.send({
-    message: 'You shall not pass',
-    error: err
-  })
+  )
 }
-)
 
 
 app.use((req, res, next) => {
