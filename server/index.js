@@ -47,10 +47,10 @@ app.options("*", cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 // Allow the following IPs
-const ips = ['127.0.0.1', '209.170.73.224']
+// const ips = ['127.0.0.1', '209.170.73.224']
 
-// Create the server
-app.use(ipfilter(ips, { mode: 'allow' }))
+// // Create the server
+// app.use(ipfilter(ips, { mode: 'allow' }))
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
