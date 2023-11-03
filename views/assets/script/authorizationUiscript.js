@@ -40,7 +40,7 @@ const addIp = (data) => {
         })
         getDataIP.ajax.reload(null, false)
         // $(".add_ip").modal("show");
-        $('. add_ip input').val('');
+        $('.add_ip input').val('');
     });
 };
 
