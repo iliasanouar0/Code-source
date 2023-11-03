@@ -230,6 +230,7 @@ $(document).on('click', '#edit', ev => {
         return
     }
     let data = {
+        id: `${id}`,
         ip: `${ip_edit}`,
         type: `${type_edit}`,
         entity: `${entity_edit}`,
