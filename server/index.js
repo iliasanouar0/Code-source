@@ -12,6 +12,7 @@ const setTimeout = require('timers/promises');
 let time = setTimeout.setTimeout
 const url = require('node:url');
 const ipFilter = require('express-ipfilter').IpFilter
+const IpDeniedError = require('express-ipfilter').IpDeniedError
 
 Date.prototype.toDateInputValue = function () {
   var local = new Date(this);
