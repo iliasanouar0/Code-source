@@ -65,7 +65,8 @@ app.use((req, res, next) => {
   next();
 });
 app.get('/ap/ip/', (req, res) => {
-  console.log(clientIp(req, res))
+  let ip = req.headers['x-forwarded-for'] ? (req.headers['x-forwarded-for']).split(',')[0] : ""
+  console.log(ip);
   res.status(200).send(req.ip)
 })
 /**
