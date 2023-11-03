@@ -64,10 +64,23 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With, Content-Type, Accept");
   next();
 });
+
+
 app.get('/ap/ip/', (req, res) => {
   let ip = req.headers['x-forwarded-for'] ? (req.headers['x-forwarded-for']).split(',')[0] : ""
   console.log(ip);
   res.status(200).send(req.ip)
+})
+
+app.get("/ip", (req, res) => {
+  console.log(req.ip)
+  let ip = req.ip.split(':');
+  let ip_details = req.socket.address();
+  console.log(ip_details);
+  // { address: '::ffff:127.0.0.1', family: 'IPv6', port: 3001 
+
+  console.log(ip[3]);//127.0.0.1
+  res.json(ip[3]);
 })
 /**
  * * Websocket => 
