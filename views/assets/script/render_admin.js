@@ -637,6 +637,100 @@ const getDataSettings = () => {
     })
 }
 
+const getDataIP = $("#ipAuthorization").DataTable({
+  responsive: true,
+  deferRender: true,
+  destroy: true,
+  autoWidth: false,
+  ajax: {
+    url: `http://${ip}:3000/ip/`,
+    dataSrc: '',
+  },
+  //   <th><input type="checkbox" name="checkbox" class="checkAll"></th>
+  //   <th>IP</th>
+  //   <th>Team</th>
+  //   <th>status</th>
+  //   <th>Created</th>
+  //   <th>Updated</th>
+  //   <th>Action</th>
+  // </tr>
+  // {
+  //   "id": 1,
+  //   "ip": "111.111.111.111",
+  //   "type": "local",
+  //   "status": "idel",
+  //   "note": "test",
+  //   "entityid": 1,
+  //   "createdat": "2023-11-03T10:03:46.225Z",
+  //   "updatedat": "2023-11-03T10:03:46.225Z",
+  //   "nom": "GM2"
+  // },
+  columns: [
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      defaultContent: "",
+      render: function (data, type, row) {
+        return `<input type="checkbox" class="check" value="${row.id}">`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0">
+          <div class="card-body p-0 text-center">
+          ${row.ip}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.nom}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        let add = new Date(row.createdat).toLocaleString()
+        return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${add}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        let add = new Date(row.updatedat).toLocaleString()
+        return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${add}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (row) {
+        return `<div class="text-center">
+          <button type="button" class="btn btn-success edit"  data-id="${row.id_entity}"><i class="fas fa-edit"></i></button>
+        <button type="button" class="btn btn-danger delete" data-id="${row.id_entity}"><i class="far fa-trash-alt"></i></button>
+          </div>`
+      }
+    }
+  ],
+})
+
 if (path.includes("/admin/users/")) {
   getDataUser
 } else if (path.includes("/admin/entities/")) {
