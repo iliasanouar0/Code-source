@@ -745,7 +745,7 @@ const getMode = () => {
   };
   $.ajax(settings).done(function (responseText) {
     if (responseText == 'production') {
-      $('#mode').attr('checked')
+      $('#mode').attr('checked','true')
     }
     $('.mode').html(responseText)
   });
