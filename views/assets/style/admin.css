@@ -140,18 +140,6 @@ ul.ui-autocomplete {
   z-index: 1100;
 }
 
-.custom-control-input {
-  width: 3em;
-  height: 1em;
-}
-
-
-
-.custom-control-input::before {
-  width: 3em;
-  height: 1em;
-}
-
 .custom-control-input:focus~.custom-control-label::before {
   border-color: green !important;
   box-shadow: 0 0 0 0.2rem rgb(122, 255, 122) !important;
