@@ -76,10 +76,10 @@ app.get("/ip/test/", (req, res) => {
   console.log(req.ip)
   let ip = req.ip.split(':');
   let ip_details = req.socket.address();
-  res.json(ip_details);
+  console.log(ip_details);
   // { address: '::ffff:127.0.0.1', family: 'IPv6', port: 3001 
-  // console.log(ip[3]);//127.0.0.1
-  // res.json(ip[3]);
+  console.log(ip[3]);
+  res.json(ip[3]);
 })
 /**
  * * Websocket => 
