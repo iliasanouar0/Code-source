@@ -56,25 +56,20 @@ if (result.error) {
 }
 let mode = result.parsed.NODE_ENV
 console.log(mode);
-// if (mode === 'production') {
+
 app.use((err, req, res, _next) => {
-  console.log('Error handler', err)
+  ipFilter(ips, { mode: 'allow' }),
+    console.log('Error handler', err)
   if (err instanceof IpDeniedError) {
     res.status(401)
   } else {
     res.status(err.status || 500)
   }
-
   res.render('error', {
     message: 'You shall not pass',
     error: err
   })
-})
-// }
-
-app.use(
-  // filterIp(ips),
-  ipFilter(ips, { mode: 'allow' })
+}
 )
 
 app.use((req, res, next) => {
