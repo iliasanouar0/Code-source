@@ -224,7 +224,7 @@ $(document).on('click', '#edit', ev => {
     let type_edit = $("#type_edit").val();
     let entity_edit = $("#entity_edit").val();
     let note_edit = $('#note_edit').val()
-    if (ip_edit == '' || type_edit == '' || entity_edit == '' {
+    if (ip_edit == '' || type_edit == '' || entity_edit == '') {
         swal.fire('all felids required')
         return
     }
