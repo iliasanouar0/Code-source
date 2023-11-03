@@ -39,8 +39,8 @@ const addIp = (data) => {
             confirmButtonText: "ok",
         })
         getDataIP.ajax.reload(null, false)
-        $(".add_ip").modal("show");
-        $('input').val('');
+        // $(".add_ip").modal("show");
+        $('. add_ip input').val('');
     });
 };
 
