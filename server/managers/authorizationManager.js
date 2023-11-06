@@ -29,7 +29,7 @@ const getIps = (req, res) => {
     })
 }
 
-async function getIpsServer(mode) {
+const getIpsServer = async (mode) => {
     if (mode == 'development') {
         let sql = 'SELECT ip FROM authorizedips'
         const client = await pool.connect()
