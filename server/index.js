@@ -49,52 +49,39 @@ app.options("*", cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 
-// Allow the following IPs
-// ['127.0.0.1', '209.170.73.224' /*, '196.70.254.73'*/]
-
-
 const result = dotenv.config()
 if (result.error) {
   throw result.error
 }
 let mode = result.parsed.NODE_ENV
-// const allowedIp = []
-// const ips = async (mode) => {
-//   let ips = await authorizationManager.getIpsServer(mode)
-//   ips.forEach((ip) => {
-//     allowedIp.push(ip.ip)
-//   })
-//   console.log(allowedIp);
-// }
-// ips(mode)
-// console.log(allowedIp);
 
-if (mode == 'development') {
+
+const ips = async () => {
+  let ips = await authorizationManager.getIpsServer()
+  ips.forEach((ip) => {
+    allowedIp.push(ip.ip)
+  })
+  console.log(allowedIp);
+  app.use(
+    ipFilter(allowedIp, { mode: 'allow' })
+  )
+
+  app.use((err, req, res, _next) => {
+    if (err instanceof IpDeniedError) {
+      res.status(401)
+    } else {
+      location.href = 'test'
+      res.status(err.status || 500)
+    }
+    res.send({
+      message: 'You shall not pass',
+      error: err
+    })
+  })
+}
+
+if (mode != 'development') {
   const allowedIp = []
-  const ips = async () => {
-    let ips = await authorizationManager.getIpsServer()
-    console.log(ips);
-    ips.forEach((ip) => {
-      allowedIp.push(ip.ip)
-    })
-    console.log(allowedIp);
-    app.use(
-      ipFilter(allowedIp, { mode: 'allow' })
-    )
-
-    app.use((err, req, res, _next) => {
-      if (err instanceof IpDeniedError) {
-        res.status(401)
-      } else {
-        location.href = 'test'
-        res.status(err.status || 500)
-      }
-      res.send({
-        message: 'You shall not pass',
-        error: err
-      })
-    })
-  }
   ips()
 }
 
