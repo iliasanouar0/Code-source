@@ -66,19 +66,19 @@
                     redirect: 'follow'
                 };
 
-                fetch(`http://${ip}:3000/node/env/`, requestOptions)
-                    .then(response => {
-                        if (response.ok) {
-                            return response.json();
-                        } else {
-                            // Either one will work:
-                            throw new Error(response.status);
-                            // OR
-                            // return Promise.reject(response.status);
-                        }
-                    })
-                    .then(json => console.log("[Fetch Response]:", json))
-                    // .catch(err => console.error("[Fetch Error]:", err));
+                try {
+                    fetch(`http://${ip}:3000/node/env/`, requestOptions)
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json();
+                            } else {
+                                throw new Error(response.status);
+                            }
+                        })
+                        .then(json => console.log("[Fetch Response]:", json))
+                } catch (error) {
+                    console.log(error);
+                }
             },
             success: function () {
                 if (document.cookie == "confirmed=true") {
