@@ -64,16 +64,22 @@
                             "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
                         },
                         error: (e) => {
-                            console.log(e.message);
-                            console.log(e);
-                        }
+                            sessionStorage.setItem('auth', '0')
+                            $('.container').html('')
+                            $('.container').html('<h1>NO ACCESS<h1/>')
+                        },
                     };
                     $.ajax(settings).done(function (responseText) {
-                        console.log(responseText)
+                        if (responseText == 'development') {
+                            location.href = './views/authentication/'
+                        }
                     });
                 } catch (error) {
                     console.log(error.name);
                     console.log(error.message);
+                    sessionStorage.setItem('auth', '0')
+                    $('.container').html('')
+                    $('.container').html('<h1>NO ACCESS<h1/>')
                 }
             },
             success: function () {
