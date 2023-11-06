@@ -91,7 +91,7 @@ if (mode == 'production') {
 }
 app.use((err, req, res, _next) => {
   if (err instanceof IpDeniedError) {
-    res.status(401)
+    res.status(200)
   } else {
     res.status(err.status || 500)
   }
