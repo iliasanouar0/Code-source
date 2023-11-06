@@ -44,6 +44,8 @@ const nodeEnvManager = require('./managers/nodeEnvManager')
 const port = 3000;
 const app = express(); // setup express application
 
+
+app.set('trust proxy', true)
 app.options("*", cors());
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
