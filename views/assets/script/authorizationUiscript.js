@@ -252,7 +252,18 @@ $('#mode').change(() => {
             "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
         }
     };
-    $.ajax(settings).done(function (responseText) {
+    $.ajax(settings).done(console.log('changed'));
+    var settingsGET = {
+        url: `http://${ip}:3000/node/env/`,
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+            "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+        }
+    };
+    $.ajax(settingsGET).done(function (responseText) {
         $('.mode').html(responseText)
     });
 })
