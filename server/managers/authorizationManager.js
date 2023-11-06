@@ -32,7 +32,7 @@ const getIps = (req, res) => {
 const getIpsServer = async () => {
     let sql = 'SELECT ip FROM authorizedips'
     const client = await pool.connect()
-    const list = await client.query(sql, [id])
+    const list = await client.query(sql)
     client.release()
     return list.rows;
 }
