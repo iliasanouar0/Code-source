@@ -7,7 +7,7 @@ function getRootWebSitePath() {
   return webFolderFullPath;
 }
 let auth = JSON.parse(sessionStorage.auth)
-if (auth == 0) {
+if (auth == 0 || auth == 'undefined') {
   location.href = '/'
 }
 let storage = { ...localStorage }
