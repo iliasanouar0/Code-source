@@ -61,6 +61,9 @@
                     "headers": {
                         "Cookie": "redirect=1; testing=1"
                     },
+                    "error": (e) => {
+                        console.log(e);
+                    },
                 };
 
                 $.ajax(settings).done(function (response) {
