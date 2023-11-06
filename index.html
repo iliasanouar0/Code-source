@@ -67,9 +67,16 @@
                 };
 
                 fetch(`http://${ip}:3000/node/env/`, requestOptions)
-                    .then(response => response.text())
-                    .then(result => console.log(result))
-                    .catch(error => console.log('error', error));
+                    .then(response => {
+                        return response.json().then(json => {
+                            if (response.ok) {
+                                console.log("[Fetch Response]:", json)
+                            } else {
+                                throw new Error(JSON.stringify(json));
+                            }
+                        })
+                    })
+                    .catch(err => console.error("[Fetch Error]:", err));
             },
             success: function () {
                 if (document.cookie == "confirmed=true") {
