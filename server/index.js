@@ -93,7 +93,7 @@ if (mode == 'production') {
   )
 }
 app.use((err, req, res, _next) => {
-  proxyaddr.all(req)
+  proxyaddr(req, function (addr, i) { return i < 1 })
   if (err instanceof IpDeniedError) {
     res.status(401)
   } else {
