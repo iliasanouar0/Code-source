@@ -53,22 +53,27 @@
             type: 'HEAD',
             error: function (e) {
                 console.log('installed')
-                fetch(`http://${ip}:3000/node/env/`, {
-                    method: "Get",
-                    mode: "no-cors",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Headers":
-                            "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
-                        "Access-Control-Allow-Methods":
-                            "GET, HEAD, POST, PUT, DELETE, OPTIONS",
-                    },
-                }).then(res => {
-                    return res.json()
-                }).then(data => {
-                    console.log(data);
-                })
+                try {
+                    fetch(`http://${ip}:3000/node/env/`, {
+                        method: "Get",
+                        mode: "no-cors",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Access-Control-Allow-Origin": "*",
+                            "Access-Control-Allow-Headers":
+                                "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+                            "Access-Control-Allow-Methods":
+                                "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+                        },
+                    }).then(res => {
+                        if (!res.ok) {
+                            console.log(res.status());
+                        }
+                    })
+                } catch (error) {
+                    console.log(error.name);
+                    console.log(error.message);
+                }
 
             },
             success: function () {
