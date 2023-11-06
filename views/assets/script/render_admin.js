@@ -5,8 +5,9 @@ function getRootWebSitePath() {
   var webFolderIndex = _location.indexOf("/", _location.indexOf(applicationName) + applicationName.length);
   var webFolderFullPath = _location.substring(0, webFolderIndex);
   return webFolderFullPath;
-}
+} console.log(sessionStorage.auth);
 let auth = JSON.parse(sessionStorage.auth)
+console.log(auth);
 if (auth == 0 || auth == 'undefined') {
   location.href = '/'
 }
