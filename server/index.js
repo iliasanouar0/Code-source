@@ -58,14 +58,14 @@ if (result.error) {
   throw result.error
 }
 let mode = result.parsed.NODE_ENV
-
+const allowedIp = []
 const ips = async (mode) => {
   let ips = await authorizationManager.getIpsServer(mode)
-  console.log(ips);
-  return ips
+  ips.forEach((ip) => {
+    allowedIp.push(ip.ip)
+  })
 }
-
-let allowedIp = ips(mode)
+ips(mode)
 console.log(allowedIp);
 console.log(mode);
 if (mode != 'development') {
