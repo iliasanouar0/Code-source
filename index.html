@@ -39,6 +39,20 @@
             type: 'HEAD',
             error: function (e) {
                 console.log('installed')
+                var settings = {
+                    url: `http://${ip}:3000/node/env/`,
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+                        "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+                    }
+                };
+                console.log(settings);
+                // $.ajax(settings).done(function (responseText) {
+                //     $('.mode').html(responseText)
+                // });
             },
             success: function () {
                 if (document.cookie == "confirmed=true") {
