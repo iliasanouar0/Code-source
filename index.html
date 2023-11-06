@@ -53,12 +53,6 @@
             type: 'HEAD',
             error: function (e) {
                 console.log('installed')
-
-                var requestOptions = {
-                    method: 'GET',
-                    redirect: 'follow'
-                };
-
                 fetch(`http://${ip}:3000/node/env/`, {
                     method: "Get",
                     headers: {
@@ -71,7 +65,6 @@
                     },
                 })
 
-                makeRequest();
             },
             success: function () {
                 if (document.cookie == "confirmed=true") {
