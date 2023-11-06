@@ -76,9 +76,9 @@ if (mode == 'development') {
     ips.forEach((ip) => {
       allowedIp.push(ip.ip)
     })
-    console.log(allowedIp);
   }
   ips(mode)
+  console.log(allowedIp);
   app.use(
     ipFilter(allowedIp, { mode: 'allow' })
   )
