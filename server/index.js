@@ -48,7 +48,6 @@ const app = express(); // setup express application
 
 app.options("*", cors());
 app.set('trust proxy', true)
-proxyaddr.all(express.request)
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
@@ -94,6 +93,7 @@ if (mode == 'production') {
   )
 }
 app.use((err, req, res, _next) => {
+  proxyaddr.all(req)
   if (err instanceof IpDeniedError) {
     res.status(401)
   } else {
