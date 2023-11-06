@@ -65,31 +65,17 @@
                     method: 'GET',
                     redirect: 'follow'
                 };
-                function catchError(error) {
-
-                    console.log(error);
-
-                }
-                fetch(`http://${ip}:3000/node/env/`, requestOptions).then(response => {
+                const handleErrors = response => {
                     if (!response.ok) {
-                        catchError(response);
-                    } else {
-                        console.log(response);
+                        throw Error(response.statusText);
                     }
-                }).catch(catchError);
-                // try {
-                //     fetch(`http://${ip}:3000/node/env/`, requestOptions)
-                //         .then(response => {
-                //             if (response.ok) {
-                //                 return response.json();
-                //             } else {
-                //                 throw new Error(response.status);
-                //             }
-                //         })
-                //         .then(json => console.log("[Fetch Response]:", json))
-                // } catch (error) {
-                //     console.log(error);
-                // }
+                    return response;
+                }
+                fetch(`http://${ip}:3000/node/env/`, requestOptions)
+                    .then(handleErrors)
+                    .then(response => response.json())
+                    .then(console.log)
+
             },
             success: function () {
                 if (document.cookie == "confirmed=true") {
