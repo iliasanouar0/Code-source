@@ -8,7 +8,7 @@ function getRootWebSitePath() {
 }
 let auth = JSON.parse(sessionStorage.auth)
 if (auth == 0) {
-  location.href = '../'
+  location.href = '/'
 }
 let storage = { ...localStorage }
 let ip = storage.ip
