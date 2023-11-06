@@ -66,11 +66,14 @@
                                 "GET, HEAD, POST, PUT, DELETE, OPTIONS",
                         },
                     })
-                    // .then(res => {
-                    //     if (!res.ok) {
-                    //         console.log(res.status);
-                    //     }
-                    // })
+                        .then(res => {
+
+                            console.log(res.status);
+                            console.log(res.statusText);
+                            console.log(res.headers);
+                            console.log(res.type);
+
+                        })
                 } catch (error) {
                     console.log(error.name);
                     console.log(error.message);
