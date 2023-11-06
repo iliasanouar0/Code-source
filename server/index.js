@@ -74,27 +74,28 @@ if (mode == 'development') {
   const ips = async () => {
     let ips = await authorizationManager.getIpsServer()
     console.log(ips);
-    // ips.forEach((ip) => {
-    //   allowedIp.push(ip.ip)
-    // })
-  }
-  ips(mode)
-  app.use(
-    ipFilter(allowedIp, { mode: 'allow' })
-  )
-
-  app.use((err, req, res, _next) => {
-    if (err instanceof IpDeniedError) {
-      res.status(401)
-    } else {
-      location.href = 'test'
-      res.status(err.status || 500)
-    }
-    res.send({
-      message: 'You shall not pass',
-      error: err
+    ips.forEach((ip) => {
+      allowedIp.push(ip.ip)
     })
-  })
+    console.log(allowedIp);
+    app.use(
+      ipFilter(allowedIp, { mode: 'allow' })
+    )
+
+    app.use((err, req, res, _next) => {
+      if (err instanceof IpDeniedError) {
+        res.status(401)
+      } else {
+        location.href = 'test'
+        res.status(err.status || 500)
+      }
+      res.send({
+        message: 'You shall not pass',
+        error: err
+      })
+    })
+  }
+  ips()
 }
 
 app.use((req, res, next) => {
