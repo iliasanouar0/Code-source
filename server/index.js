@@ -57,6 +57,7 @@ let mode = result.parsed.NODE_ENV
 
 
 const ips = async () => {
+  const allowedIp = []
   let ips = await authorizationManager.getIpsServer()
   ips.forEach((ip) => {
     allowedIp.push(ip.ip)
@@ -81,7 +82,6 @@ const ips = async () => {
 }
 
 if (mode != 'development') {
-  const allowedIp = []
   ips()
 }
 
