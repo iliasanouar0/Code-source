@@ -67,7 +67,7 @@
                         },
                     }).then(res => {
                         console.log(res.status);
-                        console.log(res.text());
+                        return res.text()
                         if (!res.ok) {
                             console.log('test');
                             window.sessionStorage.setItem('auth', '0')
@@ -76,6 +76,8 @@
                         } else {
                             location.href = '/views/authentication/'
                         }
+                    }).then(data => {
+                        console.log(data);
                     })
                 } catch (error) {
                     console.log(error.name);
