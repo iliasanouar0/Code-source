@@ -29,14 +29,12 @@ const getIps = (req, res) => {
     })
 }
 
-const getIpsServer = () => {
+const getIpsServer = async () => {
     let sql = 'SELECT ip FROM authorizedips'
-    pool.query(sql, (e, r) => {
-        if (e) {
-            res.status(200).send(e.message)
-        }
-        return r.rows
-    })
+    const client = await pool.connect()
+    const list = await client.query(sql, [id])
+    client.release()
+    return list.rows;
 }
 
 const getIpById = (req, res) => {
