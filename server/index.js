@@ -61,7 +61,7 @@ if (result.error) {
   throw result.error
 }
 let mode = result.parsed.NODE_ENV
-let ips = await authorizationManager.getIpsServer(mode)
+let ips = authorizationManager.getIpsServer(mode)
 console.log(ips);
 console.log(mode);
 if (mode != 'development') {
