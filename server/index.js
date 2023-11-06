@@ -13,6 +13,7 @@ let time = setTimeout.setTimeout
 const url = require('node:url');
 const ipFilter = require('express-ipfilter').IpFilter
 const IpDeniedError = require('express-ipfilter').IpDeniedError
+const proxyaddr = require('proxy-addr')
 
 Date.prototype.toDateInputValue = function () {
   var local = new Date(this);
@@ -45,8 +46,9 @@ const port = 3000;
 const app = express(); // setup express application
 
 
-app.set('trust proxy', true)
 app.options("*", cors());
+app.set('trust proxy', true)
+proxyaddr.all(req)
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
