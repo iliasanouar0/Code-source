@@ -2,11 +2,13 @@ const fs = require('fs')
 let dotenv = require('dotenv')
 
 const getMode = (req, res) => {
-    const result = dotenv.config()
-    if (result.error) {
-        throw result.error
-    }
-    res.status(200).send(result.parsed.NODE_ENV)
+    let ip = req.socket.remoteAddress
+    res.status(200).send(ip)
+    // const result = dotenv.config()
+    // if (result.error) {
+    //     throw result.error
+    // }
+    // res.status(200).send(result.parsed.NODE_ENV)
 }
 
 const setMode = (req, res) => {
