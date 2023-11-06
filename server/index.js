@@ -97,6 +97,7 @@ app.use((err, req, res, _next) => {
   }
   res.send({
     message: 'You shall not pass',
+    ip: req.socket.remoteAddress
   })
 })
 
