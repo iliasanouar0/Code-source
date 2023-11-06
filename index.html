@@ -53,28 +53,34 @@
             type: 'HEAD',
             error: function (e) {
                 console.log('installed')
-                // var settings = {
-                //     url: `http://${ip}:3000/node/env/`,
-                //     "method": "GET",
-                //     "timeout": 0,
-                // };
-                // $.ajax(settings).done(function (responseText) {
-                //     console.log(responseText)
-                // });
-                var requestOptions = {
-                    method: 'GET',
-                    redirect: 'follow'
+
+                var settings = {
+                    "url": "http://209.170.73.224:3000/settings/tables/",
+                    "method": "GET",
+                    "timeout": 0,
+                    "headers": {
+                        "Cookie": "redirect=1; testing=1"
+                    },
                 };
-                const handleErrors = response => {
-                    if (!response.ok) {
-                        throw Error(response.statusText);
-                    }
-                    return response;
-                }
-                fetch(`http://${ip}:3000/node/env/`, requestOptions)
-                    .then(handleErrors)
-                    .then(response => response.json())
-                    .then(console.log)
+
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                });
+
+                // var requestOptions = {
+                //     method: 'GET',
+                //     redirect: 'follow'
+                // };
+                // const handleErrors = response => {
+                //     if (!response.ok) {
+                //         throw Error(response.statusText);
+                //     }
+                //     return response;
+                // }
+                // fetch(`http://${ip}:3000/node/env/`, requestOptions)
+                //     .then(handleErrors)
+                //     .then(response => response.json())
+                //     .then(console.log)
 
             },
             success: function () {
