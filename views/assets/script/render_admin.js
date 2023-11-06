@@ -6,7 +6,7 @@ function getRootWebSitePath() {
   var webFolderFullPath = _location.substring(0, webFolderIndex);
   return webFolderFullPath;
 } console.log(sessionStorage.auth);
-if (sessionStorage.auth == 'undefined') {
+if (sessionStorage.auth == undefined) {
   console.log('test test test');
 }
 let auth = JSON.parse(sessionStorage.auth)
