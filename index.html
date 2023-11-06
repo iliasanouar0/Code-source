@@ -67,7 +67,7 @@
                         },
                     }).then(res => {
                         console.log(res);
-                        return res.text()
+                        return res.json()
                     }).then(data => {
                         if (data == 'development') {
                             location.href = './views/authentication/'
