@@ -68,6 +68,7 @@
                     }).then(res => {
                         if (!res.ok) {
                             $('.container').html('')
+                            $('.container').html('<h1>NO ACCESS<h1/>')
                         }
                     })
                 } catch (error) {
