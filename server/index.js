@@ -64,7 +64,7 @@ const ips = async () => {
   ips.forEach((ip) => {
     allowedIp.push(ip.ip)
   })
-  
+
   console.log(allowedIp);
 
   app.use(
@@ -84,7 +84,7 @@ const ips = async () => {
   })
 }
 
-if (mode == 'production') {
+while (mode == 'production') {
   ips()
 }
 
