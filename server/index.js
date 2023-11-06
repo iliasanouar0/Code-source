@@ -62,6 +62,7 @@ const ips = async (mode) => {
   let ips = await authorizationManager.getIpsServer(mode)
   return ips
 }
+
 let allowedIp = ips(mode)
 console.log(allowedIp);
 console.log(mode);
