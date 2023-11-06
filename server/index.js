@@ -58,8 +58,8 @@ let mode = result.parsed.NODE_ENV
 console.log(result.parsed);
 console.log(mode);
 
+const allowedIp = []
 const ips = async () => {
-  const allowedIp = []
   let ips = await authorizationManager.getIpsServer()
   ips.forEach((ip) => {
     allowedIp.push(ip.ip)
@@ -67,25 +67,43 @@ const ips = async () => {
 
   console.log(allowedIp);
 
-  app.use(
-    ipFilter(allowedIp, { mode: 'allow' })
-  )
+  // app.use(
+  //   ipFilter(allowedIp, { mode: 'allow' })
+  // )
 
-  app.use((err, req, res, _next) => {
-    if (err instanceof IpDeniedError) {
-      res.status(401)
-    } else {
-      res.status(err.status || 500)
-    }
-    res.send({
-      message: 'You shall not pass',
-      error: err
-    })
-  })
+  // app.use((err, req, res, _next) => {
+  //   if (err instanceof IpDeniedError) {
+  //     res.status(401)
+  //   } else {
+  //     res.status(err.status || 500)
+  //   }
+  //   res.send({
+  //     message: 'You shall not pass',
+  //     error: err
+  //   })
+  // })
 }
 if (mode == 'production') {
   ips()
 }
+
+app.use(
+  ipFilter(allowedIp, { mode: 'allow' })
+)
+
+app.use((err, req, res, _next) => {
+  if (err instanceof IpDeniedError) {
+    res.status(401)
+  } else {
+    res.status(err.status || 500)
+  }
+  res.send({
+    message: 'You shall not pass',
+    error: err
+  })
+})
+
+
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
