@@ -79,6 +79,7 @@ if (mode == 'development') {
   }
   ips(mode)
   time(2000)
+  console.log(allowedIp);
   app.use(
     ipFilter(allowedIp, { mode: 'allow' })
   )
