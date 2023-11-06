@@ -25,8 +25,7 @@ const ngrok = require("ngrok");
 
 (async function () {
   const listener = await ngrok.connect({
-    addr: 8080,
-    authtoken_from_env: true,
+    addr: 3000,
   });
 
   console.log(`Ingress established at: ${listener.url()}`);
