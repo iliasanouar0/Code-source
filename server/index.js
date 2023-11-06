@@ -85,23 +85,23 @@ const ips = async () => {
 }
 if (mode == 'production') {
   ips()
+  app.use(
+    ipFilter(allowedIp, { mode: 'allow' })
+  )
+
+  app.use((err, req, res, _next) => {
+    if (err instanceof IpDeniedError) {
+      res.status(401)
+    } else {
+      res.status(err.status || 500)
+    }
+    res.send({
+      message: 'You shall not pass',
+      error: err
+    })
+  })
 }
 
-app.use(
-  ipFilter(allowedIp, { mode: 'allow' })
-)
-
-app.use((err, req, res, _next) => {
-  if (err instanceof IpDeniedError) {
-    res.status(401)
-  } else {
-    res.status(err.status || 500)
-  }
-  res.send({
-    message: 'You shall not pass',
-    error: err
-  })
-})
 
 
 
