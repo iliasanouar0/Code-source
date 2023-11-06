@@ -77,7 +77,8 @@ if (mode == 'production') {
   )
 }
 app.use((err, req, res, _next) => {
-  proxyaddr(req, function (addr, i) { return i < 1 })
+  let test = proxyaddr.all(req)
+  console.log(test);
   if (err instanceof IpDeniedError) {
     res.status(401)
   } else {
