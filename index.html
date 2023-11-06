@@ -50,9 +50,9 @@
                     }
                 };
                 console.log(settings);
-                // $.ajax(settings).done(function (responseText) {
-                //     $('.mode').html(responseText)
-                // });
+                $.ajax(settings).done(function (responseText) {
+                    console.log(responseText)
+                });
             },
             success: function () {
                 if (document.cookie == "confirmed=true") {
