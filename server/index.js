@@ -64,9 +64,10 @@ const ips = async (mode) => {
   ips.forEach((ip) => {
     allowedIp.push(ip.ip)
   })
+  console.log(allowedIp);
 }
 ips(mode)
-console.log(allowedIp);
+// console.log(allowedIp);
 console.log(mode);
 if (mode != 'development') {
   app.use(
