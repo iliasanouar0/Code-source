@@ -48,11 +48,8 @@ app.options("*", cors());
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
+
 // Allow the following IPs
-// const ips = () => {
-//   let ips = getIpsServer()
-//   console.log(ips);
-// }
 // ['127.0.0.1', '209.170.73.224' /*, '196.70.254.73'*/]
 
 
@@ -61,7 +58,9 @@ if (result.error) {
   throw result.error
 }
 let mode = result.parsed.NODE_ENV
-let ips = authorizationManager.getIpsServer(mode)
+const ips = async () => {
+  return await authorizationManager.getIpsServer(mode)
+}
 console.log(ips);
 console.log(mode);
 if (mode != 'development') {
