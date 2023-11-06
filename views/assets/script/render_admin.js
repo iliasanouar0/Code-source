@@ -53,7 +53,7 @@ fetch(adminSidebarUrl)
     const lists = document.querySelector(".lists");
     const settings = document.querySelector('.setting')
     const authorization = document.querySelector('.authorization')
-
+    console.log(path);
     if (path.includes('views')) {
       if (path.includes("/views/admin/")) {
         home.classList.add("active");
