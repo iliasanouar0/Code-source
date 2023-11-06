@@ -13,6 +13,7 @@ let ip = storage.ip
 let adminNavbarUrl = ""
 let adminSidebarUrl = ""
 const root = getRootWebSitePath();
+console.log(root);
 if (root.includes('views')) {
   adminNavbarUrl = `${root}/layout/admin_navbar.html`;
   adminSidebarUrl = `${root}/layout/admin_sidebar.html`;
@@ -53,66 +54,64 @@ fetch(adminSidebarUrl)
     const lists = document.querySelector(".lists");
     const settings = document.querySelector('.setting')
     const authorization = document.querySelector('.authorization')
-    console.log(path);
-    if (path.includes('views')) {
-      if (path.includes("/views/admin/")) {
-        home.classList.add("active");
-        home.setAttribute("href", "./");
-      } else if (path.includes("/views/admin/entities/")) {
-        home.setAttribute("href", "../");
-        entities.classList.add("active");
-        entities.setAttribute("href", "./");
-        users.setAttribute("href", "../users/");
-        process.setAttribute('href', '../process/')
-        lists.setAttribute('href', '../lists/')
-        settings.setAttribute("href", '../database/')
-        authorization.setAttribute("href", '../authorization/')
-      } else if (path.includes("/views/admin/users/")) {
-        home.setAttribute("href", "../");
-        users.classList.add("active");
-        users.setAttribute("href", "./");
-        entities.setAttribute("href", "../entities/");
-        process.setAttribute('href', '../process/')
-        lists.setAttribute('href', '../lists/')
-        settings.setAttribute("href", '../database/')
-        authorization.setAttribute("href", '../authorization/')
-      } else if (path.includes("/views/admin/process/")) {
-        home.setAttribute("href", "../");
-        process.classList.add("active");
-        process.setAttribute("href", "./");
-        entities.setAttribute("href", "../entities/");
-        users.setAttribute("href", "../users/");
-        lists.setAttribute('href', '../lists/')
-        settings.setAttribute("href", '../database/')
-        authorization.setAttribute("href", '../authorization/')
-      } else if (path.includes("/views/admin/lists/")) {
-        home.setAttribute("href", "../");
-        lists.classList.add("active");
-        lists.setAttribute("href", "./");
-        entities.setAttribute("href", "../entities/");
-        process.setAttribute('href', '../process/')
-        users.setAttribute('href', '../users/')
-        settings.setAttribute("href", '../database/')
-        authorization.setAttribute("href", '../authorization/')
-      } else if (path.includes("/views/admin/database/")) {
-        home.setAttribute("href", "../");
-        settings.classList.add("active");
-        settings.setAttribute("href", "./");
-        entities.setAttribute("href", "../entities/");
-        process.setAttribute('href', '../process/')
-        users.setAttribute('href', '../users/')
-        lists.setAttribute("href", '../lists/')
-        authorization.setAttribute("href", '../authorization/')
-      } else if (path.includes("/views/admin/authorization/")) {
-        home.setAttribute("href", "../");
-        authorization.classList.add("active");
-        authorization.setAttribute("href", "./");
-        entities.setAttribute("href", "../entities/");
-        process.setAttribute('href', '../process/')
-        users.setAttribute('href', '../users/')
-        lists.setAttribute("href", '../lists/')
-        settings.setAttribute("href", '../database/')
-      }
+
+    if (path == "/admin/") {
+      home.classList.add("active");
+      home.setAttribute("href", "./");
+    } else if (path == "/admin/entities/") {
+      home.setAttribute("href", "../");
+      entities.classList.add("active");
+      entities.setAttribute("href", "./");
+      users.setAttribute("href", "../users/");
+      process.setAttribute('href', '../process/')
+      lists.setAttribute('href', '../lists/')
+      settings.setAttribute("href", '../database/')
+      authorization.setAttribute("href", '../authorization/')
+    } else if (path == "/admin/users/") {
+      home.setAttribute("href", "../");
+      users.classList.add("active");
+      users.setAttribute("href", "./");
+      entities.setAttribute("href", "../entities/");
+      process.setAttribute('href', '../process/')
+      lists.setAttribute('href', '../lists/')
+      settings.setAttribute("href", '../database/')
+      authorization.setAttribute("href", '../authorization/')
+    } else if (path == "/admin/process/") {
+      home.setAttribute("href", "../");
+      process.classList.add("active");
+      process.setAttribute("href", "./");
+      entities.setAttribute("href", "../entities/");
+      users.setAttribute("href", "../users/");
+      lists.setAttribute('href', '../lists/')
+      settings.setAttribute("href", '../database/')
+      authorization.setAttribute("href", '../authorization/')
+    } else if (path == "/admin/lists/") {
+      home.setAttribute("href", "../");
+      lists.classList.add("active");
+      lists.setAttribute("href", "./");
+      entities.setAttribute("href", "../entities/");
+      process.setAttribute('href', '../process/')
+      users.setAttribute('href', '../users/')
+      settings.setAttribute("href", '../database/')
+      authorization.setAttribute("href", '../authorization/')
+    } else if (path == "/admin/database/") {
+      home.setAttribute("href", "../");
+      settings.classList.add("active");
+      settings.setAttribute("href", "./");
+      entities.setAttribute("href", "../entities/");
+      process.setAttribute('href', '../process/')
+      users.setAttribute('href', '../users/')
+      lists.setAttribute("href", '../lists/')
+      authorization.setAttribute("href", '../authorization/')
+    } else if (path == "/admin/authorization/") {
+      home.setAttribute("href", "../");
+      authorization.classList.add("active");
+      authorization.setAttribute("href", "./");
+      entities.setAttribute("href", "../entities/");
+      process.setAttribute('href', '../process/')
+      users.setAttribute('href', '../users/')
+      lists.setAttribute("href", '../lists/')
+      settings.setAttribute("href", '../database/')
     }
   });
 
