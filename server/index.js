@@ -46,6 +46,7 @@ const port = 3000;
 const app = express(); // setup express application
 
 
+
 app.options("*", cors());
 app.set('trust proxy', true)
 // Parse incoming requests data
@@ -88,7 +89,9 @@ app.use((err, req, res, _next) => {
   })
 })
 
-
+app.get('/proxy/', (req, res) => {
+  res.status(200).send({ ip: req.ip, remoteAddress: req.socket.remoteAddress })
+})
 
 
 app.use((req, res, next) => {
