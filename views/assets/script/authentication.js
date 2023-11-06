@@ -78,6 +78,7 @@ submitButton.addEventListener("click", (e) => {
           return;
         }
         sessionStorage.setItem("user", JSON.stringify(data[0]));
+        window.sessionStorage.setItem('auth', '1')
         if (data[0].type == "admin" && data[0].status == "active") {
           window.location.href = "../admin/process";
         } else if (data[0].type == "sup") {
