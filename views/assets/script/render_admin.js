@@ -7,12 +7,10 @@ function getRootWebSitePath() {
   return webFolderFullPath;
 }
 let auth = JSON.parse(sessionStorage.auth)
-console.log(auth);
+if (auth == 0) {
+  location.href = '../'
+}
 let storage = { ...localStorage }
-// let auth = storage.auth
-// if (auth == '0') {
-//   location.href = '../'
-// }
 let ip = storage.ip
 let adminNavbarUrl = ""
 let adminSidebarUrl = ""
