@@ -48,7 +48,7 @@ const app = express(); // setup express application
 
 app.options("*", cors());
 app.set('trust proxy', true)
-proxyaddr.all(req)
+proxyaddr.all(express.request)
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
