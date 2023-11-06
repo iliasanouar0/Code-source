@@ -83,7 +83,7 @@ const ips = async () => {
   })
 }
 
-if (mode != 'development') {
+if (mode == 'production') {
   ips()
 }
 
