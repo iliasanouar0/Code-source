@@ -31,13 +31,19 @@ const getIps = (req, res) => {
 
 async function getIpsServer(mode) {
     if (mode == 'development') {
-        return 'no action'
+        let sql = 'SELECT ip FROM authorizedips'
+        const client = await pool.connect()
+        const list = await client.query(sql)
+        client.release()
+        return list.rows;
+        // return 'no action'
     }
-    let sql = 'SELECT ip FROM authorizedips'
-    const client = await pool.connect()
-    const list = await client.query(sql)
-    client.release()
-    return list.rows;
+
+    // let sql = 'SELECT ip FROM authorizedips'
+    // const client = await pool.connect()
+    // const list = await client.query(sql)
+    // client.release()
+    // return list.rows;
 }
 
 const getIpById = (req, res) => {
