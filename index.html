@@ -64,6 +64,7 @@
                             "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
                         },
                         mode: 'no-cors',
+                        timeout: 0,
                         error: (e) => {
                             sessionStorage.setItem('auth', '0')
                             $('.container').html('')
