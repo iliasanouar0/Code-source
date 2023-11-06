@@ -8,6 +8,7 @@ function getRootWebSitePath() {
 }
 
 let storage = { ...localStorage }
+console.log(storage);
 let auth = storage.auth
 if (auth == '0') {
   location.href = '../'
