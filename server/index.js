@@ -58,16 +58,15 @@ if (result.error) {
   throw result.error
 }
 let mode = result.parsed.NODE_ENV
-const ips = async () => {
-  let ip = await authorizationManager.getIpsServer(mode)
-  console.log(ip);
+const ips = async (mode) => {
+  return await authorizationManager.getIpsServer(mode)
 }
-ips()
-console.log(ips);
+let allowedIp = ips(mode)
+console.log(allowedIp);
 console.log(mode);
 if (mode != 'development') {
   app.use(
-    ipFilter(ips, { mode: 'allow' })
+    ipFilter(allowedIp, { mode: 'allow' })
   )
 
   app.use((err, req, res, _next) => {
