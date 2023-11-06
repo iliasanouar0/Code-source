@@ -6,13 +6,13 @@ function getRootWebSitePath() {
   var webFolderFullPath = _location.substring(0, webFolderIndex);
   return webFolderFullPath;
 }
-
+let auth = JSON.parse(sessionStorage.auth)
+console.log(auth);
 let storage = { ...localStorage }
-console.log(storage);
-let auth = storage.auth
-if (auth == '0') {
-  location.href = '../'
-}
+// let auth = storage.auth
+// if (auth == '0') {
+//   location.href = '../'
+// }
 let ip = storage.ip
 let adminNavbarUrl = ""
 let adminSidebarUrl = ""
