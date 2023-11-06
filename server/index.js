@@ -21,15 +21,6 @@ Date.prototype.toDateInputValue = function () {
   return local.toJSON().slice(0, 10);
 };
 
-const ngrok = require("ngrok");
-
-(async function () {
-  const listener = await ngrok.connect({
-    addr: 3000,
-  });
-
-  console.log(`Ingress established at: ${listener.url()}`);
-})();
 
 const wsi = new WebSocket.Server({ port: 7071 })
 const wsp = new WebSocket.Server({ port: 7072 })
