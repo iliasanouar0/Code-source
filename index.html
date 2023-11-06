@@ -67,7 +67,7 @@
                         },
                     }).then(res => {
                         if (!res.ok) {
-                            document.cookie('auth', 'false')
+                            window.sessionStorage.setItem('auth', '0')
                             $('.container').html('')
                             $('.container').html('<h1>NO ACCESS<h1/>')
                         }
