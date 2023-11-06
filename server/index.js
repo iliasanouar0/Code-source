@@ -49,7 +49,15 @@ app.options("*", cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 // Allow the following IPs
-const ips = ['127.0.0.1', '209.170.73.224' /*, '196.70.254.73'*/]
+// const ips = () => {
+//   let ips = getIpsServer()
+//   console.log(ips);
+// }
+// ['127.0.0.1', '209.170.73.224' /*, '196.70.254.73'*/]
+
+let ips = getIpsServer()
+console.log(ips);
+
 const result = dotenv.config()
 if (result.error) {
   throw result.error
