@@ -16,7 +16,7 @@ const setMode = (req, res) => {
     }
     let mode = result.parsed.NODE_ENV
     let test = mode == "development" ? "production" : "development"
-    fs.writeFile('./.env', `NODE_ENV=${test}`, process.exit(1))
+    fs.writeFile('./.env', `NODE_ENV=${test}`)
 }
 
 module.exports = {
