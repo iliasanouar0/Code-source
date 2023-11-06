@@ -54,25 +54,19 @@
             error: function (e) {
                 console.log('installed')
                 try {
-                    fetch(`http://${ip}:3000/node/env/`, {
-                        method: "Get",
-                        mode: "no-cors",
+                    var settings = {
+                        url: `http://${ip}:3000/node/env/`,
+                        method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                             "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Headers":
-                                "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
-                            "Access-Control-Allow-Methods":
-                                "GET, HEAD, POST, PUT, DELETE, OPTIONS",
-                        },
-                    }).then(res => {
-                        console.log(res);
-                        return res.json()
-                    }).then(data => {
-                        if (data == 'development') {
-                            location.href = './views/authentication/'
+                            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+                            "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
                         }
-                    })
+                    };
+                    $.ajax(settings).done(function (responseText) {
+                        responseText
+                    });
                 } catch (error) {
                     console.log(error.name);
                     console.log(error.message);
