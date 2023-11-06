@@ -64,7 +64,7 @@
                         try {
                             await fetch(`http://${ip}:3000/node/env/`);
                         } catch (error) {
-                            console.log(error.status);
+                            console.log(error.message);
                         }
                     } catch (err) {
                         console.log(err);
