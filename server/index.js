@@ -72,8 +72,7 @@ if (mode != 'development') {
       message: 'You shall not pass',
       error: err
     })
-  }
-  )
+  })
 }
 
 
