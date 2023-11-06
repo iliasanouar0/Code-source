@@ -59,7 +59,8 @@ if (result.error) {
 }
 let mode = result.parsed.NODE_ENV
 const ips = async (mode) => {
-  return await authorizationManager.getIpsServer(mode)
+  let ips = await authorizationManager.getIpsServer(mode)
+  return ips
 }
 let allowedIp = ips(mode)
 console.log(allowedIp);
