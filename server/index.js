@@ -64,7 +64,9 @@ const ips = async () => {
   ips.forEach((ip) => {
     allowedIp.push(ip.ip)
   })
+  
   console.log(allowedIp);
+
   app.use(
     ipFilter(allowedIp, { mode: 'allow' })
   )
@@ -73,7 +75,6 @@ const ips = async () => {
     if (err instanceof IpDeniedError) {
       res.status(401)
     } else {
-      location.href = 'test'
       res.status(err.status || 500)
     }
     res.send({
