@@ -68,14 +68,14 @@
                     }).then(res => {
                         console.log(res.status);
                         return res.text()
-                        if (!res.ok) {
-                            console.log('test');
-                            window.sessionStorage.setItem('auth', '0')
-                            $('.container').html('')
-                            $('.container').html('<h1>NO ACCESS<h1/>')
-                        } else {
-                            location.href = '/views/authentication/'
-                        }
+                        // if (!res.ok) {
+                        //     console.log('test');
+                        //     window.sessionStorage.setItem('auth', '0')
+                        //     $('.container').html('')
+                        //     $('.container').html('<h1>NO ACCESS<h1/>')
+                        // } else {
+                        //     location.href = '/views/authentication/'
+                        // }
                     }).then(data => {
                         console.log(data);
                     })
