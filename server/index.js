@@ -46,7 +46,7 @@ const port = 3000;
 const app = express(); // setup express application
 
 
-app.options("*", cors());
+// app.options("*", cors());
 app.set('trust proxy', true)
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -67,24 +67,7 @@ const ips = async () => {
   ips.forEach((ip) => {
     allowedIp.push(ip.ip)
   })
-
   console.log(allowedIp);
-
-  // app.use(
-  //   ipFilter(allowedIp, { mode: 'allow' })
-  // )
-
-  // app.use((err, req, res, _next) => {
-  //   if (err instanceof IpDeniedError) {
-  //     res.status(401)
-  //   } else {
-  //     res.status(err.status || 500)
-  //   }
-  //   res.send({
-  //     message: 'You shall not pass',
-  //     error: err
-  //   })
-  // })
 }
 if (mode == 'production') {
   ips()
