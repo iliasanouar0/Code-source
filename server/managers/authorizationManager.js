@@ -29,22 +29,21 @@ const getIps = (req, res) => {
     })
 }
 
-const getIpsServer = (mode) => {
-    if (mode == 'development') {
-        let sql = 'SELECT ip FROM authorizedips'
-        pool.query(sql, (e, r) => {
-            if (e) {
-                throw e.message
-            }
-            return r.rows
-        })
-    }
-
-    // let sql = 'SELECT ip FROM authorizedips'
-    // const client = await pool.connect()
-    // const list = await client.query(sql)
-    // client.release()
-    // return list.rows;
+const getIpsServer = async () => {
+    // if (mode == 'development') {
+    //     let sql = 'SELECT ip FROM authorizedips'
+    //     pool.query(sql, (e, r) => {
+    //         if (e) {
+    //             throw e.message
+    //         }
+    //         return r.rows
+    //     })
+    // }
+    let sql = 'SELECT ip FROM authorizedips'
+    const client = await pool.connect()
+    const list = await client.query(sql)
+    client.release()
+    return list.rows;
 }
 
 const getIpById = (req, res) => {
