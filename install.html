@@ -313,6 +313,7 @@
         function timer() {
             t = setTimeout(add, 1000);
         }
+        
         Date.prototype.toDateInputValue = function () {
             var local = new Date(this);
             local.setMinutes(this.getMinutes() - this.getTimezoneOffset());

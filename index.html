@@ -37,7 +37,10 @@
         $.ajax({
             url: `install.html`,
             type: 'HEAD',
-            error: function () {
+            error: function (e,er,t) {
+                console.log(e);
+                console.log(er);
+                console.log(t);
                 console.log('installed')
             },
             success: function () {
