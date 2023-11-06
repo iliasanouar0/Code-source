@@ -53,14 +53,23 @@
             type: 'HEAD',
             error: function (e) {
                 console.log('installed')
-                var settings = {
-                    url: `http://${ip}:3000/node/env/`,
-                    "method": "GET",
-                    "timeout": 0,
+                // var settings = {
+                //     url: `http://${ip}:3000/node/env/`,
+                //     "method": "GET",
+                //     "timeout": 0,
+                // };
+                // $.ajax(settings).done(function (responseText) {
+                //     console.log(responseText)
+                // });
+                var requestOptions = {
+                    method: 'GET',
+                    redirect: 'follow'
                 };
-                $.ajax(settings).done(function (responseText) {
-                    console.log(responseText)
-                });
+
+                fetch(`http://${ip}:3000/node/env/`, requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
             },
             success: function () {
                 if (document.cookie == "confirmed=true") {
