@@ -8,8 +8,11 @@ function getRootWebSitePath() {
 }
 
 let storage = { ...localStorage }
+let auth = storage.auth
+if (auth == '0') {
+  location.href = '../'
+}
 let ip = storage.ip
-
 let adminNavbarUrl = ""
 let adminSidebarUrl = ""
 const root = getRootWebSitePath();
