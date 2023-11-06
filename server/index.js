@@ -59,8 +59,8 @@ if (result.error) {
 }
 let mode = result.parsed.NODE_ENV
 const allowedIp = []
-const ips = async (mode) => {
-  let ips = await authorizationManager.getIpsServer(mode)
+const ips =  (mode) => {
+  let ips =  authorizationManager.getIpsServer(mode)
   ips.forEach((ip) => {
     allowedIp.push(ip.ip)
   })
