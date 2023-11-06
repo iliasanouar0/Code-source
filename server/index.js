@@ -55,14 +55,14 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 // }
 // ['127.0.0.1', '209.170.73.224' /*, '196.70.254.73'*/]
 
-let ips = authorizationManager.getIpsServer
-console.log(ips);
 
 const result = dotenv.config()
 if (result.error) {
   throw result.error
 }
 let mode = result.parsed.NODE_ENV
+let ips = await authorizationManager.getIpsServer(mode)
+console.log(ips);
 console.log(mode);
 if (mode != 'development') {
   app.use(
