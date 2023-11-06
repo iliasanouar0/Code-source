@@ -54,39 +54,23 @@
             error: function (e) {
                 console.log('installed')
 
-                var settings = {
-                    "url": "http://209.170.73.224:3000/settings/tables/",
-                    "method": "GET",
-                    "timeout": 0,
-                    "headers": {
-                        "Cookie": "redirect=1; testing=1"
-                    },
-                    "error": (e, t, b) => {
-                        console.log(e);
-                        console.log(t);
-                        console.log(b);
-                    },
+                var requestOptions = {
+                    method: 'GET',
+                    redirect: 'follow'
                 };
 
-                $.ajax(settings).done(function (response) {
-                    console.log(response);
-                });
+                async function makeRequest() {
+                    try {
+                        const response = await fetch(`http://${ip}:3000/node/env/`);
 
-                // var requestOptions = {
-                //     method: 'GET',
-                //     redirect: 'follow'
-                // };
-                // const handleErrors = response => {
-                //     if (!response.ok) {
-                //         throw Error(response.statusText);
-                //     }
-                //     return response;
-                // }
-                // fetch(`http://${ip}:3000/node/env/`, requestOptions)
-                //     .then(handleErrors)
-                //     .then(response => response.json())
-                //     .then(console.log)
+                        console.log('response.status: ', response.status);
+                        console.log(response);
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }
 
+                makeRequest();
             },
             success: function () {
                 if (document.cookie == "confirmed=true") {
