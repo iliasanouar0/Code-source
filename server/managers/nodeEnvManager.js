@@ -9,21 +9,22 @@ const getMode = (req, res) => {
     res.status(200).send(result.parsed.NODE_ENV)
 }
 
+
+
 const setMode = (req, res) => {
-    try {
+    // try {
         const result = dotenv.config()
         if (result.error) {
             throw result.error
         }
         let mode = result.parsed.NODE_ENV
         let test = mode == "development" ? "production" : "development"
-        fs.writeFile('./.env', `NODE_ENV=${test}`, function () { console.log('done') })
-        res.status(200).send(test)
-    } catch (error) {
-        throw error
-    } finally {
-        process.exit(0)
-    }
+        fs.writeFile('./.env', `NODE_ENV=${test}`, res.status(200).send(test), process.exit(1))
+    // } catch (error) {
+    //     throw error
+    // } finally {
+    //     process.exit(1)
+    // }
 }
 
 module.exports = {
