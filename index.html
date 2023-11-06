@@ -59,20 +59,17 @@
                     redirect: 'follow'
                 };
 
-                async function makeRequest() {
-                    try {
-                        try {
-                            await fetch(`http://${ip}:3000/node/env/`);
-                        } catch (error) {
-                            console.log(error.message);
-                            console.log(error.code);
-                            console.log(error.stack);
-                            console.log(error.name);
-                        }
-                    } catch (err) {
-                        console.log(err);
-                    }
-                }
+                fetch(`http://${ip}:3000/node/env/`, {
+                    method: "Get",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Headers":
+                            "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+                        "Access-Control-Allow-Methods":
+                            "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+                    },
+                })
 
                 makeRequest();
             },
