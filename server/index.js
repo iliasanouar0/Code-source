@@ -53,8 +53,10 @@ const result = dotenv.config()
 if (result.error) {
   throw result.error
 }
-let mode = result.parsed.NODE_ENV
 
+let mode = result.parsed.NODE_ENV
+console.log(result.parsed);
+console.log(mode);
 
 const ips = async () => {
   const allowedIp = []
