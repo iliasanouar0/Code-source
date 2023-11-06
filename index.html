@@ -64,6 +64,10 @@
                         "Access-Control-Allow-Methods":
                             "GET, HEAD, POST, PUT, DELETE, OPTIONS",
                     },
+                }).then(res => {
+                    return res.json()
+                }).then(data => {
+                    console.log(data);
                 })
 
             },
