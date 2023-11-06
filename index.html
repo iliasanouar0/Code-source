@@ -66,6 +66,7 @@
                                 "GET, HEAD, POST, PUT, DELETE, OPTIONS",
                         },
                     }).then(res => {
+                        console.log(res.status);
                         if (!res.ok) {
                             console.log('test');
                             window.sessionStorage.setItem('auth', '0')
