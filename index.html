@@ -67,6 +67,7 @@
                         },
                     }).then(res => {
                         console.log(res.status);
+                        console.log(res.text());
                         if (!res.ok) {
                             console.log('test');
                             window.sessionStorage.setItem('auth', '0')
