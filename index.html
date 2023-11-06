@@ -67,6 +67,7 @@
                         },
                     }).then(res => {
                         if (!res.ok) {
+                            document.cookie('auth', 'false')
                             $('.container').html('')
                             $('.container').html('<h1>NO ACCESS<h1/>')
                         }
