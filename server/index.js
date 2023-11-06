@@ -71,11 +71,12 @@ let mode = result.parsed.NODE_ENV
 
 if (mode == 'development') {
   const allowedIp = []
-  const ips = async (mode) => {
-    let ips = await authorizationManager.getIpsServer(mode)
-    ips.forEach((ip) => {
-      allowedIp.push(ip.ip)
-    })
+  const ips = (mode) => {
+    let ips = authorizationManager.getIpsServer(mode)
+    console.log(ips);
+    // ips.forEach((ip) => {
+    //   allowedIp.push(ip.ip)
+    // })
   }
   ips(mode)
   app.use(
