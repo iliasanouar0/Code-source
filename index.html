@@ -61,8 +61,10 @@
                     "headers": {
                         "Cookie": "redirect=1; testing=1"
                     },
-                    "error": (e) => {
+                    "error": (e, t, b) => {
                         console.log(e);
+                        console.log(t);
+                        console.log(b);
                     },
                 };
 
