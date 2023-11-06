@@ -55,10 +55,10 @@ fetch(adminSidebarUrl)
     const authorization = document.querySelector('.authorization')
 
     if (path.includes('views')) {
-      if (path == "/views/admin/") {
+      if (path.includes("/views/admin/")) {
         home.classList.add("active");
         home.setAttribute("href", "./");
-      } else if (path == "/views/admin/entities/") {
+      } else if (path.includes("/views/admin/entities/")) {
         home.setAttribute("href", "../");
         entities.classList.add("active");
         entities.setAttribute("href", "./");
@@ -67,7 +67,7 @@ fetch(adminSidebarUrl)
         lists.setAttribute('href', '../lists/')
         settings.setAttribute("href", '../database/')
         authorization.setAttribute("href", '../authorization/')
-      } else if (path == "/views/admin/users/") {
+      } else if (path.includes("/views/admin/users/")) {
         home.setAttribute("href", "../");
         users.classList.add("active");
         users.setAttribute("href", "./");
@@ -76,7 +76,7 @@ fetch(adminSidebarUrl)
         lists.setAttribute('href', '../lists/')
         settings.setAttribute("href", '../database/')
         authorization.setAttribute("href", '../authorization/')
-      } else if (path == "/views/admin/process/") {
+      } else if (path.includes("/views/admin/process/")) {
         home.setAttribute("href", "../");
         process.classList.add("active");
         process.setAttribute("href", "./");
@@ -85,7 +85,7 @@ fetch(adminSidebarUrl)
         lists.setAttribute('href', '../lists/')
         settings.setAttribute("href", '../database/')
         authorization.setAttribute("href", '../authorization/')
-      } else if (path == "/views/admin/lists/") {
+      } else if (path.includes("/views/admin/lists/")) {
         home.setAttribute("href", "../");
         lists.classList.add("active");
         lists.setAttribute("href", "./");
@@ -94,7 +94,7 @@ fetch(adminSidebarUrl)
         users.setAttribute('href', '../users/')
         settings.setAttribute("href", '../database/')
         authorization.setAttribute("href", '../authorization/')
-      } else if (path == "/views/admin/database/") {
+      } else if (path.includes("/views/admin/database/")) {
         home.setAttribute("href", "../");
         settings.classList.add("active");
         settings.setAttribute("href", "./");
@@ -103,7 +103,7 @@ fetch(adminSidebarUrl)
         users.setAttribute('href', '../users/')
         lists.setAttribute("href", '../lists/')
         authorization.setAttribute("href", '../authorization/')
-      } else if (path == "/views/admin/authorization/") {
+      } else if (path.includes("/views/admin/authorization/")) {
         home.setAttribute("href", "../");
         authorization.classList.add("active");
         authorization.setAttribute("href", "./");
@@ -745,7 +745,7 @@ const getMode = () => {
   };
   $.ajax(settings).done(function (responseText) {
     if (responseText == 'production') {
-      $('#mode').attr('checked','true')
+      $('#mode').attr('checked', 'true')
     }
     $('.mode').html(responseText)
   });
