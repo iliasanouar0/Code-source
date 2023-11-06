@@ -13,13 +13,14 @@ const getMode = (req, res) => {
 
 const setMode = (req, res) => {
     // try {
-        const result = dotenv.config()
-        if (result.error) {
-            throw result.error
-        }
-        let mode = result.parsed.NODE_ENV
-        let test = mode == "development" ? "production" : "development"
-        fs.writeFile('./.env', `NODE_ENV=${test}`, res.status(200).send(test), process.exit(1))
+    const result = dotenv.config()
+    if (result.error) {
+        throw result.error
+    }
+    let mode = result.parsed.NODE_ENV
+    let test = mode == "development" ? "production" : "development"
+    res.status(200).send(test)
+    fs.writeFile('./.env', `NODE_ENV=${test}`, process.exit(1))
     // } catch (error) {
     //     throw error
     // } finally {
