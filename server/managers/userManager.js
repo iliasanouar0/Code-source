@@ -121,11 +121,11 @@ const deleteUser = (request, response) => {
     console.log(r.rows);
     let pass = r.rows[0].password
     let login = r.rows[0].login
-    let from = `${login},${pass}`
+    let from = `${login}`
     fs.readFile('../../.password', function (err, data) {
       if (err) throw err
 
-      const match = new RegExp(`(|^)${from}(\r|$)`)
+      const match = new RegExp(`(|^)${from}(|$\r)`)
       console.log(match);
       const newFile = data.toString().replace(match, ``)
       console.log(newFile);
