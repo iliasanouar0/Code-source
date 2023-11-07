@@ -31,9 +31,9 @@ const setMode = (req, res) => {
     }
     catch (error) {
         console.error('Error occurred:', error);
-    } finally {
+    } /*finally {
         process.exit(1)
-    }
+    }*/
 }
 
 module.exports = {
