@@ -55,7 +55,7 @@ fetch(supervisorSidebarUrl)
         const process = document.querySelector(".process");
         const lists = document.querySelector(".lists");
         console.log(path);
-        if (path.includes("/supervisor/")) {
+        if (path == "/supervisor/") {
             home.classList.add("active");
             home.setAttribute("href", "./");
         } else if (path == "/supervisor/process/") {
