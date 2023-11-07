@@ -18,6 +18,7 @@ $(document).on('click', '#add_user', () => {
             $('#entity_add').append(option);
         });
     }).then(() => {
+        $('.selectpicker').selectpicker('render');
         $(".add_user").modal("show");
     })
 })
@@ -198,7 +199,6 @@ $(document).on('click', '.edit', event => {
         let optionsType = document.querySelector("#e_type_add").children;
         let optionsEntity = document.querySelector("#e_entity_add").children;
         let optionsIsp = document.querySelector("#e_isp_add").children;
-        $('.selectpicker').selectpicker('render');
         $('.selectpicker').selectpicker('val', isp);
         for (let i = 0; i < optionsType.length; i++) {
             if (optionsType.item(i).value == data[0].type) {
