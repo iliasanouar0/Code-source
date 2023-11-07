@@ -346,7 +346,7 @@ const getDatalist = $("#listsDate").DataTable({
   ],
 })
 
-if (path == "/views/mailer/lists/") {
+if (path == "/mailer/lists/") {
   const select = document.querySelector("#l_isp_add");
   select.innerHTML = ""
   let isp = user.isp.split(',')
