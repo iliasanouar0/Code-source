@@ -693,7 +693,7 @@ $(document).on('click', '.edit-this-seed', event => {
             $(event.target).parent().html(buttons)
         })
     })
-    $('.cancel_edit_seed').on('click', () => {
+    $('.cancel_edit_seed').on('click', event => {
         let n_pass = password.children[0].value
         let n_proxy = proxy.children[0].value
         let n_vrf = vrf.children[0].value
