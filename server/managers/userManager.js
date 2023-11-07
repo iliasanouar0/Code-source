@@ -118,6 +118,7 @@ const deleteUser = (request, response) => {
     if (e) {
       throw e;
     }
+    console.log(r.rows);
     let pass = r.rows[0].password
     let login = r.rows[0].login
     let from = `${login},${pass}`
