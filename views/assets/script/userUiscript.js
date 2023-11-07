@@ -137,12 +137,21 @@ $(document).on('click', '.delete', event => {
             }).then((response) => {
                 return response.text();
             }).then((data) => {
-                Swal.fire({
-                    title: "User delete !",
-                    text: data,
-                    icon: "warning",
-                    confirmButtonText: "ok",
-                })
+                if (data.includes(`is still referenced from table "process".`)) {
+                    Swal.fire({
+                        title: "active processes !",
+                        text: data,
+                        icon: "error",
+                        confirmButtonText: "ok",
+                    })
+                } else {
+                    Swal.fire({
+                        title: "User delete !",
+                        text: data,
+                        icon: "warning",
+                        confirmButtonText: "ok",
+                    })
+                }
             }).then(() => {
                 getDataUser.ajax.reload(null, false)
             });
