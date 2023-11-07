@@ -41,7 +41,7 @@ const checkPass = (request, response) => {
         response.status(500).json({ name: error.name, stack: error.stack, message: error.message, err: error });
       }
       let check = results.rows[0].password
-      response.status.send(passwordHash.verify(pass, check))
+      response.status(200).send(passwordHash.verify(pass, check))
     }
   );
 }
