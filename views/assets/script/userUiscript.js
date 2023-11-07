@@ -195,19 +195,25 @@ $(document).on('click', '.edit', event => {
         $("#e_f_name_add").val(data[0].f_name)
         $("#e_l_name_add").val(data[0].l_name)
         let isp = data[0].isp.split(',')
-        console.log(isp);
-        let options = document.querySelector("#e_type_add").children;
-        let optionsE = document.querySelector("#e_entity_add").children;
-        for (let i = 0; i < options.length; i++) {
-            if (options.item(i).value == data[0].type) {
-                options.item(i).setAttribute("selected", "true");
+        let optionsType = document.querySelector("#e_type_add").children;
+        let optionsEntity = document.querySelector("#e_entity_add").children;
+        let optionsIsp = document.querySelector("#e_isp_add").children;
+        console.log(optionsIsp);
+        for (let i = 0; i < optionsType.length; i++) {
+            if (optionsType.item(i).value == data[0].type) {
+                optionsType.item(i).setAttribute("selected", "true");
             }
         }
-        for (let i = 0; i < optionsE.length; i++) {
-            if (optionsE.item(i).value == data[0].id_entity) {
-                optionsE.item(i).setAttribute("selected", "true");
+        for (let i = 0; i < optionsEntity.length; i++) {
+            if (optionsEntity.item(i).value == data[0].id_entity) {
+                optionsEntity.item(i).setAttribute("selected", "true");
             }
         }
+        // for (let i = 0; i < optionsIsp.length; i++) {
+        //     if (optionsEntity.item(i).value == data[0].id_entity) {
+        //         optionsEntity.item(i).setAttribute("selected", "true");
+        //     }
+        // }
         $('#edit').data('id', id)
     }).then(() => {
         $(".edit_user").modal("show");
