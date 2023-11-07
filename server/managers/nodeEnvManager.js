@@ -19,11 +19,20 @@ const setMode = (req, res) => {
     let mode = result.parsed.NODE_ENV
     let test = mode == "development" ? "production" : "development"
     // fs.writeFile('./.env', `NODE_ENV=${test}`, () => { console.log('done'); res.status(200).send(test); process.exit(1) })
-    const options = {
-        files: './.env',
-        from: `/NODE_ENV=${mode}/g`,
-        to: `NODE_ENV=${test}`,
-    };
+    let options
+    if (test == "development") {
+        options = {
+            files: '.env',
+            from: /NODE_ENV=production/g,
+            to: `NODE_ENV=${test}`,
+        }
+    } else {
+        options = {
+            files: '.env',
+            from: /NODE_ENV=development/g,
+            to: `NODE_ENV=${test}`,
+        }
+    }
     try {
         const results = replace.sync(options);
         console.log('Replacement results:', results);
@@ -31,9 +40,9 @@ const setMode = (req, res) => {
     }
     catch (error) {
         console.error('Error occurred:', error);
-    } /*finally {
+    } finally {
         process.exit(1)
-    }*/
+    }
 }
 
 module.exports = {
