@@ -1,6 +1,6 @@
 const userData = JSON.parse(sessionStorage.user);
 let userName = `${userData.f_name} ${userData.l_name}`;
-
+console.log(navigator.userAgent);
 
 $(document).on("click", ".info a", function () {
   $("#f_name").val(userData.f_name);
