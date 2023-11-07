@@ -474,32 +474,32 @@ $(document).on('click', '.view', event => {
         }
     }
     $.ajax(settings).done(function (responseText) {
-        let timerInterval
-        Swal.fire({
-            title: 'loading !!',
-            html: '<b></b>',
-            timer: responseText.length,
-            timerProgressBar: true,
-            didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                }, 100)
-            },
-            willClose: () => {
-                clearInterval(timerInterval)
-            }
-        }).then((result) => {
-            if (result.dismiss === Swal.DismissReason.timer) {
-                Swal.fire({
-                    title: 'done !',
-                    icon: 'success',
-                    timer: 1000,
-                    showConfirmButton: false
-                })
-            }
-        })
+        // let timerInterval
+        // Swal.fire({
+        //     title: 'loading !!',
+        //     html: '<b></b>',
+        //     timer: responseText.length,
+        //     timerProgressBar: true,
+        //     didOpen: () => {
+        //         Swal.showLoading()
+        //         const b = Swal.getHtmlContainer().querySelector('b')
+        //         timerInterval = setInterval(() => {
+        //             b.textContent = Swal.getTimerLeft()
+        //         }, 100)
+        //     },
+        //     willClose: () => {
+        //         clearInterval(timerInterval)
+        //     }
+        // }).then((result) => {
+        //     if (result.dismiss === Swal.DismissReason.timer) {
+        //         Swal.fire({
+        //             title: 'done !',
+        //             icon: 'success',
+        //             timer: 1000,
+        //             showConfirmButton: false
+        //         })
+        //     }
+        // })
         $('#pagination-container').pagination({
             dataSource: responseText,
             pageSize: 10,
@@ -656,7 +656,7 @@ $(document).on('click', '.edit-this-seed', event => {
     proxy.innerHTML = `<input type="text" class="form-control proxy_change" value="${c_proxy}">`
     vrf.innerHTML = `<input type="text" class="form-control vrf_change" value="${c_vrf}">`
 
-    $(event.target).parent().html(`<button type="button" class="btn btn-success save_edit_seed" data-id="${data}">save</button>`)
+    $(event.target).parent().html(`<button type="button" class="btn btn-success save_edit_seed" data-id="${data}">save</button><button type="button" class="btn btn-secondary cancel_edit_seed">Cancel</button>`)
     $('.save_edit_seed').on('click', event => {
         let n_pass = password.children[0].value
         let n_proxy = proxy.children[0].value
@@ -692,6 +692,15 @@ $(document).on('click', '.edit-this-seed', event => {
             vrf.innerHTML = n_vrf
             $(event.target).parent().html(buttons)
         })
+    })
+    $('.cancel_edit_seed').on('click', () => {
+        let n_pass = password.children[0].value
+        let n_proxy = proxy.children[0].value
+        let n_vrf = vrf.children[0].value
+        password.innerHTML = n_pass
+        proxy.innerHTML = n_proxy
+        vrf.innerHTML = n_vrf
+        $(event.target).parent().html(buttons)
     })
 
 })
