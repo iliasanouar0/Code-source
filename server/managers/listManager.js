@@ -49,9 +49,9 @@ const getListsSup = (req, res) => {
     "SELECT list.*, COUNT(id_seeds) AS seeds_count, users.login, entity.nom FROM list LEFT JOIN seeds ON seeds.id_list = list.id_list JOIN users ON list.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity WHERE users.type!=%admin% GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY list.date_add DESC",
     (error, results) => {
       if (error) {
-        response.status(500).json(error.message);
+        res.status(500).json(error.message);
       }
-      response.status(200).json(results.rows);
+      res.status(200).json(results.rows);
     }
   );
 }
