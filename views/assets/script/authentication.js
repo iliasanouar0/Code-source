@@ -71,21 +71,28 @@ submitButton.addEventListener("click", (e) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        let stmt = data[0].password == password.value;
-        switch (stmt) {
-          case true:
-            password.classList.remove("is-invalid");
-            password.classList.add("is-valid");
-            break;
-          default:
-            password.classList.remove("is-valid");
-            password.classList.add("is-invalid");
-            break;
-        }
-        if (!stmt) {
-          return;
-        }
+        var settings = {
+          "url": `http://${ip}:3000/users/pass/${data[0].id_user}?pass=${password.value}`,
+          "method": "GET",
+          "timeout": 0,
+        };
+
+        $.ajax(settings).done(function (response) {
+          let stmt = response;
+          switch (stmt) {
+            case true:
+              password.classList.remove("is-invalid");
+              password.classList.add("is-valid");
+              break;
+            default:
+              password.classList.remove("is-valid");
+              password.classList.add("is-invalid");
+              break;
+          }
+          if (!stmt) {
+            return;
+          }
+        });
         sessionStorage.setItem("user", JSON.stringify(data[0]));
         window.sessionStorage.setItem('auth', '1')
         if (data[0].type == "admin" && data[0].status == "active") {
