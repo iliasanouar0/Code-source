@@ -508,7 +508,7 @@ const getDataUser = $("#userTable").DataTable({
           ${row.password}
           </div>
         </div>-->
-        <div class="col-md-auto">
+        <div class="col-md-auto btn btn-danger">
         <i class="fas fa-cog update_pass" data-id="${row.id_user}"></i>
         </div>
         </div>`
