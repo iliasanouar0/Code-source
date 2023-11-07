@@ -127,8 +127,9 @@ const deleteUser = (request, response) => {
       let array = data.toString().split('\r\n')
       const match = new RegExp(from + "\\S+\r$", 'g')
       let result
-      for (let i = 0; i < array.length; i++) {
-        if (match.test(array[i])) {
+      let i = 0
+      array.forEach(element => {
+        if (match.test(element)) {
           result = array.slice(i, 1)
           console.log(result);
           const newFile = result.join('\r\n')
@@ -137,9 +138,9 @@ const deleteUser = (request, response) => {
             if (err) return console.log(err)
             console.log("true")
           })
-          break
         }
-      }
+        i++
+      });
     })
   })
   pool.query("DELETE FROM users WHERE id_user = $1", [id], (error, results) => {
