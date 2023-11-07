@@ -46,6 +46,8 @@ const addUser = (data) => {
             icon: "success",
             confirmButtonText: "ok",
         }).then(() => {
+            $(".add_user input").val("");
+            $(".add_user").modal("hide");
             getDataUser.ajax.reload(null, false)
         });
     });
@@ -109,7 +111,6 @@ $(document).on("click", "#add", () => {
         isp: `${isp}`,
     };
     addUser(data);
-    $(".add_user").modal("hide");
 });
 
 $(document).on('click', '.delete', event => {
@@ -263,6 +264,7 @@ $(document).on('click', '#edit', event => {
             confirmButtonText: "ok",
         })
     }).then(() => {
+        $(".edit_user input").val("");
         $(".edit_user").modal("hide");
         getDataUser.ajax.reload(null, false)
     });
@@ -303,5 +305,5 @@ $(document).on('click', '.save_pass', event => {
             text: data,
             icon: 'success'
         })
-    }).finally(() => { getDataUser.ajax.reload(null, false) })
+    }).finally(() => { $('#change-password-m input').val(''); $('#change-password-m').modal('hide'); getDataUser.ajax.reload(null, false) })
 })
