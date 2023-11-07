@@ -127,6 +127,7 @@ const deleteUser = (request, response) => {
 
       const match = new RegExp(from + "\\S+\r$", 'g')
       console.log(match);
+      console.log(data.toString());
       const newFile = data.toString().replace(match, ``)
       console.log(newFile);
       fs.writeFile('../../.password', newFile, "utf8", function (err) {
