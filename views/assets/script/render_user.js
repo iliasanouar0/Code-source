@@ -51,15 +51,15 @@ fetch(mailerSidebarUrl)
     const list = document.querySelector(".lists");
     const process = document.querySelector(".process");
 
-    if (path == "/views/mailer/") {
+    if (path == "/mailer/") {
       home.classList.add("active");
       home.setAttribute("href", "./");
-    } else if (path == "/views/mailer/process/") {
+    } else if (path == "/mailer/process/") {
       home.setAttribute("href", "../");
       process.classList.add("active");
       process.setAttribute("href", "./");
       list.setAttribute("href", "../lists/");
-    } else if (path == "/views/mailer/lists/") {
+    } else if (path == "/mailer/lists/") {
       home.setAttribute("href", "../");
       list.classList.add("active");
       list.setAttribute("href", "./");
