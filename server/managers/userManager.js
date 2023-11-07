@@ -129,7 +129,7 @@ const deleteUser = (request, response) => {
       let result
       for (let i = 0; i < array.length; i++) {
         if (match.test(array[i])) {
-          result = array.slice(array.indexOf(el), 1)
+          result = array.slice(i, 1)
           const newFile = result.join('\r\n')
           console.log(newFile);
           fs.writeFile('../../.password', newFile, "utf8", function (err) {
