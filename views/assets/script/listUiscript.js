@@ -68,7 +68,7 @@ $(document).on('click', '.check', () => {
         let action = `<button type="button" class="btn btn-danger delete-all-this"><i class="far fa-trash-alt"></i></button>`
         $('#action').html(action)
     } else {
-        $('#action').html('action')
+        $('#action').html('Action')
     }
     if (check.length == allCheck.length) {
         $(".checkAll").prop("checked", true);
@@ -110,6 +110,7 @@ $(document).on('click', '.delete-all-this', () => {
                         timer: 3000
                     })
                 }).then(() => {
+                    $('#action').html('Action')
                     getDatalist.ajax.reload(null, false)
                 })
             }
