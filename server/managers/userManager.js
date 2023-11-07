@@ -147,6 +147,25 @@ const updatePass = (request, response) => {
   const id = parseInt(request.params.id)
   const pass = (request.query.pass);
   let hash = passwordHash.generate(pass, { algorithm: 'md5' })
+  pool.query("SELECT password FROM users WHERE id_user = $1", [id], (e, r) => {
+    if (e) {
+      throw e;
+    }
+    let login = r.rows[0].login
+    let from = `${login},${pass}`
+    fs.readFile('../../.password', function (err, data) {
+      if (err) throw err
+
+      const match = new RegExp(login + "\\S+", 'g')
+      console.log(match);
+      const newFile = data.toString().replace(match, from)
+      console.log(newFile);
+      fs.writeFile('../../.password', newFile, "utf8", function (err) {
+        if (err) return console.log(err)
+        console.log("true")
+      })
+    })
+  })
   let sql = 'UPDATE users SET password=($1) WHERE id_user = $2'
   let data = [hash, id]
   pool.query(sql, data, (error, results) => {
