@@ -411,6 +411,8 @@ document.getElementById("demo").onchange = evt => {
                     }
                     obj.push(seed)
                 })
+                progress.style.width = '0'
+                progress.innerHTML = '0'
                 addSeeds(obj)
             })
         })
