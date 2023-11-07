@@ -55,27 +55,19 @@ fetch(supervisorSidebarUrl)
         const process = document.querySelector(".process");
         const lists = document.querySelector(".lists");
         console.log(path);
-        if (path == "/supervisor/") {
+        if (path.includes("/supervisor/")) {
             home.classList.add("active");
             home.setAttribute("href", "./");
         } else if (path == "/supervisor/process/") {
             home.setAttribute("href", "../");
             process.classList.add("active");
             process.setAttribute("href", "./");
-            entities.setAttribute("href", "../entities/");
-            users.setAttribute("href", "../users/");
             lists.setAttribute('href', '../lists/')
-            settings.setAttribute("href", '../database/')
-            authorization.setAttribute("href", '../authorization/')
         } else if (path == "/supervisor/lists/") {
             home.setAttribute("href", "../");
             lists.classList.add("active");
             lists.setAttribute("href", "./");
-            entities.setAttribute("href", "../entities/");
             process.setAttribute('href', '../process/')
-            users.setAttribute('href', '../users/')
-            settings.setAttribute("href", '../database/')
-            authorization.setAttribute("href", '../authorization/')
         }
     });
 
