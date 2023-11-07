@@ -25,6 +25,7 @@ if (root.includes('views')) {
     supervisorNavbarUrl = `${root}/views/layout/supervisor_navbar.html`;
     supervisorSidebarUrl = `${root}/views/layout/supervisor_sidebar.html`;
 }
+let user = JSON.parse(sessionStorage.user)
 
 const _location = document.location.toString();
 let path = _location.replace(root, "");
