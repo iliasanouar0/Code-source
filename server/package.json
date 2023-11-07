@@ -23,6 +23,7 @@
     "pg-format": "^1.0.4",
     "proxy-addr": "^2.0.7",
     "puppeteer": "^21.3.8",
+    "replace-in-file": "^7.0.2",
     "ws": "^8.14.2"
   },
   "devDependencies": {
