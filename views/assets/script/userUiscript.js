@@ -209,11 +209,13 @@ $(document).on('click', '.edit', event => {
                 optionsEntity.item(i).setAttribute("selected", "true");
             }
         }
-        // for (let i = 0; i < optionsIsp.length; i++) {
-        //     if (optionsEntity.item(i).value == data[0].id_entity) {
-        //         optionsEntity.item(i).setAttribute("selected", "true");
-        //     }
-        // }
+        for (let i = 0; i < optionsIsp.length; i++) {
+            for (let j = 0; j < isp.length; j++) {
+                if (optionsEntity.item(i).value == isp[j]) {
+                    optionsEntity.item(i).setAttribute("selected", "true");
+                }
+            }
+        }
         $('#edit').data('id', id)
     }).then(() => {
         $(".edit_user").modal("show");
