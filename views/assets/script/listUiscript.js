@@ -1,4 +1,4 @@
-// const userData = JSON.parse(sessionStorage.user);
+const userData = JSON.parse(sessionStorage.user);
 Date.prototype.toDateInputValue = function () {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -222,10 +222,10 @@ const addSeeds = (data) => {
 }
 
 $(document).on('click', "#l_add", () => {
-    let e_name = $('#la_name').val().toString()
-    let e_add_date = $('#l_add_date').val().toString()
-    let e_update_date = $('#l_update_date').val().toString()
-    let l_isp_add = $('#l_isp_add').val().toString()
+    let e_name = $('#la_name').val()
+    let e_add_date = $('#l_add_date').val()
+    let e_update_date = $('#l_update_date').val()
+    let l_isp_add = $('#l_isp_add').val()
     if (e_name == "" || e_add_date == "" || e_update_date == "" || l_isp_add == "") {
         Swal.fire('Please fill all fields')
         return
