@@ -1,3 +1,4 @@
+const user = JSON.parse(sessionStorage.user);
 
 $(document).on('click', '.password_show', event => {
     $(event.target).toggleClass("blur")
@@ -193,6 +194,7 @@ $(document).on('click', '.edit', event => {
     }).then(data => {
         $("#e_f_name_add").val(data[0].f_name)
         $("#e_l_name_add").val(data[0].l_name)
+        console.log(data[0].isp);
         let options = document.querySelector("#e_type_add").children;
         let optionsE = document.querySelector("#e_entity_add").children;
         for (let i = 0; i < options.length; i++) {
