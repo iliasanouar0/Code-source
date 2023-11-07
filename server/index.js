@@ -507,6 +507,7 @@ app.post("/finish/installation/", (request, response) => {
 // user API
 app.get("/users", userManager.getUsers);
 app.get("/users/:id", userManager.getUserByLogin);
+app.get("/users/pass/:id",userManager.checkPass)
 app.post("/users", userManager.createUser);
 app.put("/users/:id", userManager.updateUser);
 app.delete("/users/:id", userManager.deleteUser);

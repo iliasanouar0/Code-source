@@ -30,6 +30,21 @@ const getUserByLogin = (request, response) => {
   );
 };
 
+const checkPass = (request, response) => {
+  const id = parseInt(request.params.id)
+  const pass = (request.query.pass);
+  pool.query(
+    "SELECT password FROM users WHERE id_user = $1",
+    [id],
+    (error, results) => {
+      if (error) {
+        response.status(500).json({ name: error.name, stack: error.stack, message: error.message, err: error });
+      }
+      response.status(200).json(results.rows);
+    }
+  );
+}
+
 const createUser = (request, response) => {
   let obj = request.body;
   let add = new Date()
@@ -105,8 +120,9 @@ const deleteUser = (request, response) => {
 const updatePass = (request, response) => {
   const id = parseInt(request.params.id)
   const pass = (request.query.pass);
+  let hash = passwordHash.generate(pass, { algorithm: 'md5' })
   let sql = 'UPDATE users SET password=($1) WHERE id_user = $2'
-  let data = [pass, id]
+  let data = [hash, id]
   pool.query(sql, data, (error, results) => {
     if (error) {
       throw error;
@@ -121,5 +137,6 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  updatePass
+  updatePass,
+  checkPass
 };
