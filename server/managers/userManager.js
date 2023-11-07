@@ -127,18 +127,18 @@ const deleteUser = (request, response) => {
       let array = data.toString().split('\r\n')
       const match = new RegExp(from + "\\S+\r$", 'g')
       let result
-      array.forEach(el => {
-        if (match.test(el)) {
+      for (let i = 0; i < array.length; i++) {
+        if (match.test(array[i])) {
           result = array.slice(array.indexOf(el), 1)
+          const newFile = result.join('\r\n')
+          console.log(newFile);
+          fs.writeFile('../../.password', newFile, "utf8", function (err) {
+            if (err) return console.log(err)
+            console.log("true")
+          })
+          break
         }
-      })
-
-      const newFile = result.join('\r\n')
-      console.log(newFile);
-      fs.writeFile('../../.password', newFile, "utf8", function (err) {
-        if (err) return console.log(err)
-        console.log("true")
-      })
+      }
     })
   })
   pool.query("DELETE FROM users WHERE id_user = $1", [id], (error, results) => {
