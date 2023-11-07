@@ -213,6 +213,7 @@ const addSeeds = (data) => {
                 icon: 'success',
                 confirmButtonText: 'ok'
             }).then(() => {
+                $('#demo').val('')
                 getDatalist.ajax.reload(null, false)
             })
         }
