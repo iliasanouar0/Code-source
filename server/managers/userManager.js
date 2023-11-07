@@ -130,10 +130,18 @@ const deleteUser = (request, response) => {
         console.log("true")
       })
     })
+    try {
+      const data = fs.readFileSync('../../.password', 'utf8')
+      let newData = data.trim()
+      console.log(newData);
+    }
+    catch (err) {
+      console.log(err)
+    }
   })
   pool.query("DELETE FROM users WHERE id_user = $1", [id], (error, results) => {
     if (error) {
-      response.status(200).send(error.detail) ;
+      response.status(200).send(error.detail);
     }
     response.status(200).send(`User deleted with ID: ${id}`);
   });
