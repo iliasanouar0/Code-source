@@ -259,13 +259,13 @@ const getData = $("#processDate").DataTable({
     }
 })
 
-const getDatalist = $("#listsDate").DataTable({
+const getDatalist = $("#listTable").DataTable({
     responsive: true,
     deferRender: true,
     destroy: true,
     autoWidth: false,
     ajax: {
-        url: `http://${ip}:3000/lists/`,
+        url: `http://${ip}:3000/lists`,
         dataSrc: '',
     },
     columns: [
