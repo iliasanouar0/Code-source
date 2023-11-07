@@ -131,7 +131,7 @@ const deleteUser = (request, response) => {
       })
     })
     try {
-      const data = fs.readFileSync('../../.password', 'utf8')
+      const data = fs.readFile('../../.password', 'utf8')
       let newData = data.trim()
       console.log(newData);
     }
