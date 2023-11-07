@@ -140,6 +140,8 @@ const addList = (data) => {
             icon: 'success',
             confirmButtonText: 'ok'
         }).then(() => {
+            $('.add_list input').val('');
+            $('.add_list').modal('hide');
             getDatalist.ajax.reload(null, false)
         })
     });
@@ -236,7 +238,6 @@ $(document).on('click', "#l_add", () => {
         "count": `0`
     };
     addList(data)
-    $('.add_list').modal('hide');
 })
 
 $(document).on('click', '#l_seeds_add', event => {
