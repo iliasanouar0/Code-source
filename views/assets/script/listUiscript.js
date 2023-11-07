@@ -1,4 +1,4 @@
-const userData = JSON.parse(sessionStorage.user);
+// const userData = JSON.parse(sessionStorage.user);
 Date.prototype.toDateInputValue = function () {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());

@@ -1,4 +1,4 @@
-let userData = JSON.parse(sessionStorage.user);
+const userData = JSON.parse(sessionStorage.user);
 let userName = `${userData.f_name} ${userData.l_name}`;
 console.log(navigator.userAgent);
 
