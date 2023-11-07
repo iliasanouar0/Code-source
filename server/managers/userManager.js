@@ -129,7 +129,7 @@ const updatePass = (request, response) => {
     if (error) {
       throw error;
     }
-    response.status(200).send(`User deleted with ID: ${id}`);
+    response.status(200).send(`password updated for user with ID: ${id}`);
   });
 }
 
