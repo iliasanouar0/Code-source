@@ -265,7 +265,7 @@ const getDatalist = $("#listsDate").DataTable({
     destroy: true,
     autoWidth: false,
     ajax: {
-        url: `http://${ip}:3000/lists/${user.id_user}`,
+        url: `http://${ip}:3000/lists/`,
         dataSrc: '',
     },
     columns: [
