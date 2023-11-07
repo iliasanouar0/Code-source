@@ -37,8 +37,8 @@ fetch(mailerSidebarUrl)
     $(".mailer-sidebar").html(html)
   })
   .then(() => {
-    const imgUrlLogo = `${root}/views/assets/images/R.jpg`;
-    const imgUrlUser = `${root}/views/assets/images/user.png`;
+    const imgUrlLogo = `${root}/assets/images/R.jpg`;
+    const imgUrlUser = `${root}/assets/images/user.png`;
 
     const imgSrcLogo = document.querySelector(".logo");
     const imgSrcUser = document.querySelector(".user");
