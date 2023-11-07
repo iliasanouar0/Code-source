@@ -94,7 +94,7 @@ const getData = $("#processDate").DataTable({
     destroy: true,
     autoWidth: false,
     ajax: {
-        url: `http://${ip}:3000/process/mailer/${user.id_user}`,
+        url: `http://${ip}:3000/process/sup/`,
         dataSrc: '',
     },
     columns: [
@@ -369,18 +369,16 @@ if (path == "/supervisor/lists/") {
         select.innerHTML = ""
         fetch(`http://${ip}:3000/lists/${user.id_user}`, {
             method: "GET",
-        })
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                data.forEach((elm) => {
-                    let option = document.createElement("option");
-                    option.innerHTML = elm["name"];
-                    option.setAttribute("value", elm["id_list"]);
-                    select.appendChild(option);
-                });
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            data.forEach((elm) => {
+                let option = document.createElement("option");
+                option.innerHTML = elm["name"];
+                option.setAttribute("value", elm["id_list"]);
+                select.appendChild(option);
             });
+        });
     });
-    // getData
+    getData
 }

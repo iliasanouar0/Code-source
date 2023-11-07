@@ -45,6 +45,16 @@ const getAllUserDate = (request, response) => {
     })
 }
 
+const getAllSupDate = (request, response) => {
+    let sql = "SELECT process.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM process JOIN list ON list.id_list=process.id_list JOIN users ON process.id_user=users.id_user JOIN seeds ON seeds.id_list=process.id_list WHERE users.type!='admin' GROUP BY process.id_process,list.id_list,users.id_user"
+    pool.query(sql, (error, result) => {
+        if (error) {
+            response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
+        }
+        response.status(200).send(result.rows)
+    })
+}
+
 const getAllProcessSeeds = (request, response) => {
     const id = (request.params.id)
     let sql = "SELECT process.id_process,process.action,process.status as pstatus, seeds.*,results.start_in, results.end_in, results.status as rStatus FROM process JOIN seeds ON seeds.id_list=process.id_list  LEFT JOIN results ON results.id_process=process.id_process AND results.id_seeds=seeds.id_seeds  WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds,results.start_in,results.end_in, results.status,process.status ORDER BY CASE WHEN results.status = 'running' then 1 WHEN results.status = 'finished' then 2  WHEN results.status = 'failed' then 3 WHEN results.status='waiting' then 4 END ASC"
@@ -283,5 +293,6 @@ module.exports = {
     getProcessState,
     getProcessStateServer,
     getAllProcessSeedsCount,
-    getAllUserDate
+    getAllUserDate,
+    getAllSupDate
 }
