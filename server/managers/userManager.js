@@ -147,7 +147,7 @@ const updatePass = (request, response) => {
   const id = parseInt(request.params.id)
   const pass = (request.query.pass);
   let hash = passwordHash.generate(pass, { algorithm: 'md5' })
-  pool.query("SELECT password FROM users WHERE id_user = $1", [id], (e, r) => {
+  pool.query("SELECT login FROM users WHERE id_user = $1", [id], (e, r) => {
     if (e) {
       throw e;
     }
