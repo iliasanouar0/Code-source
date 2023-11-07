@@ -413,8 +413,10 @@ $(document).on('click', '#t_add', () => {
                     text: response,
                     icon: 'success'
                 })
-                getDataSettings()
+                $('.add_table input').val('')
                 $('.add_table').modal('hide')
+                $('#table_columns').empty()
+                getDataSettings()
             }
         });
     }
@@ -570,6 +572,8 @@ $(document).on('click', '#c_add', () => {
                     icon: 'success'
                 })
                 getDataSettings()
+                $('#a_table_columns').empty()
+                $('.add_column input').val('')
                 $('.add_column').modal('hide')
             }
         });
