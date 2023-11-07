@@ -46,7 +46,7 @@ const getLists = (request, response) => {
 
 const getListsSup = (req, res) => {
   pool.query(
-    "SELECT list.*, COUNT(id_seeds) AS seeds_count, users.login, entity.nom FROM list LEFT JOIN seeds ON seeds.id_list = list.id_list JOIN users ON list.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity WHERE users.type!=admin GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY list.date_add DESC",
+    "SELECT list.*, COUNT(id_seeds) AS seeds_count, users.login, entity.nom FROM list LEFT JOIN seeds ON seeds.id_list = list.id_list JOIN users ON list.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity WHERE users.type='admin' GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY list.date_add DESC",
     (error, results) => {
       if (error) {
         res.status(500).json(error.message);
