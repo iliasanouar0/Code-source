@@ -212,7 +212,7 @@ $(document).on('click', '.edit', event => {
         for (let i = 0; i < optionsIsp.length; i++) {
             for (let j = 0; j < isp.length; j++) {
                 if (optionsIsp.item(i).value == isp[j]) {
-                    optionsIsp.item(i).setAttribute("selected", "true");
+                    optionsIsp.item(i).setAttribute("aria-selected", "true");
                 }
             }
         }
