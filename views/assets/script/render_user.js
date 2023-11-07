@@ -19,8 +19,15 @@ let storage = { ...localStorage }
 let ip = storage.ip
 
 const root = getRootWebSitePath();
-const mailerSidebarUrl = `${root}/views/layout/mailer_sidebar.html`;
-const mailerNavbarUrl = `${root}/views/layout/mailer_navbar.html`;
+let mailerSidebarUrl = ""
+let mailerNavbarUrl = ""
+if (root.includes('views')) {
+  mailerSidebarUrl = `${root}/layout/mailer_sidebar.html`;
+  mailerNavbarUrl = `${root}/layout/mailer_navbar.html`;
+} else {
+  mailerSidebarUrl = `${root}/views/layout/mailer_sidebar.html`;
+  mailerNavbarUrl = `${root}/views/layout/mailer_navbar.html`;
+}
 const _location = document.location.toString();
 let path = _location.replace(root, "");
 
