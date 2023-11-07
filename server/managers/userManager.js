@@ -2,6 +2,7 @@ const fs = require('fs')
 const pg = require("pg");
 const passwordHash = require('password-hash');
 const data = require('../db');
+const replace = require('replace-in-file');
 
 let config = data.data
 
@@ -113,6 +114,30 @@ const updateUser = (request, response) => {
 
 const deleteUser = (request, response) => {
   const id = parseInt(request.params.id);
+  pool.query("SELECT password,login FROM users WHERE id_user = $1", [id], (e, r) => {
+    if (e) {
+      throw e;
+    }
+    let pass = r.rows[0].password
+    let login = r.rows[0].login
+    let from = `${login},${pass}`
+    const regex = new RegExp(from, 'i');
+    let options = {
+      files: '../../.password',
+      from: regex,
+      to: 'test-test',
+    }
+    try {
+      const results = replace.sync(options);
+      console.log('Replacement results:', results);
+      res.status(200).send(test)
+    }
+    catch (error) {
+      console.error('Error occurred:', error);
+    } finally {
+      process.exit(1)
+    }
+  })
   pool.query("DELETE FROM users WHERE id_user = $1", [id], (error, results) => {
     if (error) {
       throw error;

@@ -18,7 +18,6 @@ const setMode = (req, res) => {
     }
     let mode = result.parsed.NODE_ENV
     let test = mode == "development" ? "production" : "development"
-    // fs.writeFile('./.env', `NODE_ENV=${test}`, () => { console.log('done'); res.status(200).send(test); process.exit(1) })
     let options
     if (test == "development") {
         options = {
