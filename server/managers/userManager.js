@@ -133,7 +133,7 @@ const deleteUser = (request, response) => {
   })
   pool.query("DELETE FROM users WHERE id_user = $1", [id], (error, results) => {
     if (error) {
-      response.status(200).send(error.message) ;
+      response.status(200).send(error.detail) ;
     }
     response.status(200).send(`User deleted with ID: ${id}`);
   });
