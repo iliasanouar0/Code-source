@@ -89,7 +89,7 @@ function msToMnSc(ms) {
     );
 }
 
-const getData = $("#processDate").DataTable({
+const getData = $("#ProcessData").DataTable({
     responsive: true,
     destroy: true,
     autoWidth: false,
