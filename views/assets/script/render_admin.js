@@ -26,6 +26,10 @@ if (root.includes('views')) {
   adminSidebarUrl = `${root}/views/layout/admin_sidebar.html`;
 }
 
+$('.modal').on('show.bs.modal')
+$(document).on('.modal', 'show.bs.modal', () => {
+  $('.modal input').val('')
+})
 const _location = document.location.toString();
 let path = _location.replace(root, "");
 fetch(adminSidebarUrl)
