@@ -18,7 +18,7 @@ $(document).on('click', '#add_user', () => {
             $('#entity_add').append(option);
         });
     }).then(() => {
-        $('.selectpicker').selectpicker('val', '');
+        $('.selectpicker').selectpicker('deselectAll');
         $(".add_user").modal("show");
     })
 })
