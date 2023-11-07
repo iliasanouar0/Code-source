@@ -197,7 +197,7 @@ $(document).on('click', '.edit', event => {
         let isp = data[0].isp.split(',')
         let optionsType = document.querySelector("#e_type_add").children;
         let optionsEntity = document.querySelector("#e_entity_add").children;
-        let optionsIsp = document.querySelector("#bs-select-2 ul").children;
+        let optionsIsp = document.querySelector("#bs-select-2");
         console.log(optionsIsp);
         for (let i = 0; i < optionsType.length; i++) {
             if (optionsType.item(i).value == data[0].type) {
@@ -209,7 +209,6 @@ $(document).on('click', '.edit', event => {
                 optionsEntity.item(i).setAttribute("selected", "true");
             }
         }
-        console.log(optionsIsp);
         // for (let i = 0; i < optionsIsp.length; i++) {
         //     for (let j = 0; j < isp.length; j++) {
         //         if (optionsIsp.item(i).value == isp[j]) {
