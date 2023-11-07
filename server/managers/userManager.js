@@ -130,12 +130,9 @@ const deleteUser = (request, response) => {
     try {
       const results = replace.sync(options);
       console.log('Replacement results:', results);
-      res.status(200).send(test)
     }
     catch (error) {
       console.error('Error occurred:', error);
-    } finally {
-      process.exit(1)
     }
   })
   pool.query("DELETE FROM users WHERE id_user = $1", [id], (error, results) => {
