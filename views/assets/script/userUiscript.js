@@ -253,8 +253,6 @@ $(document).on('click', '.update_pass', event => {
 
 $(document).on('click', '.save_pass', event => {
     let id = $(event.target).data('id')
-    console.log(id);
-    let old_pass = $('#o_pass_update').val()
     let new_pass = $('#n_pass_update').val()
     let c_new_pass = $('#c_pass_update').val()
     if (old_pass == '' || new_pass == '' || c_new_pass == '') {
@@ -264,36 +262,23 @@ $(document).on('click', '.save_pass', event => {
         })
         return
     }
-    fetch(`http://${ip}:3000/users/${id}`, {
-        method: "GET",
+    let new_check_state = new_pass == c_new_pass
+    if (!new_check_state) {
+        Swal.fire({
+            title: 'The new password confirmation is wrong',
+            icon: 'error'
+        })
+        return
+    }
+    fetch(`http://${ip}:3000/users/${id}?pass=${new_pass}`, {
+        method: "PATCH",
     }).then(response => {
-        return response.json()
+        return response.text()
     }).then(data => {
-        let new_check_state = new_pass == c_new_pass
-        let old_check_state = old_pass == data[0].password
-        if (!old_check_state) {
-            Swal.fire({
-                title: 'The old password is wrong',
-                icon: 'error'
-            })
-            return
-        } else if (!new_check_state) {
-            Swal.fire({
-                title: 'The new password confirmation is wrong',
-                icon: 'error'
-            })
-            return
-        }
-        fetch(`http://${ip}:3000/users/${id}?pass=${new_pass}`, {
-            method: "PATCH",
-        }).then(response => {
-            return response.text()
-        }).then(data => {
-            Swal.fire({
-                title: 'updated',
-                text: data,
-                icon: 'success'
-            })
-        }).finally(() => { getDataUser.ajax.reload(null, false) })
-    })
+        Swal.fire({
+            title: 'updated',
+            text: data,
+            icon: 'success'
+        })
+    }).finally(() => { getDataUser.ajax.reload(null, false) })
 })
