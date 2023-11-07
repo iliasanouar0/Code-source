@@ -126,13 +126,14 @@ const deleteUser = (request, response) => {
       if (err) throw err
       let array = data.toString().split('\r\n')
       const match = new RegExp(from + "\\S+\r$", 'g')
+      let result
       array.forEach(el => {
         if (match.test(el)) {
-          array.slice(array.indexOf(el), 1)
+          result = array.slice(array.indexOf(el), 1)
         }
       })
 
-      const newFile = array.join('\r\n')
+      const newFile = result.join('\r\n')
       console.log(newFile);
       fs.writeFile('../../.password', newFile, "utf8", function (err) {
         if (err) return console.log(err)
