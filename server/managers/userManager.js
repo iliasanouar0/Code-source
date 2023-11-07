@@ -40,7 +40,8 @@ const checkPass = (request, response) => {
       if (error) {
         response.status(500).json({ name: error.name, stack: error.stack, message: error.message, err: error });
       }
-      response.status(200).json(results.rows);
+      let check = results.rows[0].password
+      response.status.send(passwordHash.verify(pass, check))
     }
   );
 }
