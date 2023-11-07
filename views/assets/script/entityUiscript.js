@@ -25,6 +25,8 @@ const addEntity = (data) => {
             confirmButtonText: "ok",
         })
     }).then(() => {
+        $(".add_entity input").val("");
+        $(".add_entity").modal("hide");
         getDataEntity.ajax.reload(null, false)
     });
 };
@@ -50,7 +52,6 @@ $(document).on("click", "#e_add", () => {
         date_update: `${e_update_date}`,
     };
     addEntity(data);
-    $(".add_entity").modal("hide");
 });
 
 $(document).on('click', '.delete', event => {
@@ -160,6 +161,7 @@ $(document).on('click', '#e_e_add', event => {
             confirmButtonText: "ok",
         })
     }).then(() => {
+        $(".edit_entity input").val('')
         $(".edit_entity").modal('hide')
         getDataEntity.ajax.reload(null, false)
     });
