@@ -118,17 +118,13 @@ const deleteUser = (request, response) => {
     if (e) {
       throw e;
     }
-    console.log(r.rows);
     let pass = r.rows[0].password
     let login = r.rows[0].login
     let from = `${login}`
     fs.readFile('../../.password', function (err, data) {
       if (err) throw err
-
       const match = new RegExp(from + "\\S+", 'g')
-      console.log(match);
       const newFile = data.toString().replace(match, ``)
-      console.log(newFile);
       fs.writeFile('../../.password', newFile, "utf8", function (err) {
         if (err) return console.log(err)
         console.log("true")
@@ -155,11 +151,8 @@ const updatePass = (request, response) => {
     let from = `${login},${pass}`
     fs.readFile('../../.password', function (err, data) {
       if (err) throw err
-
       const match = new RegExp(login + "\\S+", 'g')
-      console.log(match);
       const newFile = data.toString().replace(match, from)
-      console.log(newFile);
       fs.writeFile('../../.password', newFile, "utf8", function (err) {
         if (err) return console.log(err)
         console.log("true")
