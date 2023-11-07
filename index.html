@@ -73,6 +73,7 @@
                     };
                     $.ajax(settings).done(function (responseText) {
                         if (responseText == 'development' || responseText == 'production') {
+                            window.sessionStorage.setItem('auth', '1')
                             location.href = './views/authentication/'
                         }
                     });
