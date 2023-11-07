@@ -1,3 +1,12 @@
+console.log(sessionStorage.auth);
+if (sessionStorage.auth == undefined) {
+  location.href = '/'
+}
+let auth = JSON.parse(sessionStorage.auth)
+if (auth == 0 || auth == 'undefined') {
+  location.href = '/'
+}
+
 const togglePassword = document.querySelector(".switch");
 togglePassword.addEventListener("click", function (e) {
   // toggle the type attributeW

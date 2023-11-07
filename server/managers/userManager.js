@@ -1,5 +1,5 @@
 const pg = require("pg");
-var IdGenerator = require("auth0-id-generator");
+const passwordHash = require('password-hash');
 const data = require('../db');
 
 let config = data.data
