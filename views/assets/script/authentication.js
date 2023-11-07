@@ -98,7 +98,7 @@ submitButton.addEventListener("click", (e) => {
         if (data[0].type == "admin" && data[0].status == "active") {
           window.location.href = "../admin/process";
         } else if (data[0].type == "sup") {
-          document.location.href = "../supervisor/";
+          document.location.href = "../supervisor/process";
         } else {
           document.location.href = "../mailer/process";
         }
