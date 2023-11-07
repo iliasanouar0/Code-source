@@ -197,7 +197,7 @@ $(document).on('click', '.edit', event => {
         let isp = data[0].isp.split(',')
         let optionsType = document.querySelector("#e_type_add").children;
         let optionsEntity = document.querySelector("#e_entity_add").children;
-        let optionsIsp = document.querySelector("#e_isp_add").children;
+        let optionsIsp = document.querySelector("#bs-select-2 ul").children;
         console.log(optionsIsp);
         for (let i = 0; i < optionsType.length; i++) {
             if (optionsType.item(i).value == data[0].type) {
@@ -209,13 +209,14 @@ $(document).on('click', '.edit', event => {
                 optionsEntity.item(i).setAttribute("selected", "true");
             }
         }
-        for (let i = 0; i < optionsIsp.length; i++) {
-            for (let j = 0; j < isp.length; j++) {
-                if (optionsIsp.item(i).value == isp[j]) {
-                    optionsIsp.item(i).setAttribute("aria-selected", "true");
-                }
-            }
-        }
+        console.log(optionsIsp);
+        // for (let i = 0; i < optionsIsp.length; i++) {
+        //     for (let j = 0; j < isp.length; j++) {
+        //         if (optionsIsp.item(i).value == isp[j]) {
+        //             optionsIsp.item(i).setAttribute("aria-selected", "true");
+        //         }
+        //     }
+        // }
         $('#edit').data('id', id)
     }).then(() => {
         $(".edit_user").modal("show");
