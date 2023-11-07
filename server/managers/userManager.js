@@ -125,7 +125,7 @@ const deleteUser = (request, response) => {
     fs.readFile('../../.password', function (err, data) {
       if (err) throw err
 
-      const match = new RegExp(`(\n|^)${from}(\r|$)`)
+      const match = new RegExp(`(|^)${from}(\r|$)`)
       console.log(match);
       const newFile = data.toString().replace(match, ``)
       console.log(newFile);
