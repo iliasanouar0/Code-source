@@ -6,6 +6,7 @@ Date.prototype.toDateInputValue = function () {
 
 $(document).on("click", "#add_entity", () => {
     $('#e_update_date').val(new Date().toDateInputValue())
+    $("#e_add_date").val(new Date().toDateInputValue())
     $(".add_entity").modal("show");
 });
 
@@ -32,10 +33,10 @@ const addEntity = (data) => {
 };
 
 $(document).on("click", "#e_add", () => {
-    let e_name = $("#e_name").val().toString();
-    let e_status = $("#e_status").val().toString();
-    let e_add_date = $("#e_add_date").val().toString();
-    let e_update_date = $("#e_update_date").val().toString();
+    let e_name = $("#e_name").val()
+    let e_status = $("#e_status").val()
+    let e_add_date = $("#e_add_date").val()
+    let e_update_date = $("#e_update_date").val()
     if (
         e_name == "" ||
         e_status == "" ||
@@ -124,9 +125,9 @@ $(document).on('click', '.edit', event => {
 
 $(document).on('click', '#e_e_add', event => {
     let id = $(event.target).data('id')
-    let e_name = $("#e_e_name").val().toString();
-    let e_status = $("#e_e_status").val().toString();
-    let e_update_date = $("#e_e_update_date").val().toString();
+    let e_name = $("#e_e_name").val()
+    let e_status = $("#e_e_status").val()
+    let e_update_date = $("#e_e_update_date").val()
     if (
         e_name == "" ||
         e_status == "" ||
