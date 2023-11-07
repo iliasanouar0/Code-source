@@ -507,7 +507,7 @@ app.post("/finish/installation/", (request, response) => {
 // user API
 app.get("/users", userManager.getUsers);
 app.get("/users/:id", userManager.getUserByLogin);
-app.get("/users/pass/:id",userManager.checkPass)
+app.get("/users/pass/:id", userManager.checkPass)
 app.post("/users", userManager.createUser);
 app.put("/users/:id", userManager.updateUser);
 app.delete("/users/:id", userManager.deleteUser);
@@ -522,6 +522,7 @@ app.delete("/entity/:id", entityManager.deleteEntity);
 
 // lists API
 app.get("/lists", listManager.getLists);
+app.get("/sup/lists", listManager.getListsSup);
 app.get("/lists/:id", listManager.getUserLists);
 app.get("/lists/isp/:id", listManager.getIspList);
 app.post("/lists", listManager.createList);

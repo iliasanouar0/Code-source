@@ -44,6 +44,18 @@ const getLists = (request, response) => {
   );
 };
 
+const getListsSup = (req, res) => {
+  pool.query(
+    "SELECT list.*, COUNT(id_seeds) AS seeds_count, users.login, entity.nom FROM list LEFT JOIN seeds ON seeds.id_list = list.id_list JOIN users ON list.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity WHERE users.type!=%admin% GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY list.date_add DESC",
+    (error, results) => {
+      if (error) {
+        response.status(500).json(error.message);
+      }
+      response.status(200).json(results.rows);
+    }
+  );
+}
+
 const getUserLists = (request, response) => {
   let id = (request.params.id)
   let sql = "SELECT list.*, COUNT(id_seeds) AS seeds_count, users.login, entity.nom FROM list LEFT JOIN seeds ON seeds.id_list = list.id_list JOIN users ON list.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity WHERE list.id_user=($1) GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY list.date_add DESC"
@@ -56,33 +68,7 @@ const getUserLists = (request, response) => {
   );
 };
 
-// const getListByIdOrCount = (request, response) => {
-//   const id = request.params.id;
-//   const isCount = request.query.isCount;
-//   if (isCount) {
-//     pool.query(
-//       "SELECT COUNT(*) FROM seeds WHERE id_list=$1",
-//       [id],
-//       (error, results) => {
-//         if (error) {
-//           throw error;
-//         }
-//         response.status(200).json(results.rows);
-//       }
-//     );
-//   } else {
-//     pool.query(
-//       "SELECT * FROM list WHERE id_list=$1",
-//       [id],
-//       (error, results) => {
-//         if (error) {
-//           throw error;
-//         }
-//         response.status(200).json(results.rows);
-//       }
-//     );
-//   }
-// };
+
 
 const deleteList = (request, response) => {
   const id = parseInt(request.params.id);
@@ -107,7 +93,6 @@ const updateName = (request, response) => {
       response.status(200).send(`list updated with ID: ${id}`);
     }
   );
-  // response.status(200).send(request)
 };
 
 const getIspList = (request, response) => {
@@ -128,4 +113,5 @@ module.exports = {
   updateName,
   getUserLists,
   getIspList,
+  getListsSup
 };

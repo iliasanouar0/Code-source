@@ -265,7 +265,7 @@ const getDatalist = $("#listTable").DataTable({
     destroy: true,
     autoWidth: false,
     ajax: {
-        url: `http://${ip}:3000/lists`,
+        url: `http://${ip}:3000/sup/lists/`,
         dataSrc: '',
     },
     columns: [
