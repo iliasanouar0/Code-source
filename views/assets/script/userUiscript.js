@@ -197,7 +197,7 @@ $(document).on('click', '.edit', event => {
         let isp = data[0].isp.split(',')
         let optionsType = document.querySelector("#e_type_add").children;
         let optionsEntity = document.querySelector("#e_entity_add").children;
-        let optionsIsp = document.querySelector("#bs-select-2 ul").children;
+        let optionsIsp = document.querySelector("#bs-select-2 ul");
         console.log(optionsIsp);
         for (let i = 0; i < optionsType.length; i++) {
             if (optionsType.item(i).value == data[0].type) {
