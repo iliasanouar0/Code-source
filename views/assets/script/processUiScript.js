@@ -51,6 +51,7 @@ const addProcess = data => {
             showConfirmButton: false,
             icon: 'success'
         }).then(() => {
+            $('.add_process input').val('')
             $(".add_process").modal("hide");
             getData.ajax.reload(null, false)
         })
