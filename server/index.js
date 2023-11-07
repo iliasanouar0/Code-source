@@ -570,5 +570,5 @@ app.put('/ip/', authorizationManager.editIp)
 app.get('/node/env/', nodeEnvManager.getMode)
 app.post('/node/env/', nodeEnvManager.setMode)
 app.listen(port, result.parsed.IP, '0.0.0.0', () => {
-  console.log(`Server running at ${port}`);
+  console.log(`Server ip : ${result.parsed.IP} running at ${port}`);
 });
