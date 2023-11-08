@@ -21,13 +21,19 @@
 
 ## 📝 Table of Contents
 
-- [Getting Started](#getting_started)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
-- [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
+- [📝 Table of Contents](#-table-of-contents)
+- [🏁 Getting Started ](#-getting-started-)
+  - [Prerequisites](#prerequisites)
+    - [Update the system :](#update-the-system-)
+    - [Node.js -v \>= 16](#nodejs--v--16)
+  - [Installing](#installing)
+- [🔧 Running the tests ](#-running-the-tests-)
+  - [Break down into end to end tests](#break-down-into-end-to-end-tests)
+  - [And coding style tests](#and-coding-style-tests)
+- [🎈 Usage ](#-usage-)
+- [⛏️ Built Using ](#️-built-using-)
+- [✍️ Authors ](#️-authors-)
+- [🎉 Acknowledgements ](#-acknowledgements-)
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -41,7 +47,7 @@ These instructions will get you a copy of the project up and running on your ser
 sudo yum update -y
 ```
 
-#### NodeJs -v >= 16
+#### Node.js -v >= 16
 
 - Node.js packages are provided through the NodeSource Node.js Binary Distributions via .rpm,
 Add the repository to the system using the commands below 
@@ -56,6 +62,14 @@ curl -fsSL https://rpm.nodesource.com/setup_16.x | sudo bash -
 sudo yum install -y nodejs
 ```
 
+- Confirm that you can start node shell:
+  
+```
+node
+```
+Welcome to Node.js v16.14.2.
+Type ".help" for more information.
+> .exit
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running.
