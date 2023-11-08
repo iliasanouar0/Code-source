@@ -46,6 +46,7 @@ if (path.includes('supervisor')) {
             break;
     
         default:
+            location.href="./"
             break;
     }
 }
