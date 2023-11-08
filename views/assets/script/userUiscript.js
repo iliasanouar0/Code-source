@@ -1,4 +1,4 @@
-const user = JSON.parse(sessionStorage.user);
+// const user = JSON.parse(sessionStorage.user);
 
 $(document).on('click', '.password_show', event => {
     $(event.target).toggleClass("blur")
