@@ -41,7 +41,7 @@ const addUser = (data) => {
             "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
         },
         error: (err) => {
-            console.log(err);
+            console.log(err.responseJSON);
         }
     };
     $.ajax(settings).done(function (responseText) {
