@@ -38,7 +38,7 @@ $(document).ready(function () {
 
 console.log(root);
 console.log(path);
-window.addEventListener('beforeprint', e => {
+document.addEventListener('DOMContentLoaded', e => {
     e.preventDefault()
     if (path.includes('supervisor')) {
         switch (userData.type) {
