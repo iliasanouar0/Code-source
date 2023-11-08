@@ -36,8 +36,8 @@ $(document).ready(function () {
 });
 
 
-console.log(root);
-console.log(path);
+// console.log(root);
+// console.log(path);
 // window.addEventListener('online ', e => {
 //     e.preventDefault()
 //     if (path.includes('supervisor')) {

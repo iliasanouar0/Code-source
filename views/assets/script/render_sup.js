@@ -14,7 +14,10 @@ if (auth == 0 || auth == 'undefined') {
     location.href = '/'
 }
 
-switch (userData.type) {
+let user = JSON.parse(sessionStorage.user)
+
+
+switch (user.type) {
     case 'IT':
         location.href = '../../access.html'
         break;
@@ -22,7 +25,7 @@ switch (userData.type) {
         location.href = '../../access.html'
         break;
     default:
-        console.log(userData.type);
+        console.log(user.type);
         break;
 }
 
@@ -38,8 +41,6 @@ if (root.includes('views')) {
     supervisorNavbarUrl = `${root}/views/layout/supervisor_navbar.html`;
     supervisorSidebarUrl = `${root}/views/layout/supervisor_sidebar.html`;
 }
-let user = JSON.parse(sessionStorage.user)
-
 const _location = document.location.toString();
 let path = _location.replace(root, "");
 fetch(supervisorSidebarUrl)
