@@ -5,7 +5,7 @@ function getRootWebSitePath() {
   var webFolderIndex = _location.indexOf("/", _location.indexOf(applicationName) + applicationName.length);
   var webFolderFullPath = _location.substring(0, webFolderIndex);
   return webFolderFullPath;
-} console.log(sessionStorage.auth);
+}
 if (sessionStorage.auth == undefined) {
   location.href = '/'
 }
@@ -16,17 +16,6 @@ if (auth == 0 || auth == 'undefined') {
 
 let user = JSON.parse(sessionStorage.user)
 
-switch (user.type) {
-  case 'mailer':
-    location.href = '../../access.html'
-    break;
-  case 'sup':
-    location.href = '../../access.html'
-    break;
-  default:
-    console.log(user.type);
-    break;
-}
 
 let storage = { ...localStorage }
 let ip = storage.ip

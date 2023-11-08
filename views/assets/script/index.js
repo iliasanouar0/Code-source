@@ -2,7 +2,6 @@ const userData = JSON.parse(sessionStorage.user);
 console.log(userData);
 
 let userName = `${userData.f_name} ${userData.l_name}`;
-console.log(navigator.userAgent);
 
 $(document).on("click", ".info a", function () {
     $("#f_name").val(userData.f_name);
@@ -34,46 +33,3 @@ $(document).ready(function () {
     $("#e_add_date").val(new Date().toDateInputValue());
     $(".update").val(new Date().toDateInputValue());
 });
-
-
-// if (path.includes('supervisor')) {
-//     switch (userData.type) {
-//         case 'IT':
-//             location.href = '../../access.html'
-//             break;
-//         case 'mailer':
-//             location.href = '../../access.html'
-//             break;
-//         default:
-//             console.log(userData.type);
-//             break;
-//     }
-// }
-
-// if (path.includes('admin')) {
-//     switch (userData.type) {
-//         case 'sup':
-//             location.href = '../../access.html'
-//             break;
-//         case 'mailer':
-//             location.href = '../../access.html'
-//             break;
-//         default:
-//             console.log(userData.type);
-//             break;
-//     }
-// }
-
-// if (path.includes('mailer')) {
-//     switch (userData.type) {
-//         case 'IT':
-//             location.href = '../../access.html'
-//             break;
-//         case 'sup':
-//             location.href = '../../access.html'
-//             break;
-//         default:
-//             console.log(userData.type);
-//             break;
-//     }
-// }

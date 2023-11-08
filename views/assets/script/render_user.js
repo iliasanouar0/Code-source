@@ -18,17 +18,6 @@ let user = JSON.parse(sessionStorage.user)
 let storage = { ...localStorage }
 let ip = storage.ip
 
-switch (user.type) {
-  case 'IT':
-      location.href = '../../access.html'
-      break;
-  case 'sup':
-      location.href = '../../access.html'
-      break;
-  default:
-      console.log(user.type);
-      break;
-}
 
 const root = getRootWebSitePath();
 let mailerSidebarUrl = ""
