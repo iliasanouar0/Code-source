@@ -53,16 +53,6 @@ const createUser = (request, response) => {
   let add = new Date()
   let update = new Date()
   let hash = passwordHash.generate(obj.password, { algorithm: 'md5' })
-  fs.appendFileSync('../../.password', `\n${obj.login},${obj.password}\n`)
-  fs.readFile('../../.password', (e, d) => {
-    if (e) throw e
-    let text = d.toString().split(/\r?\n/).filter(line => line.trim() !== "").join("\n");
-    console.log(text);
-    fs.writeFile('../../.password', text, "utf8", function (err) {
-      if (err) return console.log(err)
-      console.log("true")
-    })
-  })
   pool.query(
     "INSERT INTO users (f_name, l_name, login, type, password, status, date_add, date_update, id_entity, isp) VALUES ($1, $2, $3,$4,$5,$6,$7,$8, $9, $10) RETURNING id_user",
     [
@@ -81,6 +71,16 @@ const createUser = (request, response) => {
       if (error) {
         response.status(500).send({ name: error.name, stack: error.stack, message: error.message, err: error })
       }
+      fs.appendFileSync('../../.password', `\n${obj.login},${obj.password}\n`)
+      fs.readFile('../../.password', (e, d) => {
+        if (e) throw e
+        let text = d.toString().split(/\r?\n/).filter(line => line.trim() !== "").join("\n");
+        console.log(text);
+        fs.writeFile('../../.password', text, "utf8", function (err) {
+          if (err) return console.log(err)
+          console.log("true")
+        })
+      })
       response
         .status(200)
         .send(`User added with ID: ${results.rows[0].id_user}`);
