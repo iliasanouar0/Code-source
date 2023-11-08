@@ -38,50 +38,50 @@ $(document).ready(function () {
 
 console.log(root);
 console.log(path);
-window.addEventListener('online ', e => {
-    e.preventDefault()
-    if (path.includes('supervisor')) {
-        switch (userData.type) {
-            case 'IT':
-                location.href = '../../access.html'
-                break;
-            case 'mailer':
-                location.href = '../../access.html'
-                break;
-            default:
-                console.log(userData.type);
-                break;
-        }
-    }
+// window.addEventListener('online ', e => {
+//     e.preventDefault()
+//     if (path.includes('supervisor')) {
+//         switch (userData.type) {
+//             case 'IT':
+//                 location.href = '../../access.html'
+//                 break;
+//             case 'mailer':
+//                 location.href = '../../access.html'
+//                 break;
+//             default:
+//                 console.log(userData.type);
+//                 break;
+//         }
+//     }
 
-    if (path.includes('admin')) {
-        switch (userData.type) {
-            case 'sup':
-                location.href = '../../access.html'
-                break;
-            case 'mailer':
-                location.href = '../../access.html'
-                break;
-            default:
-                console.log(userData.type);
-                break;
-        }
-    }
+//     if (path.includes('admin')) {
+//         switch (userData.type) {
+//             case 'sup':
+//                 location.href = '../../access.html'
+//                 break;
+//             case 'mailer':
+//                 location.href = '../../access.html'
+//                 break;
+//             default:
+//                 console.log(userData.type);
+//                 break;
+//         }
+//     }
 
-    if (path.includes('mailer')) {
-        switch (userData.type) {
-            case 'IT':
-                location.href = '../../access.html'
-                break;
-            case 'sup':
-                location.href = '../../access.html'
-                break;
-            default:
-                console.log(userData.type);
-                break;
-        }
-    }
-})
+//     if (path.includes('mailer')) {
+//         switch (userData.type) {
+//             case 'IT':
+//                 location.href = '../../access.html'
+//                 break;
+//             case 'sup':
+//                 location.href = '../../access.html'
+//                 break;
+//             default:
+//                 console.log(userData.type);
+//                 break;
+//         }
+//     }
+// })
 // if (path.includes('supervisor')) {
 //     switch (userData.type) {
 //         case 'IT':
