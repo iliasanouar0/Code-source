@@ -13,6 +13,19 @@ let auth = JSON.parse(sessionStorage.auth)
 if (auth == 0 || auth == 'undefined') {
     location.href = '/'
 }
+
+switch (userData.type) {
+    case 'IT':
+        location.href = '../../access.html'
+        break;
+    case 'mailer':
+        location.href = '../../access.html'
+        break;
+    default:
+        console.log(userData.type);
+        break;
+}
+
 let storage = { ...localStorage }
 let ip = storage.ip
 let supervisorNavbarUrl = ""
