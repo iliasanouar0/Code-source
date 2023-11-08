@@ -15,15 +15,13 @@
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center"> Building a web application for email reporting and management
     <br> 
 </p>
 
 ## 📝 Table of Contents
 
-- [About](#about)
 - [Getting Started](#getting_started)
-- [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
 - [TODO](../TODO.md)
@@ -31,20 +29,26 @@
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
-## 🧐 About <a name = "about"></a>
-
-Write about 1-2 paragraphs describing the purpose of your project.
-
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your server.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
+#### Update the system :
+
+Centos 7 :
 
 ```
-Give examples
+sudo yum update -y
+```
+
+#### NodeJs -v >= 16
+
+Centos 7 :
+
+```
+sudo yum install nodejs
 ```
 
 ### Installing
@@ -89,9 +93,6 @@ Give an example
 
 Add notes about how to use the system.
 
-## 🚀 Deployment <a name = "deployment"></a>
-
-Add additional notes about how to deploy this on a live system.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
