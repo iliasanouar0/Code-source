@@ -45,12 +45,14 @@ sudo yum update -y
 
 #### NodeJs -v >= 16
 
-Centos 7 :
+- Centos 7 :
 
+Node.js packages are provided through the NodeSource Node.js Binary Distributions via .rpm. 
+Add the repository to the system using the commands below 
 ```
-sudo yum install nodejs
+curl -fsSL https://rpm.nodesource.com/setup_16.x | sudo bash -
 ```
-
+Once the repository has been configured on your CentOS server you can proceed to install Node.js 16 :
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running.
