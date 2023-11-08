@@ -9,7 +9,7 @@ if (authO == 0 || authO == 'undefined') {
     location.href = '../../access.html'
 }
 
-if (sessionStorage.user == undefined) {
+if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
     location.href = '/'
 }
 
