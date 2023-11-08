@@ -16,7 +16,6 @@ if (auth == 0 || auth == 'undefined') {
 
 let user = JSON.parse(sessionStorage.user)
 
-
 switch (user.type) {
     case 'IT':
         location.href = '../../access.html'

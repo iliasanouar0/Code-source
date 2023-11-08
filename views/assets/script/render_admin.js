@@ -14,6 +14,8 @@ if (auth == 0 || auth == 'undefined') {
   location.href = '/'
 }
 
+let user = JSON.parse(sessionStorage.user)
+
 switch (user.type) {
   case 'mailer':
     location.href = '../../access.html'
