@@ -68,9 +68,9 @@ sudo yum install -y nodejs
 node
 ```
 - output:
-> Welcome to Node.js v16.**.*.
-> Type ".help" for more information.
-> \> .exit
+ Welcome to Node.js v16.*.*.
+ Type ".help" for more information.
+ \> .exit
 
 ### Installing
 
