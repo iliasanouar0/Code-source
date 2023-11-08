@@ -1,11 +1,14 @@
 if (sessionStorage.auth == undefined) {
-    location.href = '/'
+    location.href = '../../access.html'
 }
 let authO = JSON.parse(sessionStorage.auth)
 if (authO == 0 || authO == 'undefined') {
-    location.href = '/'
+    location.href = '../../access.html'
 }
 
+if (sessionStorage.user == undefined) {
+    location.href = '/'
+}
 
 
 let link = document.location.toString()
