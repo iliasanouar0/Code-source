@@ -164,15 +164,6 @@ const updatePass = (request, response) => {
       fs.writeFile('../../.password', newFile, "utf8", function (err) {
         if (err) return console.log(err)
         console.log("true")
-        fs.readFile('../../.password', (e, d) => {
-          if (e) throw e
-          let text = d.toString().split(/\r?\n/).filter(line => line.trim() !== "").join("\r\n");
-          console.log(text);
-          fs.writeFile('../../.password', text, "utf8", function (err) {
-            if (err) return console.log(err)
-            console.log("true")
-          })
-        })
       })
     })
   })
