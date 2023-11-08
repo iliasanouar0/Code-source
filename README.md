@@ -3,7 +3,7 @@
  <img width=200px height=200px src="./views/assets/images/R.jpg" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Project Title</h3>
+<h3 align="center">Reporting</h3>
 
 <div align="center">
 
