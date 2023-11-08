@@ -42,12 +42,13 @@ const addUser = (data) => {
         },
         error: (err) => {
             let message = err.responseJSON.message
-            Swal.fire({
-                title: "login already exist !!",
-                text: message,
-                icon: "error",
-                confirmButtonText: "ok",
-            })
+            if (message.includes('duplicate key value violates unique constraint "u_login"')) {
+                Swal.fire({
+                    title: "login already exist !!",
+                    icon: "error",
+                    confirmButtonText: "Try new",
+                })
+            }
         }
     };
     $.ajax(settings).done(function (responseText) {
