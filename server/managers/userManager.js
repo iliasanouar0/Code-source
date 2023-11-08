@@ -131,9 +131,11 @@ const deleteUser = (request, response) => {
       })
     })
     try {
-      const data = fs.readFile('../../.password')
-      let newData = data.trim()
-      console.log(newData);
+      fs.readFile('../../.password', (err, data) => {
+        if (err) throw err
+        let newData = data.trim()
+        console.log(newData);
+      })
     }
     catch (err) {
       console.log(err)
