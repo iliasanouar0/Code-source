@@ -27,6 +27,7 @@
     - [Update the system :](#update-the-system-)
     - [Node.js -v \>= 16 :](#nodejs--v--16-)
   - [Installing](#installing)
+    - [Cloning the application || Download the zip folder](#cloning-the-application--download-the-zip-folder)
 - [🔧 Running the tests ](#-running-the-tests-)
   - [Break down into end to end tests](#break-down-into-end-to-end-tests)
   - [And coding style tests](#and-coding-style-tests)
@@ -63,18 +64,30 @@ sudo yum install -y nodejs
 ```
 
 - Confirm that you can start node shell:
-  
+
 ```
 node
 ```
 - output:  <br> 
- Welcome to Node.js v16.*.*.  <br> 
+ Welcome to Node.js v16.\*.\*.  <br> 
  Type ".help" for more information.  <br> 
  \> .exit  <br> 
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
+- Before installation is preferred to check httpd server configuration :
+
+#### Cloning the application || Download the zip folder
+
+In your server folder Clone application using : 
+
+```
+git clone https://github.com/iliasanouar0/Code-source.git
+```
+
+Or you can download and copy the application folder in server from here
+
+[Application]([https://github/iliasanouar0/Code-source/archive/refs/heads/master.zip])
 
 Say what the step will be
 
