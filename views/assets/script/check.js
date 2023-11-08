@@ -1,6 +1,9 @@
+console.log(sessionStorage.auth);
+
 if (sessionStorage.auth == undefined) {
     location.href = '../../access.html'
 }
+
 let authO = JSON.parse(sessionStorage.auth)
 if (authO == 0 || authO == 'undefined') {
     location.href = '../../access.html'
@@ -10,12 +13,9 @@ if (sessionStorage.user == undefined) {
     location.href = '/'
 }
 
-
 let link = document.location.toString()
-console.log(link);
 
 let data = JSON.parse(sessionStorage.user)
-console.log(data);
 
 if (link.includes('supervisor')) {
     switch (data.type) {
