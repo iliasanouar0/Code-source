@@ -41,7 +41,13 @@ const addUser = (data) => {
             "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
         },
         error: (err) => {
-            console.log(err.responseJSON);
+            let message = err.responseJSON.message
+            Swal.fire({
+                title: "login already exist !!",
+                text: message,
+                icon: "error",
+                confirmButtonText: "ok",
+            })
         }
     };
     $.ajax(settings).done(function (responseText) {
