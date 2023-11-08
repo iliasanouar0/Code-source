@@ -1,7 +1,10 @@
-let path =  document.location.toString()
+let link = document.location.toString()
+console.log(link);
 
-if (path.includes('supervisor')) {
-    switch (userData.type) {
+let data = JSON.parse(sessionStorage.user)
+
+if (link.includes('supervisor')) {
+    switch (data.type) {
         case 'IT':
             location.href = '../../access.html'
             break;
@@ -9,13 +12,13 @@ if (path.includes('supervisor')) {
             location.href = '../../access.html'
             break;
         default:
-            console.log(userData.type);
+            console.log(data.type);
             break;
     }
 }
 
-if (path.includes('admin')) {
-    switch (userData.type) {
+if (link.includes('admin')) {
+    switch (data.type) {
         case 'sup':
             location.href = '../../access.html'
             break;
@@ -23,13 +26,13 @@ if (path.includes('admin')) {
             location.href = '../../access.html'
             break;
         default:
-            console.log(userData.type);
+            console.log(data.type);
             break;
     }
 }
 
-if (path.includes('mailer')) {
-    switch (userData.type) {
+if (link.includes('mailer')) {
+    switch (data.type) {
         case 'IT':
             location.href = '../../access.html'
             break;
@@ -37,7 +40,7 @@ if (path.includes('mailer')) {
             location.href = '../../access.html'
             break;
         default:
-            console.log(userData.type);
+            console.log(data.type);
             break;
     }
 }
