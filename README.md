@@ -87,7 +87,7 @@ git clone https://github.com/iliasanouar0/Code-source.git
 
 Or you can download and copy the application folder in server from here
 
-[Application]([https://github/iliasanouar0/Code-source/archive/refs/heads/master.zip])
+[Application](https://codeload.github.com/iliasanouar0/Code-source/zip/refs/heads/master)
 
 Say what the step will be
 
