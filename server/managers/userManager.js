@@ -124,11 +124,12 @@ const deleteUser = (request, response) => {
     fs.readFile('../../.password', function (err, data) {
       if (err) throw err
       const match = new RegExp(from + "\\S+", 'g')
-      const newFile = data.toString().replace(match, ``).trim()
-      fs.writeFile('../../.password', newFile, "utf8", function (err) {
-        if (err) return console.log(err)
-        console.log("true")
-      })
+      const newFile = data.toString().replace(match, ``)
+      console.log(newFile);
+      // fs.writeFile('../../.password', newFile, "utf8", function (err) {
+      //   if (err) return console.log(err)
+      //   console.log("true")
+      // })
     })
     // try {
     //   fs.readFile('../../.password', (err, data) => {
