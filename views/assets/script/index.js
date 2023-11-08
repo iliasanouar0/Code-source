@@ -42,9 +42,11 @@ console.log(path);
 if (path.includes('supervisor')) {
     switch (userData.type) {
         case 'IT':
-            location.href='../../'
+            location.href = '../../'
             break;
-    
+        case 'mailer':
+            location.href = '../../'
+            break;
         default:
             console.log(userData.type);
             break;
