@@ -34,3 +34,7 @@ $(document).ready(function () {
     $("#e_add_date").val(new Date().toDateInputValue());
     $(".update").val(new Date().toDateInputValue());
 });
+
+
+let root = getRootWebSitePath()
+console.log(root);
