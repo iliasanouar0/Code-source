@@ -79,7 +79,7 @@ const createUser = (request, response) => {
     ],
     (error, results) => {
       if (error) {
-        response.status(401).send({ name: error.name, stack: error.stack, message: error.message, err: error })
+        response.status(500).send({ name: error.name, stack: error.stack, message: error.message, err: error })
       }
       response
         .status(200)
