@@ -81,8 +81,7 @@
                     console.log(error.name);
                     console.log(error.message);
                     sessionStorage.setItem('auth', '0')
-                    $('.container').html('')
-                    $('.container').html('<h1>NO ACCESS<h1/>')
+                    location.href = './views/access.html'
                 }
             },
             success: function () {

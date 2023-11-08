@@ -85,6 +85,8 @@ submitButton.addEventListener("click", (e) => {
           login.classList.add("is-invalid");
           return
         }
+        login.classList.add("is-valid");
+        login.classList.remove("is-invalid");
         var settings = {
           "url": `http://${ip}:3000/users/pass/${data[0].id_user}?pass=${password.value}`,
           "method": "GET",
