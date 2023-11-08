@@ -40,6 +40,9 @@ const addUser = (data) => {
                 "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
             "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
         },
+        error: (err) => {
+            console.log(err);
+        }
     };
     $.ajax(settings).done(function (responseText) {
         Swal.fire({
