@@ -5,7 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reporting | Admin | process-panel</title>
-
+    <script>
+        if (sessionStorage.auth == undefined) {
+            location.href = '/'
+        }
+        let auth = JSON.parse(sessionStorage.auth)
+        if (auth == 0 || auth == 'undefined') {
+            location.href = '/'
+        }
+    </script>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
