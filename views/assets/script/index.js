@@ -36,5 +36,5 @@ $(document).ready(function () {
 });
 
 
-// let root = getRootWebSitePath()
 console.log(root);
+console.log(path);
