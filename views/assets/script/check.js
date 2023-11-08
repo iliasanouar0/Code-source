@@ -12,6 +12,8 @@ let link = document.location.toString()
 console.log(link);
 
 let data = JSON.parse(sessionStorage.user)
+console.log(data);
+
 if (link.includes('supervisor')) {
     switch (data.type) {
         case 'IT':
