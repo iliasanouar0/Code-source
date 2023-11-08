@@ -1,5 +1,4 @@
 const userData = JSON.parse(sessionStorage.user);
-console.log(userData);
 
 let userName = `${userData.f_name} ${userData.l_name}`;
 
