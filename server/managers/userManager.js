@@ -129,7 +129,7 @@ const deleteUser = (request, response) => {
         if (err) return console.log(err)
         fs.readFile('../../.password', (e, d) => {
           if (e) throw e
-          let text = d.toString().split(/\r?\n/).filter(line => line.trim() !== "").join("\n");
+          let text = d.toString().split(/\r?\n/).filter(line => line.trim() !== "").join("\r\n");
           console.log(text);
           fs.writeFile('../../.password', text, "utf8", function (err) {
             if (err) return console.log(err)
