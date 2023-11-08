@@ -38,3 +38,14 @@ $(document).ready(function () {
 
 console.log(root);
 console.log(path);
+
+if (path.includes('supervisor')) {
+    switch (userData.type) {
+        case 'IT':
+            location.href='../../'
+            break;
+    
+        default:
+            break;
+    }
+}
