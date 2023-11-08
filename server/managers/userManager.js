@@ -53,7 +53,7 @@ const createUser = (request, response) => {
   let add = new Date()
   let update = new Date()
   let hash = passwordHash.generate(obj.password, { algorithm: 'md5' })
-  fs.appendFileSync('../../.password', `\r\n${obj.login},${obj.password}\r\n`)
+  fs.appendFileSync('../../.password', `\r${obj.login},${obj.password}\r\n`)
   pool.query(
     "INSERT INTO users (f_name, l_name, login, type, password, status, date_add, date_update, id_entity, isp) VALUES ($1, $2, $3,$4,$5,$6,$7,$8, $9, $10) RETURNING id_user",
     [
