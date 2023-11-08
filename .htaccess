@@ -1,1 +1,10 @@
+
 Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  Options +FollowSymlinks
+  # Options +SymLinksIfOwnerMatch
+  # RewriteBase /
+  # RewriteOptions <options>
+</IfModule>
