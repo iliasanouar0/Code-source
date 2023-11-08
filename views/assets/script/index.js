@@ -38,7 +38,7 @@ $(document).ready(function () {
 
 console.log(root);
 console.log(path);
-document.addEventListener('DOMContentLoaded', e => {
+document.addEventListener('online ', e => {
     e.preventDefault()
     if (path.includes('supervisor')) {
         switch (userData.type) {
