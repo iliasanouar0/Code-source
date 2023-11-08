@@ -1,8 +1,17 @@
+if (sessionStorage.auth == undefined) {
+    location.href = '/'
+}
+let authO = JSON.parse(sessionStorage.auth)
+if (authO == 0 || authO == 'undefined') {
+    location.href = '/'
+}
+
+
+
 let link = document.location.toString()
 console.log(link);
 
 let data = JSON.parse(sessionStorage.user)
-
 if (link.includes('supervisor')) {
     switch (data.type) {
         case 'IT':
