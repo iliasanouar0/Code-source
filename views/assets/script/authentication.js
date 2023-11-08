@@ -78,8 +78,10 @@ submitButton.addEventListener("click", (e) => {
         return response.json()
       })
       .then((data) => {
-        if (data == []) {
-          console.log(data);
+        console.log(data);
+        console.log(data.length);
+        if (data.length == 0) {
+          console.log('Empty');
         }
         var settings = {
           "url": `http://${ip}:3000/users/pass/${data[0].id_user}?pass=${password.value}`,
