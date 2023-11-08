@@ -81,7 +81,9 @@ submitButton.addEventListener("click", (e) => {
         console.log(data);
         console.log(data.length);
         if (data.length == 0) {
-          console.log('Empty');
+          login.classList.remove("is-valid");
+          login.classList.add("is-invalid");
+          return
         }
         var settings = {
           "url": `http://${ip}:3000/users/pass/${data[0].id_user}?pass=${password.value}`,
