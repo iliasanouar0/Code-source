@@ -25,7 +25,7 @@
 - [🏁 Getting Started ](#-getting-started-)
   - [Prerequisites](#prerequisites)
     - [Update the system :](#update-the-system-)
-    - [Node.js -v \>= 16](#nodejs--v--16)
+    - [Node.js -v \>= 16 :](#nodejs--v--16-)
   - [Installing](#installing)
 - [🔧 Running the tests ](#-running-the-tests-)
   - [Break down into end to end tests](#break-down-into-end-to-end-tests)
@@ -47,7 +47,7 @@ These instructions will get you a copy of the project up and running on your ser
 sudo yum update -y
 ```
 
-#### Node.js -v >= 16
+#### Node.js -v >= 16 :
 
 - Node.js packages are provided through the NodeSource Node.js Binary Distributions via .rpm,
 Add the repository to the system using the commands below 
@@ -56,7 +56,7 @@ Add the repository to the system using the commands below
 curl -fsSL https://rpm.nodesource.com/setup_16.x | sudo bash -
 ```
 
-- Once the repository has been configured on your CentOS server you can proceed to install Node.js 16 :
+- Once the repository has been configured on your CentOS server you can proceed to install Node.js 16:
 
 ```
 sudo yum install -y nodejs
@@ -67,10 +67,11 @@ sudo yum install -y nodejs
 ```
 node
 ```
-Welcome to Node.js v16.14.2.
-Type ".help" for more information.
-> .exit
-> 
+- output:
+> Welcome to Node.js v16.**.*.
+> Type ".help" for more information.
+> \> .exit
+
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running.
