@@ -30,13 +30,9 @@
     - [Installing PM2 'PROCESS MANAGER FOR NODE.JS'](#installing-pm2-process-manager-for-nodejs)
     - [Cloning the application || Download the zip folder](#cloning-the-application--download-the-zip-folder)
     - [Starting Express.js \& Node.js server](#starting-expressjs--nodejs-server)
-- [🔧 Running the tests ](#-running-the-tests-)
-  - [Break down into end to end tests](#break-down-into-end-to-end-tests)
-  - [And coding style tests](#and-coding-style-tests)
-- [🎈 Usage ](#-usage-)
+    - [Accessing the application and installation](#accessing-the-application-and-installation)
 - [⛏️ Built Using ](#️-built-using-)
 - [✍️ Authors ](#️-authors-)
-- [🎉 Acknowledgements ](#-acknowledgements-)
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -77,7 +73,11 @@ node
 
 ### Installing
 
-- Before installation is preferred to check httpd server configuration :
+- Before installation is preferred to check httpd server & Webmin & PostgreSQL Database Server configuration.
+
+- Creating database "report".
+
+- And Grant Privileges For "root".
 
 #### Installing PM2 'PROCESS MANAGER FOR NODE.JS'
 
@@ -102,60 +102,44 @@ In your server inn the application folder :
 cd application-name*/server/
 ```
 *make sure to change the application-name
-And repeat
 
 Start server using PM2 command
 ```
 pm2 start index.js --watch
 ```
-* incase you want to follow server state and log 
+In case you want to follow server state and log 
 ```
 pm2 plus
 ```
 and follow the steps ...
 
-End with an example of getting some data out of the system or using it for a little demo.
+#### Accessing the application and installation
 
-## 🔧 Running the tests <a name = "tests"></a>
+- After finishing setting up the server side, Let's go and open the application in browser.<br>
+- After oping in th first time the application will start installation and configuration.<br>
+- Follow the steps of installation.🧐<br>
+- After the installation done we will have the login and password to start using application.<br>
+- The application in first will be in development mode, add local and server ips in IP authorization and switch to production.<br>
 
-Explain how to run the automated tests for this system.
+<!-- ## 🎈 Usage <a name="usage"></a>
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## 🎈 Usage <a name="usage"></a>
-
-Add notes about how to use the system.
+Add notes about how to use the system. -->
 
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [MongoDB](https://www.mongodb.com/) - Database
+- [PostgresSql](https://www.postgresql.org/) - PostgresSql
 - [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
 - [NodeJs](https://nodejs.org/en/) - Server Environment
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+<!-- - [@kylelobo](https://github.com/kylelobo) - Idea & Initial work -->
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/iliasanouar0/Code-source/contributors) who participated in this project.
 
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+<!-- ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
 - Hat tip to anyone whose code was used
 - Inspiration
-- References
+- References -->
