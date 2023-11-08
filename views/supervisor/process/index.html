@@ -7,11 +7,10 @@
     <title>Reporting | Admin | process-panel</title>
     <script>
         if (sessionStorage.auth == undefined) {
-            location.href = '/'
+            location.href = './access.html'
         }
-        // let auth = JSON.parse(sessionStorage.auth)
         if (auth == 0 || auth == 'undefined') {
-            location.href = '/'
+            location.href = './access.html'
         }
     </script>
     <!-- Google Font: Source Sans Pro -->
