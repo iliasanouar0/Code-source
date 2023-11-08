@@ -1,17 +1,1 @@
-
-<!-- Options -Indexes -->
-
-<!-- <IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteCond %{HTTPS} =on
-  RewriteRule ^ - [E=PROTO:https]
-  RewriteCond %{HTTPS} !=on
-  RewriteRule ^ - [E=PROTO:http]
-
-  RewriteCond %{HTTPS} !=on
-
-  RewriteCond %{HTTP_HOST} !^www\. [NC]
-  RewriteCond %{SERVER_ADDR} !=127.0.0.1
-  RewriteCond %{SERVER_ADDR} !=::1
-  RewriteRule ^ %{ENV:PROTO}://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-</IfModule> -->
+Options -Indexes
