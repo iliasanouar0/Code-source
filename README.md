@@ -27,7 +27,9 @@
     - [Update the system :](#update-the-system-)
     - [Node.js -v \>= 16 :](#nodejs--v--16-)
   - [Installing](#installing)
+    - [Installing PM2 'PROCESS MANAGER FOR NODE.JS'](#installing-pm2-process-manager-for-nodejs)
     - [Cloning the application || Download the zip folder](#cloning-the-application--download-the-zip-folder)
+    - [Starting Express.js \& Node.js server](#starting-expressjs--nodejs-server)
 - [🔧 Running the tests ](#-running-the-tests-)
   - [Break down into end to end tests](#break-down-into-end-to-end-tests)
   - [And coding style tests](#and-coding-style-tests)
@@ -77,6 +79,12 @@ node
 
 - Before installation is preferred to check httpd server configuration :
 
+#### Installing PM2 'PROCESS MANAGER FOR NODE.JS'
+
+```
+npm install pm2 -g
+```
+
 #### Cloning the application || Download the zip folder
 
 In your server folder Clone application using : 
@@ -85,21 +93,26 @@ In your server folder Clone application using :
 git clone https://github.com/iliasanouar0/Code-source.git
 ```
 
-Or you can download and copy the application folder in server from here
+Or you can download and copy the application folder in server from here => [Application](https://codeload.github.com/iliasanouar0/Code-source/zip/refs/heads/master)
 
-[Application](https://codeload.github.com/iliasanouar0/Code-source/zip/refs/heads/master)
+#### Starting Express.js & Node.js server
 
-Say what the step will be
-
+In your server inn the application folder : 
 ```
-Give the example
+cd application-name*/server/
 ```
-
+*make sure to change the application-name
 And repeat
 
+Start server using PM2 command
 ```
-until finished
+pm2 start index.js --watch
 ```
+* incase you want to follow server state and log 
+```
+pm2 plus
+```
+and follow the steps ...
 
 End with an example of getting some data out of the system or using it for a little demo.
 
