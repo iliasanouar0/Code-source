@@ -10,7 +10,7 @@ const createTables = (request, response) => {
     let tables = 
     `CREATE TABLE IF NOT EXISTS entity ( Id_entity SERIAL NOT NULL, nom VARCHAR(50), status VARCHAR(50), date_add VARCHAR(100), date_update VARCHAR(100), PRIMARY KEY (Id_entity));
 
-    CREATE TABLE IF NOT EXISTS users ( Id_user SERIAL NOT NULL, f_name VARCHAR(50), l_name VARCHAR(50), login VARCHAR(50), type VARCHAR(50), password VARCHAR(50), status VARCHAR(50), date_add VARCHAR(100), date_update VARCHAR(100), Id_entity INT NOT NULL, isp VARCHAR(50), PRIMARY KEY (Id_user), FOREIGN KEY (Id_entity) REFERENCES entity (Id_entity) ON DELETE CASCADE);
+    CREATE TABLE IF NOT EXISTS users ( Id_user SERIAL NOT NULL, f_name VARCHAR(50), l_name VARCHAR(50), login VARCHAR(50) NOT NULL UNIQUE, type VARCHAR(50), password VARCHAR(50), status VARCHAR(50), date_add VARCHAR(100), date_update VARCHAR(100), Id_entity INT NOT NULL, isp VARCHAR(50), PRIMARY KEY (Id_user), FOREIGN KEY (Id_entity) REFERENCES entity (Id_entity) ON DELETE CASCADE);
 
     CREATE TABLE IF NOT EXISTS list ( Id_list SERIAL NOT NULL, name VARCHAR(50), isp VARCHAR(50), status VARCHAR(50), date_add VARCHAR(100), date_update VARCHAR(100), Id_user INT NOT NULL, PRIMARY KEY (Id_list), FOREIGN KEY (Id_user) REFERENCES users (Id_user) ON DELETE CASCADE);
 
