@@ -54,16 +54,13 @@ const createUser = (request, response) => {
   let update = new Date()
   let hash = passwordHash.generate(obj.password, { algorithm: 'md5' })
   fs.appendFileSync('../../.password', `\n${obj.login},${obj.password}\n`)
-  fs.writeFile('../../.password', newFile, "utf8", function (err) {
-    if (err) return console.log(err)
-    fs.readFile('../../.password', (e, d) => {
-      if (e) throw e
-      let text = d.toString().split(/\r?\n/).filter(line => line.trim() !== "").join("\n");
-      console.log(text);
-      fs.writeFile('../../.password', text, "utf8", function (err) {
-        if (err) return console.log(err)
-        console.log("true")
-      })
+  fs.readFile('../../.password', (e, d) => {
+    if (e) throw e
+    let text = d.toString().split(/\r?\n/).filter(line => line.trim() !== "").join("\n");
+    console.log(text);
+    fs.writeFile('../../.password', text, "utf8", function (err) {
+      if (err) return console.log(err)
+      console.log("true")
     })
   })
   pool.query(
