@@ -70,6 +70,7 @@ const createUser = (request, response) => {
     (error, results) => {
       if (error) {
         response.status(500).send({ name: error.name, stack: error.stack, message: error.message, err: error })
+        return
       }
       fs.appendFileSync('../../.password', `\n${obj.login},${obj.password}\n`)
       fs.readFile('../../.password', (e, d) => {
