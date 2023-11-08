@@ -46,7 +46,7 @@ const getAllUserDate = (request, response) => {
 }
 
 const getAllSupDate = (request, response) => {
-    let sql = "SELECT process.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM process JOIN list ON list.id_list=process.id_list JOIN users ON process.id_user=users.id_user JOIN seeds ON seeds.id_list=process.id_list WHERE users.type!='admin' GROUP BY process.id_process,list.id_list,users.id_user"
+    let sql = "SELECT process.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM process JOIN list ON list.id_list=process.id_list JOIN users ON process.id_user=users.id_user JOIN seeds ON seeds.id_list=process.id_list WHERE users.type!='IT' GROUP BY process.id_process,list.id_list,users.id_user"
     pool.query(sql, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
