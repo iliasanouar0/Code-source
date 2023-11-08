@@ -69,7 +69,14 @@ submitButton.addEventListener("click", (e) => {
     fetch(`http://${ip}:3000/users/0?login=${login.value}`, {
       method: "GET",
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          login.classList.remove("is-valid");
+          login.classList.add("is-invalid");
+          return
+        }
+        return response.json()
+      })
       .then((data) => {
         var settings = {
           "url": `http://${ip}:3000/users/pass/${data[0].id_user}?pass=${password.value}`,
