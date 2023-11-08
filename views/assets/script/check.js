@@ -1,3 +1,5 @@
+let path =  document.location.toString()
+
 if (path.includes('supervisor')) {
     switch (userData.type) {
         case 'IT':
