@@ -92,16 +92,16 @@ submitButton.addEventListener("click", (e) => {
           if (!stmt) {
             return;
           }
+          sessionStorage.setItem("user", JSON.stringify(data[0]));
+          window.sessionStorage.setItem('auth', '1')
+          if (data[0].type == "IT" && data[0].status == "active") {
+            window.location.href = "../admin/process";
+          } else if (data[0].type == "sup") {
+            document.location.href = "../supervisor/process";
+          } else {
+            document.location.href = "../mailer/process";
+          }
         });
-        sessionStorage.setItem("user", JSON.stringify(data[0]));
-        window.sessionStorage.setItem('auth', '1')
-        if (data[0].type == "IT" && data[0].status == "active") {
-          window.location.href = "../admin/process";
-        } else if (data[0].type == "sup") {
-          document.location.href = "../supervisor/process";
-        } else {
-          document.location.href = "../mailer/process";
-        }
       });
   }
 });
