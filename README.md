@@ -97,7 +97,7 @@ Or you can download and copy the application folder in server from here => [Appl
 
 #### Starting Express.js & Node.js server
 
-In your server inn the application folder : 
+In your server in the application folder : 
 ```
 cd application-name*/server/
 ```
