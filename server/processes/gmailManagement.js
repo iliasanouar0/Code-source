@@ -16,7 +16,8 @@ const path = `${root}/views/assets/images/process_result`
 let pidProcess = []
 
 const login = async (data) => {
-    console.log(`opening seed : ${data.gmail}, At ${new Date()}`);
+    console.log(`opening seed : ${data.gmail},`);
+    console.log(`At ${new Date().toLocaleString()}`);
     let feedback = ''
     const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
     const browserPID = browser.process().pid
