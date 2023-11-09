@@ -5,8 +5,16 @@ const websocket_s = new WebSocket(wssUri);
 websocket_s.onmessage = (event) => {
     let data = event.data
     console.log(data);
-    if (data == 'reload') {
-        getData.ajax.reload(null, false)
+    switch (data) {
+        case 'reload':
+            getData.ajax.reload(null, false)
+            break;
+        case 'location reload':
+            location.reload()
+            break
+        default:
+            console.log(data);
+            break;
     }
 }
 
@@ -377,7 +385,6 @@ $(document).on('click', '#restart_s', () => {
     }).then((result) => {
         if (result.isConfirmed) {
             websocket_s.send(JSON.stringify({ request: "restart" }))
-            location.reload()
         } else if (result.isDismissed) {
             Swal.fire({
                 position: 'top-end',

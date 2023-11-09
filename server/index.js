@@ -468,7 +468,7 @@ wss.on('connection', (wss, req) => {
           }
         }
       }
-      sendToAll(clients, 'reload')
+      sendToAll(clients, 'location reload')
       process.exit(0)
     }
   })
