@@ -373,7 +373,7 @@ $(document).on('click', '.stop', event => {
     })
 })
 
-var h1 = document.getElementsByTagName('h1')[0];
+var h1 = document.getElementsByTagName('q')[0];
 var sec = 0;
 var min = 0;
 var hrs = 0;
