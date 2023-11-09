@@ -432,7 +432,8 @@ wss.on('connection', (wss, req) => {
     } else if (request == 'restart') {
       let ip_process = await processManager.getAllProcessByState({ status: "RUNNING" })
       if (ip_process.length != 0) {
-        for (let i = 0; i < ip_process.length; i++) {
+        let action = ip_process.length
+        for (let i = 0; i < action; i++) {
           await time(5000)
           let data = {
             id_process: `${ip_process[0].id_process}`,
