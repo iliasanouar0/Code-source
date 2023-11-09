@@ -470,7 +470,7 @@ wss.on('connection', (wss, req) => {
           console.log(ip_process.length);
           if (ip_process.length == 0) {
             sendToAll(clients, 'location reload')
-            process.exit(0)
+            // process.exit(0)
           }
         }
       }
