@@ -469,9 +469,9 @@ wss.on('connection', (wss, req) => {
             ip_process.shift()
           }
         }
-        sendToAll(clients, 'location reload')
-        process.exit(0)
       }
+      sendToAll(clients, 'location reload')
+      process.exit(0)
     }
   })
 })
