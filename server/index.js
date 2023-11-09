@@ -273,7 +273,7 @@ wss.on('connection', (wss, req) => {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
           processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
-          console.log(`process with id : ${data.id_process} Finished`);
+          console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
           sendToAll(clients, 'reload')
         }
       }
