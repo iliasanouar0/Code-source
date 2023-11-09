@@ -438,6 +438,7 @@ wss.on('connection', (wss, req) => {
       let ip_process = await processManager.getAllProcessByState({ status: "RUNNING" })
       if (ip_process.length != 0) {
         for (let i = 0; i < ip_process.length; i++) {
+          await time(5000)
           let data = {
             id_process: `${ip_process[i].id_process}`,
             status: `PAUSED`,
@@ -459,8 +460,8 @@ wss.on('connection', (wss, req) => {
           await time(1000)
           let success = state[0].finished
           let failed = state[0].failed
-          let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await time(1000)
+          let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
           if (seeds.length == 0) {
             processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
@@ -468,7 +469,6 @@ wss.on('connection', (wss, req) => {
             processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
           }
         }
-        await time(5000)
       }
       sendToAll(clients, 'location reload')
       process.exit(0)
