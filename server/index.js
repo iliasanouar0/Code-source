@@ -128,11 +128,6 @@ wsi.on('connection', function connection(ws) {
   });
 });
 
-function randomRange(myMin, myMax) {
-  return Math.floor(
-    Math.random() * (Math.ceil(myMax) - Math.floor(myMin) + 1) + myMin
-  );
-}
 
 const sendToAll = (c, m) => {
   c.forEach(client => {
