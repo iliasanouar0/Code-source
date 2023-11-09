@@ -280,6 +280,7 @@ wss.on('connection', (wss, req) => {
 
     } else if (request == "resume") {
       processManager.resumedProcess(data.data)
+      console.log(seeds[0].action + ' action resume')
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "paused" })
       console.log(seeds);
       let active
@@ -386,6 +387,7 @@ wss.on('connection', (wss, req) => {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
           processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
+          console.log(`Process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
           sendToAll(clients, 'reload')
         }
       }
