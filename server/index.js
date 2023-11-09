@@ -439,33 +439,35 @@ wss.on('connection', (wss, req) => {
       sendToAll(clients, 'reload')
     } else if (request == 'restart') {
       let ip_process = await processManager.getAllProcessByState({ status: "RUNNING" })
-      for (let i = 0; index < ip_process.length; i++) {
-        let data = {
-          id_process: `${ip_process[i].id_process}`,
-          status: `PAUSED`,
-        }
-        processManager.stoppedProcess(data.data)
-        let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-        let seedsRunning = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
-        let statechangeSeeds = []
-        let statechangeSeedsRunning = []
-        for (let i = 0; i < seeds.length; i++) {
-          statechangeSeeds.push({ id_seeds: seeds[i].id_seeds, id_process: data.id_process })
-        }
-        for (let i = 0; i < seedsRunning.length; i++) {
-          statechangeSeedsRunning.push({ id_seeds: seedsRunning[i].id_seeds, id_process: data.id_process })
-        }
-        await resultManager.updateState(statechangeSeeds, "paused")
-        await resultManager.updateState(statechangeSeedsRunning, "paused")
-        let state = await processStateManager.getState(data.id_process)
-        let success = state[0].finished
-        let failed = state[0].failed
-        let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
-        await processStateManager.updateState(status)
-        if (seeds.length == 0) {
-          processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
-        } else {
-          processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
+      if (ip_process.length != 0) {
+        for (let i = 0; i < ip_process.length; i++) {
+          let data = {
+            id_process: `${ip_process[i].id_process}`,
+            status: `PAUSED`,
+          }
+          processManager.stoppedProcess(data.data)
+          let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
+          let seedsRunning = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
+          let statechangeSeeds = []
+          let statechangeSeedsRunning = []
+          for (let i = 0; i < seeds.length; i++) {
+            statechangeSeeds.push({ id_seeds: seeds[i].id_seeds, id_process: data.id_process })
+          }
+          for (let i = 0; i < seedsRunning.length; i++) {
+            statechangeSeedsRunning.push({ id_seeds: seedsRunning[i].id_seeds, id_process: data.id_process })
+          }
+          await resultManager.updateState(statechangeSeeds, "paused")
+          await resultManager.updateState(statechangeSeedsRunning, "paused")
+          let state = await processStateManager.getState(data.id_process)
+          let success = state[0].finished
+          let failed = state[0].failed
+          let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
+          await processStateManager.updateState(status)
+          if (seeds.length == 0) {
+            processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
+          } else {
+            processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
+          }
         }
       }
       sendToAll(clients, 'reload')
