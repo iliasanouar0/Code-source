@@ -336,17 +336,59 @@ function randomRange(myMin, myMax) {
 }
 
 $(document).on('click', '.stop', event => {
-    let id = $(event.target).data('id')
-    const status = "STOPPED"
-    let end_in = new Date()
-    let obj = {
-        id_process: `${id}`,
-        end_in: end_in,
-        status: `${status}`,
-    }
-    // websocket_s.onopen = (e) => {
-    websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
-    // }
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: 'black',
+        confirmButtonText: 'Yes, restart it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let id = $(event.target).data('id')
+            const status = "STOPPED"
+            let end_in = new Date()
+            let obj = {
+                id_process: `${id}`,
+                end_in: end_in,
+                status: `${status}`,
+            }
+            websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
+        } else if (result.isDismissed) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Cancelled',
+                showConfirmButton: false,
+                timer: 3000
+            })
+        }
+    })
+})
+
+$(document).on('click', '#restart_s', () => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: 'black',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log('will restart');
+        } else if (result.isDismissed) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Cancelled',
+                showConfirmButton: false,
+                timer: 3000
+            })
+        }
+    })
 })
 
 const editActions = (data) => {
