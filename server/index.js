@@ -440,6 +440,8 @@ wss.on('connection', (wss, req) => {
     } else if (request == 'restart') {
       let ip_process = await processManager.getAllProcessByState({ status: "RUNNING" })
       console.log(ip_process);
+      // processManager.stoppedProcess(data.data)
+
       // await processManager.restedProcess(data.data)
       // await resultManager.deleteResultsProcess(data.id_process)
       // let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
