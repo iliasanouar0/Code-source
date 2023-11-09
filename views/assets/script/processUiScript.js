@@ -377,6 +377,7 @@ $(document).on('click', '#restart_s', () => {
     }).then((result) => {
         if (result.isConfirmed) {
             websocket_s.send(JSON.stringify({ request: "restart" }))
+            location.reload()
         } else if (result.isDismissed) {
             Swal.fire({
                 position: 'top-end',
