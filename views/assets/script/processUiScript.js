@@ -409,7 +409,7 @@ $(document).on('click', '#restart_s', () => {
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: 'black',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes, restart app!'
     }).then((result) => {
         if (result.isConfirmed) {
             websocket_s.send(JSON.stringify({ request: "restart" }))
