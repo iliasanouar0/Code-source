@@ -458,10 +458,11 @@ wss.on('connection', (wss, req) => {
           await resultManager.updateState(statechangeSeedsRunning, "paused")
           let state = await processStateManager.getState(data.id_process)
           await time(1000)
+          console.log(state);
           let success = state[0].finished
           let failed = state[0].failed
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
-          // await time(1000)
+          console.log(status);
           await processStateManager.updateState(status)
           if (seeds.length == 0) {
             processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
