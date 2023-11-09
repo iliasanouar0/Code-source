@@ -378,7 +378,7 @@ $(document).on('click', '#restart_s', () => {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-            console.log('will restart');
+            websocket_s.send(JSON.stringify({ request: "restart" }))
         } else if (result.isDismissed) {
             Swal.fire({
                 position: 'top-end',

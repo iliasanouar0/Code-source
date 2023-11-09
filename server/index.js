@@ -437,6 +437,23 @@ wss.on('connection', (wss, req) => {
 
       }
       sendToAll(clients, 'reload')
+    } else if (request == 'restart') {
+      // await processManager.restedProcess(data.data)
+      // await resultManager.deleteResultsProcess(data.id_process)
+      // let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
+      // let statechangeSeeds = []
+      // for (let i = 0; i < seeds.length; i++) {
+      //   statechangeSeeds.push({ id_seeds: seeds[i].id_seeds, id_process: data.id_process })
+      // }
+      // await resultManager.updateState(statechangeSeeds, "stopped")
+      // await processStateManager.deleteState(data.id_process)
+      // if (seeds.length > 0) {
+      //   processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
+      // } else {
+      //   processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
+
+      // }
+      sendToAll(clients, 'reload')
     }
   })
 })
