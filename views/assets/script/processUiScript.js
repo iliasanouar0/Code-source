@@ -107,9 +107,7 @@ $(document).on('click', '.pause', event => {
         id_process: `${id}`,
         status: `${status}`,
     }
-    // websocket_s.onopen = (e) => {
     websocket_s.send(JSON.stringify({ request: "pause", id_process: id, data: obj }))
-    // }
 })
 
 $(document).on('click', '.resume', event => {
