@@ -281,7 +281,6 @@ wss.on('connection', (wss, req) => {
         }
       }
 
-
     } else if (request == "resume") {
       processManager.resumedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "paused" })
@@ -393,8 +392,6 @@ wss.on('connection', (wss, req) => {
           sendToAll(clients, 'reload')
         }
       }
-
-
     } else if (request == "pause") {
       processManager.stoppedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
@@ -441,6 +438,7 @@ wss.on('connection', (wss, req) => {
       let ip_process = await processManager.getAllProcessByState({ status: "RUNNING" })
       if (ip_process.length != 0) {
         for (let i = 0; i < ip_process.length; i++) {
+          await time(7000)
           let data = {
             id_process: `${ip_process[i].id_process}`,
             status: `PAUSED`,
