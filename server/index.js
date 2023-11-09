@@ -435,7 +435,7 @@ wss.on('connection', (wss, req) => {
       console.log(ip_process.length);
       if (ip_process.length != 0) {
         let stand = 0
-        while (stand = 0 && ip_process != 0) {
+        while (stand = 0 && ip_process.length != 0) {
           for (let i = 0; i <= stand; i++) {
             await time(5000)
             let data = {
@@ -472,8 +472,6 @@ wss.on('connection', (wss, req) => {
           }
         }
       }
-      sendToAll(clients, 'location reload')
-      process.exit(0)
     }
   })
 })
