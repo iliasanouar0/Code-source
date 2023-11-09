@@ -468,8 +468,8 @@ wss.on('connection', (wss, req) => {
             } else {
               processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
             }
-            ip_process.shift()
           }
+          ip_process.shift()
         }
       }
     }
