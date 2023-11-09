@@ -464,6 +464,8 @@ wss.on('connection', (wss, req) => {
           console.log(status);
           await time(2000)
           await processStateManager.updateState(status)
+          await processStateManager.updateState(status)
+          await processStateManager.updateState(status)
           if (seeds.length == 0) {
             processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
           } else {
