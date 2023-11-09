@@ -94,6 +94,15 @@ const getAllProcessSeedsByState = async (data) => {
     return list.rows
 }
 
+const getAllProcessByState = async (data) => {
+    let values = [data.status]
+    let sql = "SELECT id_process FROM process WHERE process.status=($1)"
+    const client = await pool.connect()
+    const list = await client.query(sql, values);
+    client.release()
+    return list.rows
+}
+
 const updateActions = (request, response) => {
     let query = "UPDATE process SET action=($2) WHERE id_process=($1)"
     const id = (request.params.id)
@@ -184,7 +193,6 @@ const stoppedProcess = (data) => {
         return true
     })
 }
-
 
 const processing = async (data) => {
     let result
@@ -294,5 +302,6 @@ module.exports = {
     getProcessStateServer,
     getAllProcessSeedsCount,
     getAllUserDate,
-    getAllSupDate
+    getAllSupDate,
+    getAllProcessByState
 }

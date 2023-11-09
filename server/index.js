@@ -438,6 +438,8 @@ wss.on('connection', (wss, req) => {
       }
       sendToAll(clients, 'reload')
     } else if (request == 'restart') {
+      let ip_process = await processManager.getAllProcessByState({ status: "RUNNING" })
+      console.log(ip_process);
       // await processManager.restedProcess(data.data)
       // await resultManager.deleteResultsProcess(data.id_process)
       // let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
