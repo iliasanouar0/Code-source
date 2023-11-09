@@ -431,6 +431,8 @@ wss.on('connection', (wss, req) => {
       sendToAll(clients, 'reload')
     } else if (request == 'restart') {
       let ip_process = await processManager.getAllProcessByState({ status: "RUNNING" })
+      console.log(ip_process);
+      console.log(ip_process.length);
       if (ip_process.length != 0) {
         let stand = 0
         while (stand = 0 && ip_process != 0) {
