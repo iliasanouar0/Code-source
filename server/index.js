@@ -148,6 +148,7 @@ wss.on('connection', (wss, req) => {
     if (request == "start") {
       processManager.startedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
+      console.log(seeds[0].action + ' action start')
       let active
       let waiting = seeds.length - 3
       if (seeds.length >= 3) {

@@ -44,6 +44,7 @@ const login = async (data) => {
         });
         await page.close()
         await browser.close()
+        console.log(`invalid email : ${data.gmail}`);
         feedback += `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
@@ -59,6 +60,7 @@ const login = async (data) => {
             });
             await page.close()
             await browser.close()
+            console.log(`invalid email : ${data.gmail}`);
             feedback += `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
             return feedback
@@ -89,6 +91,7 @@ const login = async (data) => {
         });
         await page.close()
         await browser.close()
+        console.log(`invalid email : ${data.gmail}`);
         feedback += `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
@@ -100,6 +103,7 @@ const login = async (data) => {
     });
     await page.close()
     await browser.close()
+    console.log(`login email : ${data.gmail}, At ${new Date().getTime().toLocaleString()}`);
     feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     return feedback
