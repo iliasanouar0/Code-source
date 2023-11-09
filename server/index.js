@@ -438,6 +438,7 @@ wss.on('connection', (wss, req) => {
       let ip_process = await processManager.getAllProcessByState({ status: "RUNNING" })
       if (ip_process.length != 0) {
         for (let i = 0; i < ip_process.length; i++) {
+          await time(7000)
           let data = {
             id_process: `${ip_process[i].id_process}`,
             status: `PAUSED`,
@@ -454,7 +455,6 @@ wss.on('connection', (wss, req) => {
             statechangeSeedsRunning.push({ id_seeds: seedsRunning[i].id_seeds, id_process: data.id_process })
           }
           await resultManager.updateState(statechangeSeeds, "paused")
-          await time(7000)
           await resultManager.updateState(statechangeSeedsRunning, "paused")
           let state = await processStateManager.getState(data.id_process)
           let success = state[0].finished
