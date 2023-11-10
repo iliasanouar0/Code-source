@@ -434,10 +434,7 @@ $(document).on('click', '#restart_s', () => {
                 preConfirm: () => {
                     let login = document.getElementById("swal-input1").value
                     let password = document.getElementById("swal-input2").value
-                    return [
-                        login,
-                        password
-                    ];
+                    return { login: login, password: password }
                 }
             });
             if (formValues) {
