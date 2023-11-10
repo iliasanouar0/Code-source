@@ -208,17 +208,13 @@ $(document).on('click', '.status', event => {
                     } else if (row.rstatus === null && row.pstatus === 'STOPPED') {
                         status = `<span class="text-danger">${row.pstatus}</span>`
                     } else if (row.rstatus == 'finished') {
-                        return `<div class="f-action card m-0 col-md-auto">
-                            <div class="card-body p-0 text-center text-dark">
+                        return `<div class="f-action card-body p-0 text-center text-dark">
                                 ${row.rstatus}
-                            </div>
-                        </div>`
+                            </div>`
                     } else if (row.rstatus == 'failed') {
-                        return `<div class="fr-action card m-0 col-md-auto">
-                        <div class="card-body p-0 text-center text-dark">
+                        return `<div class="fr-action card-body p-0 text-center text-dark">
                             ${row.rstatus}
-                        </div>
-                    </div>`
+                        </div>`
                     } else {
                         status = row.rstatus
                     }
