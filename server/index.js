@@ -135,8 +135,6 @@ const sendToAll = (c, m) => {
   });
 }
 const root = __dirname
-console.log(root);
-const pathLog = `${root}/`
 let clients = []
 let c = wss.clients
 wss.on('connection', (wss, req) => {
@@ -439,7 +437,7 @@ wss.on('connection', (wss, req) => {
       let ip_process = await processManager.getAllProcessByState({ status: "RUNNING" })
       if (ip_process.length == 0) {
         var date = new Date().toLocaleString().split(',')[0];
-        let file = `./logApp/${date}.txt`
+        let file = `${root}/logApp/${date}.txt`
         fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
           if (err) {
             console.error(
