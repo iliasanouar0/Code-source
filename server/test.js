@@ -11,7 +11,7 @@ const login = async (data) => {
   console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
   console.log(` `);
 
-  const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
+  const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
   const page = await browser.newPage()
   await page.setViewport({ width: 1280, height: 720 });
   const navigationPromise = page.waitForNavigation()
@@ -83,8 +83,8 @@ const login = async (data) => {
 }
 
 let data = {
-  gmail: 'ssahaan761294158@gmail.com',
-  password: '761294158',
-  vrf: 'pelila1985'
+  gmail: 'ronaldorober12@gmail.com',
+  password: '02077504',
+  vrf: 'PeiButtorff@outlook.com'
 }
 login(data)

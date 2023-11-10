@@ -71,9 +71,9 @@ const verify = async (data) => {
     }
     await page.type('input[type="password"]', data.password, { delay: 200 })
     await page.screenshot({
-        path: `${path}/${data.gmail.split('@')[0]}-@-test1-${data.id_process}.png`
+        path: `${path}/${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
     });
-    feedback += `, ${data.gmail.split('@')[0]}-@-test1-${data.id_process}.png`
+    feedback += `, ${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(1000)
     await Promise.all([
@@ -82,11 +82,6 @@ const verify = async (data) => {
         ),
         await page.waitForNavigation(),
     ]);
-    await page.screenshot({
-        path: `${path}/${data.gmail.split('@')[0]}-@-test2-${data.id_process}.png`
-    });
-    feedback += `, ${data.gmail.split('@')[0]}-@-test2-${data.id_process}.png`
-    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(1000)
     if (await page.$('[aria-invalid="true"]') != null) {
         await page.screenshot({
@@ -101,6 +96,7 @@ const verify = async (data) => {
     }
     await navigationPromise
     await time(3000)
+    console.log('browser in ' + page.url());
     if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
         console.log('verified email : ' + data.gmail);
         await page.screenshot({
