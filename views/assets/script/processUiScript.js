@@ -412,17 +412,21 @@ function timer() {
 $(document).on('click', '#restart_s', () => {
     Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        text: `You won't be able to revert this!
+        By clicking on "Restart App":
+
+            1 - we clean the browser 
+             2- we stop all the running process 
+3- we remove all existing process 
+4- Get better performance for the app 
+        `,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: 'black',
-        confirmButtonText: 'Yes, restart app!'
+        confirmButtonText: 'Yes, Restart app!'
     }).then(async (result) => {
         if (result.isConfirmed) {
-            // websocket_s.send(JSON.stringify({ request: "restart" }))
-            // $('#restart').modal('show')
-            // timer()
             const { value: formValues } = await Swal.fire({
                 title: "Login and password",
                 confirmButtonColor: 'black',
@@ -440,9 +444,12 @@ $(document).on('click', '#restart_s', () => {
                     return
                 }
                 if (formValues.login != user.login) {
-                    Swal.fire("Invalid login");
+                    Swal.fire("Invalid login, operation canalled");
                     return
                 }
+                websocket_s.send(JSON.stringify({ request: "restart" }))
+                $('#restart').modal('show')
+                timer()
                 Swal.fire(JSON.stringify(formValues));
             }
         } else if (result.isDismissed) {
