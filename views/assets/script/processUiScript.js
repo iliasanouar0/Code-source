@@ -442,6 +442,10 @@ $(document).on('click', '#restart_s', () => {
                     Swal.fire("empty values was provided, operation canalled");
                     return
                 }
+                if (formValues.login != user.login) {
+                    Swal.fire("Invalid login");
+                    return
+                }
                 Swal.fire(JSON.stringify(formValues));
             }
         } else if (result.isDismissed) {
