@@ -432,6 +432,11 @@ $(document).on('click', '#restart_s', () => {
                 `,
                 focusConfirm: false,
                 preConfirm: () => {
+                    let login = document.getElementById("swal-input1").value
+                    let password = document.getElementById("swal-input2").value
+                    if (login == "" || password == "") {
+                        return 'please enter valid data'
+                    }
                     return [
                         document.getElementById("swal-input1").value,
                         document.getElementById("swal-input2").value
