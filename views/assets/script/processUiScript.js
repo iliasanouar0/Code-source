@@ -427,26 +427,23 @@ $(document).on('click', '#restart_s', () => {
                 title: "Login and password",
                 confirmButtonColor: 'black',
                 html: `
-                  <input id="swal-input1" class="swal2-input" placeHolder="enter your login">
-                  <input id="swal-input2" class="swal2-input" placeHolder="enter your password">
-                `,
+                  <input id="swal-input1" class="swal2-input" placeHolder="enter your login">`,
                 focusConfirm: false,
                 preConfirm: () => {
                     let login = document.getElementById("swal-input1").value
-                    let password = document.getElementById("swal-input2").value
-                    return { login: login, password: password }
+                    return login
                 }
             });
             if (formValues) {
-                if (formValues.login == "" || formValues.password == "") {
+                if (formValues == "") {
                     Swal.fire("empty values was provided, operation canalled");
                     return
                 }
                 if (formValues.login != user.login) {
-                    Swal.fire("Invalid login");
+                    Swal.fire("Invalid login, operation canalled");
                     return
                 }
-                Swal.fire(JSON.stringify(formValues));
+                Swal.fire(formValues);
             }
         } else if (result.isDismissed) {
             Swal.fire({
