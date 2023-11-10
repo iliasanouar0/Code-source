@@ -414,7 +414,7 @@ $(document).on('click', '#restart_s', () => {
         title: 'Are you sure?',
         text: `You won't be able to revert this!`,
         html: 
-        `<a href="#">why we do restarting</a>`,
+        `<button class="btn btn-info" href="#">why we do restarting</button>`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
