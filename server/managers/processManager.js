@@ -123,6 +123,26 @@ const deleteProcess = (request, response) => {
     for (let i = 0; i < ides.length; i++) {
         params.push([ides[i]])
     }
+    // var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
+    // let file = `${root}/logApp/${date}.txt`
+    // fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
+    //     if (err) {
+    //         console.error(
+    //             `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+    //         fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+    //             if (e) throw e
+    //             console.log('log added');
+    //             sendToAll(clients, 'location reload')
+    //         })
+    //     } else {
+    //         console.log(`${file} exists, and it is writable`);
+    //         fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+    //             if (e) throw e
+    //             console.log('log added');
+    //             sendToAll(clients, 'location reload')
+    //         })
+    //     }
+    // });
     params.forEach(param => {
         pool.query(sql, param, (err, result) => {
             if (err) { response.status(409).send(err) } else { console.log(`records deleted`) }
