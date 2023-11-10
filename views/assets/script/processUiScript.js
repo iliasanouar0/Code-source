@@ -412,14 +412,13 @@ function timer() {
 $(document).on('click', '#restart_s', () => {
     Swal.fire({
         title: 'Are you sure?',
-        text: `You won't be able to revert this!
-        By clicking on "Restart App":
+        text: `You won't be able to revert this!<br>
+        By clicking on "Restart App":<br>
 
-            1 - we clean the browser 
-             2- we stop all the running process 
-3- we remove all existing process 
-4- Get better performance for the app 
-        `,
+            1 - we clean the browser <br>
+             2- we stop all the running process <br>
+3- we remove all existing process <br>
+4- Get better performance for the app <br>`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
