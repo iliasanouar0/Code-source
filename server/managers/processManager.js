@@ -200,7 +200,7 @@ const processing = async (data) => {
         case 'verify':
             switch (data.isp) {
                 case 'gmail':
-                    await gmailManagement.login(data).then(e => {
+                    await gmailManagement.verify(data).then(e => {
                         result = e
                     })
                     return result
