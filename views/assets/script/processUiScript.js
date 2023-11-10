@@ -439,7 +439,7 @@ $(document).on('click', '#restart_s', () => {
                     Swal.fire("empty values was provided, operation canalled");
                     return
                 }
-                if (formValues.login != user.login) {
+                if (formValues != user.login) {
                     Swal.fire("Invalid login, operation canalled");
                     return
                 }
