@@ -438,8 +438,10 @@ $(document).on('click', '#restart_s', () => {
                 }
             });
             if (formValues) {
+                console.log(formValues.login);
                 if (formValues.login == "" || formValues.password == "") {
                     Swal.fire("empty");
+                    return
                 }
                 Swal.fire(JSON.stringify(formValues));
             }
