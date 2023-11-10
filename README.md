@@ -29,6 +29,7 @@
   - [Installing](#installing)
     - [Installing PM2 'PROCESS MANAGER FOR NODE.JS'](#installing-pm2-process-manager-for-nodejs)
     - [Cloning the application || Download the zip folder](#cloning-the-application--download-the-zip-folder)
+    - [installing chromium](#installing-chromium)
     - [Starting Express.js \& Node.js server](#starting-expressjs--nodejs-server)
     - [Accessing the application and installation](#accessing-the-application-and-installation)
 - [⛏️ Built Using ](#️-built-using-)
@@ -94,6 +95,21 @@ git clone https://github.com/iliasanouar0/Code-source.git
 ```
 
 Or you can download and copy the application folder in server from here => [Application](https://codeload.github.com/iliasanouar0/Code-source/zip/refs/heads/master)
+
+#### installing chromium
+
+In the application folder :
+
+```
+cd application-name*/server/node_modules/puppeteer
+```
+*make sure to change the application-name
+
+run npm install to install all dependencies :
+
+```
+npm install
+```
 
 #### Starting Express.js & Node.js server
 
