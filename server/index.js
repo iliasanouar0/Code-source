@@ -446,13 +446,13 @@ wss.on('connection', (wss, req) => {
             fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}`, (e) => {
               if (e) throw e
               console.log('log added');
+              sendToAll(clients, 'location reload')
             })
           } else {
             console.log(`${file} exists, and it is writable`);
           }
         });
-        sendToAll(clients, 'location reload')
-        process.exit(0)
+        // process.exit(0)
       }
       let action = ip_process.length
       for (let i = 0; i < action; i++) {
