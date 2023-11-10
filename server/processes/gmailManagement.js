@@ -96,6 +96,7 @@ const verify = async (data) => {
     }
     await navigationPromise
     await time(3000)
+    console.log(page.url());
     if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
         console.log('verified email : ' + data.gmail);
         await page.screenshot({
