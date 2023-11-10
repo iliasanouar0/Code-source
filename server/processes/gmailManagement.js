@@ -134,6 +134,7 @@ const verify = async (data) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }
+    await time(3000)
     await page.goto('https://mail.google.com/mail/u/0/#inbox')
     console.log(page.url());
     await navigationPromise
