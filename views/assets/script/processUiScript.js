@@ -409,12 +409,16 @@ function timer() {
     t = setTimeout(add, 1000);
 }
 
+$(document).on('click', '.why', () => {
+    console.log('test');
+})
+
 $(document).on('click', '#restart_s', () => {
     Swal.fire({
         title: 'Are you sure?',
         text: `You won't be able to revert this!`,
-        html: 
-        `<button class="btn btn-info">why we do restarting</button>`,
+        html:
+            `<button class="btn btn-info why">why we do restarting</button>`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
@@ -425,8 +429,7 @@ $(document).on('click', '#restart_s', () => {
             const { value: formValues } = await Swal.fire({
                 title: "Login",
                 confirmButtonColor: 'black',
-                html: `
-                  <input id="swal-input1" class="swal2-input" placeHolder="enter your login">`,
+                html: `<input id="swal-input1" class="swal2-input" placeHolder="enter your login">`,
                 focusConfirm: false,
                 preConfirm: () => {
                     let login = document.getElementById("swal-input1").value
@@ -442,10 +445,9 @@ $(document).on('click', '#restart_s', () => {
                     Swal.fire("Invalid login, operation canalled");
                     return
                 }
-                websocket_s.send(JSON.stringify({ request: "restart" }))
+                websocket_s.send(JSON.stringify({ request: "restart", login: formValues.login }))
                 $('#restart').modal('show')
                 timer()
-                Swal.fire(JSON.stringify(formValues));
             }
         } else if (result.isDismissed) {
             Swal.fire({
