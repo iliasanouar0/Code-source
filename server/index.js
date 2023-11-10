@@ -134,7 +134,7 @@ const sendToAll = (c, m) => {
     client.send(m)
   });
 }
-const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
+const root = __dirname
 console.log(root);
 const pathLog = `${root}/`
 let clients = []
