@@ -418,11 +418,28 @@ $(document).on('click', '#restart_s', () => {
         confirmButtonColor: '#d33',
         cancelButtonColor: 'black',
         confirmButtonText: 'Yes, restart app!'
-    }).then((result) => {
+    }).then(async (result) => {
         if (result.isConfirmed) {
-            websocket_s.send(JSON.stringify({ request: "restart" }))
-            $('#restart').modal('show')
-            timer()
+            // websocket_s.send(JSON.stringify({ request: "restart" }))
+            // $('#restart').modal('show')
+            // timer()
+            const { value: formValues } = await Swal.fire({
+                title: "Login and password",
+                html: `
+                  <input id="swal-input1" class="swal2-input" placeHolder="enter your login">
+                  <input id="swal-input2" class="swal2-input" placeHolder="enter your password">
+                `,
+                focusConfirm: false,
+                preConfirm: () => {
+                    return [
+                        document.getElementById("swal-input1").value,
+                        document.getElementById("swal-input2").value
+                    ];
+                }
+            });
+            if (formValues) {
+                Swal.fire(JSON.stringify(formValues));
+            }
         } else if (result.isDismissed) {
             Swal.fire({
                 position: 'top-end',
