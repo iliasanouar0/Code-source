@@ -443,16 +443,20 @@ wss.on('connection', (wss, req) => {
           if (err) {
             console.error(
               `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-            fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}`, (e) => {
+            fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
               if (e) throw e
               console.log('log added');
               sendToAll(clients, 'location reload')
             })
           } else {
             console.log(`${file} exists, and it is writable`);
+            fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+              if (e) throw e
+              console.log('log added');
+              sendToAll(clients, 'location reload')
+            })
           }
         });
-        // process.exit(0)
       }
       let action = ip_process.length
       for (let i = 0; i < action; i++) {
@@ -491,20 +495,27 @@ wss.on('connection', (wss, req) => {
         console.log(ip_process);
         console.log(ip_process.length);
         if (ip_process.length == 0) {
-          var date = new Date();
-          console.log(date);
-          // let file =
-          //   fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
-          //     if (err) {
-          //       console.error(
-          //         `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-          //     } else {
-          //       console.log(`${file} exists, and it is writable`);
-          //     }
-          //   });
           await time(5000)
-          sendToAll(clients, 'location reload')
-          process.exit(0)
+          var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
+          let file = `${root}/logApp/${date}.txt`
+          fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
+            if (err) {
+              console.error(
+                `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+              fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+                if (e) throw e
+                console.log('log added');
+                sendToAll(clients, 'location reload')
+              })
+            } else {
+              console.log(`${file} exists, and it is writable`);
+              fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+                if (e) throw e
+                console.log('log added');
+                sendToAll(clients, 'location reload')
+              })
+            }
+          });
         }
       }
     }
