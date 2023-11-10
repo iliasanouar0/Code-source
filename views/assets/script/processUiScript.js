@@ -414,7 +414,7 @@ $(document).on('click', '#restart_s', () => {
         title: 'Are you sure?',
         text: `You won't be able to revert this!`,
         html: 
-        `<button class="btn btn-info" href="#">why we do restarting</button>`,
+        `<button class="btn btn-info">why we do restarting</button>`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
@@ -423,7 +423,7 @@ $(document).on('click', '#restart_s', () => {
     }).then(async (result) => {
         if (result.isConfirmed) {
             const { value: formValues } = await Swal.fire({
-                title: "Login and password",
+                title: "Login",
                 confirmButtonColor: 'black',
                 html: `
                   <input id="swal-input1" class="swal2-input" placeHolder="enter your login">`,
