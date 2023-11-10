@@ -441,7 +441,9 @@ wss.on('connection', (wss, req) => {
           if (err) {
             console.error(
               `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-            fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}`)
+            fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}`, (e) => {
+              if (e) throw e
+            })
           } else {
             console.log(`${file} exists, and it is writable`);
           }
