@@ -109,6 +109,7 @@ const verify = async (data) => {
         return feedback
     }
     await navigationPromise
+    await time(2000)
     await page.click('#yDmH0d > c-wiz > div > div.eKnrVb > div > div.j663ec > div > form > span > section:nth-child(2) > div > div > section > div > div > div > ul > li:nth-child(3)')
     await time(2000)
     await page.type('#knowledge-preregistered-email-response', data.verification, { delay: 100 })
@@ -117,11 +118,12 @@ const verify = async (data) => {
     });
     feedback += `, ${data.gmail.split('@')[0]}-@-verification-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    
+    await time(2000)
     await page.waitForSelector('#view_container > div > div > div.pwWryf.bxPAYd > div > div.zQJV3 > div > div.qhFLie > div > div > button')
     await page.click('#view_container > div > div > div.pwWryf.bxPAYd > div > div.zQJV3 > div > div.qhFLie > div > div > button')
     await navigationPromise
     await time(2000)
+    console.log(await page.$('[aria-invalid="true"]'));
     if (await page.$('[aria-invalid="true"]') != null) {
         console.log('invalid verification : ' + data.verification);
         await page.screenshot({
