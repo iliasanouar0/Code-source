@@ -443,14 +443,14 @@ wss.on('connection', (wss, req) => {
           if (err) {
             console.error(
               `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-            fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\r\n`, (e) => {
+            fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
               if (e) throw e
               console.log('log added');
               sendToAll(clients, 'location reload')
             })
           } else {
             console.log(`${file} exists, and it is writable`);
-            fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\r\n`, (e) => {
+            fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
               if (e) throw e
               console.log('log added');
               sendToAll(clients, 'location reload')
@@ -461,35 +461,35 @@ wss.on('connection', (wss, req) => {
       let action = ip_process.length
       for (let i = 0; i < action; i++) {
         await time(5000)
-        let data = {
+        let val = {
           id_process: `${ip_process[0].id_process}`,
           status: `PAUSED`,
         }
-        processManager.stoppedProcess(data)
-        let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-        let seedsRunning = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
+        processManager.stoppedProcess(val)
+        let seeds = await processManager.getAllProcessSeedsByState({ id_process: val.id_process, status: "waiting" })
+        let seedsRunning = await processManager.getAllProcessSeedsByState({ id_process: val.id_process, status: "running" })
         let statechangeSeeds = []
         let statechangeSeedsRunning = []
         for (let i = 0; i < seeds.length; i++) {
-          statechangeSeeds.push({ id_seeds: seeds[i].id_seeds, id_process: data.id_process })
+          statechangeSeeds.push({ id_seeds: seeds[i].id_seeds, id_process: val.id_process })
         }
         for (let i = 0; i < seedsRunning.length; i++) {
-          statechangeSeedsRunning.push({ id_seeds: seedsRunning[i].id_seeds, id_process: data.id_process })
+          statechangeSeedsRunning.push({ id_seeds: seedsRunning[i].id_seeds, id_process: val.id_process })
         }
         await resultManager.updateState(statechangeSeeds, "paused")
         await resultManager.updateState(statechangeSeedsRunning, "paused")
-        let state = await processStateManager.getState(data.id_process)
+        let state = await processStateManager.getState(val.id_process)
         console.log(state);
         let success = state[0].finished
         let failed = state[0].failed
-        let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
+        let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: val.id_process }
         console.log(status);
         await time(2000)
         await processStateManager.updateState(status)
         if (seeds.length == 0) {
-          processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
+          processManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: val.id_process })
         } else {
-          processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
+          processManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: val.id_process })
         }
         ip_process.shift()
         console.log(ip_process);
@@ -502,14 +502,14 @@ wss.on('connection', (wss, req) => {
             if (err) {
               console.error(
                 `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-              fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\r\n`, (e) => {
+              fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
                 if (e) throw e
                 console.log('log added');
                 sendToAll(clients, 'location reload')
               })
             } else {
               console.log(`${file} exists, and it is writable`);
-              fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\r\n`, (e) => {
+              fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
                 if (e) throw e
                 console.log('log added');
                 sendToAll(clients, 'location reload')
