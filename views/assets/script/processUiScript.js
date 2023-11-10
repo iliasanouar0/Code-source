@@ -425,6 +425,7 @@ $(document).on('click', '#restart_s', () => {
             // timer()
             const { value: formValues } = await Swal.fire({
                 title: "Login and password",
+                confirmButtonColor: 'black',
                 html: `
                   <input id="swal-input1" class="swal2-input" placeHolder="enter your login">
                   <input id="swal-input2" class="swal2-input" placeHolder="enter your password">
