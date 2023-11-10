@@ -375,7 +375,7 @@ const getDatalist = $("#listTable").DataTable({
             <div class="card-body p-0 text-center text-dark">
               ${row.login}
               </div>
-            </div>
+          </div>
           </div>
          `
       }
