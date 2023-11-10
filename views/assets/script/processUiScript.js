@@ -438,6 +438,9 @@ $(document).on('click', '#restart_s', () => {
                 }
             });
             if (formValues) {
+                if (formValues.login == "" || formValues.password == "") {
+                    Swal.fire("empty");
+                }
                 Swal.fire(JSON.stringify(formValues));
             }
         } else if (result.isDismissed) {
