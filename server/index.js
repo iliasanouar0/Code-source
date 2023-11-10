@@ -476,6 +476,17 @@ wss.on('connection', (wss, req) => {
         console.log(ip_process);
         console.log(ip_process.length);
         if (ip_process.length == 0) {
+          var date = new Date();
+          console.log(date);
+          // let file =
+          //   fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
+          //     if (err) {
+          //       console.error(
+          //         `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+          //     } else {
+          //       console.log(`${file} exists, and it is writable`);
+          //     }
+          //   });
           await time(5000)
           sendToAll(clients, 'location reload')
           process.exit(0)
