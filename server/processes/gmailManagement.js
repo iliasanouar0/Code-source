@@ -96,7 +96,6 @@ const verify = async (data) => {
     }
     await navigationPromise
     await time(3000)
-    console.log('browser in ' + page.url());
     if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
         console.log('verified email : ' + data.gmail);
         await page.screenshot({
@@ -109,6 +108,7 @@ const verify = async (data) => {
         return feedback
     }
     await navigationPromise
+    console.log('browser in ' + page.url());
     await time(2000)
     await page.click('#yDmH0d > c-wiz > div > div.eKnrVb > div > div.j663ec > div > form > span > section:nth-child(2) > div > div > section > div > div > div > ul > li:nth-child(3)')
     await time(2000)
@@ -135,6 +135,7 @@ const verify = async (data) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }
+    console.log('browser in ' + page.url());
     await page.goto('https://mail.google.com/mail/u/0/#inbox')
     await navigationPromise
     console.log('verified email : ' + data.gmail);
