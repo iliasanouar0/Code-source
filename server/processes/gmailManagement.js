@@ -165,7 +165,9 @@ const kill = (id_process) => {
     })
 }
 
-module.exports =
+module.exports = {
     verify,
     kill
+}
+
 
