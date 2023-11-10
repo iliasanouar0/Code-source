@@ -443,14 +443,14 @@ wss.on('connection', (wss, req) => {
           if (err) {
             console.error(
               `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-            fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+            fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\r\n`, (e) => {
               if (e) throw e
               console.log('log added');
               sendToAll(clients, 'location reload')
             })
           } else {
             console.log(`${file} exists, and it is writable`);
-            fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+            fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\r\n`, (e) => {
               if (e) throw e
               console.log('log added');
               sendToAll(clients, 'location reload')
@@ -502,14 +502,14 @@ wss.on('connection', (wss, req) => {
             if (err) {
               console.error(
                 `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-              fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+              fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\r\n`, (e) => {
                 if (e) throw e
                 console.log('log added');
                 sendToAll(clients, 'location reload')
               })
             } else {
               console.log(`${file} exists, and it is writable`);
-              fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+              fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\r\n`, (e) => {
                 if (e) throw e
                 console.log('log added');
                 sendToAll(clients, 'location reload')
