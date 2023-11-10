@@ -431,19 +431,19 @@ $(document).on('click', '#restart_s', () => {
                 focusConfirm: false,
                 preConfirm: () => {
                     let login = document.getElementById("swal-input1").value
-                    return login
+                    return { login: login }
                 }
             });
             if (formValues) {
-                if (formValues == "") {
+                if (formValues.login == "") {
                     Swal.fire("empty values was provided, operation canalled");
                     return
                 }
-                if (formValues != user.login) {
-                    Swal.fire("Invalid login, operation canalled");
+                if (formValues.login != user.login) {
+                    Swal.fire("Invalid login");
                     return
                 }
-                Swal.fire(formValues);
+                Swal.fire(JSON.stringify(formValues));
             }
         } else if (result.isDismissed) {
             Swal.fire({
