@@ -110,6 +110,7 @@ const verify = async (data) => {
     }
     await navigationPromise
     await time(2000)
+    console.log(page.url());
     await page.click('#yDmH0d > c-wiz > div > div.eKnrVb > div > div.j663ec > div > form > span > section:nth-child(2) > div > div > section > div > div > div > ul > li:nth-child(3)')
     await time(2000)
     await page.type('#knowledge-preregistered-email-response', data.verification, { delay: 100 })
