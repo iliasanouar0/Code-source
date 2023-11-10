@@ -436,6 +436,7 @@ wss.on('connection', (wss, req) => {
     } else if (request == 'restart') {
       let ip_process = await processManager.getAllProcessByState({ status: "RUNNING" })
       if (ip_process.length == 0) {
+        await time(5000)
         var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
         let file = `${root}/logApp/${date}.txt`
         fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
@@ -450,7 +451,6 @@ wss.on('connection', (wss, req) => {
             console.log(`${file} exists, and it is writable`);
           }
         });
-        await time(5000)
         sendToAll(clients, 'location reload')
         process.exit(0)
       }
