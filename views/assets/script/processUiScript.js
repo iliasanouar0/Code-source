@@ -439,7 +439,7 @@ $(document).on('click', '#restart_s', () => {
             });
             if (formValues) {
                 if (formValues.login == "" || formValues.password == "") {
-                    Swal.fire("invalid or empty values was provided, operation canalled");
+                    Swal.fire("empty values was provided, operation canalled");
                     return
                 }
                 Swal.fire(JSON.stringify(formValues));
