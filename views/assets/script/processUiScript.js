@@ -208,11 +208,11 @@ $(document).on('click', '.status', event => {
                     } else if (row.rstatus === null && row.pstatus === 'STOPPED') {
                         status = `<span class="text-danger">${row.pstatus}</span>`
                     } else if (row.rstatus == 'finished') {
-                        return `<div class="card-body p-0 text-center f-action">
+                        return `<div class="p-0 text-center f-action">
                                 ${row.rstatus}
                             </div>`
                     } else if (row.rstatus == 'failed') {
-                        return `<div class="card-body p-0 text-center fr-action">
+                        return `<div class="p-0 text-center fr-action">
                             ${row.rstatus}
                         </div>`
                     } else {
