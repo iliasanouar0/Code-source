@@ -469,12 +469,15 @@ $(document).on('click', '#restart_s', () => {
                     timer()
                 } else {
                     swal.fire({
-                        title: 'it\'s looks like your connection is off reload page',
+                        title: 'connection lost !',
+                        text: 'it\'s looks like your connection is off reload page',
+                        icon: 'warning',
+                        confirmButtonText: 'reload page',
                         allowOutsideClick: false,
                         allowEscapeKey: false,
                         allowEnterKey: false,
-
                     }).then(result => {
+                        console.log(result);
                         if (result.isConfirmed) {
                             location.reload
                         }
