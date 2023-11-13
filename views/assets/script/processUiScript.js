@@ -395,7 +395,7 @@ $(document).on('click', '.size', event => {
     const fullPage = document.querySelector('#fullpage');
     // fullPage.style.backgroundImage = 'url(' + img.src + ')';
     $('#feedback-img').prop('src', `${img.src}`)
-    fullPage.style.display = 'block';
+    fullPage.style.display = 'flex';
 })
 
 function randomRange(myMin, myMax) {
