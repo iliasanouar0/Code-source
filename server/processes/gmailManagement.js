@@ -21,7 +21,6 @@ let pidProcess = []
 
 const verify = async (data) => {
     let arg
-    console.log(data);
     console.log(data.proxy);
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
@@ -29,6 +28,7 @@ const verify = async (data) => {
         const proxyServer = `${data.proxy}`;
         arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     }
+    console.log(arg);
     console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     console.log(` `);
     let feedback = ''
