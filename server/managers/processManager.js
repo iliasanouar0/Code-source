@@ -138,31 +138,32 @@ const deleteProcess = (request, response) => {
         params.push([ides[i]])
     }
     params.forEach(param => {
-        pool.query(sql, param, (err, result) => {
-            if (err) {
-                response.status(409).send(err)
-            } else {
-                // var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
-                // let file = `${root}/logApp/${date}.txt`
-                // fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
-                //     if (err) {
-                //         console.error(
-                //             `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-                //         fs.writeFile(file, `User : ${data.login},delete process ${param} action verify in  ${new Date().toLocaleString()}\n`, (e) => {
-                //             if (e) throw e
-                //             console.log('log added');
-                //         })
-                //     } else {
-                //         console.log(`${file} exists, and it is writable`);
-                //         fs.appendFile(file, `User : ${data.login},delete process ${param} action verify in  ${new Date().toLocaleString()}\n`, (e) => {
-                //             if (e) throw e
-                //             console.log('log added');
-                //         })
-                //     }
-                // });
-                console.log(`records deleted`)
-            }
-        });
+        console.log(param);
+        // pool.query(sql, param, (err, result) => {
+        //     if (err) {
+        //         response.status(409).send(err)
+        //     } else {
+        //         // var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
+        //         // let file = `${root}/logApp/${date}.txt`
+        //         // fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
+        //         //     if (err) {
+        //         //         console.error(
+        //         //             `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+        //         //         fs.writeFile(file, `User : ${data.login},delete process ${param} action verify in  ${new Date().toLocaleString()}\n`, (e) => {
+        //         //             if (e) throw e
+        //         //             console.log('log added');
+        //         //         })
+        //         //     } else {
+        //         //         console.log(`${file} exists, and it is writable`);
+        //         //         fs.appendFile(file, `User : ${data.login},delete process ${param} action verify in  ${new Date().toLocaleString()}\n`, (e) => {
+        //         //             if (e) throw e
+        //         //             console.log('log added');
+        //         //         })
+        //         //     }
+        //         // });
+        //         console.log(`records deleted`)
+        //     }
+        // });
     });
     response.status(200).send('process deleted');
 }
