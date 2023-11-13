@@ -22,6 +22,7 @@ const checkProxy = async (data) => {
     const browser = await puppeteer.launch({ headless: 'new', args: arg })
     const browserPID = browser.process().pid
     const page = await browser.newPage()
+    let feedback = ''
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
     try {
         await page.goto(`http://monip.org/`)
