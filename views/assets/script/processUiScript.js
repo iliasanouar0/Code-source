@@ -1,7 +1,6 @@
 const user = JSON.parse(sessionStorage.user);
 const wssUri = `ws://${ip}:7073/wss?id=${user.id_user}`;
 const websocket_s = new WebSocket(wssUri);
-const socketState = websocket_s.readyState
 
 
 websocket_s.onmessage = (event) => {
@@ -104,6 +103,7 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: start_in,
     }
+    let socketState = websocket_s.readyState
     if (socketState !== websocket_s.CLOSED) {
         websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
         getData.ajax.reload(null, false)
@@ -119,6 +119,7 @@ $(document).on('click', '.pause', event => {
         id_process: `${id}`,
         status: `${status}`,
     }
+    let socketState = websocket_s.readyState
     if (socketState !== websocket_s.CLOSED) {
         websocket_s.send(JSON.stringify({ request: "pause", id_process: id, data: obj }))
     } else {
@@ -134,9 +135,12 @@ $(document).on('click', '.resume', event => {
         status: `${status}`,
     }
 
-    // websocket_s.onopen = (e) => {
-    websocket_s.send(JSON.stringify({ request: "resume", id_process: id, data: obj }))
-    // }
+    let socketState = websocket_s.readyState
+    if (socketState !== websocket_s.CLOSED) {
+        websocket_s.send(JSON.stringify({ request: "resume", id_process: id, data: obj }))
+    } else {
+        swal.fire('Reload page first')
+    }
 })
 
 function msToMnSc(ms) {
@@ -376,6 +380,7 @@ $(document).on('click', '.stop', event => {
                 end_in: end_in,
                 status: `${status}`,
             }
+            let socketState = websocket_s.readyState
             if (socketState !== websocket_s.CLOSED) {
                 websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
             } else {
@@ -457,6 +462,7 @@ $(document).on('click', '#restart_s', () => {
                     Swal.fire("Invalid login, operation canalled");
                     return
                 }
+                let socketState = websocket_s.readyState
                 if (socketState !== websocket_s.CLOSED) {
                     websocket_s.send(JSON.stringify({ request: "restart", login: formValues.login }))
                     $('#restart').modal('show')
