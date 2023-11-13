@@ -27,17 +27,17 @@ const checkProxy = async (data) => {
     try {
         await page.goto(`http://monip.org/`)
         await page.screenshot({
-            path: `${path}/${data.proxy.split(':')[0]}-@-ip-${data.id_process}.png`
+            path: `${path}/${data.gmail.split('@')[0]}-@-ip-${data.id_process}.png`
         });
-        feedback += `${data.proxy.split(':')[0]}-@-ip-${data.id_process}.png`
+        feedback += `${data.gmail.split('@')[0]}-@-ip-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(10000)
         await page.goto('https://bot.sannysoft.com/', { waitUntil: ['load', 'domcontentloaded'] })
         await page.screenshot({
-            path: `${path}/${data.proxy.split(':')[0]}-@-bot-${data.id_process}.png`,
+            path: `${path}/${data.gmail.split('@')[0]}-@-bot-${data.id_process}.png`,
             fullPage: true
         });
-        feedback += `, ${data.proxy.split(':')[0]}-@-bot-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-bot-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     } catch (error) {
 
