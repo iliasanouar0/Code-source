@@ -114,7 +114,6 @@ i.fa-redo {
 
 #fullpage {
   justify-content: center;
-  align-items: center;
   display: none;
   position: absolute;
   z-index: 9999;
