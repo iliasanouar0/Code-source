@@ -393,7 +393,8 @@ $(document).on('click', '.details', event => {
 $(document).on('click', '.size', event => {
     let img = $(event.target).contents().prevObject[0]
     const fullPage = document.querySelector('#fullpage');
-    fullPage.style.backgroundImage = 'url(' + img.src + ')';
+    // fullPage.style.backgroundImage = 'url(' + img.src + ')';
+    $('#feedback-img').prop('src', `${img.src}`)
     fullPage.style.display = 'block';
 })
 
