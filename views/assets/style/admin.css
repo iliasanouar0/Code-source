@@ -113,6 +113,9 @@ i.fa-redo {
 }
 
 #fullpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   display: none;
   position: absolute;
   z-index: 9999;
