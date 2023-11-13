@@ -478,6 +478,7 @@ $(document).on('click', '#restart_s', () => {
                         allowEnterKey: false,
                     }).then(result => {
                         console.log(result);
+                        console.log(result.isConfirmed);
                         if (result.isConfirmed) {
                             console.log('test');
                             location.reload()
