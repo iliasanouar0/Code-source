@@ -505,7 +505,7 @@ $(document).on('click', '.why', () => {
 })
 
 $(document).on('hide.bs.modal', '.why-info', () => {
-    $(document).remove('.why-info')
+    $('.why-info').remove()
 })
 
 $(document).on('click', '#restart_s', () => {
