@@ -448,6 +448,7 @@ wss.on('connection', (wss, req) => {
               if (e) throw e
               console.log('log added');
               sendToAll(clients, 'location reload')
+              process.exit(0)
             })
           } else {
             console.log(`${file} exists, and it is writable`);
@@ -455,6 +456,7 @@ wss.on('connection', (wss, req) => {
               if (e) throw e
               console.log('log added');
               sendToAll(clients, 'location reload')
+              process.exit(0)
             })
           }
         });
