@@ -3,6 +3,7 @@ var IdGenerator = require("auth0-id-generator");
 const format = require("pg-format");
 const data = require('../db');
 const gmailManagement = require("../processes/gmailManagement");
+const root = __dirname
 
 let config = data.data
 
@@ -138,29 +139,29 @@ const deleteProcess = (request, response) => {
         params.push(ides[i])
     }
     params.forEach(param => {
-        console.log(param);
-        // pool.query(sql, param, (err, result) => {
+        console.log(root);
+        // pool.query(sql, [param.id], (err, result) => {
         //     if (err) {
         //         response.status(409).send(err)
         //     } else {
-        //         // var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
-        //         // let file = `${root}/logApp/${date}.txt`
-        //         // fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
-        //         //     if (err) {
-        //         //         console.error(
-        //         //             `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-        //         //         fs.writeFile(file, `User : ${data.login},delete process ${param} action verify in  ${new Date().toLocaleString()}\n`, (e) => {
-        //         //             if (e) throw e
-        //         //             console.log('log added');
-        //         //         })
-        //         //     } else {
-        //         //         console.log(`${file} exists, and it is writable`);
-        //         //         fs.appendFile(file, `User : ${data.login},delete process ${param} action verify in  ${new Date().toLocaleString()}\n`, (e) => {
-        //         //             if (e) throw e
-        //         //             console.log('log added');
-        //         //         })
-        //         //     }
-        //         // });
+        //         var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
+        //         let file = `${root}/logApp/${date}.txt`
+        //         fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
+        //             if (err) {
+        //                 console.error(
+        //                     `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+        //                 fs.writeFile(file, `User : ${data.login},delete process ${param.id} action ${param.action} in  ${new Date().toLocaleString()}\n`, (e) => {
+        //                     if (e) throw e
+        //                     console.log('log added');
+        //                 })
+        //             } else {
+        //                 console.log(`${file} exists, and it is writable`);
+        //                 fs.appendFile(file, `User : ${data.login},delete process ${param} action ${param.action} in  ${new Date().toLocaleString()}\n`, (e) => {
+        //                     if (e) throw e
+        //                     console.log('log added');
+        //                 })
+        //             }
+        //         });
         //         console.log(`records deleted`)
         //     }
         // });
