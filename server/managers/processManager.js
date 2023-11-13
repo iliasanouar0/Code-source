@@ -116,6 +116,15 @@ const updateActions = (request, response) => {
     })
 }
 
+const getProcessAction = async (id) => {
+    // let id = (request.param.id)
+    let sql = "SELECT action FROM process WHERE id_process=$1"
+    const client = await pool.connect()
+    const list = await client.query(sql, values);
+    client.release()
+    return list.rows[0]
+}
+
 const deleteProcess = (request, response) => {
     const ides = (request.body);
     const sql = "DELETE FROM process WHERE id_process=$1";
@@ -123,29 +132,50 @@ const deleteProcess = (request, response) => {
     for (let i = 0; i < ides.length; i++) {
         params.push([ides[i]])
     }
-    // var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
-    // let file = `${root}/logApp/${date}.txt`
+    var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
+    let file = `${root}/logApp/${date}.txt`
     // fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
     //     if (err) {
     //         console.error(
     //             `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-    //         fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+    //         fs.writeFile(file, `User : ${data.login},delete process  action verify in  ${new Date().toLocaleString()}\n`, (e) => {
     //             if (e) throw e
     //             console.log('log added');
-    //             sendToAll(clients, 'location reload')
     //         })
     //     } else {
     //         console.log(`${file} exists, and it is writable`);
-    //         fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+    //         fs.appendFile(file, `User : ${data.login},delete process  action verify in  ${new Date().toLocaleString()}\n`, (e) => {
     //             if (e) throw e
     //             console.log('log added');
-    //             sendToAll(clients, 'location reload')
     //         })
     //     }
     // });
     params.forEach(param => {
         pool.query(sql, param, (err, result) => {
-            if (err) { response.status(409).send(err) } else { console.log(`records deleted`) }
+            if (err) {
+                response.status(409).send(err)
+            } else {
+                // fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
+                //     if (err) {
+                //         console.error(
+                //             `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+                //         fs.writeFile(file, `User : ${data.login},delete process ${param} action verify in  ${new Date().toLocaleString()}\n`, (e) => {
+                //             if (e) throw e
+                //             console.log('log added');
+                //         })
+                //     } else {
+                //         console.log(`${file} exists, and it is writable`);
+                //         fs.appendFile(file, `User : ${data.login},delete process ${param} action verify in  ${new Date().toLocaleString()}\n`, (e) => {
+                //             if (e) throw e
+                //             console.log('log added');
+                //         })
+                //     }
+                // });
+                console.log(param);
+                let action = getProcessAction(param)
+                console.log(action);
+                console.log(`records deleted`)
+            }
         });
     });
     response.status(200).send('process deleted');
