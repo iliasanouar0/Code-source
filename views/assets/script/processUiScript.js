@@ -9,6 +9,7 @@ websocket_s.onmessage = (event) => {
     switch (data) {
         case 'reload':
             $('body').tooltip('dispose');
+            $('body .tooltip').removeClass('show');
             getData.ajax.reload(null, false)
             break;
         case 'location reload':
