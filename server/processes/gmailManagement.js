@@ -26,7 +26,7 @@ const verify = async (data) => {
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     } else {
-        const proxyServer = `${data.proxy}:3838`;
+        const proxyServer = `${data.proxy}`;
         arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     }
     console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
