@@ -4,6 +4,7 @@ const format = require("pg-format");
 const fs = require('fs')
 const data = require('../db');
 const gmailManagement = require("../processes/gmailManagement");
+const checkManagement = require("../processes/checkManagement");
 const root = __dirname
 let path = root.slice(0, root.length - 31)
 console.log(path);
@@ -244,6 +245,11 @@ const processing = async (data) => {
                     break;
             }
             break;
+        case 'checkProxy':
+            await checkManagement.checkProxy(data).then(e => {
+                result = e
+            })
+            return result
         default:
             console.log('data invalid');
             break;
