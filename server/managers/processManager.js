@@ -140,6 +140,7 @@ const deleteProcess = (request, response) => {
     }
     params.forEach(param => {
         console.log(root);
+        console.log(root.slice(0, root.length - 7));
         // pool.query(sql, [param.id], (err, result) => {
         //     if (err) {
         //         response.status(409).send(err)
