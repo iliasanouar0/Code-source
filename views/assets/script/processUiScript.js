@@ -446,7 +446,7 @@ $(document).on('click', '#restart_s', () => {
                     Swal.fire("Invalid login, operation canalled");
                     return
                 }
-                console.log(socketState);
+                console.log(websocket_s.CLOSED);
                 websocket_s.send(JSON.stringify({ request: "restart", login: formValues.login }))
                 $('#restart').modal('show')
                 timer()
