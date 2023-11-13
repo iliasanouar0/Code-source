@@ -116,13 +116,18 @@ const updateActions = (request, response) => {
     })
 }
 
-const getProcessAction = async (id) => {
-    // let id = (request.param.id)
+const getProcessAction = (id) => {
     let sql = "SELECT action FROM process WHERE id_process=$1"
-    const client = await pool.connect()
-    const list = await client.query(sql, values);
-    client.release()
-    return list.rows[0]
+    // const client = await pool.connect()
+    // const list = await client.query(sql, [id]);
+    // client.release()
+    // return list.rows[0]
+    pool.query(sql, [id], (er, re) => {
+        if (er) {
+            throw er
+        }
+        return re.rows[0]
+    })
 }
 
 const deleteProcess = (request, response) => {
@@ -172,7 +177,7 @@ const deleteProcess = (request, response) => {
                 //     }
                 // });
                 console.log(param);
-                let action = getProcessAction(param)
+                let action = getProcessAction(param[0])
                 console.log(action);
                 console.log(`records deleted`)
             }
