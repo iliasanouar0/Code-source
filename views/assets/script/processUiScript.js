@@ -2,7 +2,6 @@ const user = JSON.parse(sessionStorage.user);
 const wssUri = `ws://${ip}:7073/wss?id=${user.id_user}`;
 const websocket_s = new WebSocket(wssUri);
 const socketState = websocket_s.readyState
-console.log(socketState);
 
 websocket_s.onmessage = (event) => {
     let data = event.data
@@ -447,6 +446,7 @@ $(document).on('click', '#restart_s', () => {
                     Swal.fire("Invalid login, operation canalled");
                     return
                 }
+                console.log(socketState);
                 websocket_s.send(JSON.stringify({ request: "restart", login: formValues.login }))
                 $('#restart').modal('show')
                 timer()
