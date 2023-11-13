@@ -31,6 +31,7 @@ const checkProxy = async (data) => {
         });
         feedback += `${data.proxy.split(':')[0]}-@-ip-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(10000)
         await page.goto('https://bot.sannysoft.com/', { waitUntil: ['load', 'domcontentloaded'] })
         await page.screenshot({
             path: `${path}/${data.proxy.split(':')[0]}-@-bot-${data.id_process}.png`,
