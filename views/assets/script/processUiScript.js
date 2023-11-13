@@ -504,6 +504,10 @@ $(document).on('click', '.why', () => {
     $('.why-info').modal('show')
 })
 
+$(document).on('hide.bs.modal', '.why-info', () => {
+    $(document).remove('.why-info')
+})
+
 $(document).on('click', '#restart_s', () => {
     Swal.fire({
         title: 'Are you sure?',
