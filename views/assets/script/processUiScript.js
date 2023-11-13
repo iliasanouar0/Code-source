@@ -69,23 +69,24 @@ const addProcess = data => {
 }
 
 $(document).on('click', "#p_add", () => {
-    let p_name = $('#p_name').val().toString()
-    let p_list_add = $('#p_list_add').val().toString()
-    let p_status = $('#p_status').val().toString()
+    let p_subject = $('#p_subject').val()
+    let p_list_add = $('#p_list_add').val()
+    let p_status = $('#p_status').val()
     let p_add_date = new Date().toLocaleString();
     let p_update_date = new Date().toLocaleString();
     let selected = $('.actions input:checked')
-    if (p_name == "" || p_list_add == "" || p_status == "" || p_add_date == "" || p_update_date == "" || selected.length == 0) {
+    if (p_subject == "" || p_list_add == "" || p_status == "" || p_add_date == "" || p_update_date == "" || selected.length == 0) {
         Swal.fire('Please fill all fields')
         return
     }
-    let valueSelect = []
+    // let p_name = 
+        let valueSelect = []
     for (let i = 0; i < selected.length; i++) {
         valueSelect.push(selected[i].value)
     }
     const data = {
         "name": `${p_name}`,
-        "action": `${valueSelect}`,
+        "action": `${valueSelect},subject:${p_subject}`,
         "status": `${p_status}`,
         "date_add": `${p_add_date}`,
         "date_update": `${p_update_date}`,
