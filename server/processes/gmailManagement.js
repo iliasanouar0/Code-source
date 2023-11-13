@@ -28,7 +28,7 @@ const verify = async (data) => {
     console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     console.log(` `);
     let feedback = ''
-    const browser = await puppeteer.launch({ headless: false, args: arg })
+    const browser = await puppeteer.launch({ headless: 'new', args: arg })
     const browserPID = browser.process().pid
     const page = await browser.newPage()
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
