@@ -17,10 +17,17 @@ const path = `${root}/views/assets/images/process_result`
 let pidProcess = []
 
 const verify = async (data) => {
+    let arg
+    if (data.proxy == 'none' || data.proxy == null || data.proxy == '') {
+        arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+    } else {
+        const proxyServer = `${data.proxy}:3838`;
+        arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+    }
     console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     console.log(` `);
     let feedback = ''
-    const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox'] })
+    const browser = await puppeteer.launch({ headless: false, args: arg })
     const browserPID = browser.process().pid
     const page = await browser.newPage()
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
@@ -113,7 +120,9 @@ const verify = async (data) => {
     console.log(page.url());
     await page.click('#yDmH0d > c-wiz > div > div.eKnrVb > div > div.j663ec > div > form > span > section:nth-child(2) > div > div > section > div > div > div > ul > li:nth-child(3)')
     await time(2000)
-    await page.type('#knowledge-preregistered-email-response', data.verification, { delay: 100 })
+    page.waitForSelector('#knowledge-preregistered-email-response')
+    await time(2000)
+    await page.type('#knowledge-preregistered-email-response', data.verification, { delay: 200 })
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-verification-${data.id_process}.png`
     });
@@ -123,8 +132,7 @@ const verify = async (data) => {
     await page.waitForSelector('#view_container > div > div > div.pwWryf.bxPAYd > div > div.zQJV3 > div > div.qhFLie > div > div > button')
     await page.click('#view_container > div > div > div.pwWryf.bxPAYd > div > div.zQJV3 > div > div.qhFLie > div > div > button')
     await navigationPromise
-    await time(2000)
-    console.log(await page.$('[aria-invalid="true"]'));
+    await time(10000)
     if (await page.$('[aria-invalid="true"]') != null) {
         console.log('invalid verification : ' + data.verification);
         await page.screenshot({
@@ -136,19 +144,17 @@ const verify = async (data) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }
-    await time(3000)
-    await page.goto('https://mail.google.com/mail/u/0/#inbox')
-    console.log(page.url());
-    await navigationPromise
-    console.log('verified email : ' + data.gmail);
-    await page.screenshot({
-        path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-    });
-    await page.close()
-    await browser.close()
-    feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    return feedback
+    if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
+        console.log('verified email : ' + data.gmail);
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+        });
+        await page.close()
+        await browser.close()
+        feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        return feedback
+    }
 }
 
 const kill = (id_process) => {
