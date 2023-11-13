@@ -61,6 +61,7 @@ const addProcess = data => {
             icon: 'success'
         }).then(() => {
             $('.add_process input').val('')
+            $(';add_process input:checkbox').prop("checked", false)
             $(".add_process").modal("hide");
             getData.ajax.reload(null, false)
         })
