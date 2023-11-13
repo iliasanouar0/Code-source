@@ -106,6 +106,7 @@ $(document).on('click', '.start', event => {
     }
     let socketState = websocket_s.readyState
     if (socketState !== websocket_s.CLOSED) {
+        $('body').tooltip('dispose');
         websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
         getData.ajax.reload(null, false)
     } else {
@@ -134,6 +135,7 @@ $(document).on('click', '.pause', event => {
     }
     let socketState = websocket_s.readyState
     if (socketState !== websocket_s.CLOSED) {
+        $('body').tooltip('dispose');
         websocket_s.send(JSON.stringify({ request: "pause", id_process: id, data: obj }))
     } else {
         swal.fire({
@@ -162,6 +164,7 @@ $(document).on('click', '.resume', event => {
 
     let socketState = websocket_s.readyState
     if (socketState !== websocket_s.CLOSED) {
+        $('body').tooltip('dispose');
         websocket_s.send(JSON.stringify({ request: "resume", id_process: id, data: obj }))
     } else {
         swal.fire({
@@ -191,6 +194,7 @@ function msToMnSc(ms) {
 }
 
 $(document).on('click', '.status', event => {
+    $('body').tooltip('dispose');
     let id = $(event.target).data('id')
     let children = $(event.target).parent().parent()[0].children
     $('.count').html(children[2].innerHTML)
@@ -344,6 +348,7 @@ $(document).on('click', '.status', event => {
 })
 
 $(document).on('click', '.details', event => {
+    $('body').tooltip('dispose');
     let id = $(event.target).data('id')
     let id_process = $(event.target).data('id_process')
     fetch(`http://${ip}:3000/result/feedback/${id}?id_process=${id_process}`).then(response => {
