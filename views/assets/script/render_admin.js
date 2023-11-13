@@ -143,6 +143,7 @@ function msToMnSc(ms) {
 const getData = $("#example1").DataTable({
   responsive: true,
   // deferRender: true,
+  order: [[1, 'desc']],
   destroy: true,
   autoWidth: false,
   ajax: {
@@ -159,7 +160,7 @@ const getData = $("#example1").DataTable({
         return `<input type="checkbox" class="check" value="${row.id_process}" data-val="${row.action}">`
       }
     },
-    { data: 'id_process' },
+    { data: 'id_process', },
     {
       data: null,
       searchable: false,

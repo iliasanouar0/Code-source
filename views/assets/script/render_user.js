@@ -86,6 +86,8 @@ function msToMnSc(ms) {
 }
 
 const getData = $("#processDate").DataTable({
+  order: [[1, 'desc']],
+
   responsive: true,
   destroy: true,
   autoWidth: false,
