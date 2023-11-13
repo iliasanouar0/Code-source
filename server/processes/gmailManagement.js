@@ -112,6 +112,10 @@ const verify = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
+        const count = await page.$eval('.bsU', element => {
+            return element.innerHTML
+        })
+        console.log(count);
         await page.close()
         await browser.close()
         feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
@@ -154,6 +158,11 @@ const verify = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
+        const count = await page.$eval('.bsU', element => {
+            return element.innerHTML
+        })
+        console.log(count);
+        await resultsManager.saveDetails({ details: `inbox count : ${count}`, id_seeds: data.id_seeds, id_process: data.id_process })
         await page.close()
         await browser.close()
         feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`

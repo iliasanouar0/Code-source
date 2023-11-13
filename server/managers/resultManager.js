@@ -46,6 +46,19 @@ const saveFeedback = async (data) => {
     })
 }
 
+const saveDetails = async (data) => {
+    let sql = `UPDATE results SET statusdetails=($1) WHERE id_seeds=($2) AND id_process=($3)`
+    let values = [data.details, data.id_seeds, data.id_process]
+    const client = await pool.connect()
+    client.query(sql, values, (err) => {
+        if (err) {
+            return err;
+        }
+        client.release()
+        return true
+    })
+}
+
 const getFeedback = (request, response) => {
     let id = (request.params.id)
     let id_process = (request.query.id_process)
@@ -141,5 +154,5 @@ module.exports = {
     deleteResultsProcess,
     updateState,
     startNow,
-    saveFeedback
+    saveFeedback, saveDetails
 }
