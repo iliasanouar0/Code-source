@@ -108,7 +108,19 @@ $(document).on('click', '.start', event => {
         websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
         getData.ajax.reload(null, false)
     } else {
-        swal.fire('Reload page first')
+        swal.fire({
+            title: 'connection lost !',
+            text: 'it\'s looks like your connection is off reload page',
+            icon: 'warning',
+            confirmButtonText: 'reload page',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+        }).then(result => {
+            if (result.isConfirmed) {
+                location.reload()
+            }
+        })
     }
 })
 
@@ -123,7 +135,19 @@ $(document).on('click', '.pause', event => {
     if (socketState !== websocket_s.CLOSED) {
         websocket_s.send(JSON.stringify({ request: "pause", id_process: id, data: obj }))
     } else {
-        swal.fire('Reload page first')
+        swal.fire({
+            title: 'connection lost !',
+            text: 'it\'s looks like your connection is off reload page',
+            icon: 'warning',
+            confirmButtonText: 'reload page',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+        }).then(result => {
+            if (result.isConfirmed) {
+                location.reload()
+            }
+        })
     }
 })
 
@@ -139,7 +163,19 @@ $(document).on('click', '.resume', event => {
     if (socketState !== websocket_s.CLOSED) {
         websocket_s.send(JSON.stringify({ request: "resume", id_process: id, data: obj }))
     } else {
-        swal.fire('Reload page first')
+        swal.fire({
+            title: 'connection lost !',
+            text: 'it\'s looks like your connection is off reload page',
+            icon: 'warning',
+            confirmButtonText: 'reload page',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+        }).then(result => {
+            if (result.isConfirmed) {
+                location.reload()
+            }
+        })
     }
 })
 
@@ -384,7 +420,19 @@ $(document).on('click', '.stop', event => {
             if (socketState !== websocket_s.CLOSED) {
                 websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
             } else {
-                swal.fire('Reload page first')
+                swal.fire({
+                    title: 'connection lost !',
+                    text: 'it\'s looks like your connection is off reload page',
+                    icon: 'warning',
+                    confirmButtonText: 'reload page',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        location.reload()
+                    }
+                })
             }
         } else if (result.isDismissed) {
             Swal.fire({
@@ -477,10 +525,7 @@ $(document).on('click', '#restart_s', () => {
                         allowEscapeKey: false,
                         allowEnterKey: false,
                     }).then(result => {
-                        console.log(result);
-                        console.log(result.isConfirmed);
                         if (result.isConfirmed) {
-                            console.log('test');
                             location.reload()
                         }
                     })
