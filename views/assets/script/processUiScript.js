@@ -8,7 +8,6 @@ websocket_s.onmessage = (event) => {
     console.log(data);
     switch (data) {
         case 'reload':
-            $('body').tooltip('dispose');
             $('body .tooltip').removeClass('show');
             getData.ajax.reload(null, false)
             break;
@@ -108,7 +107,7 @@ $(document).on('click', '.start', event => {
     }
     let socketState = websocket_s.readyState
     if (socketState !== websocket_s.CLOSED) {
-        $('body').tooltip('dispose');
+        $('body .tooltip').removeClass('show');
         websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
         getData.ajax.reload(null, false)
     } else {
