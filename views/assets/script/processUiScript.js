@@ -549,7 +549,7 @@ $(document).on('click', '.delete-all-this', () => {
             for (let i = 0; i < check.length; i++) {
                 let ID = check[i].value
                 let action = $(check[i]).data('val')
-                ides.push({ id: ID, action: action })
+                ides.push({ id: ID, action: action, login: user.login })
             }
             fetch(`http://${ip}:3000/process/`, {
                 method: "PATCH",
