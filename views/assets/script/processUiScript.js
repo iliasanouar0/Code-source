@@ -278,7 +278,7 @@ $(document).on('click', '.status', event => {
                 data: null,
                 render: function (row) {
                     if (row.statusdetails == null || row.statusdetails == "" || row.statusdetails == undefined || row.statusdetails == 'undefined') {
-                        return `<p class="placeholder-glow"><span class="placeholder col mb-1"></span></p>`
+                        return `<p>&#9940;</p>`
                     }
                     return `${row.statusdetails}`
                 }
