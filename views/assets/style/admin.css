@@ -115,7 +115,7 @@ i.fa-redo {
 #fullpage {
   display: none;
   position: absolute;
-  /* z-index: 0; */
+  z-index: 5;
   top: 0;
   left: 0;
   width: 100vw;
