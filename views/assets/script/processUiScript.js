@@ -3,6 +3,7 @@ const wssUri = `ws://${ip}:7073/wss?id=${user.id_user}`;
 const websocket_s = new WebSocket(wssUri);
 const socketState = websocket_s.readyState
 
+
 websocket_s.onmessage = (event) => {
     let data = event.data
     console.log(data);
@@ -103,10 +104,12 @@ $(document).on('click', '.start', event => {
         status: `${status}`,
         start_in: start_in,
     }
-    // websocket_s.onopen = (e) => {
-    websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
-    getData.ajax.reload(null, false)
-    // }
+    if (socketState !== websocket_s.CLOSED) {
+        websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
+        getData.ajax.reload(null, false)
+    } else {
+        swal.fire('Reload page first')
+    }
 })
 
 $(document).on('click', '.pause', event => {
@@ -116,7 +119,11 @@ $(document).on('click', '.pause', event => {
         id_process: `${id}`,
         status: `${status}`,
     }
-    websocket_s.send(JSON.stringify({ request: "pause", id_process: id, data: obj }))
+    if (socketState !== websocket_s.CLOSED) {
+        websocket_s.send(JSON.stringify({ request: "pause", id_process: id, data: obj }))
+    } else {
+        swal.fire('Reload page first')
+    }
 })
 
 $(document).on('click', '.resume', event => {
@@ -369,7 +376,11 @@ $(document).on('click', '.stop', event => {
                 end_in: end_in,
                 status: `${status}`,
             }
-            websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
+            if (socketState !== websocket_s.CLOSED) {
+                websocket_s.send(JSON.stringify({ request: "reset", id_process: id, data: obj }))
+            } else {
+                swal.fire('Reload page first')
+            }
         } else if (result.isDismissed) {
             Swal.fire({
                 position: 'top-end',
@@ -446,10 +457,13 @@ $(document).on('click', '#restart_s', () => {
                     Swal.fire("Invalid login, operation canalled");
                     return
                 }
-                console.log(websocket_s.CLOSED);
-                websocket_s.send(JSON.stringify({ request: "restart", login: formValues.login }))
-                $('#restart').modal('show')
-                timer()
+                if (socketState !== websocket_s.CLOSED) {
+                    websocket_s.send(JSON.stringify({ request: "restart", login: formValues.login }))
+                    $('#restart').modal('show')
+                    timer()
+                } else {
+                    swal.fire('Reload page first')
+                }
             }
         } else if (result.isDismissed) {
             Swal.fire({
