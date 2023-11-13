@@ -483,7 +483,7 @@ function timer() {
 }
 
 $(document).on('click', '.why', () => {
-    let modal = `<div class="z-3 modal fade why-info" tabindex="-1">
+    let modal = `<div class="modal fade why-info" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -491,7 +491,13 @@ $(document).on('click', '.why', () => {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+        <h6>By clicking on "Restart App" :</h6>
+        <ol>
+        <li>we clean the browser</li>
+        <li>we stop all the running process</li>
+        <li>we remove all existing process</li>
+        <li>Get better performance for the app</li>
+        </ol>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -501,6 +507,7 @@ $(document).on('click', '.why', () => {
     </div>
   </div>`
     $('footer').after(modal)
+    Swal.close()
     $('.why-info').modal('show')
 })
 
