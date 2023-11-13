@@ -483,7 +483,7 @@ function timer() {
 }
 
 $(document).on('click', '.why', () => {
-    let modal = `<div class="modal fade why-info" tabindex="-1">
+    let modal = `<div class="z-3 modal fade why-info" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
