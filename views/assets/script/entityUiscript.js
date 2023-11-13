@@ -55,6 +55,7 @@ $(document).on("click", "#e_add", () => {
     addEntity(data);
 });
 
+
 $(document).on('click', '.delete', event => {
     Swal.fire({
         title: 'Are you sure?',
