@@ -2,7 +2,6 @@ const user = JSON.parse(sessionStorage.user);
 const wssUri = `ws://${ip}:7073/wss?id=${user.id_user}`;
 const websocket_s = new WebSocket(wssUri);
 
-
 websocket_s.onmessage = (event) => {
     let data = event.data
     console.log(data);
@@ -470,6 +469,7 @@ function tick() {
         }
     }
 }
+
 function add() {
     tick();
     h1.textContent = (hrs > 9 ? hrs : "0" + hrs)
@@ -477,6 +477,7 @@ function add() {
         + ":" + (sec > 9 ? sec : "0" + sec);
     timer();
 }
+
 function timer() {
     t = setTimeout(add, 1000);
 }
