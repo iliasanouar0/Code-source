@@ -468,7 +468,7 @@ $(document).on('click', '#restart_s', () => {
                     $('#restart').modal('show')
                     timer()
                 } else {
-                    swal.fire('Reload page first')
+                    swal.fire('it\'s looks like your connection is off reload page')
                 }
             }
         } else if (result.isDismissed) {
