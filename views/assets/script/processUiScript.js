@@ -479,7 +479,8 @@ $(document).on('click', '#restart_s', () => {
                     }).then(result => {
                         console.log(result);
                         if (result.isConfirmed) {
-                            location.reload
+                            console.log('test');
+                            location.reload()
                         }
                     })
                 }
