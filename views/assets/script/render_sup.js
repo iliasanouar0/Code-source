@@ -105,7 +105,7 @@ const getData = $("#ProcessData").DataTable({
             orderable: false,
             defaultContent: "",
             render: function (data, type, row) {
-                return `<input type="checkbox" class="check" value="${row.id_process}">`
+                return `<input type="checkbox" class="check" value="${row.id_process}" data-val="${row.action}">`
             }
         },
         { data: 'id_process' },
