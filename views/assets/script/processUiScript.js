@@ -468,7 +468,17 @@ $(document).on('click', '#restart_s', () => {
                     $('#restart').modal('show')
                     timer()
                 } else {
-                    swal.fire('it\'s looks like your connection is off reload page')
+                    swal.fire({
+                        title: 'it\'s looks like your connection is off reload page',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            location.reload
+                        }
+                    })
                 }
             }
         } else if (result.isDismissed) {
