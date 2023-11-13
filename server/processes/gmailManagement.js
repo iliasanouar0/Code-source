@@ -24,6 +24,7 @@ const verify = async (data) => {
         const proxyServer = `${data.proxy}:3838`;
         arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     }
+    console.log(arg);
     console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     console.log(` `);
     let feedback = ''
