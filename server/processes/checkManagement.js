@@ -27,8 +27,7 @@ const checkProxy = async (data) => {
     try {
         await page.goto(`http://monip.org/`)
         await page.screenshot({
-            path: `${path}/${data.proxy.split(':')[0]}-@-ip-${data.id_process}.png`,
-            fullPage: true
+            path: `${path}/${data.proxy.split(':')[0]}-@-ip-${data.id_process}.png`
         });
         feedback += `${data.proxy.split(':')[0]}-@-ip-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
@@ -38,7 +37,7 @@ const checkProxy = async (data) => {
             path: `${path}/${data.proxy.split(':')[0]}-@-bot-${data.id_process}.png`,
             fullPage: true
         });
-        feedback += `,${data.proxy.split(':')[0]}-@-bot-${data.id_process}.png`
+        feedback += `, ${data.proxy.split(':')[0]}-@-bot-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     } catch (error) {
 
