@@ -21,7 +21,7 @@ let pidProcess = []
 
 const verify = async (data) => {
     let arg
-    if (data.proxy == 'none' || data.proxy == null || data.proxy == '') {
+    if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.process == 'undefined' || data.process == undefined) {
         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     } else {
         const proxyServer = `${data.proxy}:3838`;
@@ -143,7 +143,7 @@ const verify = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalid-verification-${data.id_process}.png`
         });
-        
+
         await page.close()
         await browser.close()
         feedback += `, ${data.gmail.split('@')[0]}-@-invalid-verification-${data.id_process}.png`
