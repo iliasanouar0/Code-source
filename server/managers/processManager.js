@@ -135,7 +135,7 @@ const deleteProcess = (request, response) => {
     const sql = "DELETE FROM process WHERE id_process=$1";
     const params = [];
     for (let i = 0; i < ides.length; i++) {
-        params.push([ides[i]])
+        params.push(ides[i])
     }
     params.forEach(param => {
         console.log(param);
