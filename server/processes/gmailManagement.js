@@ -116,6 +116,7 @@ const verify = async (data) => {
             return element.innerHTML
         })
         console.log(count);
+        await resultsManager.saveDetails({ details: `inbox count : ${count}`, id_seeds: data.id_seeds, id_process: data.id_process })
         await page.close()
         await browser.close()
         feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
