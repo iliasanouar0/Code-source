@@ -132,8 +132,8 @@ const deleteProcess = (request, response) => {
     for (let i = 0; i < ides.length; i++) {
         params.push([ides[i]])
     }
-    var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
-    let file = `${root}/logApp/${date}.txt`
+    // var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
+    // let file = `${root}/logApp/${date}.txt`
     // fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
     //     if (err) {
     //         console.error(
