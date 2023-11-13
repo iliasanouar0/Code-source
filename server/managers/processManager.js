@@ -119,20 +119,6 @@ const updateActions = (request, response) => {
     })
 }
 
-const getProcessAction = (id) => {
-    let sql = "SELECT action FROM process WHERE id_process=$1"
-    // const client = await pool.connect()
-    // const list = await client.query(sql, [id]);
-    // client.release()
-    // return list.rows[0]
-    pool.query(sql, [id], (er, re) => {
-        if (er) {
-            throw er
-        }
-        return re.rows[0]
-    })
-}
-
 const deleteProcess = (request, response) => {
     const ides = (request.body);
     const sql = "DELETE FROM process WHERE id_process=$1";
@@ -146,7 +132,7 @@ const deleteProcess = (request, response) => {
                 response.status(409).send(err)
             } else {
                 var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
-                let file = `${path}/logApp/${date}.txt`
+                let file = `/home/logApp/${date}.txt`
                 fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
                     if (err) {
                         console.error(

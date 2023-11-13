@@ -439,7 +439,7 @@ wss.on('connection', (wss, req) => {
       if (ip_process.length == 0) {
         await time(5000)
         var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
-        let file = `../home/logApp/${date}.txt`
+        let file = `/home/logApp/${date}.txt`
         fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
           if (err) {
             console.error(
