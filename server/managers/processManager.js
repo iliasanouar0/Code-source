@@ -5,7 +5,8 @@ const fs = require('fs')
 const data = require('../db');
 const gmailManagement = require("../processes/gmailManagement");
 const root = __dirname
-let path = root.slice(0, root.length - 8)
+let path = root.slice(0, root.length - 31)
+console.log(path);
 let config = data.data
 
 const pool = new pg.Pool(config);
