@@ -384,7 +384,7 @@ class GmailManagement {
     }
 }
 /**
- * ! TESTING !!!
+ * ! TESTING !
  */
 let lone = new GmailManagement
 // lone.removeAllInbox('iliasanouar0@gmail.com', 'ilias080701')
