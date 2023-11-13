@@ -23,7 +23,7 @@ const verify = async (data) => {
     let arg
     console.log(data);
     console.log(data.proxy);
-    if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.process == 'undefined' || data.process == undefined) {
+    if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     } else {
         const proxyServer = `${data.proxy}:3838`;
