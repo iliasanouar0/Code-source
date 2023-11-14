@@ -388,9 +388,9 @@ class GmailManagement {
  */
 let lone = new GmailManagement
 // lone.removeAllInbox('iliasanouar0@gmail.com', 'ilias080701')
-lone.markAsStarted('iliasanouar0@gmail.com', 'ilias080701')
+// lone.markAsStarted('iliasanouar0@gmail.com', 'ilias080701')
 // lone.removeAllSpam('iliasanouar0@gmail.com', 'ilias080701')
-// .notSpam('iliasanouar0@gmail.com', 'ilias080701')
+// lone.notSpam('iliasanouar0@gmail.com', 'ilias080701')
 // lone.markAsRead('iliasanouar0@gmail.com', 'ilias080701')
-// .markAsSpam('iliasanouar0@gmail.com', 'ilias080701')
+lone.markAsSpam('iliasanouar0@gmail.com', 'ilias080701')
 // .notSpamThat('iliasanouar0@gmail.com', 'ilias080701', "get started in lucid")
