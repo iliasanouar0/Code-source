@@ -79,8 +79,19 @@ $(document).on('click', "#p_add", () => {
         Swal.fire('Please fill all fields')
         return
     }
-    // let p_name = 
-        let valueSelect = []
+    var settings = {
+        "url": "https://api.api-ninjas.com/v1/randomword",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "X-API-Key": "e8yHbiyMFyT3pV3x79He5A==cnUQmdFuKmJgCM6F"
+        },
+    };
+    let p_name
+    $.ajax(settings).done(function (response) {
+        p_name = response
+    });
+    let valueSelect = []
     for (let i = 0; i < selected.length; i++) {
         valueSelect.push(selected[i].value)
     }
