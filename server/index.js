@@ -199,7 +199,6 @@ wss.on('connection', (wss, req) => {
           }
           let actions
           let subject
-          console.log(toProcess[0].action.indexOf(','));
           if (toProcess[0].action.indexOf(',') == -1) {
             actions = [toProcess[0].action]
             subject = ""
