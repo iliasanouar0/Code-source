@@ -222,38 +222,44 @@ const stoppedProcess = (data) => {
 
 const processing = async (data) => {
     let result
-    switch (data.action) {
-        case 'verify':
-            switch (data.isp) {
-                case 'gmail':
-                    await gmailManagement.verify(data).then(e => {
-                        result = e
-                    })
-                    return result
-                default:
-                    console.log('data invalid');
-                    break;
-            }
-            break;
-        case 'kill':
-            switch (data.isp) {
-                case 'gmail':
-                    gmailManagement.kill(data.id_process)
-                    break
-                default:
-                    console.log('data invalid');
-                    break;
-            }
-            break;
-        case 'checkProxy':
-            await checkManagement.checkProxy(data).then(e => {
-                result = e
-            })
-            return result
-        default:
-            console.log('data invalid');
-            break;
-    }
+    let actions = data.action.split(',')
+    let subject = actions.pop()
+    console.log(actions);
+    console.log(subject);
+    actions.forEach(async action => {
+        switch (action) {
+            case 'verify':
+                switch (data.isp) {
+                    case 'gmail':
+                        await gmailManagement.verify(data).then(e => {
+                            result = e
+                        })
+                        return result
+                    default:
+                        console.log('data invalid');
+                        break;
+                }
+                break;
+            case 'kill':
+                switch (data.isp) {
+                    case 'gmail':
+                        gmailManagement.kill(data.id_process)
+                        break
+                    default:
+                        console.log('data invalid');
+                        break;
+                }
+                break;
+            case 'checkProxy':
+                await checkManagement.checkProxy(data).then(e => {
+                    result = e
+                })
+                return result
+            default:
+                console.log('data invalid');
+                break;
+        }
+    });
     // return action(data)
 }
 

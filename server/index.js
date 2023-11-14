@@ -526,27 +526,6 @@ wss.on('connection', (wss, req) => {
 })
 
 
-// var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
-// let file = `/home/logApp/${date}.txt`
-// fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
-//   if (err) {
-//     console.error(
-//       `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-//     // fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
-//     //   if (e) throw e
-//     //   console.log('log added');
-//     //   sendToAll(clients, 'location reload')
-//     // })
-//   } else {
-//     console.log(`${file} exists, and it is writable`);
-//     // fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
-//     //   if (e) throw e
-//     //   console.log('log added');
-//     //   sendToAll(clients, 'location reload')
-//     // })
-//   }
-// });
-
 // ~ open connection to websocket view :
 wsv.on('connection', async wsv => {
   const equalsCheck = (a, b) => {
