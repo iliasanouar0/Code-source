@@ -197,13 +197,13 @@ wss.on('connection', (wss, req) => {
           if (state == "STOPPED") {
             break
           }
-          console.log(toProcess[0].action);
+          console.log(toProcess[0].action.indexOf(','));
           let actions = toProcess[0].action.split(',')
           let subject = actions.pop().split(':')[1]
           console.log(actions);
           console.log(subject);
           let r = ''
-          actions.forEach(async action => {
+          await actions.forEach(async action => {
             console.log(action + ' action start')
             let re = await processManager.processing({ data: toProcess[0], action: action, subject: subject })
             console.log(re);
