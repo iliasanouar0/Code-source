@@ -240,14 +240,7 @@ const notSpam = async (data) => {
     });
     feedback += `, ${data.gmail.split('@')[0]}-@-span-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    // const span = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div/div[2]/div/div/div[3]/div/div[1]/div/div[5]/div/div/div[2]/div')
     await time(3000)
-    // console.log(span[0]);
-    // const countSpan = await span[0].getProperty('textContent');
-    // details += `, Unread span : ${await countSpan.jsonValue()}`
-    // console.log(details);
-    // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-
     const elements = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[2]/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div/div[1]/div/div[1]/span')
     await time(3000)
     await elements[0].click()
@@ -289,6 +282,88 @@ const notSpam = async (data) => {
 
 }
 
+const markAsSpam = async (data) => {
+    let arg
+    if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
+        arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+    } else {
+        const proxyServer = `${data.proxy}`;
+        arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+    }
+    console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
+    console.log(` `);
+    let feedback = ''
+    let details = ''
+    const browser = await puppeteer.launch({ headless: 'new', args: arg })
+    const browserPID = browser.process().pid
+    const page = await browser.newPage()
+    pidProcess.push({ id_process: data.id_process, pid: browserPID })
+    await page.setViewport({ width: 1280, height: 720 });
+    const navigationPromise = page.waitForNavigation()
+    await page.goto('https://gmail.com/')
+    await navigationPromise
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+    });
+    feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    await page.waitForSelector('input[type="email"]')
+    await page.click('input[type="email"]')
+    await navigationPromise
+    await page.type('input[type="email"]', data.gmail, { delay: 100 })
+    await page.waitForSelector('#identifierNext')
+    await page.click('#identifierNext')
+    await page.waitForSelector('input[type="password"]')
+    await time(5000)
+    page.type('input[type="password"]', data.password, { delay: 200 })
+    await time(3000)
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
+    });
+    feedback += `, ${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    await time(3000)
+    page.waitForSelector('#passwordNext')
+    page.click('#passwordNext')
+    await navigationPromise
+    await time(10000)
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+    });
+    feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    const countInbox = await page.$eval('.bsU', element => {
+        return element.innerHTML
+    })
+    details += `Entre unread inbox : ${countInbox}`
+    console.log(countInbox);
+    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    await time(10000)
+    const elements = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[2]/div/div/div/div[1]/div[2]/div[1]/div[1]/div/div/div[1]/div/div[1]/span')
+    await time(3000)
+    await elements[0].click()
+    await time(3000)
+    if (await page.$('div[act="9"]') != null) {
+        page.waitForSelector('div[act="9"]')
+        page.click('div[act="9"]')
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-inboxResult-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-inboxResult-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        const countInbox = await page.$eval('.bsU', element => {
+            return element.innerHTML
+        })
+        details += `, Out unread inbox : ${countInbox}`
+        console.log(countInbox);
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        await page.close()
+        await browser.close()
+        return feedback
+    }
+}
+
 const kill = (id_process) => {
     pidProcess.forEach(Element => {
         if (Element.id_process == id_process) {
@@ -309,6 +384,7 @@ const kill = (id_process) => {
 module.exports = {
     verify,
     notSpam,
+    markAsSpam,
     kill,
 }
 
