@@ -90,21 +90,21 @@ $(document).on('click', "#p_add", () => {
     let p_name
     $.ajax(settings).done(function (response) {
         p_name = response
+        let valueSelect = []
+        for (let i = 0; i < selected.length; i++) {
+            valueSelect.push(selected[i].value)
+        }
+        const data = {
+            "name": `${p_name}`,
+            "action": `${valueSelect},subject:${p_subject}`,
+            "status": `${p_status}`,
+            "date_add": `${p_add_date}`,
+            "date_update": `${p_update_date}`,
+            "id_user": `${userData['id_user']}`,
+            "id_list": `${p_list_add}`
+        };
+        addProcess(data)
     });
-    let valueSelect = []
-    for (let i = 0; i < selected.length; i++) {
-        valueSelect.push(selected[i].value)
-    }
-    const data = {
-        "name": `${p_name}`,
-        "action": `${valueSelect},subject:${p_subject}`,
-        "status": `${p_status}`,
-        "date_add": `${p_add_date}`,
-        "date_update": `${p_update_date}`,
-        "id_user": `${userData['id_user']}`,
-        "id_list": `${p_list_add}`
-    };
-    addProcess(data)
 })
 
 $(document).on('click', '.start', event => {
