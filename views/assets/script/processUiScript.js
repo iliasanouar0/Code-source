@@ -146,6 +146,7 @@ $(document).on('click', "#p_add", () => {
                 valueSelect.push(selected_other[i].value)
             }
         }
+        console.log(valueSelect);
         const data = {
             "name": `${response.word}`,
             "action": `${valueSelect},subject:${p_subject}`,
