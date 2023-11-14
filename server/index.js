@@ -202,11 +202,10 @@ wss.on('connection', (wss, req) => {
           let subject = actions.pop().split(':')[1]
           console.log(actions);
           console.log(subject);
-          let r = ''
-          r += await actions.forEach(async action => {
+          let r = await actions.forEach(async action => {
             console.log(action + ' action start')
-            let re = await processManager.processing({ data: toProcess[0], action: action, subject: subject })
-            console.log(re);
+            let re
+            re += await processManager.processing({ data: toProcess[0], action: action, subject: subject })
             return re
           })
           console.log('this si r : ' + r);
