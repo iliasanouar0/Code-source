@@ -41,7 +41,7 @@ const verify = async (data) => {
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
     });
-    feedback = `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+    feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await page.waitForSelector('input[type="email"]')
     await page.click('input[type="email"]')
@@ -58,7 +58,7 @@ const verify = async (data) => {
         await page.close()
         await browser.close()
         console.log(`invalid email : ${data.gmail}`);
-        feedback = `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }
@@ -74,7 +74,7 @@ const verify = async (data) => {
             await page.close()
             await browser.close()
             console.log(`invalid email : ${data.gmail}`);
-            feedback = `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+            feedback += `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
             return feedback
         }
@@ -83,7 +83,7 @@ const verify = async (data) => {
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
     });
-    feedback = `, ${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
+    feedback += `, ${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(1000)
     await Promise.all([
@@ -100,7 +100,7 @@ const verify = async (data) => {
         await page.close()
         await browser.close()
         console.log(`invalid email : ${data.gmail}`);
-        feedback = `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }
@@ -119,7 +119,7 @@ const verify = async (data) => {
         await resultsManager.saveDetails({ details: `Unread inbox : ${count}`, id_seeds: data.id_seeds, id_process: data.id_process })
         await page.close()
         await browser.close()
-        feedback = `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }
@@ -134,7 +134,7 @@ const verify = async (data) => {
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-verification-${data.id_process}.png`
     });
-    feedback = `, ${data.gmail.split('@')[0]}-@-verification-${data.id_process}.png`
+    feedback += `, ${data.gmail.split('@')[0]}-@-verification-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(2000)
     await page.waitForSelector('#view_container > div > div > div.pwWryf.bxPAYd > div > div.zQJV3 > div > div.qhFLie > div > div > button')
@@ -150,7 +150,7 @@ const verify = async (data) => {
 
         await page.close()
         await browser.close()
-        feedback = `, ${data.gmail.split('@')[0]}-@-invalid-verification-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalid-verification-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }
@@ -166,7 +166,7 @@ const verify = async (data) => {
         await resultsManager.saveDetails({ details: `Unread inbox : ${count}`, id_seeds: data.id_seeds, id_process: data.id_process })
         await page.close()
         await browser.close()
-        feedback = `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }

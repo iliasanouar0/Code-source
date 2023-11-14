@@ -29,7 +29,7 @@ const checkProxy = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-ip-${data.id_process}.png`
         });
-        feedback = `${data.gmail.split('@')[0]}-@-ip-${data.id_process}.png`
+        feedback += `${data.gmail.split('@')[0]}-@-ip-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(10000)
         await page.goto('https://bot.sannysoft.com/', { waitUntil: ['load', 'domcontentloaded'] })
@@ -37,7 +37,7 @@ const checkProxy = async (data) => {
             path: `${path}/${data.gmail.split('@')[0]}-@-bot-${data.id_process}.png`,
             fullPage: true
         });
-        feedback = `, ${data.gmail.split('@')[0]}-@-bot-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-bot-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     } catch (error) {
 
