@@ -199,12 +199,13 @@ wss.on('connection', (wss, req) => {
             break
           }
           let actions = toProcess[0].action.split(',')
-          let subject = actions.pop()
+          let subject = actions.pop().split(':')[1]
           console.log(actions);
-          console.log(subject.split(':')[1]);
+          console.log(subject);
           let r = ''
           actions.forEach(async action => {
-            r += await processManager.processing({ data: toProcess[0], action: action })
+            let re = await processManager.processing({ data: toProcess[0], action: action, subject: subject })
+            r += re
           })
           if (r.indexOf('invalid') == -1) {
             success++
