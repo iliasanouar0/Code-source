@@ -240,28 +240,40 @@ const notSpam = async (data) => {
     });
     feedback += `, ${data.gmail.split('@')[0]}-@-span-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    const span = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div/div[2]/div/div/div[3]/div/div[1]/div/div[5]/div/div/div[2]/div')
+    // const span = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div/div[2]/div/div/div[3]/div/div[1]/div/div[5]/div/div/div[2]/div')
     await time(3000)
-    console.log(span[0]);
-    const countSpan = await span[0].getProperty('textContent');
-    details += `, Unread span : ${await countSpan.jsonValue()}`
-    console.log(details);
-    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    // console.log(span[0]);
+    // const countSpan = await span[0].getProperty('textContent');
+    // details += `, Unread span : ${await countSpan.jsonValue()}`
+    // console.log(details);
+    // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     const elements = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[2]/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div/div[1]/div/div[1]/span')
     await time(3000)
     await elements[0].click()
     await time(3000)
-    page.waitForSelector('div[act="18"]')
-    page.click('div[act="18"]')
-    await time(3000)
-    await page.screenshot({
-        path: `${path}/${data.gmail.split('@')[0]}-@-spanResult-${data.id_process}.png`
-    });
-    feedback += `, ${data.gmail.split('@')[0]}-@-spanResult-${data.id_process}.png`
-    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    await page.close()
-    await browser.close()
-    return feedback
+    if (await page.$('div[act="18"]') != null) {
+        page.waitForSelector('div[act="18"]')
+        page.click('div[act="18"]')
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-spanResult-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-spanResult-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await page.close()
+        await browser.close()
+        return feedback
+    } else {
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-noSpan-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-noSpan-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await page.close()
+        await browser.close()
+        return feedback
+    }
+
 }
 
 const kill = (id_process) => {
