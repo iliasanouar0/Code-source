@@ -222,12 +222,12 @@ const notSpam = async (data) => {
     });
     feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    const countInbox = await page.$eval('.bsU', element => {
-        return element.innerHTML
-    })
-    details += `Unread inbox : ${countInbox}`
-    console.log(countInbox);
-    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    // const countInbox = await page.$eval('.bsU', element => {
+    //     return element.innerHTML
+    // })
+    // details += `Unread inbox : ${countInbox}`
+    // console.log(countInbox);
+    // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(10000)
     await page.waitForSelector('.CJ')
     await page.click('.CJ')
