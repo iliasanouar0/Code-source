@@ -261,6 +261,12 @@ const notSpam = async (data) => {
         });
         feedback += `, ${data.gmail.split('@')[0]}-@-spanResult-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        const countInbox = await page.$eval('.bsU', element => {
+            return element.innerHTML
+        })
+        details += `, Out unread inbox : ${countInbox}`
+        console.log(countInbox);
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
         await page.close()
         await browser.close()
         return feedback
