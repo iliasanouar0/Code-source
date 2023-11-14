@@ -765,25 +765,25 @@ if (path.includes("/admin/users/")) {
 } else if (path.includes("/admin/entities/")) {
   getDataEntity
 } else if (path.includes("/admin/process/")) {
-  // document.querySelector("#add_process").addEventListener("click", () => {
-  const select = document.querySelector("#p_list_add");
-  //   select.innerHTML = ""
-  fetch(`http://${ip}:3000/lists`, {
-    method: "GET",
-  })
-    .then((response) => {
-      return response.json();
+  document.querySelector("#add_process").addEventListener("click", () => {
+    const select = document.querySelector("#p_list_add");
+    select.innerHTML = ""
+    fetch(`http://${ip}:3000/lists`, {
+      method: "GET",
     })
-    .then((data) => {
-      data.forEach((elm) => {
-        let option = document.createElement("option");
-        option.innerHTML = elm["name"];
-        option.setAttribute("value", elm["id_list"]);
-        select.appendChild(option);
-      });
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        data.forEach((elm) => {
+          let option = document.createElement("option");
+          option.innerHTML = elm["name"];
+          option.setAttribute("value", elm["id_list"]);
+          select.appendChild(option);
+        });
 
-    })
-  // })
+      })
+  })
 } else if (path.includes("/admin/lists/")) {
   getDatalist
 } else if (path.includes("/admin/database/")) {
