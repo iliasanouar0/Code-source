@@ -84,6 +84,13 @@ $("#btn-check-proxy").change(function () {
     }
 });
 
+$("#btn-check-c-spam").change(function () {
+    let status = $(this).is(":checked") ? true : false;
+    if (status) {
+        $("#btn-check-o-spam").prop("checked", status);
+    }
+});
+
 $(".btn-check").change(function () {
     let status = $(this).is(":checked") ? true : false;
     if (status) {
