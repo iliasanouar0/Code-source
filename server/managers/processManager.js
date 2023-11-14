@@ -225,10 +225,12 @@ const processing = async (data) => {
     let actions = data.action.split(',')
     let subject = actions.pop()
     console.log(actions);
-    console.log(subject);
+    console.log(subject.split(':')[1]);
     actions.forEach(async action => {
+        console.log(action);
         switch (action) {
             case 'verify':
+                console.log(data);
                 switch (data.isp) {
                     case 'gmail':
                         await gmailManagement.verify(data).then(e => {
