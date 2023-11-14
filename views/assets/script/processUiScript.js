@@ -70,8 +70,12 @@ const addProcess = data => {
 
 $("#btn-check-proxy").change(function () {
     let status = $(this).is(":checked") ? true : false;
-    $(".btn-check").prop("checked", !status);
-    $(this).prop("checked", status);
+    if (status) {
+        $(".btn-check").prop("checked", !status);
+        $(this).prop("checked", status);
+    } else {
+        return
+    }
 });
 
 $(document).on('click', "#p_add", () => {
