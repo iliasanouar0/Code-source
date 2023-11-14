@@ -225,7 +225,7 @@ const notSpam = async (data) => {
     const countInbox = await page.$eval('.bsU', element => {
         return element.innerHTML
     })
-    details += `Unread inbox : ${countInbox}`
+    details += `Entre unread inbox : ${countInbox}`
     console.log(countInbox);
     await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(10000)
@@ -247,6 +247,7 @@ const notSpam = async (data) => {
     // details += `, Unread span : ${await countSpan.jsonValue()}`
     // console.log(details);
     // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+
     const elements = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[2]/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div/div[1]/div/div[1]/span')
     await time(3000)
     await elements[0].click()
@@ -269,6 +270,12 @@ const notSpam = async (data) => {
         });
         feedback += `, ${data.gmail.split('@')[0]}-@-noSpan-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        const countInbox = await page.$eval('.bsU', element => {
+            return element.innerHTML
+        })
+        details += `, Out unread inbox : ${countInbox}`
+        console.log(countInbox);
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
         await page.close()
         await browser.close()
         return feedback
