@@ -150,7 +150,6 @@ wss.on('connection', (wss, req) => {
     if (request == "start") {
       processManager.startedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
-      console.log(seeds[0].action + ' action start')
       let active
       let waiting = seeds.length - 3
       if (seeds.length >= 3) {
@@ -204,7 +203,9 @@ wss.on('connection', (wss, req) => {
           console.log(subject);
           let r = ''
           actions.forEach(async action => {
+            console.log(action + ' action start')
             let re = await processManager.processing({ data: toProcess[0], action: action, subject: subject })
+            console.log(re);
             r += re
           })
           if (r.indexOf('invalid') == -1) {
