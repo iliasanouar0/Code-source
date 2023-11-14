@@ -205,6 +205,13 @@ wss.on('connection', (wss, req) => {
           actions.forEach(async action => {
             console.log(action + ' action start')
             let re = await processManager.processing({ data: toProcess[0], action: action, subject: subject })
+            let i = 0
+            while (i < 10) {
+              setTimeout(() => {
+                i++
+                console.log(re);
+              }, 4000);
+            }
             console.log(re);
             r += re
           })
