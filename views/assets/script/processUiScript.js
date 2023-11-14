@@ -146,10 +146,15 @@ $(document).on('click', "#p_add", () => {
                 valueSelect.push(selected_other[i].value)
             }
         }
-        console.log(valueSelect);
+        let action
+        if (p_subject != "") {
+            action = `${valueSelect},subject:${p_subject}`
+        } else {
+            action = `${valueSelect}`
+        }
         const data = {
             "name": `${response.word}`,
-            "action": `${valueSelect},subject:${p_subject}`,
+            "action": action,
             "status": `${p_status}`,
             "date_add": `${p_add_date}`,
             "date_update": `${p_update_date}`,
