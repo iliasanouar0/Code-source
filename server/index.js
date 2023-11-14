@@ -197,9 +197,16 @@ wss.on('connection', (wss, req) => {
           if (state == "STOPPED") {
             break
           }
+          let actions
+          let subject
           console.log(toProcess[0].action.indexOf(','));
-          let actions = toProcess[0].action.split(',')
-          let subject = actions.pop().split(':')[1]
+          if (toProcess[0].action.indexOf(',') == -1) {
+            actions = [toProcess[0].action]
+            subject = ""
+          } else {
+            actions = toProcess[0].action.split(',')
+            subject = actions.pop().split(':')[1]
+          }
           console.log(actions);
           console.log(subject);
           let r = ''

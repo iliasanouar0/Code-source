@@ -114,7 +114,7 @@ $(document).on('click', "#p_add", () => {
     let p_add_date = new Date().toLocaleString();
     let p_update_date = new Date().toLocaleString();
     let selected = $('.actions input:checked')
-    if (p_subject == "" || p_list_add == "" || p_status == "" || p_add_date == "" || p_update_date == "" || selected.length == 0) {
+    if (p_list_add == "" || p_status == "" || p_add_date == "" || p_update_date == "" || selected.length == 0) {
         Swal.fire('Please fill all fields')
         return
     }
@@ -126,16 +126,13 @@ $(document).on('click', "#p_add", () => {
             "X-API-Key": "e8yHbiyMFyT3pV3x79He5A==cnUQmdFuKmJgCM6F"
         },
     };
-    let p_name
     $.ajax(settings).done(function (response) {
-        p_name = response.word
-        console.log(p_name);
         let valueSelect = []
         for (let i = 0; i < selected.length; i++) {
             valueSelect.push(selected[i].value)
         }
         const data = {
-            "name": `${p_name}`,
+            "name": `${response.word}`,
             "action": `${valueSelect},subject:${p_subject}`,
             "status": `${p_status}`,
             "date_add": `${p_add_date}`,
