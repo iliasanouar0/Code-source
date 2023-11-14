@@ -68,6 +68,11 @@ const addProcess = data => {
     })
 }
 
+$("#btn-check-proxy").change(function () {
+    let status = $(this).is(":checked") ? true : false;
+    $(".check").prop("checked", !status);
+});
+
 $(document).on('click', "#p_add", () => {
     let p_subject = $('#p_subject').val()
     let p_list_add = $('#p_list_add').val()
