@@ -237,9 +237,9 @@ const processing = async (data) => {
             }
             break;
         case 'kill':
-            switch (seed.isp) {
+            switch (data.isp) {
                 case 'gmail':
-                    gmailManagement.kill(seed.id_process)
+                    gmailManagement.kill(data.id_process)
                     break
                 default:
                     console.log('data invalid');
