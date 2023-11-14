@@ -88,6 +88,7 @@ $(".btn-check").change(function () {
     let status = $(this).is(":checked") ? true : false;
     if (status) {
         $("#btn-check-proxy").prop("checked", !status);
+        $("#btn-check-verify").prop("checked", !status);
         $(this).prop("checked", status);
     }
 });
