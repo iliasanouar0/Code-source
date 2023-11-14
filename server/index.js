@@ -208,6 +208,7 @@ wss.on('connection', (wss, req) => {
             console.log(re);
             r += re
           })
+          console.log('this si r : ' + r);
           if (r.indexOf('invalid') == -1) {
             success++
             let end_in = new Date()
