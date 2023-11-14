@@ -203,11 +203,11 @@ wss.on('connection', (wss, req) => {
           console.log(actions);
           console.log(subject);
           let r = ''
-          await actions.forEach(async action => {
+          r += await actions.forEach(async action => {
             console.log(action + ' action start')
             let re = await processManager.processing({ data: toProcess[0], action: action, subject: subject })
             console.log(re);
-            r += re
+            return re
           })
           console.log('this si r : ' + r);
           if (r.indexOf('invalid') == -1) {
