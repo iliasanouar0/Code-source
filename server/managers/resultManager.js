@@ -47,7 +47,7 @@ const saveFeedback = async (data) => {
 }
 
 const saveDetails = async (data) => {
-    let sql = `UPDATE results SET statusdetails=statusdetails || ',' || ($1) WHERE id_seeds=($2) AND id_process=($3)`
+    let sql = `UPDATE results SET statusdetails=statusdetails || ($1) WHERE id_seeds=($2) AND id_process=($3)`
     let values = [data.details, data.id_seeds, data.id_process]
     const client = await pool.connect()
     client.query(sql, values, (err) => {
