@@ -197,6 +197,7 @@ wss.on('connection', (wss, req) => {
           if (state == "STOPPED") {
             break
           }
+          console.log(toProcess[0].action);
           let actions = toProcess[0].action.split(',')
           let subject = actions.pop().split(':')[1]
           console.log(actions);
@@ -208,9 +209,6 @@ wss.on('connection', (wss, req) => {
             console.log(re);
             r += re
           })
-          while (r = '') {
-            console.log(r);
-          }
           console.log('this si r : ' + r);
           if (r.indexOf('invalid') == -1) {
             success++
