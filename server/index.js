@@ -198,7 +198,14 @@ wss.on('connection', (wss, req) => {
           if (state == "STOPPED") {
             break
           }
-          let r = await processManager.processing(toProcess[0])
+          let actions = toProcess[0].action.split(',')
+          let subject = actions.pop()
+          console.log(actions);
+          console.log(subject.split(':')[1]);
+          let r = ''
+          actions.forEach(async action => {
+            r += await processManager.processing({ data: toProcess[0], action: action })
+          })
           if (r.indexOf('invalid') == -1) {
             success++
             let end_in = new Date()
