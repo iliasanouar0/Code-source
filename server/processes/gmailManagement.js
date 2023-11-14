@@ -57,7 +57,6 @@ const verify = async (data) => {
         });
         await page.close()
         await browser.close()
-        console.log('jj');
         console.log(`invalid email : ${data.gmail}`);
         feedback += `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
@@ -74,7 +73,6 @@ const verify = async (data) => {
             });
             await page.close()
             await browser.close()
-            console.log('kk');
             console.log(`invalid email : ${data.gmail}`);
             feedback += `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
