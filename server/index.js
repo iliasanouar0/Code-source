@@ -205,60 +205,67 @@ wss.on('connection', (wss, req) => {
           await actions.forEach(async action => {
             console.log(action + ' action start')
             let r = await processManager.processing({ data: toProcess[0], action: action, subject: subject })
-            console.log('this si r : ' + r);
-            if (r.indexOf('invalid') == -1) {
-              success++
-              let end_in = new Date()
-              let result
-              await Promise.all([
-                await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "finished"),
-                result = {
-                  id_seeds: toProcess[0].id_seeds,
-                  end_in: end_in,
-                  id_process: data.id_process
-                },
-                await resultManager.endNow(result)
-              ]);
-              toProcess.shift()
-              if (toProcess.length < active && count < length && state != "STOPPED") {
-                toProcess.push(seeds[count])
-                await Promise.all([
-                  await resultManager.startNow({ id_seeds: seeds[count].id_seeds, id_process: data.id_process }),
-                  await resultManager.updateState([{ id_seeds: seeds[count].id_seeds, id_process: data.id_process }], "running")
-                ])
-                count++
-                let w = waiting - count + 3
-                let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-                processStateManager.updateState(status)
-              }
-            } else {
-              failed++
-              let end_in = new Date()
-              let result
-              await Promise.all([
-                await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "failed"),
-                result = {
-                  id_seeds: toProcess[0].id_seeds,
-                  end_in: end_in,
-                  id_process: data.id_process
-                },
-                await resultManager.endNow(result)
-              ]);
-              toProcess.shift()
-
-              if (toProcess.length < active && count < length && state != "STOPPED") {
-                toProcess.push(seeds[count])
-                await Promise.all([
-                  await resultManager.startNow({ id_seeds: seeds[count].id_seeds, id_process: data.id_process }),
-                  await resultManager.updateState([{ id_seeds: seeds[count].id_seeds, id_process: data.id_process }], "running")
-                ])
-                count++
-                let w = waiting - count + 3
-                let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
-                processStateManager.updateState(status)
-              }
-            }
           })
+          console.log('this si r : ' + r);
+          if (r.indexOf('invalid') == -1) {
+            success++
+            let end_in = new Date()
+            let result
+            await Promise.all([
+              await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "finished"),
+              result = {
+                id_seeds: toProcess[0].id_seeds,
+                end_in: end_in,
+                id_process: data.id_process
+              },
+              await resultManager.endNow(result)
+            ]);
+            toProcess.shift()
+            state = await processManager.getProcessState(data.id_process)
+            if (state == "STOPPED") {
+              break
+            }
+            if (toProcess.length < active && count < length && state != "STOPPED") {
+              toProcess.push(seeds[count])
+              await Promise.all([
+                await resultManager.startNow({ id_seeds: seeds[count].id_seeds, id_process: data.id_process }),
+                await resultManager.updateState([{ id_seeds: seeds[count].id_seeds, id_process: data.id_process }], "running")
+              ])
+              count++
+              let w = waiting - count + 3
+              let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+              processStateManager.updateState(status)
+            }
+          } else {
+            failed++
+            let end_in = new Date()
+            let result
+            await Promise.all([
+              await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "failed"),
+              result = {
+                id_seeds: toProcess[0].id_seeds,
+                end_in: end_in,
+                id_process: data.id_process
+              },
+              await resultManager.endNow(result)
+            ]);
+            toProcess.shift()
+            state = await processManager.getProcessState(data.id_process)
+            if (state == "STOPPED") {
+              break
+            }
+            if (toProcess.length < active && count < length && state != "STOPPED") {
+              toProcess.push(seeds[count])
+              await Promise.all([
+                await resultManager.startNow({ id_seeds: seeds[count].id_seeds, id_process: data.id_process }),
+                await resultManager.updateState([{ id_seeds: seeds[count].id_seeds, id_process: data.id_process }], "running")
+              ])
+              count++
+              let w = waiting - count + 3
+              let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+              processStateManager.updateState(status)
+            }
+          }
         }
         let w = waiting - count + 3
         if (w <= 0) {
