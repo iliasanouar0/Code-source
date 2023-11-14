@@ -73,8 +73,14 @@ $("#btn-check-proxy").change(function () {
     if (status) {
         $(".btn-check").prop("checked", !status);
         $(this).prop("checked", status);
-    } else {
-        return
+    }
+});
+
+$(".btn-check").change(function () {
+    let status = $(this).is(":checked") ? true : false;
+    if (status) {
+        $("#btn-check-proxy").prop("checked", !status);
+        $(this).prop("checked", status);
     }
 });
 
