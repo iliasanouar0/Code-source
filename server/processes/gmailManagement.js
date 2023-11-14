@@ -172,72 +172,6 @@ const verify = async (data) => {
     }
 }
 
-const notSpamI = async (data) => {
-    let arg
-    if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
-        arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-    } else {
-        const proxyServer = `${data.proxy}`;
-        arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-    }
-    console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
-    console.log(` `);
-    let feedback = ''
-    let count = ''
-    const browser = await puppeteer.launch({ headless: 'new', args: arg })
-    const browserPID = browser.process().pid
-    const page = await browser.newPage()
-    pidProcess.push({ id_process: data.id_process, pid: browserPID })
-    await page.setViewport({ width: 1280, height: 720 });
-    const navigationPromise = page.waitForNavigation()
-    await page.goto('https://gmail.com/')
-    await navigationPromise
-    await page.screenshot({
-        path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
-    });
-    feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
-    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    await page.waitForSelector('input[type="email"]')
-    await page.click('input[type="email"]')
-    await navigationPromise
-    await page.type('input[type="email"]', email, { delay: 100 })
-    await page.waitForSelector('#identifierNext')
-    await page.click('#identifierNext')
-    await page.waitForSelector('input[type="password"]')
-    setTimeout(() => {
-        page.type('input[type="password"]', password, { delay: 200 })
-    }, 2000);
-    setTimeout(() => {
-        page.waitForSelector('#passwordNext')
-        page.click('#passwordNext')
-    }, 5000);
-
-    await navigationPromise
-    await page.waitForSelector('.CJ')
-    await page.click('.CJ')
-
-    setTimeout(() => {
-        page.waitForSelector('a[href="https://mail.google.com/mail/u/0/#spam"]')
-        page.click('a[href="https://mail.google.com/mail/u/0/#spam"]')
-    }, 2000);
-
-    setTimeout(() => {
-        const span = page.evaluate(() => {
-            console.log('evaluate');
-            span = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]')
-            console.log(span[1]);
-            span[1].click()
-            console.log(span);
-            return span
-        })
-    }, 3000);
-
-    setTimeout(() => {
-        page.waitForSelector('div[act="18"]')
-        page.click('div[act="18"]')
-    }, 4000);
-}
-
 const notSpam = async (data) => {
     let arg
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
@@ -272,6 +206,7 @@ const notSpam = async (data) => {
     await page.waitForSelector('input[type="password"]')
     await time(5000)
     page.type('input[type="password"]', data.password, { delay: 200 })
+    await time(3000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
     });
@@ -281,7 +216,7 @@ const notSpam = async (data) => {
     page.waitForSelector('#passwordNext')
     page.click('#passwordNext')
     await navigationPromise
-    await time(5000)
+    await time(10000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     });
