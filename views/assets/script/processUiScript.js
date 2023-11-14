@@ -89,7 +89,7 @@ $(document).on('click', "#p_add", () => {
     };
     let p_name
     $.ajax(settings).done(function (response) {
-        p_name = response
+        p_name = response.word
         console.log(p_name);
         let valueSelect = []
         for (let i = 0; i < selected.length; i++) {
