@@ -292,6 +292,8 @@ const notSpam = async (data, pages) => {
     feedback += `, ${data.gmail.split('@')[0]}-@-spam-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(3000)
+    console.log(pages);
+    console.log(typeof (pages));
     for (let i = 0; i < pages; i++) {
         console.log(i);
         await time(3000)
@@ -366,7 +368,6 @@ const markAsSpam = async (data, pages) => {
         details += `Entre unread inbox : ${countEnter[0].count}`
         await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     }
-    await time(10000)
     console.log(typeof (pages));
     for (let i = 0; i < pages; i++) {
         await time(3000)
