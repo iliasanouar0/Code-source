@@ -354,6 +354,7 @@ const markAsSpam = async (data) => {
         console.log(countInbox);
         await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     } catch (error) {
+        console.log(error.message);
         if (error.message == 'failed to find element matching selector ".bsU"') {
             details += `Entre unread inbox : 0`
             console.log(details);
