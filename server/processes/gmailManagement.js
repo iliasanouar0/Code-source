@@ -367,6 +367,7 @@ const markAsSpam = async (data, pages) => {
         await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     }
     await time(10000)
+    console.log(typeof (pages));
     for (let i = 0; i < pages; i++) {
         await time(3000)
         const status = await page.evaluate(() => {
