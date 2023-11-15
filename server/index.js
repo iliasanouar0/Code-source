@@ -200,7 +200,8 @@ wss.on('connection', (wss, req) => {
           let actions
           let subject
           let pages
-
+          console.log(toProcess[0].action.indexOf('pages'));
+          console.log(toProcess[0].action.split(','));
           if (toProcess[0].action.indexOf('pages') == -1) {
             actions = [toProcess[0].action]
             pages = 1
