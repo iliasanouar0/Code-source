@@ -126,6 +126,7 @@ $(".btn-check").change(function () {
 
 $(document).on('click', "#p_add", () => {
     let p_subject = $('#p_subject').val()
+    let p_max_pages = $("#max_pages").val()
     let p_list_add = $('#p_list_add').val()
     let p_status = $('#p_status').val()
     let p_add_date = new Date().toLocaleString();
@@ -165,9 +166,9 @@ $(document).on('click', "#p_add", () => {
         }
         let action
         if (p_subject != "") {
-            action = `${valueSelect},subject:${p_subject}`
+            action = `${valueSelect},subject:${p_subject},pages:${p_max_pages}`
         } else {
-            action = `${valueSelect}`
+            action = `${valueSelect},pages:${p_max_pages}`
         }
         const data = {
             "name": `${response.word}`,
