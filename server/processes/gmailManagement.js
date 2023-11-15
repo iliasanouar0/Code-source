@@ -45,6 +45,10 @@ const login = async (data) => {
             let cookies = JSON.parse(fs.readFileSync(file));
             await page.setCookie(...cookies);
         }
+
+
+
+        
     })
     await page.goto('https://gmail.com')
     await navigationPromise
