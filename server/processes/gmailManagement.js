@@ -53,7 +53,7 @@ const login = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
-        feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+        feedback += `${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         const cookiesObject = await page.cookies()
         let NewFileJson = JSON.stringify(cookiesObject)
@@ -254,55 +254,8 @@ const verify = async (data) => {
 }
 
 const notSpam = async (data, pages) => {
-    // let arg
-    // if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
-    //     arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-    // } else {
-    //     const proxyServer = `${data.proxy}`;
-    //     arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-    // }
-    // console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
-    // console.log(` `);
     let feedback = ''
     let details = ''
-    // const browser = await puppeteer.launch({ headless: 'new', args: arg })
-    // const browserPID = browser.process().pid
-    // const page = await browser.newPage()
-    // pidProcess.push({ id_process: data.id_process, pid: browserPID })
-    // await page.setViewport({ width: 1280, height: 720 });
-    // const navigationPromise = page.waitForNavigation()
-    // await page.goto('https://gmail.com/')
-    // await navigationPromise
-    // await page.screenshot({
-    //     path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
-    // });
-    // feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
-    // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    // await page.waitForSelector('input[type="email"]')
-    // await page.click('input[type="email"]')
-    // await navigationPromise
-    // await page.type('input[type="email"]', data.gmail, { delay: 100 })
-    // await page.waitForSelector('#identifierNext')
-    // await page.click('#identifierNext')
-    // await page.waitForSelector('input[type="password"]')
-    // await time(5000)
-    // page.type('input[type="password"]', data.password, { delay: 200 })
-    // await time(3000)
-    // // await page.screenshot({
-    // //     path: `${path}/${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
-    // // });
-    // // feedback += `, ${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
-    // // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    // await time(3000)
-    // page.waitForSelector('#passwordNext')
-    // page.click('#passwordNext')
-    // await navigationPromise
-    // await time(10000)
-    // await page.screenshot({
-    //     path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-    // });
-    // feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-    // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     const obj = await login(data)
     const page = obj.page
     const browser = obj.browser
