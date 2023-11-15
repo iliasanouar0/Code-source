@@ -57,7 +57,6 @@ const login = async (data) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         const cookiesObject = await page.cookies()
         let NewFileJson = JSON.stringify(cookiesObject)
-        console.log(NewFileJson);
         fs.writeFile(`${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`, NewFileJson, { spaces: 2 }, (err) => {
             if (err) {
                 console.log(err);
