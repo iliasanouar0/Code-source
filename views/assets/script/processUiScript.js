@@ -100,11 +100,13 @@ $("#btn-check-c-link").change(function () {
 
 $("#btn-check-n-spam").change(function () {
     let status = $(this).is(":checked") ? true : false;
-    // if (status) {
     $('.max_pages').toggleClass('d-none')
-    // }
 });
 
+$("#btn-check-m-spam").change(function () {
+    let status = $(this).is(":checked") ? true : false;
+    $('.max_pages').toggleClass('d-none')
+});
 
 $(".btn-check").change(function () {
     let status = $(this).is(":checked") ? true : false;
