@@ -1,6 +1,4 @@
 const pg = require("pg");
-var IdGenerator = require("auth0-id-generator");
-const format = require("pg-format");
 const fs = require('fs')
 const data = require('../db');
 const gmailManagement = require("../processes/gmailManagement");
@@ -12,9 +10,6 @@ let config = data.data
 
 const pool = new pg.Pool(config);
 
-function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
 
 const addProcess = (request, response) => {
     const obj = (request.body)
