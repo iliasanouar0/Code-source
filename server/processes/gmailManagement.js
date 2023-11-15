@@ -4,6 +4,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 const setTimeout = require('timers/promises');
 let time = setTimeout.setTimeout
 puppeteer.use(StealthPlugin())
+
 /**
  * @default
  * @constant
@@ -15,8 +16,6 @@ puppeteer.use(StealthPlugin())
 const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
 const path = `${root}/views/assets/images/process_result`
 let pidProcess = []
-
-
 
 
 const verify = async (data) => {
@@ -352,12 +351,17 @@ const markAsSpam = async (data) => {
         });
         feedback += `, ${data.gmail.split('@')[0]}-@-inboxResult-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        const countInbox = await page.$eval('.bsU', element => {
-            return element.innerHTML
-        })
-        details += `, Out unread inbox : ${countInbox}`
-        console.log(countInbox);
-        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        try {
+            const countInbox = await page.$eval('.bsU', element => {
+                return element.innerHTML
+            })
+            details += `, Out unread inbox : ${countInbox}`
+            console.log(countInbox);
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } catch (error) {
+            details += `, Out unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        }
         await page.close()
         await browser.close()
         return feedback
