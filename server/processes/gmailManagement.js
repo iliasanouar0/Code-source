@@ -354,11 +354,13 @@ const markAsSpam = async (data) => {
         console.log(countInbox);
         await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     } catch (error) {
-        console.log(error.message);
-        console.log(error);
-        details += `Entre unread inbox : 0`
-        console.log(details);
-        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        if (error.message == 'failed to find element matching selector ".bsU"') {
+            details += `Entre unread inbox : 0`
+            console.log(details);
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } else {
+            console.log(error);
+        }
     }
     await time(10000)
     await page.evaluate(() => {
