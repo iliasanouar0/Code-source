@@ -21,6 +21,8 @@ let pidProcess = []
 
 
 const login = async (data) => {
+    let feedback = ''
+    let details = ''
     let arg
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
@@ -263,8 +265,8 @@ const notSpam = async (data, pages) => {
     // }
     // console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     // console.log(` `);
-    let feedback = ''
-    let details = ''
+    // let feedback = ''
+    // let details = ''
     // const browser = await puppeteer.launch({ headless: 'new', args: arg })
     // const browserPID = browser.process().pid
     // const page = await browser.newPage()
