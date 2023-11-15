@@ -96,7 +96,7 @@ const login = async (data) => {
             }
         })
     }
-    return page
+    return { page: page, feedback: feedback }
 }
 
 
@@ -303,7 +303,9 @@ const notSpam = async (data, pages) => {
     // });
     // feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    const page = await login(data)
+    const obj = await login(data)
+    const page = obj.page
+    feedback += obj.feedback
     const countEnter = await page.evaluate(() => {
         let html = []
         let el = document.querySelectorAll('.bsU')
