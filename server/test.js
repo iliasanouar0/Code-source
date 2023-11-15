@@ -143,35 +143,19 @@ const notSpam = async (data) => {
   page.waitForSelector('#passwordNext')
   page.click('#passwordNext')
   await navigationPromise
-  // await time(5000)
-  // await page.waitForSelector('.CJ')
-  // await page.click('.CJ')
-  // await time(3000)
-  // page.waitForSelector('a[href="https://mail.google.com/mail/u/0/#spam"]')
-  // page.click('a[href="https://mail.google.com/mail/u/0/#spam"]')
-  // await time(3000)
-
-  await time(10000)
-  const countInbox = await page.evaluate(() => {
-    let html = []
-    let el = document.querySelectorAll('.bsU')
-    let elSpan = document.querySelectorAll('.nU.n1 a')
-    for (let i = 0; i < el.length; i++) {
-      html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-    }
-    return html
-  })
-  console.log(countInbox);
-  // await page.evaluate(() => {
-  //   document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
-  // })
-  // const elements = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[1]/div/div[1]/span')
+  await time(5000)
+  await page.waitForSelector('.CJ')
+  await page.click('.CJ')
   await time(3000)
-  // console.log(elements[0].click());
-  // const countSpan = await elements[0].getProperty('textContent');
-  // let details = `Unread inbox : ${await countSpan.jsonValue()}`
-  // console.log(countSpan);
-  // console.log(details);
+  page.waitForSelector('a[href="https://mail.google.com/mail/u/0/#spam"]')
+  page.click('a[href="https://mail.google.com/mail/u/0/#spam"]')
+  await time(3000)
+  
+  const status = await page.evaluate(() => {
+    let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
+    checkSpan.item(1).click()
+  })
+
 }
 
 let data = {
