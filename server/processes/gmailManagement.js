@@ -296,6 +296,7 @@ const notSpam = async (data, pages) => {
     console.log(typeof (pages));
     for (let i = 0; i < pages; i++) {
         console.log(i);
+        
         await time(3000)
         const status = await page.evaluate(() => {
             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
