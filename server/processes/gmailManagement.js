@@ -351,7 +351,7 @@ const markAsSpam = async (data) => {
         // console.log(countInbox);
         // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
 
-        const countInbox = await page.evaluate(() => {
+        const countEnter = await page.evaluate(() => {
             let html = []
             let el = document.querySelectorAll('.bsU')
             let elSpan = document.querySelectorAll('.nU.n1 a')
@@ -360,17 +360,22 @@ const markAsSpam = async (data) => {
             }
             return html
         })
-        console.log(countInbox);
-    } catch (error) {
-        // console.log(error.message);
-        // console.log(error.message == 'Error: failed to find element matching selector ".bsU"');
-        if (error.message == 'Error: failed to find element matching selector ".bsU"') {
+        console.log(countEnter);
+        if (countEnter.length == 0 || countEnter[0].element != "Inbox" || countEnter[0].element != "Boîte de réception" || countEnter[0].element != "البريد الوارد") {
             details += `Entre unread inbox : 0`
             console.log(details);
             await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-        } else {
-            console.log(error);
         }
+    } catch (error) {
+        console.log(error.message);
+        // console.log(error.message == 'Error: failed to find element matching selector ".bsU"');
+        // if (error.message == 'Error: failed to find element matching selector ".bsU"') {
+        //     details += `Entre unread inbox : 0`
+        //     console.log(details);
+        //     await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        // } else {
+        //     console.log(error);
+        // }
         // details += `Entre unread inbox : 0`
         // console.log(details);
         // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
