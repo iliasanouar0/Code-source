@@ -201,7 +201,7 @@ wss.on('connection', (wss, req) => {
           let subject
           let pages
 
-          if (toProcess[0].action.indexOf('subject') == -1) {
+          if (toProcess[0].action.indexOf('pages') == -1) {
             actions = [toProcess[0].action]
             pages = 1
           } else {
