@@ -361,7 +361,7 @@ const markAsSpam = async (data) => {
             let el = document.querySelectorAll('.bsU')
             return el
         })
-        console.log(countInbox);
+        console.log(countInbox.jsonValue());
     } catch (error) {
         // console.log(error.message);
         // console.log(error.message == 'Error: failed to find element matching selector ".bsU"');
