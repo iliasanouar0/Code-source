@@ -368,7 +368,9 @@ const markAsSpam = async (data, pages) => {
         await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     }
     await time(3000)
+    console.log(`treated pages : ${pages}`);
     for (let i = 0; i < pages; i++) {
+        console.log(`starting page : ${i + 1}`);
         await time(3000)
         const status = await page.evaluate(() => {
             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
@@ -382,6 +384,7 @@ const markAsSpam = async (data, pages) => {
             await page.click('div[act="9"]')
             await time(3000)
         } else {
+            console.log(`page ${i + 1} have no mode messages`);
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
             });
