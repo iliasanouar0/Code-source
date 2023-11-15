@@ -143,20 +143,13 @@ const notSpam = async (data) => {
   page.waitForSelector('#passwordNext')
   page.click('#passwordNext')
   await navigationPromise
-  await time(5000)
-  // await page.waitForSelector('.CJ')
-  // await page.click('.CJ')
-  // await time(3000)
-  // page.waitForSelector('a[href="https://mail.google.com/mail/u/0/#spam"]')
-  // page.click('a[href="https://mail.google.com/mail/u/0/#spam"]')
-  // await time(3000)
-
-  // const status = await page.evaluate(() => {
-  //   let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-  //   checkSpan.item(1).click()
-  //   return checkSpan.item(1).ariaChecked
-  // })
-  // console.log(status);
+  await time(10000)
+  const status = await page.evaluate(() => {
+    let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
+    checkSpan.item(0).click()
+    return checkSpan.item(0).ariaChecked
+  })
+  console.log(status);
 }
 
 let data = {

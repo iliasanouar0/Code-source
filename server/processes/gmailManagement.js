@@ -368,18 +368,14 @@ const markAsSpam = async (data) => {
         await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     }
     await time(10000)
-    // await page.evaluate(() => {
-    //     document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
-    // })
-    // await time(3000)
     const status = await page.evaluate(() => {
         let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-        checkSpan.item(1).click()
-        return checkSpan.item(1).ariaChecked
-    })
+        checkSpan.item(0).click()
+        return checkSpan.item(0).ariaChecked
+      })
     console.log(status);
     await time(3000)
-    if (status == 'true') {
+    if (status == true) {
         page.waitForSelector('div[act="9"]')
         page.click('div[act="9"]')
         await time(3000)
