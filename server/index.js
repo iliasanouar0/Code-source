@@ -199,8 +199,16 @@ wss.on('connection', (wss, req) => {
           }
           let actions
           let subject
-          let pages = parseInt(actions.pop().split(':')[1])
-          console.log(pages);
+          let pages
+          
+          if (toProcess[0].action.indexOf('subject') == -1) {
+            actions = [toProcess[0].action]
+            subject = ""
+          } else {
+            actions = toProcess[0].action.split(',')
+            pages = parseInt(actions.pop().split(':')[1])
+          }
+
           if (toProcess[0].action.indexOf('subject') == -1) {
             actions = [toProcess[0].action]
             subject = ""
