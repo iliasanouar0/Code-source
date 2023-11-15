@@ -221,12 +221,17 @@ const notSpam = async (data) => {
     });
     feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    const countInbox = await page.$eval('.bsU', element => {
-        return element.innerHTML
-    })
-    details += `Entre unread inbox : ${countInbox}`
-    console.log(countInbox);
-    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    try {
+        const countInbox = await page.$eval('.bsU', element => {
+            return element.innerHTML
+        })
+        details += `Entre unread inbox : ${countInbox}`
+        console.log(countInbox);
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    } catch (error) {
+        details += `Entre unread inbox : 0`
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    }
     await time(10000)
     await page.waitForSelector('.CJ')
     await page.click('.CJ')
@@ -253,12 +258,17 @@ const notSpam = async (data) => {
         });
         feedback += `, ${data.gmail.split('@')[0]}-@-spanResult-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        const countInbox = await page.$eval('.bsU', element => {
-            return element.innerHTML
-        })
-        details += `, Out unread inbox : ${countInbox}`
-        console.log(countInbox);
-        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        try {
+            const countInbox = await page.$eval('.bsU', element => {
+                return element.innerHTML
+            })
+            details += `, Out unread inbox : ${countInbox}`
+            console.log(countInbox);
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } catch (error) {
+            details += `, Out unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        }
         await page.close()
         await browser.close()
         return feedback
@@ -268,12 +278,17 @@ const notSpam = async (data) => {
         });
         feedback += `, ${data.gmail.split('@')[0]}-@-noSpan-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        const countInbox = await page.$eval('.bsU', element => {
-            return element.innerHTML
-        })
-        details += `, Out unread inbox : ${countInbox}`
-        console.log(countInbox);
-        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        try {
+            const countInbox = await page.$eval('.bsU', element => {
+                return element.innerHTML
+            })
+            details += `, Out unread inbox : ${countInbox}`
+            console.log(countInbox);
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } catch (error) {
+            details += `, Out unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        }
         await page.close()
         await browser.close()
         return feedback
@@ -331,12 +346,17 @@ const markAsSpam = async (data) => {
     });
     feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    const countInbox = await page.$eval('.bsU', element => {
-        return element.innerHTML
-    })
-    details += `Entre unread inbox : ${countInbox}`
-    console.log(countInbox);
-    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    try {
+        const countInbox = await page.$eval('.bsU', element => {
+            return element.innerHTML
+        })
+        details += `Entre unread inbox : ${countInbox}`
+        console.log(countInbox);
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    } catch (error) {
+        details += `Entre unread inbox : 0`
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    }
     await time(10000)
     await page.evaluate(() => {
         document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
