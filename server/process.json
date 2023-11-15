@@ -1,5 +1,8 @@
 {
     "ignore_watch": [
         "cookies"
-    ]
+    ],
+    "watch_options": {
+        "followSymlinks": false
+    }
 }
