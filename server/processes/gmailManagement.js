@@ -308,6 +308,7 @@ const notSpam = async (data, pages) => {
             await page.click('div[act="18"]')
             await time(3000)
         } else {
+            console.log(`page ${i + 1} have no mode messages`);
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-spamResult-${data.id_process}.png`
             });
