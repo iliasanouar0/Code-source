@@ -221,15 +221,23 @@ const notSpam = async (data) => {
     });
     feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    try {
-        const countInbox = await page.$eval('.bsU', element => {
-            return element.innerHTML
-        })
-        details += `Entre unread inbox : ${countInbox}`
-        console.log(countInbox);
-        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-    } catch (error) {
+    const countEnter = await page.evaluate(() => {
+        let html = []
+        let el = document.querySelectorAll('.bsU')
+        let elSpan = document.querySelectorAll('.nU.n1 a')
+        for (let i = 0; i < el.length; i++) {
+            html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+        }
+        return html
+    })
+    if (countEnter.length == 0) {
         details += `Entre unread inbox : 0`
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
+        details += `Entre unread inbox : 0`
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    } else {
+        details += `Entre unread inbox : ${countEnter[0].count}`
         await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     }
     await time(10000)
@@ -261,15 +269,23 @@ const notSpam = async (data) => {
         });
         feedback += `, ${data.gmail.split('@')[0]}-@-spamResult-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        try {
-            const countInbox = await page.$eval('.bsU', element => {
-                return element.innerHTML
-            })
-            details += `, Out unread inbox : ${countInbox}`
-            console.log(countInbox);
-            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-        } catch (error) {
+        const countOut = await page.evaluate(() => {
+            let html = []
+            let el = document.querySelectorAll('.bsU')
+            let elSpan = document.querySelectorAll('.nU.n1 a')
+            for (let i = 0; i < el.length; i++) {
+                html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+            }
+            return html
+        })
+        if (countOut.length == 0) {
             details += `, Out unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
+            details += `, Out unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } else {
+            details += `, Out unread inbox  : ${countOut[0].count}`
             await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
         }
         await page.close()
@@ -282,15 +298,23 @@ const notSpam = async (data) => {
         });
         feedback += `, ${data.gmail.split('@')[0]}-@-noSpan-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        try {
-            const countInbox = await page.$eval('.bsU', element => {
-                return element.innerHTML
-            })
-            details += `, Out unread inbox : ${countInbox}`
-            console.log(countInbox);
-            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-        } catch (error) {
+        const countOut = await page.evaluate(() => {
+            let html = []
+            let el = document.querySelectorAll('.bsU')
+            let elSpan = document.querySelectorAll('.nU.n1 a')
+            for (let i = 0; i < el.length; i++) {
+                html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+            }
+            return html
+        })
+        if (countOut.length == 0) {
             details += `, Out unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
+            details += `, Out unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } else {
+            details += `, Out unread inbox  : ${countOut[0].count}`
             await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
         }
         await page.close()
