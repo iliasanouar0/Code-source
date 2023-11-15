@@ -30,7 +30,7 @@ const login = async (data) => {
     }
     console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     console.log(` `);
-    const browser = await puppeteer.launch({ headless: false, args: arg })
+    const browser = await puppeteer.launch({ headless: 'new', args: arg })
     const page = await browser.newPage()
     const navigationPromise = page.waitForNavigation()
     let file = `${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`
