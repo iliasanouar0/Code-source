@@ -152,9 +152,19 @@ const notSpam = async (data) => {
   // await time(3000)
 
   await time(10000)
-  await page.evaluate(() => {
-    document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
-})
+  const countInbox = await page.evaluate(() => {
+    let html = []
+    let el = document.querySelectorAll('.bsU')
+    let elSpan = document.querySelectorAll('.nU.n1 a')
+    for (let i = 0; i < el.length; i++) {
+      html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+    }
+    return html
+  })
+  console.log(countInbox);
+  // await page.evaluate(() => {
+  //   document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
+  // })
   // const elements = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[1]/div/div[1]/span')
   await time(3000)
   // console.log(elements[0].click());

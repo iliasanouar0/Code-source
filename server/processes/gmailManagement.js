@@ -347,22 +347,20 @@ const markAsSpam = async (data) => {
     feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     try {
-        // const countInbox = await page.$$eval('.bsU', element => {
-        //     element.length
-        //     // return element[0].innerHTML
-        // })
-
-        // console.log(countInbox);
         // details += `Entre unread inbox : ${countInbox}`
         // console.log(countInbox);
         // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
 
         const countInbox = await page.evaluate(() => {
+            let html = []
             let el = document.querySelectorAll('.bsU')
-            console.log(el);
-            return el
+            let elSpan = document.querySelectorAll('.nU.n1 a')
+            for (let i = 0; i < el.length; i++) {
+                html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+            }
+            return html
         })
-        console.log(JSON.stringify(countInbox));
+        console.log(countInbox);
     } catch (error) {
         // console.log(error.message);
         // console.log(error.message == 'Error: failed to find element matching selector ".bsU"');
