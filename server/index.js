@@ -211,7 +211,6 @@ wss.on('connection', (wss, req) => {
           }
 
           if (toProcess[0].action.indexOf('subject') == -1) {
-            actions = [toProcess[0].action]
             subject = ""
           } else {
             actions = toProcess[0].action.split(',')
