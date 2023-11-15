@@ -164,12 +164,16 @@ $(document).on('click', "#p_add", () => {
                 valueSelect.push(selected_other[i].value)
             }
         }
-        let action
+        let action = `${valueSelect}`
+
         if (p_subject != "") {
-            action = `${valueSelect},subject:${p_subject},pages:${p_max_pages}`
-        } else {
-            action = `${valueSelect},pages:${p_max_pages}`
+            action += `,subject:${p_subject}`
         }
+
+        if (p_max_pages > 1) {
+            action += `,pages:${p_max_pages}`
+        }
+        
         const data = {
             "name": `${response.word}`,
             "action": action,
