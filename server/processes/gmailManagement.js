@@ -292,11 +292,7 @@ const notSpam = async (data, pages) => {
     feedback += `, ${data.gmail.split('@')[0]}-@-spam-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(3000)
-    console.log(pages);
-    console.log(typeof (pages));
     for (let i = 0; i < pages; i++) {
-        console.log(i);
-        
         await time(3000)
         const status = await page.evaluate(() => {
             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
@@ -309,7 +305,7 @@ const notSpam = async (data, pages) => {
             await time(3000)
             await page.waitForSelector('div[act="18"]')
             await page.click('div[act="18"]')
-            await time(7000)
+            await time(3000)
         } else {
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-spamResult-${data.id_process}.png`
@@ -378,12 +374,11 @@ const markAsSpam = async (data, pages) => {
             return checkSpan.item(0).ariaChecked
         })
         await time(3000)
-        console.log(status);
         if (status == 'true') {
             await time(3000)
             await page.waitForSelector('div[act="9"]')
             await page.click('div[act="9"]')
-            await time(7000)
+            await time(3000)
         } else {
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
