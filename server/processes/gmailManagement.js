@@ -251,7 +251,7 @@ const notSpam = async (data) => {
         return checkSpan.item(1).ariaChecked
     })
     console.log(status);
-    if (status == 'true') {
+    if (status) {
         page.waitForSelector('div[act="18"]')
         page.click('div[act="18"]')
         await time(3000)
@@ -275,6 +275,7 @@ const notSpam = async (data) => {
         await browser.close()
         return feedback
     } else {
+        console.log('status was false');
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-noSpan-${data.id_process}.png`
         });
@@ -372,10 +373,9 @@ const markAsSpam = async (data) => {
         let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
         checkSpan.item(0).click()
         return checkSpan.item(0).ariaChecked
-      })
-    console.log(status);
+    })
     await time(3000)
-    if (status == true) {
+    if (status) {
         page.waitForSelector('div[act="9"]')
         page.click('div[act="9"]')
         await time(3000)
@@ -405,6 +405,7 @@ const markAsSpam = async (data) => {
         }
         await page.close()
         await browser.close()
+        return feedback
     } else {
         await time(3000)
         await page.screenshot({
@@ -433,6 +434,7 @@ const markAsSpam = async (data) => {
         }
         await page.close()
         await browser.close()
+        return feedback
     }
 }
 
