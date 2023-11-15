@@ -170,7 +170,7 @@ const verify = async (data) => {
     }
 }
 
-const notSpam = async (data) => {
+const notSpam = async (data,pages) => {
     let arg
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
@@ -322,7 +322,7 @@ const notSpam = async (data) => {
     }
 }
 
-const markAsSpam = async (data) => {
+const markAsSpam = async (data,pages) => {
     let arg
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
