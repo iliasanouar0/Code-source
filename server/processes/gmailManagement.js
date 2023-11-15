@@ -400,6 +400,7 @@ const markAsSpam = async (data,pages) => {
     })
     await time(3000)
     if (status == 'true') {
+        await time(3000)
         page.waitForSelector('div[act="9"]')
         page.click('div[act="9"]')
         await time(7000)
