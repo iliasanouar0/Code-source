@@ -31,7 +31,10 @@ const login = async (data) => {
     console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     console.log(` `);
     const browser = await puppeteer.launch({ headless: 'new', args: arg })
+    const browserPID = browser.process().pid
     const page = await browser.newPage()
+    pidProcess.push({ id_process: data.id_process, pid: browserPID })
+    await page.setViewport({ width: 1280, height: 720 });
     const navigationPromise = page.waitForNavigation()
     let file = `${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`
     fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
@@ -255,8 +258,8 @@ const notSpam = async (data, pages) => {
     // }
     // console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     // console.log(` `);
-    // let feedback = ''
-    // let details = ''
+    let feedback = ''
+    let details = ''
     // const browser = await puppeteer.launch({ headless: 'new', args: arg })
     // const browserPID = browser.process().pid
     // const page = await browser.newPage()
