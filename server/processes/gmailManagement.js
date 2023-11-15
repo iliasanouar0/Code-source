@@ -304,10 +304,9 @@ const notSpam = async (data, pages) => {
         await time(3000)
         console.log(status);
         if (status == 'true') {
-            await time(3000)
             await page.waitForSelector('div[act="18"]')
-            await page.click('div[act="18"]')
             await time(3000)
+            await page.click('div[act="18"]')
         } else {
             console.log(`page ${i + 1} have no mode messages`);
             await page.screenshot({
@@ -381,10 +380,9 @@ const markAsSpam = async (data, pages) => {
         await time(3000)
         console.log(status);
         if (status == 'true') {
-            await time(3000)
             await page.waitForSelector('div[act="9"]')
-            await page.click('div[act="9"]')
             await time(3000)
+            await page.click('div[act="9"]')
         } else {
             console.log(`page ${i + 1} have no mode messages`);
             await page.screenshot({
