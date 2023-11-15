@@ -27,6 +27,10 @@ Date.prototype.toDateInputValue = function () {
 
 $(document).on("click", "#add_process", () => {
     $(".add_process").modal("show");
+    if ($('#btn-check-n-spam').is(":checked") || $('#btn-check-m-spam').is(":checked")) {
+        console.log("test");
+        $('.max_pages').toggleClass('d-none')
+    }
 });
 
 $(document).ready(function () {
@@ -103,13 +107,9 @@ $("#btn-check-c-link").change(function () {
 //     $('.max_pages').toggleClass('d-none')
 // });
 
-$(() => {
-    console.log("ff-N-function");
-    if ($('#btn-check-n-spam').is(":checked") || $('#btn-check-m-spam').is(":checked")) {
-        console.log("test");
-        $('.max_pages').toggleClass('d-none')
-    }
-})
+// $(() => {
+//     console.log("ff-N-function");
+// })
 
 // $("#btn-check-m-spam").change(function () {
 //     let status = $(this).is(":checked") ? true : false;
