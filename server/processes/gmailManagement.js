@@ -96,7 +96,7 @@ const login = async (data) => {
             }
         })
     }
-    return { page: page, feedback: feedback }
+    return { browser: browser, page: page, feedback: feedback }
 }
 
 
@@ -305,7 +305,9 @@ const notSpam = async (data, pages) => {
     // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     const obj = await login(data)
     const page = obj.page
+    const browser = obj.browser
     feedback += obj.feedback
+
     const countEnter = await page.evaluate(() => {
         let html = []
         let el = document.querySelectorAll('.bsU')
