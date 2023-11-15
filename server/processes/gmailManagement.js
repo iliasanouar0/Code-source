@@ -402,7 +402,7 @@ const markAsSpam = async (data,pages) => {
     if (status == 'true') {
         page.waitForSelector('div[act="9"]')
         page.click('div[act="9"]')
-        await time(3000)
+        await time(7000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-inboxResult-${data.id_process}.png`
         });
