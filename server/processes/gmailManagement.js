@@ -339,9 +339,9 @@ const markAsSpam = async (data) => {
     console.log(countInbox);
     await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(10000)
-    const elements = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[2]/div/div/div/div[1]/div[2]/div[1]/div[1]/div/div/div[1]/div/div[1]/span')
-    await time(3000)
-    await elements[0].click()
+    await page.evaluate(() => {
+        document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
+    })
     await time(3000)
     if (await page.$('div[act="9"]') != null) {
         page.waitForSelector('div[act="9"]')

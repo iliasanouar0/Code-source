@@ -143,32 +143,31 @@ const notSpam = async (data) => {
   page.waitForSelector('#passwordNext')
   page.click('#passwordNext')
   await navigationPromise
-  await time(5000)
-  await page.waitForSelector('.CJ')
-  await page.click('.CJ')
-  await time(3000)
-  page.waitForSelector('a[href="https://mail.google.com/mail/u/0/#spam"]')
-  page.click('a[href="https://mail.google.com/mail/u/0/#spam"]')
-  await time(3000)
-  // const elements = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[2]/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div/div[1]/div/div[1]/span')
+  // await time(5000)
+  // await page.waitForSelector('.CJ')
+  // await page.click('.CJ')
   // await time(3000)
-  // await elements[0].click()
+  // page.waitForSelector('a[href="https://mail.google.com/mail/u/0/#spam"]')
+  // page.click('a[href="https://mail.google.com/mail/u/0/#spam"]')
   // await time(3000)
-  // page.waitForSelector('div[act="18"]')
-  // page.click('div[act="18"]')
-  const elements = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div/div[2]/div/div/div[3]/div/div[1]/div/div[5]/div/div/div[2]/div')
+
+  await time(10000)
+  await page.evaluate(() => {
+    document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
+})
+  // const elements = await page.$x('/html/body/div[7]/div[3]/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[1]/div/div[1]/span')
   await time(3000)
-  console.log(elements[0]);
-  const countSpan = await elements[0].getProperty('textContent');
-  let details = `Unread inbox : ${await countSpan.jsonValue()}`
-  console.log(countSpan);
-  console.log(details);
+  // console.log(elements[0].click());
+  // const countSpan = await elements[0].getProperty('textContent');
+  // let details = `Unread inbox : ${await countSpan.jsonValue()}`
+  // console.log(countSpan);
+  // console.log(details);
 }
 
 let data = {
-  gmail: 'iliasanouar0@gmail.com',
+  gmail: 'mohmedly1971@gmail.com',
   // gmail: 'shrh8274@gmail.com',
-  password: 'ilias080701',
+  password: 'rB6t69q6qSRCh4',
   // proxy: '188.34.177.156',
   // proxy: '38.34.185.143:3838',
   vrf: 'peholafa@outlook.com'
