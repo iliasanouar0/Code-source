@@ -17,7 +17,6 @@ const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
 const path = `${root}/views/assets/images/process_result`
 let pidProcess = []
 
-
 const verify = async (data) => {
     let arg
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {

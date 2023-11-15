@@ -10,7 +10,6 @@ let config = data.data
 
 const pool = new pg.Pool(config);
 
-
 const addProcess = (request, response) => {
     const obj = (request.body)
     let sql = `INSERT INTO process (name ,action ,status ,date_add ,date_update,id_list ,id_user) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
@@ -275,7 +274,6 @@ const processing = async (data) => {
             break;
     }
 }
-
 
 const process = async (data, action) => {
     let success = []
