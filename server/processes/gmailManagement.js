@@ -16,7 +16,7 @@ puppeteer.use(StealthPlugin())
 
 const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
 const path = `${root}/views/assets/images/process_result`
-const cookies = `${root}/server/cookies/`
+const cookies = `/root/AppUsers/cookies/`
 let pidProcess = []
 
 
