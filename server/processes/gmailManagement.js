@@ -293,6 +293,7 @@ const notSpam = async (data, pages) => {
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(3000)
     for (let i = 0; i < pages; i++) {
+        console.log(i);
         await time(3000)
         const status = await page.evaluate(() => {
             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
