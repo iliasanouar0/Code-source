@@ -300,7 +300,6 @@ const notSpam = async (data, pages) => {
             return checkSpan.item(1).ariaChecked
         })
         await time(3000)
-        console.log(status);
         if (status == 'true') {
             await time(3000)
             await page.waitForSelector('div[act="18"]')
