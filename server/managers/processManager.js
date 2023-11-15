@@ -235,7 +235,7 @@ const processing = async (data) => {
         case 'notSpam':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.notSpam(seed).then(e => {
+                    await gmailManagement.notSpam(seed, pages).then(e => {
                         result = e
                     })
                     return result
