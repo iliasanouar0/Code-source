@@ -292,126 +292,50 @@ const notSpam = async (data, pages) => {
     feedback += `, ${data.gmail.split('@')[0]}-@-spam-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(3000)
-    const status = await page.evaluate(() => {
-        let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-        checkSpan.item(1).click()
-        return checkSpan.item(1).ariaChecked
-    })
-    console.log(status);
-    if (status == 'true') {
-        await time(3000)
-        page.waitForSelector('div[act="18"]')
-        page.click('div[act="18"]')
-        await time(5000)
-        await page.screenshot({
-            path: `${path}/${data.gmail.split('@')[0]}-@-spamResult-${data.id_process}.png`
-        });
-        feedback += `, ${data.gmail.split('@')[0]}-@-spamResult-${data.id_process}.png`
-        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        const countOut = await page.evaluate(() => {
-            let html = []
-            let el = document.querySelectorAll('.bsU')
-            let elSpan = document.querySelectorAll('.nU.n1 a')
-            for (let i = 0; i < el.length; i++) {
-                html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-            }
-            return html
+    for (let i = 0; i < pages; i++) {
+        const status = await page.evaluate(() => {
+            let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
+            checkSpan.item(1).click()
+            return checkSpan.item(1).ariaChecked
         })
-        if (countOut.length == 0) {
-            details += `, Out unread inbox : 0`
-            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-        } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
-            details += `, Out unread inbox : 0`
-            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        if (status == 'true') {
+            await time(3000)
+            page.waitForSelector('div[act="18"]')
+            page.click('div[act="18"]')
         } else {
-            details += `, Out unread inbox  : ${countOut[0].count}`
-            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+            break
         }
-        await page.close()
-        await browser.close()
-        return feedback
-    } else {
-        console.log('status was false');
-        await page.screenshot({
-            path: `${path}/${data.gmail.split('@')[0]}-@-noSpan-${data.id_process}.png`
-        });
-        feedback += `, ${data.gmail.split('@')[0]}-@-noSpan-${data.id_process}.png`
-        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        const countOut = await page.evaluate(() => {
-            let html = []
-            let el = document.querySelectorAll('.bsU')
-            let elSpan = document.querySelectorAll('.nU.n1 a')
-            for (let i = 0; i < el.length; i++) {
-                html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-            }
-            return html
-        })
-        if (countOut.length == 0) {
-            details += `, Out unread inbox : 0`
-            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-        } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
-            details += `, Out unread inbox : 0`
-            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-        } else {
-            details += `, Out unread inbox  : ${countOut[0].count}`
-            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-        }
-        await page.close()
-        await browser.close()
-        return feedback
     }
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-spamResult-${data.id_process}.png`
+    });
+    feedback += `, ${data.gmail.split('@')[0]}-@-spamResult-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    const countOut = await page.evaluate(() => {
+        let html = []
+        let el = document.querySelectorAll('.bsU')
+        let elSpan = document.querySelectorAll('.nU.n1 a')
+        for (let i = 0; i < el.length; i++) {
+            html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+        }
+        return html
+    })
+    if (countOut.length == 0) {
+        details += `, Out unread inbox : 0`
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
+        details += `, Out unread inbox : 0`
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    } else {
+        details += `, Out unread inbox  : ${countOut[0].count}`
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    }
+    await page.close()
+    await browser.close()
+    return feedback
 }
 
 const markAsSpam = async (data, pages) => {
-    // let arg
-    // if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
-    //     arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-    // } else {
-    //     const proxyServer = `${data.proxy}`;
-    //     arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-    // }
-    // console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
-    // console.log(` `);
-    // let feedback = ''
-    // let details = ''
-    // const browser = await puppeteer.launch({ headless: 'new', args: arg })
-    // const browserPID = browser.process().pid
-    // const page = await browser.newPage()
-    // pidProcess.push({ id_process: data.id_process, pid: browserPID })
-    // await page.setViewport({ width: 1280, height: 720 });
-    // const navigationPromise = page.waitForNavigation()
-    // await page.goto('https://gmail.com/')
-    // await navigationPromise
-    // await page.screenshot({
-    //     path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
-    // });
-    // feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
-    // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    // await page.waitForSelector('input[type="email"]')
-    // await page.click('input[type="email"]')
-    // await navigationPromise
-    // await page.type('input[type="email"]', data.gmail, { delay: 100 })
-    // await page.waitForSelector('#identifierNext')
-    // await page.click('#identifierNext')
-    // await page.waitForSelector('input[type="password"]')
-    // await time(5000)
-    // page.type('input[type="password"]', data.password, { delay: 200 })
-    // await time(3000)
-    // await page.screenshot({
-    //     path: `${path}/${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
-    // });
-    // feedback += `, ${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
-    // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    // await time(3000)
-    // page.waitForSelector('#passwordNext')
-    // page.click('#passwordNext')
-    // await navigationPromise
-    // await time(10000)
-    // await page.screenshot({
-    //     path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-    // });
-    // feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-    // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     let feedback = ''
     let details = ''
     const obj = await login(data)
@@ -450,23 +374,15 @@ const markAsSpam = async (data, pages) => {
             await time(3000)
             page.waitForSelector('div[act="9"]')
             page.click('div[act="9"]')
-            await time(7000)
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-inboxResultPage${i + 1}-${data.id_process}.png`
-            });
-            feedback += `, ${data.gmail.split('@')[0]}-@-inboxResultPage${i + 1}-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         } else {
-            console.log('status was false');
-            await time(3000)
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-noInbox-${data.id_process}.png`
-            });
-            feedback += `, ${data.gmail.split('@')[0]}-@-noInbox-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
             break
         }
     }
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
+    });
+    feedback += `, ${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     const countOut = await page.evaluate(() => {
         let html = []
         let el = document.querySelectorAll('.bsU')
