@@ -248,6 +248,18 @@ const processing = async (data) => {
                     break;
             }
             break;
+        case 'markAsSpam':
+            switch (seed.isp) {
+                case 'gmail':
+                    await gmailManagement.markAsSpam(seed).then(e => {
+                        result = e
+                    })
+                    return result
+                default:
+                    console.log('data invalid');
+                    break;
+            }
+            break;
         case 'kill':
             switch (data.isp) {
                 case 'gmail':
