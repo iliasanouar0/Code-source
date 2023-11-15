@@ -251,7 +251,7 @@ const notSpam = async (data) => {
         return checkSpan.item(1).ariaChecked
     })
     console.log(status);
-    if (status) {
+    if (status == 'true') {
         page.waitForSelector('div[act="18"]')
         page.click('div[act="18"]')
         await time(3000)
@@ -375,7 +375,7 @@ const markAsSpam = async (data) => {
         return checkSpan.item(0).ariaChecked
     })
     await time(3000)
-    if (status) {
+    if (status == 'true') {
         page.waitForSelector('div[act="9"]')
         page.click('div[act="9"]')
         await time(3000)
@@ -407,6 +407,7 @@ const markAsSpam = async (data) => {
         await browser.close()
         return feedback
     } else {
+        console.log('status was false');
         await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-noInbox-${data.id_process}.png`
