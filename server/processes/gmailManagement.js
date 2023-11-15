@@ -252,9 +252,10 @@ const notSpam = async (data) => {
     })
     console.log(status);
     if (status == 'true') {
+        await time(3000)
         page.waitForSelector('div[act="18"]')
         page.click('div[act="18"]')
-        await time(3000)
+        await time(5000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-spamResult-${data.id_process}.png`
         });
