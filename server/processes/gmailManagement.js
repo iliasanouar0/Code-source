@@ -361,7 +361,9 @@ const markAsSpam = async (data) => {
             return html
         })
         console.log(countEnter);
-        if (countEnter.length == 0 || countEnter[0].element != "Inbox" || countEnter[0].element != "Boîte de réception" || countEnter[0].element != "البريد الوارد") {
+        console.log(countEnter.length);
+        console.log(countEnter[0].element);
+        if (countEnter[0].element != "Inbox" || countEnter[0].element != "Boîte de réception" || countEnter[0].element != "البريد الوارد") {
             details += `Entre unread inbox : 0`
             console.log(details);
             await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
