@@ -200,10 +200,10 @@ wss.on('connection', (wss, req) => {
           let actions
           let subject
           let pages
-          
+
           if (toProcess[0].action.indexOf('subject') == -1) {
             actions = [toProcess[0].action]
-            subject = ""
+            pages = 1
           } else {
             actions = toProcess[0].action.split(',')
             pages = parseInt(actions.pop().split(':')[1])
@@ -221,7 +221,7 @@ wss.on('connection', (wss, req) => {
           let r = ''
           for (let i = 0; i < actions.length; i++) {
             console.log(actions[i] + ' action start')
-            r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject })
+            r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages })
           }
           if (r.indexOf('invalid') == -1) {
             success++
