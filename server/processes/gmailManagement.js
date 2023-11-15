@@ -356,9 +356,10 @@ const markAsSpam = async (data) => {
         // details += `Entre unread inbox : ${countInbox}`
         // console.log(countInbox);
         // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-        
+
         const countInbox = await page.evaluate(() => {
             let el = document.querySelectorAll('.bsU')
+            console.log(el);
             return el
         })
         console.log(countInbox.jsonValue());
