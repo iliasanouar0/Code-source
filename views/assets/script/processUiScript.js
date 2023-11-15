@@ -100,9 +100,9 @@ $("#btn-check-c-link").change(function () {
 
 $("#btn-check-n-spam").change(function () {
     let status = $(this).is(":checked") ? true : false;
-    if (status) {
-        $('.max_pages').toggleClass('d-none')
-    }
+    // if (status) {
+    $('.max_pages').toggleClass('d-none')
+    // }
 });
 
 
