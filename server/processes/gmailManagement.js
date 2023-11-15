@@ -364,7 +364,7 @@ const markAsSpam = async (data, pages) => {
         details += `Entre unread inbox : ${countEnter[0].count}`
         await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     }
-    console.log(typeof (pages));
+    await time(3000)
     for (let i = 0; i < pages; i++) {
         await time(3000)
         const status = await page.evaluate(() => {
