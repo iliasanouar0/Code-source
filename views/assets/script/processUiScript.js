@@ -104,7 +104,9 @@ $("#btn-check-c-link").change(function () {
 // });
 
 $(() => {
+    console.log("ff-N-function");
     if ($('#btn-check-n-spam').is(":checked") || $('#btn-check-m-spam').is(":checked")) {
+        console.log("test");
         $('.max_pages').toggleClass('d-none')
     }
 })
