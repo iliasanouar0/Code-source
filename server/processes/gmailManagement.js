@@ -362,7 +362,7 @@ const markAsSpam = async (data) => {
             console.log(el);
             return el
         })
-        console.log(countInbox.jsonValue());
+        console.log(JSON.stringify(countInbox));
     } catch (error) {
         // console.log(error.message);
         // console.log(error.message == 'Error: failed to find element matching selector ".bsU"');
