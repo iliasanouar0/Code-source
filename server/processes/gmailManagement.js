@@ -347,14 +347,21 @@ const markAsSpam = async (data) => {
     feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     try {
-        const countInbox = await page.$$eval('.bsU', element => {
-            element.length
-            // return element[0].innerHTML
-        })
-        console.log(countInbox);
+        // const countInbox = await page.$$eval('.bsU', element => {
+        //     element.length
+        //     // return element[0].innerHTML
+        // })
+
+        // console.log(countInbox);
         // details += `Entre unread inbox : ${countInbox}`
         // console.log(countInbox);
         // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        
+        const countInbox = await page.evaluate(() => {
+            let el = document.querySelectorAll('.bsU')
+            return el
+        })
+        console.log(countInbox);
     } catch (error) {
         // console.log(error.message);
         // console.log(error.message == 'Error: failed to find element matching selector ".bsU"');
