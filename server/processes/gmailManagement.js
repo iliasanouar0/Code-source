@@ -51,9 +51,9 @@ const login = async (data) => {
     await time(5000)
     if (await page.url() == "https://mail.google.com/mail/u/0/#inbox") {
         await page.screenshot({
-            path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+            path: `${path}/${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
         });
-        feedback += `${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+        feedback += `${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         const cookiesObject = await page.cookies()
         let NewFileJson = JSON.stringify(cookiesObject)
