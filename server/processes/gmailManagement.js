@@ -192,11 +192,25 @@ const verify = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
-        const count = await page.$eval('.bsU', element => {
-            return element.innerHTML
+        const countEnter = await page.evaluate(() => {
+            let html = []
+            let el = document.querySelectorAll('.bsU')
+            let elSpan = document.querySelectorAll('.nU.n1 a')
+            for (let i = 0; i < el.length; i++) {
+                html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+            }
+            return html
         })
-        console.log(count);
-        await resultsManager.saveDetails({ details: `Unread inbox : ${count}`, id_seeds: data.id_seeds, id_process: data.id_process })
+        if (countEnter.length == 0) {
+            details += `Entre unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
+            details += `Entre unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } else {
+            details += `Entre unread inbox : ${countEnter[0].count}`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        }
         await page.close()
         await browser.close()
         feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
@@ -239,11 +253,25 @@ const verify = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
-        const count = await page.$eval('.bsU', element => {
-            return element.innerHTML
+        const countEnter = await page.evaluate(() => {
+            let html = []
+            let el = document.querySelectorAll('.bsU')
+            let elSpan = document.querySelectorAll('.nU.n1 a')
+            for (let i = 0; i < el.length; i++) {
+                html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+            }
+            return html
         })
-        console.log(count);
-        await resultsManager.saveDetails({ details: `Unread inbox : ${count}`, id_seeds: data.id_seeds, id_process: data.id_process })
+        if (countEnter.length == 0) {
+            details += `Entre unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
+            details += `Entre unread inbox : 0`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        } else {
+            details += `Entre unread inbox : ${countEnter[0].count}`
+            await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+        }
         await page.close()
         await browser.close()
         feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
@@ -279,6 +307,7 @@ const notSpam = async (data, pages) => {
         details += `Entre unread inbox : ${countEnter[0].count}`
         await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     }
+
     await time(10000)
     await page.waitForSelector('.CJ')
     await page.click('.CJ')
@@ -380,9 +409,11 @@ const markAsSpam = async (data, pages) => {
         await time(3000)
         console.log(status);
         if (status == 'true') {
+            console.log('i will click');
             await page.waitForSelector('div[act="9"]')
             await time(3000)
             await page.click('div[act="9"]')
+            console.log('clicked');
         } else {
             console.log(`page ${i + 1} have no mode messages`);
             await page.screenshot({
