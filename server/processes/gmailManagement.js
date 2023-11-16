@@ -563,6 +563,8 @@ const openInbox = async (data, count) => {
                 let checkMessage = document.querySelectorAll('.TC')
                 if (checkMessage.length != 0) {
                     return false
+                } else {
+                    return true
                 }
             }
             el.item(0).click()
@@ -572,9 +574,12 @@ const openInbox = async (data, count) => {
         console.log(unreadOpen);
         if (!unreadOpen) {
             break
+        } else if (unreadOpen) {
+            await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+        } else {
+            await time(4000)
+            await page.click('.ar6.T-I-J3.J-J5-Ji')
         }
-        await time(4000)
-        await page.click('.ar6.T-I-J3.J-J5-Ji')
     }
     await time(6000)
     await page.screenshot({
