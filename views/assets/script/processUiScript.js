@@ -480,7 +480,7 @@ $(document).on('click', '.details', event => {
         let variables
         let card = ""
         feedBack.forEach(element => {
-            variables = .split('-')
+            variables = element.split('-')
             if (variables[2] == 'AUTO_LOGIN') {
                 card += `<div class="col">
                 <div class="card">
