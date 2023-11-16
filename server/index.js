@@ -207,6 +207,7 @@ wss.on('connection', (wss, req) => {
           } else {
             actions = toProcess[0].action.split(',')
             for (let i = 0; i < actions.length; i++) {
+              console.log(actions[i]);
               if (actions[i].indexOf('count') != -1) {
                 c = actions.pop().split(':')[1]
               } else if (actions[i].indexOf('pages') != -1) {
@@ -216,32 +217,6 @@ wss.on('connection', (wss, req) => {
               }
             }
           }
-
-          // if (toProcess[0].action.indexOf('count') == -1) {
-          //   c = ""
-          // } else {
-
-          //   console.log('check count actions : ');
-          //   console.log(actions);
-          // }
-
-          // if (toProcess[0].action.indexOf('pages') == -1) {
-          //   pages = 1
-          // } else {
-          //   actions = actions[0].split(',')
-          //   pages = parseInt(actions.pop().split(':')[1])
-          //   console.log('check pages actions : ');
-          //   console.log(actions);
-          // }
-
-          // if (toProcess[0].action.indexOf('subject') == -1) {
-          //   subject = ""
-          // } else {
-          //   actions = actions[0].split(',')
-          //   subject = actions.pop().split(':')[1]
-          //   console.log('check subject actions : ');
-          //   console.log(actions);
-          // }
 
           console.log('final actions : ');
           console.log(actions);
