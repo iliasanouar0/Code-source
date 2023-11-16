@@ -208,8 +208,7 @@ wss.on('connection', (wss, req) => {
             actions = toProcess[0].action.split(',')
             console.log(actions);
             for (let i = 0; i < actions.length; i++) {
-              console.log(actions[i]);
-              console.log(actions[-1]);
+              console.log(actions[actions.length - 1]);
               if (actions[i].indexOf('count') != -1) {
                 c = actions.pop().split(':')[1]
               } else if (actions[i].indexOf('pages') != -1) {
