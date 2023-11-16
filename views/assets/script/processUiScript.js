@@ -481,17 +481,31 @@ $(document).on('click', '.details', event => {
         let card = ""
         feedBack.forEach(element => {
             variables = element.split('-')
-            card += `<div class="col">
-            <div class="card">
-            <a class="size">
-            <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
-            </a>
-            <div class="card-body">
-                <h5 class="card-title">${variables[2]}</h5>
-                <p class="card-text">${variables[0]}@gmail.com</p>
-            </div>
-            </div>
-        </div>`
+            if (variables[2] == 'AUTO_LOGIN') {
+                card += `<div class="col">
+                <div class="card">
+                <a class="size">
+                <img src="../../assets/images/process_result/AUTO.png" class="card-img-top" alt="feedback">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">login</h5>
+                    <p class="card-text">${variables[0]}@gmail.com</p>
+                </div>
+                </div>
+            </div>`
+            } else {
+                card += `<div class="col">
+                <div class="card">
+                <a class="size">
+                <img src="../../assets/images/process_result/AUTO.png" class="card-img-top" alt="feedback">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title"${variables[2]}</h5>
+                    <p class="card-text">${variables[0]}@gmail.com</p>
+                </div>
+                </div>
+            </div>`
+            }
         });
         $('.feedback').html(card)
         $('#modal-result-view').modal('show')
