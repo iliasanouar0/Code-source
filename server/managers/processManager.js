@@ -219,7 +219,6 @@ const processing = async (data) => {
     let seed = data.data
     let pages = data.pages
     let count = data.count
-    console.log(`pages : ${pages}`);
     switch (data.action) {
         case 'verify':
             switch (seed.isp) {
