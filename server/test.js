@@ -107,11 +107,11 @@ const openInbox = async (data, count) => {
 }
 
 let data = {
-    gmail: 'ronaldorober12@gmail.com',
+    gmail: 'shrh8274@gmail.com',
     // gmail: 'shrh8274@gmail.com',
-    password: '02077504',
+    password: '09383466753',
     // proxy: '188.34.177.156',
     // proxy: '38.34.185.143:3838',
-    vrf: 'PeiButtorff@outlook.com'
+    vrf: 'PennySgueglia@hotmail.com'
 }
 openInbox(data, 3)
