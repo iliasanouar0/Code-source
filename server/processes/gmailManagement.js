@@ -290,6 +290,13 @@ const notSpam = async (data, pages) => {
     const browser = obj.browser
     feedback += obj.feedback
 
+
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    });
+    feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+
     const countEnter = await page.evaluate(() => {
         let html = []
         let el = document.querySelectorAll('.bsU')
@@ -407,6 +414,12 @@ const markAsSpam = async (data, pages) => {
     const browser = obj.browser
     feedback += obj.feedback
 
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    });
+    feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+
     const countEnter = await page.evaluate(() => {
         let html = []
         let el = document.querySelectorAll('.bsU')
@@ -512,6 +525,12 @@ const openInbox = async (data, count) => {
     const page = obj.page
     const browser = obj.browser
     feedback += obj.feedback
+
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    });
+    feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
 
     const countEnter = await page.evaluate(() => {
         let html = []
