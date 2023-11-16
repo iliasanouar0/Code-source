@@ -213,7 +213,7 @@ wss.on('connection', (wss, req) => {
           if (toProcess[0].action.indexOf('pages') == -1) {
             pages = 1
           } else {
-            actions = toProcess[0].action.split(',')
+            actions = actions.split(',')
             pages = parseInt(actions.pop().split(':')[1])
             console.log('check pages actions : ' + actions);
           }
@@ -221,7 +221,7 @@ wss.on('connection', (wss, req) => {
           if (toProcess[0].action.indexOf('subject') == -1) {
             subject = ""
           } else {
-            actions = toProcess[0].action.split(',')
+            actions = actions.split(',')
             subject = actions.pop().split(':')[1]
             console.log('check subject actions : ' + actions);
           }
