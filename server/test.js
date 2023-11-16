@@ -73,12 +73,12 @@ const openInbox = async (data, count) => {
     let unreadOpen
     for (let i = 0; i < count; i++) {
         await time(3000)
+        console.log(i);
         unreadOpen = await page.evaluate((i) => {
             let html = []
             let el = document.querySelectorAll('.zA.zE')
-            console.log(el.item(i));
-            el.item(i).click()
-            html.push({ messageOpened: i + 1, message: el.item(i).children.item(3).innerText })
+            el.item(0).click()
+            html.push({ messageOpened: i + 1, message: el.item(0).children.item(3).innerText })
             return html
         }, i)
         console.log(unreadOpen);
@@ -114,4 +114,4 @@ let data = {
     // proxy: '38.34.185.143:3838',
     vrf: 'PennySgueglia@hotmail.com'
 }
-openInbox(data, 3)
+openInbox(data, 10)

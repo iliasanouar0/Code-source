@@ -538,9 +538,8 @@ const openInbox = async (data, count) => {
         unreadOpen = await page.evaluate((i) => {
             let html = []
             let el = document.querySelectorAll('.zA.zE')
-            console.log(el.item(i));
-            el.item(i).click()
-            html.push({ messageOpened: i + 1, message: el.item(i).children.item(3).innerText })
+            el.item(0).click()
+            html.push({ messageOpened: i + 1, message: el.item(0).children.item(3).innerText })
             return html
         }, i)
         console.log(unreadOpen);
