@@ -100,6 +100,7 @@ const login = async (data) => {
 }
 
 const verify = async (data) => {
+    let details = ''
     let arg
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
