@@ -202,33 +202,46 @@ wss.on('connection', (wss, req) => {
           let pages
           let c
 
-          if (toProcess[0].action.indexOf('count') == -1) {
+          if (toProcess[0].action.indexOf('count') == -1 && toProcess[0].action.indexOf('pages') == -1 && toProcess[0].action.indexOf('subject') == -1) {
             actions = [toProcess[0].action]
-            c = ""
           } else {
             actions = toProcess[0].action.split(',')
-            c = actions.pop().split(':')[1]
-            console.log('check count actions : ');
-            console.log(actions);
+            for (let i = 0; i < actions.length; i++) {
+              if (actions[-0].indexOf('count') != -1) {
+                c = actions.pop().split(':')[1]
+              } else if (actions[-0].indexOf('pages') != -1) {
+                pages = parseInt(actions.pop().split(':')[1])
+              } else if (actions[-0].indexOf('subject') != -1) {
+                subject = actions.pop().split(':')[1]
+              }
+            }
           }
 
-          if (toProcess[0].action.indexOf('pages') == -1) {
-            pages = 1
-          } else {
-            actions = actions[0].split(',')
-            pages = parseInt(actions.pop().split(':')[1])
-            console.log('check pages actions : ');
-            console.log(actions);
-          }
+          // if (toProcess[0].action.indexOf('count') == -1) {
+          //   c = ""
+          // } else {
 
-          if (toProcess[0].action.indexOf('subject') == -1) {
-            subject = ""
-          } else {
-            actions = actions[0].split(',')
-            subject = actions.pop().split(':')[1]
-            console.log('check subject actions : ');
-            console.log(actions);
-          }
+          //   console.log('check count actions : ');
+          //   console.log(actions);
+          // }
+
+          // if (toProcess[0].action.indexOf('pages') == -1) {
+          //   pages = 1
+          // } else {
+          //   actions = actions[0].split(',')
+          //   pages = parseInt(actions.pop().split(':')[1])
+          //   console.log('check pages actions : ');
+          //   console.log(actions);
+          // }
+
+          // if (toProcess[0].action.indexOf('subject') == -1) {
+          //   subject = ""
+          // } else {
+          //   actions = actions[0].split(',')
+          //   subject = actions.pop().split(':')[1]
+          //   console.log('check subject actions : ');
+          //   console.log(actions);
+          // }
 
           console.log('final actions : ' + actions);
           console.log(subject);
