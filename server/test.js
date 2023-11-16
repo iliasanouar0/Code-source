@@ -67,23 +67,40 @@ const openInbox = async (data, count) => {
         details += `Entre unread inbox : ${countEnter[0].count}`
     }
     console.log(details);
+    await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
     await time(10000)
 
     console.log('Messages to read : ' + count);
     let unreadOpen
     for (let i = 0; i < count; i++) {
         await time(3000)
-        console.log(i);
         unreadOpen = await page.evaluate((i) => {
             let html = []
             let el = document.querySelectorAll('.zA.zE')
+            if (el.length == 0) {
+                let checkMessage = document.querySelectorAll('.TC')
+                if (checkMessage.length != 0) {
+                    return false
+                } else {
+                    return true
+                }
+            }
             el.item(0).click()
             html.push({ messageOpened: i + 1, message: el.item(0).children.item(3).innerText })
             return html
         }, i)
         console.log(unreadOpen);
-        await time(4000)
-        await page.click('.ar6.T-I-J3.J-J5-Ji')
+        if (!unreadOpen) {
+            break
+        } else if (unreadOpen == true) {
+            await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+            if (await page.url() == 'https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread') {
+                await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
+            }
+        } else {
+            await time(4000)
+            await page.click('.ar6.T-I-J3.J-J5-Ji')
+        }
     }
 
     await time(6000)
@@ -114,4 +131,4 @@ let data = {
     // proxy: '38.34.185.143:3838',
     vrf: 'PennySgueglia@hotmail.com'
 }
-openInbox(data, 10)
+openInbox(data, 100)

@@ -548,6 +548,7 @@ const openInbox = async (data, count) => {
     } else {
         details += `Entre unread inbox : ${countEnter[0].count}`
     }
+
     console.log(details);
     await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
     await time(10000)
@@ -574,13 +575,17 @@ const openInbox = async (data, count) => {
         console.log(unreadOpen);
         if (!unreadOpen) {
             break
-        } else if (unreadOpen) {
+        } else if (unreadOpen == true) {
             await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+            if (await page.url() == 'https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread') {
+                await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
+            }
         } else {
             await time(4000)
             await page.click('.ar6.T-I-J3.J-J5-Ji')
         }
     }
+
     await time(6000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-openInboxResult-${data.id_process}.png`
