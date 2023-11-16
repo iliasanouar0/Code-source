@@ -504,6 +504,79 @@ const markAsSpam = async (data, pages) => {
     return feedback
 }
 
+const openInbox = async (data, count) => {
+    let feedback = ''
+    let details = ''
+    const obj = await login(data)
+    const page = obj.page
+    const browser = obj.browser
+    feedback += obj.feedback
+
+    const countEnter = await page.evaluate(() => {
+        let html = []
+        let el = document.querySelectorAll('.bsU')
+        let elSpan = document.querySelectorAll('.nU.n1 a')
+        for (let i = 0; i < el.length; i++) {
+            html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+        }
+        return html
+    })
+    if (countEnter.length == 0) {
+        details += `Entre unread inbox : 0`
+    } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
+        details += `Entre unread inbox : 0`
+    } else {
+        details += `Entre unread inbox : ${countEnter[0].count}`
+    }
+    console.log(details);
+    await time(10000)
+
+    console.log('Messages to read : ' + count);
+    let unreadOpen
+    for (let i = 0; i < count; i++) {
+        await time(3000)
+        unreadOpen = await page.evaluate((i) => {
+            let html = []
+            let el = document.querySelectorAll('.zA.zE')
+            console.log(el.item(i));
+            el.item(i).click()
+            html.push({ messageOpened: i + 1, message: el.item(i).children.item(3).innerText })
+            return html
+        }, i)
+        console.log(unreadOpen);
+        await time(4000)
+        await page.click('.ar6.T-I-J3.J-J5-Ji')
+    }
+    await time(6000)
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-openInboxResult-${data.id_process}.png`
+    });
+    feedback += `, ${data.gmail.split('@')[0]}-@-openInboxResult-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    const countOut = await page.evaluate(() => {
+        let html = []
+        let el = document.querySelectorAll('.bsU')
+        let elSpan = document.querySelectorAll('.nU.n1 a')
+        for (let i = 0; i < el.length; i++) {
+            html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+        }
+        return html
+    })
+    if (countOut.length == 0) {
+        details += `, Out unread inbox : 0`
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
+        details += `, Out unread inbox : 0`
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    } else {
+        details += `, Out unread inbox  : ${countOut[0].count}`
+        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    }
+    await page.close()
+    await browser.close()
+    return feedback
+}
+
 const kill = (id_process) => {
     pidProcess.forEach(Element => {
         if (Element.id_process == id_process) {
@@ -525,6 +598,7 @@ module.exports = {
     verify,
     notSpam,
     markAsSpam,
+    openInbox,
     kill,
 }
 

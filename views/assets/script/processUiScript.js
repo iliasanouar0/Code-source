@@ -109,7 +109,6 @@ $("#btn-check-n-spam").change(() => {
 $("#btn-check-m-spam").change(() => {
     let other = $("#btn-check-n-spam").is(":checked") ? true : false;
     let status = $(this).is(":checked") ? true : false;
-    // $('.max_pages').toggleClass('d-none')
     if (!other) {
         $('.max_pages').toggleClass('d-none')
     }
@@ -124,7 +123,25 @@ $(".btn-check").change(function () {
     }
 });
 
+$("#btn-check-open").change(() => {
+    let other = $("#btn-check-n-spam").is(":checked") ? true : false;
+    let status = $(this).is(":checked") ? true : false;
+    if (!other || status) {
+        $('.max_open').toggleClass('d-none')
+    }
+})
+
+$("#btn-check-o-spam").change(() => {
+    let other = $("#btn-check-n-spam").is(":checked") ? true : false;
+    let status = $(this).is(":checked") ? true : false;
+    if (!other || status) {
+        $('.max_open').toggleClass('d-none')
+    }
+})
+
+
 $(document).on('click', "#p_add", () => {
+    let p_max_open = $('#max_open').val()
     let p_subject = $('#p_subject').val()
     let p_max_pages = $("#max_pages").val()
     let p_list_add = $('#p_list_add').val()
@@ -136,56 +153,52 @@ $(document).on('click', "#p_add", () => {
         Swal.fire('Please fill all fields')
         return
     }
-    var settings = {
-        "url": "https://api.api-ninjas.com/v1/randomword",
-        "method": "GET",
-        "timeout": 0,
-        "headers": {
-            "X-API-Key": "e8yHbiyMFyT3pV3x79He5A==cnUQmdFuKmJgCM6F"
-        },
+
+    let valueSelect = []
+    let selected_spam = $('.spam input:checked')
+    let selected_inbox = $('.inbox input:checked')
+    let selected_other = $('.others input:checked')
+    if (selected_spam != 0) {
+        for (let i = 0; i < selected_spam.length; i++) {
+            valueSelect.push(selected_spam[i].value)
+        }
+    }
+    if (selected_inbox != 0) {
+        for (let i = 0; i < selected_inbox.length; i++) {
+            valueSelect.push(selected_inbox[i].value)
+        }
+    }
+    if (selected_other != 0) {
+        for (let i = 0; i < selected_other.length; i++) {
+            valueSelect.push(selected_other[i].value)
+        }
+    }
+
+    let action = `${valueSelect}`
+
+    if (p_subject != "") {
+        action += `,subject:${p_subject}`
+    }
+
+    if (p_max_pages > 1) {
+        action += `,pages:${p_max_pages}`
+    }
+
+    if (p_max_open != '' || p_max_open != 0) {
+        action += `,count:${p_max_open}`
+    }
+
+    const data = {
+        "name": `test`,
+        "action": action,
+        "status": `${p_status}`,
+        "date_add": `${p_add_date}`,
+        "date_update": `${p_update_date}`,
+        "id_user": `${userData['id_user']}`,
+        "id_list": `${p_list_add}`
     };
-    $.ajax(settings).done(function (response) {
-        let valueSelect = []
-        let selected_spam = $('.spam input:checked')
-        let selected_inbox = $('.inbox input:checked')
-        let selected_other = $('.others input:checked')
-        if (selected_spam != 0) {
-            for (let i = 0; i < selected_spam.length; i++) {
-                valueSelect.push(selected_spam[i].value)
-            }
-        }
-        if (selected_inbox != 0) {
-            for (let i = 0; i < selected_inbox.length; i++) {
-                valueSelect.push(selected_inbox[i].value)
-            }
-        }
-        if (selected_other != 0) {
-            for (let i = 0; i < selected_other.length; i++) {
-                valueSelect.push(selected_other[i].value)
-            }
-        }
-        let action = `${valueSelect}`
-
-        if (p_subject != "") {
-            action += `,subject:${p_subject}`
-        }
-
-        if (p_max_pages > 1) {
-            action += `,pages:${p_max_pages}`
-        }
-        
-        const data = {
-            "name": `${response.word}`,
-            "action": action,
-            "status": `${p_status}`,
-            "date_add": `${p_add_date}`,
-            "date_update": `${p_update_date}`,
-            "id_user": `${userData['id_user']}`,
-            "id_list": `${p_list_add}`
-        };
-        addProcess(data)
-    });
-})
+    addProcess(data)
+});
 
 $(document).on('click', '.start', event => {
     const id = $(event.target)[0].attributes[2].value

@@ -21,7 +21,6 @@ const login = async (data) => {
     console.log(` `);
     const browser = await puppeteer.launch({ headless: false, args: arg })
     const page = await browser.newPage()
-    await page.setViewport({ width: 1280, height: 720 });
     const navigationPromise = page.waitForNavigation()
     await page.goto('https://gmail.com')
     await navigationPromise
@@ -43,7 +42,7 @@ const login = async (data) => {
     return { browser: browser, page: page, feedback: feedback }
 }
 
-const notSpam = async (data, pages) => {
+const openInbox = async (data, count) => {
     let feedback = ''
     let details = ''
     const obj = await login(data)
@@ -68,50 +67,25 @@ const notSpam = async (data, pages) => {
         details += `Entre unread inbox : ${countEnter[0].count}`
     }
     console.log(details);
-
     await time(10000)
-    await page.waitForSelector('.CJ')
-    await page.click('.CJ')
-    await time(3000)
-    page.waitForSelector('a[href="https://mail.google.com/mail/u/0/#spam"]')
-    page.click('a[href="https://mail.google.com/mail/u/0/#spam"]')
-    await time(3000)
-    console.log(`treated pages: ${pages}`);
-    for (let i = 0; i < pages; i++) {
-        console.log(`starting page : ${i + 1}`);
+
+    console.log('Messages to read : ' + count);
+    let unreadOpen
+    for (let i = 0; i < count; i++) {
         await time(3000)
-        const status = await page.evaluate(() => {
-            let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-            checkSpan.item(1).click()
-            return checkSpan.item(1).ariaChecked
-        })
-        await time(3000)
-        console.log(status);
-        if (status == 'true') {
-            await page.waitForSelector('div[act="18"]')
-            await time(3000)
-            await page.click('div[act="18"]')
-        } else {
-            console.log(`page ${i + 1} have no mode messages`);
-            const countOut = await page.evaluate(() => {
-                let html = []
-                let el = document.querySelectorAll('.bsU')
-                let elSpan = document.querySelectorAll('.nU.n1 a')
-                for (let i = 0; i < el.length; i++) {
-                    html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-                }
-                return html
-            })
-            if (countOut.length == 0) {
-                details += `, Out unread inbox : 0`
-            } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
-                details += `, Out unread inbox : 0`
-            } else {
-                details += `, Out unread inbox  : ${countOut[0].count}`
-            }
-            console.log(details);
-        }
+        unreadOpen = await page.evaluate((i) => {
+            let html = []
+            let el = document.querySelectorAll('.zA.zE')
+            console.log(el.item(i));
+            el.item(i).click()
+            html.push({ messageOpened: i + 1, message: el.item(i).children.item(3).innerText })
+            return html
+        }, i)
+        console.log(unreadOpen);
+        await time(4000)
+        await page.click('.ar6.T-I-J3.J-J5-Ji')
     }
+
     await time(6000)
     const countOut = await page.evaluate(() => {
         let html = []
@@ -140,4 +114,4 @@ let data = {
     // proxy: '38.34.185.143:3838',
     vrf: 'PeiButtorff@outlook.com'
 }
-notSpam(data, 3)
+openInbox(data, 3)

@@ -3,6 +3,7 @@ const fs = require('fs')
 const data = require('../db');
 const gmailManagement = require("../processes/gmailManagement");
 const checkManagement = require("../processes/checkManagement");
+const { count, count } = require("console");
 const root = __dirname
 let path = root.slice(0, root.length - 31)
 console.log(path);
@@ -218,6 +219,7 @@ const processing = async (data) => {
     let result
     let seed = data.data
     let pages = data.pages
+    let count = data.count
     console.log(`pages : ${pages}`);
     switch (data.action) {
         case 'verify':
@@ -248,6 +250,18 @@ const processing = async (data) => {
             switch (seed.isp) {
                 case 'gmail':
                     await gmailManagement.markAsSpam(seed, pages).then(e => {
+                        result = e
+                    })
+                    return result
+                default:
+                    console.log('data invalid');
+                    break;
+            }
+            break;
+        case 'openInbox':
+            switch (seed.isp) {
+                case 'gmail':
+                    await gmailManagement.openInbox(seed, count).then(e => {
                         result = e
                     })
                     return result
