@@ -569,7 +569,7 @@ const openInbox = async (data, count) => {
                 }
             }
             el.item(0).click()
-            html.push({ messageOpened: i + 1, message: el.item(0).children.item(3).innerText })
+            html.push({ messageOpened: i + 1, message: el.item(0).children.item(4).innerText })
             return html
         }, i)
         console.log(unreadOpen);
