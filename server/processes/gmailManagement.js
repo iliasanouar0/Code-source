@@ -549,6 +549,7 @@ const openInbox = async (data, count) => {
         details += `Entre unread inbox : ${countEnter[0].count}`
     }
     console.log(details);
+    await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
     await time(10000)
 
     console.log('Messages to read : ' + count);
@@ -559,14 +560,17 @@ const openInbox = async (data, count) => {
             let html = []
             let el = document.querySelectorAll('.zA.zE')
             if (el.length == 0) {
-                return
+                let checkMessage = document.querySelectorAll('.TC')
+                if (checkMessage.length != 0) {
+                    return false
+                }
             }
             el.item(0).click()
             html.push({ messageOpened: i + 1, message: el.item(0).children.item(3).innerText })
             return html
         }, i)
         console.log(unreadOpen);
-        if (unreadOpen == 'undefined' || unreadOpen == undefined) {
+        if (!unreadOpen) {
             break
         }
         await time(4000)
