@@ -200,6 +200,7 @@ wss.on('connection', (wss, req) => {
           let actions
           let subject
           let pages
+          let c
           console.log(toProcess[0].action.indexOf('pages'));
           console.log(toProcess[0].action.split(','));
           if (toProcess[0].action.indexOf('pages') == -1) {
@@ -216,13 +217,21 @@ wss.on('connection', (wss, req) => {
             actions = toProcess[0].action.split(',')
             subject = actions.pop().split(':')[1]
           }
+
+          if (toProcess[0].action.indexOf('count') == -1) {
+            c = ""
+          } else {
+            actions = toProcess[0].action.split(',')
+            c = actions.pop().split(':')[1]
+          }
           console.log(actions);
           console.log(subject);
           console.log(pages);
+          console.log(c);
           let r = ''
           for (let i = 0; i < actions.length; i++) {
             console.log(actions[i] + ' action start')
-            r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages })
+            r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c })
           }
           if (r.indexOf('invalid') == -1) {
             success++
