@@ -106,38 +106,38 @@ const addProcess = data => {
 //     }
 // });
 
-$("#btn-check-m-spam").change(() => {
-    let other = $("#btn-check-n-spam").is(":checked") ? true : false;
-    let status = $(this).is(":checked") ? true : false;
-    if (!other) {
-        $('.max_pages').toggleClass('d-none')
-    }
-});
+// $("#btn-check-m-spam").change(() => {
+//     let other = $("#btn-check-n-spam").is(":checked") ? true : false;
+//     let status = $(this).is(":checked") ? true : false;
+//     if (!other) {
+//         $('.max_pages').toggleClass('d-none')
+//     }
+// });
 
-$(".btn-check").change(function () {
-    let status = $(this).is(":checked") ? true : false;
-    if (status) {
-        $("#btn-check-proxy").prop("checked", !status);
-        $("#btn-check-verify").prop("checked", !status);
-        $(this).prop("checked", status);
-    }
-});
+// $(".btn-check").change(function () {
+//     let status = $(this).is(":checked") ? true : false;
+//     if (status) {
+//         $("#btn-check-proxy").prop("checked", !status);
+//         $("#btn-check-verify").prop("checked", !status);
+//         $(this).prop("checked", status);
+//     }
+// });
 
-$("#btn-check-open").change(() => {
-    let other = $("#btn-check-n-spam").is(":checked") ? true : false;
-    let status = $(this).is(":checked") ? true : false;
-    if (!other || status) {
-        $('.max_open').toggleClass('d-none')
-    }
-})
+// $("#btn-check-open").change(() => {
+//     let other = $("#btn-check-n-spam").is(":checked") ? true : false;
+//     let status = $(this).is(":checked") ? true : false;
+//     if (!other || status) {
+//         $('.max_open').toggleClass('d-none')
+//     }
+// })
 
-$("#btn-check-o-spam").change(() => {
-    let other = $("#btn-check-n-spam").is(":checked") ? true : false;
-    let status = $(this).is(":checked") ? true : false;
-    if (!other || status) {
-        $('.max_open').toggleClass('d-none')
-    }
-})
+// $("#btn-check-o-spam").change(() => {
+//     let other = $("#btn-check-n-spam").is(":checked") ? true : false;
+//     let status = $(this).is(":checked") ? true : false;
+//     if (!other || status) {
+//         $('.max_open').toggleClass('d-none')
+//     }
+// })
 
 
 $(document).on('click', "#p_add", () => {
