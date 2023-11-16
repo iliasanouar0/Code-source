@@ -480,7 +480,7 @@ $(document).on('click', '.details', event => {
         let variables
         let card = ""
         feedBack.forEach(element => {
-            variables = element.split('-')
+            variables = .split('-')
             if (variables[2] == 'AUTO_LOGIN') {
                 card += `<div class="col">
                 <div class="card">
@@ -497,10 +497,10 @@ $(document).on('click', '.details', event => {
                 card += `<div class="col">
                 <div class="card">
                 <a class="size">
-                <img src="../../assets/images/process_result/AUTO.png" class="card-img-top" alt="feedback">
+                <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
                 </a>
                 <div class="card-body">
-                    <h5 class="card-title"${variables[2]}</h5>
+                    <h5 class="card-title">${variables[2]}</h5>
                     <p class="card-text">${variables[0]}@gmail.com</p>
                 </div>
                 </div>
