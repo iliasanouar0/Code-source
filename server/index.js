@@ -206,6 +206,7 @@ wss.on('connection', (wss, req) => {
             actions = [toProcess[0].action]
           } else {
             actions = toProcess[0].action.split(',')
+            console.log(actions);
             for (let i = 0; i < actions.length; i++) {
               console.log(actions[i]);
               if (actions[i].indexOf('count') != -1) {
