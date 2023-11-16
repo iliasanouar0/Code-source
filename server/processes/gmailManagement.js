@@ -368,6 +368,7 @@ const notSpam = async (data, pages) => {
             return feedback
         }
     }
+    await time(6000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-spamResult-${data.id_process}.png`
     });
@@ -473,6 +474,7 @@ const markAsSpam = async (data, pages) => {
             return feedback
         }
     }
+    await time(6000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
     });
