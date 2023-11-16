@@ -68,43 +68,43 @@ const addProcess = data => {
     })
 }
 
-$("#btn-check-verify").change(function () {
-    let status = $(this).is(":checked") ? true : false;
-    if (status) {
-        $(".btn-check").prop("checked", !status);
-        $(this).prop("checked", status);
-    }
-});
+// $("#btn-check-verify").change(function () {
+//     let status = $(this).is(":checked") ? true : false;
+//     if (status) {
+//         $(".btn-check").prop("checked", !status);
+//         $(this).prop("checked", status);
+//     }
+// });
 
-$("#btn-check-proxy").change(function () {
-    let status = $(this).is(":checked") ? true : false;
-    if (status) {
-        $(".btn-check").prop("checked", !status);
-        $(this).prop("checked", status);
-    }
-});
+// $("#btn-check-proxy").change(function () {
+//     let status = $(this).is(":checked") ? true : false;
+//     if (status) {
+//         $(".btn-check").prop("checked", !status);
+//         $(this).prop("checked", status);
+//     }
+// });
 
-$("#btn-check-c-spam").change(function () {
-    let status = $(this).is(":checked") ? true : false;
-    if (status) {
-        $("#btn-check-o-spam").prop("checked", status);
-    }
-});
+// $("#btn-check-c-spam").change(function () {
+//     let status = $(this).is(":checked") ? true : false;
+//     if (status) {
+//         $("#btn-check-o-spam").prop("checked", status);
+//     }
+// });
 
-$("#btn-check-c-link").change(function () {
-    let status = $(this).is(":checked") ? true : false;
-    if (status) {
-        $("#btn-check-open").prop("checked", status);
-    }
-});
+// $("#btn-check-c-link").change(function () {
+//     let status = $(this).is(":checked") ? true : false;
+//     if (status) {
+//         $("#btn-check-open").prop("checked", status);
+//     }
+// });
 
-$("#btn-check-n-spam").change(() => {
-    let other = $("#btn-check-m-spam").is(":checked") ? true : false;
-    let status = $(this).is(":checked") ? true : false;
-    if (!other) {
-        $('.max_pages').toggleClass('d-none')
-    }
-});
+// $("#btn-check-n-spam").change(() => {
+//     let other = $("#btn-check-m-spam").is(":checked") ? true : false;
+//     let status = $(this).is(":checked") ? true : false;
+//     if (!other) {
+//         $('.max_pages').toggleClass('d-none')
+//     }
+// });
 
 $("#btn-check-m-spam").change(() => {
     let other = $("#btn-check-n-spam").is(":checked") ? true : false;
