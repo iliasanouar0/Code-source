@@ -2,7 +2,8 @@ const resultsManager = require('../managers/resultManager')
 const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 const setTimeout = require('timers/promises');
-const fs = require('fs')
+const fs = require('fs');
+const { unescape } = require('querystring');
 let time = setTimeout.setTimeout
 puppeteer.use(StealthPlugin())
 
@@ -546,6 +547,9 @@ const openInbox = async (data, count) => {
             return html
         }, i)
         console.log(unreadOpen);
+        if (unreadOpen == 'undefined' || unreadOpen == undefined) {
+            break
+        }
         await time(4000)
         await page.click('.ar6.T-I-J3.J-J5-Ji')
     }
