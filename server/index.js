@@ -207,13 +207,14 @@ wss.on('connection', (wss, req) => {
           } else {
             actions = toProcess[0].action.split(',')
             console.log(actions);
+            let length = actions.length
             for (let i = 0; i < actions.length; i++) {
-              console.log(actions[actions.length - 1]);
-              if (actions[i].indexOf('count') != -1) {
+              console.log(actions[length - i + 1]);
+              if (actions[length - i + 1].indexOf('count') != -1) {
                 c = actions.pop().split(':')[1]
-              } else if (actions[i].indexOf('pages') != -1) {
+              } else if (actions[length - i + 1].indexOf('pages') != -1) {
                 pages = parseInt(actions.pop().split(':')[1])
-              } else if (actions[i].indexOf('subject') != -1) {
+              } else if (actions[length - i + 1].indexOf('subject') != -1) {
                 subject = actions.pop().split(':')[1]
               }
             }
