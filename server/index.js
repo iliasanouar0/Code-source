@@ -243,7 +243,8 @@ wss.on('connection', (wss, req) => {
           //   console.log(actions);
           // }
 
-          console.log('final actions : ' + actions);
+          console.log('final actions : ');
+          console.log(actions);
           console.log(subject);
           console.log(pages);
           console.log(c);
