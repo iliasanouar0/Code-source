@@ -217,7 +217,7 @@ wss.on('connection', (wss, req) => {
           } else {
             actions = actions[0].split(',')
             pages = parseInt(actions.pop().split(':')[1])
-            console.log('check pages actions : ' + actions);
+            console.log('check pages actions : ');
             console.log(actions);
           }
 
@@ -226,7 +226,7 @@ wss.on('connection', (wss, req) => {
           } else {
             actions = actions[0].split(',')
             subject = actions.pop().split(':')[1]
-            console.log('check subject actions : ' + actions);
+            console.log('check subject actions : ');
             console.log(actions);
           }
 
