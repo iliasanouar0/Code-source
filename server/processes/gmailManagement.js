@@ -90,7 +90,6 @@ const login = async (data) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         const cookiesObject = await page.cookies()
         let NewFileJson = JSON.stringify(cookiesObject)
-        console.log(NewFileJson);
         fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
             if (err) {
                 throw err
@@ -246,7 +245,6 @@ const verify = async (data) => {
             await page.click('[name="save"]')
         }
         await time(4000)
-        console.log(checked);
         const countEnter = await page.evaluate(() => {
             let html = []
             let el = document.querySelectorAll('.bsU')
