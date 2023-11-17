@@ -219,8 +219,32 @@ const verify = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
+        // await time(4000)
+        // let checked = await primaryDefiner(page)
+        // await time(4000)
         await time(4000)
-        let checked = await primaryDefiner(page)
+        const checked = await page.evaluate(() => {
+            let status = []
+            let checkSpan = document.querySelectorAll('.C7')
+            for (let i = 0; i < checkSpan.length - 1; i++) {
+                let check = checkSpan[i].children.item(1).innerText
+                if (check != 'Primary') {
+                    let s = checkSpan[i].children.item(0).children[0].ariaChecked
+                    if (s == 'true') {
+                        let s = checkSpan[i].children.item(0).click()
+                        status.push({ unchecked: true, label: check })
+                    }
+                }
+            }
+            return status
+        })
+        console.log(checked);
+        if (checked.length != 0) {
+            await time(3000)
+            await page.waitForSelector('[name="save"]')
+            await time(3000)
+            await page.click('[name="save"]')
+        }
         await time(4000)
         console.log(checked);
         const countEnter = await page.evaluate(() => {

@@ -1,5 +1,8 @@
-const puppeteer = require('puppeteer');
-
+// const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra')
+// Add stealth plugin and use defaults (all tricks to hide puppeteer usage)
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+puppeteer.use(StealthPlugin())
 class GmailManagement {
     email
     password
@@ -166,11 +169,11 @@ class GmailManagement {
         await page.waitForSelector('input[type="password"]')
         setTimeout(() => {
             page.type('input[type="password"]', password, { delay: 200 })
-        }, 2000);
+        }, 5000);
         setTimeout(() => {
             page.waitForSelector('#passwordNext')
             page.click('#passwordNext')
-        }, 5000);
+        }, 10000);
         await navigationPromise
         setTimeout(() => {
             const span = page.evaluate(() => {
@@ -180,11 +183,11 @@ class GmailManagement {
                 console.log(span);
                 // return span
             })
-        }, 10000);
+        }, 20000);
         setTimeout(() => {
             page.waitForSelector('div[act="2"]')
             page.click('div[act="2"]')
-        }, 12000);
+        }, 25000);
 
     }
 
@@ -392,5 +395,5 @@ let lone = new GmailManagement
 // lone.removeAllSpam('iliasanouar0@gmail.com', 'ilias080701')
 // lone.notSpam('iliasanouar0@gmail.com', 'ilias080701')
 // lone.markAsRead('iliasanouar0@gmail.com', 'ilias080701')
-lone.markAsSpam('iliasanouar0@gmail.com', 'ilias080701')
+// lone.markAsUnread('aminouhassan771@gmail.com', '97845024')
 // .notSpamThat('iliasanouar0@gmail.com', 'ilias080701', "get started in lucid")
