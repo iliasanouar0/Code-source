@@ -76,7 +76,7 @@ const login = async (data) => {
             if (await page.url() == "https://mail.google.com/mail/u/0/#inbox") {
                 const cookiesObject = await page.cookies()
                 let NewFileJson = JSON.stringify(cookiesObject)
-                fs.writeFile(`./${data.gmail.split('@')[0]}-@-init-Gmail.json`, NewFileJson, { spaces: 2 }, (err) => {
+                fs.writeFile(`${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`, NewFileJson, { spaces: 2 }, (err) => {
                     if (err) {
                         console.log(err);
                     }
