@@ -333,7 +333,7 @@ const notSpam = async (data, pages) => {
     const browser = obj.browser
     feedback += obj.feedback
 
-
+    await time(10000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
     });
