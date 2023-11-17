@@ -22,7 +22,6 @@ const login = async (data) => {
     const browser = await puppeteer.launch({ headless: false, args: arg })
     const page = await browser.newPage()
     let file = `./${data.gmail.split('@')[0]}-@-init-Gmail.json`
-    await time(3000)
     fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
         if (err) {
             console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
@@ -69,6 +68,95 @@ const login = async (data) => {
             }
         }
     })
+    return { browser: browser, page: page, feedback: feedback }
+}
+const notSpam = async (data, pages) => {
+    let feedback = ''
+    let details = ''
+    const obj = await login(data)
+    const page = obj.page
+    const browser = obj.browser
+    feedback += obj.feedback
+    
+    await time(10000)
+    const countEnter = await page.evaluate(() => {
+        let html = []
+        let el = document.querySelectorAll('.bsU')
+        let elSpan = document.querySelectorAll('.nU.n1 a')
+        for (let i = 0; i < el.length; i++) {
+            html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+        }
+        return html
+    })
+    if (countEnter.length == 0) {
+        details += `Entre unread inbox : 0`
+    } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
+        details += `Entre unread inbox : 0`
+    } else {
+        details += `Entre unread inbox : ${countEnter[0].count}`
+    }
+    console.log(details);
+    await page.waitForSelector('.CJ')
+    await page.click('.CJ')
+    await time(3000)
+    page.waitForSelector('a[href="https://mail.google.com/mail/u/0/#spam"]')
+    page.click('a[href="https://mail.google.com/mail/u/0/#spam"]')
+    await time(3000)
+    console.log(`treated pages: ${pages}`);
+    for (let i = 0; i < pages; i++) {
+        console.log(`starting page : ${i + 1}`);
+        await time(3000)
+        const status = await page.evaluate(() => {
+            let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
+            checkSpan.item(1).click()
+            return checkSpan.item(1).ariaChecked
+        })
+        await time(3000)
+        console.log(status);
+        if (status == 'true') {
+            await page.waitForSelector('div[act="18"]')
+            await time(3000)
+            await page.click('div[act="18"]')
+        } else {
+            console.log(`page ${i + 1} have no mode messages`);
+            const countOut = await page.evaluate(() => {
+                let html = []
+                let el = document.querySelectorAll('.bsU')
+                let elSpan = document.querySelectorAll('.nU.n1 a')
+                for (let i = 0; i < el.length; i++) {
+                    html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+                }
+                return html
+            })
+            if (countOut.length == 0) {
+                details += `, Out unread inbox : 0`
+            } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
+                details += `, Out unread inbox : 0`
+            } else {
+                details += `, Out unread inbox  : ${countOut[0].count}`
+            }
+            console.log(details);
+            return
+        }
+    }
+    await time(6000)
+    const countOut = await page.evaluate(() => {
+        let html = []
+        let el = document.querySelectorAll('.bsU')
+        let elSpan = document.querySelectorAll('.nU.n1 a')
+        for (let i = 0; i < el.length; i++) {
+            html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+        }
+        return html
+    })
+    if (countOut.length == 0) {
+        details += `, Out unread inbox : 0`
+    } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
+        details += `, Out unread inbox : 0`
+    } else {
+        details += `, Out unread inbox  : ${countOut[0].count}`
+    }
+    console.log(details);
 }
 
 let data = {
@@ -79,4 +167,4 @@ let data = {
     // proxy: '38.34.185.143:3838',
     vrf: 'PennySgueglia@hotmail.com'
 }
-// login(data, 100)
+notSpam(data, 100)
