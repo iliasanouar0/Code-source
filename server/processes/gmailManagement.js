@@ -567,6 +567,7 @@ const openInbox = async (data, count) => {
     const page = obj.page
     const browser = obj.browser
     feedback += obj.feedback
+    await time(10000)
 
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
