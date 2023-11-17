@@ -116,11 +116,12 @@ const primaryDefiner = async (page) => {
         }
         return status
     })
-    // console.log(checked);
-    await time(3000)
-    await page.waitForSelector('[name="save"]')
-    await time(3000)
-    await page.click('[name="save"]')
+    if (checked.length != 0) {
+        await time(3000)
+        await page.waitForSelector('[name="save"]')
+        await time(3000)
+        await page.click('[name="save"]')
+    }
     return checked
 }
 
