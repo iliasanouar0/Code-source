@@ -41,10 +41,10 @@ const login = async (data) => {
     fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
         if (err) {
             console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-            await time(5000)
             const navigationPromise = page.waitForNavigation()
             await page.goto('https://gmail.com')
             await navigationPromise
+            await time(3000)
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
             });
