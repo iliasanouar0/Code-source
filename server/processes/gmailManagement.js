@@ -218,6 +218,10 @@ const verify = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
+        await time(4000)
+        let checked = await primaryDefiner(page)
+        await time(4000)
+        console.log(checked);
         const countEnter = await page.evaluate(() => {
             let html = []
             let el = document.querySelectorAll('.bsU')
@@ -288,6 +292,10 @@ const verify = async (data) => {
             }
             return html
         })
+        await time(4000)
+        let checked = await primaryDefiner(page)
+        await time(4000)
+        console.log(checked);
         if (countEnter.length == 0) {
             details += `Entre unread inbox : 0`
             await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
