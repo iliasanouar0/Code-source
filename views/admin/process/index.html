@@ -143,6 +143,21 @@
                                 <label for="p_subject">Subject</label>
                                 <input type="text" class="form-control" id="p_subject">
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group max_pages">
+                                        <label for="max_pages">Max pages</label>
+                                        <input type="number" class="form-control" name="max_pages" id="max_pages"
+                                            min="1" value="1">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group max_open">
+                                        <label for="max_open">Max Open</label>
+                                        <input type="number" class="form-control" name="max_open" id="max_open" min="0">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="fs-5">Actions</label>
                                 <div class="row w-100 actions">
@@ -273,15 +288,6 @@
                                     id="p_status">
                                     <option value="idel" selected>idel</option>
                                 </select>
-                            </div>
-                            <div class="form-group max_pages">
-                                <label for="max_pages">Max pages</label>
-                                <input type="number" class="form-control" name="max_pages" id="max_pages" min="1"
-                                    value="1">
-                            </div>
-                            <div class="form-group max_open">
-                                <label for="max_open">Max Open</label>
-                                <input type="number" class="form-control" name="max_open" id="max_open" min="0">
                             </div>
                             <div class="form-group d-none">
                                 <label for="login">Add date</label>

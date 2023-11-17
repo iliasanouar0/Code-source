@@ -100,6 +100,30 @@ const login = async (data) => {
     return { browser: browser, page: page, feedback: feedback }
 }
 
+const primaryDefiner = async (page) => {
+    const checked = await page.evaluate(() => {
+        let status = []
+        let checkSpan = document.querySelectorAll('.C7')
+        for (let i = 0; i < checkSpan.length - 1; i++) {
+            let check = checkSpan[i].children.item(1).innerText
+            if (check != 'Primary') {
+                let s = checkSpan[i].children.item(0).children[0].ariaChecked
+                if (s == 'true') {
+                    let s = checkSpan[i].children.item(0).click()
+                    status.push({ unchecked: true, label: check })
+                }
+            }
+        }
+        return status
+    })
+    // console.log(checked);
+    await time(3000)
+    await page.waitForSelector('[name="save"]')
+    await time(3000)
+    await page.click('[name="save"]')
+    return checked
+}
+
 const verify = async (data) => {
     let details = ''
     let arg
