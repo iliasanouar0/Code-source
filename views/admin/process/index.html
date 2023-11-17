@@ -153,8 +153,8 @@
                                                     id="max_pages" min="1" value="1">
                                             </div>
                                             <div class="col-auto">
-                                                <span class="form-text">
-                                                    <small class="text-danger">- [Max : 500 P]</small><br>
+                                                <span class="form-text text-danger">
+                                                    [Max : 500 P]
                                                 </span>
                                             </div>
                                         </div>
@@ -173,10 +173,19 @@
                                 <div class="col">
                                     <div class="form-group max_open">
                                         <label for="max_open">Max Open</label>
-                                        <input type="number" class="form-control" name="max_open" id="max_open" min="0">
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <input type="number" class="form-control" name="max_open" id="max_open"
+                                                    min="0">
+                                            </div>
+                                            <div class="col-auto">
+                                                <span class="form-text text-danger">
+                                                    [Max : 50K]
+                                                </span>
+                                            </div>
+                                        </div>
                                         <small class="text-info">- Max open default value is 0.</small><br>
                                         <small class="text-info">- Max open (0 = No Limit)</small><br>
-                                        <small class="text-danger">- [Max : 50K]</small><br>
                                         <small>- Limit for :<br>
                                             <code
                                                 style="margin-left: 5px; font-size: 11px; color: rgb(25, 79, 133);">[Open ,Click ,Not Spam ,Mark as Important ,Mark as Starred ,Reply ,Forward ,Report Spam]</code></small>
