@@ -508,6 +508,7 @@ const markAsSpam = async (data, pages) => {
             });
             feedback += `, ${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+            await time(3000)
             const countOut = await page.evaluate(() => {
                 let html = []
                 let el = document.querySelectorAll('.bsU')
