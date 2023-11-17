@@ -147,11 +147,19 @@
                                 <div class="col">
                                     <div class="form-group max_pages">
                                         <label for="max_pages">Max pages</label>
-                                        <input type="number" class="form-control" name="max_pages" id="max_pages"
-                                            min="1" value="1">
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <input type="number" class="form-control" name="max_pages"
+                                                    id="max_pages" min="1" value="1">
+                                            </div>
+                                            <div class="col-auto">
+                                                <span class="form-text">
+                                                    <small class="text-danger">- [Max : 500 P]</small><br>
+                                                </span>
+                                            </div>
+                                        </div>
                                         <small class="text-info">- Max pages default value is 1.</small><br>
                                         <small class="text-info">- Max pages (1 = One page)</small><br>
-                                        <small class="text-danger">- [Max : 500 P]</small><br>
                                         <small>- Limit for :<br>
                                             <code
                                                 style="margin-left: 0px; font-size: 11px; color: rgb(25, 79, 133);">[Open Bulk ,Move To Inbox ,Archive ,Delete [is:unread] ,Delete [is:read] ,Open Bulk Spam,Delete forever Spam ,Move from Promotions to Primary ,Mark as unread ,Delete Archive]</code></small>
