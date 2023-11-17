@@ -37,7 +37,6 @@ const login = async (data) => {
     const page = await browser.newPage()
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
     await page.setViewport({ width: 1280, height: 720 });
-    const navigationPromise = page.waitForNavigation()
     let file = `${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`
     fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
         if (err) {
@@ -48,6 +47,7 @@ const login = async (data) => {
         }
     })
     await page.goto('https://gmail.com')
+    const navigationPromise = page.waitForNavigation()
     await navigationPromise
     await time(5000)
     if (await page.url() == "https://mail.google.com/mail/u/0/#inbox") {
