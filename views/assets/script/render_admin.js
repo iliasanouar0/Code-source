@@ -245,13 +245,13 @@ const getData = $("#example1").DataTable({
         let actions = row.action.split(',')
         let html = ''
         actions.forEach(elm => {
-          html += `<div class="card m-0">
+          html += `<div class="card m-0 w-50">
           <div class="card-body p-0 text-center text-dark">
           ${elm}
           </div>
         </div>`
         })
-        return `<div class="row w-75">${html}</div>`
+        return `<div class="row">${html}</div>`
       }
     },
     {
