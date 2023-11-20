@@ -55,6 +55,7 @@ const login = async (data) => {
             page.type('input[type="password"]', data.password, { delay: 200 })
             await time(3000)
             page.waitForSelector('#passwordNext')
+            await time(3000)
             page.click('#passwordNext')
             await navigationPromise
             await time(10000)
