@@ -224,7 +224,7 @@ wss.on('connection', (wss, req) => {
               }
             }
           }
-          console.log(actions);
+          console.log(options);
           console.log(`Actions : ${actions}`);
           let r = ''
           for (let i = 0; i < actions.length; i++) {
