@@ -227,7 +227,9 @@ wss.on('connection', (wss, req) => {
               r += ', '
             }
           }
-          console.log(r.split(', ').pop().join(', '));
+          let array = r.split(', ')
+          array.pop()
+          console.log(array.join((', ')));
           if (r.indexOf('invalid') == -1) {
             success++
             let end_in = new Date()
