@@ -895,6 +895,19 @@ const openInbox = async (data, count, options) => {
                     break;
             }
             await time(3000)
+            switch (options.markAsImportant) {
+                case true:
+                    let opt = await page.$$('.bjy.T-I-J3.J-J5-Ji')
+                    await opt[opt.length - 1].click()
+                    await time(3000)
+                    let imp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
+                    await imp[0].click()
+                    break;
+                default:
+                    await page.click('.ar6.T-I-J3.J-J5-Ji')
+                    break;
+            }
+            await time(3000)
             await page.click('.ar6.T-I-J3.J-J5-Ji')
         }
     }
