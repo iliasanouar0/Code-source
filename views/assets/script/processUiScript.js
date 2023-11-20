@@ -516,7 +516,6 @@ $(document).on('click', '.details', event => {
 })
 
 $(document).on('click', '#Refresh', event => {
-    $('.feedback').html('')
     let id = $(event.target).data('id')
     let id_process = $(event.target).data('id_process')
     fetch(`http://${ip}:3000/result/feedback/${id}?id_process=${id_process}`).then(response => {
@@ -571,7 +570,6 @@ $(document).on('click', '#Refresh', event => {
         $('.feedback').html(card)
         $('#Refresh').data('id', id)
         $('#Refresh').data('id_process', id_process)
-        // $('#modal-result-view').modal('show')
     })
 })
 
