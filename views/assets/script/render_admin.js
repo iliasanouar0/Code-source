@@ -244,9 +244,8 @@ const getData = $("#example1").DataTable({
       render: function (data, type, row) {
         let actions = row.action.split(',')
         let html = ''
-        console.log(actions);
         actions.forEach(elm => {
-          html += `<div class="b-action card m-0 col">
+          html += `<div class="card m-0 col">
           <div class="card-body p-0 text-center text-dark">
           ${elm}
           </div>
