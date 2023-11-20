@@ -209,12 +209,12 @@ wss.on('connection', (wss, req) => {
             actions = toProcess[0].action.split(',')
             let length = actions.length
             for (let i = 0; i < actions.length; i++) {
-              if (actions[length - (i + 1)].indexOf('markAsImportant') != -1) {
-                actions.pop()
-                options.markAsImportant = true;
-              } else if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
+              if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
                 actions.pop()
                 options.markAsStarted = true;
+              } else if (actions[length - (i + 1)].indexOf('markAsImportant') != -1) {
+                actions.pop()
+                options.markAsImportant = true;
               } else if (actions[length - (i + 1)].indexOf('count') != -1) {
                 c = actions.pop().split(':')[1]
               } else if (actions[length - (i + 1)].indexOf('pages') != -1) {
