@@ -206,7 +206,6 @@ wss.on('connection', (wss, req) => {
             actions = [toProcess[0].action]
           } else {
             actions = toProcess[0].action.split(',')
-            console.log(actions);
             let length = actions.length
             for (let i = 0; i < actions.length; i++) {
               console.log(actions[length - (i + 1)]);
@@ -219,15 +218,13 @@ wss.on('connection', (wss, req) => {
               }
             }
           }
-
-          console.log('Actions : ');
-          console.log(`${actions}`);
+          console.log(`Actions : ${actions}`);
           let r = ''
           for (let i = 0; i < actions.length; i++) {
             console.log(actions[i] + ' action start')
             r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c })
           }
-          console.log(r);
+          console.log(r.toString());
           if (r.indexOf('invalid') == -1) {
             success++
             let end_in = new Date()
