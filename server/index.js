@@ -223,6 +223,9 @@ wss.on('connection', (wss, req) => {
           for (let i = 0; i < actions.length; i++) {
             console.log(actions[i] + ' action start')
             r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c })
+            if (i < actions.length) {
+              r += ', '
+            }
           }
           console.log(r.split(', '));
           if (r.indexOf('invalid') == -1) {
