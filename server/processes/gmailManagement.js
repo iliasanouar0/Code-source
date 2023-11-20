@@ -38,10 +38,10 @@ const login = async (data) => {
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
     await page.setViewport({ width: 1280, height: 720 });
     let file = `${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`
+    const navigationPromise = page.waitForNavigation()
     fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
         if (err) {
             console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-            const navigationPromise = page.waitForNavigation()
             await page.goto('https://gmail.com')
             await navigationPromise
             await page.waitForSelector('input[type="email"]')
@@ -70,10 +70,15 @@ const login = async (data) => {
             let cookies = JSON.parse(fs.readFileSync(file));
             await page.setCookie(...cookies);
             await page.goto('https://gmail.com')
-            const navigationPromise = page.waitForNavigation()
             await navigationPromise
             await time(5000)
             if (await page.url() == "https://mail.google.com/mail/u/0/#inbox") {
+                await time(3000)
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
+                });
+                feedback += `, ${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
                 const cookiesObject = await page.cookies()
                 let NewFileJson = JSON.stringify(cookiesObject)
                 fs.writeFile(`${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`, NewFileJson, { spaces: 2 }, (err) => {
