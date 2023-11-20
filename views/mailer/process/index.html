@@ -122,140 +122,243 @@
         <div class="modal fade add_process" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="card card-success">
-                        <div class="card-header">
-                            <h3 class="card-title">add process</h3>
+                    <div class="card border-success mb-0">
+                        <div class="card-header bg-transparent border-success text-center">
+                            <h3 class="card-title">Create new process</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="p_name">Name</label>
-                                <input type="text" class="form-control" id="p_name">
-                            </div>
-                            <div class="form-group">
-                                <label>List</label>
+                                <label>List :</label>
                                 <select class="form-control lists" style="width: 100%;" tabindex="-1" aria-hidden="true"
                                     id="p_list_add">
                                 </select>
                             </div>
+                            <small>
+                                <div class="alert alert-sm alert-warning" role="alert">
+                                    <div class="spinner-grow-sm text-danger spinner-grow" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    For better Performance please use Limit or Subject
+                                </div>
+                            </small>
                             <div class="form-group">
-                                <label>Actions</label>
+                                <label for="p_subject">Subject :</label>
+                                <input type="text" class="form-control" id="p_subject">
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div class="form-group max_pages">
+                                        <label for="max_pages">Max pages :</label>
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <input type="number" class="form-control" name="max_pages"
+                                                    id="max_pages" min="1" value="1">
+                                            </div>
+                                            <div class="col-auto">
+                                                <span class="form-text text-danger">
+                                                    [Max : 500 P]
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <small class="text-info">- Max pages default value is 1.</small><br>
+                                        <small class="text-info">- Max pages (1 = One page)</small><br>
+                                        <small>- Limit for :<br>
+                                            <code
+                                                style="margin-left: 0px; font-size: 11px; color: rgb(25, 79, 133);">[Open Bulk ,Move To Inbox ,Archive ,Delete [is:unread] ,Delete [is:read] ,Open Bulk Spam,Delete forever Spam ,Move from Promotions to Primary ,Mark as unread ,Delete Archive]</code></small>
+                                    </div>
+                                </div>
+                                <div class="col-1" style="width: 3.33333%;">
+                                    <div class="d-flex h-100">
+                                        <div class="vr"></div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group max_open">
+                                        <label for="max_open">Max emails :</label>
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <input type="number" class="form-control" name="max_open" id="max_open"
+                                                    min="0">
+                                            </div>
+                                            <div class="col-auto">
+                                                <span class="form-text text-danger">
+                                                    [Max : 50K]
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <small class="text-info">- Max emails default value is 0.</small><br>
+                                        <small class="text-info">- Max emails (0 = No Limit)</small><br>
+                                        <small>- Limit for :<br>
+                                            <code
+                                                style="margin-left: 5px; font-size: 11px; color: rgb(25, 79, 133);">[Open ,Click ,Not Spam ,Mark as Important ,Mark as Starred ,Reply ,Forward ,Report Spam]</code></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <small class="d-none">
+                                <div class="alert alert-primary sm" role="alert">
+                                    You can use <code
+                                        style="color: rgb(255, 0, 0)">[Open+Click+Reply+Mark as Important+Mark as Starred]</code>
+                                    in the same process. </div>
+                            </small>
+                            <div class="form-group">
+                                <label class="fs-5">Actions</label>
                                 <div class="row w-100 actions">
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-verify"
-                                                value="verify" autocomplete="off">
-                                            <label class="btn btn-outline-primary"
-                                                for="btn-check-verify">Verify</label><br>
+                                    <div class="row w-100 inbox">
+                                        <label>Inbox :</label>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-open"
+                                                    value="openInbox" autocomplete="off">
+                                                <label class="btn btn-outline-primary"
+                                                    for="btn-check-open">Open</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-archive"
+                                                    value="markAsArchive" autocomplete="off">
+                                                <label class="btn btn-outline-primary"
+                                                    for="btn-check-m-archive">Archive</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-unread"
+                                                    value="markAsUnread" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-m-unread">Mark As
+                                                    Unread</label><br>
+                                            </div>
                                         </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-n-spam"
-                                                value="notSpam" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-n-spam">Not
-                                                Spam</label><br>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-read"
+                                                    value="markAsRead" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-m-read">Mark As
+                                                    Read</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-du-inbox"
+                                                    value="deleteInboxUnread" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-du-inbox">Delete
+                                                    [unread] Inbox</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-dr-inbox"
+                                                    value="deleteInboxRead" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-dr-inbox">Delete
+                                                    [read] Inbox</label><br>
+                                            </div>
                                         </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-read"
-                                                value="markAsRead" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-read">Mark As
-                                                Read</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-d-inbox"
-                                                value="deleteInbox" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-d-inbox">Delete
-                                                Inbox</label><br>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-d-spam"
-                                                value="deleteSpam" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-d-spam">Delete
-                                                Spam</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-spam"
-                                                value="markAsSpam" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-spam">Mark As
-                                                Spam</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-imp"
-                                                value="markAsImportant" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-imp">Mark As
-                                                Important</label><br>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-c-link"
-                                                value="clickLink" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-c-link">Click
-                                                Link</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-started"
-                                                value="markAsStarted" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-started">Mark As
-                                                Started</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-archive"
-                                                value="markAsArchive" autocomplete="off">
-                                            <label class="btn btn-outline-primary"
-                                                for="btn-check-m-archive">Archive</label><br>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-imp"
+                                                    value="markAsImportant" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-m-imp">Mark As
+                                                    Important</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-c-link"
+                                                    value="clickLink" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-c-link">Click
+                                                </label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-started"
+                                                    value="markAsStarted" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-m-started">Mark As
+                                                    Started</label><br>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-unread"
-                                                value="markAsUnread" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-unread">Mark As
-                                                Unread</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-n-spamT"
-                                                value="notSpamThis" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-n-spamT">Not Spam
-                                                Only</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-open" value="open"
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-open">Open</label><br>
+                                    <div class="row w-100 inbox">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-spam"
+                                                    value="markAsSpam" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-m-spam">Mark As
+                                                    Spam</label><br>
+                                            </div>
                                         </div>
                                     </div>
-                                    <label>Others</label>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-proxy"
-                                                value="checkProxy" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-proxy">Check
-                                                proxy</label><br>
+                                    <div class="row w-100 spam">
+                                        <label>Spam :</label>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-n-spam"
+                                                    value="notSpam" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-n-spam">Move to
+                                                    inbox</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-o-spam"
+                                                    value="openSpam" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-o-spam">Open
+                                                    Spam</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-d-spam"
+                                                    value="deleteSpam" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-d-spam">Delete
+                                                    forever</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-c-spam"
+                                                    value="clickSpam" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-c-spam">Click
+                                                    Spam</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-ob-spam"
+                                                    value="openBulkSpam" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-ob-spamT">Open
+                                                    bulk
+                                                    spam</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-no-spam"
+                                                    value="notSpamOpen" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-no-spam">Not spam
+                                                    [open]</label><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row w-100 others">
+                                        <label>Others</label>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-proxy"
+                                                    value="checkProxy" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-proxy">Check
+                                                    proxy</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-verify"
+                                                    value="verify" autocomplete="off">
+                                                <label class="btn btn-outline-primary"
+                                                    for="btn-check-verify">Verify</label><br>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" style="display: none;">
+                            <div class="form-group d-none">
                                 <label>Status</label>
                                 <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true"
                                     id="p_status">
                                     <option value="idel" selected>idel</option>
                                 </select>
                             </div>
-                            <div class="form-group" style="display: none;">
+                            <div class="form-group d-none">
                                 <label for="login">Add date</label>
                                 <input type="date" class="form-control" id="p_add_date" readonly>
                             </div>
-
-                            <div class="form-group" style="display: none;">
+                            <div class="form-group d-none">
                                 <label for="login">Update date</label>
                                 <input type="date" class="form-control update" id="p_update_date" readonly>
                             </div>
                         </div>
-
-                        <div class="card-footer text-center">
-                            <button type="button" class="btn btn-success" id="p_add">Submit</button>
+                        <div class="card-footer text-center bg-transparent border-success">
+                            <button type="button" class="btn btn-success" id="p_add">Create</button>
                         </div>
                     </div>
                 </div>
