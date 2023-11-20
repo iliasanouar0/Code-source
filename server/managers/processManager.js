@@ -283,7 +283,7 @@ const processing = async (data) => {
         case 'markAsRead':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.markAsRead(seed, count).then(e => {
+                    await gmailManagement.markAsRead(seed, pages).then(e => {
                         result = e
                     })
                     return result
