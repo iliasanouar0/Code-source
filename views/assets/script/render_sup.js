@@ -370,7 +370,7 @@ if (path == "/supervisor/lists/") {
     document.querySelector("#add_process").addEventListener("click", () => {
         const select = document.querySelector("#p_list_add");
         select.innerHTML = ""
-        fetch(`http://${ip}:3000//sup/lists`, {
+        fetch(`http://${ip}:3000/sup/lists`, {
             method: "GET",
         }).then((response) => {
             return response.json();
