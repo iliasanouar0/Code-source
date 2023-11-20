@@ -252,7 +252,7 @@ const getData = $("#example1").DataTable({
           </div>
         </div>`
         })
-        return `<div class="row">${html}</div>`
+        return `<div class="row w-100 g-2">${html}</div>`
       }
     },
     {
