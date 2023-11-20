@@ -209,6 +209,8 @@ wss.on('connection', (wss, req) => {
             actions = toProcess[0].action.split(',')
             let length = actions.length
             for (let i = 0; i < actions.length; i++) {
+              console.log(actions);
+              console.log(actions[length - (i + 1)]);
               console.log(actions[length - (i + 1)].indexOf('markAsImportant'));
               if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
                 actions.pop()
