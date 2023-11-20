@@ -428,6 +428,8 @@ const notSpam = async (data, pages) => {
         }
     }
     await time(6000)
+    await page.goto('https://mail.google.com/mail/u/0/#inbox')
+    await time(3000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-spamResult-${data.id_process}.png`
     });
@@ -543,6 +545,8 @@ const markAsSpam = async (data, pages) => {
         }
     }
     await time(6000)
+    await page.goto('https://mail.google.com/mail/u/0/#inbox')
+    await time(3000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
     });
@@ -662,6 +666,8 @@ const markAsUnread = async (data, pages) => {
         }
     }
     await time(6000)
+    await page.goto('https://mail.google.com/mail/u/0/#inbox')
+    await time(3000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
     });
@@ -782,6 +788,8 @@ const markAsRead = async (data, pages) => {
         }
     }
     await time(6000)
+    await page.goto('https://mail.google.com/mail/u/0/#inbox')
+    await time(3000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
     });
@@ -892,6 +900,8 @@ const openInbox = async (data, count, options) => {
     }
 
     await time(6000)
+    await page.goto('https://mail.google.com/mail/u/0/#inbox')
+    await time(3000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-openInboxResult-${data.id_process}.png`
     });
