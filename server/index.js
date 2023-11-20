@@ -201,7 +201,7 @@ wss.on('connection', (wss, req) => {
           let subject
           let pages
           let c
-          let options
+          let options = { markAsImportant: false, markAsStarted: false }
 
           if (toProcess[0].action.indexOf('count') == -1 && toProcess[0].action.indexOf('pages') == -1 && toProcess[0].action.indexOf('subject') == -1) {
             actions = [toProcess[0].action]
@@ -209,9 +209,12 @@ wss.on('connection', (wss, req) => {
             actions = toProcess[0].action.split(',')
             let length = actions.length
             for (let i = 0; i < actions.length; i++) {
-              if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
+              if (actions[length - (i + 1)].indexOf('markAsImportant') != -1) {
                 actions.pop()
-                options = { markAsStarted: true }
+                options.markAsImportant = true;
+              } else if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
+                actions.pop()
+                options.markAsStarted = true;
               } else if (actions[length - (i + 1)].indexOf('count') != -1) {
                 c = actions.pop().split(':')[1]
               } else if (actions[length - (i + 1)].indexOf('pages') != -1) {

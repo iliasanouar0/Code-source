@@ -891,7 +891,7 @@ const openInbox = async (data, count, options) => {
                     await starts[0].click()
                     break;
                 default:
-                    await page.click('.ar6.T-I-J3.J-J5-Ji')
+                    console.log('false');
                     break;
             }
             await time(3000)
@@ -904,7 +904,7 @@ const openInbox = async (data, count, options) => {
                     await imp[0].click()
                     break;
                 default:
-                    await page.click('.ar6.T-I-J3.J-J5-Ji')
+                    console.log('false');
                     break;
             }
             await time(3000)
