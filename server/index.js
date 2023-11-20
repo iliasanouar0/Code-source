@@ -220,11 +220,8 @@ wss.on('connection', (wss, req) => {
             }
           }
 
-          console.log('final actions : ');
-          console.log(actions);
-          console.log(subject);
-          console.log(pages);
-          console.log(c);
+          console.log('Actions : ');
+          console.log(`${actions}`);
           let r = ''
           for (let i = 0; i < actions.length; i++) {
             console.log(actions[i] + ' action start')
