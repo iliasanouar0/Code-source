@@ -194,9 +194,9 @@
 // }
 
 // let data = {
-//     gmail: 'aminouhassan771@gmail.com',
+//     gmail: 'mamanes107@gmail.com',
 //     // gmail: 'shrh8274@gmail.com',
-//     password: '97845024',
+//     password: '97548283',
 //     // proxy: '188.34.177.156',
 //     proxy: '38.34.185.143:3838',
 //     vrf: 'PennySgueglia@hotmail.com'
