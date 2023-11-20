@@ -252,7 +252,7 @@ const getData = $("#example1").DataTable({
           </div>
         </div>`
         })
-        return `<div class="row w-100 gap-2">${html}</div>`
+        return `<div class="row w-100 gap-1">${html}</div>`
       }
     },
     {
