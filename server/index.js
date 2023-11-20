@@ -201,6 +201,7 @@ wss.on('connection', (wss, req) => {
           let subject
           let pages
           let c
+          let options
 
           if (toProcess[0].action.indexOf('count') == -1 && toProcess[0].action.indexOf('pages') == -1 && toProcess[0].action.indexOf('subject') == -1) {
             actions = [toProcess[0].action]
@@ -218,11 +219,12 @@ wss.on('connection', (wss, req) => {
               }
             }
           }
+          console.log(actions);
           console.log(`Actions : ${actions}`);
           let r = ''
           for (let i = 0; i < actions.length; i++) {
             console.log(actions[i] + ' action start')
-            r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c })
+            r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c, options: options })
             if (i < actions.length) {
               r += ', '
             }

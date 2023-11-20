@@ -219,6 +219,7 @@ const processing = async (data) => {
     let seed = data.data
     let pages = data.pages
     let count = data.count
+    let options = data.options
     switch (data.action) {
         case 'verify':
             switch (seed.isp) {
@@ -271,7 +272,7 @@ const processing = async (data) => {
         case 'openInbox':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.openInbox(seed, count).then(e => {
+                    await gmailManagement.openInbox(seed, count, options).then(e => {
                         result = e
                     })
                     return result

@@ -812,7 +812,7 @@ const markAsRead = async (data, pages) => {
     return feedback
 }
 
-const openInbox = async (data, count) => {
+const openInbox = async (data, count, options) => {
     let feedback = ''
     let details = ''
     const obj = await login(data)
@@ -877,6 +877,16 @@ const openInbox = async (data, count) => {
             }
         } else {
             await time(4000)
+            switch (options.markAsStarted) {
+                case true:
+                    let starts = await page.$$('.zd.bi4')
+                    await starts[0].click()
+                    break;
+                default:
+                    await page.click('.ar6.T-I-J3.J-J5-Ji')
+                    break;
+            }
+            await time(3000)
             await page.click('.ar6.T-I-J3.J-J5-Ji')
         }
     }
