@@ -729,7 +729,7 @@ const markAsRead = async (data, pages) => {
     }
     await time(3000)
     console.log(`treated pages : ${pages}`);
-    await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%Aunread')
+    await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
     await time(3000)
     for (let i = 0; i < pages; i++) {
         console.log(`starting page : ${i + 1}`);
@@ -747,7 +747,7 @@ const markAsRead = async (data, pages) => {
             await time(3000)
             await c[1].click();
             await time(3000)
-            await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aread')
+            await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
         } else {
             console.log(`page ${i + 1} have no mode messages`);
             await page.screenshot({
