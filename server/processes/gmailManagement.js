@@ -35,7 +35,7 @@ const login = async (data) => {
     const browserPID = browser.process().pid
     const page = await browser.newPage()
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
-    await page.setViewport({ width: 1440, height: 1024 });
+    await page.setViewport({ width: 1440, height: 720 });
     let file = `${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`
     const navigationPromise = page.waitForNavigation()
     fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
