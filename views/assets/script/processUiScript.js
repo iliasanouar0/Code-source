@@ -515,6 +515,7 @@ $(document).on('click', '.details', event => {
 })
 
 $(document).on('click', '#Refresh', event => {
+    $('#Refresh').html(`<div class="spinner-border spinner-border-sm text-danger" role="status"><span class="visually-hidden">Loading</span></div>`)
     let id = $(event.target).data('id')
     let id_process = $(event.target).data('id_process')
     fetch(`http://${ip}:3000/result/feedback/${id}?id_process=${id_process}`).then(response => {
@@ -566,6 +567,7 @@ $(document).on('click', '#Refresh', event => {
             }
         });
         $('.feedback').html(card)
+        $('#Refresh').html('Refresh')
         $('#Refresh').data('id', id)
         $('#Refresh').data('id_process', id_process)
     })
