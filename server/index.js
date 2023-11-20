@@ -229,7 +229,9 @@ wss.on('connection', (wss, req) => {
           }
           let array = r.split(', ')
           array.pop()
-          console.log(array.join((', ')));
+          r = array.join((', '))
+          console.log(r);
+          await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
           if (r.indexOf('invalid') == -1) {
             success++
             let end_in = new Date()
