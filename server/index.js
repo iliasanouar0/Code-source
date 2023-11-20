@@ -224,7 +224,7 @@ wss.on('connection', (wss, req) => {
             console.log(actions[i] + ' action start')
             r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c })
           }
-          console.log(r.split(','));
+          console.log(r.split(', '));
           if (r.indexOf('invalid') == -1) {
             success++
             let end_in = new Date()
