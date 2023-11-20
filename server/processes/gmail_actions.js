@@ -366,22 +366,15 @@ class GmailManagement {
         await navigationPromise
         setTimeout(() => {
             const span = page.evaluate(() => {
-                // console.log('evaluate');
                 span = document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
-                // span[1].click()
                 console.log(span);
-                // return span
             })
         }, 10000);
 
-
         setTimeout(() => {
             const plus = page.evaluate(() => {
-                // console.log('evaluate');
                 plus = document.querySelector('.nf .asa')
-                // plus.click()
                 console.log(plus);
-                // return span
             })
         }, 13000);
     }
@@ -389,11 +382,5 @@ class GmailManagement {
 /**
  * ! TESTING !
  */
-let lone = new GmailManagement
-// lone.removeAllInbox('iliasanouar0@gmail.com', 'ilias080701')
-// lone.markAsStarted('iliasanouar0@gmail.com', 'ilias080701')
-// lone.removeAllSpam('iliasanouar0@gmail.com', 'ilias080701')
-// lone.notSpam('iliasanouar0@gmail.com', 'ilias080701')
-// lone.markAsRead('iliasanouar0@gmail.com', 'ilias080701')
-// lone.markAsUnread('aminouhassan771@gmail.com', '97845024')
-// .notSpamThat('iliasanouar0@gmail.com', 'ilias080701', "get started in lucid")
+// let lone = new GmailManagement
+// lone.markAsRead('aminouhassan771@gmail.com', '97845024')
