@@ -243,12 +243,16 @@ const getData = $("#example1").DataTable({
       data: null,
       render: function (data, type, row) {
         let actions = row.action.split(',')
+        let html = ''
         console.log(actions);
-        return `<div class="b-action card m-0">
+        actions.forEach(elm => {
+          html += `<div class="b-action card m-0 col">
           <div class="card-body p-0 text-center text-dark">
-          ${row.action}
+          ${elm}
           </div>
         </div>`
+        })
+        return `<div class="row">${html}</div>`
       }
     },
     {
