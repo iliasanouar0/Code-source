@@ -509,7 +509,69 @@ $(document).on('click', '.details', event => {
             }
         });
         $('.feedback').html(card)
+        $('#Refresh').data('id', id)
+        $('#Refresh').data('id_process', id_process)
         $('#modal-result-view').modal('show')
+    })
+})
+
+$(document).on('click', '#Refresh', event => {
+    $('.feedback').html('')
+    let id = $(event.target).data('id')
+    let id_process = $(event.target).data('id_process')
+    fetch(`http://${ip}:3000/result/feedback/${id}?id_process=${id_process}`).then(response => {
+        return response.json()
+    }).then(data => {
+        if (data.length == 0) {
+            Swal.fire({
+                title: 'NO feedback yet !!',
+                icon: 'info'
+            })
+            return
+        }
+        let feedBack = data[0].feedback.split(', ')
+        if (feedBack[0] == '0') {
+            Swal.fire({
+                title: 'NO feedback yet !!',
+                icon: 'info'
+            })
+            return
+        }
+        let variables
+        let card = ""
+        feedBack.forEach(element => {
+            variables = element.split('-')
+            console.log(variables[2]);
+            if (variables[2] == 'AUTO_LOGIN') {
+                card += `<div class="col">
+                <div class="card">
+                <a class="size">
+                <img src="../../assets/images/process_result/AUTO.png" class="card-img-top" alt="feedback">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">login</h5>
+                    <p class="card-text">${variables[0]}@gmail.com</p>
+                </div>
+                </div>
+            </div>`
+            } else {
+                card += `<div class="col">
+                <div class="card">
+                <a class="size">
+                <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">${variables[2]}</h5>
+                    <p class="card-text">${variables[0]}@gmail.com</p>
+                </div>
+                </div>
+            </div>`
+            }
+        });
+        $('.feedback').html(card)
+        $('#Refresh').data('id', id)
+        $('#Refresh').data('id_process', id_process)
+        // $('#modal-result-view').modal('show')
     })
 })
 
