@@ -481,7 +481,6 @@ $(document).on('click', '.details', event => {
         let card = ""
         feedBack.forEach(element => {
             variables = element.split('-')
-            console.log(variables[2]);
             if (variables[2] == 'AUTO_LOGIN') {
                 card += `<div class="col">
                 <div class="card">
@@ -540,7 +539,6 @@ $(document).on('click', '#Refresh', event => {
         let card = ""
         feedBack.forEach(element => {
             variables = element.split('-')
-            console.log(variables[2]);
             if (variables[2] == 'AUTO_LOGIN') {
                 card += `<div class="col">
                 <div class="card">
