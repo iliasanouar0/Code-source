@@ -679,22 +679,25 @@ const markAsUnread = async (data, pages) => {
     }
     await time(3000)
     console.log(`treated pages : ${pages}`);
+    await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aread')
+    await time(3000)
     for (let i = 0; i < pages; i++) {
         console.log(`starting page : ${i + 1}`);
         await time(3000)
         const status = await page.evaluate(() => {
             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-            checkSpan.item(0).click()
-            return checkSpan.item(0).ariaChecked
+            checkSpan.item(1).click()
+            return checkSpan.item(1).ariaChecked
         })
         await time(3000)
         console.log(status);
         if (status == 'true') {
-            console.log('i will click');
-            await page.waitForSelector('div[act="9"]')
             await time(3000)
-            await page.click('div[act="9"]')
-            console.log('clicked');
+            let c = await page.$$('div[act="2"]')
+            await time(3000)
+            await c[1].click();
+            await time(3000)
+            await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aread')
         } else {
             console.log(`page ${i + 1} have no mode messages`);
             await page.screenshot({
@@ -722,6 +725,7 @@ const markAsUnread = async (data, pages) => {
                 details += `, Out unread inbox : ${countOut[0].count}`
                 await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
             }
+            console.log(details);
             await page.close()
             await browser.close()
             return feedback
@@ -752,6 +756,7 @@ const markAsUnread = async (data, pages) => {
         details += `, Out unread inbox : ${countOut[0].count}`
         await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
     }
+    console.log(details);
     await page.close()
     await browser.close()
     return feedback

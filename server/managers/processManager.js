@@ -256,6 +256,18 @@ const processing = async (data) => {
                     break;
             }
             break;
+        case 'markAsUnread':
+            switch (seed.isp) {
+                case 'gmail':
+                    await gmailManagement.markAsUnread(seed, pages).then(e => {
+                        result = e
+                    })
+                    return result
+                default:
+                    console.log('data invalid');
+                    break;
+            }
+            break;
         case 'openInbox':
             switch (seed.isp) {
                 case 'gmail':
