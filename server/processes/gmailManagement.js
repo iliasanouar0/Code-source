@@ -911,32 +911,23 @@ const openInbox = async (data, count, options) => {
                         }
                         return s[s.length - 1].ariaChecked
                     })
-                    await time(3000)
+                    await time(2000)
                     if (options != false) {
                         let opt = await page.$$("div.pG div.pH-A7.a9q")
                         await opt[opt.length - 1].click()
                     } else {
+                        await time(3000)
                         let m = await page.$$('.bjy.T-I-J3.J-J5-Ji')
-                        if (m.length == 2) {
-                            await m[m.length - 1].click()
-                        } else {
-                            await m[m.length - 2].click()
-                        }
-                        await time(3000)
-                        let l = await page.evaluate(() => {
-                            let p = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
-                            if (p.length == 0) {
-                                return false
-                            }
-                            if (p[0].parentElement.parentElement.ariaDisabled == null) {
-                                return false
-                            }
-                            return p[0].parentElement.parentElement.ariaDisabled
+                        await m[m.length - 1].click()
+                        await time(2000)
+                        let imp = await page.evaluate(() => {
+                            let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
+                            return o[0].parentElement.parentElement.ariaHidden
                         })
-                        await time(3000)
-                        if (l == false) {
-                            let important = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
-                            await important[0].click
+                        await time(2000)
+                        if (imp != 'true') {
+                            let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
+                            await markImp[0].click()
                         }
                     }
                     break;
