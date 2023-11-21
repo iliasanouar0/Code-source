@@ -930,8 +930,16 @@ $('#btn-check-c-link').change(event => {
  * ~check options  
  * ! others :
  */
-
+// verify
 $('#btn-check-verify').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
+// check proxy
+$('#btn-check-proxy').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
         $('.btn-check').prop("checked", false);
