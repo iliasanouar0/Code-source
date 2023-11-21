@@ -913,8 +913,9 @@ $('#btn-check-m-started').change(() => {
 $('#btn-check-c-link').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     console.log(status);
-
-    if (status) $('#btn-check-open').prop("checked", true);
+    if (status) {
+        $('#btn-check-open').prop("checked", true);
+    }
 })
 
 /**
