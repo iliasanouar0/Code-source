@@ -888,3 +888,37 @@ $(document).on('click', '.delete-all-this', () => {
         }
     })
 })
+
+/**
+ * ~check options  
+ * ! inbox :
+ */
+
+// mark as important
+$('#btn-check-m-imp').change(() => {
+    let status = $(this).is(":checked") ? true : false;
+    if (status) $('#btn-check-open').prop("checked", true);
+})
+
+// mark as started
+$('#btn-check-m-started').change(() => {
+    let status = $(this).is(":checked") ? true : false;
+    if (status) $('#btn-check-open').prop("checked", true);
+})
+
+// click inbox
+$('#btn-check-c-link').change(() => {
+    let status = $(this).is(":checked") ? true : false;
+    if (status) $('#btn-check-open').prop("checked", true);
+})
+
+/**
+ * ~check options  
+ * ! spam :
+ */
+
+
+/**
+ * ~check options  
+ * ! others :
+ */
