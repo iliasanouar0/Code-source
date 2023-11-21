@@ -895,18 +895,20 @@ $(document).on('click', '.delete-all-this', () => {
  */
 
 // mark as important
-$('#btn-check-m-imp').change(() => {
-    let status = $(this).is(":checked") ? true : false;
+$('#btn-check-m-imp').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
     console.log(status);
-
-    if (status) $('#btn-check-open').prop("checked", true);
+    if (status) {
+        $('#btn-check-open').prop("checked", true);
+    }
 })
 // mark as started
-$('#btn-check-m-started').change(() => {
-    let status = $(this).is(":checked") ? true : false;
+$('#btn-check-m-started').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
     console.log(status);
-
-    if (status) $('#btn-check-open').prop("checked", true);
+    if (status) {
+        $('#btn-check-open').prop("checked", true);
+    }
 })
 
 // click inbox
