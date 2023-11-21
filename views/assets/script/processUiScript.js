@@ -899,6 +899,7 @@ $('#btn-check-m-imp').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
         $('#btn-check-open').prop("checked", true);
+        $('#btn-check-verify').prop("checked", true);
     }
 })
 // mark as started
@@ -906,6 +907,7 @@ $('#btn-check-m-started').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
         $('#btn-check-open').prop("checked", true);
+        $('#btn-check-verify').prop("checked", true);
     }
 })
 
@@ -914,6 +916,7 @@ $('#btn-check-c-link').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
         $('#btn-check-open').prop("checked", true);
+        $('#btn-check-verify').prop("checked", true);
     }
 })
 
