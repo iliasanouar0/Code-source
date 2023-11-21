@@ -897,7 +897,7 @@ $(document).on('click', '.delete-all-this', () => {
 // open 
 $('#btn-check-open').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
+    if (!status) {
         $('#btn-check-verify').prop("checked", false);
         $('#btn-check-proxy').prop("checked", false);
         $('#btn-check-m-imp').prop("checked", false);
