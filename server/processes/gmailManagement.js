@@ -887,8 +887,16 @@ const openInbox = async (data, count, options) => {
             await time(4000)
             switch (options.markAsStarted) {
                 case true:
-                    let starts = await page.$$('.zd.bi4')
-                    await starts[0].click()
+                    let starts = await page.evaluate(() => {
+                        let s = document.querySelectorAll('.zd.bi4')
+                        return s[0].ariaLabel
+                    })
+                    await time(3000)
+                    console.log(starts);
+                    if (starts != 'Starred') {
+                        let star = await page.$$('.zd.bi4')
+                        await star[0].click()
+                    }
                     break;
                 default:
                     console.log('false');
@@ -900,8 +908,15 @@ const openInbox = async (data, count, options) => {
                     let opt = await page.$$('.bjy.T-I-J3.J-J5-Ji')
                     await opt[opt.length - 1].click()
                     await time(3000)
-                    let imp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
-                    await imp[0].click()
+                    let imp = await page.evaluate(() => {
+                        let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
+                        return o[0].parentElement.parentElement.ariaHidden
+                    })
+                    console.log(imp);
+                    if (imp != 'true') {
+                        let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
+                        await markImp[0].click()
+                    }
                     break;
                 default:
                     console.log('false');

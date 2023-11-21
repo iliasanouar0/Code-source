@@ -80,6 +80,12 @@
 //     feedback += obj.feedback
 //     await time(10000)
 
+//     // await page.screenshot({
+//     //     path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+//     // });
+//     // feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+//     // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+
 //     const countEnter = await page.evaluate(() => {
 //         let html = []
 //         let el = document.querySelectorAll('.bsU')
@@ -129,15 +135,22 @@
 //                 await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
 //             }
 //         } else {
-//             // return
 //             await time(4000)
 //             switch (options.markAsStarted) {
 //                 case true:
-//                     let starts = await page.$$('.zd.bi4')
-//                     await starts[0].click()
+//                     let starts = await page.evaluate(() => {
+//                         let s = document.querySelectorAll('.zd.bi4')
+//                         return s[0].ariaLabel
+//                     })
+//                     await time(3000)
+//                     console.log(starts);
+//                     if (starts != 'Starred') {
+//                         let star = await page.$$('.zd.bi4')
+//                         await star[0].click()
+//                     }
 //                     break;
 //                 default:
-//                     await page.click('.ar6.T-I-J3.J-J5-Ji')
+//                     console.log('false');
 //                     break;
 //             }
 //             await time(3000)
@@ -146,11 +159,18 @@
 //                     let opt = await page.$$('.bjy.T-I-J3.J-J5-Ji')
 //                     await opt[opt.length - 1].click()
 //                     await time(3000)
-//                     let imp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
-//                     await imp[0].click()
+//                     let imp = await page.evaluate(() => {
+//                         let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
+//                         return o[0].parentElement.parentElement.ariaHidden
+//                     })
+//                     console.log(imp);
+//                     if (imp != 'true') {
+//                         let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
+//                         await markImp[0].click()
+//                     }
 //                     break;
 //                 default:
-//                     await page.click('.ar6.T-I-J3.J-J5-Ji')
+//                     console.log('false');
 //                     break;
 //             }
 //             await time(3000)
@@ -159,6 +179,13 @@
 //     }
 
 //     await time(6000)
+//     await page.goto('https://mail.google.com/mail/u/0/#inbox')
+//     await time(3000)
+//     // await page.screenshot({
+//     //     path: `${path}/${data.gmail.split('@')[0]}-@-openInboxResult-${data.id_process}.png`
+//     // });
+//     // feedback += `, ${data.gmail.split('@')[0]}-@-openInboxResult-${data.id_process}.png`
+//     // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
 //     const countOut = await page.evaluate(() => {
 //         let html = []
 //         let el = document.querySelectorAll('.bsU')
@@ -170,21 +197,28 @@
 //     })
 //     if (countOut.length == 0) {
 //         details += `, Out unread inbox : 0`
+//         // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
 //     } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
 //         details += `, Out unread inbox : 0`
+//         // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
 //     } else {
 //         details += `, Out unread inbox  : ${countOut[0].count}`
+//         // await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
 //     }
+//     console.log(details);
 //     return
+//     // await page.close()
+//     // await browser.close()
+//     // return feedback
 // }
 
 // let data = {
 //     // gmail: 'mamanes107@gmail.com',
-//     gmail: 'shrh8274@gmail.com',
-//     password: '09383466753',
+//     gmail: 'ronaldorober12@gmail.com',
+//     password: '02077504',
 //     // proxy: '188.34.177.156',
 //     // proxy: '38.34.185.143:3838',
 //     vrf: 'PennySgueglia@hotmail.com'
 // }
 
-// openInbox(data, 100, { markAsStarted: true, markAsImportant: true })
+// openInbox(data, 100, { markAsImportant: true, markAsStarted: true })
