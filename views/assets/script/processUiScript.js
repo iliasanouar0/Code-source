@@ -910,8 +910,8 @@ $('#btn-check-m-started').change(() => {
 })
 
 // click inbox
-$('#btn-check-c-link').change(() => {
-    let status = $(this).is(":checked") ? true : false;
+$('#btn-check-c-link').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
     console.log(status);
 
     if (status) $('#btn-check-open').prop("checked", true);
