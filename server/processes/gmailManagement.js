@@ -892,7 +892,6 @@ const openInbox = async (data, count, options) => {
                         return s[0].ariaLabel
                     })
                     await time(3000)
-                    console.log(starts);
                     if (starts != 'Starred') {
                         let star = await page.$$('.zd.bi4')
                         await star[0].click()
@@ -905,22 +904,14 @@ const openInbox = async (data, count, options) => {
             await time(3000)
             switch (options.markAsImportant) {
                 case true:
-                    let opt = await page.$$('.bjy.T-I-J3.J-J5-Ji')
-                    console.log(await page.url().includes('https://mail.google.com/mail/u/0/#inbox/'));
-                    if (await page.url().includes('https://mail.google.com/mail/u/0/#inbox/')) {
-                        await opt[opt.length - 1].click()
-                    } else {
-                        await opt[opt.length - 2].click()
-                    }
-                    await time(3000)
-                    let imp = await page.evaluate(() => {
-                        let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
-                        return o[0].parentElement.parentElement.ariaHidden
+                    let options = await page.evaluate(() => {
+                        let s = document.querySelectorAll('.zd.bi4')
+                        return s[0].ariaChecked
                     })
-                    console.log(imp);
-                    if (imp != 'true') {
-                        let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
-                        await markImp[0].click()
+                    await time(3000)
+                    if (options != false) {
+                        let opt = await page.$$("div.pG div.pH-A7.a9q")
+                        await opt[opt.length - 1].click()
                     }
                     break;
                 default:
