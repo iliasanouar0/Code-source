@@ -905,13 +905,39 @@ const openInbox = async (data, count, options) => {
             switch (options.markAsImportant) {
                 case true:
                     let options = await page.evaluate(() => {
-                        let s = document.querySelectorAll('.zd.bi4')
-                        return s[0].ariaChecked
+                        let s = document.querySelectorAll("div.pG")
+                        if (s.length == 0) {
+                            return false
+                        }
+                        return s[s.length - 1].ariaChecked
                     })
                     await time(3000)
                     if (options != false) {
                         let opt = await page.$$("div.pG div.pH-A7.a9q")
                         await opt[opt.length - 1].click()
+                    } else {
+                        let m = await page.$$('.bjy.T-I-J3.J-J5-Ji')
+                        if (m.length == 2) {
+                            await m[m.length - 1].click()
+                        } else {
+                            await m[m.length - 2].click()
+                        }
+                        await time(3000)
+                        let l = await page.evaluate(() => {
+                            let p = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
+                            if (p.length == 0) {
+                                return false
+                            }
+                            if (p[0].parentElement.parentElement.ariaDisabled == null) {
+                                return false
+                            }
+                            return p[0].parentElement.parentElement.ariaDisabled
+                        })
+                        await time(3000)
+                        if (l == false) {
+                            let important = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
+                            await important[0].click
+                        }
                     }
                     break;
                 default:
