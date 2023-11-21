@@ -897,7 +897,6 @@ $(document).on('click', '.delete-all-this', () => {
 // mark as important
 $('#btn-check-m-imp').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
-    console.log(status);
     if (status) {
         $('#btn-check-open').prop("checked", true);
     }
@@ -905,7 +904,6 @@ $('#btn-check-m-imp').change(event => {
 // mark as started
 $('#btn-check-m-started').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
-    console.log(status);
     if (status) {
         $('#btn-check-open').prop("checked", true);
     }
@@ -914,7 +912,6 @@ $('#btn-check-m-started').change(event => {
 // click inbox
 $('#btn-check-c-link').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
-    console.log(status);
     if (status) {
         $('#btn-check-open').prop("checked", true);
     }
@@ -930,3 +927,11 @@ $('#btn-check-c-link').change(event => {
  * ~check options  
  * ! others :
  */
+
+$('#btn-check-verify').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
