@@ -903,6 +903,9 @@ $('#btn-check-open').change(event => {
         $('#btn-check-m-imp').prop("checked", false);
         $('#btn-check-m-started').prop("checked", false);
         $('#btn-check-c-link').prop("checked", false);
+    } else {
+        $('#btn-check-verify').prop("checked", false);
+        $('#btn-check-proxy').prop("checked", false);
     }
 })
 
