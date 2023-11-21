@@ -913,7 +913,7 @@ const openInbox = async (data, count, options) => {
                         return o[0].parentElement.parentElement.ariaHidden
                     })
                     console.log(imp);
-                    if (imp != 'true') {
+                    if (imp != 'true' || imp == null) {
                         let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
                         await markImp[0].click()
                     }
