@@ -106,7 +106,7 @@
 //     console.log(details);
 //     await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
 //     await time(10000)
-
+//     let c = 0
 //     console.log('Messages to read : ' + count);
 //     let unreadOpen
 //     for (let i = 0; i < count; i++) {
@@ -126,7 +126,6 @@
 //             html.push({ messageOpened: i + 1, message: el.item(0).children.item(4).innerText })
 //             return html
 //         }, i)
-//         console.log(unreadOpen);
 //         if (!unreadOpen) {
 //             break
 //         } else if (unreadOpen == true) {
@@ -157,7 +156,12 @@
 //             switch (options.markAsImportant) {
 //                 case true:
 //                     let opt = await page.$$('.bjy.T-I-J3.J-J5-Ji')
-//                     await opt[opt.length - 1].click()
+//                     console.log(await page.url().includes('https://mail.google.com/mail/u/0/#inbox/'));
+//                     if (await page.url().includes('https://mail.google.com/mail/u/0/#inbox/')) {
+//                         await opt[opt.length - 1].click()
+//                     } else {
+//                         await opt[opt.length - 2].click()
+//                     }
 //                     await time(3000)
 //                     let imp = await page.evaluate(() => {
 //                         let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
@@ -214,8 +218,8 @@
 
 // let data = {
 //     // gmail: 'mamanes107@gmail.com',
-//     gmail: 'ronaldorober12@gmail.com',
-//     password: '02077504',
+//     gmail: 'aminouhassan771@gmail.com',
+//     password: '97845024',
 //     // proxy: '188.34.177.156',
 //     // proxy: '38.34.185.143:3838',
 //     vrf: 'PennySgueglia@hotmail.com'
