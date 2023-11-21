@@ -894,12 +894,25 @@ $(document).on('click', '.delete-all-this', () => {
  * ! inbox :
  */
 
+// open 
+$('#btn-check-open').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('#btn-check-verify').prop("checked", false);
+        $('#btn-check-proxy').prop("checked", false);
+        $('#btn-check-m-imp').prop("checked", false);
+        $('#btn-check-m-started').prop("checked", false);
+        $('#btn-check-c-link').prop("checked", false);
+    }
+})
+
 // mark as important
 $('#btn-check-m-imp').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
         $('#btn-check-open').prop("checked", true);
         $('#btn-check-verify').prop("checked", false);
+        $('#btn-check-proxy').prop("checked", false);
     }
 })
 // mark as started
@@ -908,6 +921,7 @@ $('#btn-check-m-started').change(event => {
     if (status) {
         $('#btn-check-open').prop("checked", true);
         $('#btn-check-verify').prop("checked", false);
+        $('#btn-check-proxy').prop("checked", false);
     }
 })
 
@@ -917,6 +931,7 @@ $('#btn-check-c-link').change(event => {
     if (status) {
         $('#btn-check-open').prop("checked", true);
         $('#btn-check-verify').prop("checked", false);
+        $('#btn-check-proxy').prop("checked", false);
     }
 })
 
