@@ -135,7 +135,7 @@
                                                 <h6>Actions access :</h6>
                                             </div>
                                             <div class="col text-right">
-                                                <button class="btn btn-success btn-sm">Add entity</button>
+                                                <button class="btn btn-success btn-sm" id="entityAccess">Add entity</button>
                                             </div>
                                         </div>
                                         <div class="col">
@@ -283,6 +283,43 @@
                         </div>
                         <div class="card-footer text-center">
                             <button type="button" class="btn btn-success" id="add">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade add_access" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Grant access</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Actions</label>
+                                        <select class="form-control" style="width: 100%;" tabindex="-1"
+                                            aria-hidden="true" id="actions">
+                                            <option value="" selected>-_-_SELECT IP TYPE_-_-</option>
+                                            <option value="local">Set mailbox to only primary</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Entity</label>
+                                        <select class="form-control entities" style="width: 100%;" tabindex="-1"
+                                            aria-hidden="true" id="entity_grant">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="button" class="btn btn-success" id="grant_access">Submit</button>
                         </div>
                     </div>
                 </div>

@@ -259,3 +259,62 @@ $('#mode').change(() => {
         $('.mode').html(responseText)
     });
 })
+
+$(document).on('click', '#entityAccess', () => {
+    $('#entity_grant').html('')
+    fetch(`http://${ip}:3000/entity`, {
+        method: "GET",
+    }).then((response) => {
+        return response.json();
+    }).then((data) => {
+        data.forEach((elm) => {
+            let option = document.createElement("option");
+            option.innerHTML = elm["nom"];
+            option.setAttribute("value", elm["id_entity"]);
+            $('#entity_grant').append(option);
+        });
+    }).then(() => {
+        $(".add_access").modal("show");
+    })
+})
+
+const GrantAccess = (data) => {
+    var settings = {
+        url: `http://${ip}:3000/ip/`,
+        method: "POST",
+        timeout: 0,
+        data: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+                "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+            "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+        },
+    };
+    $.ajax(settings).done(function (responseText) {
+        console.log(responseText);
+        Swal.fire({
+            text: responseText,
+            confirmButtonText: "ok",
+        })
+        getDataIP.ajax.reload(null, false)
+        $(".add_ip").modal("hide");
+        $('.add_ip input').val('');
+    });
+};
+
+$(document).on('click', '#grant_access', () => {
+    let type_add = $('#actions').val()
+    let entity_add = $("#entity_grant").val();
+    if (type_add == '' || entity_add == '') {
+        swal.fire('all felids required')
+        return
+    }
+    let data = {
+        type: `${type_add}`,
+        entity: `${entity_add}`,
+    }
+    // GrantAccess(data)
+    console.log(data);
+})
