@@ -83,7 +83,7 @@ node
 
 ### Required files
 
-- The Cookies file.
+- The Cookies file :
 
 In the root folder of the server create AppUsers/cookies :<br>
 1:
@@ -99,7 +99,7 @@ cd AppUsers
 mkdir cookies
 ```
 
-- The log file.
+- The log file :
 
 In the home folder of the server create /home/LogReportingAction/ :<br>
 1:
