@@ -772,21 +772,13 @@ const getAccessGranted = $("#GrantedAccess").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="card m-0">
-          <div class="card-body p-0 text-center">
-          ${row.entity}
-          </div>
-        </div>`
+        return row.entity
       }
     },
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="card m-0 border-dark">
-          <div class="card-body p-0 text-center text-dark">
-          ${row.action}
-          </div>
-        </div>`
+        return row.action
       }
     },
   ],
