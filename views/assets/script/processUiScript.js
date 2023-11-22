@@ -905,7 +905,7 @@ $('#btn-check-open').change(event => {
         $('#btn-check-c-link').prop("checked", false);
         $('#btn-check-du-inbox').prop("checked", false);
         $('#btn-check-dr-inbox').prop("checked", false);
-        
+
     } else {
         $('#btn-check-verify').prop("checked", false);
         $('#btn-check-proxy').prop("checked", false);
@@ -959,6 +959,24 @@ $('#btn-check-du-inbox').change(event => {
 
 // delete read
 $('#btn-check-dr-inbox').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
+
+// mark as read
+$('#btn-check-m-read').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
+
+// mark as unread
+$('#btn-check-m-unread').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
         $('.btn-check').prop("checked", false);
