@@ -912,6 +912,7 @@ $('#btn-check-open').change(event => {
         $('#btn-check-dr-inbox').prop("checked", false);
         $('#btn-check-m-read').prop("checked", false);
         $('#btn-check-m-unread').prop("checked", false);
+        $('#btn-check-m-spam').prop("checked", false);
     }
 })
 
