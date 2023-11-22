@@ -27,7 +27,7 @@
     - [Update the system :](#update-the-system-)
     - [Node.js -v \>= 16 :](#nodejs--v--16-)
   - [Installing](#installing)
-  - [Required files](#required-files)
+    - [Required files](#required-files)
     - [Installing PM2 'PROCESS MANAGER FOR NODE.JS'](#installing-pm2-process-manager-for-nodejs)
     - [Cloning the application || Download the zip folder](#cloning-the-application--download-the-zip-folder)
     - [installing chromium](#installing-chromium)
@@ -81,7 +81,7 @@ node
 
 - And Grant Privileges For "root".
 
-### Required files
+#### Required files
 
 - The Cookies file :
 
