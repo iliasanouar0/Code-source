@@ -1043,7 +1043,8 @@ $('#btn-check-c-spam').change(event => {
 $('#btn-check-d-spam').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
-        $('.btn-check').prop("checked", false);
+        $('.spam .btn-check').prop("checked", false);
+        $('.others .btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
     }
 })
@@ -1053,6 +1054,7 @@ $('#btn-check-n-spam').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
         $('.spam .btn-check').prop("checked", false);
+        $('.others .btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
     }
 })
