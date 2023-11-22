@@ -910,6 +910,8 @@ $('#btn-check-open').change(event => {
         $('#btn-check-proxy').prop("checked", false);
         $('#btn-check-du-inbox').prop("checked", false);
         $('#btn-check-dr-inbox').prop("checked", false);
+        $('#btn-check-m-read').prop("checked", false);
+        $('#btn-check-m-unread').prop("checked", false);
     }
 })
 
