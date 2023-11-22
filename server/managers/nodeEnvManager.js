@@ -50,7 +50,7 @@ const grantAccess = (req, res) => {
         throw result.error
     }
 
-    let granted = `{entity:${access.entity},action:${access.action}},`
+    let granted = `{entity:${access.entity},action:${access.action}}, `
     let options = {
         files: '.env',
         from: /HAS_ACCESS=+/g,
@@ -71,7 +71,7 @@ const getAccessGranted = (req, res) => {
         throw result.error
     }
     let grantAccess = []
-    let string = result.parsed.HAS_ACCESS.split(',')
+    let string = result.parsed.HAS_ACCESS.split(', ')
     res.status(200).send(string)
 }
 
