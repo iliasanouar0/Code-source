@@ -270,7 +270,7 @@ $(document).on('click', '#entityAccess', () => {
         data.forEach((elm) => {
             let option = document.createElement("option");
             option.innerHTML = elm["nom"];
-            option.setAttribute("value", elm["id_entity"]);
+            option.setAttribute("value", elm["nom"]);
             $('#entity_grant').append(option);
         });
     }).then(() => {
