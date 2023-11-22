@@ -1059,6 +1059,16 @@ $('#btn-check-n-spam').change(event => {
     }
 })
 
+// open bulk
+$('#btn-check-ob-spam').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.spam .btn-check').prop("checked", false);
+        $('.others .btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
+
 /**
  * ~check options  
  * ! others :
