@@ -85,7 +85,7 @@ node
 
 - The Cookies file.
 
-In the root folder of the server create AppUsers/cookies :
+In the root folder of the server create AppUsers/cookies :<br>
 1:
 ```
 mkdir AppUsers
@@ -101,7 +101,7 @@ mkdir cookies
 
 - The log file.
 
-In the home folder of the server create /home/LogReportingAction/ :
+In the home folder of the server create /home/LogReportingAction/ :<br>
 1:
 ```
 cd /home
