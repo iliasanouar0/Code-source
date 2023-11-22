@@ -157,8 +157,8 @@
 
 // let data = {
 //     // gmail: 'mamanes107@gmail.com',
-//     gmail: 'ssahaan761294158@gmail.com',
-//     password: '761294158',
+//     gmail: 'hasithjayanath1994@gmail.com',
+//     password: '761578412',
 //     // proxy: '188.34.177.156',
 //     proxy: '38.34.185.143:3838',
 //     vrf: 'pelila1985@outlook.com'

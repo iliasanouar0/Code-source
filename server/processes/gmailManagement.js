@@ -224,7 +224,7 @@ const verify = async (data, entity) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
-        await time(4000)
+        await time(5000)
         for (let i = 0; i < grantAccess.length; i++) {
             if (grantAccess[i].entity == entity) {
                 switch (grantAccess[i].action) {
@@ -376,7 +376,7 @@ const verify = async (data, entity) => {
                         let cos = await page.$$("label:nth-child(6) div button")
                         await time(2000)
                         await cos[0].click()
-                        await time(5000)
+                        await time(7000)
                         let s = 0
                         let checkSpan = await page.$$("td.r9 table tr td")
                         for (let i = 0; i < 3; i++) {
