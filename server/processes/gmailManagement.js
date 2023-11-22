@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 const setTimeout = require('timers/promises');
 const fs = require('fs');
-const { unescape } = require('querystring');
+let dotenv = require('dotenv')
 let time = setTimeout.setTimeout
 puppeteer.use(StealthPlugin())
 
@@ -121,7 +121,16 @@ const primaryDefiner = async (page) => {
     return checked
 }
 
-const verify = async (data) => {
+const verify = async (data, entity) => {
+    const result = dotenv.config()
+    if (result.error) {
+        throw result.error
+    }
+    let grantAccess = []
+    let string = result.parsed.HAS_ACCESS.split(/-/g)
+    for (let i = 1; i < string.length; i++) {
+        grantAccess.push(JSON.parse(string[i - 1]))
+    }
     let details = ''
     let arg
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
@@ -215,9 +224,7 @@ const verify = async (data) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
-        // await time(4000)
-        // let checked = await primaryDefiner(page)
-        // await time(4000)
+
         await time(4000)
         const checked = await page.evaluate(() => {
             let status = []
@@ -242,6 +249,7 @@ const verify = async (data) => {
             await page.click('[name="save"]')
         }
         await time(4000)
+
         const countEnter = await page.evaluate(() => {
             let html = []
             let el = document.querySelectorAll('.bsU')
