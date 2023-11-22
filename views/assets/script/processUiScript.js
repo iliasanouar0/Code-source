@@ -1047,7 +1047,7 @@ $('#btn-check-d-spam').change(event => {
 $('#btn-check-n-spam').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
-        $('.spam.btn-check').prop("checked", false);
+        $('.spam .btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
     }
 })
