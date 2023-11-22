@@ -297,10 +297,13 @@ const verify = async (data, entity) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }
+
     await navigationPromise
     await time(2000)
     console.log(page.url());
-    await page.click('#yDmH0d > c-wiz > div > div.eKnrVb > div > div.j663ec > div > form > span > section:nth-child(2) > div > div > section > div > div > div > ul > li:nth-child(3)')
+    let recovery = await page.$$('.lCoei.YZVTmd.SmR8')
+    await time(2000)
+    await recovery[2].click()
     await time(2000)
     page.waitForSelector('#knowledge-preregistered-email-response')
     await time(2000)
@@ -311,9 +314,9 @@ const verify = async (data, entity) => {
     feedback += `, ${data.gmail.split('@')[0]}-@-verification-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(2000)
-    await page.waitForSelector('#view_container > div > div > div.pwWryf.bxPAYd > div > div.zQJV3 > div > div.qhFLie > div > div > button')
+    let confirm = await page.$$('.VfPpkd-Jh9lGc')
     await time(2000)
-    await page.click('#view_container > div > div > div.pwWryf.bxPAYd > div > div.zQJV3 > div > div.qhFLie > div > div > button')
+    await confirm[0].click()
     await navigationPromise
     await time(10000)
     if (await page.$('[aria-invalid="true"]') != null) {
@@ -328,6 +331,7 @@ const verify = async (data, entity) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
     }
+
     if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
         console.log('verified email : ' + data.gmail);
         await page.screenshot({
