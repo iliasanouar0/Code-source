@@ -774,7 +774,7 @@ const getAccessGranted = $("#GrantedAccess").DataTable({
       render: function (data, type, row) {
         return `<div class="card m-0">
           <div class="card-body p-0 text-center">
-          ${row.ip}
+          ${row.entity}
           </div>
         </div>`
       }
@@ -784,63 +784,11 @@ const getAccessGranted = $("#GrantedAccess").DataTable({
       render: function (data, type, row) {
         return `<div class="card m-0 border-dark">
           <div class="card-body p-0 text-center text-dark">
-          ${row.nom}
+          ${row.action}
           </div>
         </div>`
       }
     },
-    {
-      data: null,
-      render: function (data, type, row) {
-        return `<div class="card m-0 border-dark">
-          <div class="card-body p-0 text-center text-dark">
-          ${row.type}
-          </div>
-        </div>`
-      }
-    },
-    {
-      data: null,
-      render: function (data, type, row) {
-        return `<div class="card m-0 border-dark">
-          <div class="card-body p-0 text-center text-dark">
-          ${row.status}
-          </div>
-        </div>`
-      }
-    },
-    {
-      data: null,
-      render: function (data, type, row) {
-        let add = new Date(row.createdat).toLocaleString()
-        return `<div class="b-action card m-0">
-          <div class="card-body p-0 text-center text-dark">
-          ${add}
-          </div>
-        </div>`
-      }
-    },
-    {
-      data: null,
-      render: function (data, type, row) {
-        let add = new Date(row.updatedat).toLocaleString()
-        return `<div class="b-action card m-0">
-          <div class="card-body p-0 text-center text-dark">
-          ${add}
-          </div>
-        </div>`
-      }
-    },
-    {
-      data: null,
-      searchable: false,
-      orderable: false,
-      render: function (row) {
-        return `<div class="text-center">
-          <button type="button" class="btn btn-success edit"  data-id="${row.id}"><i class="fas fa-edit"></i></button>
-          </div>`
-      }
-    }
   ],
 })
 
@@ -896,5 +844,6 @@ if (path.includes("/admin/users/")) {
   getDataSettings()
 } else if (path.includes("/admin/authorization/")) {
   getDataIP
+  getAccessGranted
   getMode()
 }

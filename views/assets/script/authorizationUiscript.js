@@ -298,6 +298,7 @@ const GrantAccess = (data) => {
             text: responseText,
             confirmButtonText: "ok",
         })
+        getAccessGranted.ajax.reload(null, false)
         $(".add_access").modal("hide");
     });
 };
