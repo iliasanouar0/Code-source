@@ -918,6 +918,7 @@ $('#btn-check-m-imp').change(event => {
         $('#btn-check-proxy').prop("checked", false);
     }
 })
+
 // mark as started
 $('#btn-check-m-started').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
@@ -943,7 +944,28 @@ $('#btn-check-c-link').change(event => {
  * ! spam :
  */
 
+// btn-check-o-spam
+$('#btn-check-o-spam').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (!status) {
+        $('#btn-check-c-spam').prop("checked", false);
+        $('#btn-check-verify').prop("checked", false);
+        $('#btn-check-proxy').prop("checked", false);
+    } else {
+        $('#btn-check-verify').prop("checked", false);
+        $('#btn-check-proxy').prop("checked", false);
+    }
+})
 
+// btn-check-c-spam
+$('#btn-check-c-spam').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('#btn-check-o-spam').prop("checked", true);
+        $('#btn-check-verify').prop("checked", false);
+        $('#btn-check-proxy').prop("checked", false);
+    }
+})
 /**
  * ~check options  
  * ! others :
