@@ -27,6 +27,7 @@
     - [Update the system :](#update-the-system-)
     - [Node.js -v \>= 16 :](#nodejs--v--16-)
   - [Installing](#installing)
+  - [Required files](#required-files)
     - [Installing PM2 'PROCESS MANAGER FOR NODE.JS'](#installing-pm2-process-manager-for-nodejs)
     - [Cloning the application || Download the zip folder](#cloning-the-application--download-the-zip-folder)
     - [installing chromium](#installing-chromium)
@@ -80,6 +81,35 @@ node
 
 - And Grant Privileges For "root".
 
+### Required files
+
+- The Cookies file.
+
+In the root folder of the server create AppUsers/cookies :
+1:
+```
+mkdir AppUsers
+```
+2:
+```
+cd AppUsers
+```
+3 :
+```
+mkdir cookies
+```
+
+- The log file.
+
+In the home folder of the server create /home/LogReportingAction/ :
+1:
+```
+cd /home
+```
+2:
+```
+mkdir LogReportingAction
+```
 #### Installing PM2 'PROCESS MANAGER FOR NODE.JS'
 
 ```
