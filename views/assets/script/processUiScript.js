@@ -903,6 +903,9 @@ $('#btn-check-open').change(event => {
         $('#btn-check-m-imp').prop("checked", false);
         $('#btn-check-m-started').prop("checked", false);
         $('#btn-check-c-link').prop("checked", false);
+        $('#btn-check-du-inbox').prop("checked", false);
+        $('#btn-check-dr-inbox').prop("checked", false);
+        
     } else {
         $('#btn-check-verify').prop("checked", false);
         $('#btn-check-proxy').prop("checked", false);
@@ -916,6 +919,8 @@ $('#btn-check-m-imp').change(event => {
         $('#btn-check-open').prop("checked", true);
         $('#btn-check-verify').prop("checked", false);
         $('#btn-check-proxy').prop("checked", false);
+        $('#btn-check-du-inbox').prop("checked", false);
+        $('#btn-check-dr-inbox').prop("checked", false);
     }
 })
 
@@ -926,6 +931,8 @@ $('#btn-check-m-started').change(event => {
         $('#btn-check-open').prop("checked", true);
         $('#btn-check-verify').prop("checked", false);
         $('#btn-check-proxy').prop("checked", false);
+        $('#btn-check-du-inbox').prop("checked", false);
+        $('#btn-check-dr-inbox').prop("checked", false);
     }
 })
 
@@ -936,6 +943,8 @@ $('#btn-check-c-link').change(event => {
         $('#btn-check-open').prop("checked", true);
         $('#btn-check-verify').prop("checked", false);
         $('#btn-check-proxy').prop("checked", false);
+        $('#btn-check-du-inbox').prop("checked", false);
+        $('#btn-check-dr-inbox').prop("checked", false);
     }
 })
 
@@ -969,6 +978,8 @@ $('#btn-check-o-spam').change(event => {
         $('#btn-check-c-spam').prop("checked", false);
         $('#btn-check-verify').prop("checked", false);
         $('#btn-check-proxy').prop("checked", false);
+        $('#btn-check-du-inbox').prop("checked", false);
+        $('#btn-check-dr-inbox').prop("checked", false);
     } else {
         $('#btn-check-verify').prop("checked", false);
         $('#btn-check-proxy').prop("checked", false);
@@ -982,6 +993,8 @@ $('#btn-check-c-spam').change(event => {
         $('#btn-check-o-spam').prop("checked", true);
         $('#btn-check-verify').prop("checked", false);
         $('#btn-check-proxy').prop("checked", false);
+        $('#btn-check-du-inbox').prop("checked", false);
+        $('#btn-check-dr-inbox').prop("checked", false);
     }
 })
 
