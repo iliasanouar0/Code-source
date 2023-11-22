@@ -122,7 +122,7 @@
 //                     let cos = await page.$$("label:nth-child(6) div button")
 //                     await time(2000)
 //                     await cos[0].click()
-//                     await time(5000)
+//                     await time(7000)
 //                     let s = 0
 //                     let checkSpan = await page.$$("td.r9 table tr td")
 //                     for (let i = 0; i < 3; i++) {
@@ -157,11 +157,11 @@
 
 // let data = {
 //     // gmail: 'mamanes107@gmail.com',
-//     gmail: 'aminouhassan771@gmail.com',
-//     password: '97845024',
+//     gmail: 'ssahaan761294158@gmail.com',
+//     password: '761294158',
 //     // proxy: '188.34.177.156',
-//     // proxy: '38.34.185.143:3838',
-//     vrf: 'PennySgueglia@hotmail.com'
+//     proxy: '38.34.185.143:3838',
+//     vrf: 'pelila1985@outlook.com'
 // }
 
 // // let data = {
