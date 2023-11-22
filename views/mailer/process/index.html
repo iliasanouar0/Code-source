@@ -167,12 +167,12 @@
                                                 style="margin-left: 0px; font-size: 11px; color: rgb(25, 79, 133);">[Open Bulk ,Move To Inbox ,Archive ,Delete [is:unread] ,Delete [is:read] ,Open Bulk Spam,Delete forever Spam ,Move from Promotions to Primary ,Mark as unread ,Delete Archive]</code></small>
                                     </div>
                                 </div>
-                                <div class="col-1" style="width: 3.33333%;">
+                                <div class="col-1 p-0 m-0" style="width: 3.33333%;">
                                     <div class="d-flex h-100">
                                         <div class="vr"></div>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col p-0 m-0">
                                     <div class="form-group max_open">
                                         <label for="max_open">Max emails :</label>
                                         <div class="row g-3 align-items-center">
@@ -204,7 +204,7 @@
                                 <label class="fs-5">Actions</label>
                                 <div class="row w-100 actions">
                                     <div class="row w-100 inbox">
-                                        <label>Inbox :</label>
+                                        <label>- Inbox :</label>
                                         <div class="col">
                                             <div class="form-check">
                                                 <input type="checkbox" class="btn-check" id="btn-check-open"
@@ -275,66 +275,74 @@
                                                     Spam</label><br>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row w-100 spam">
-                                        <label>Spam :</label>
                                         <div class="col">
                                             <div class="form-check">
-                                                <input type="checkbox" class="btn-check" id="btn-check-n-spam"
-                                                    value="notSpam" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btn-check-n-spam">Move to
-                                                    inbox</label><br>
+                                                <input type="checkbox" class="btn-check" id="btn-check-primary-promo"
+                                                    value="promotionsToPrimary" autocomplete="off">
+                                                <label class="btn btn-outline-primary"
+                                                    for="btn-check-primary-promo">Promotions > Primary</label><br>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row w-100 spam">
+                                        <label>- Spam :</label>
+                                        <div class="col">
                                             <div class="form-check">
                                                 <input type="checkbox" class="btn-check" id="btn-check-o-spam"
                                                     value="openSpam" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btn-check-o-spam">Open
+                                                <label class="btn btn-outline-danger" for="btn-check-o-spam">Open
+                                                    Spam</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-c-spam"
+                                                    value="clickSpam" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="btn-check-c-spam">Click
                                                     Spam</label><br>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-check">
-                                                <input type="checkbox" class="btn-check" id="btn-check-d-spam"
-                                                    value="deleteSpam" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btn-check-d-spam">Delete
-                                                    forever</label><br>
+                                                <input type="checkbox" class="btn-check" id="btn-check-n-spam"
+                                                    value="notSpam" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="btn-check-n-spam">Move to
+                                                    inbox</label><br>
                                             </div>
                                             <div class="form-check">
-                                                <input type="checkbox" class="btn-check" id="btn-check-c-spam"
-                                                    value="clickSpam" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btn-check-c-spam">Click
-                                                    Spam</label><br>
+                                                <input type="checkbox" class="btn-check" id="btn-check-d-spam"
+                                                    value="deleteSpam" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="btn-check-d-spam">Delete
+                                                    forever</label><br>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-check">
                                                 <input type="checkbox" class="btn-check" id="btn-check-ob-spam"
                                                     value="openBulkSpam" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btn-check-ob-spamT">Open
+                                                <label class="btn btn-outline-danger" for="btn-check-ob-spam">Open
                                                     bulk
                                                     spam</label><br>
                                             </div>
                                             <div class="form-check">
                                                 <input type="checkbox" class="btn-check" id="btn-check-no-spam"
                                                     value="notSpamOpen" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btn-check-no-spam">Not spam
+                                                <label class="btn btn-outline-danger" for="btn-check-no-spam">Not spam
                                                     [open]</label><br>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row w-100 others">
-                                        <label>Others</label>
+                                        <label>- Others :</label>
                                         <div class="col">
                                             <div class="form-check">
                                                 <input type="checkbox" class="btn-check" id="btn-check-proxy"
                                                     value="checkProxy" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btn-check-proxy">Check
+                                                <label class="btn btn-outline-success" for="btn-check-proxy">Check
                                                     proxy</label><br>
                                             </div>
                                             <div class="form-check">
                                                 <input type="checkbox" class="btn-check" id="btn-check-verify"
                                                     value="verify" autocomplete="off">
-                                                <label class="btn btn-outline-primary"
+                                                <label class="btn btn-outline-success"
                                                     for="btn-check-verify">Verify</label><br>
                                             </div>
                                         </div>
@@ -364,6 +372,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="modal fade" id="edit_action" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
