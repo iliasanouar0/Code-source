@@ -253,3 +253,29 @@
 // // }
 
 // openInbox(data, 100, { markAsImportant: true, markAsStarted: true })
+
+/**
+ * 
+ * // const fs = require('fs')
+// let dotenv = require('dotenv')
+// const replace = require('replace-in-file');
+
+// const result = dotenv.config()
+// if (result.error) {
+//     throw result.error
+// }
+
+// let granted = `{entity:IT,action:test},`
+// let options = {
+//     files: '.env',
+//     from: /HAS_ACCESS=+/g,
+//     to: `HAS_ACCESS=${granted}`,
+// }
+// try {
+//     const results = replace.sync(options);
+//     console.log('Replacement results:', results);
+// } catch (error) {
+//     console.error('Error occurred:', error);
+// } 
+ * 
+ */

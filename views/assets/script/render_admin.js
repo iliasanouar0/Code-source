@@ -748,6 +748,102 @@ const getDataIP = $("#ipAuthorization").DataTable({
   ],
 })
 
+const getAccessGranted = $("#GrantedAccess").DataTable({
+  responsive: true,
+  deferRender: true,
+  destroy: true,
+  autoWidth: false,
+  pageLength: 5,
+  lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+  ajax: {
+    url: `http://${ip}:3000/node/access/`,
+    dataSrc: '',
+  },
+  columns: [
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      defaultContent: "",
+      render: function (data, type, row) {
+        return `<input type="checkbox" class="check" value="${row.entity}">`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0">
+          <div class="card-body p-0 text-center">
+          ${row.ip}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.nom}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.type}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.status}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        let add = new Date(row.createdat).toLocaleString()
+        return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${add}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        let add = new Date(row.updatedat).toLocaleString()
+        return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${add}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (row) {
+        return `<div class="text-center">
+          <button type="button" class="btn btn-success edit"  data-id="${row.id}"><i class="fas fa-edit"></i></button>
+          </div>`
+      }
+    }
+  ],
+})
+
 const getMode = () => {
   var settings = {
     url: `http://${ip}:3000/node/env/`,

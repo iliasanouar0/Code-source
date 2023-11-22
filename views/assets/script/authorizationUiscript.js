@@ -280,7 +280,7 @@ $(document).on('click', '#entityAccess', () => {
 
 const GrantAccess = (data) => {
     var settings = {
-        url: `http://${ip}:3000/ip/`,
+        url: `http://${ip}:3000/node/access/`,
         method: "POST",
         timeout: 0,
         data: JSON.stringify(data),
@@ -298,23 +298,21 @@ const GrantAccess = (data) => {
             text: responseText,
             confirmButtonText: "ok",
         })
-        getDataIP.ajax.reload(null, false)
-        $(".add_ip").modal("hide");
-        $('.add_ip input').val('');
+        $(".add_access").modal("hide");
     });
 };
 
 $(document).on('click', '#grant_access', () => {
-    let type_add = $('#actions').val()
+    let actions_add = $('#actions').val()
     let entity_add = $("#entity_grant").val();
     if (type_add == '' || entity_add == '') {
         swal.fire('all felids required')
         return
     }
     let data = {
-        type: `${type_add}`,
+        action: `${actions_add}`,
         entity: `${entity_add}`,
     }
-    // GrantAccess(data)
     console.log(data);
+    GrantAccess(data)
 })

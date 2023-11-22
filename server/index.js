@@ -76,6 +76,7 @@ if (mode == 'production') {
     ipFilter(allowedIp, { mode: 'allow' })
   )
 }
+
 app.use((err, req, res, _next) => {
   let test = proxyaddr.all(req)
   console.log(test);
@@ -209,9 +210,6 @@ wss.on('connection', (wss, req) => {
             actions = toProcess[0].action.split(',')
             let length = actions.length
             for (let i = 0; i <= actions.length; i++) {
-              console.log(actions);
-              console.log(actions[length - (i + 1)]);
-              console.log(actions[length - (i + 1)].indexOf('markAsImportant'));
               if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
                 actions.pop()
                 options.markAsStarted = true;
@@ -227,7 +225,6 @@ wss.on('connection', (wss, req) => {
               }
             }
           }
-          console.log(options);
           console.log(`Actions : ${actions}`);
           let r = ''
           for (let i = 0; i < actions.length; i++) {
@@ -699,9 +696,11 @@ app.get('/ip/:id', authorizationManager.getIpById)
 app.patch('/ip/', authorizationManager.deleteIp)
 app.put('/ip/', authorizationManager.editIp)
 
-//node API 
+//node API
 app.get('/node/env/', nodeEnvManager.getMode)
 app.post('/node/env/', nodeEnvManager.setMode)
+app.get('/node/access/', nodeEnvManager.getAccessGranted)
+app.post('/node/access/', nodeEnvManager.grantAccess)
 app.listen(port, result.parsed.IP, '0.0.0.0', () => {
   console.log(`Server ip : ${result.parsed.IP} running at ${port}`);
 });
