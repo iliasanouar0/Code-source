@@ -905,10 +905,11 @@ $('#btn-check-open').change(event => {
         $('#btn-check-c-link').prop("checked", false);
         $('#btn-check-du-inbox').prop("checked", false);
         $('#btn-check-dr-inbox').prop("checked", false);
-
     } else {
         $('#btn-check-verify').prop("checked", false);
         $('#btn-check-proxy').prop("checked", false);
+        $('#btn-check-du-inbox').prop("checked", false);
+        $('#btn-check-dr-inbox').prop("checked", false);
     }
 })
 
