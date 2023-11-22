@@ -57,7 +57,7 @@ Add the repository to the system using the commands below
 curl -fsSL https://rpm.nodesource.com/setup_16.x | sudo bash -
 ```
 
-- Once the repository has been configured on your CentOS server you can proceed to install Node.js 16:
+- Once the repository has been configured on your CentOS server you can process to install Node.js 16 :
 
 ```
 sudo yum install -y nodejs
