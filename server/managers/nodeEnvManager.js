@@ -70,7 +70,9 @@ const getAccessGranted = (req, res) => {
     if (result.error) {
         throw result.error
     }
-    res.status(200).send([result.parsed.HAS_ACCESS])
+    let grantAccess = []
+    let string = result.parsed.HAS_ACCESS.split(',')
+    res.status(200).send(string)
 }
 
 module.exports = {
