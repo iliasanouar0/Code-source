@@ -76,6 +76,7 @@ const getAccessGranted = (req, res) => {
         console.log(e);
         grantAccess.push(e)
     })
+    grantAccess.pop()
     res.status(200).send(grantAccess)
 }
 
