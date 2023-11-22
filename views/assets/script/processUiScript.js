@@ -913,6 +913,7 @@ $('#btn-check-open').change(event => {
         $('#btn-check-m-read').prop("checked", false);
         $('#btn-check-m-unread').prop("checked", false);
         $('#btn-check-m-spam').prop("checked", false);
+        $('#btn-check-m-archive').prop("checked", false);
     }
 })
 
