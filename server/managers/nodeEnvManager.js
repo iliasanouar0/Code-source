@@ -72,10 +72,10 @@ const getAccessGranted = (req, res) => {
     }
     let grantAccess = []
     let string = result.parsed.HAS_ACCESS.split(/-/g)
-    string.forEach(e => {
-        grantAccess.push(e)
-    })
-    grantAccess.pop()
+    for (let i = 1; i < string.length; i++) {
+        grantAccess.push(string[i - 1])
+    }
+    console.log(grantAccess);
     res.status(200).send(grantAccess)
 }
 
