@@ -220,11 +220,12 @@ const processing = async (data) => {
     let pages = data.pages
     let count = data.count
     let options = data.options
+    let entity = data.entity
     switch (data.action) {
         case 'verify':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.verify(seed).then(e => {
+                    await gmailManagement.verify(seed, entity).then(e => {
                         result = e
                     })
                     return result
