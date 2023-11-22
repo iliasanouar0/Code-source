@@ -70,7 +70,7 @@ const getAccessGranted = (req, res) => {
     if (result.error) {
         throw result.error
     }
-    res.status(200).send(result.parsed.HAS_ACCESS)
+    res.status(200).send([result.parsed.HAS_ACCESS])
 }
 
 module.exports = {
