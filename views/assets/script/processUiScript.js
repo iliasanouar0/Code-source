@@ -939,6 +939,24 @@ $('#btn-check-c-link').change(event => {
     }
 })
 
+// delete unread
+$('#btn-check-du-inbox').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
+
+// delete read
+$('#btn-check-dr-inbox').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
+
 /**
  * ~check options  
  * ! spam :
