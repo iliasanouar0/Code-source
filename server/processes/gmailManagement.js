@@ -96,31 +96,6 @@ const login = async (data) => {
     return { browser: browser, page: page, feedback: feedback }
 }
 
-// const primaryDefiner = async (page) => {
-//     const checked = await page.evaluate(() => {
-//         let status = []
-//         let checkSpan = document.querySelectorAll('.C7')
-//         for (let i = 0; i < checkSpan.length - 1; i++) {
-//             let check = checkSpan[i].children.item(1).innerText
-//             if (check != 'Primary') {
-//                 let s = checkSpan[i].children.item(0).children[0].ariaChecked
-//                 if (s == 'true') {
-//                     let s = checkSpan[i].children.item(0).click()
-//                     status.push({ unchecked: true, label: check })
-//                 }
-//             }
-//         }
-//         return status
-//     })
-//     if (checked.length != 0) {
-//         await time(3000)
-//         await page.waitForSelector('[name="save"]')
-//         await time(3000)
-//         await page.click('[name="save"]')
-//     }
-//     return checked
-// }
-
 const verify = async (data, entity) => {
     const result = dotenv.config()
     if (result.error) {
@@ -149,6 +124,7 @@ const verify = async (data, entity) => {
     await page.setViewport({ width: 1280, height: 720 });
     const navigationPromise = page.waitForNavigation()
     await page.goto('https://gmail.com/')
+
     await navigationPromise
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
@@ -163,7 +139,7 @@ const verify = async (data, entity) => {
     await page.click('#identifierNext')
     await navigationPromise
     await time(10000)
-    if (await page.$('[aria-invalid="true"]') != null || await page.$('#next > div > div > a') != null) {
+    if (await page.$('[aria-invalid="true"]') != null) {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
         });
@@ -175,43 +151,21 @@ const verify = async (data, entity) => {
         return feedback
     }
     await navigationPromise
-    await time(3000);
-    try {
-        await page.waitForSelector('input[type="password"]', { timeout: 500 })
-    } catch (error) {
-        if (error) {
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
-            });
-            await page.close()
-            await browser.close()
-            console.log(`invalid email : ${data.gmail}`);
-            feedback += `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            return feedback
-        }
-    }
+    await page.waitForSelector('input[type="password"]', { timeout: 500 })
+    await time(3000)
     await page.type('input[type="password"]', data.password, { delay: 200 })
-    await page.screenshot({
-        path: `${path}/${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
-    });
-    feedback += `, ${data.gmail.split('@')[0]}-@-password-${data.id_process}.png`
-    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    await time(1000)
-    await Promise.all([
-        page.$eval(`#passwordNext`, element =>
-            element.click()
-        ),
-        await page.waitForNavigation(),
-    ]);
-    await time(1000)
+    await time(5000)
+    await page.waitForSelector('#passwordNext')
+    await time(2000)
+    await page.click('#passwordNext')
+    await time(10000)
     if (await page.$('[aria-invalid="true"]') != null) {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
         });
         await page.close()
         await browser.close()
-        console.log(`invalid email : ${data.gmail}`);
+        console.log(`invalid pass : ${data.gmail}`);
         feedback += `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         return feedback
