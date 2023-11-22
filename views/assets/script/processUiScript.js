@@ -944,7 +944,7 @@ $('#btn-check-c-link').change(event => {
  * ! spam :
  */
 
-// btn-check-o-spam
+// Open spam
 $('#btn-check-o-spam').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (!status) {
@@ -957,7 +957,7 @@ $('#btn-check-o-spam').change(event => {
     }
 })
 
-// btn-check-c-spam
+// click spam
 $('#btn-check-c-spam').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
@@ -966,10 +966,12 @@ $('#btn-check-c-spam').change(event => {
         $('#btn-check-proxy').prop("checked", false);
     }
 })
+
 /**
  * ~check options  
  * ! others :
  */
+
 // verify
 $('#btn-check-verify').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
@@ -978,6 +980,7 @@ $('#btn-check-verify').change(event => {
         $(event.target).prop("checked", true);
     }
 })
+
 // check proxy
 $('#btn-check-proxy').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
