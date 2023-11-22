@@ -212,7 +212,7 @@ $(document).on('click', '.start', event => {
     let socketState = websocket_s.readyState
     if (socketState !== websocket_s.CLOSED) {
         var settings = {
-            "url": `http://${ip}:3000/process/entity/${user.id_entity}`,
+            "url": `http://${ip}:3000/entity/${user.id_entity}`,
             "method": "GET",
             "timeout": 0,
             "headers": {
