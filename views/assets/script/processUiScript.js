@@ -984,6 +984,24 @@ $('#btn-check-m-unread').change(event => {
     }
 })
 
+// archive
+$('#btn-check-m-archive').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
+
+// mark as spam
+$('#btn-check-m-spam').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
+
 /**
  * ~check options  
  * ! spam :
