@@ -1043,6 +1043,15 @@ $('#btn-check-d-spam').change(event => {
     }
 })
 
+// move to inbox
+$('#btn-check-n-spam').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
+
 /**
  * ~check options  
  * ! others :
