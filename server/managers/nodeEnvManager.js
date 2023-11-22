@@ -71,7 +71,7 @@ const getAccessGranted = (req, res) => {
         throw result.error
     }
     let grantAccess = []
-    let string = result.parsed.HAS_ACCESS.split(/, /g)
+    let string = result.parsed.HAS_ACCESS.split(/, ||,/g)
     string.forEach(e => {
         console.log(e);
         grantAccess.push(e)
