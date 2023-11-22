@@ -293,11 +293,6 @@ const GrantAccess = (data) => {
         },
     };
     $.ajax(settings).done(function (responseText) {
-        console.log(responseText);
-        Swal.fire({
-            text: responseText,
-            confirmButtonText: "ok",
-        })
         getAccessGranted.ajax.reload(null, false)
         $(".add_access").modal("hide");
     });
