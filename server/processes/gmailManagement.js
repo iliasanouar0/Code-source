@@ -343,9 +343,6 @@ const verify = async (data, entity) => {
             return html
         })
         await time(4000)
-        let checked = await primaryDefiner(page)
-        await time(4000)
-        console.log(checked);
         if (countEnter.length == 0) {
             details += `Entre unread inbox : 0`
             await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
