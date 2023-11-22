@@ -74,7 +74,7 @@ const getAccessGranted = (req, res) => {
     let string = result.parsed.HAS_ACCESS.split(', ')
     string.forEach(e=>{
         console.log(e);
-        grantAccess.push(JSON.parse(e))
+        grantAccess.push(e)
     })
     res.status(200).send(grantAccess)
 }
