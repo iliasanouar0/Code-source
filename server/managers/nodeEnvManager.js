@@ -76,7 +76,7 @@ const getAccessGranted = (req, res) => {
     //     grantAccess.push(JSON.parse(string[i - 1]))
     // }
     // res.status(200).send(grantAccess)
-    res.status(200).send(string)
+    res.status(200).send({ entity: string })
 }
 
 module.exports = {
