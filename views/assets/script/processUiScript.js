@@ -151,7 +151,7 @@ $(document).on('click', "#p_add", () => {
     let selected = $('.actions input:checked')
     let login_selected = $('.login_options input:checked').val()
     console.log(login_selected);
-    if (p_list_add == "" || p_status == "" || p_add_date == "" || p_update_date == "" || selected.length == 0) {
+    if (p_list_add == "" || p_status == "" || p_add_date == "" || p_update_date == "" || selected.length == 0 || login_selected == undefined) {
         Swal.fire('Please fill all fields')
         return
     }
