@@ -752,6 +752,7 @@ const getAccessGranted = $("#GrantedAccess").DataTable({
   responsive: true,
   deferRender: true,
   destroy: true,
+  searchable: false,
   autoWidth: false,
   pageLength: 5,
   lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
@@ -775,13 +776,7 @@ const getAccessGranted = $("#GrantedAccess").DataTable({
         return row.entity
       }
     }
-    // {
-    //   data: null,
-    //   render: function (data, type, row) {
-    //     return row.action
-    //   }
-    // },
-  ],
+  ]
 })
 
 const getMode = () => {
