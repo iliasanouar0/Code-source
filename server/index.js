@@ -211,6 +211,8 @@ wss.on('connection', (wss, req) => {
             actions = toProcess[0].action.split(',')
             let length = actions.length
             for (let i = 0; i <= actions.length; i++) {
+              console.log(actions);
+              console.log(actions[length - (i + 1)]);
               if (actions[length - (i + 1)].indexOf('option') != -1) {
                 mode = actions.pop().split(':')[1]
               } else if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
