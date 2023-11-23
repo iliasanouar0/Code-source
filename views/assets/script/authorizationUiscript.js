@@ -299,16 +299,15 @@ const GrantAccess = (data) => {
 };
 
 $(document).on('click', '#grant_access', () => {
-    let actions_add = $('#actions').val()
+    // let actions_add = $('#actions').val()
     let entity_add = $("#entity_grant").val();
-    if (type_add == '' || entity_add == '') {
+    if (entity_add == '') {
         swal.fire('all felids required')
         return
     }
     let data = {
-        action: `${actions_add}`,
+        // action: `${actions_add}`,
         entity: `${entity_add}`,
     }
-    console.log(data);
     GrantAccess(data)
 })
