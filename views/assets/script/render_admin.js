@@ -253,7 +253,7 @@ const getData = $("#example1").DataTable({
         // return `<div class="row">${html}</div>`
         return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.action}">
           <div class="card-body p-0 text-center text-dark">
-          ${row.action.substring(0, 15)}...
+          ${row.action.substring(0, 20)}...
           </div>
          </div>`
       }
