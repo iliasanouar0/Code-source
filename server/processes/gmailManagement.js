@@ -922,17 +922,17 @@ const openInbox = async (data, count, options) => {
                     let options = await page.evaluate(() => {
                         let s = document.querySelectorAll("div.pG")
                         if (s.length == 0) {
-                            return false
+                            return null
                         }
                         return s[s.length - 1].ariaChecked
                     })
                     await time(2000)
                     console.log('options : ' + options);
-                    if (options != false) {
+                    if (!options) {
                         let opt = await page.$$("div.pG div.pH-A7.a9q")
                         await time(2000)
                         await opt[opt.length - 1].click()
-                    } else {
+                    } else if (options == null) {
                         await time(3000)
                         let m = await page.$$('.bjy.T-I-J3.J-J5-Ji')
                         await m[m.length - 1].click()

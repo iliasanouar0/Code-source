@@ -94,9 +94,11 @@
 //     } else {
 //         details += `Entre unread inbox : ${countEnter[0].count}`
 //     }
+
 //     console.log(details);
 //     await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
 //     await time(10000)
+
 //     console.log('Messages to read : ' + count);
 //     let unreadOpen
 //     for (let i = 0; i < count; i++) {
@@ -148,15 +150,17 @@
 //                     let options = await page.evaluate(() => {
 //                         let s = document.querySelectorAll("div.pG")
 //                         if (s.length == 0) {
-//                             return false
+//                             return null
 //                         }
 //                         return s[s.length - 1].ariaChecked
 //                     })
 //                     await time(2000)
-//                     if (options != false) {
+//                     console.log('options : ' + options);
+//                     if (!options) {
 //                         let opt = await page.$$("div.pG div.pH-A7.a9q")
+//                         await time(2000)
 //                         await opt[opt.length - 1].click()
-//                     } else {
+//                     } else if (options == null) {
 //                         await time(3000)
 //                         let m = await page.$$('.bjy.T-I-J3.J-J5-Ji')
 //                         await m[m.length - 1].click()
@@ -181,26 +185,26 @@
 //         }
 //     }
 
-//     await time(6000)
-//     await page.goto('https://mail.google.com/mail/u/0/#inbox')
-//     await time(3000)
-//     const countOut = await page.evaluate(() => {
-//         let html = []
-//         let el = document.querySelectorAll('.bsU')
-//         let elSpan = document.querySelectorAll('.nU.n1 a')
-//         for (let i = 0; i < el.length; i++) {
-//             html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-//         }
-//         return html
-//     })
-//     if (countOut.length == 0) {
-//         details += `, Out unread inbox : 0`
-//     } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
-//         details += `, Out unread inbox : 0`
-//     } else {
-//         details += `, Out unread inbox  : ${countOut[0].count}`
-//     }
-//     console.log(details);
+//     // await time(6000)
+//     // await page.goto('https://mail.google.com/mail/u/0/#inbox')
+//     // await time(3000)
+//     // const countOut = await page.evaluate(() => {
+//     //     let html = []
+//     //     let el = document.querySelectorAll('.bsU')
+//     //     let elSpan = document.querySelectorAll('.nU.n1 a')
+//     //     for (let i = 0; i < el.length; i++) {
+//     //         html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+//     //     }
+//     //     return html
+//     // })
+//     // if (countOut.length == 0) {
+//     //     details += `, Out unread inbox : 0`
+//     // } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
+//     //     details += `, Out unread inbox : 0`
+//     // } else {
+//     //     details += `, Out unread inbox  : ${countOut[0].count}`
+//     // }
+//     // console.log(details);
 //     return
 // }
 
@@ -234,6 +238,7 @@
 // // // }
 
 // openInbox(data, 100, { markAsStarted: true, markAsImportant: true })
+// openInbox(data, 1, { markAsStarted: true, markAsImportant: true })
 
 
 // const fs = require('fs')
