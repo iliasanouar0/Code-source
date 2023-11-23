@@ -156,7 +156,7 @@
 //                     })
 //                     await time(2000)
 //                     console.log('options : ' + options);
-//                     if (!options) {
+//                     if (options == 'false') {
 //                         let opt = await page.$$("div.pG div.pH-A7.a9q")
 //                         await time(2000)
 //                         await opt[opt.length - 1].click()
@@ -185,35 +185,32 @@
 //         }
 //     }
 
-//     // await time(6000)
-//     // await page.goto('https://mail.google.com/mail/u/0/#inbox')
-//     // await time(3000)
-//     // const countOut = await page.evaluate(() => {
-//     //     let html = []
-//     //     let el = document.querySelectorAll('.bsU')
-//     //     let elSpan = document.querySelectorAll('.nU.n1 a')
-//     //     for (let i = 0; i < el.length; i++) {
-//     //         html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-//     //     }
-//     //     return html
-//     // })
-//     // if (countOut.length == 0) {
-//     //     details += `, Out unread inbox : 0`
-//     // } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
-//     //     details += `, Out unread inbox : 0`
-//     // } else {
-//     //     details += `, Out unread inbox  : ${countOut[0].count}`
-//     // }
-//     // console.log(details);
+//     await time(6000)
+//     await page.goto('https://mail.google.com/mail/u/0/#inbox')
+//     await time(3000)
+//     const countOut = await page.evaluate(() => {
+//         let html = []
+//         let el = document.querySelectorAll('.bsU')
+//         let elSpan = document.querySelectorAll('.nU.n1 a')
+//         for (let i = 0; i < el.length; i++) {
+//             html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+//         }
+//         return html
+//     })
+//     if (countOut.length == 0) {
+//         details += `, Out unread inbox : 0`
+//     } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
+//         details += `, Out unread inbox : 0`
+//     } else {
+//         details += `, Out unread inbox  : ${countOut[0].count}`
+//     }
+//     console.log(details);
 //     return
 // }
 
 // let data = {
-//     // gmail: 'mamanes107@gmail.com',
-//     // gmail: 'asithjayanath1994@gmail.com',
-//     gmail: 'ssahaan761294158@gmail.com',
-//     password: '761294158',
-//     // password: '61578412',
+//     gmail: 'ronaldorober12@gmail.com',
+//     password: '02077504',
 //     // proxy: '188.34.177.156',
 //     // proxy: '38.34.185.143:3838',
 //     verification: 'pelila1985@outlook.com'

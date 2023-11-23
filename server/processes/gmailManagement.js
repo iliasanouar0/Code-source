@@ -1044,7 +1044,7 @@ const openInbox = async (data, count, options, mode) => {
                     })
                     await time(2000)
                     console.log('options : ' + options);
-                    if (!options) {
+                    if (options == 'false') {
                         let opt = await page.$$("div.pG div.pH-A7.a9q")
                         await time(2000)
                         await opt[opt.length - 1].click()
