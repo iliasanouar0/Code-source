@@ -868,6 +868,60 @@ const markAsRead = async (data, pages, mode) => {
     console.log(`treated pages : ${pages}`);
     await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
     await time(3000)
+    if (pages == undefined) {
+        let i = 0
+        while (i < 999999) {
+            console.log(`starting page : ${i + 1}`);
+            await time(3000)
+            const status = await page.evaluate(() => {
+                let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
+                checkSpan.item(1).click()
+                return checkSpan.item(1).ariaChecked
+            })
+            await time(3000)
+            console.log(status);
+            if (status == 'true') {
+                await time(3000)
+                let c = await page.$$('div[act="1"]')
+                await time(3000)
+                await c[1].click();
+                await time(3000)
+                await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+                i++
+            } else {
+                console.log(`page ${i + 1} have no mode messages`);
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
+                });
+                feedback += `, ${data.gmail.split('@')[0]}-@-InboxResult-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                await time(3000)
+                const countOut = await page.evaluate(() => {
+                    let html = []
+                    let el = document.querySelectorAll('.bsU')
+                    let elSpan = document.querySelectorAll('.nU.n1 a')
+                    for (let i = 0; i < el.length; i++) {
+                        html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+                    }
+                    return html
+                })
+                if (countOut.length == 0) {
+                    details += `, Out unread inbox : 0`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
+                    details += `, Out unread inbox : 0`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                } else {
+                    details += `, Out unread inbox : ${countOut[0].count}`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                }
+                console.log(details);
+                await page.close()
+                await browser.close()
+                return feedback
+            }
+        }
+    }
     for (let i = 0; i < pages; i++) {
         console.log(`starting page : ${i + 1}`);
         await time(3000)
@@ -989,87 +1043,176 @@ const openInbox = async (data, count, options, mode) => {
 
     console.log('Messages to read : ' + count);
     let unreadOpen
-    for (let i = 0; i < count; i++) {
-        await time(3000)
-        unreadOpen = await page.evaluate((i) => {
-            let html = []
-            let el = document.querySelectorAll('.zA.zE')
-            if (el.length == 0) {
-                let checkMessage = document.querySelectorAll('.TC')
-                if (checkMessage.length != 0) {
-                    return false
-                } else {
-                    return true
-                }
-            }
-            el.item(0).click()
-            html.push({ messageOpened: i + 1, message: el.item(0).children.item(4).innerText })
-            return html
-        }, i)
-        console.log(unreadOpen);
-        if (!unreadOpen) {
-            break
-        } else if (unreadOpen == true) {
-            await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
-            if (await page.url() == 'https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread') {
-                await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
-            }
-        } else {
-            await time(4000)
-            switch (options.markAsStarted) {
-                case true:
-                    let starts = await page.evaluate(() => {
-                        let s = document.querySelectorAll('.zd.bi4')
-                        return s[0].ariaLabel
-                    })
-                    await time(3000)
-                    if (starts != 'Starred') {
-                        let star = await page.$$('.zd.bi4')
-                        await star[0].click()
-                    }
-                    break;
-                default:
-                    console.log('false');
-                    break;
-            }
+    if (count == undefined) {
+        let i = 0
+        while (i < 99999) {
             await time(3000)
-            switch (options.markAsImportant) {
-                case true:
-                    let options = await page.evaluate(() => {
-                        let s = document.querySelectorAll("div.pG")
-                        if (s.length == 0) {
-                            return null
-                        }
-                        return s[s.length - 1].ariaChecked
-                    })
-                    await time(2000)
-                    console.log('options : ' + options);
-                    if (options == 'false') {
-                        let opt = await page.$$("div.pG div.pH-A7.a9q")
-                        await time(2000)
-                        await opt[opt.length - 1].click()
-                    } else if (options == null) {
+            unreadOpen = await page.evaluate((i) => {
+                let html = []
+                let el = document.querySelectorAll('.zA.zE')
+                if (el.length == 0) {
+                    let checkMessage = document.querySelectorAll('.TC')
+                    if (checkMessage.length != 0) {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
+                el.item(0).click()
+                html.push({ messageOpened: i + 1, message: el.item(0).children.item(4).innerText })
+                return html
+            }, i)
+            console.log(unreadOpen);
+            if (!unreadOpen) {
+                break
+            } else if (unreadOpen == true) {
+                await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+                if (await page.url() == 'https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread') {
+                    await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
+                }
+            } else {
+                await time(4000)
+                switch (options.markAsStarted) {
+                    case true:
+                        let starts = await page.evaluate(() => {
+                            let s = document.querySelectorAll('.zd.bi4')
+                            return s[0].ariaLabel
+                        })
                         await time(3000)
-                        let m = await page.$$('.bjy.T-I-J3.J-J5-Ji')
-                        await m[m.length - 1].click()
-                        await time(2000)
-                        let imp = await page.evaluate(() => {
-                            let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
-                            return o[0].parentElement.parentElement.ariaHidden
+                        if (starts != 'Starred') {
+                            let star = await page.$$('.zd.bi4')
+                            await star[0].click()
+                        }
+                        break;
+                    default:
+                        console.log('false');
+                        break;
+                }
+                await time(3000)
+                switch (options.markAsImportant) {
+                    case true:
+                        let options = await page.evaluate(() => {
+                            let s = document.querySelectorAll("div.pG")
+                            if (s.length == 0) {
+                                return null
+                            }
+                            return s[s.length - 1].ariaChecked
                         })
                         await time(2000)
-                        if (imp != 'true') {
-                            let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
-                            await markImp[0].click()
+                        console.log('options : ' + options);
+                        if (options == 'false') {
+                            let opt = await page.$$("div.pG div.pH-A7.a9q")
+                            await time(2000)
+                            await opt[opt.length - 1].click()
+                        } else if (options == null) {
+                            await time(3000)
+                            let m = await page.$$('.bjy.T-I-J3.J-J5-Ji')
+                            await m[m.length - 1].click()
+                            await time(2000)
+                            let imp = await page.evaluate(() => {
+                                let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
+                                return o[0].parentElement.parentElement.ariaHidden
+                            })
+                            await time(2000)
+                            if (imp != 'true') {
+                                let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
+                                await markImp[0].click()
+                            }
                         }
-                    }
-                    break;
-                default:
-                    console.log('false');
-                    break;
+                        break;
+                    default:
+                        console.log('false');
+                        break;
+                }
+                await time(3000)
+                await page.click('.ar6.T-I-J3.J-J5-Ji')
+                i++
             }
+        }
+
+    } else {
+        for (let i = 0; i < count; i++) {
             await time(3000)
-            await page.click('.ar6.T-I-J3.J-J5-Ji')
+            unreadOpen = await page.evaluate((i) => {
+                let html = []
+                let el = document.querySelectorAll('.zA.zE')
+                if (el.length == 0) {
+                    let checkMessage = document.querySelectorAll('.TC')
+                    if (checkMessage.length != 0) {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
+                el.item(0).click()
+                html.push({ messageOpened: i + 1, message: el.item(0).children.item(4).innerText })
+                return html
+            }, i)
+            console.log(unreadOpen);
+            if (!unreadOpen) {
+                break
+            } else if (unreadOpen == true) {
+                await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+                if (await page.url() == 'https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread') {
+                    await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
+                }
+            } else {
+                await time(4000)
+                switch (options.markAsStarted) {
+                    case true:
+                        let starts = await page.evaluate(() => {
+                            let s = document.querySelectorAll('.zd.bi4')
+                            return s[0].ariaLabel
+                        })
+                        await time(3000)
+                        if (starts != 'Starred') {
+                            let star = await page.$$('.zd.bi4')
+                            await star[0].click()
+                        }
+                        break;
+                    default:
+                        console.log('false');
+                        break;
+                }
+                await time(3000)
+                switch (options.markAsImportant) {
+                    case true:
+                        let options = await page.evaluate(() => {
+                            let s = document.querySelectorAll("div.pG")
+                            if (s.length == 0) {
+                                return null
+                            }
+                            return s[s.length - 1].ariaChecked
+                        })
+                        await time(2000)
+                        console.log('options : ' + options);
+                        if (options == 'false') {
+                            let opt = await page.$$("div.pG div.pH-A7.a9q")
+                            await time(2000)
+                            await opt[opt.length - 1].click()
+                        } else if (options == null) {
+                            await time(3000)
+                            let m = await page.$$('.bjy.T-I-J3.J-J5-Ji')
+                            await m[m.length - 1].click()
+                            await time(2000)
+                            let imp = await page.evaluate(() => {
+                                let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
+                                return o[0].parentElement.parentElement.ariaHidden
+                            })
+                            await time(2000)
+                            if (imp != 'true') {
+                                let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
+                                await markImp[0].click()
+                            }
+                        }
+                        break;
+                    default:
+                        console.log('false');
+                        break;
+                }
+                await time(3000)
+                await page.click('.ar6.T-I-J3.J-J5-Ji')
+            }
         }
     }
 
