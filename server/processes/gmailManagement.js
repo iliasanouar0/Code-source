@@ -151,7 +151,7 @@ const verify = async (data, entity) => {
         }
         await page.close()
         await browser.close()
-        feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+        feedback += `${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(5000)
         if (grantAccess.entity == entity) {
