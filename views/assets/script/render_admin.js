@@ -764,15 +764,15 @@ const getAccessGranted = $("#GrantedAccess").DataTable({
     dataSrc: '',
   },
   columns: [
-    {
-      data: null,
-      searchable: false,
-      orderable: false,
-      defaultContent: "",
-      render: function (data, type, row) {
-        return `<input type="checkbox" class="check" value="${row.entity}">`
-      }
-    },
+    // {
+    //   data: null,
+    //   searchable: false,
+    //   orderable: false,
+    //   defaultContent: "",
+    //   render: function (data, type, row) {
+    //     return `<input type="checkbox" class="check" value="${row.entity}">`
+    //   }
+    // },
     {
       data: null,
       render: function (data, type, row) {
