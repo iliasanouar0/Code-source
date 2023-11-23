@@ -766,6 +766,7 @@ const markAsUnread = async (data, pages, mode) => {
                 await c[1].click();
                 await time(3000)
                 await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aread')
+                i++
             } else {
                 console.log(`page ${i + 1} have no mode messages`);
                 await page.screenshot({
