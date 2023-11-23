@@ -18,6 +18,7 @@ puppeteer.use(StealthPlugin())
 const root = __dirname.substring(0, __dirname.indexOf('/server/processes'))
 const path = `${root}/views/assets/images/process_result`
 const cookies = `/root/AppUsers/cookies`
+const userDir = `/root/userDir/`
 let pidProcess = []
 
 const login = async (data) => {
@@ -107,10 +108,10 @@ const verify = async (data, entity) => {
     let details = ''
     let arg
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
-        arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+        arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox', `--user-data-dir=${userDir}${data.gmail.split('@')[0]}-@-init-Gmail`]
     } else {
         const proxyServer = `${data.proxy}`;
-        arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+        arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox', `--user-data-dir=${userDir}${data.gmail.split('@')[0]}-@-init-Gmail`]
     }
     console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     console.log(` `);
