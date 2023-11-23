@@ -774,7 +774,7 @@ const getAccessGranted = $("#GrantedAccess").DataTable({
       render: function (data, type, row) {
         return row.entity
       }
-    },
+    }
     // {
     //   data: null,
     //   render: function (data, type, row) {
