@@ -210,7 +210,7 @@ wss.on('connection', (wss, req) => {
           } else {
             actions = toProcess[0].action.split(',')
             let length = actions.length
-            for (let i = 0; i <= actions.length; i++) {
+            for (let i = 0; i < actions.length; i++) {
               console.log(actions);
               console.log(actions[length - (i + 1)]);
               console.log(actions[length - (i + 1)].indexOf('markAsImportant'));
