@@ -71,7 +71,7 @@ const getAccessGranted = (req, res) => {
         throw result.error
     }
     // let grantAccess = []
-    let string = result.parsed.SERVER_ENTITY.split(/-/g)
+    let string = result.parsed.SERVER_ENTITY
     // for (let i = 1; i < string.length; i++) {
     //     grantAccess.push(JSON.parse(string[i - 1]))
     // }
