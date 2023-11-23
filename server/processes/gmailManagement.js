@@ -927,6 +927,7 @@ const openInbox = async (data, count, options) => {
                         return s[s.length - 1].ariaChecked
                     })
                     await time(2000)
+                    console.log('options : ' + options);
                     if (options != false) {
                         let opt = await page.$$("div.pG div.pH-A7.a9q")
                         await time(2000)
