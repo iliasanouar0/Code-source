@@ -70,7 +70,139 @@
 //     return { browser: browser, page: page, feedback: feedback }
 // }
 
+// const openInbox = async (data, count, options) => {
+//     let feedback = ''
+//     let details = ''
+//     const obj = await login(data)
+//     const page = obj.page
+//     const browser = obj.browser
+//     feedback += obj.feedback
+//     await time(10000)
+//     const countEnter = await page.evaluate(() => {
+//         let html = []
+//         let el = document.querySelectorAll('.bsU')
+//         let elSpan = document.querySelectorAll('.nU.n1 a')
+//         for (let i = 0; i < el.length; i++) {
+//             html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+//         }
+//         return html
+//     })
+//     if (countEnter.length == 0) {
+//         details += `Entre unread inbox : 0`
+//     } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
+//         details += `Entre unread inbox : 0`
+//     } else {
+//         details += `Entre unread inbox : ${countEnter[0].count}`
+//     }
+//     console.log(details);
+//     await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+//     await time(10000)
+//     console.log('Messages to read : ' + count);
+//     let unreadOpen
+//     for (let i = 0; i < count; i++) {
+//         await time(3000)
+//         unreadOpen = await page.evaluate((i) => {
+//             let html = []
+//             let el = document.querySelectorAll('.zA.zE')
+//             if (el.length == 0) {
+//                 let checkMessage = document.querySelectorAll('.TC')
+//                 if (checkMessage.length != 0) {
+//                     return false
+//                 } else {
+//                     return true
+//                 }
+//             }
+//             el.item(0).click()
+//             html.push({ messageOpened: i + 1, message: el.item(0).children.item(4).innerText })
+//             return html
+//         }, i)
+//         console.log(unreadOpen);
+//         if (!unreadOpen) {
+//             break
+//         } else if (unreadOpen == true) {
+//             await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+//             if (await page.url() == 'https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread') {
+//                 await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
+//             }
+//         } else {
+//             await time(4000)
+//             switch (options.markAsStarted) {
+//                 case true:
+//                     let starts = await page.evaluate(() => {
+//                         let s = document.querySelectorAll('.zd.bi4')
+//                         return s[0].ariaLabel
+//                     })
+//                     await time(3000)
+//                     if (starts != 'Starred') {
+//                         let star = await page.$$('.zd.bi4')
+//                         await star[0].click()
+//                     }
+//                     break;
+//                 default:
+//                     console.log('false');
+//                     break;
+//             }
+//             await time(3000)
+//             switch (options.markAsImportant) {
+//                 case true:
+//                     let options = await page.evaluate(() => {
+//                         let s = document.querySelectorAll("div.pG")
+//                         if (s.length == 0) {
+//                             return false
+//                         }
+//                         return s[s.length - 1].ariaChecked
+//                     })
+//                     await time(2000)
+//                     if (options != false) {
+//                         let opt = await page.$$("div.pG div.pH-A7.a9q")
+//                         await opt[opt.length - 1].click()
+//                     } else {
+//                         await time(3000)
+//                         let m = await page.$$('.bjy.T-I-J3.J-J5-Ji')
+//                         await m[m.length - 1].click()
+//                         await time(2000)
+//                         let imp = await page.evaluate(() => {
+//                             let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
+//                             return o[0].parentElement.parentElement.ariaHidden
+//                         })
+//                         await time(2000)
+//                         if (imp != 'true') {
+//                             let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
+//                             await markImp[0].click()
+//                         }
+//                     }
+//                     break;
+//                 default:
+//                     console.log('false');
+//                     break;
+//             }
+//             await time(3000)
+//             await page.click('.ar6.T-I-J3.J-J5-Ji')
+//         }
+//     }
 
+//     await time(6000)
+//     await page.goto('https://mail.google.com/mail/u/0/#inbox')
+//     await time(3000)
+//     const countOut = await page.evaluate(() => {
+//         let html = []
+//         let el = document.querySelectorAll('.bsU')
+//         let elSpan = document.querySelectorAll('.nU.n1 a')
+//         for (let i = 0; i < el.length; i++) {
+//             html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+//         }
+//         return html
+//     })
+//     if (countOut.length == 0) {
+//         details += `, Out unread inbox : 0`
+//     } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
+//         details += `, Out unread inbox : 0`
+//     } else {
+//         details += `, Out unread inbox  : ${countOut[0].count}`
+//     }
+//     console.log(details);
+//     return
+// }
 
 // let data = {
 //     // gmail: 'mamanes107@gmail.com',
@@ -83,25 +215,25 @@
 //     verification: 'pelila1985@outlook.com'
 // }
 
-// // let data = {
-// //     // gmail: 'mamanes107@gmail.com',
-// //     gmail: 'mamanes107@gmail.com',
-// //     password: '97548283',
-// //     // proxy: '188.34.177.156',
-// //     // proxy: '38.34.185.143:3838',
-// //     vrf: 'PennySgueglia@hotmail.com'
-// // }
+// // // let data = {
+// // //     // gmail: 'mamanes107@gmail.com',
+// // //     gmail: 'mamanes107@gmail.com',
+// // //     password: '97548283',
+// // //     // proxy: '188.34.177.156',
+// // //     // proxy: '38.34.185.143:3838',
+// // //     vrf: 'PennySgueglia@hotmail.com'
+// // // }
 
-// // let data = {
-// //     // gmail: 'mamanes107@gmail.com',
-// //     gmail: 'ronaldorober12@gmail.com',
-// //     password: '02077504',
-// //     // proxy: '188.34.177.156',
-// //     // proxy: '38.34.185.143:3838',
-// //     vrf: 'PennySgueglia@hotmail.com'
-// // }
+// // // let data = {
+// // //     // gmail: 'mamanes107@gmail.com',
+// // //     gmail: 'ronaldorober12@gmail.com',
+// // //     password: '02077504',
+// // //     // proxy: '188.34.177.156',
+// // //     // proxy: '38.34.185.143:3838',
+// // //     vrf: 'PennySgueglia@hotmail.com'
+// // // }
 
-// verify(data, "IT")
+// openInbox(data, 100, { markAsStarted: true, markAsImportant: true })
 
 
 // const fs = require('fs')
@@ -113,11 +245,12 @@
 //     throw result.error
 // }
 
-// let granted = JSON.stringify({ "entity": `IT`, "action": `primaryDefiner` }) + '-'
+// // let granted = JSON.stringify({ "entity": `IT`, "action": `primaryDefiner` }) + '-'
+// let granted = 'IT'
 // let options = {
 //     files: '.env',
-//     from: /HAS_ACCESS=+/g,
-//     to: `HAS_ACCESS=${granted}`,
+//     from: /SERVER_ENTITY=\w+/g,
+//     to: `SERVER_ENTITY=${granted}`,
 // }
 // try {
 //     const results = replace.sync(options);

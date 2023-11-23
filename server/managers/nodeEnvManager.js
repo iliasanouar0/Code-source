@@ -50,11 +50,11 @@ const grantAccess = (req, res) => {
         throw result.error
     }
 
-    let granted = JSON.stringify({ "entity": `${access.entity}`, "action": `${access.action}` }) + '-'
+    let granted = `${access.entity}`
     let options = {
         files: '.env',
-        from: /HAS_ACCESS=+/g,
-        to: `HAS_ACCESS=${granted}`,
+        from: /SERVER_ENTITY=\w+/g,
+        to: `SERVER_ENTITY=${granted}`,
     }
     try {
         const results = replace.sync(options);
@@ -70,12 +70,13 @@ const getAccessGranted = (req, res) => {
     if (result.error) {
         throw result.error
     }
-    let grantAccess = []
-    let string = result.parsed.HAS_ACCESS.split(/-/g)
-    for (let i = 1; i < string.length; i++) {
-        grantAccess.push(JSON.parse(string[i - 1]))
-    }
-    res.status(200).send(grantAccess)
+    // let grantAccess = []
+    let string = result.parsed.SERVER_ENTITY.split(/-/g)
+    // for (let i = 1; i < string.length; i++) {
+    //     grantAccess.push(JSON.parse(string[i - 1]))
+    // }
+    // res.status(200).send(grantAccess)
+    res.status(200).send(string)
 }
 
 module.exports = {
