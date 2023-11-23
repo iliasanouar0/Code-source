@@ -753,6 +753,7 @@ const getAccessGranted = $("#GrantedAccess").DataTable({
   deferRender: true,
   destroy: true,
   searching: false,
+  ordering: false,
   autoWidth: false,
   pageLength: 5,
   lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
