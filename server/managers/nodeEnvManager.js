@@ -70,13 +70,8 @@ const getAccessGranted = (req, res) => {
     if (result.error) {
         throw result.error
     }
-    // let grantAccess = []
     let string = result.parsed.SERVER_ENTITY
-    // for (let i = 1; i < string.length; i++) {
-    //     grantAccess.push(JSON.parse(string[i - 1]))
-    // }
-    // res.status(200).send(grantAccess)
-    res.status(200).send({ entity: string })
+    res.status(200).send([{ entity: string }])
 }
 
 module.exports = {
