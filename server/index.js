@@ -210,10 +210,9 @@ wss.on('connection', (wss, req) => {
           } else {
             actions = toProcess[0].action.split(',')
             let length = actions.length
-            for (let i = 0; i < actions.length + 1; i++) {
+            for (let i = 0; i < length; i++) {
               console.log(i);
               console.log(actions);
-              console.log(actions.length + 1);
               console.log(actions[length - (i + 1)]);
               console.log(actions[length - (i + 1)].indexOf('markAsImportant'));
               if (actions[length - (i + 1)].indexOf('option') != -1) {
