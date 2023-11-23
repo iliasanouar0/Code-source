@@ -142,7 +142,6 @@ function msToMnSc(ms) {
 
 const getData = $("#example1").DataTable({
   responsive: true,
-  // deferRender: true,
   order: [[1, 'desc']],
   destroy: true,
   autoWidth: false,
@@ -252,9 +251,9 @@ const getData = $("#example1").DataTable({
         // </div>`
         // })
         // return `<div class="row">${html}</div>`
-        return `<div class="card m-0">
+        return `<div class="card m-0 data-bs-toggle="tooltip" data-bs-title="${row.action}"">
           <div class="card-body p-0 text-center text-dark">
-          ${row.action}
+          ${row.action.substring(0, 10)}
           </div>
          </div>`
       }
