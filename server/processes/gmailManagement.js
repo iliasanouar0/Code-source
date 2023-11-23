@@ -179,44 +179,39 @@ const verify = async (data, entity) => {
         await time(5000)
 
         if (grantAccess.entity == entity) {
-            switch (grantAccess[i].action) {
-                case "primaryDefiner":
-                    await page.waitForSelector('.FH')
-                    await time(2000)
-                    await page.click('.FH')
-                    await time(2000)
-                    let op = await page.$$("label:nth-child(6) span")
-                    await time(2000)
-                    await op[0].click()
-                    await time(2000)
-                    let cos = await page.$$("label:nth-child(6) div button")
-                    await time(2000)
-                    await cos[0].click()
-                    await time(7000)
-                    let s = 0
-                    let checkSpan = await page.$$("td.r9 table tr td")
-                    for (let i = 0; i < 3; i++) {
-                        s = s + 1
-                        if (s % 2 == 0) {
-                            s = s + 1
-                        }
-                        console.log(s);
-                        await time(1000)
-                        checkSpan[s].click()
-                        await time(1000)
-                        let sp = await page.$$('[act="z"] .J-N-Jz')
-                        await time(1000)
-                        await sp[sp.length - 1].click()
-                        await time(1000)
-                    }
-                    await time(3000)
-                    let btn = await page.$$('[guidedhelpid="save_changes_button"]')
-                    await time(2000)
-                    await btn[0].click()
-                    break;
-                default:
-                    break;
+            await page.waitForSelector('.FH')
+            await time(2000)
+            await page.click('.FH')
+            await time(2000)
+            let op = await page.$$("label:nth-child(6) span")
+            await time(2000)
+            await op[0].click()
+            await time(2000)
+            let cos = await page.$$("label:nth-child(6) div button")
+            await time(2000)
+            await cos[0].click()
+            await time(7000)
+            let s = 0
+            let checkSpan = await page.$$("td.r9 table tr td")
+            for (let i = 0; i < 3; i++) {
+                s = s + 1
+                if (s % 2 == 0) {
+                    s = s + 1
+                }
+                console.log(s);
+                await time(1000)
+                checkSpan[s].click()
+                await time(1000)
+                let sp = await page.$$('[act="z"] .J-N-Jz')
+                await time(1000)
+                await sp[sp.length - 1].click()
+                await time(1000)
             }
+            await time(3000)
+            let btn = await page.$$('[guidedhelpid="save_changes_button"]')
+            await time(2000)
+            await btn[0].click()
+
         } else {
             console.log("no access !!");
         }
@@ -314,44 +309,39 @@ const verify = async (data, entity) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(5000)
         if (grantAccess.entity == entity) {
-            switch (grantAccess[i].action) {
-                case "primaryDefiner":
-                    await page.waitForSelector('.FH')
-                    await time(2000)
-                    await page.click('.FH')
-                    await time(2000)
-                    let op = await page.$$("label:nth-child(6) span")
-                    await time(2000)
-                    await op[0].click()
-                    await time(2000)
-                    let cos = await page.$$("label:nth-child(6) div button")
-                    await time(2000)
-                    await cos[0].click()
-                    await time(7000)
-                    let s = 0
-                    let checkSpan = await page.$$("td.r9 table tr td")
-                    for (let i = 0; i < 3; i++) {
-                        s = s + 1
-                        if (s % 2 == 0) {
-                            s = s + 1
-                        }
-                        console.log(s);
-                        await time(1000)
-                        checkSpan[s].click()
-                        await time(1000)
-                        let sp = await page.$$('[act="z"] .J-N-Jz')
-                        await time(1000)
-                        await sp[sp.length - 1].click()
-                        await time(1000)
-                    }
-                    await time(3000)
-                    let btn = await page.$$('[guidedhelpid="save_changes_button"]')
-                    await time(2000)
-                    await btn[0].click()
-                    break;
-                default:
-                    break;
+            await page.waitForSelector('.FH')
+            await time(2000)
+            await page.click('.FH')
+            await time(2000)
+            let op = await page.$$("label:nth-child(6) span")
+            await time(2000)
+            await op[0].click()
+            await time(2000)
+            let cos = await page.$$("label:nth-child(6) div button")
+            await time(2000)
+            await cos[0].click()
+            await time(7000)
+            let s = 0
+            let checkSpan = await page.$$("td.r9 table tr td")
+            for (let i = 0; i < 3; i++) {
+                s = s + 1
+                if (s % 2 == 0) {
+                    s = s + 1
+                }
+                console.log(s);
+                await time(1000)
+                checkSpan[s].click()
+                await time(1000)
+                let sp = await page.$$('[act="z"] .J-N-Jz')
+                await time(1000)
+                await sp[sp.length - 1].click()
+                await time(1000)
             }
+            await time(3000)
+            let btn = await page.$$('[guidedhelpid="save_changes_button"]')
+            await time(2000)
+            await btn[0].click()
+
         } else {
             console.log("no access !!");
         }
