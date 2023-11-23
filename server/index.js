@@ -203,14 +203,17 @@ wss.on('connection', (wss, req) => {
           let pages
           let c
           let options = { markAsImportant: false, markAsStarted: false }
+          let mode
 
-          if (toProcess[0].action.indexOf('count') == -1 && toProcess[0].action.indexOf('pages') == -1 && toProcess[0].action.indexOf('subject') == -1) {
+          if (toProcess[0].action.indexOf('count') == -1 && toProcess[0].action.indexOf('pages') == -1 && toProcess[0].action.indexOf('subject') == -1 && toProcess[0].action.indexOf('option') == -1) {
             actions = [toProcess[0].action]
           } else {
             actions = toProcess[0].action.split(',')
             let length = actions.length
             for (let i = 0; i <= actions.length; i++) {
-              if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
+              if (actions[length - (i + 1)].indexOf('option') != -1) {
+                mode = actions.pop().split(':')[1]
+              } else if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
                 actions.pop()
                 options.markAsStarted = true;
               } else if (actions[length - (i + 1)].indexOf('markAsImportant') != -1) {
@@ -229,7 +232,7 @@ wss.on('connection', (wss, req) => {
           let r = ''
           for (let i = 0; i < actions.length; i++) {
             console.log(actions[i] + ' action start')
-            r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c, options: options, entity: data.entity })
+            r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c, options: options, entity: data.entity, mode: mode })
             if (i < actions.length) {
               r += ', '
             }

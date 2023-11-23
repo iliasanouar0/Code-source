@@ -221,11 +221,12 @@ const processing = async (data) => {
     let count = data.count
     let options = data.options
     let entity = data.entity
+    let mode = data.mode
     switch (data.action) {
         case 'verify':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.verify(seed, entity).then(e => {
+                    await gmailManagement.verify(seed, entity, mode).then(e => {
                         result = e
                     })
                     return result
@@ -237,7 +238,7 @@ const processing = async (data) => {
         case 'notSpam':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.notSpam(seed, pages).then(e => {
+                    await gmailManagement.notSpam(seed, pages, mode).then(e => {
                         result = e
                     })
                     return result
@@ -249,7 +250,7 @@ const processing = async (data) => {
         case 'markAsSpam':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.markAsSpam(seed, pages).then(e => {
+                    await gmailManagement.markAsSpam(seed, pages, mode).then(e => {
                         result = e
                     })
                     return result
@@ -261,7 +262,7 @@ const processing = async (data) => {
         case 'markAsUnread':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.markAsUnread(seed, pages).then(e => {
+                    await gmailManagement.markAsUnread(seed, pages, mode).then(e => {
                         result = e
                     })
                     return result
@@ -273,7 +274,7 @@ const processing = async (data) => {
         case 'openInbox':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.openInbox(seed, count, options).then(e => {
+                    await gmailManagement.openInbox(seed, count, options, mode).then(e => {
                         result = e
                     })
                     return result
@@ -285,7 +286,7 @@ const processing = async (data) => {
         case 'markAsRead':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.markAsRead(seed, pages).then(e => {
+                    await gmailManagement.markAsRead(seed, pages, mode).then(e => {
                         result = e
                     })
                     return result

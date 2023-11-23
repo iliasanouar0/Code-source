@@ -172,7 +172,7 @@ $(document).on('click', "#p_add", () => {
             valueSelect.push(selected_inbox[i].value)
         }
     }
-    
+
     if (selected_other != 0) {
         for (let i = 0; i < selected_other.length; i++) {
             valueSelect.push(selected_other[i].value)
@@ -192,6 +192,8 @@ $(document).on('click', "#p_add", () => {
     if (p_max_open != '' || p_max_open != 0) {
         action += `,count:${p_max_open}`
     }
+
+    action += `,option:${login_selected}`
 
     const data = {
         "name": `test`,
