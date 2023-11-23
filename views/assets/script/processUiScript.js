@@ -160,16 +160,19 @@ $(document).on('click', "#p_add", () => {
     let selected_spam = $('.spam input:checked')
     let selected_inbox = $('.inbox input:checked')
     let selected_other = $('.others input:checked')
+
     if (selected_spam != 0) {
         for (let i = 0; i < selected_spam.length; i++) {
             valueSelect.push(selected_spam[i].value)
         }
     }
+
     if (selected_inbox != 0) {
         for (let i = 0; i < selected_inbox.length; i++) {
             valueSelect.push(selected_inbox[i].value)
         }
     }
+    
     if (selected_other != 0) {
         for (let i = 0; i < selected_other.length; i++) {
             valueSelect.push(selected_other[i].value)
