@@ -68,78 +68,6 @@ const addProcess = data => {
     })
 }
 
-// $("#btn-check-verify").change(function () {
-//     let status = $(this).is(":checked") ? true : false;
-//     if (status) {
-//         $(".btn-check").prop("checked", !status);
-//         $(this).prop("checked", status);
-//     }
-// });
-
-// $("#btn-check-proxy").change(function () {
-//     let status = $(this).is(":checked") ? true : false;
-//     if (status) {
-//         $(".btn-check").prop("checked", !status);
-//         $(this).prop("checked", status);
-//     }
-// });
-
-// $("#btn-check-c-spam").change(function () {
-//     let status = $(this).is(":checked") ? true : false;
-//     if (status) {
-//         $("#btn-check-o-spam").prop("checked", status);
-//     }
-// });
-
-// $("#btn-check-c-link").change(function () {
-//     let status = $(this).is(":checked") ? true : false;
-//     if (status) {
-//         $("#btn-check-open").prop("checked", status);
-//     }
-// });
-
-// $("#btn-check-n-spam").change(() => {
-//     let other = $("#btn-check-m-spam").is(":checked") ? true : false;
-//     let status = $(this).is(":checked") ? true : false;
-//     if (!other) {
-//         $('.max_pages').toggleClass('d-none')
-//     }
-// });
-
-// $("#btn-check-m-spam").change(() => {
-//     let other = $("#btn-check-n-spam").is(":checked") ? true : false;
-//     let status = $(this).is(":checked") ? true : false;
-//     if (!other) {
-//         $('.max_pages').toggleClass('d-none')
-//     }
-// });
-
-// $(".btn-check").change(function () {
-//     let status = $(this).is(":checked") ? true : false;
-//     if (status) {
-//         $("#btn-check-proxy").prop("checked", !status);
-//         $("#btn-check-verify").prop("checked", !status);
-//         $(this).prop("checked", status);
-//     }
-// });
-
-// $("#btn-check-open").change(() => {
-//     let other = $("#btn-check-n-spam").is(":checked") ? true : false;
-//     let status = $(this).is(":checked") ? true : false;
-//     if (!other || status) {
-//         $('.max_open').toggleClass('d-none')
-//     }
-// })
-
-// $("#btn-check-o-spam").change(() => {
-//     let other = $("#btn-check-n-spam").is(":checked") ? true : false;
-//     let status = $(this).is(":checked") ? true : false;
-//     if (!other || status) {
-//         $('.max_open').toggleClass('d-none')
-//     }
-// })
-
-
 $(document).on('click', "#p_add", () => {
     let p_max_open = $('#max_open').val()
     let p_subject = $('#p_subject').val()
@@ -498,7 +426,8 @@ $(document).on('click', '.details', event => {
         let card = ""
         feedBack.forEach(element => {
             variables = element.split('-')
-            if (variables[2] == 'AUTO_LOGIN') {
+            let c = 0
+            if (variables[2] == 'AUTO_LOGIN' && c == 0) {
                 card += `<div class="col">
                 <div class="card">
                 <a class="size">
@@ -510,7 +439,8 @@ $(document).on('click', '.details', event => {
                 </div>
                 </div>
             </div>`
-            } else {
+                c++
+            } else if (variables[2] != 'AUTO_LOGIN') {
                 card += `<div class="col">
                 <div class="card">
                 <a class="size">
