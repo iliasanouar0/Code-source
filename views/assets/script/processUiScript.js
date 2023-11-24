@@ -243,7 +243,7 @@ function msToMnSc(duration) {
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-    return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+    return hours + ":" + minutes + ":" + seconds;
 }
 
 $(document).on('click', '.status', event => {

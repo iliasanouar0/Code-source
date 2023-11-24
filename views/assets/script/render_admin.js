@@ -150,7 +150,7 @@ function msToMnSc(duration) {
   minutes = (minutes < 10) ? "0" + minutes : minutes;
   seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-  return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+  return hours + ":" + minutes + ":" + seconds;
 }
 
 const getData = $("#example1").DataTable({
@@ -280,7 +280,7 @@ const getData = $("#example1").DataTable({
         }
         let end_in = new Date(row.end_in)
         let start_in = new Date(row.start_in)
-        let end = `${end_in.toLocaleString()} <span class="text-danger">[ ${msToMnSc(end_in - start_in)} min ]</span>`
+        let end = `${end_in.toLocaleString()} <span class="text-danger">[ ${msToMnSc(end_in - start_in)}]</span>`
         return end
       }
     },
