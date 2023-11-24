@@ -30,7 +30,7 @@ const login = async (data, mode) => {
         const proxyServer = `${data.proxy}`;
         arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     }
-    console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
+    console.log(`Opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     console.log(` `);
     if (mode == 'Cookies') {
         const browser = await puppeteer.launch({ headless: 'new', args: arg })
