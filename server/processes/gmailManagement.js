@@ -109,10 +109,9 @@ const login = async (data, mode) => {
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail);
             await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+                path: `${path}/${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
             });
-
-            feedback += `${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+            feedback += `${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
             await time(5000)
         } else {
