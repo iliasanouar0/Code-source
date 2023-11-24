@@ -130,16 +130,6 @@ fetch(adminNavbarUrl)
     navbarContainer.innerHTML = html;
   });
 
-// function msToMnSc(ms) {
-//   var minutes = Math.floor(ms / 60000);
-//   var seconds = ((ms % 60000) / 1000).toFixed(0);
-//   let hours = Math.floor(minutes / 60);
-//   return (
-//     hours + ":" + seconds == 60 ? (minutes + 1) + ":00" :
-//       minutes + ":" + (seconds < 10 ? "0" : "") + seconds
-//   );
-// }
-
 function msToMnSc(duration) {
   var milliseconds = Math.floor((duration % 1000) / 100),
     seconds = Math.floor((duration / 1000) % 60),
@@ -150,7 +140,7 @@ function msToMnSc(duration) {
   minutes = (minutes < 10) ? "0" + minutes : minutes;
   seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-  return hours + ":" + minutes + ":" + seconds;
+  return hours + " : " + minutes + " : " + seconds;
 }
 
 const getData = $("#example1").DataTable({
