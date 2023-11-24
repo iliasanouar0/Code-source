@@ -133,10 +133,9 @@ fetch(adminNavbarUrl)
 function msToMnSc(ms) {
   var minutes = Math.floor(ms / 60000);
   var seconds = ((ms % 60000) / 1000).toFixed(0);
+  let hours = 0
   return (
-    seconds == 60 ?
-      (minutes + 1) + ":00" :
-      minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+    minutes == 60 ? hours + 1 + ":" + seconds == 60 ? (minutes + 1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds : seconds == 60 ? (minutes + 1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds
   );
 }
 
@@ -241,16 +240,6 @@ const getData = $("#example1").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        // let actions = row.action.split(',')
-        // let html = ''
-        // actions.forEach(elm => {
-        //   html += `<div class="card m-0">
-        //   <div class="card-body p-0 text-center text-dark">
-        //   ${elm}
-        //   </div>
-        // </div>`
-        // })
-        // return `<div class="row">${html}</div>`
         return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.action}">
           <div class="card-body p-0 text-center text-dark">
           ${row.action.substring(0, 20)}...
