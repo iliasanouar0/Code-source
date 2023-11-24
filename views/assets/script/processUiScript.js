@@ -424,10 +424,10 @@ $(document).on('click', '.details', event => {
         }
         let variables
         let card = ""
+        let c = 0
         feedBack.forEach(element => {
             variables = element.split('-')
-            let c = 0
-            if (variables[2] == 'AUTO_LOGIN' && c == 0) {
+            if (variables[2] == 'AUTO_LOGIN' && c === 0) {
                 card += `<div class="col">
                 <div class="card">
                 <a class="size">
