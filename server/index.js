@@ -364,7 +364,50 @@ wss.on('connection', (wss, req) => {
           if (state == "STOPPED") {
             break
           }
-          let r = await processManager.processing(toProcess[0])
+          let actions
+          let subject
+          let pages
+          let c
+          let options = { markAsImportant: false, markAsStarted: false }
+          let mode
+
+          if (toProcess[0].action.indexOf('count') == -1 && toProcess[0].action.indexOf('pages') == -1 && toProcess[0].action.indexOf('subject') == -1 && toProcess[0].action.indexOf('option') == -1) {
+            actions = [toProcess[0].action]
+          } else {
+            actions = toProcess[0].action.split(',')
+            let length = actions.length
+            for (let i = 0; i < length; i++) {
+              if (actions[length - (i + 1)].indexOf('option') != -1) {
+                mode = actions.pop().split(':')[1]
+              } else if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
+                actions.pop()
+                options.markAsStarted = true;
+              } else if (actions[length - (i + 1)].indexOf('markAsImportant') != -1) {
+                actions.pop()
+                options.markAsImportant = true;
+              } else if (actions[length - (i + 1)].indexOf('count') != -1) {
+                c = actions.pop().split(':')[1]
+              } else if (actions[length - (i + 1)].indexOf('pages') != -1) {
+                pages = parseInt(actions.pop().split(':')[1])
+              } else if (actions[length - (i + 1)].indexOf('subject') != -1) {
+                subject = actions.pop().split(':')[1]
+              }
+            }
+          }
+          console.log(`Actions : ${actions}`);
+          let r = ''
+          for (let i = 0; i < actions.length; i++) {
+            console.log(actions[i] + ' action start')
+            r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c, options: options, entity: data.entity, mode: mode })
+            if (i < actions.length) {
+              r += ', '
+            }
+          }
+          let array = r.split(', ')
+          array.pop()
+          r = array.join((', '))
+          console.log(r);
+          await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
           if (r.indexOf('invalid') == -1) {
             success++
             await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "finished")
