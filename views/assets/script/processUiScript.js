@@ -236,12 +236,11 @@ $(document).on('click', '.resume', event => {
 function msToMnSc(ms) {
     var minutes = Math.floor(ms / 60000);
     var seconds = ((ms % 60000) / 1000).toFixed(0);
+    let hours = 0
     return (
-        seconds == 60 ?
-            (minutes + 1) + ":00" :
-            minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+      minutes == 60 ? hours + 1 + ":" + seconds == 60 ? (minutes + 1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds : seconds == 60 ? (minutes + 1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds
     );
-}
+  }
 
 $(document).on('click', '.status', event => {
     $('body').tooltip('dispose');
