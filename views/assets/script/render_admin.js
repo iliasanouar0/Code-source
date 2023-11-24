@@ -280,7 +280,7 @@ const getData = $("#example1").DataTable({
         }
         let end_in = new Date(row.end_in)
         let start_in = new Date(row.start_in)
-        let end = `${end_in.toLocaleString()} <span class="text-danger">[ ${msToMnSc(end_in - start_in)}]</span>`
+        let end = `${end_in.toLocaleString()} <span class="text-danger">[ ${msToMnSc(end_in - start_in)} ]</span>`
         return end
       }
     },
