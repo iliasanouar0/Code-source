@@ -202,10 +202,10 @@ wss.on('connection', (wss, req) => {
           let subject
           let pages
           let c
-          let options = { markAsImportant: false, markAsStarted: false }
+          let options = { markAsImportant: false, markAsStarted: false, click: false }
           let mode
 
-          if (toProcess[0].action.indexOf('count') == -1 && toProcess[0].action.indexOf('pages') == -1 && toProcess[0].action.indexOf('subject') == -1 && toProcess[0].action.indexOf('option') == -1) {
+          if (toProcess[0].action.indexOf('click') == -1 && toProcess[0].action.indexOf('count') == -1 && toProcess[0].action.indexOf('pages') == -1 && toProcess[0].action.indexOf('subject') == -1 && toProcess[0].action.indexOf('option') == -1) {
             actions = [toProcess[0].action]
           } else {
             actions = toProcess[0].action.split(',')
@@ -216,6 +216,9 @@ wss.on('connection', (wss, req) => {
               } else if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
                 actions.pop()
                 options.markAsStarted = true;
+              } else if (actions[length - (i + 1)].indexOf('click') != -1) {
+                actions.pop()
+                options.click = true;
               } else if (actions[length - (i + 1)].indexOf('markAsImportant') != -1) {
                 actions.pop()
                 options.markAsImportant = true;

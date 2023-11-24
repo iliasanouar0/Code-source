@@ -1284,6 +1284,41 @@ const openInbox = async (data, count, options, mode) => {
                         break;
                 }
                 await time(3000)
+                switch (options.click) {
+                    case true:
+                        console.log('click');
+                        let options = await page.evaluate(() => {
+                            let s = document.querySelectorAll(".ii.gt a")
+                            if (s.length == 0) {
+                                return null
+                            }
+                            if (s[0].offsetWidth == 0) {
+                                return null
+                            }
+                            return s[0].href
+                        })
+                        await time(2000)
+                        console.log(options);
+                        if (options == null) {
+                            let link = await page.$$(".ii.gt a")
+                            await time(2000)
+                            await link[1].click()
+                        } else {
+                            let link = await page.$$(".ii.gt a")
+                            await time(2000)
+                            await link[0].click()
+                        }
+                        await time(30000)
+                        let pages = await browser.pages()
+                        await time(1000)
+                        console.log(pages[2]);
+                        await time(1000)
+                        await pages[2].close()
+                        break;
+                    default:
+                        console.log('false');
+                        break;
+                }
                 await page.click('.ar6.T-I-J3.J-J5-Ji')
                 i++
             }
@@ -1370,6 +1405,41 @@ const openInbox = async (data, count, options, mode) => {
                         break;
                 }
                 await time(3000)
+                switch (options.click) {
+                    case true:
+                        console.log('click');
+                        let options = await page.evaluate(() => {
+                            let s = document.querySelectorAll(".ii.gt a")
+                            if (s.length == 0) {
+                                return null
+                            }
+                            if (s[0].offsetWidth == 0) {
+                                return null
+                            }
+                            return s[0].href
+                        })
+                        await time(2000)
+                        console.log(options);
+                        if (options == null) {
+                            let link = await page.$$(".ii.gt a")
+                            await time(2000)
+                            await link[1].click()
+                        } else {
+                            let link = await page.$$(".ii.gt a")
+                            await time(2000)
+                            await link[0].click()
+                        }
+                        await time(30000)
+                        let pages = await browser.pages()
+                        await time(1000)
+                        console.log(pages[2]);
+                        await time(1000)
+                        await pages[2].close()
+                        break;
+                    default:
+                        console.log('false');
+                        break;
+                }
                 await page.click('.ar6.T-I-J3.J-J5-Ji')
             }
         }
