@@ -1288,32 +1288,41 @@ const openInbox = async (data, count, options, mode) => {
                     case true:
                         console.log('click');
                         let options = await page.evaluate(() => {
+                            let keys = []
                             let s = document.querySelectorAll(".ii.gt a")
                             if (s.length == 0) {
                                 return null
                             }
-                            if (s[0].offsetWidth == 0) {
-                                return null
+                            for (let i = 0; i < s.length; i++) {
+                                if (s[i].offsetWidth == 0 || s[i].href == '' || s[i].href.includes('mailto:') || s[i].href.includes("https://accounts.google.com/") || s[i].target != '_blank') {
+                                    keys.push({ index: i, state: false })
+                                } else {
+                                    keys.push({ index: i, state: true })
+                                }
                             }
-                            return s[0].href
+                            return keys
                         })
                         await time(2000)
                         console.log(options);
-                        if (options == null) {
-                            let link = await page.$$(".ii.gt a")
-                            await time(2000)
-                            await link[1].click()
-                        } else {
-                            let link = await page.$$(".ii.gt a")
-                            await time(2000)
-                            await link[0].click()
+                        let the_one = false
+                        for (let i = 0; i < options.length; i++) {
+                            if (options[i].state == true) {
+                                let link = await page.$$(".ii.gt a")
+                                await time(2000)
+                                await link[options[i].index].click()
+                                the_one = options[i].state
+                                break
+                            }
                         }
-                        await time(30000)
-                        let pages = await browser.pages()
-                        await time(1000)
-                        console.log(pages[2]);
-                        await time(1000)
-                        await pages[2].close()
+                        console.log(the_one);
+                        if (the_one) {
+                            await time(30000)
+                            let pages = await browser.pages()
+                            await time(1000)
+                            console.log(pages[2]);
+                            await time(1000)
+                            await pages[2].close()
+                        }
                         break;
                     default:
                         console.log('false');
@@ -1409,32 +1418,41 @@ const openInbox = async (data, count, options, mode) => {
                     case true:
                         console.log('click');
                         let options = await page.evaluate(() => {
+                            let keys = []
                             let s = document.querySelectorAll(".ii.gt a")
                             if (s.length == 0) {
                                 return null
                             }
-                            if (s[0].offsetWidth == 0) {
-                                return null
+                            for (let i = 0; i < s.length; i++) {
+                                if (s[i].offsetWidth == 0 || s[i].href == '' || s[i].href.includes('mailto:') || s[i].href.includes("https://accounts.google.com/") || s[i].target != '_blank') {
+                                    keys.push({ index: i, state: false })
+                                } else {
+                                    keys.push({ index: i, state: true })
+                                }
                             }
-                            return s[0].href
+                            return keys
                         })
                         await time(2000)
                         console.log(options);
-                        if (options == null) {
-                            let link = await page.$$(".ii.gt a")
-                            await time(2000)
-                            await link[1].click()
-                        } else {
-                            let link = await page.$$(".ii.gt a")
-                            await time(2000)
-                            await link[0].click()
+                        let the_one = false
+                        for (let i = 0; i < options.length; i++) {
+                            if (options[i].state == true) {
+                                let link = await page.$$(".ii.gt a")
+                                await time(2000)
+                                await link[options[i].index].click()
+                                the_one = options[i].state
+                                break
+                            }
                         }
-                        await time(30000)
-                        let pages = await browser.pages()
-                        await time(1000)
-                        console.log(pages[2]);
-                        await time(1000)
-                        await pages[2].close()
+                        console.log(the_one);
+                        if (the_one) {
+                            await time(30000)
+                            let pages = await browser.pages()
+                            await time(1000)
+                            console.log(pages[2]);
+                            await time(1000)
+                            await pages[2].close()
+                        }
                         break;
                     default:
                         console.log('false');
