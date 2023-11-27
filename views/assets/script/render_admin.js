@@ -1050,7 +1050,6 @@ if (path.includes("/admin/users/")) {
         option.setAttribute("value", elm['file']);
         dataAdd.appendChild(option);
       });
-
     })
   })
   getDataCompose
