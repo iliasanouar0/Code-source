@@ -177,12 +177,16 @@
                                                 <label class="btn btn-outline-success" for="btn-check-proxy">Check
                                                     proxy</label><br>
                                             </div>
+                                        </div>
+                                        <div class="col">
                                             <div class="form-check">
                                                 <input type="checkbox" class="btn-check" id="btn-check-verify"
                                                     value="verify" autocomplete="off">
                                                 <label class="btn btn-outline-success"
                                                     for="btn-check-verify">Verify</label><br>
                                             </div>
+                                        </div>
+                                        <div class="col">
                                             <div class="form-check">
                                                 <input type="checkbox" class="btn-check" id="btn-check-compose"
                                                     value="compose" autocomplete="off">
@@ -193,330 +197,330 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group d-none">
-                                <label>Status</label>
-                                <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true"
-                                    id="p_status">
-                                    <option value="idel" selected>idel</option>
-                                </select>
-                            </div>
-                            <div class="form-group d-none">
-                                <label for="login">Add date</label>
-                                <input type="date" class="form-control" id="p_add_date" readonly>
-                            </div>
-                            <div class="form-group d-none">
-                                <label for="login">Update date</label>
-                                <input type="date" class="form-control update" id="p_update_date" readonly>
-                            </div>
                         </div>
-                        <div class="card-footer text-center bg-transparent border-success">
-                            <button type="button" class="btn btn-success" id="p_add">Create</button>
+                        <div class="form-group d-none">
+                            <label>Status</label>
+                            <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true"
+                                id="p_status">
+                                <option value="idel" selected>idel</option>
+                            </select>
                         </div>
+                        <div class="form-group d-none">
+                            <label for="login">Add date</label>
+                            <input type="date" class="form-control" id="p_add_date" readonly>
+                        </div>
+                        <div class="form-group d-none">
+                            <label for="login">Update date</label>
+                            <input type="date" class="form-control update" id="p_update_date" readonly>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center bg-transparent border-success">
+                        <button type="button" class="btn btn-success" id="p_add">Create</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="modal fade" id="edit_action" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="card card-info">
-                        <div class="card-header">
-                            <h3 class="card-title">Edit process actions</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Actions</label>
-                                <div class="row w-100 actions">
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-verify-e"
-                                                value="verify" autocomplete="off">
-                                            <label class="btn btn-outline-primary"
-                                                for="btn-check-verify-e">Verify</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-n-spam-e"
-                                                value="notSpam" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-n-spam-e">Not
-                                                Spam</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-read-e"
-                                                value="markAsRead" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-read-e">Mark As
-                                                Read</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-d-inbox-e"
-                                                value="deleteInbox" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-d-inbox-e">Delete
-                                                Inbox</label><br>
-                                        </div>
+    <div class="modal fade" id="edit_action" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit process actions</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Actions</label>
+                            <div class="row w-100 actions">
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-verify-e" value="verify"
+                                            autocomplete="off">
+                                        <label class="btn btn-outline-primary"
+                                            for="btn-check-verify-e">Verify</label><br>
                                     </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-d-spam-e"
-                                                value="deleteSpam" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-d-spam-e">Delete
-                                                Spam</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-spam-e"
-                                                value="markAsSpam" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-spam-e">Mark As
-                                                Spam</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-imp-e"
-                                                value="markAsImportant" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-imp-e">Mark As
-                                                Important</label><br>
-                                        </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-n-spam-e" value="notSpam"
+                                            autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-n-spam-e">Not
+                                            Spam</label><br>
                                     </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-c-link-e"
-                                                value="clickLink" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-c-link-e">Click
-                                                Link</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-started-e"
-                                                value="markAsStarted" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-started-e">Mark As
-                                                Started</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-archive-e"
-                                                value="markAsArchive" autocomplete="off">
-                                            <label class="btn btn-outline-primary"
-                                                for="btn-check-m-archive-e">Archive</label><br>
-                                        </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-m-read-e"
+                                            value="markAsRead" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-m-read-e">Mark As
+                                            Read</label><br>
                                     </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-unread-e"
-                                                value="markAsUnread" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-unread-e">Mark As
-                                                Unread</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-n-spamT-e"
-                                                value="notSpamThis" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-n-spamT-e">Not Spam
-                                                Only</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-open-e" value="open"
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-primary"
-                                                for="btn-check-open-e">Open</label><br>
-                                        </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-d-inbox-e"
+                                            value="deleteInbox" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-d-inbox-e">Delete
+                                            Inbox</label><br>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-d-spam-e"
+                                            value="deleteSpam" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-d-spam-e">Delete
+                                            Spam</label><br>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-m-spam-e"
+                                            value="markAsSpam" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-m-spam-e">Mark As
+                                            Spam</label><br>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-m-imp-e"
+                                            value="markAsImportant" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-m-imp-e">Mark As
+                                            Important</label><br>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-c-link-e"
+                                            value="clickLink" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-c-link-e">Click
+                                            Link</label><br>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-m-started-e"
+                                            value="markAsStarted" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-m-started-e">Mark As
+                                            Started</label><br>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-m-archive-e"
+                                            value="markAsArchive" autocomplete="off">
+                                        <label class="btn btn-outline-primary"
+                                            for="btn-check-m-archive-e">Archive</label><br>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-m-unread-e"
+                                            value="markAsUnread" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-m-unread-e">Mark As
+                                            Unread</label><br>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-n-spamT-e"
+                                            value="notSpamThis" autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-n-spamT-e">Not Spam
+                                            Only</label><br>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="btn-check" id="btn-check-open-e" value="open"
+                                            autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="btn-check-open-e">Open</label><br>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="card-footer text-center">
-                            <button type="button" class="btn btn-success" id="p_a_add">Submit</button>
-                        </div>
+                    <div class="card-footer text-center">
+                        <button type="button" class="btn btn-success" id="p_a_add">Submit</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade user_data" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="card card-info">
-                        <div class="card-header">
-                            <h3 class="card-title">Your data</h3>
+    </div>
+    <div class="modal fade user_data" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Your data</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="f_name">First name</label>
+                            <input type="text" class="form-control" id="f_name" READONLY>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="f_name">First name</label>
-                                <input type="text" class="form-control" id="f_name" READONLY>
-                            </div>
-                            <div class="form-group">
-                                <label for="l_name">Last name</label>
-                                <input type="text" class="form-control" id="l_name" READONLY>
-                            </div>
-                            <div class="form-group">
-                                <label for="login">Login</label>
-                                <input type="text" class="form-control" id="login" READONLY>
-                            </div>
-                            <div class="form-group">
-                                <label for="type">Type</label>
-                                <input type="text" class="form-control" id="type" READONLY>
-                            </div>
+                        <div class="form-group">
+                            <label for="l_name">Last name</label>
+                            <input type="text" class="form-control" id="l_name" READONLY>
                         </div>
+                        <div class="form-group">
+                            <label for="login">Login</label>
+                            <input type="text" class="form-control" id="login" READONLY>
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <input type="text" class="form-control" id="type" READONLY>
+                        </div>
+                    </div>
 
-                        <div class="card-footer">
-                            <button type="button" class="btn btn-danger" id="logout">logout</button>
-                        </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-danger" id="logout">logout</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="restart" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
-            data-bs-keyboard="false" tabindex="-1">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <h5 class="text-white">You can't prevent the restart anymore</h5><br>
-                <div class="timer">
-                    <strong><q class="display-1 text-danger"><time>00:00:00</time></q></strong>
-                </div>
+    </div>
+    <div class="modal fade" id="restart" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <h5 class="text-white">You can't prevent the restart anymore</h5><br>
+            <div class="timer">
+                <strong><q class="display-1 text-danger"><time>00:00:00</time></q></strong>
             </div>
         </div>
-        <div class="modal fade" id="modal-danger" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content bg-danger">
-                    <div class="modal-header">
-                        <h4 class="modal-title">login-out</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>are u sure you want to logout ?!</p>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
-                        <a type="button" class="btn btn-outline-light" href="../logout.html">LOGOUT</a>
-                    </div>
+    </div>
+    <div class="modal fade" id="modal-danger" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-danger">
+                <div class="modal-header">
+                    <h4 class="modal-title">login-out</h4>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
-
+                <div class="modal-body">
+                    <p>are u sure you want to logout ?!</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+                    <a type="button" class="btn btn-outline-light" href="../logout.html">LOGOUT</a>
+                </div>
             </div>
 
         </div>
-        <div class="modal fade" id="modal-process-view" style="display: none;">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="row w-100">
-                            <div class="col">
-                                <h4 class="modal-title">Status of process <span id="p_s"></span></h4>
-                            </div>
-                            <div class="col text-center count">
 
-                            </div>
-                            <div class="col text-right status_bg">
+    </div>
+    <div class="modal fade" id="modal-process-view" style="display: none;">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="row w-100">
+                        <div class="col">
+                            <h4 class="modal-title">Status of process <span id="p_s"></span></h4>
+                        </div>
+                        <div class="col text-center count">
 
-                            </div>
-                            <div class="col text-right">
-                                <button type="button" class="btn-close" aria-label="Close"></button>
-                            </div>
+                        </div>
+                        <div class="col text-right status_bg">
+
+                        </div>
+                        <div class="col text-right">
+                            <button type="button" class="btn-close" aria-label="Close"></button>
                         </div>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning elevation-1">
-                                        <i class="fas fa-hourglass-start"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Waiting seeds</span>
-                                        <span class="info-box-number w_seeds">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="info-box mb-3">
-                                    <span class="info-box-icon bg-info elevation-1">
-                                        <i class="fas fa-cog"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Active seeds</span>
-                                        <span class="info-box-number a_seeds">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="info-box mb-3">
-                                    <span class="info-box-icon bg-success elevation-1">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Finished seeds</span>
-                                        <span class="info-box-number f_seeds">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="info-box mb-3">
-                                    <span class="info-box-icon bg-danger elevation-1">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Failed seeds</span>
-                                        <span class="info-box-number ff_seeds">0</span>
-                                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-warning elevation-1">
+                                    <i class="fas fa-hourglass-start"></i>
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Waiting seeds</span>
+                                    <span class="info-box-number w_seeds">0</span>
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-bordered table-striped text-center" id="process_result"
-                            style="width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>Email</th>
-                                    <th>Proxy</th>
-                                    <th>ISP</th>
-                                    <th>Status</th>
-                                    <th>Status details</th>
-                                    <th>Duration</th>
-                                    <th>Details</th>
-                                </tr>
-                            </thead>
-                            <tbody id="seeds_result"></tbody>
-                        </table>
-                        <div id="pagination-container">
-                            <nav aria-label="pagination">
-                                <ul class="pagination pagination-sm seeds-pagination">
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal" id="modal-result-view" style="display: none;">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="row w-100">
-                            <div class="col">
-                                <h4 class="modal-title">Seed feedback</span></h4>
+                        <div class="col">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-info elevation-1">
+                                    <i class="fas fa-cog"></i>
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Active seeds</span>
+                                    <span class="info-box-number a_seeds">0</span>
+                                </div>
                             </div>
-                            <div class="col text-right">
-                                <button class="btn btn-primary" id="Refresh">Refresh</button>
+                        </div>
+                        <div class="col">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-success elevation-1">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Finished seeds</span>
+                                    <span class="info-box-number f_seeds">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-danger elevation-1">
+                                    <i class="fas fa-times"></i>
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Failed seeds</span>
+                                    <span class="info-box-number ff_seeds">0</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-body">
-                        <div class="row row-cols-1 row-cols-md-2 g-4 feedback">
-                        </div>
+                    <table class="table table-bordered table-striped text-center" id="process_result"
+                        style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Proxy</th>
+                                <th>ISP</th>
+                                <th>Status</th>
+                                <th>Status details</th>
+                                <th>Duration</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="seeds_result"></tbody>
+                    </table>
+                    <div id="pagination-container">
+                        <nav aria-label="pagination">
+                            <ul class="pagination pagination-sm seeds-pagination">
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="fullpage" onclick="this.style.display='none';">
-            <div class="row z-3">
-                <div class="col">
-                    <img src="" alt="feedBack" id="feedback-img">
+    </div>
+    <div class="modal" id="modal-result-view" style="display: none;">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="row w-100">
+                        <div class="col">
+                            <h4 class="modal-title">Seed feedback</span></h4>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-primary" id="Refresh">Refresh</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row row-cols-1 row-cols-md-2 g-4 feedback">
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- /. modal -->
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                Anything you want
+    </div>
+    <div id="fullpage" onclick="this.style.display='none';">
+        <div class="row z-3">
+            <div class="col">
+                <img src="" alt="feedBack" id="feedback-img">
             </div>
-            <!-- Default to the left -->
-            <strong>Copyright &copy; 2023 <a href="#">Reporting</a>.</strong> All rights
-            reserved.
-        </footer>
+        </div>
+    </div>
+    <!-- /. modal -->
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline">
+            Anything you want
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2023 <a href="#">Reporting</a>.</strong> All rights
+        reserved.
+    </footer>
     </div>
     <!-- ./wrapper -->
 
