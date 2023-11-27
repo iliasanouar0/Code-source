@@ -731,6 +731,7 @@ app.patch("/process/", processManager.deleteProcess);
 app.get('/compose/admin', composeManager.getAllData)
 app.get('/compose/data/', composeManager.getData)
 app.get('/compose/offers/', composeManager.getOffers)
+app.post('/compose/offers/upload/', composeManager.uploadOffer)
 
 // result API
 app.get("/result/feedback/:id", resultManager.getFeedback)

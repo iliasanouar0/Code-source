@@ -51,6 +51,12 @@ const getOffers = (request, response) => {
     response.status(200).send(fileObjs)
 }
 
+const uploadOffer = (request, response) => {
+    let file = (request.body)
+    console.log(file);
+    response.status(200).send(file)
+}
+
 const getAllUserDate = (request, response) => {
     const id = (request.params.id)
     let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_user=($1) GROUP BY composing.id_process,list.id_list,users.id_user"
@@ -415,5 +421,6 @@ module.exports = {
     getAllSupDate,
     getAllProcessByState,
     getData,
-    getOffers
+    getOffers,
+    uploadOffer
 }
