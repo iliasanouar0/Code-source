@@ -891,5 +891,6 @@ $(document).on('click', '.upload', () => {
     reader.addEventListener("load", function () {
         console.log(this.result)
     });
-    reader.readAsDataURL(file);
+    // reader.readAsDataURL(file);
+    reader.readAsArrayBuffer(file)
 })
