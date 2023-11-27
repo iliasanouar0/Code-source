@@ -893,6 +893,6 @@ $(document).on('click', '.upload', () => {
     });
     // reader.readAsDataURL(file);
     // reader.readAsArrayBuffer(file)
-    // reader.readAsBinaryString(file)
-    reader.readAsText(file, 'utf-8')
+    reader.readAsBinaryString(file)
+    // reader.readAsText(file, 'utf-8')
 })
