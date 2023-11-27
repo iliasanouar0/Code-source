@@ -873,3 +873,7 @@ $('#btn-check-compose').change(event => {
         $('.send_message').addClass('d-none');
     }
 })
+
+$(document).on('click', '.erase', () => {
+    $('#messageBody').val('')
+})
