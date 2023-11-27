@@ -7,6 +7,7 @@ let dotenv = require('dotenv')
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require('fs')
+const fileUpload = require('express-fileupload');
 const WebSocket = require('ws');
 const setTimeout = require('timers/promises');
 let time = setTimeout.setTimeout
@@ -731,8 +732,23 @@ app.patch("/process/", processManager.deleteProcess);
 app.get('/compose/admin', composeManager.getAllData)
 app.get('/compose/data/', composeManager.getData)
 app.get('/compose/offers/', composeManager.getOffers)
-app.post('/compose/offers/upload/', composeManager.uploadOffer)
+// app.post('/compose/offers/upload/', composeManager.uploadOffer)
+app.post('/compose/offers/upload/', function (req, res) {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No files were uploaded.');
+  }
 
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let sampleFile = req.files.sampleFile;
+
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv('/home/offers/', function (err) {
+    if (err)
+      return res.status(500).send(err);
+
+    res.send('File uploaded!');
+  });
+});
 // result API
 app.get("/result/feedback/:id", resultManager.getFeedback)
 app.get("/result/duration/:id", resultManager.getDuration)
