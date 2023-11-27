@@ -841,196 +841,6 @@ $(document).on('click', '.delete-all-this', () => {
 
 /**
  * ~check options  
- * ! inbox :
- */
-
-// open 
-$('#btn-check-open').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (!status) {
-        $('#btn-check-verify').prop("checked", false);
-        $('#btn-check-proxy').prop("checked", false);
-        $('#btn-check-m-imp').prop("checked", false);
-        $('#btn-check-m-started').prop("checked", false);
-        $('#btn-check-c-link').prop("checked", false);
-        $('#btn-check-du-inbox').prop("checked", false);
-        $('#btn-check-dr-inbox').prop("checked", false);
-    } else {
-        $('#btn-check-verify').prop("checked", false);
-        $('#btn-check-proxy').prop("checked", false);
-        $('#btn-check-du-inbox').prop("checked", false);
-        $('#btn-check-dr-inbox').prop("checked", false);
-        $('#btn-check-m-read').prop("checked", false);
-        $('#btn-check-m-unread').prop("checked", false);
-        $('#btn-check-m-spam').prop("checked", false);
-        $('#btn-check-m-archive').prop("checked", false);
-    }
-})
-
-// mark as important
-$('#btn-check-m-imp').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('#btn-check-open').prop("checked", true);
-        $('#btn-check-verify').prop("checked", false);
-        $('#btn-check-proxy').prop("checked", false);
-        $('#btn-check-du-inbox').prop("checked", false);
-        $('#btn-check-dr-inbox').prop("checked", false);
-    }
-})
-
-// mark as started
-$('#btn-check-m-started').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('#btn-check-open').prop("checked", true);
-        $('#btn-check-verify').prop("checked", false);
-        $('#btn-check-proxy').prop("checked", false);
-        $('#btn-check-du-inbox').prop("checked", false);
-        $('#btn-check-dr-inbox').prop("checked", false);
-    }
-})
-
-// click inbox
-$('#btn-check-c-link').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('#btn-check-open').prop("checked", true);
-        $('#btn-check-verify').prop("checked", false);
-        $('#btn-check-proxy').prop("checked", false);
-        $('#btn-check-du-inbox').prop("checked", false);
-        $('#btn-check-dr-inbox').prop("checked", false);
-    }
-})
-
-// delete unread
-$('#btn-check-du-inbox').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('.btn-check').prop("checked", false);
-        $(event.target).prop("checked", true);
-    }
-})
-
-// delete read
-$('#btn-check-dr-inbox').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('.btn-check').prop("checked", false);
-        $(event.target).prop("checked", true);
-    }
-})
-
-// mark as read
-$('#btn-check-m-read').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('.btn-check').prop("checked", false);
-        $(event.target).prop("checked", true);
-    }
-})
-
-// mark as unread
-$('#btn-check-m-unread').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('.btn-check').prop("checked", false);
-        $(event.target).prop("checked", true);
-    }
-})
-
-// archive
-$('#btn-check-m-archive').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('.btn-check').prop("checked", false);
-        $(event.target).prop("checked", true);
-    }
-})
-
-// mark as spam
-$('#btn-check-m-spam').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('.btn-check').prop("checked", false);
-        $(event.target).prop("checked", true);
-    }
-})
-
-/**
- * ~check options  
- * ! spam :
- */
-
-// Open spam
-$('#btn-check-o-spam').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (!status) {
-        $('#btn-check-c-spam').prop("checked", false);
-        $('#btn-check-verify').prop("checked", false);
-        $('#btn-check-proxy').prop("checked", false);
-        $('#btn-check-du-inbox').prop("checked", false);
-        $('#btn-check-dr-inbox').prop("checked", false);
-    } else {
-        $('#btn-check-verify').prop("checked", false);
-        $('#btn-check-proxy').prop("checked", false);
-    }
-})
-
-// click spam
-$('#btn-check-c-spam').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('#btn-check-o-spam').prop("checked", true);
-        $('#btn-check-verify').prop("checked", false);
-        $('#btn-check-proxy').prop("checked", false);
-        $('#btn-check-du-inbox').prop("checked", false);
-        $('#btn-check-dr-inbox').prop("checked", false);
-    }
-})
-
-// delete spam
-$('#btn-check-d-spam').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('.spam .btn-check').prop("checked", false);
-        $('.others .btn-check').prop("checked", false);
-        $(event.target).prop("checked", true);
-    }
-})
-
-// move to inbox
-$('#btn-check-n-spam').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('.spam .btn-check').prop("checked", false);
-        $('.others .btn-check').prop("checked", false);
-        $(event.target).prop("checked", true);
-    }
-})
-
-// open bulk
-$('#btn-check-ob-spam').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('.spam .btn-check').prop("checked", false);
-        $('.others .btn-check').prop("checked", false);
-        $(event.target).prop("checked", true);
-    }
-})
-
-// move to inbox open
-$('#btn-check-no-spam').change(event => {
-    let status = $(event.target).is(":checked") ? true : false;
-    if (status) {
-        $('.spam .btn-check').prop("checked", false);
-        $('.others .btn-check').prop("checked", false);
-        $(event.target).prop("checked", true);
-    }
-})
-
-/**
- * ~check options  
  * ! others :
  */
 
@@ -1045,6 +855,15 @@ $('#btn-check-verify').change(event => {
 
 // check proxy
 $('#btn-check-proxy').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+    }
+})
+
+// compose
+$('#btn-check-compose').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
         $('.btn-check').prop("checked", false);
