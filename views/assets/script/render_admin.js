@@ -1024,22 +1024,35 @@ if (path.includes("/admin/users/")) {
 } else if (path.includes("/admin/compose/")) {
   document.querySelector("#add_compose").addEventListener("click", () => {
     const select = document.querySelector("#p_list_add");
+    const dataAdd = document.querySelector("#p_data_add");
     select.innerHTML = ""
+    dataAdd.innerHTML = ""
     fetch(`http://${ip}:3000/lists`, {
       method: "GET",
+    }).then((response) => {
+      return response.json();
+    }).then((data) => {
+      data.forEach((elm) => {
+        let option = document.createElement("option");
+        option.innerHTML = elm["name"];
+        option.setAttribute("value", elm["id_list"]);
+        select.appendChild(option);
+      });
     })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        data.forEach((elm) => {
-          let option = document.createElement("option");
-          option.innerHTML = elm["name"];
-          option.setAttribute("value", elm["id_list"]);
-          select.appendChild(option);
-        });
 
-      })
+    fetch(`http://${ip}:3000/compose/data`, {
+      method: "GET",
+    }).then((response) => {
+      return response.json();
+    }).then((data) => {
+      data.forEach((elm) => {
+        let option = document.createElement("option");
+        option.innerHTML = elm
+        option.setAttribute("value", elm);
+        dataAdd.appendChild(option);
+      });
+
+    })
   })
   getDataCompose
 }
