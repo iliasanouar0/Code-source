@@ -885,6 +885,8 @@ $(document).on('click', '.erase', () => {
 $(document).on('click', '.upload', () => {
     let file = $('#messageBody')[0].files[0]
     console.log(file);
+    let val = $('#messageBody').val()
+    console.log(val);
     // var form = new FormData();
     // form.append("File", file, "");
     const reader = new FileReader();
