@@ -40,8 +40,17 @@ const getData = (request, response) => {
     let data = []
     fs.readdir(path, (err, files) => {
         files.forEach(file => {
-            console.log(file);
-            data.push(file)
+            let filePath = `${path}/${file}`
+            let obj
+            fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
+                if (!err) {
+                    console.log('received data: ' + data);
+                    obj = { count: data.length, file: file }
+                } else {
+                    console.log(err);
+                }
+            });
+            data.push(obj)
         });
         response.status(200).send(data)
     });
