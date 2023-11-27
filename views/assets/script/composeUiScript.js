@@ -850,6 +850,8 @@ $('#btn-check-verify').change(event => {
     if (status) {
         $('.btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
+        $('.send_message').addClass('d-none');
+
     }
 })
 
@@ -859,6 +861,8 @@ $('#btn-check-proxy').change(event => {
     if (status) {
         $('.btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
+        $('.send_message').addClass('d-none');
+
     }
 })
 
