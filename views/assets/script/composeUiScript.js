@@ -890,12 +890,7 @@ $(document).on('click', '.upload', () => {
     var settings = {
         "url": `http://${ip}:3000/compose/offers/upload/`,
         "method": "POST",
-        "timeout": 0,
-        "processData": false,
-        "mimeType": "multipart/form-data",
-        "contentType": false,
         "data": form
-        // "data": JSON.stringify(file)
     };
 
     $.ajax(settings).done(function (response) {
