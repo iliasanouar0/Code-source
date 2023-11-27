@@ -23,7 +23,7 @@ const addProcess = (request, response) => {
 }
 
 const getAllData = (request, response) => {
-    let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM process JOIN list ON list.id_list=process.id_list JOIN users ON process.id_user=users.id_user JOIN seeds ON seeds.id_list=process.id_list GROUP BY process.id_process,list.id_list,users.id_user"
+    let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list GROUP BY composing.id_process,list.id_list,users.id_user"
     pool.query(sql, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -34,7 +34,7 @@ const getAllData = (request, response) => {
 
 const getAllUserDate = (request, response) => {
     const id = (request.params.id)
-    let sql = "SELECT process.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM process JOIN list ON list.id_list=process.id_list JOIN users ON process.id_user=users.id_user JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_user=($1) GROUP BY process.id_process,list.id_list,users.id_user"
+    let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_user=($1) GROUP BY composing.id_process,list.id_list,users.id_user"
     pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -44,7 +44,7 @@ const getAllUserDate = (request, response) => {
 }
 
 const getAllSupDate = (request, response) => {
-    let sql = "SELECT process.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM process JOIN list ON list.id_list=process.id_list JOIN users ON process.id_user=users.id_user JOIN seeds ON seeds.id_list=process.id_list WHERE users.type!='IT' GROUP BY process.id_process,list.id_list,users.id_user"
+    let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list WHERE users.type!='IT' GROUP BY composing.id_process,list.id_list,users.id_user"
     pool.query(sql, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -55,7 +55,7 @@ const getAllSupDate = (request, response) => {
 
 const getAllProcessSeeds = (request, response) => {
     const id = (request.params.id)
-    let sql = "SELECT process.id_process,process.action,process.status as pstatus, seeds.*,results.start_in, results.end_in, results.status as rStatus,results.statusdetails FROM process JOIN seeds ON seeds.id_list=process.id_list  LEFT JOIN results ON results.id_process=process.id_process AND results.id_seeds=seeds.id_seeds  WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds,results.start_in,results.end_in, results.status,process.status,results.statusdetails ORDER BY CASE WHEN results.status = 'running' then 1 WHEN results.status = 'finished' then 2  WHEN results.status = 'failed' then 3 WHEN results.status='waiting' then 4 END ASC"
+    let sql = "SELECT composing.id_process,composing.action,composing.status as pstatus, seeds.*,results.start_in, results.end_in, results.status as rStatus,results.statusdetails FROM composing JOIN seeds ON seeds.id_list=composing.id_list  LEFT JOIN results ON results.id_process=composing.id_process AND results.id_seeds=seeds.id_seeds  WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds,results.start_in,results.end_in, results.status,composing.status,results.statusdetails ORDER BY CASE WHEN results.status = 'running' then 1 WHEN results.status = 'finished' then 2  WHEN results.status = 'failed' then 3 WHEN results.status='waiting' then 4 END ASC"
     pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -66,7 +66,7 @@ const getAllProcessSeeds = (request, response) => {
 
 const getAllProcessSeedsCount = (request, response) => {
     const id = (request.params.id)
-    let sql = "SELECT process.id_process,process.action, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds"
+    let sql = "SELECT composing.id_process,composing.action, seeds.* FROM composing JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds"
     pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -76,7 +76,7 @@ const getAllProcessSeedsCount = (request, response) => {
 }
 
 const getAllProcessSeedsServer = async (id) => {
-    let sql = "SELECT process.id_process,process.action, seeds.* FROM process JOIN seeds ON seeds.id_list=process.id_list WHERE process.id_process=$1 GROUP BY seeds.id_list,process.id_list,process.id_process,seeds.id_seeds"
+    let sql = "SELECT composing.id_process,composing.action, seeds.* FROM composing JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds"
     const client = await pool.connect()
     const list = await client.query(sql, [id])
     client.release()
@@ -85,7 +85,7 @@ const getAllProcessSeedsServer = async (id) => {
 
 const getAllProcessSeedsByState = async (data) => {
     let values = [data.id_process, data.status]
-    let sql = "SELECT results.status as s, process.action, seeds.* FROM results JOIN process ON process.id_process=results.id_process JOIN seeds ON seeds.Id_seeds=results.Id_seeds WHERE results.id_process=($1) AND results.status=($2)"
+    let sql = "SELECT results.status as s, composing.action, seeds.* FROM results JOIN composing ON composing.id_process=results.id_process JOIN seeds ON seeds.Id_seeds=results.Id_seeds WHERE results.id_process=($1) AND results.status=($2)"
     const client = await pool.connect()
     const list = await client.query(sql, values);
     client.release()
@@ -94,7 +94,7 @@ const getAllProcessSeedsByState = async (data) => {
 
 const getAllProcessByState = async (data) => {
     let values = [data.status]
-    let sql = "SELECT id_process FROM process WHERE process.status=($1)"
+    let sql = "SELECT id_process FROM composing WHERE composing.status=($1)"
     const client = await pool.connect()
     const list = await client.query(sql, values);
     client.release()
@@ -102,7 +102,7 @@ const getAllProcessByState = async (data) => {
 }
 
 const updateActions = (request, response) => {
-    let query = "UPDATE process SET action=($2) WHERE id_process=($1)"
+    let query = "UPDATE composing SET action=($2) WHERE id_process=($1)"
     const id = (request.params.id)
     const actions = (request.body)
     let val = [id, actions.actions]
@@ -116,7 +116,7 @@ const updateActions = (request, response) => {
 
 const deleteProcess = (request, response) => {
     const ides = (request.body);
-    const sql = "DELETE FROM process WHERE id_process=$1";
+    const sql = "DELETE FROM composing WHERE id_process=$1";
     const params = [];
     for (let i = 0; i < ides.length; i++) {
         params.push(ides[i])
@@ -132,13 +132,13 @@ const deleteProcess = (request, response) => {
                     if (err) {
                         console.error(
                             `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-                        fs.writeFile(file, `User : ${param.login}, delete process ${param.id} action ${param.action} in  ${new Date().toLocaleString()}\n`, (e) => {
+                        fs.writeFile(file, `User : ${param.login}, delete composing ${param.id} action ${param.action} in  ${new Date().toLocaleString()}\n`, (e) => {
                             if (e) throw e
                             console.log('log added');
                         })
                     } else {
                         console.log(`${file} exists, and it is writable`);
-                        fs.appendFile(file, `User : ${param.login}, delete process ${param.id} action ${param.action} in  ${new Date().toLocaleString()}\n`, (e) => {
+                        fs.appendFile(file, `User : ${param.login}, delete composing ${param.id} action ${param.action} in  ${new Date().toLocaleString()}\n`, (e) => {
                             if (e) throw e
                             console.log('log added');
                         })
@@ -148,13 +148,13 @@ const deleteProcess = (request, response) => {
             }
         });
     });
-    response.status(200).send('process deleted');
+    response.status(200).send('composing deleted');
 }
 
 const startedProcess = (data) => {
     let start_in = new Date()
     let end_in
-    let query = "UPDATE process SET status=($1), start_in=($2), end_in=($3) WHERE id_process=($4)"
+    let query = "UPDATE composing SET status=($1), start_in=($2), end_in=($3) WHERE id_process=($4)"
     let values = [data.status, start_in, end_in, data.id_process]
     let obj = { query: query, data: values }
     pool.query(obj.query, obj.data, (error, result) => {
@@ -166,7 +166,7 @@ const startedProcess = (data) => {
 }
 
 const resumedProcess = (data) => {
-    let query = "UPDATE process SET status=($1) WHERE id_process=($2)"
+    let query = "UPDATE composing SET status=($1) WHERE id_process=($2)"
     let values = [data.status, data.id_process]
     let obj = { query: query, data: values }
     pool.query(obj.query, obj.data, (error, result) => {
@@ -179,7 +179,7 @@ const resumedProcess = (data) => {
 
 const finishedProcess = (data) => {
     let end_in = new Date()
-    let query = "UPDATE process SET status=($1), end_in=($2) WHERE id_process=($3)"
+    let query = "UPDATE composing SET status=($1), end_in=($2) WHERE id_process=($3)"
     let values = [data.status, end_in, data.id_process]
     let obj = { query: query, data: values }
     pool.query(obj.query, obj.data, (error, result) => {
@@ -191,7 +191,7 @@ const finishedProcess = (data) => {
 }
 
 const restedProcess = async (data) => {
-    let query = "UPDATE process SET status=($1),end_in=($2) WHERE id_process=($3)"
+    let query = "UPDATE composing SET status=($1),end_in=($2) WHERE id_process=($3)"
     let values = [data.status, data.end_in, data.id_process]
     let obj = { query: query, data: values }
     pool.query(obj.query, obj.data, (error, result) => {
@@ -203,7 +203,7 @@ const restedProcess = async (data) => {
 }
 
 const stoppedProcess = (data) => {
-    let query = "UPDATE process SET status=($1) WHERE id_process=($2)"
+    let query = "UPDATE composing SET status=($1) WHERE id_process=($2)"
     let values = [data.status, data.id_process]
     let obj = { query: query, data: values }
     pool.query(obj.query, obj.data, (error, result) => {
@@ -317,7 +317,7 @@ const processing = async (data) => {
     }
 }
 
-const process = async (data, action) => {
+const composing = async (data, action) => {
     let success = []
     let failed = []
     let line = 1
@@ -325,12 +325,12 @@ const process = async (data, action) => {
     let length = data.length
     let max = 3
     let toProcess = []
-    let process = false
+    let composing = false
     for (let i = 0; i < max; i++) {
         count++
         toProcess.push(data[i])
     }
-    while (process == false) {
+    while (composing == false) {
         for (let i = 0; i < toProcess.length; i++) {
             if (processing(toProcess[i], action)) {
                 success.push(toProcess[i])
@@ -349,14 +349,14 @@ const process = async (data, action) => {
             }
         }
         if (length == count) {
-            process = true
+            composing = true
             return
         }
     }
 }
 
 const getProcessState = async (data) => {
-    sql = 'SELECT status FROM process WHERE id_process=($1)'
+    sql = 'SELECT status FROM composing WHERE id_process=($1)'
     const client = await pool.connect()
     const list = await client.query(sql, [data]);
     client.release()
@@ -365,7 +365,7 @@ const getProcessState = async (data) => {
 
 const getProcessStateServer = (request, response) => {
     let data = request.params.id
-    sql = 'SELECT status FROM process WHERE id_process=($1)'
+    sql = 'SELECT status FROM composing WHERE id_process=($1)'
     pool.query(sql, [data], (error, result) => {
         if (error) {
             return `${error.name, error.stack, error.message, error}`
@@ -387,7 +387,7 @@ module.exports = {
     restedProcess,
     getAllProcessSeedsByState,
     getAllProcessSeedsServer,
-    process,
+    composing,
     processing,
     getProcessState,
     getProcessStateServer,
