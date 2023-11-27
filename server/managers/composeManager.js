@@ -43,8 +43,8 @@ const getData = (request, response) => {
             console.log(file);
             data.push(file)
         });
+        response.status(200).send(data)
     });
-    response.status(200).send(data)
 }
 
 const getAllUserDate = (request, response) => {
