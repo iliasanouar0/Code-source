@@ -882,9 +882,14 @@ $(document).on('click', '.erase', () => {
     $('#messageBody').val('')
 })
 
-// $(document).on('click', '.upload', () => {
-//     let file = $('#messageBody')[0].files[0]
-//     console.log(file);
-//     var form = new FormData();
-//     form.append("File", file, "");
-// })
+$(document).on('click', '.upload', () => {
+    let file = $('#messageBody')[0].files[0]
+    console.log(file);
+    // var form = new FormData();
+    // form.append("File", file, "");
+    const reader = new FileReader();
+    reader.addEventListener("load", function () {
+        console.log(this.result)
+    });
+    reader.readAsDataURL(file);
+})
