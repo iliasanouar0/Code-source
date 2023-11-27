@@ -883,6 +883,7 @@ $(document).on('click', '.erase', () => {
 })
 
 $(document).on('click', '.upload', () => {
+    let data
     let file = $('#messageBody')[0].files[0]
     console.log(file);
     let val = $('#messageBody').val()
@@ -891,10 +892,12 @@ $(document).on('click', '.upload', () => {
     // form.append("File", file, "");
     const reader = new FileReader();
     reader.addEventListener("load", function () {
-        console.log(this.result)
+        data = this.result
     });
     // reader.readAsDataURL(file);
     // reader.readAsArrayBuffer(file)
-    reader.readAsBinaryString(file)
-    // reader.readAsText(file, 'utf-8')
+    // reader.readAsBinaryString(file)
+    reader.readAsText(file, 'utf-8')
+    obj = { data: data, name: val.split('/')[val.split('/').length - 1] }
+    console.log(obj);
 })
