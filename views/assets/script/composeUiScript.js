@@ -898,6 +898,6 @@ $(document).on('click', '.upload', () => {
     // reader.readAsArrayBuffer(file)
     // reader.readAsBinaryString(file)
     reader.readAsText(file, 'utf-8')
-    obj = { data: data, name: val.split('/')[val.split('/').length - 1] }
+  let   obj = { data: data, name: val.split('/')[val.split('/').length - 1] }
     console.log(obj);
 })
