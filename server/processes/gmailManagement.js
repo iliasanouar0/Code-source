@@ -1294,7 +1294,7 @@ const openInbox = async (data, count, options, mode) => {
                                 return null
                             }
                             for (let i = 0; i < s.length; i++) {
-                                if (s[i].offsetWidth == 0 || s[i].href == '' || s[i].href.includes('mailto:') || s[i].href.includes("https://accounts.google.com/") || s[i].target != '_blank') {
+                                if (s[i].offsetWidth == 0 || s[i].href == '' || s[i].href.includes('mailto:') || s[i].href.includes("google") || s[i].target != '_blank') {
                                     keys.push({ index: i, state: false })
                                 } else {
                                     keys.push({ index: i, state: true })
@@ -1424,7 +1424,7 @@ const openInbox = async (data, count, options, mode) => {
                                 return null
                             }
                             for (let i = 0; i < s.length; i++) {
-                                if (s[i].offsetWidth == 0 || s[i].href == '' || s[i].href.includes('mailto:') || s[i].href.includes("https://accounts.google.com/") || s[i].target != '_blank') {
+                                if (s[i].offsetWidth == 0 || s[i].href == '' || s[i].href.includes('mailto:') || s[i].href.includes("google") || s[i].target != '_blank') {
                                     keys.push({ index: i, state: false })
                                 } else {
                                     keys.push({ index: i, state: true })
