@@ -887,7 +887,7 @@ $(document).on('click', '.upload', () => {
     console.log(file);
     var form = new FormData();
     form.append("File", file, "");
-    fetch('/upload', { method: "POST", body: form });
+    fetch('../views/', { method: "POST", body: form });
     // var settings = {
     //     "url": `http://${ip}:3000/compose/offers/upload/`,
     //     "method": "POST",
