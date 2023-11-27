@@ -46,11 +46,11 @@ const getData = (request, response) => {
                     let array = data.split('\n\r')
                     console.log('received data: ' + array);
                     objects.push({ count: array.length, file: file })
-                    response.status(200).send(objects)
                 } else {
                     console.log(err);
                 }
             });
+            response.status(200).send(objects)
         });
     });
 }
