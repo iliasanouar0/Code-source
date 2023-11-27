@@ -37,23 +37,21 @@ const getAllData = (request, response) => {
 
 const getData = (request, response) => {
     let path = '/home/data'
-    let files = fs.readdir(path, (err, files) => {
-        return files
-    });
     let objects = []
-    for (let i = 0; i < files.length; i++) {
-        let filePath = `${path}/${files[i]}`
-        fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
-            if (!err) {
-                let array = data.split('\n\r')
-                console.log('received data: ' + array);
-                objects.push({ count: array.length, file: files[i] })
-            } else {
-                console.log(err);
-            }
+    fs.readdir(path, (err, files) => {
+        files.forEach(file => {
+            let filePath = `${path}/${file}`
+            fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
+                if (!err) {
+                    console.log('received data: ' + data.split('\n\r'));
+                    objects.push({ count: data.length, file: file })
+                } else {
+                    console.log(err);
+                }
+            });
         });
-    }
-    response.status(200).send(files)
+        response.status(200).send(objects)
+    });
 }
 
 const getAllUserDate = (request, response) => {
