@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link type="text/css" id="dark-mode" rel="stylesheet" href="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reporting | Admin | process-panel</title>
+    <script src="../../assets/script/check.js"></script>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../../assets/vendors/AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../assets/vendors/AdminLTE-3.2.0/dist/css/adminlte.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style/admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.6.0/pagination.min.css"
+        integrity="sha512-K1k7jSn9RDKEcn/ugqVVvWYu0bcS3q1w6m/5pQSnrj0bCfIqF6Wk49lkmckSb4wglvTP9V17LtS0q0XxYccXbg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../assets/style/main.css">
+    <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+    <link
+        href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.1/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.css"
+        rel="stylesheet">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light admin-navbar">
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar admin-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Processes</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Processes</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col">
+                                    <h3 class="card-title">Processes TABLE</h3>
+                                </div>
+                                <div class="col text-right">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="btn btn-success" id="add_process">Add process</button>
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="btn btn-danger" id="restart_s">Restart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center w-100" id="action"></div>
+                        <div class="card-body">
+                            <table id="example1" style="width:100%" class="display">
+                                <thead>
+                                    <tr>
+                                        <!-- id , count , User , List , ISP , Status ,Process , Start at , End at , Action -->
+                                        <th><input type="checkbox" name="checkbox" class="checkAll"></th>
+                                        <th>ID</th>
+                                        <th>Count</th>
+                                        <th>User</th>
+                                        <th>List</th>
+                                        <th>ISP</th>
+                                        <th>Status</th>
+                                        <th>Process</th>
+                                        <th>Start at</th>
+                                        <th>End at <span class="text-danger small">[Duration]</span></th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="Process_data"></tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+        </div>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <div class="mb-4"><input type="checkbox" value="1" class="mr-1"><span>Dark Mode</span></div>
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- modal -->
+        <div class="modal fade add_process" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card border-success mb-0">
+                        <div class="card-header bg-transparent border-success text-center">
+                            <h3 class="card-title">Create new process</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>List :</label>
+                                <select class="form-control lists" style="width: 100%;" tabindex="-1" aria-hidden="true"
+                                    id="p_list_add">
+                                </select>
+                            </div>
+                            <small>
+                                <div class="alert alert-sm alert-warning" role="alert">
+                                    <div class="spinner-grow-sm text-danger spinner-grow" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    For better Performance please use Limit or Subject
+                                </div>
+                            </small>
+                            <div class="form-group">
+                                <label for="p_subject">Subject :</label>
+                                <input type="text" class="form-control" id="p_subject">
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div class="form-group max_pages">
+                                        <label for="max_pages">Max pages :</label>
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <input type="number" class="form-control" name="max_pages"
+                                                    id="max_pages" min="1" value="1">
+                                            </div>
+                                            <div class="col-auto">
+                                                <span class="form-text text-danger">
+                                                    [Max : 500 P]
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <small class="text-info">- Max pages default value is 1.</small><br>
+                                        <small class="text-info">- Max pages (1 = One page)</small><br>
+                                        <small>- Limit for :<br>
+                                            <code
+                                                style="margin-left: 0px; font-size: 11px; color: rgb(25, 79, 133);">[Open Bulk ,Move To Inbox ,Archive ,Delete [is:unread] ,Delete [is:read] ,Open Bulk Spam,Delete forever Spam ,Move from Promotions to Primary ,Mark as unread ,Delete Archive]</code></small>
+                                    </div>
+                                </div>
+                                <div class="col-1 p-0 m-0" style="width: 3.33333%;">
+                                    <div class="d-flex h-100">
+                                        <div class="vr"></div>
+                                    </div>
+                                </div>
+                                <div class="col p-0 m-0">
+                                    <div class="form-group max_open">
+                                        <label for="max_open">Max emails :</label>
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <input type="number" class="form-control" name="max_open" id="max_open"
+                                                    min="0">
+                                            </div>
+                                            <div class="col-auto">
+                                                <span class="form-text text-danger">
+                                                    [Max : 50K]
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <small class="text-info">- Max emails default value is 0.</small><br>
+                                        <small class="text-info">- Max emails (0 = No Limit)</small><br>
+                                        <small>- Limit for :<br>
+                                            <code
+                                                style="margin-left: 5px; font-size: 11px; color: rgb(25, 79, 133);">[Open ,Click ,Not Spam ,Mark as Important ,Mark as Starred ,Reply ,Forward ,Report Spam]</code></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <small class="d-none">
+                                <div class="alert alert-primary sm" role="alert">
+                                    You can use <code
+                                        style="color: rgb(255, 0, 0)">[Open+Click+Reply+Mark as Important+Mark as Starred]</code>
+                                    in the same process. </div>
+                            </small>
+                            <div class="form-group">
+                                <label class="fs-5">Login</label>
+                                <div class="row login_options">
+                                    <div class="col text-center">
+                                        <div class="form-check">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                <input class="form-check-input" type="radio" name="login_options"
+                                                    id="flexRadioDefault1" value="Profile">
+                                                <img src="../../assets/images/kindpng_4952535.png" alt="Profile"
+                                                    height="50px"><br>
+                                                <p>Profile</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center">
+                                        <div class="form-check">
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                <input class="form-check-input" type="radio" name="login_options"
+                                                    id="flexRadioDefault2" value="Cookies">
+                                                <img src="../../assets/images/cookies.png" alt="Cookies"
+                                                    height="50px"><br>
+                                                <p>Cookies</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="fs-5">Actions</label>
+                                <div class="row w-100 actions">
+                                    <div class="row w-100 inbox">
+                                        <label>- Inbox :</label>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-open"
+                                                    value="openInbox" autocomplete="off">
+                                                <label class="btn btn-outline-primary"
+                                                    for="btn-check-open">Open</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-archive"
+                                                    value="markAsArchive" autocomplete="off">
+                                                <label class="btn btn-outline-primary"
+                                                    for="btn-check-m-archive">Archive</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-unread"
+                                                    value="markAsUnread" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-m-unread">Mark As
+                                                    Unread</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-read"
+                                                    value="markAsRead" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-m-read">Mark As
+                                                    Read</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-du-inbox"
+                                                    value="deleteInboxUnread" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-du-inbox">Delete
+                                                    [unread] Inbox</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-dr-inbox"
+                                                    value="deleteInboxRead" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-dr-inbox">Delete
+                                                    [read] Inbox</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-imp"
+                                                    value="markAsImportant" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-m-imp">Mark As
+                                                    Important</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-c-link"
+                                                    value="clickLink" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-c-link">Click
+                                                </label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-started"
+                                                    value="markAsStarted" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-m-started">Mark As
+                                                    Started</label><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row w-100 inbox">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-m-spam"
+                                                    value="markAsSpam" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="btn-check-m-spam">Mark As
+                                                    Spam</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-primary-promo"
+                                                    value="promotionsToPrimary" autocomplete="off">
+                                                <label class="btn btn-outline-primary"
+                                                    for="btn-check-primary-promo">Promotions > Primary</label><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row w-100 spam">
+                                        <label>- Spam :</label>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-o-spam"
+                                                    value="openSpam" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="btn-check-o-spam">Open
+                                                    Spam</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-c-spam"
+                                                    value="clickSpam" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="btn-check-c-spam">Click
+                                                    Spam</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-n-spam"
+                                                    value="notSpam" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="btn-check-n-spam">Move to
+                                                    inbox</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-d-spam"
+                                                    value="deleteSpam" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="btn-check-d-spam">Delete
+                                                    forever</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-ob-spam"
+                                                    value="openBulkSpam" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="btn-check-ob-spam">Open
+                                                    bulk
+                                                    spam</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-no-spam"
+                                                    value="notSpamOpen" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="btn-check-no-spam">Not spam
+                                                    [open]</label><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row w-100 others">
+                                        <label>- Others :</label>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-proxy"
+                                                    value="checkProxy" autocomplete="off">
+                                                <label class="btn btn-outline-success" for="btn-check-proxy">Check
+                                                    proxy</label><br>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn-check" id="btn-check-verify"
+                                                    value="verify" autocomplete="off">
+                                                <label class="btn btn-outline-success"
+                                                    for="btn-check-verify">Verify</label><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group d-none">
+                                <label>Status</label>
+                                <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true"
+                                    id="p_status">
+                                    <option value="idel" selected>idel</option>
+                                </select>
+                            </div>
+                            <div class="form-group d-none">
+                                <label for="login">Add date</label>
+                                <input type="date" class="form-control" id="p_add_date" readonly>
+                            </div>
+                            <div class="form-group d-none">
+                                <label for="login">Update date</label>
+                                <input type="date" class="form-control update" id="p_update_date" readonly>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center bg-transparent border-success">
+                            <button type="button" class="btn btn-success" id="p_add">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="edit_action" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Edit process actions</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Actions</label>
+                                <div class="row w-100 actions">
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-verify-e"
+                                                value="verify" autocomplete="off">
+                                            <label class="btn btn-outline-primary"
+                                                for="btn-check-verify-e">Verify</label><br>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-n-spam-e"
+                                                value="notSpam" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="btn-check-n-spam-e">Not
+                                                Spam</label><br>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-m-read-e"
+                                                value="markAsRead" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="btn-check-m-read-e">Mark As
+                                                Read</label><br>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-d-inbox-e"
+                                                value="deleteInbox" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="btn-check-d-inbox-e">Delete
+                                                Inbox</label><br>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-d-spam-e"
+                                                value="deleteSpam" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="btn-check-d-spam-e">Delete
+                                                Spam</label><br>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-m-spam-e"
+                                                value="markAsSpam" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="btn-check-m-spam-e">Mark As
+                                                Spam</label><br>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-m-imp-e"
+                                                value="markAsImportant" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="btn-check-m-imp-e">Mark As
+                                                Important</label><br>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-c-link-e"
+                                                value="clickLink" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="btn-check-c-link-e">Click
+                                                Link</label><br>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-m-started-e"
+                                                value="markAsStarted" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="btn-check-m-started-e">Mark As
+                                                Started</label><br>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-m-archive-e"
+                                                value="markAsArchive" autocomplete="off">
+                                            <label class="btn btn-outline-primary"
+                                                for="btn-check-m-archive-e">Archive</label><br>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-m-unread-e"
+                                                value="markAsUnread" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="btn-check-m-unread-e">Mark As
+                                                Unread</label><br>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-n-spamT-e"
+                                                value="notSpamThis" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="btn-check-n-spamT-e">Not Spam
+                                                Only</label><br>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="btn-check" id="btn-check-open-e" value="open"
+                                                autocomplete="off">
+                                            <label class="btn btn-outline-primary"
+                                                for="btn-check-open-e">Open</label><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-center">
+                            <button type="button" class="btn btn-success" id="p_a_add">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade user_data" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Your data</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="f_name">First name</label>
+                                <input type="text" class="form-control" id="f_name" READONLY>
+                            </div>
+                            <div class="form-group">
+                                <label for="l_name">Last name</label>
+                                <input type="text" class="form-control" id="l_name" READONLY>
+                            </div>
+                            <div class="form-group">
+                                <label for="login">Login</label>
+                                <input type="text" class="form-control" id="login" READONLY>
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <input type="text" class="form-control" id="type" READONLY>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-danger" id="logout">logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="restart" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
+            data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <h5 class="text-white">You can't prevent the restart anymore</h5><br>
+                <div class="timer">
+                    <strong><q class="display-1 text-danger"><time>00:00:00</time></q></strong>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-danger" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                        <h4 class="modal-title">login-out</h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>are u sure you want to logout ?!</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+                        <a type="button" class="btn btn-outline-light" href="../logout.html">LOGOUT</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="modal fade" id="modal-process-view" style="display: none;">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row w-100">
+                            <div class="col">
+                                <h4 class="modal-title">Status of process <span id="p_s"></span></h4>
+                            </div>
+                            <div class="col text-center count">
+
+                            </div>
+                            <div class="col text-right status_bg">
+
+                            </div>
+                            <div class="col text-right">
+                                <button type="button" class="btn-close" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-warning elevation-1">
+                                        <i class="fas fa-hourglass-start"></i>
+                                    </span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Waiting seeds</span>
+                                        <span class="info-box-number w_seeds">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="info-box mb-3">
+                                    <span class="info-box-icon bg-info elevation-1">
+                                        <i class="fas fa-cog"></i>
+                                    </span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Active seeds</span>
+                                        <span class="info-box-number a_seeds">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="info-box mb-3">
+                                    <span class="info-box-icon bg-success elevation-1">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Finished seeds</span>
+                                        <span class="info-box-number f_seeds">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="info-box mb-3">
+                                    <span class="info-box-icon bg-danger elevation-1">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Failed seeds</span>
+                                        <span class="info-box-number ff_seeds">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-striped text-center" id="process_result"
+                            style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Proxy</th>
+                                    <th>ISP</th>
+                                    <th>Status</th>
+                                    <th>Status details</th>
+                                    <th>Duration</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody id="seeds_result"></tbody>
+                        </table>
+                        <div id="pagination-container">
+                            <nav aria-label="pagination">
+                                <ul class="pagination pagination-sm seeds-pagination">
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="modal-result-view" style="display: none;">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row w-100">
+                            <div class="col">
+                                <h4 class="modal-title">Seed feedback</span></h4>
+                            </div>
+                            <div class="col text-right">
+                                <button class="btn btn-primary" id="Refresh">Refresh</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row row-cols-1 row-cols-md-2 g-4 feedback">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="fullpage" onclick="this.style.display='none';">
+            <div class="row z-3">
+                <div class="col">
+                    <img src="" alt="feedBack" id="feedback-img">
+                </div>
+            </div>
+        </div>
+        <!-- /. modal -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2023 <a href="#">Reporting</a>.</strong> All rights
+            reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <!-- jQuery -->
+    <script src="../../assets/vendors/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
+    <script
+        src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.1/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script src="../../assets/vendors/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../assets/vendors/AdminLTE-3.2.0/dist/js/adminlte.min.js"></script>
+    <!-- main admin script -->
+    <script src="../../assets/script/render_admin.js"></script>
+    <script type="module" src="../../assets/script/processUiScript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../assets/script/index.js" defer></script>
+</body>
+
+</html>

@@ -56,6 +56,7 @@ fetch(adminSidebarUrl)
   })
   .then(() => {
     const home = document.querySelector(".home");
+    const compose = document.querySelector('.compose')
     const entities = document.querySelector(".entities");
     const users = document.querySelector(".users");
     const process = document.querySelector(".process");
@@ -75,6 +76,8 @@ fetch(adminSidebarUrl)
       lists.setAttribute('href', '../lists/')
       settings.setAttribute("href", '../database/')
       authorization.setAttribute("href", '../authorization/')
+      compose.setAttribute("href", '../compose/')
+
     } else if (path == "/admin/users/") {
       home.setAttribute("href", "../");
       users.classList.add("active");
@@ -84,6 +87,8 @@ fetch(adminSidebarUrl)
       lists.setAttribute('href', '../lists/')
       settings.setAttribute("href", '../database/')
       authorization.setAttribute("href", '../authorization/')
+      compose.setAttribute("href", '../compose/')
+
     } else if (path == "/admin/process/") {
       home.setAttribute("href", "../");
       process.classList.add("active");
@@ -102,6 +107,8 @@ fetch(adminSidebarUrl)
       users.setAttribute('href', '../users/')
       settings.setAttribute("href", '../database/')
       authorization.setAttribute("href", '../authorization/')
+      compose.setAttribute("href", '../compose/')
+
     } else if (path == "/admin/database/") {
       home.setAttribute("href", "../");
       settings.classList.add("active");
@@ -111,6 +118,8 @@ fetch(adminSidebarUrl)
       users.setAttribute('href', '../users/')
       lists.setAttribute("href", '../lists/')
       authorization.setAttribute("href", '../authorization/')
+      compose.setAttribute("href", '../compose/')
+
     } else if (path == "/admin/authorization/") {
       home.setAttribute("href", "../");
       authorization.classList.add("active");
@@ -120,6 +129,17 @@ fetch(adminSidebarUrl)
       users.setAttribute('href', '../users/')
       lists.setAttribute("href", '../lists/')
       settings.setAttribute("href", '../database/')
+      compose.setAttribute("href", '../compose/')
+    } else if (path == "/admin/compose/") {
+      home.setAttribute("href", "../");
+      compose.classList.add("active");
+      compose.setAttribute("href", "./");
+      entities.setAttribute("href", "../entities/");
+      process.setAttribute('href', '../process/')
+      users.setAttribute('href', '../users/')
+      lists.setAttribute("href", '../lists/')
+      settings.setAttribute("href", '../database/')
+      authorization.setAttribute("href", '../authorization/')
     }
   });
 
