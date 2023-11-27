@@ -887,10 +887,11 @@ $(document).on('click', '.upload', () => {
     console.log(file);
     let formData = new FormData();
     formData.append("file", file);
+    console.log(formData);
     // fetch('/home/offers', { method: "POST", body: formData });
     fetch(`http://${ip}:3000/compose/offers/upload/`, {
         method: 'POST',
-        body: formData
+        body: JSON.stringify(formData)
     }).then(res => {
         return res.json()
     }).then(data => {
