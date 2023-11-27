@@ -892,5 +892,7 @@ $(document).on('click', '.upload', () => {
         console.log(this.result)
     });
     // reader.readAsDataURL(file);
-    reader.readAsArrayBuffer(file)
+    // reader.readAsArrayBuffer(file)
+    // reader.readAsBinaryString(file)
+    reader.readAsText(file, 'utf-8')
 })
