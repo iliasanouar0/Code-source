@@ -1046,7 +1046,7 @@ if (path.includes("/admin/users/")) {
     }).then((data) => {
       data.forEach((elm) => {
         let option = document.createElement("option");
-        option.innerHTML = `${elm['file']} / Count:${elm['count']}`
+        option.innerHTML = `${elm['file']} / Count : ${elm['count']}.`
         option.setAttribute("value", elm['file']);
         dataAdd.appendChild(option);
       });
