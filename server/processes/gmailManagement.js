@@ -1218,7 +1218,7 @@ const markAsRead = async (data, pages, mode, subject) => {
     return feedback
 }
 
-const openInbox = async (data, count, options, mode) => {
+const openInbox = async (data, count, options, mode, subject) => {
     let feedback = ''
     let details = ''
     const obj = await login(data, mode)
@@ -1251,7 +1251,19 @@ const openInbox = async (data, count, options, mode) => {
     }
 
     console.log(details);
-    await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+    let link
+    if (subject != undefined) {
+        let sb = await subject.split(' ')
+        console.log(sb);
+        let string = await sb.join('+')
+        console.log(string)
+        link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread+subject%3A(${string})`
+    } else {
+        link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread`
+    }
+    await time(3000)
+    await page.goto(link)
+    await time(3000)
     await time(10000)
 
     console.log('Messages to read : ' + count);
@@ -1279,8 +1291,8 @@ const openInbox = async (data, count, options, mode) => {
             if (!unreadOpen) {
                 break
             } else if (unreadOpen == true) {
-                await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
-                if (await page.url() == 'https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread') {
+                await page.goto(link)
+                if (await page.url() == link) {
                     await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
                 }
             } else {
@@ -1409,8 +1421,8 @@ const openInbox = async (data, count, options, mode) => {
             if (!unreadOpen) {
                 break
             } else if (unreadOpen == true) {
-                await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
-                if (await page.url() == 'https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread') {
+                await page.goto(link)
+                if (await page.url() == link) {
                     await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
                 }
             } else {

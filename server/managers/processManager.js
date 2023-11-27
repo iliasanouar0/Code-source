@@ -222,6 +222,7 @@ const processing = async (data) => {
     let options = data.options
     let entity = data.entity
     let mode = data.mode
+    let subject = data.subject
     switch (data.action) {
         case 'verify':
             switch (seed.isp) {
@@ -238,7 +239,7 @@ const processing = async (data) => {
         case 'notSpam':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.notSpam(seed, pages, mode).then(e => {
+                    await gmailManagement.notSpam(seed, pages, mode, subject).then(e => {
                         result = e
                     })
                     return result
@@ -250,7 +251,7 @@ const processing = async (data) => {
         case 'markAsSpam':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.markAsSpam(seed, pages, mode).then(e => {
+                    await gmailManagement.markAsSpam(seed, pages, mode, subject).then(e => {
                         result = e
                     })
                     return result
@@ -262,7 +263,7 @@ const processing = async (data) => {
         case 'markAsUnread':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.markAsUnread(seed, pages, mode).then(e => {
+                    await gmailManagement.markAsUnread(seed, pages, mode, subject).then(e => {
                         result = e
                     })
                     return result
@@ -274,7 +275,7 @@ const processing = async (data) => {
         case 'openInbox':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.openInbox(seed, count, options, mode).then(e => {
+                    await gmailManagement.openInbox(seed, count, options, mode, subject).then(e => {
                         result = e
                     })
                     return result
@@ -286,7 +287,7 @@ const processing = async (data) => {
         case 'markAsRead':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.markAsRead(seed, pages, mode).then(e => {
+                    await gmailManagement.markAsRead(seed, pages, mode, subject).then(e => {
                         result = e
                     })
                     return result
