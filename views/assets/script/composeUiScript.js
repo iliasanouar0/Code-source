@@ -885,31 +885,20 @@ $(document).on('click', '.erase', () => {
 $(document).on('click', '.upload', () => {
     let file = $('#messageBody')[0].files[0]
     console.log(file);
-    let fd = new FormData();
-    fd.append('test', file);
-    // console.log(formData);
-    // // fetch('/home/offers', { method: "POST", body: formData });
-    // fetch(`http://${ip}:3000/compose/offers/upload/`, {
-    //     method: 'POST',
-    //     body: JSON.stringify(formData)
-    // }).then(res => {
-    //     return res.json()
-    // }).then(data => {
-    //     console.log(data);
-    // })
-    var req = $.ajax({
-        url: `http://${ip}:3000/compose/offers/upload/`,
-        method: 'POST',
-        data: fd, // sends fields with filename mimetype etc
-        // data: aFiles[0], // optional just sends the binary
-        processData: false, // don't let jquery process the data
-        contentType: false // let xhr set the content type
-    });
+    var form = new FormData();
+    form.append("File", file, "");
 
-    // jQuery is promise A++ compatible and is the todays norms of doing things 
-    req.then(function (response) {
-        console.log(response)
-    }, function (xhr) {
-        console.error('failed to fetch xhr', xhr)
-    })
+    var settings = {
+        "url": `http://${ip}:3000/compose/offers/upload/`,
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
 })
