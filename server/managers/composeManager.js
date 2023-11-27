@@ -38,21 +38,21 @@ const getAllData = (request, response) => {
 const getData = (request, response) => {
     let path = '/home/data'
     let files = fs.readdir(path, (err, files) => {
-        let objects = []
-        for (let i = 0; i < files.length; i++) {
-            let filePath = `${path}/${files[i]}`
-            fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
-                if (!err) {
-                    let array = data.split('\n\r')
-                    console.log('received data: ' + array);
-                    objects.push({ count: array.length, file: files[i] })
-                } else {
-                    console.log(err);
-                }
-            });
-        }
-        return objects
+        return files
     });
+    let objects = []
+    for (let i = 0; i < files.length; i++) {
+        let filePath = `${path}/${files[i]}`
+        fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
+            if (!err) {
+                let array = data.split('\n\r')
+                console.log('received data: ' + array);
+                objects.push({ count: array.length, file: files[i] })
+            } else {
+                console.log(err);
+            }
+        });
+    }
     response.status(200).send(files)
 }
 
