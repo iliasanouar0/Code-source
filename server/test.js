@@ -70,14 +70,13 @@
 //     return { browser: browser, page: page, feedback: feedback }
 // }
 
-// const markAsRead = async (data, pages, subject) => {
+// const openInbox = async (data, count, options, subject) => {
 //     let feedback = ''
 //     let details = ''
 //     const obj = await login(data)
 //     const page = obj.page
 //     const browser = obj.browser
 //     feedback += obj.feedback
-
 //     await time(10000)
 //     const countEnter = await page.evaluate(() => {
 //         let html = []
@@ -95,9 +94,10 @@
 //     } else {
 //         details += `Entre unread inbox : ${countEnter[0].count}`
 //     }
-//     await time(3000)
-//     console.log(`treated pages : ${pages}`);
+
+//     console.log(details);
 //     let link
+//     console.log(subject);
 //     if (subject != undefined) {
 //         let sb = await subject.split(' ')
 //         console.log(sb);
@@ -107,94 +107,288 @@
 //     } else {
 //         link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread`
 //     }
+//     console.log(link);
 //     await time(3000)
 //     await page.goto(link)
 //     await time(3000)
-//     if (pages == undefined) {
+//     console.log(await page.url());
+//     // return
+//     await time(10000)
+
+//     console.log('Messages to read : ' + count);
+//     let unreadOpen
+//     if (count == undefined) {
 //         let i = 0
-//         while (i < 999999) {
-//             console.log(`starting page : ${i + 1}`);
+//         while (i < 99999) {
 //             await time(3000)
-//             const status = await page.evaluate(() => {
-//                 let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-//                 checkSpan.item(1).click()
-//                 return checkSpan.item(1).ariaChecked
-//             })
-//             await time(3000)
-//             console.log(status);
-//             if (status == 'true') {
+//             unreadOpen = await page.evaluate((i) => {
+//                 let html = []
+//                 let length = document.querySelectorAll(`.F.cf.zt`).length
+//                 let el = document.querySelectorAll(`.F.cf.zt`)[length - 1].tBodies.item(0).childNodes
+//                 if (el.length == 0) {
+//                     let checkMessage = document.querySelectorAll('.TC')
+//                     if (checkMessage.length != 0) {
+//                         return false
+//                     } else {
+//                         return true
+//                     }
+//                 }
+//                 el.item(0).click()
+//                 html.push({ messageOpened: i + 1, message: el.item(0).children.item(4).innerText })
+//                 return html
+//             }, i)
+//             console.log(unreadOpen);
+//             if (!unreadOpen) {
+//                 break
+//             } else if (unreadOpen == true) {
+//                 await page.goto(link)
+//                 if (await page.url() == link) {
+//                     await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
+//                 }
+//             } else {
+//                 await time(4000)
+//                 switch (options.markAsStarted) {
+//                     case true:
+//                         let starts = await page.evaluate(() => {
+//                             let s = document.querySelectorAll('.zd.bi4')
+//                             return s[0].ariaLabel
+//                         })
+//                         await time(3000)
+//                         if (starts != 'Starred') {
+//                             let star = await page.$$('.zd.bi4')
+//                             await star[0].click()
+//                         }
+//                         break;
+//                     default:
+//                         console.log('false');
+//                         break;
+//                 }
 //                 await time(3000)
-//                 let c = await page.$$('div[act="1"]')
+//                 switch (options.markAsImportant) {
+//                     case true:
+//                         let options = await page.evaluate(() => {
+//                             let s = document.querySelectorAll("div.pG")
+//                             if (s.length == 0) {
+//                                 return null
+//                             }
+//                             return s[s.length - 1].ariaChecked
+//                         })
+//                         await time(2000)
+//                         console.log('options : ' + options);
+//                         if (options == 'false') {
+//                             let opt = await page.$$("div.pG div.pH-A7.a9q")
+//                             await time(2000)
+//                             await opt[opt.length - 1].click()
+//                         } else if (options == null) {
+//                             await time(3000)
+//                             let m = await page.$$('.bjy.T-I-J3.J-J5-Ji')
+//                             await m[m.length - 1].click()
+//                             await time(2000)
+//                             let imp = await page.evaluate(() => {
+//                                 let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
+//                                 return o[0].parentElement.parentElement.ariaHidden
+//                             })
+//                             await time(2000)
+//                             if (imp != 'true') {
+//                                 let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
+//                                 await markImp[0].click()
+//                             }
+//                         }
+//                         break;
+//                     default:
+//                         console.log('false');
+//                         break;
+//                 }
 //                 await time(3000)
-//                 await c[1].click();
+//                 switch (options.click) {
+//                     case true:
+//                         console.log('click');
+//                         let options = await page.evaluate(() => {
+//                             let keys = []
+//                             let s = document.querySelectorAll(".ii.gt a")
+//                             if (s.length == 0) {
+//                                 return null
+//                             }
+//                             for (let i = 0; i < s.length; i++) {
+//                                 if (s[i].offsetWidth == 0 || s[i].href == '' || s[i].href.includes('mailto:') || s[i].href.includes("google.com") || s[i].target != '_blank') {
+//                                     keys.push({ index: i, state: false })
+//                                 } else {
+//                                     keys.push({ index: i, state: true })
+//                                 }
+//                             }
+//                             return keys
+//                         })
+//                         await time(2000)
+//                         console.log(options);
+//                         let the_one = false
+//                         for (let i = 0; i < options.length; i++) {
+//                             if (options[i].state == true) {
+//                                 let link = await page.$$(".ii.gt a")
+//                                 await time(2000)
+//                                 await link[options[i].index].click()
+//                                 the_one = options[i].state
+//                                 break
+//                             }
+//                         }
+//                         console.log(the_one);
+//                         if (the_one) {
+//                             await time(30000)
+//                             let pages = await browser.pages()
+//                             await time(1000)
+//                             console.log(pages[2]);
+//                             await time(1000)
+//                             await pages[2].close()
+//                         }
+//                         break;
+//                     default:
+//                         console.log('false');
+//                         break;
+//                 }
+//                 // return
 //                 await time(3000)
 //                 await page.goto(link)
-//                 i++
-//             } else {
-//                 console.log(`page ${i + 1} have no mode messages`);
-//                 await time(3000)
-//                 const countOut = await page.evaluate(() => {
-//                     let html = []
-//                     let el = document.querySelectorAll('.bsU')
-//                     let elSpan = document.querySelectorAll('.nU.n1 a')
-//                     for (let i = 0; i < el.length; i++) {
-//                         html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-//                     }
-//                     return html
-//                 })
-//                 if (countOut.length == 0) {
-//                     details += `, Out unread inbox : 0`
-//                 } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
-//                     details += `, Out unread inbox : 0`
-//                 } else {
-//                     details += `, Out unread inbox : ${countOut[0].count}`
+//                 if (await page.url() == link) {
+//                     await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
 //                 }
-//                 console.log(details);
-//                 return
+//                 i++
 //             }
 //         }
+
 //     } else {
-//         for (let i = 0; i < pages; i++) {
-//             console.log(`starting page : ${i + 1}`);
+//         for (let i = 0; i < count; i++) {
 //             await time(3000)
-//             const status = await page.evaluate(() => {
-//                 let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-//                 checkSpan.item(1).click()
-//                 return checkSpan.item(1).ariaChecked
-//             })
-//             await time(3000)
-//             console.log(status);
-//             if (status == 'true') {
+//             unreadOpen = await page.evaluate((i) => {
+//                 let html = []
+//                 let length = document.querySelectorAll(`.F.cf.zt`).length
+//                 let el = document.querySelectorAll(`.F.cf.zt`)[length - 1].tBodies.item(0).childNodes
+//                 if (el.length == 0) {
+//                     let checkMessage = document.querySelectorAll('.TC')
+//                     if (checkMessage.length != 0) {
+//                         return false
+//                     } else {
+//                         return true
+//                     }
+//                 }
+//                 el.item(0).click()
+//                 html.push({ messageOpened: i + 1, message: el.item(0).children.item(4).innerText })
+//                 return html
+//             }, i)
+//             console.log(unreadOpen);
+//             if (!unreadOpen) {
+//                 break
+//             } else if (unreadOpen == true) {
+//                 await page.goto(link)
+//                 if (await page.url() == link) {
+//                     await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
+//                 }
+//             } else {
+//                 await time(4000)
+//                 switch (options.markAsStarted) {
+//                     case true:
+//                         let starts = await page.evaluate(() => {
+//                             let s = document.querySelectorAll('.zd.bi4')
+//                             return s[0].ariaLabel
+//                         })
+//                         await time(3000)
+//                         if (starts != 'Starred') {
+//                             let star = await page.$$('.zd.bi4')
+//                             await star[0].click()
+//                         }
+//                         break;
+//                     default:
+//                         console.log('false');
+//                         break;
+//                 }
 //                 await time(3000)
-//                 let c = await page.$$('div[act="1"]')
+//                 switch (options.markAsImportant) {
+//                     case true:
+//                         let options = await page.evaluate(() => {
+//                             let s = document.querySelectorAll("div.pG")
+//                             if (s.length == 0) {
+//                                 return null
+//                             }
+//                             return s[s.length - 1].ariaChecked
+//                         })
+//                         await time(2000)
+//                         console.log('options : ' + options);
+//                         if (options == 'false') {
+//                             let opt = await page.$$("div.pG div.pH-A7.a9q")
+//                             await time(2000)
+//                             await opt[opt.length - 1].click()
+//                         } else if (options == null) {
+//                             await time(3000)
+//                             let m = await page.$$('.bjy.T-I-J3.J-J5-Ji')
+//                             await m[m.length - 1].click()
+//                             await time(2000)
+//                             let imp = await page.evaluate(() => {
+//                                 let o = document.querySelectorAll('.Kk8Fcb.sVHnob.J-N-JX')
+//                                 return o[0].parentElement.parentElement.ariaHidden
+//                             })
+//                             await time(2000)
+//                             if (imp != 'true') {
+//                                 let markImp = await page.$$('.Kk8Fcb.sVHnob.J-N-JX')
+//                                 await markImp[0].click()
+//                             }
+//                         }
+//                         break;
+//                     default:
+//                         console.log('false');
+//                         break;
+//                 }
 //                 await time(3000)
-//                 await c[1].click();
+//                 switch (options.click) {
+//                     case true:
+//                         console.log('click');
+//                         let options = await page.evaluate(() => {
+//                             let keys = []
+//                             let s = document.querySelectorAll(".ii.gt a")
+//                             if (s.length == 0) {
+//                                 return null
+//                             }
+//                             for (let i = 0; i < s.length; i++) {
+//                                 if (s[i].offsetWidth == 0 || s[i].href == '' || s[i].href.includes('mailto:') || s[i].href.includes("google") || s[i].target != '_blank') {
+//                                     keys.push({ index: i, state: false })
+//                                 } else {
+//                                     keys.push({ index: i, state: true })
+//                                 }
+//                             }
+//                             return keys
+//                         })
+//                         await time(2000)
+//                         console.log(options);
+//                         let the_one = false
+//                         for (let i = 0; i < options.length; i++) {
+//                             if (options[i].state == true) {
+//                                 let link = await page.$$(".ii.gt a")
+//                                 await time(2000)
+//                                 await link[options[i].index].click()
+//                                 the_one = options[i].state
+//                                 break
+//                             }
+//                         }
+//                         console.log(the_one);
+//                         if (the_one) {
+//                             await time(30000)
+//                             let pages = await browser.pages()
+//                             await time(1000)
+//                             console.log(pages[2]);
+//                             await time(1000)
+//                             await pages[2].close()
+//                         }
+//                         break;
+//                     default:
+//                         console.log('false');
+//                         break;
+//                 }
 //                 await time(3000)
 //                 await page.goto(link)
-//             } else {
-//                 console.log(`page ${i + 1} have no mode messages`);
-//                 await time(3000)
-//                 const countOut = await page.evaluate(() => {
-//                     let html = []
-//                     let el = document.querySelectorAll('.bsU')
-//                     let elSpan = document.querySelectorAll('.nU.n1 a')
-//                     for (let i = 0; i < el.length; i++) {
-//                         html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-//                     }
-//                     return html
-//                 })
-//                 if (countOut.length == 0) {
-//                     details += `, Out unread inbox : 0`
-//                 } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
-//                     details += `, Out unread inbox : 0`
-//                 } else {
-//                     details += `, Out unread inbox : ${countOut[0].count}`
+//                 if (await page.url() == link) {
+//                     await page.click('#aso_search_form_anchor button.gb_Ee.gb_Fe.bEP')
 //                 }
-//                 console.log(details);
-//                 return 
 //             }
 //         }
 //     }
+
 //     await time(6000)
 //     await page.goto('https://mail.google.com/mail/u/0/#inbox')
 //     await time(3000)
@@ -212,11 +406,11 @@
 //     } else if (countOut[0].element != "Inbox" && countOut[0].element != "Boîte de réception" && countOut[0].element != "البريد الوارد") {
 //         details += `, Out unread inbox : 0`
 //     } else {
-//         details += `, Out unread inbox : ${countOut[0].count}`
+//         details += `, Out unread inbox  : ${countOut[0].count}`
 //     }
-//     console.log(details);
-//     return 
+//     return
 // }
+
 
 // let data = {
 //     gmail: 'hasithjayanath1994@gmail.com',
@@ -244,8 +438,9 @@
 // // //     vrf: 'PennySgueglia@hotmail.com'
 // // // }
 
-// markAsRead(data, 100, 'test')
-// // openInbox(data, 1, { markAsStarted: true, markAsImportant: true })
+// // markAsRead(data, 100, 'Camp')
+// let test
+// openInbox(data, test, { markAsStarted: true, markAsImportant: true, click: true }, 'Camp')
 
 
 // // const fs = require('fs')
