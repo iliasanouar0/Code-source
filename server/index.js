@@ -23,7 +23,7 @@ Date.prototype.toDateInputValue = function () {
 
 
 const wsi = new WebSocket.Server({ port: 7071 })
-const wsp = new WebSocket.Server({ port: 7072 })
+const wsc = new WebSocket.Server({ port: 7072 })
 const wss = new WebSocket.Server({ port: 7073 })
 wss.broadcast = data => {
   wss.clients.forEach(client => client.send(data));
@@ -41,6 +41,7 @@ const resultManager = require("./managers/resultManager")
 const settingsManager = require("./managers/settingsManager")
 const authorizationManager = require('./managers/authorizationManager')
 const nodeEnvManager = require('./managers/nodeEnvManager')
+const composeManager = require('./managers/composeManager')
 
 const port = 3000;
 const app = express(); // setup express application
@@ -725,6 +726,9 @@ app.get("/process/mailer/:id", processManager.getAllUserDate)
 app.get("/process/seeds/:id", processManager.getAllProcessSeeds)
 app.get('/process/page/:id', processManager.getAllProcessSeedsCount)
 app.patch("/process/", processManager.deleteProcess);
+
+// composing API
+app.get('/compose/admin', composeManager.getAllData)
 
 // result API
 app.get("/result/feedback/:id", resultManager.getFeedback)

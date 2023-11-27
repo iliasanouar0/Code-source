@@ -1,5 +1,5 @@
 const user = JSON.parse(sessionStorage.user);
-const wssUri = `ws://${ip}:7073/wss?id=${user.id_user}`;
+const wssUri = `ws://${ip}:7072/wss?id=${user.id_user}`;
 const websocket_s = new WebSocket(wssUri);
 
 websocket_s.onmessage = (event) => {
@@ -8,7 +8,7 @@ websocket_s.onmessage = (event) => {
     switch (data) {
         case 'reload':
             $('body .tooltip').removeClass('show');
-            getData.ajax.reload(null, false)
+            getDataCompose.ajax.reload(null, false)
             break;
         case 'location reload':
             location.reload()
@@ -25,8 +25,8 @@ Date.prototype.toDateInputValue = function () {
     return local.toJSON().slice(0, 10);
 };
 
-$(document).on("click", "#add_process", () => {
-    $(".add_process").modal("show");
+$(document).on("click", "#add_compose", () => {
+    $(".add_compose").modal("show");
 });
 
 $(document).ready(function () {
@@ -41,8 +41,8 @@ $(document).on('click', '.edit', event => {
     $('#p_a_add').data('id', id)
 })
 
-const addProcess = data => {
-    fetch(`http://${ip}:3000/process/`, {
+const addCompose = data => {
+    fetch(`http://${ip}:3000/compose/`, {
         method: 'POST',
         body: `${JSON.stringify(data)}`,
         headers: {
@@ -60,10 +60,10 @@ const addProcess = data => {
             showConfirmButton: false,
             icon: 'success'
         }).then(() => {
-            $('.add_process input:text').val('')
-            $('.add_process input:checkbox').prop("checked", false)
-            $(".add_process").modal("hide");
-            getData.ajax.reload(null, false)
+            $('.add_compose input:text').val('')
+            $('.add_compose input:checkbox').prop("checked", false)
+            $(".add_compose").modal("hide");
+            getDataCompose.ajax.reload(null, false)
         })
     })
 }
@@ -132,7 +132,7 @@ $(document).on('click', "#p_add", () => {
         "id_user": `${userData['id_user']}`,
         "id_list": `${p_list_add}`
     };
-    addProcess(data)
+    addCompose(data)
 });
 
 $(document).on('click', '.start', event => {
@@ -156,7 +156,7 @@ $(document).on('click', '.start', event => {
         };
         $.ajax(settings).done(function (response) {
             websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj, entity: response[0].nom }))
-            getData.ajax.reload(null, false)
+            getDataCompose.ajax.reload(null, false)
             $('body .tooltip').removeClass('show');
         });
     } else {
@@ -733,7 +733,7 @@ const editActions = (data) => {
             title: response,
             icon: 'success'
         })
-        getData.ajax.reload(null, false)
+        getDataCompose.ajax.reload(null, false)
     });
 }
 
@@ -825,7 +825,7 @@ $(document).on('click', '.delete-all-this', () => {
             }).then(() => {
                 $('.checkAll')[0].checked = false
                 $('#action').html('')
-                getData.ajax.reload(null, false)
+                getDataCompose.ajax.reload(null, false)
             })
         } else if (result.isDismissed) {
             Swal.fire({
