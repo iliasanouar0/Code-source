@@ -730,6 +730,7 @@ app.patch("/process/", processManager.deleteProcess);
 // composing API
 app.get('/compose/admin', composeManager.getAllData)
 app.get('/compose/data/', composeManager.getData)
+app.get('/compose/offers/', composeManager.getOffers)
 
 // result API
 app.get("/result/feedback/:id", resultManager.getFeedback)

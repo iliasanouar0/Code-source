@@ -32,9 +32,6 @@ const getAllData = (request, response) => {
     })
 }
 
-// /home/data
-// /home/offers
-
 const getData = (request, response) => {
     let path = '/home/data'
     let objects = []
@@ -46,6 +43,12 @@ const getData = (request, response) => {
         objects.push({ count: array.length, file: file })
     })
     response.status(200).send(objects)
+}
+
+const getOffers = (request, response) => {
+    let path = '/home/offers'
+    let fileObjs = fs.readdirSync(path);
+    response.status(200).send(fileObjs)
 }
 
 const getAllUserDate = (request, response) => {
@@ -411,5 +414,6 @@ module.exports = {
     getAllUserDate,
     getAllSupDate,
     getAllProcessByState,
-    getData
+    getData,
+    getOffers
 }

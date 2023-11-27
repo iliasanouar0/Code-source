@@ -1025,8 +1025,10 @@ if (path.includes("/admin/users/")) {
   document.querySelector("#add_compose").addEventListener("click", () => {
     const select = document.querySelector("#p_list_add");
     const dataAdd = document.querySelector("#p_data_add");
+    const offersAdd = document.querySelector("#p_offers_add");
     select.innerHTML = ""
     dataAdd.innerHTML = ""
+    offersAdd.innerHTML = ""
     fetch(`http://${ip}:3000/lists`, {
       method: "GET",
     }).then((response) => {
@@ -1050,6 +1052,24 @@ if (path.includes("/admin/users/")) {
         option.setAttribute("value", elm['file']);
         dataAdd.appendChild(option);
       });
+    })
+    fetch(`http://${ip}:3000/compose/offers`, {
+      method: "GET",
+    }).then((response) => {
+      return response.json();
+    }).then((data) => {
+      if (data.length == 0) {
+        let option = document.createElement("option");
+        option.innerHTML = `No available offers`
+        offersAdd.appendChild(option);
+      } else {
+        data.forEach((elm) => {
+          let option = document.createElement("option");
+          option.innerHTML = `${elm['file']} / Count : ${elm['count']}`
+          option.setAttribute("value", elm['file']);
+          offersAdd.appendChild(option);
+        });
+      }
     })
   })
   getDataCompose
