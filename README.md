@@ -83,7 +83,7 @@ node
 
 #### Required files
 
-- The Cookies file :
+- The Cookies folder :
 
 In the root folder of the server create AppUsers/cookies :<br>
 1:
@@ -97,6 +97,14 @@ cd AppUsers
 3 :
 ```
 mkdir cookies
+```
+
+- The Profile folder :
+
+In the root folder of the server create userDir/ :<br>
+1:
+```
+mkdir  userDir
 ```
 
 - The log file :
