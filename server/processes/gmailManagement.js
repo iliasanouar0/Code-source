@@ -1261,6 +1261,7 @@ const openInbox = async (data, count, options, mode, subject) => {
     } else {
         link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread`
     }
+    console.log(link);
     await time(3000)
     await page.goto(link)
     await time(3000)
