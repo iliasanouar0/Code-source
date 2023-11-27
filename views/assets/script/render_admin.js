@@ -1039,7 +1039,6 @@ if (path.includes("/admin/users/")) {
         select.appendChild(option);
       });
     })
-
     fetch(`http://${ip}:3000/compose/data`, {
       method: "GET",
     }).then((response) => {
