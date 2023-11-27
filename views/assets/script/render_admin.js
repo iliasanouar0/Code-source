@@ -98,6 +98,8 @@ fetch(adminSidebarUrl)
       lists.setAttribute('href', '../lists/')
       settings.setAttribute("href", '../database/')
       authorization.setAttribute("href", '../authorization/')
+      compose.setAttribute("href", '../compose/')
+
     } else if (path == "/admin/lists/") {
       home.setAttribute("href", "../");
       lists.classList.add("active");
