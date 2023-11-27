@@ -885,4 +885,12 @@ $(document).on('click', '.erase', () => {
 $(document).on('click', '.upload', () => {
     let file = $('#messageBody')[0].files[0]
     console.log(file);
+    fetch(`http://${ip}:3000/compose/offers/upload/`, {
+        method: 'POST',
+        body: file
+    }).then(res => {
+        return res.json()
+    }).then(data => {
+        console.log(data);
+    })
 })
