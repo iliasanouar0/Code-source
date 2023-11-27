@@ -464,7 +464,7 @@ const verify = async (data, entity, mode) => {
     }
 }
 
-const notSpam = async (data, pages, mode) => {
+const notSpam = async (data, pages, mode, subject) => {
     let feedback = ''
     let details = ''
     const obj = await login(data, mode)
@@ -512,6 +512,19 @@ const notSpam = async (data, pages, mode) => {
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(3000)
     console.log(`treated pages: ${pages}`);
+    let link
+    if (subject != undefined) {
+        let sb = await subject.split(' ')
+        console.log(sb);
+        let string = await sb.join('+')
+        console.log(string)
+        link = `https://mail.google.com/mail/u/0/#search/in%3Aspam+subject%3A(${string})`
+    } else {
+        link = `https://mail.google.com/mail/u/0/#search/in%3Aspam`
+    }
+    await time(3000)
+    await page.goto(link)
+    await time(3000)
     if (pages == undefined) {
         let i = 0
         while (true) {
@@ -528,6 +541,8 @@ const notSpam = async (data, pages, mode) => {
                 await page.waitForSelector('div[act="18"]')
                 await time(3000)
                 await page.click('div[act="18"]')
+                await time(3000)
+                await page.goto(link)
                 i++
             } else {
                 console.log(`page ${i + 1} have no mode messages`);
@@ -575,6 +590,8 @@ const notSpam = async (data, pages, mode) => {
                 await page.waitForSelector('div[act="18"]')
                 await time(3000)
                 await page.click('div[act="18"]')
+                await time(3000)
+                await page.goto(link)
             } else {
                 console.log(`page ${i + 1} have no mode messages`);
                 await page.screenshot({
@@ -639,7 +656,7 @@ const notSpam = async (data, pages, mode) => {
     return feedback
 }
 
-const markAsSpam = async (data, pages, mode) => {
+const markAsSpam = async (data, pages, mode, subject) => {
     let feedback = ''
     let details = ''
     const obj = await login(data, mode)
@@ -676,6 +693,19 @@ const markAsSpam = async (data, pages, mode) => {
     }
     await time(3000)
     console.log(`treated pages : ${pages}`);
+    let link
+    if (subject != undefined) {
+        let sb = await subject.split(' ')
+        console.log(sb);
+        let string = await sb.join('+')
+        console.log(string)
+        link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+subject%3A(${string})`
+    } else {
+        link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox`
+    }
+    await time(3000)
+    await page.goto(link)
+    await time(3000)
     if (pages == undefined) {
         let i = 0
         while (true) {
@@ -694,6 +724,7 @@ const markAsSpam = async (data, pages, mode) => {
                 await time(3000)
                 await page.click('div[act="9"]')
                 console.log('clicked');
+                await page.goto(link)
                 i++
             } else {
                 console.log(`page ${i + 1} have no mode messages`);
@@ -744,6 +775,7 @@ const markAsSpam = async (data, pages, mode) => {
                 await time(3000)
                 await page.click('div[act="9"]')
                 console.log('clicked');
+                await page.goto(link)
             } else {
                 console.log(`page ${i + 1} have no mode messages`);
                 await page.screenshot({
@@ -809,7 +841,7 @@ const markAsSpam = async (data, pages, mode) => {
     return feedback
 }
 
-const markAsUnread = async (data, pages, mode) => {
+const markAsUnread = async (data, pages, mode, subject) => {
     let feedback = ''
     let details = ''
     const obj = await login(data, mode)
@@ -846,7 +878,18 @@ const markAsUnread = async (data, pages, mode) => {
     }
     await time(3000)
     console.log(`treated pages : ${pages}`);
-    await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aread')
+    let link
+    if (subject != undefined) {
+        let sb = await subject.split(' ')
+        console.log(sb);
+        let string = await sb.join('+')
+        console.log(string)
+        link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aread+subject%3A(${string})`
+    } else {
+        link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aread`
+    }
+    await time(3000)
+    await page.goto(link)
     await time(3000)
 
     if (pages == undefined) {
@@ -867,7 +910,7 @@ const markAsUnread = async (data, pages, mode) => {
                 await time(3000)
                 await c[1].click();
                 await time(3000)
-                await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aread')
+                await page.goto(link)
                 i++
             } else {
                 console.log(`page ${i + 1} have no mode messages`);
@@ -919,7 +962,7 @@ const markAsUnread = async (data, pages, mode) => {
                 await time(3000)
                 await c[1].click();
                 await time(3000)
-                await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aread')
+                await page.goto(link)
             } else {
                 console.log(`page ${i + 1} have no mode messages`);
                 await page.screenshot({
@@ -987,7 +1030,7 @@ const markAsUnread = async (data, pages, mode) => {
     return feedback
 }
 
-const markAsRead = async (data, pages, mode) => {
+const markAsRead = async (data, pages, mode, subject) => {
     let feedback = ''
     let details = ''
     const obj = await login(data, mode)
@@ -1024,7 +1067,18 @@ const markAsRead = async (data, pages, mode) => {
     }
     await time(3000)
     console.log(`treated pages : ${pages}`);
-    await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+    let link
+    if (subject != undefined) {
+        let sb = await subject.split(' ')
+        console.log(sb);
+        let string = await sb.join('+')
+        console.log(string)
+        link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread+subject%3A(${string})`
+    } else {
+        link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread`
+    }
+    await time(3000)
+    await page.goto(link)
     await time(3000)
     if (pages == undefined) {
         let i = 0
@@ -1044,7 +1098,7 @@ const markAsRead = async (data, pages, mode) => {
                 await time(3000)
                 await c[1].click();
                 await time(3000)
-                await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+                await page.goto(link)
                 i++
             } else {
                 console.log(`page ${i + 1} have no mode messages`);
@@ -1096,7 +1150,7 @@ const markAsRead = async (data, pages, mode) => {
                 await time(3000)
                 await c[1].click();
                 await time(3000)
-                await page.goto('https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread')
+                await page.goto(link)
             } else {
                 console.log(`page ${i + 1} have no mode messages`);
                 await page.screenshot({
