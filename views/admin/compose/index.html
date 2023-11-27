@@ -201,20 +201,34 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="body" class="form-label">Body :</label>
-                                    <textarea class="form-control" id="body" rows="3" placeholder="Email body"></textarea>
+                                    <textarea class="form-control" id="body" rows="3"
+                                        placeholder="Email body"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="to" class="form-label">To :</label>
                                     <input type="text" id="to" class="form-control" placeholder="@email">
                                 </div>
-                                <div class="mb-3">
-                                    <label for="messageBody" class="form-label">HTML body :</label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" id="messageBody"
-                                            aria-describedby="messageBody" aria-label="Upload">
-                                        <button class="btn btn-outline-danger erase" type="button">X</button>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label for="messageBody" class="form-label">HTML body :</label>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" id="messageBody"
+                                                    aria-describedby="messageBody" aria-label="Upload">
+                                                <button class="btn btn-outline-danger erase" type="button">X</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Offers :</label>
+                                            <select class="form-control lists" style="width: 100%;" tabindex="-1"
+                                                aria-hidden="true" id="p_offers_add">
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="form-group d-none">
