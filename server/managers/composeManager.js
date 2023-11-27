@@ -37,21 +37,24 @@ const getAllData = (request, response) => {
 
 const getData = (request, response) => {
     let path = '/home/data'
-    let objects = []
     fs.readdir(path, (err, files) => {
-        files.forEach(file => {
-            let filePath = `${path}/${file}`
+        let objects = []
+        for (let i = 0; i < files.length; i++) {
+            let filePath = `${path}/${files[i]}`
             fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
                 if (!err) {
                     let array = data.split('\n\r')
                     console.log('received data: ' + array);
-                    objects.push({ count: array.length, file: file })
+                    objects.push({ count: array.length, file: files[i] })
                 } else {
                     console.log(err);
                 }
             });
-            response.status(200).send(objects)
-        });
+        }
+        response.status(200).send(objects)
+        // files.forEach(file => {
+
+        // });
     });
 }
 
