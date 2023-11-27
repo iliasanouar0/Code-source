@@ -897,7 +897,7 @@ $(document).on('click', '.upload', () => {
     // }).then(data => {
     //     console.log(data);
     // })
-    var req = jQuery.ajax({
+    var req = $.ajax({
         url: `http://${ip}:3000/compose/offers/upload/`,
         method: 'POST',
         data: fd, // sends fields with filename mimetype etc
