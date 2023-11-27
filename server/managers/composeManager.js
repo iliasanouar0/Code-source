@@ -50,8 +50,9 @@ const getData = (request, response) => {
                     console.log(err);
                 }
             });
+            response.status(200).send(objects)
         }
-        response.status(200).send(objects)
+        
         // files.forEach(file => {
 
         // });
