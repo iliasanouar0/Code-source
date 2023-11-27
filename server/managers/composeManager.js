@@ -38,7 +38,7 @@ const getAllData = (request, response) => {
 const getData = (request, response) => {
     let path = '/home/data'
     let objects = []
-    let fileObjs = fs.readdirSync(path, { withFileTypes: true });
+    let fileObjs = fs.readdirSync(path);
     console.log(fileObjs);
     // fileObjs.forEach(file => {
     //     let filePath = `${path}/${file}`
