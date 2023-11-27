@@ -895,7 +895,8 @@ $(document).on('click', '.upload', () => {
         "processData": false,
         "mimeType": "multipart/form-data",
         "contentType": false,
-        "data": form
+        // "data": form
+        "data": JSON.stringify(file)
     };
 
     $.ajax(settings).done(function (response) {
