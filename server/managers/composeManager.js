@@ -37,7 +37,7 @@ const getAllData = (request, response) => {
 
 const getData = (request, response) => {
     let path = '/home/data'
-    fs.readdir(path, (err, files) => {
+    let files = fs.readdir(path, (err, files) => {
         let objects = []
         for (let i = 0; i < files.length; i++) {
             let filePath = `${path}/${files[i]}`
@@ -46,15 +46,14 @@ const getData = (request, response) => {
                     let array = data.split('\n\r')
                     console.log('received data: ' + array);
                     objects.push({ count: array.length, file: files[i] })
-                    response.status(200).send(objects)
                 } else {
                     console.log(err);
                 }
             });
         }
-        // files.forEach(file => {
-        // });
+        return objects
     });
+    response.status(200).send(files)
 }
 
 const getAllUserDate = (request, response) => {
