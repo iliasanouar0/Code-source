@@ -1265,6 +1265,7 @@ const openInbox = async (data, count, options, mode, subject) => {
     await time(3000)
     await page.goto(link)
     await time(3000)
+    console.log(await page.url());
     await time(10000)
 
     console.log('Messages to read : ' + count);
