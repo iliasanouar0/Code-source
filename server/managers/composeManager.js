@@ -40,15 +40,15 @@ const getData = (request, response) => {
     let objects = []
     let fileObjs = fs.readdirSync(path);
     console.log(fileObjs);
-    // fileObjs.forEach(file => {
-    //     let filePath = `${path}/${file}`
-    //     const data = fs.readFileSync(filePath, 'utf8');
-    //     console.log(data);
-    //     let array = data.split('\n\r')
-    //     objects.push({ count: array.length, file: file })
-    // })
-    response.status(200).send(fileObjs)
-    // response.status(200).send(objects)
+    fileObjs.forEach(file => {
+        let filePath = `${path}/${file}`
+        const data = fs.readFileSync(filePath, 'utf8');
+        console.log(data);
+        let array = data.split('\n\r')
+        objects.push({ count: array.length, file: file })
+    })
+    // response.status(200).send(fileObjs)
+    response.status(200).send(objects)
 }
 
 const getAllUserDate = (request, response) => {
