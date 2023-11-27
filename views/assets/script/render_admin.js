@@ -1022,5 +1022,24 @@ if (path.includes("/admin/users/")) {
   getAccessGranted
   getMode()
 } else if (path.includes("/admin/compose/")) {
+  document.querySelector("#add_compose").addEventListener("click", () => {
+    const select = document.querySelector("#p_list_add");
+    select.innerHTML = ""
+    fetch(`http://${ip}:3000/lists`, {
+      method: "GET",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        data.forEach((elm) => {
+          let option = document.createElement("option");
+          option.innerHTML = elm["name"];
+          option.setAttribute("value", elm["id_list"]);
+          select.appendChild(option);
+        });
+
+      })
+  })
   getDataCompose
 }
