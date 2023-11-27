@@ -881,3 +881,8 @@ $('#btn-check-compose').change(event => {
 $(document).on('click', '.erase', () => {
     $('#messageBody').val('')
 })
+
+$(document).on('click', '.upload', () => {
+    let file = $('#messageBody')[0].files[0]
+    console.log(file);
+})
