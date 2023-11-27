@@ -43,8 +43,9 @@ const getData = (request, response) => {
             let filePath = `${path}/${file}`
             fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
                 if (!err) {
-                    console.log('received data: ' + data.split('\n\r'));
-                    objects.push({ count: data.length, file: file })
+                    let array = data.split('\n\r')
+                    console.log('received data: ' + array);
+                    objects.push({ count: array.length, file: file })
                     response.status(200).send(objects)
                 } else {
                     console.log(err);
