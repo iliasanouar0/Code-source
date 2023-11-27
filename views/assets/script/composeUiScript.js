@@ -882,18 +882,9 @@ $(document).on('click', '.erase', () => {
     $('#messageBody').val('')
 })
 
-$(document).on('click', '.upload', () => {
-    let file = $('#messageBody')[0].files[0]
-    console.log(file);
-    var form = new FormData();
-    form.append("File", file, "");
-    var settings = {
-        "url": `http://${ip}:3000/compose/offers/upload/`,
-        "method": "POST",
-        "data": form
-    };
-
-    $.ajax(settings).done(function (response) {
-        console.log(response);
-    });
-})
+// $(document).on('click', '.upload', () => {
+//     let file = $('#messageBody')[0].files[0]
+//     console.log(file);
+//     var form = new FormData();
+//     form.append("File", file, "");
+// })

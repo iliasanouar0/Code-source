@@ -209,10 +209,14 @@
                                         <div class="mb-3">
                                             <label for="messageBody" class="form-label">HTML body :</label>
                                             <div class="input-group">
-                                                <input type="file" class="form-control" id="messageBody"
-                                                    aria-describedby="messageBody" aria-label="Upload">
-                                                <button class="btn btn-outline-danger erase" type="button">X</button>
-                                                <button class="btn btn-outline-success upload" type="button">Upload</button>
+                                                <form action="http://project1.gm2reporting.com:3000/compose/offers/upload/" method="post">
+                                                    <input type="file" class="form-control" id="messageBody"
+                                                        aria-describedby="messageBody" aria-label="Upload">
+                                                    <button class="btn btn-outline-danger erase"
+                                                        type="button">X</button>
+                                                    <button type="submit" class="btn btn-outline-success upload"
+                                                        type="button">Upload</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
