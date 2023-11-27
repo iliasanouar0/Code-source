@@ -885,16 +885,31 @@ $(document).on('click', '.erase', () => {
 $(document).on('click', '.upload', () => {
     let file = $('#messageBody')[0].files[0]
     console.log(file);
-    let formData = new FormData();
-    formData.append("file", file);
-    console.log(formData);
-    // fetch('/home/offers', { method: "POST", body: formData });
-    fetch(`http://${ip}:3000/compose/offers/upload/`, {
+    let fd = new FormData();
+    fd.append('test', file);
+    // console.log(formData);
+    // // fetch('/home/offers', { method: "POST", body: formData });
+    // fetch(`http://${ip}:3000/compose/offers/upload/`, {
+    //     method: 'POST',
+    //     body: JSON.stringify(formData)
+    // }).then(res => {
+    //     return res.json()
+    // }).then(data => {
+    //     console.log(data);
+    // })
+    var req = jQuery.ajax({
+        url: `http://${ip}:3000/compose/offers/upload/`,
         method: 'POST',
-        body: JSON.stringify(formData)
-    }).then(res => {
-        return res.json()
-    }).then(data => {
-        console.log(data);
+        data: fd, // sends fields with filename mimetype etc
+        // data: aFiles[0], // optional just sends the binary
+        processData: false, // don't let jquery process the data
+        contentType: false // let xhr set the content type
+    });
+
+    // jQuery is promise A++ compatible and is the todays norms of doing things 
+    req.then(function (response) {
+        console.log(response)
+    }, function (xhr) {
+        console.error('failed to fetch xhr', xhr)
     })
 })
