@@ -887,19 +887,19 @@ $(document).on('click', '.upload', () => {
     console.log(file);
     var form = new FormData();
     form.append("File", file, "");
-    fetch('../../', { method: "POST", body: form });
-    // var settings = {
-    //     "url": `http://${ip}:3000/compose/offers/upload/`,
-    //     "method": "POST",
-    //     "timeout": 0,
-    //     "processData": false,
-    //     "mimeType": "multipart/form-data",
-    //     "contentType": false,
-    //     // "data": form
-    //     "data": JSON.stringify(file)
-    // };
+    console.log(form.values());
+    var settings = {
+        "url": `http://${ip}:3000/compose/offers/upload/`,
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        // "data": form
+        "data": JSON.stringify(file)
+    };
 
-    // $.ajax(settings).done(function (response) {
-    //     console.log(response);
-    // });
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
 })
