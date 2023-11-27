@@ -45,12 +45,12 @@ const getData = (request, response) => {
                 if (!err) {
                     console.log('received data: ' + data.split('\n\r'));
                     objects.push({ count: data.length, file: file })
+                    response.status(200).send(objects)
                 } else {
                     console.log(err);
                 }
             });
         });
-        response.status(200).send(objects)
     });
 }
 
