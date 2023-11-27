@@ -32,6 +32,21 @@ const getAllData = (request, response) => {
     })
 }
 
+// /home/data
+// /home/offers
+
+const getData = (request, response) => {
+    let path = '/home/data'
+    let data = []
+    fs.readdir(path, (err, files) => {
+        files.forEach(file => {
+            console.log(file);
+            data.push(file)
+        });
+    });
+    response.status(200).send(data)
+}
+
 const getAllUserDate = (request, response) => {
     const id = (request.params.id)
     let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_user=($1) GROUP BY composing.id_process,list.id_list,users.id_user"
@@ -394,5 +409,6 @@ module.exports = {
     getAllProcessSeedsCount,
     getAllUserDate,
     getAllSupDate,
-    getAllProcessByState
+    getAllProcessByState,
+    getData
 }

@@ -138,6 +138,12 @@
                                     id="p_list_add">
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label>Data :</label>
+                                <select class="form-control data" style="width: 100%;" tabindex="-1" aria-hidden="true"
+                                    id="p_data_add">
+                                </select>
+                            </div>
                             <small>
                                 <div class="alert alert-sm alert-warning" role="alert">
                                     <div class="spinner-grow-sm text-danger spinner-grow" role="status">
@@ -148,24 +154,14 @@
                             </small>
                             <div class="row mb-3">
                                 <div class="col w-100">
-                                    <div class="form-group max_pages">
-                                        <label for="max_pages">Max pages :</label>
+                                    <div class="form-group limit_send">
+                                        <label for="limit_send">Limit</label>
                                         <div class="row g-3 align-items-center">
                                             <div class="col">
-                                                <input type="number" class="form-control" name="max_pages"
-                                                    id="max_pages" min="1" value="1">
-                                            </div>
-                                            <div class="col">
-                                                <span class="form-text text-danger">
-                                                    [Max : 500 P]
-                                                </span>
+                                                <input type="number" class="form-control" name="limit_send"
+                                                    id="limit_send" min="1" value="1">
                                             </div>
                                         </div>
-                                        <small class="text-info">- Max pages default value is 1.</small><br>
-                                        <small class="text-info">- Max pages (1 = One page)</small><br>
-                                        <small>- Limit for :<br>
-                                            <code
-                                                style="margin-left: 0px; font-size: 11px; color: rgb(25, 79, 133);">[Open Bulk ,Move To Inbox ,Archive ,Delete [is:unread] ,Delete [is:read] ,Open Bulk Spam,Delete forever Spam ,Move from Promotions to Primary ,Mark as unread ,Delete Archive]</code></small>
                                     </div>
                                 </div>
                             </div>
