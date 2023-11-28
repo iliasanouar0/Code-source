@@ -71,14 +71,17 @@ const getOfferData = (request, response) => {
 const addOfferData = (request, response) => {
     let name = (request.query.offer)
     let data = (request.body)
-    let path = `/home/offers/${name}`
-    fs.writeFile(path, data.data, function (err, data) {
-        if (!err) {
-            response.status(200).send(path)
-        } else {
-            response.status(500).send(err)
-        }
-    });
+    console.log(data);
+    console.log(name);
+    response.status(200).send(data)
+    // let path = `/home/offers/${name}`
+    // fs.writeFile(path, data.data, function (err, data) {
+    //     if (!err) {
+    //         response.status(200).send(path)
+    //     } else {
+    //         response.status(500).send(err)
+    //     }
+    // });
 }
 
 const uploadOffer = (request, response) => {
