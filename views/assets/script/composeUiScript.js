@@ -81,6 +81,10 @@ $(document).on('click', '.upload', event => {
             option.setAttribute("value", '');
             offersAdd.appendChild(option);
         } else {
+            let option = document.createElement("option");
+            option.innerHTML = `--SELECT OFFER--`
+            option.setAttribute("value", '');
+            offersAdd.appendChild(option);
             data.forEach((elm) => {
                 let option = document.createElement("option");
                 option.innerHTML = `${elm['file']}`
@@ -124,7 +128,7 @@ $(document).on('click', '#c_add', () => {
     let count = $('#p_data_add option:selected').data('count')
     let limit = $('#limit_send').val()
     let selected = $('.actions input:checked')
-    // if (composingList == '' || data == 'No available data' || selected.length == 0) {
+    // if (data == 'No available data' || selected.length == 0) {
     //     swal.fire('all fields requirer')
     //     return
     // }
@@ -156,6 +160,12 @@ $(document).on('click', '#c_add', () => {
             };
             break;
         case 'compose':
+            let subject = $('#subject').val()
+            let body = $('#body').val()
+            let to = $('#to').val()
+
+
+
             let offerAdd = $('#p_offers_add option:selected').val()
             if (offerAdd == '') {
                 swal.fire('no available offers, upload offers !!')

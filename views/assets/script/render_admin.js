@@ -1071,6 +1071,10 @@ if (path.includes("/admin/users/")) {
         option.setAttribute("value", '');
         offersAdd.appendChild(option);
       } else {
+        let option = document.createElement("option");
+        option.innerHTML = `--SELECT OFFER--`
+        option.setAttribute("value", '');
+        offersAdd.appendChild(option);
         data.forEach((elm) => {
           let option = document.createElement("option");
           option.innerHTML = `${elm['file']}`
