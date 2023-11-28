@@ -179,20 +179,20 @@ $(document).on('click', '#c_add', () => {
             };
             break;
         case 'compose':
+            let offerAdd
             let subject = $('#subject').val()
             let body = $('#body').val()
-            console.log(body);
             let to = $('#to').val()
             if (body == '') {
-                let offerAdd = $('#p_offers_add option:selected').val()
+                offerAdd = $('#p_offers_add option:selected').val()
                 if (offerAdd == '') {
                     swal.fire('Select or upload offer !!')
                     return
                 }
-                action += `subject:${subject},to:${to},offer:${offerAdd}`
             } else {
-                action += `subject:${subject},to:${to},offer:${subject.substring(0, 3)}${user['id_user']}offer.html`
+                offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer.html`
             }
+            action += `subject:${subject},to:${to},offer:`
             dataComposing = {
                 "name": `test`,
                 "action": action,
