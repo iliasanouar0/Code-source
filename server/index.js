@@ -61,9 +61,6 @@ if (result.error) {
 }
 
 let mode = result.parsed.NODE_ENV
-console.log(result.parsed);
-console.log(mode);
-
 const allowedIp = []
 const ips = async () => {
   let ips = await authorizationManager.getIpsServer()
@@ -81,7 +78,6 @@ if (mode == 'production') {
 
 app.use((err, req, res, _next) => {
   let test = proxyaddr.all(req)
-  console.log(test);
   if (err instanceof IpDeniedError) {
     res.status(401)
   } else {
