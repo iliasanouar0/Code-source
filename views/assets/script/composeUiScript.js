@@ -100,10 +100,7 @@ const addCompose = data => {
         method: 'POST',
         body: `${JSON.stringify(data)}`,
         headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+            'Content-Type': 'application/json'
         }
     }).then(response => {
         return response.text()
