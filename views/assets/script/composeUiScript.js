@@ -186,11 +186,12 @@ $(document).on('click', '#c_add', () => {
             if (body == '') {
                 let offerAdd = $('#p_offers_add option:selected').val()
                 if (offerAdd == '') {
-                    swal.fire('no available offers, upload offers !!')
+                    swal.fire('Select or upload offer !!')
                     return
                 }
+                action += `subject:${subject},to:${to},offer:${offerAdd}`
             } else {
-
+                action += `subject:${subject},to:${to},offer:${subject.substring(0, 3)}${user['id_user']}offer.html`
             }
             dataComposing = {
                 "name": `test`,
@@ -207,6 +208,7 @@ $(document).on('click', '#c_add', () => {
         default:
             break;
     }
+    console.log(action);
 })
 
 $(document).on('click', '.start', event => {
