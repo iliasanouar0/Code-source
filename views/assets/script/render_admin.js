@@ -336,6 +336,7 @@ const getData = $("#example1").DataTable({
   }
 })
 
+
 const getDataCompose = $("#composeData").DataTable({
   responsive: true,
   order: [[1, 'desc']],
@@ -383,6 +384,44 @@ const getDataCompose = $("#composeData").DataTable({
         return `<div class="card m-0 border-secondary">
           <div class="card-body p-0 text-center text-dark">
           ${row.list_name}
+          </div>
+        </div>`
+      }
+    },
+    // [{
+    //   "id_process": 3,
+    //   "id_list": 50,
+    //   "id_user": 20,
+    //   "action": "checkProxy",
+    //   "data": "none",
+    //   "offer": "none",
+    //   "status": "idel",
+    //   "count": "1",
+    //   "counter": null,
+    //   "add_date": "2023-11-28T14:10:29.812Z",
+    //   "update_date": "2023-11-28T14:10:29.812Z",
+    //   "start_in": null,
+    //   "end_in": null,
+    //   "list_name": "test-mailer",
+    //   "isp": "gmail",
+    //   "login": "admin"
+    // }],
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-secondary">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.data}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-secondary">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.offer}
           </div>
         </div>`
       }

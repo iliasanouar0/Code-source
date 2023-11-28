@@ -683,7 +683,7 @@ wsc.on('connection', (wss, req) => {
           let options = { markAsImportant: false, markAsStarted: false, click: false }
           let mode
 
-          if (toProcess[0].action.indexOf('click') == -1 && toProcess[0].action.indexOf('count') == -1 && toProcess[0].action.indexOf('pages') == -1 && toProcess[0].action.indexOf('subject') == -1 && toProcess[0].action.indexOf('option') == -1) {
+          if (toProcess[0].action.indexOf('subject') == -1 && toProcess[0].action.indexOf('to') == -1) {
             actions = [toProcess[0].action]
           } else {
             actions = toProcess[0].action.split(',')
