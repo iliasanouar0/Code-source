@@ -1,8 +1,9 @@
 const pg = require("pg");
 const fs = require('fs')
 const data = require('../db');
-// const gmailManagement = require("../processes/gmailManagement");
-// const checkManagement = require("../processes/checkManagement");
+const gmailManagement = require("../processes/gmailManagement");
+const checkManagement = require("../processes/checkManagement");
+const composeManagement = require("../processes/composeManagement")
 const root = __dirname
 let path = root.slice(0, root.length - 31)
 let config = data.data
@@ -293,66 +294,6 @@ const processing = async (data) => {
                     break;
             }
             break;
-        case 'notSpam':
-            switch (seed.isp) {
-                case 'gmail':
-                    await gmailManagement.notSpam(seed, pages, mode, subject).then(e => {
-                        result = e
-                    })
-                    return result
-                default:
-                    console.log('data invalid');
-                    break;
-            }
-            break;
-        case 'markAsSpam':
-            switch (seed.isp) {
-                case 'gmail':
-                    await gmailManagement.markAsSpam(seed, pages, mode, subject).then(e => {
-                        result = e
-                    })
-                    return result
-                default:
-                    console.log('data invalid');
-                    break;
-            }
-            break;
-        case 'markAsUnread':
-            switch (seed.isp) {
-                case 'gmail':
-                    await gmailManagement.markAsUnread(seed, pages, mode, subject).then(e => {
-                        result = e
-                    })
-                    return result
-                default:
-                    console.log('data invalid');
-                    break;
-            }
-            break;
-        case 'openInbox':
-            switch (seed.isp) {
-                case 'gmail':
-                    await gmailManagement.openInbox(seed, count, options, mode, subject).then(e => {
-                        result = e
-                    })
-                    return result
-                default:
-                    console.log('data invalid');
-                    break;
-            }
-            break;
-        case 'markAsRead':
-            switch (seed.isp) {
-                case 'gmail':
-                    await gmailManagement.markAsRead(seed, pages, mode, subject).then(e => {
-                        result = e
-                    })
-                    return result
-                default:
-                    console.log('data invalid');
-                    break;
-            }
-            break;
         case 'kill':
             switch (data.isp) {
                 case 'gmail':
@@ -368,6 +309,18 @@ const processing = async (data) => {
                 result = e
             })
             return result
+        case 'compose':
+            switch (seed.isp) {
+                case 'gmail':
+                    await gmailManagement.verify(seed, entity, mode).then(e => {
+                        result = e
+                    })
+                    return result
+                default:
+                    console.log('data invalid');
+                    break;
+            }
+            break;
         default:
             console.log('data invalid');
             break;
