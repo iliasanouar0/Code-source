@@ -156,7 +156,7 @@ $(document).on('click', '#c_add', () => {
             break;
         case 'compose':
             let offerAdd = $('p_offers_add option:selected')
-            console.log('offer : ' + offerAdd);
+            console.log(offerAdd);
             dataComposing = {
                 "name": `test`,
                 "action": action,
