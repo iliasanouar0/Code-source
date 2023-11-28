@@ -165,6 +165,8 @@ $(document).on('click', '#c_add', () => {
                 "data": `none`,
                 "count": `none`,
             };
+            console.log(dataComposing);
+
             addCompose(data)
             break;
         case 'verify':
@@ -178,6 +180,8 @@ $(document).on('click', '#c_add', () => {
                 "data": `none`,
                 "count": `none`,
             };
+            console.log(dataComposing);
+
             addCompose(data)
             break;
         case 'compose':
