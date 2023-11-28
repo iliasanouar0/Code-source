@@ -666,7 +666,8 @@ wsc.on('connection', (wss, req) => {
         count++
         toProcess.push(seeds[i])
       }
-      let state = await composeManager.getProcessState(data.id_process)
+      console.log(toProcess[0]);
+      // let state = await composeManager.getProcessState(data.id_process)
       // while (toProcess.length != 0 && state != "STOPPED") {
       //   state = await composeManager.getProcessState(data.id_process)
       //   if (state == "STOPPED") {
