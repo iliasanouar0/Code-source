@@ -70,7 +70,7 @@ const getOfferData = (request, response) => {
 
 const addOfferData = (request, response) => {
     let name = (request.query.offer)
-    let data = (request.body)
+    let data = request.body
     console.log(data);
     console.log(name);
     response.status(200).send(data)
