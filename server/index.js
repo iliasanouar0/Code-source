@@ -89,15 +89,13 @@ app.use((err, req, res, _next) => {
   })
 })
 
-// app.use()
-
 app.get('/proxy/', (req, res) => {
   res.status(200).send({ ip: req.ip, remoteAddress: req.socket.remoteAddress })
 })
 
+app.use(fileUpload())
 
 app.use((req, res, next) => {
-  fileUpload()
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With, Content-Type, Accept");
   next();
