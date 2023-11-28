@@ -736,6 +736,7 @@ wsc.on('connection', (wss, req) => {
           console.log(t);
           await time(t)
           console.log(number);
+          console.log(toProcess);
           await Promise.all([
             await resultManager.updateState([{ id_seeds: toProcess[number].id_seeds, id_process: data.id_process }], "finished"),
             result = {
