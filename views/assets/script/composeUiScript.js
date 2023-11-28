@@ -120,6 +120,7 @@ const addCompose = data => {
 $(document).on('click', '#c_add', () => {
     let composingList = $('#p_list_add').val()
     let data = $('#p_data_add').val()
+    let count = $('#p_data_add').data('count')
     let limit = $('#limit_send').val()
     let selected = $('.actions input:checked')
     // if (composingList == '' || data == 'No available data' || selected.length == 0) {
@@ -128,7 +129,6 @@ $(document).on('click', '#c_add', () => {
     // }
     console.log(data);
     console.log(data.split('/'));
-    let count = data.split('/')[1]
     let dataName = data.split('/')[0]
     console.log(dataName);
     console.log(count);
