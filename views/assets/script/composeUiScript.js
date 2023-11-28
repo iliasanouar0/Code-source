@@ -165,6 +165,7 @@ $(document).on('click', '#c_add', () => {
                 "data": `none`,
                 "count": `none`,
             };
+            addCompose(data)
             break;
         case 'verify':
             dataComposing = {
@@ -177,6 +178,7 @@ $(document).on('click', '#c_add', () => {
                 "data": `none`,
                 "count": `none`,
             };
+            addCompose(data)
             break;
         case 'compose':
             let offerAdd
