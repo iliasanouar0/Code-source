@@ -70,17 +70,15 @@ const getOfferData = (request, response) => {
 const addOfferData = (request, response) => {
     let data = (request.body)
     let name = (request.query.offer)
-    console.log(data);
-    console.log(name);
-    response.status(200).send(data)
-    // let path = `/home/offers/${name}`
-    // fs.writeFile(path, data.data, function (err, data) {
-    //     if (!err) {
-    //         response.status(200).send(path)
-    //     } else {
-    //         response.status(500).send(err)
-    //     }
-    // });
+    // response.status(200).send(data)
+    let path = `/home/offers/${name}`
+    fs.writeFile(path, data.data, function (err, data) {
+        if (!err) {
+            response.status(200).send(path)
+        } else {
+            response.status(500).send(err)
+        }
+    });
 }
 
 const uploadOffer = (request, response) => {
