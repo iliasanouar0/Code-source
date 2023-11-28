@@ -901,25 +901,23 @@ const handleImageUpload = event => {
 }
 
 $(document).on('click', '.upload', event => {
-    // let file = $('#messageBody')[0].files[0]
     handleImageUpload(event)
-    // console.log(file);
-    // let val = $('#messageBody').val()
-    // console.log(val);
-    // const reader = new FileReader();
-    // reader.readAsText(file, 'utf-8')
-    // reader.addEventListener("load", function () {
-    //     data = this.result
-    //     console.log(data);
-    //     let obj = { data: data, name: val.split('\\')[2] }
-    //     console.log(obj);
-    // });
-    // // reader.readAsDataURL(file);
-    // // reader.readAsArrayBuffer(file)
-    // // reader.readAsBinaryString(file)
-
+    fetch(`http://${ip}:3000/compose/offers`, {
+        method: "GET",
+    }).then((response) => {
+        return response.json();
+    }).then((data) => {
+        if (data.length == 0) {
+            let option = document.createElement("option");
+            option.innerHTML = `No available offers`
+            offersAdd.appendChild(option);
+        } else {
+            data.forEach((elm) => {
+                let option = document.createElement("option");
+                option.innerHTML = `${elm['file']} / Count : ${elm['count']}`
+                option.setAttribute("value", elm['file']);
+                offersAdd.appendChild(option);
+            });
+        }
+    })
 })
-
-// document.querySelector('#fileUpload').addEventListener('change', event => {
-//     handleImageUpload(event)
-// })

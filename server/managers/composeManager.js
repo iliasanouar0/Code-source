@@ -46,9 +46,13 @@ const getData = (request, response) => {
 }
 
 const getOffers = (request, response) => {
+    let objects = []
     let path = '/home/offers'
     let fileObjs = fs.readdirSync(path);
-    response.status(200).send(fileObjs)
+    fileObjs.forEach(file => {
+        objects.push({ file: file })
+    })
+    response.status(200).send(objects)
 }
 
 const uploadOffer = (request, response) => {

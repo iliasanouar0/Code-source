@@ -734,7 +734,6 @@ app.patch("/process/", processManager.deleteProcess);
 app.get('/compose/admin', composeManager.getAllData)
 app.get('/compose/data/', composeManager.getData)
 app.get('/compose/offers/', composeManager.getOffers)
-// app.post('/compose/offers/upload/', composeManager.uploadOffer)
 app.post('/compose/offers/upload/', (req, res) => {
   const file = req.files.myFile
   const fileName = req.files.myFile.name
