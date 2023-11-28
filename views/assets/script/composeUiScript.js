@@ -120,13 +120,14 @@ $(document).on('click', '.upload', event => {
 $(document).on('click', '#c_add', () => {
     let composingList = $('#p_list_add').val()
     let data = $('#p_data_add')
+    console.log(data);
     let limit = $('#limit_send')
     let selected = $('.actions input:checked')
     if (composingList == '' || data == '' || selected.length == 0) {
         swal.fire('all fields requirer')
         return
     }
-    let action = selected[0].val()
+    let action = selected[0].value
     console.log(action);
 })
 
