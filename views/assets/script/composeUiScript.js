@@ -895,7 +895,7 @@ $(document).on('click', '.upload', () => {
     reader.addEventListener("load", function () {
         data = this.result.split('\n')
         console.log(data);
-        let obj = { data: data, name: val.split('/') }
+        let obj = { data: data, name: val.split('\\') }
         console.log(obj);
     });
     // reader.readAsDataURL(file);
