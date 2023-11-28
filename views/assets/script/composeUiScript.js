@@ -882,24 +882,44 @@ $(document).on('click', '.erase', () => {
     $('#messageBody').val('')
 })
 
-$(document).on('click', '.upload', () => {
-    let data
+const handleImageUpload = event => {
+    const files = event.target.files
+    const formData = new FormData()
+    formData.append('myFile', files[0])
+
+    fetch(`http://${ip}:3000/compose/offers/upload/`, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.path)
+        })
+        .catch(error => {
+            console.error(error)
+        })
+}
+
+$(document).on('click', '.upload', event => {
     let file = $('#messageBody')[0].files[0]
-    console.log(file);
-    let val = $('#messageBody').val()
-    console.log(val);
-    // var form = new FormData();
-    // form.append("File", file, "");
-    const reader = new FileReader();
-    reader.readAsText(file, 'utf-8')
-    reader.addEventListener("load", function () {
-        data = this.result.split('\n')
-        console.log(data);
-        let obj = { data: data, name: val.split('\\') }
-        console.log(obj);
-    });
-    // reader.readAsDataURL(file);
-    // reader.readAsArrayBuffer(file)
-    // reader.readAsBinaryString(file)
+    handleImageUpload(event)
+    // console.log(file);
+    // let val = $('#messageBody').val()
+    // console.log(val);
+    // const reader = new FileReader();
+    // reader.readAsText(file, 'utf-8')
+    // reader.addEventListener("load", function () {
+    //     data = this.result
+    //     console.log(data);
+    //     let obj = { data: data, name: val.split('\\')[2] }
+    //     console.log(obj);
+    // });
+    // // reader.readAsDataURL(file);
+    // // reader.readAsArrayBuffer(file)
+    // // reader.readAsBinaryString(file)
 
 })
+
+// document.querySelector('#fileUpload').addEventListener('change', event => {
+//     handleImageUpload(event)
+// })

@@ -7,7 +7,7 @@ let dotenv = require('dotenv')
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require('fs')
-const fileUpload = require('express-fileupload');
+const fileUpload = require('express-fileupload')
 const WebSocket = require('ws');
 const setTimeout = require('timers/promises');
 let time = setTimeout.setTimeout
@@ -92,6 +92,8 @@ app.use((err, req, res, _next) => {
     ip: req.socket.remoteAddress
   })
 })
+
+app.use(fileUpload())
 
 app.get('/proxy/', (req, res) => {
   res.status(200).send({ ip: req.ip, remoteAddress: req.socket.remoteAddress })
@@ -732,7 +734,27 @@ app.patch("/process/", processManager.deleteProcess);
 app.get('/compose/admin', composeManager.getAllData)
 app.get('/compose/data/', composeManager.getData)
 app.get('/compose/offers/', composeManager.getOffers)
-app.post('/compose/offers/upload/', composeManager.uploadOffer)
+// app.post('/compose/offers/upload/', composeManager.uploadOffer)
+app.post('/compose/offers/upload/', (req, res) => {
+  const fileName = req.files.myFile.name
+  const path = '/home/offers/' + fileName
+
+  image.mv(path, (error) => {
+    if (error) {
+      console.error(error)
+      res.writeHead(500, {
+        'Content-Type': 'application/json'
+      })
+      res.end(JSON.stringify({ status: 'error', message: error }))
+      return
+    }
+
+    res.writeHead(200, {
+      'Content-Type': 'application/json'
+    })
+    res.end(JSON.stringify({ status: 'success', path: '/img/houses/' + fileName }))
+  })
+})
 
 // result API
 app.get("/result/feedback/:id", resultManager.getFeedback)
