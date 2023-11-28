@@ -120,16 +120,13 @@ const addCompose = data => {
 $(document).on('click', '#c_add', () => {
     let composingList = $('#p_list_add').val()
     let data = $('#p_data_add').val()
-    let count = $('#p_data_add option:selected').data()
+    let count = $('#p_data_add option:selected').data('count')
     let limit = $('#limit_send').val()
     let selected = $('.actions input:checked')
     // if (composingList == '' || data == 'No available data' || selected.length == 0) {
     //     swal.fire('all fields requirer')
     //     return
     // }
-    console.log(data);
-    console.log(count);
-
     let action = selected[0].value
     let dataComposing
     switch (action) {
@@ -141,7 +138,8 @@ $(document).on('click', '#c_add', () => {
                 "id_user": `${user['id_user']}`,
                 "id_list": `${composingList}`,
                 "offer": `none`,
-                "data": `none`
+                "data": `none`,
+                "count": `none`,
             };
             break;
         case 'verify':
@@ -152,10 +150,13 @@ $(document).on('click', '#c_add', () => {
                 "id_user": `${user['id_user']}`,
                 "id_list": `${composingList}`,
                 "offer": `none`,
-                "data": `none`
+                "data": `none`,
+                "count": `none`,
             };
             break;
         case 'compose':
+            let offerAdd = $('p_offers_add option:selected').val()
+            console.log('offer : ' + offerAdd);
             dataComposing = {
                 "name": `test`,
                 "action": action,
@@ -164,13 +165,12 @@ $(document).on('click', '#c_add', () => {
                 "id_list": `${composingList}`,
                 "offer": `${offerAdd}`,
                 "data": `${data}`,
-                "count": `${data}`,
+                "count": `${count}`,
             };
             break;
         default:
             break;
     }
-    console.log(action);
 })
 
 $(document).on('click', '.start', event => {
