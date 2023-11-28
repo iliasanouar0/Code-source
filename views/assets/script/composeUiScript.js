@@ -96,6 +96,7 @@ $(document).on('click', '.upload', event => {
 })
 
 const addCompose = data => {
+    console.log(data);
     var settings = {
         "url": "http://project1.gm2reporting.com:3000/compose/",
         "method": "POST",
