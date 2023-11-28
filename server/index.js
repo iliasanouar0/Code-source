@@ -818,11 +818,12 @@ wsc.on('connection', (wss, req) => {
       }
 
       console.log(active);
-
-      (function repeat(number) {
-        process(number - 1)
-        if (number > 1) repeat(number - 1);
-      })(active);
+      while (toProcess.length != 0) {
+        (function repeat(number) {
+          process(number - 1)
+          if (number > 1) repeat(number - 1);
+        })(active);
+      }
 
     } else if (request == "resume") {
       composeManager.resumedProcess(data.data)
