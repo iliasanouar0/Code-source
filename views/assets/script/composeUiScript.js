@@ -97,6 +97,7 @@ $(document).on('click', '.upload', event => {
 
 const addCompose = data => {
     fetch(`http://${ip}:3000/compose/`, {
+        mode: 'cors',
         method: 'POST',
         body: `${JSON.stringify(data)}`,
         headers: {
