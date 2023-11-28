@@ -764,19 +764,6 @@ wsc.on('connection', (wss, req) => {
             processStateManager.updateState(status)
           }
         }
-      }
-
-      console.log(active);
-
-      while (toProcess.length != 0 && state != "STOPPED") {
-        state = await composeManager.getProcessState(data.id_process)
-        if (state == "STOPPED") {
-          break
-        }
-        (function repeat(number) {
-          process(number - 1)
-          if (number > 1) repeat(number - 1);
-        })(active);
         let w = waiting - count + 3
         if (w <= 0) {
           let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
@@ -787,7 +774,7 @@ wsc.on('connection', (wss, req) => {
         }
         state = await composeManager.getProcessState(data.id_process)
         if (state == "STOPPED") {
-          break
+          return
         }
         if (toProcess.length == 0) {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
@@ -797,6 +784,19 @@ wsc.on('connection', (wss, req) => {
           sendToAll(clients, 'reload')
         }
       }
+
+      console.log(active);
+
+      // while (toProcess.length != 0 && state != "STOPPED") {
+      //   state = await composeManager.getProcessState(data.id_process)
+      //   if (state == "STOPPED") {
+      //     break
+      //   }
+      // }
+      (function repeat(number) {
+        process(number - 1)
+        if (number > 1) repeat(number - 1);
+      })(active);
 
     } else if (request == "resume") {
       composeManager.resumedProcess(data.data)
