@@ -1055,7 +1055,7 @@ if (path.includes("/admin/users/")) {
           let option = document.createElement("option");
           option.innerHTML = `${elm['file']} / Count : ${elm['count']}`
           option.setAttribute("value", elm['file']);
-          option.setAttribute("data-count", elm['count']);
+          option.dataset.count = elm['count'];
           dataAdd.appendChild(option);
         });
       }
