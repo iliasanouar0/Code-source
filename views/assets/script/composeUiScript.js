@@ -157,7 +157,10 @@ $(document).on('click', '#c_add', () => {
             break;
         case 'compose':
             let offerAdd = $('#p_offers_add option:selected').val()
-            console.log(offerAdd);
+            if (offerAdd == '') {
+                swal.fire('no available offers, upload offers !!')
+                return
+            }
             dataComposing = {
                 "name": `test`,
                 "action": action,
