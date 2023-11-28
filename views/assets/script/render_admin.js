@@ -1049,7 +1049,7 @@ if (path.includes("/admin/users/")) {
       if (data.length == 0) {
         let option = document.createElement("option");
         option.innerHTML = `No available data`
-        offersAdd.appendChild(option);
+        dataAdd.appendChild(option);
       } else {
         data.forEach((elm) => {
           let option = document.createElement("option");
