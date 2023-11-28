@@ -120,7 +120,7 @@ const addCompose = data => {
 $(document).on('click', '#c_add', () => {
     let composingList = $('#p_list_add').val()
     let data = $('#p_data_add').val()
-    let count = $('#p_data_add').att('data-count')
+    let count = $('#p_data_add').attr('data-count')
     let limit = $('#limit_send').val()
     let selected = $('.actions input:checked')
     // if (composingList == '' || data == 'No available data' || selected.length == 0) {
