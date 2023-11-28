@@ -168,7 +168,7 @@ $(document).on('click', '#c_add', () => {
             };
             console.log(dataComposing);
 
-            addCompose(data)
+            addCompose(dataComposing)
             break;
         case 'verify':
             dataComposing = {
@@ -183,7 +183,7 @@ $(document).on('click', '#c_add', () => {
             };
             console.log(dataComposing);
 
-            addCompose(data)
+            addCompose(dataComposing)
             break;
         case 'compose':
             let offerAdd
@@ -229,7 +229,7 @@ $(document).on('click', '#c_add', () => {
                 "count": `${count}`,
             };
             console.log(dataComposing);
-            addCompose(data)
+            addCompose(dataComposing)
             break;
         default:
             break;
