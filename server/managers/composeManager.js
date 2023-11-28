@@ -39,7 +39,7 @@ const getData = (request, response) => {
     fileObjs.forEach(file => {
         let filePath = `${path}/${file}`
         const data = fs.readFileSync(filePath, 'utf8');
-        let array = data.split('\n\r')
+        let array = data.split('\n')
         objects.push({ count: array.length, file: file })
     })
     response.status(200).send(objects)
