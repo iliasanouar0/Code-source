@@ -824,12 +824,7 @@ wsc.on('connection', (wss, req) => {
         if (number > 1) repeat(number - 1);
       }
 
-      while (true) {
-        await time(5000)
-        console.log(toProcess);
-      }
-
-
+      repeat(toProcess.length)
 
 
 
