@@ -55,6 +55,18 @@ const getOffers = (request, response) => {
     response.status(200).send(objects)
 }
 
+const getOfferData = (request, response) => {
+    let name = (request.params.offer)
+    let objects = []
+    let path = `/home/offers/${name}`
+    let fileObjs = fs.readdirSync(path);
+    // fileObjs.forEach(file => {
+    //     objects.push({ file: file })
+    // })
+    response.status(200).send(fileObjs)
+    // response.status(200).send(objects)
+}
+
 const uploadOffer = (request, response) => {
     let file = (request.body)
     console.log(file);
@@ -426,5 +438,6 @@ module.exports = {
     getAllProcessByState,
     getData,
     getOffers,
-    uploadOffer
+    uploadOffer,
+    getOfferData
 }
