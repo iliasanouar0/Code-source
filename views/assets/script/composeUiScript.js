@@ -122,10 +122,10 @@ $(document).on('click', '#c_add', () => {
     let data = $('#p_data_add').val()
     let limit = $('#limit_send').val()
     let selected = $('.actions input:checked')
-    if (composingList == '' || data == 'No available data' || selected.length == 0) {
-        swal.fire('all fields requirer')
-        return
-    }
+    // if (composingList == '' || data == 'No available data' || selected.length == 0) {
+    //     swal.fire('all fields requirer')
+    //     return
+    // }
     let action = selected[0].value
     console.log(action);
 })
