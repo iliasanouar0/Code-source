@@ -1046,30 +1046,36 @@ if (path.includes("/admin/users/")) {
     }).then((response) => {
       return response.json();
     }).then((data) => {
-      data.forEach((elm) => {
+      if (data.length == 0) {
         let option = document.createElement("option");
-        option.innerHTML = `${elm['file']} / Count : ${elm['count']}`
-        option.setAttribute("value", elm['file']);
-        dataAdd.appendChild(option);
-      });
+        option.innerHTML = `No available data`
+        offersAdd.appendChild(option);
+      } else {
+        data.forEach((elm) => {
+          let option = document.createElement("option");
+          option.innerHTML = `${elm['file']} / Count : ${elm['count']}`
+          option.setAttribute("value", elm['file']);
+          dataAdd.appendChild(option);
+        });
+      }
     })
     fetch(`http://${ip}:3000/compose/offers`, {
-        method: "GET",
+      method: "GET",
     }).then((response) => {
-        return response.json();
+      return response.json();
     }).then((data) => {
-        if (data.length == 0) {
-            let option = document.createElement("option");
-            option.innerHTML = `No available offers`
-            offersAdd.appendChild(option);
-        } else {
-            data.forEach((elm) => {
-                let option = document.createElement("option");
-                option.innerHTML = `${elm['file']}`
-                option.setAttribute("value", elm['file']);
-                offersAdd.appendChild(option);
-            });
-        }
+      if (data.length == 0) {
+        let option = document.createElement("option");
+        option.innerHTML = `No available offers`
+        offersAdd.appendChild(option);
+      } else {
+        data.forEach((elm) => {
+          let option = document.createElement("option");
+          option.innerHTML = `${elm['file']}`
+          option.setAttribute("value", elm['file']);
+          offersAdd.appendChild(option);
+        });
+      }
     })
   })
   getDataCompose
