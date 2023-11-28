@@ -205,7 +205,7 @@ $(document).on('click', '#c_add', () => {
                         'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
                     }
                 }).then(r => {
-                    return r.text
+                    return r.text()
                 }).then(d => {
                     console.log(d);
                 })
@@ -222,6 +222,7 @@ $(document).on('click', '#c_add', () => {
                 "count": `${count}`,
             };
             console.log(dataComposing);
+            addCompose(data)
             break;
         default:
             break;

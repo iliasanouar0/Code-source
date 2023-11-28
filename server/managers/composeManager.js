@@ -11,13 +11,13 @@ const pool = new pg.Pool(config);
 
 const addProcess = (request, response) => {
     const obj = (request.body)
-    let sql = `INSERT INTO composing (name ,action ,status ,date_add ,date_update,id_list ,id_user) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
-    let data = [obj.name, obj.action, obj.status, obj.date_add, obj.date_update, obj.id_list, obj.id_user]
+    let sql = `INSERT INTO composing (id_list ,id_user ,action ,data ,offer,status ,count) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
+    let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count]
     pool.query(sql, data, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
         }
-        response.status(200).send(`Process added with ID : ${result.rows[0].id_process}`)
+        response.status(200).send(`Compose added with ID : ${result.rows[0].id_process}`)
     })
 }
 
