@@ -41,33 +41,6 @@ $(document).on('click', '.edit', event => {
     $('#p_a_add').data('id', id)
 })
 
-const addCompose = data => {
-    fetch(`http://${ip}:3000/compose/`, {
-        method: 'POST',
-        body: `${JSON.stringify(data)}`,
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
-        }
-    }).then(response => {
-        return response.text()
-    }).then(data => {
-        Swal.fire({
-            title: data,
-            timer: 1500,
-            showConfirmButton: false,
-            icon: 'success'
-        }).then(() => {
-            $('.add_compose input:text').val('')
-            $('.add_compose input:checkbox').prop("checked", false)
-            $(".add_compose").modal("hide");
-            getDataCompose.ajax.reload(null, false)
-        })
-    })
-}
-
 /**
  * ~composing
  * ! form :
@@ -117,6 +90,33 @@ $(document).on('click', '.upload', event => {
     })
 })
 
+const addCompose = data => {
+    fetch(`http://${ip}:3000/compose/`, {
+        method: 'POST',
+        body: `${JSON.stringify(data)}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+        }
+    }).then(response => {
+        return response.text()
+    }).then(data => {
+        Swal.fire({
+            title: data,
+            timer: 1500,
+            showConfirmButton: false,
+            icon: 'success'
+        }).then(() => {
+            $('.add_compose input:text').val('')
+            $('.add_compose input:checkbox').prop("checked", false)
+            $(".add_compose").modal("hide");
+            getDataCompose.ajax.reload(null, false)
+        })
+    })
+}
+
 $(document).on('click', '#c_add', () => {
     let composingList = $('#p_list_add').val()
     let data = $('#p_data_add').val()
@@ -127,6 +127,44 @@ $(document).on('click', '#c_add', () => {
     //     return
     // }
     let action = selected[0].value
+    let dataComposing
+    switch (action) {
+        case 'checkProxy':
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `none`,
+                "data": `none`
+            };
+            break;
+        case 'verify':
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `none`,
+                "data": `none`
+            };
+            break;
+        case 'compose':
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `${offerAdd}`,
+                "data": `${data}`
+            };
+            break;
+        default:
+            break;
+    }
     console.log(action);
 })
 
