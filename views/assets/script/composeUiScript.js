@@ -361,7 +361,7 @@ $(document).on('click', '.status', event => {
         destroy: true,
         autoWidth: false,
         ajax: {
-            url: `http://${ip}:3000/process/seeds/${id}`,
+            url: `http://${ip}:3000/compose/seeds/${id}`,
             dataSrc: '',
         },
         columns: [
@@ -464,7 +464,7 @@ $(document).on('click', '.status', event => {
         order: [[3, 'asc']]
     })
 
-    $('#modal-process-view').modal('show')
+    $('#modal-compose-view').modal('show')
     /**
      * * Websocket connection :
      * ? opening => get data from database render the view. 
@@ -498,9 +498,9 @@ $(document).on('click', '.status', event => {
     }
     $('.btn-close').on('click', () => {
         websocket.close()
-        $('#modal-process-view').modal('hide')
+        $('#modal-compose-view').modal('hide')
     })
-    $('#modal-process-view').on('hide.bs.modal', () => {
+    $('#modal-compose-view').on('hide.bs.modal', () => {
         websocket.close()
     })
 })
@@ -730,8 +730,8 @@ $(document).on('click', '.why', () => {
         <h6>By clicking on "Restart App" :</h6>
         <ol>
         <li>we clean the browser</li>
-        <li>we stop all the running process</li>
-        <li>we remove all existing process</li>
+        <li>we stop all the running compose</li>
+        <li>we remove all existing compose</li>
         <li>Get better performance for the app</li>
         </ol>
         </div>
@@ -818,7 +818,7 @@ $(document).on('click', '#restart_s', () => {
 const editActions = (data) => {
     console.log(data);
     var settings = {
-        "url": `http://${ip}:3000/process/actions/${data.id_process}`,
+        "url": `http://${ip}:3000/compose/actions/${data.id_process}`,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -905,7 +905,7 @@ $(document).on('click', '.delete-all-this', () => {
                 let action = $(check[i]).data('val')
                 ides.push({ id: ID, action: action, login: user.login })
             }
-            fetch(`http://${ip}:3000/process/`, {
+            fetch(`http://${ip}:3000/compose/`, {
                 method: "PATCH",
                 body: `${JSON.stringify(ides)}`,
                 headers: {
