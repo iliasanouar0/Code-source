@@ -53,7 +53,7 @@ $(document).on('click', '.erase', () => {
 const handleImageUpload = event => {
     const files = $('#messageBody')[0].files
     const formData = new FormData()
-    formData.append('myFile', files[0])
+    formData.append('File', files[0])
 
     fetch(`http://${ip}:3000/compose/offers/upload/`, {
         method: 'POST',

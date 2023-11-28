@@ -735,10 +735,10 @@ app.get('/compose/admin', composeManager.getAllData)
 app.get('/compose/data/', composeManager.getData)
 app.get('/compose/offers/', composeManager.getOffers)
 app.post('/compose/offers/upload/', (req, res) => {
-  // const file = req.files.myFile
-  const fileName = req.files.myFile.name
+  const file = req.files.File
+  const fileName = req.files.File.name
   const path = '/home/offers/' + fileName
-  fileName.mv(path, (error) => {
+  file.mv(path, (error) => {
     if (error) {
       console.error(error)
       res.writeHead(500, {
