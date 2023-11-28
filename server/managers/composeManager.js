@@ -275,12 +275,10 @@ const stoppedProcess = (data) => {
 const processing = async (data) => {
     let result
     let seed = data.data
-    let pages = data.pages
-    let count = data.count
-    let options = data.options
     let entity = data.entity
     let mode = data.mode
     let subject = data.subject
+    let to = data.to
     switch (data.action) {
         case 'verify':
             switch (seed.isp) {
