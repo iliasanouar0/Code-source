@@ -616,6 +616,12 @@ wss.on('connection', (wss, req) => {
   })
 })
 
+
+function randomRange(myMin, myMax) {
+  return Math.floor(
+    Math.random() * (Math.ceil(myMax) - Math.floor(myMin) + 1) + myMin
+  );
+}
 // composing
 wsc.on('connection', (wss, req) => {
 
@@ -726,7 +732,7 @@ wsc.on('connection', (wss, req) => {
           success++
           let end_in = new Date()
           let result
-          await time(randomRange(5000,10000))
+          await time(randomRange(5000, 10000))
           await Promise.all([
             await resultManager.updateState([{ id_seeds: toProcess[number].id_seeds, id_process: data.id_process }], "finished"),
             result = {
