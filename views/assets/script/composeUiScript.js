@@ -119,9 +119,9 @@ $(document).on('click', '.upload', event => {
 
 $(document).on('click', '#c_add', () => {
     let composingList = $('#p_list_add').val()
-    let data = $('#p_data_add')
+    let data = $('#p_data_add').val()
     console.log(data);
-    let limit = $('#limit_send')
+    let limit = $('#limit_send').val()
     let selected = $('.actions input:checked')
     if (composingList == '' || data == '' || selected.length == 0) {
         swal.fire('all fields requirer')
