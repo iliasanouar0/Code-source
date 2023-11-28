@@ -183,6 +183,10 @@ $(document).on('click', '#c_add', () => {
             let subject = $('#subject').val()
             let body = $('#body').val()
             let to = $('#to').val()
+            if (subject == '' || to == '') {
+                swal.fire('subject and mailto are required')
+                return
+            }
             if (body == '') {
                 offerAdd = $('#p_offers_add option:selected').val()
                 if (offerAdd == '') {
@@ -192,7 +196,7 @@ $(document).on('click', '#c_add', () => {
             } else {
                 offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer.html`
             }
-            action += `subject:${subject},to:${to},offer:`
+            action += `,subject:${subject},to:${to},offer:`
             dataComposing = {
                 "name": `test`,
                 "action": action,
@@ -208,7 +212,6 @@ $(document).on('click', '#c_add', () => {
         default:
             break;
     }
-    console.log(action);
 })
 
 $(document).on('click', '.start', event => {
