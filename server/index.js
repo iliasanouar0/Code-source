@@ -736,9 +736,10 @@ app.get('/compose/data/', composeManager.getData)
 app.get('/compose/offers/', composeManager.getOffers)
 // app.post('/compose/offers/upload/', composeManager.uploadOffer)
 app.post('/compose/offers/upload/', (req, res) => {
+  const file = req.files.myFile
   const fileName = req.files.myFile.name
   const path = '/home/offers/' + fileName
-  fileUpload.mv(path, (error) => {
+  file.mv(path, (error) => {
     if (error) {
       console.error(error)
       res.writeHead(500, {
