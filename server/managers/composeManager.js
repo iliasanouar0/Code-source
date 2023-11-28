@@ -66,6 +66,7 @@ const getOfferData = (request, response) => {
             response.status(200).send(data)
         } else {
             console.log(err);
+            response.status(500).send(err)
         }
     });
     // response.status(200).send(objects)
