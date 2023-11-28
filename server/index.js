@@ -822,7 +822,7 @@ wsc.on('connection', (wss, req) => {
       (function repeat(number) {
         process(number - 1)
         if (number > 1) repeat(number - 1);
-        if (toProcess != 0 && number > 1) number = 3
+        if (toProcess != 0 && number > 1) number = 3; repeat(number - 1)
       })(active);
 
 
