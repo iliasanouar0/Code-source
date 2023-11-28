@@ -56,7 +56,7 @@ const getOffers = (request, response) => {
 }
 
 const getOfferData = (request, response) => {
-    let name = (request.params.offer)
+    let name = (request.query.offer)
     let objects = []
     let path = `/home/offers/${name}`
     // response.status(200).send(fileObjs)
