@@ -133,6 +133,7 @@ $('#p_offers_add').change(event => {
     $.ajax(settings).done(function (response) {
         $('#body').addClass('d-none')
         $('#preview').removeClass('d-none')
+        $('#preview').html(response)
     });
 })
 
