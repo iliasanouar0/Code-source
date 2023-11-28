@@ -618,7 +618,7 @@ wss.on('connection', (wss, req) => {
 
 // composing
 wsc.on('connection', (wss, req) => {
-  
+
   let id = parseInt(url.parse(req.url).query.split('=')[1])
 
   wss.id = id
@@ -687,6 +687,7 @@ wsc.on('connection', (wss, req) => {
 
       let state = await composeManager.getProcessState(data.id_process)
 
+      // ~ process !1k
       const process = async (number) => {
         state = await composeManager.getProcessState(data.id_process)
         if (state == "STOPPED") {
@@ -804,13 +805,6 @@ wsc.on('connection', (wss, req) => {
       }
 
       console.log(active);
-
-      // while (toProcess.length != 0 && state != "STOPPED") {
-      //   state = await composeManager.getProcessState(data.id_process)
-      //   if (state == "STOPPED") {
-      //     break
-      //   }
-      // }
 
       (function repeat(number) {
         process(number - 1)
