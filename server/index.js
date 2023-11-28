@@ -732,7 +732,10 @@ wsc.on('connection', (wss, req) => {
           success++
           let end_in = new Date()
           let result
-          await time(randomRange(5000, 10000))
+          let time = randomRange(1000, 10000)
+          console.log(time);
+          await time(time)
+          console.log(number);
           await Promise.all([
             await resultManager.updateState([{ id_seeds: toProcess[number].id_seeds, id_process: data.id_process }], "finished"),
             result = {
@@ -762,7 +765,10 @@ wsc.on('connection', (wss, req) => {
           failed++
           let end_in = new Date()
           let result
-          await time(5000)
+          let time = randomRange(1000, 10000)
+          console.log(time);
+          await time(time)
+          console.log(number);
           await Promise.all([
             await resultManager.updateState([{ id_seeds: toProcess[number].id_seeds, id_process: data.id_process }], "failed"),
             result = {
