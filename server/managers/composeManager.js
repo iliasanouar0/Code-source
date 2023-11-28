@@ -68,6 +68,19 @@ const getOfferData = (request, response) => {
     });
 }
 
+const addOfferData = (request, response) => {
+    let name = (request.query.offer)
+    let data = (request.body)
+    let path = `/home/offers/${name}`
+    fs.writeFile(path, data.data, function (err, data) {
+        if (!err) {
+            response.status(200).send(path)
+        } else {
+            response.status(500).send(err)
+        }
+    });
+}
+
 const uploadOffer = (request, response) => {
     let file = (request.body)
     console.log(file);
@@ -440,5 +453,6 @@ module.exports = {
     getData,
     getOffers,
     uploadOffer,
-    getOfferData
+    getOfferData,
+    addOfferData
 }

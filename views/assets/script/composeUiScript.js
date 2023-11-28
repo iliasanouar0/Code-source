@@ -195,8 +195,18 @@ $(document).on('click', '#c_add', () => {
                 }
             } else {
                 offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer.html`
+                var settings = {
+                    "url": `http://${ip}:3000/compose/offers?offer=${offerAdd}`,
+                    "method": "POST",
+                    "data": JSON.stringify({ data: body }),
+                    "timeout": 0,
+                };
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                });
+
             }
-            action += `,subject:${subject},to:${to},offer:`
+            action += `,subject:${subject},to:${to}`
             dataComposing = {
                 "name": `test`,
                 "action": action,
