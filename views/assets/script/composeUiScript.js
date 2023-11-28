@@ -97,24 +97,45 @@ $(document).on('click', '.upload', event => {
 
 const addCompose = data => {
 
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    // var myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify(data);
+    // var raw = JSON.stringify(data);
 
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
+    // var requestOptions = {
+    //     method: 'POST',
+    //     headers: myHeaders,
+    //     body: raw,
+    //     redirect: 'follow'
+    // };
+
+    // fetch(`http://${ip}:3000/compose/`, requestOptions)
+    //     .then(response => response.text())
+    //     .then(result => console.log(result))
+    //     .catch(error => console.log('error', error));
+
+    var settings = {
+        "url": "http://project1.gm2reporting.com:3000/compose/",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+            "name": "test",
+            "action": "checkProxy",
+            "status": "idel",
+            "id_user": "20",
+            "id_list": "50",
+            "offer": "none",
+            "data": "none",
+            "count": "none"
+        }),
     };
 
-    fetch(`http://${ip}:3000/compose/`, requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-
-
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
     // fetch("", {
     //     method: 'POST',
     //     body: `${JSON.stringify(data)}`,
