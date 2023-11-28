@@ -656,6 +656,7 @@ wsc.on('connection', (wss, req) => {
       let toProcess = []
       await time(10000)
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
+      console.log(status);
       processStateManager.addState(status)
       for (let i = 0; i < active; i++) {
         await Promise.all([
