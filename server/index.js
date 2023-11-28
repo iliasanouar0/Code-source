@@ -49,7 +49,8 @@ const app = express(); // setup express application
 
 
 
-app.options("*", cors());
+// app.options("*", cors());
+app.use(cors());
 app.set('trust proxy', true)
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
