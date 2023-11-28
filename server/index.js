@@ -735,8 +735,6 @@ wsc.on('connection', (wss, req) => {
           let t = randomRange(1000, 10000)
           console.log(t);
           await time(t)
-          console.log(number);
-          console.log(toProcess);
           await Promise.all([
             await resultManager.updateState([{ id_seeds: toProcess[number].id_seeds, id_process: data.id_process }], "finished"),
             result = {
@@ -746,13 +744,12 @@ wsc.on('connection', (wss, req) => {
             },
             await resultManager.endNow(result)
           ]);
-          toProcess.slice(1, number)
-          console.log(toProcess.length)
+          console.log(toProcess.slice(1, number))
           state = await composeManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             return
           }
-          if (toProcess.length < active && count < length && state != "STOPPED") {
+          if (number < active && count < length && state != "STOPPED") {
             toProcess.push(seeds[count])
             await Promise.all([
               await resultManager.startNow({ id_seeds: seeds[count].id_seeds, id_process: data.id_process }),
@@ -768,9 +765,7 @@ wsc.on('connection', (wss, req) => {
           let end_in = new Date()
           let result
           let t = randomRange(1000, 10000)
-          console.log(t);
           await time(t)
-          console.log(number);
           await Promise.all([
             await resultManager.updateState([{ id_seeds: toProcess[number].id_seeds, id_process: data.id_process }], "failed"),
             result = {
@@ -780,8 +775,8 @@ wsc.on('connection', (wss, req) => {
             },
             await resultManager.endNow(result)
           ]);
-          toProcess.slice(1, number)
-          console.log(toProcess.length)
+
+          console.log(toProcess.slice(1, number))
           state = await composeManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             return
