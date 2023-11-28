@@ -59,11 +59,15 @@ const getOfferData = (request, response) => {
     let name = (request.params.offer)
     let objects = []
     let path = `/home/offers/${name}`
-    let fileObjs = fs.readdirSync(path);
-    // fileObjs.forEach(file => {
-    //     objects.push({ file: file })
-    // })
-    response.status(200).send(fileObjs)
+    // response.status(200).send(fileObjs)
+    console.log(path);
+    fs.readFile(path, { encoding: 'utf-8' }, function (err, data) {
+        if (!err) {
+            response.status(200).send(data)
+        } else {
+            console.log(err);
+        }
+    });
     // response.status(200).send(objects)
 }
 

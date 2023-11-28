@@ -124,7 +124,7 @@ const addCompose = data => {
 
 $('#p_offers_add').change(event => {
     let value = (event.target).val()
-    fetch(`http://${ip}:3000/compose/offerdata?offer:${value}`, { method: 'GET' }).then(res => { return res.text() }).then(data => { console.log(data); })
+    fetch(`http://${ip}:3000/compose/offerdata?offer=${value}`, { method: 'GET' }).then(res => { return res.text() }).then(data => { console.log(data); })
 })
 
 $(document).on('click', '#c_add', () => {
