@@ -914,7 +914,7 @@ $(document).on('click', '.upload', event => {
         } else {
             data.forEach((elm) => {
                 let option = document.createElement("option");
-                option.innerHTML = `${elm['file']} / Count : ${elm['count']}`
+                option.innerHTML = `${elm['file']}`
                 option.setAttribute("value", elm['file']);
                 offersAdd.appendChild(option);
             });
