@@ -901,6 +901,7 @@ const handleImageUpload = event => {
 }
 
 $(document).on('click', '.upload', event => {
+    const offersAdd = document.querySelector("#p_offers_add");
     handleImageUpload(event)
     fetch(`http://${ip}:3000/compose/offers`, {
         method: "GET",
