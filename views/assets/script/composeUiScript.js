@@ -125,7 +125,8 @@ const addCompose = data => {
 $('#p_offers_add').change(event => {
     let value = $(event.target).val()
     if (value == '') {
-        return
+        $('#body').removeClass('d-none')
+        $('#preview').addClass('d-none')
     } else {
         var settings = {
             "url": `http://${ip}:3000/compose/offerdata?offer=${value}`,
