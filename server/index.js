@@ -47,12 +47,12 @@ const composeManager = require('./managers/composeManager')
 const port = 3000;
 const app = express(); // setup express application
 
-// app.use(cors());
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors());
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 app.options("*", cors());
 app.set('trust proxy', true)
@@ -68,6 +68,7 @@ if (result.error) {
 
 let mode = result.parsed.NODE_ENV
 const allowedIp = []
+
 const ips = async () => {
   let ips = await authorizationManager.getIpsServer()
   ips.forEach((ip) => {
