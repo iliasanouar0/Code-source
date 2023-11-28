@@ -893,7 +893,8 @@ $(document).on('click', '.upload', () => {
     const reader = new FileReader();
     reader.readAsText(file, 'utf-8')
     reader.addEventListener("load", function () {
-        data = this.result
+        data = this.result.split('\n')
+        console.log(data);
         let obj = { data: data, name: val.split('/')[val.split('/').length - 1] }
         console.log(obj);
     });
