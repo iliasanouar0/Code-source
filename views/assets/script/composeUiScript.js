@@ -883,7 +883,7 @@ $(document).on('click', '.erase', () => {
 })
 
 const handleImageUpload = event => {
-    const files = event.target.files
+    const files = $(event.target).files
     const formData = new FormData()
     formData.append('myFile', files[0])
 
@@ -901,7 +901,7 @@ const handleImageUpload = event => {
 }
 
 $(document).on('click', '.upload', event => {
-    let file = $('#messageBody')[0].files[0]
+    // let file = $('#messageBody')[0].files[0]
     handleImageUpload(event)
     // console.log(file);
     // let val = $('#messageBody').val()
