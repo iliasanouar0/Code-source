@@ -167,6 +167,7 @@ $(document).on('click', '#c_add', () => {
                 "data": `${data}`,
                 "count": `${count}`,
             };
+            console.log(dataComposing);
             break;
         default:
             break;
