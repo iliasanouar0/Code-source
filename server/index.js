@@ -54,7 +54,7 @@ app.use(cors());
 //   next();
 // });
 
-app.options("*", cors());
+// app.options("*", cors());
 app.set('trust proxy', true)
 
 // Parse incoming requests data
