@@ -1208,6 +1208,7 @@ app.get('/compose/data/', composeManager.getData)
 app.get('/compose/offers/', composeManager.getOffers)
 app.post('/compose/offers', composeManager.addOfferData)
 app.post('/compose/', composeManager.addProcess)
+app.get("/compose/seeds/:id", composeManager.getAllProcessSeeds)
 app.get('/compose/offerdata', composeManager.getOfferData)
 app.patch("/compose/", composeManager.deleteProcess);
 app.post('/compose/offers/upload/', (req, res) => {
