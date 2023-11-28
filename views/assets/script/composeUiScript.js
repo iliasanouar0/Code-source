@@ -195,17 +195,30 @@ $(document).on('click', '#c_add', () => {
                 }
             } else {
                 offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer.html`
-                var settings = {
-                    "url": `http://${ip}:3000/compose/offers?offer=${offerAdd}`,
-                    "method": "POST",
-                    "data": JSON.stringify({ data: body }),
-                    "timeout": 0,
-                };
-                console.log(body);
-                $.ajax(settings).done(function (response) {
-                    console.log(response);
-                });
-
+                // var settings = {
+                //     "url": `http://${ip}:3000/compose/offers?offer=${offerAdd}`,
+                //     "method": "POST",
+                //     "data": JSON.stringify({ data: body }),
+                //     "timeout": 0,
+                // };
+                // console.log(body);
+                // $.ajax(settings).done(function (response) {
+                //     console.log(response);
+                // });
+                fetch(`http://${ip}:3000/compose/offers?offer=${offerAdd}`, {
+                    method: 'POST',
+                    body: `${JSON.stringify({ data: body })}`,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                        'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+                    }
+                }).then(r => {
+                    return r.text
+                }).then(d => {
+                    console.log(d);
+                })
             }
             action += `,subject:${subject},to:${to}`
             dataComposing = {
