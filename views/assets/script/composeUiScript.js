@@ -891,13 +891,14 @@ $(document).on('click', '.upload', () => {
     // var form = new FormData();
     // form.append("File", file, "");
     const reader = new FileReader();
+    reader.readAsText(file, 'utf-8')
     reader.addEventListener("load", function () {
         data = this.result
+        let obj = { data: data, name: val.split('/')[val.split('/').length - 1] }
+        console.log(obj);
     });
     // reader.readAsDataURL(file);
     // reader.readAsArrayBuffer(file)
     // reader.readAsBinaryString(file)
-    reader.readAsText(file, 'utf-8')
-  let   obj = { data: data, name: val.split('/')[val.split('/').length - 1] }
-    console.log(obj);
+
 })
