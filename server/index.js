@@ -744,7 +744,8 @@ wsc.on('connection', (wss, req) => {
             },
             await resultManager.endNow(result)
           ]);
-          toProcess.slice(toProcess.length - number, 1)
+          console.log(toProcess.length);
+          toProcess.slice(number, 1)
           state = await composeManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             return
