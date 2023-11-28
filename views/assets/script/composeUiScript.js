@@ -135,6 +135,17 @@ const addCompose = data => {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        Swal.fire({
+            title: data,
+            timer: 1500,
+            showConfirmButton: false,
+            icon: 'success'
+        }).then(() => {
+            $('.add_compose input:text').val('')
+            $('.add_compose input:checkbox').prop("checked", false)
+            $(".add_compose").modal("hide");
+            getDataCompose.ajax.reload(null, false)
+        })
     });
     // fetch("", {
     //     method: 'POST',
