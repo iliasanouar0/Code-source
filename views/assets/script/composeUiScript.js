@@ -96,30 +96,49 @@ $(document).on('click', '.upload', event => {
 })
 
 const addCompose = data => {
-    fetch(`http://${ip}:3000/compose/`, {
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(data);
+
+    var requestOptions = {
         method: 'POST',
-        body: `${JSON.stringify(data)}`,
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
-        }
-    }).then(response => {
-        return response.text()
-    }).then(data => {
-        Swal.fire({
-            title: data,
-            timer: 1500,
-            showConfirmButton: false,
-            icon: 'success'
-        }).then(() => {
-            $('.add_compose input:text').val('')
-            $('.add_compose input:checkbox').prop("checked", false)
-            $(".add_compose").modal("hide");
-            getDataCompose.ajax.reload(null, false)
-        })
-    })
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch(`http://${ip}:3000/compose/`, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+
+    // fetch("", {
+    //     method: 'POST',
+    //     body: `${JSON.stringify(data)}`,
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Access-Control-Allow-Origin': '*',
+    //         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+    //         'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+    //     }
+    // }).then(response => {
+    //     return response.text()
+    // }).then(data => {
+    //     Swal.fire({
+    //         title: data,
+    //         timer: 1500,
+    //         showConfirmButton: false,
+    //         icon: 'success'
+    //     }).then(() => {
+    //         $('.add_compose input:text').val('')
+    //         $('.add_compose input:checkbox').prop("checked", false)
+    //         $(".add_compose").modal("hide");
+    //         getDataCompose.ajax.reload(null, false)
+    //     })
+    // })
 }
 
 $('#p_offers_add').change(event => {
