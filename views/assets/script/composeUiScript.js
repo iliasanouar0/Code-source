@@ -126,6 +126,13 @@ $(document).on('click', '#c_add', () => {
     //     swal.fire('all fields requirer')
     //     return
     // }
+    console.log(data);
+    console.log(data.split('/'));
+    let count = data.split('/')[1]
+    let dataName = data.split('/')[0]
+    console.log(dataName);
+    console.log(count);
+
     let action = selected[0].value
     let dataComposing
     switch (action) {
@@ -159,7 +166,8 @@ $(document).on('click', '#c_add', () => {
                 "id_user": `${user['id_user']}`,
                 "id_list": `${composingList}`,
                 "offer": `${offerAdd}`,
-                "data": `${data}`
+                "data": `${data}`,
+                "count": `${data}`,
             };
             break;
         default:
