@@ -618,25 +618,38 @@ wss.on('connection', (wss, req) => {
 
 // composing
 wsc.on('connection', (wss, req) => {
+  
   let id = parseInt(url.parse(req.url).query.split('=')[1])
+
   wss.id = id
+
   clients.push(wss)
+
   console.log('connected!')
+
   let request = ""
+
   wss.on('message', async (message) => {
+
     let data = JSON.parse(message.toString())
+
     request = data.request
+
     if (request == "start") {
+
       composeManager.startedProcess(data.data)
+
       let seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
       let active
       let waiting = seeds.length - 3
+
       if (seeds.length >= 3) {
         active = 3
       } else {
         active = seeds.length
         waiting = 0
       }
+
       for (let i = 0; i < seeds.length; i++) {
         let result = {
           id_process: data.id_process,
@@ -649,15 +662,20 @@ wsc.on('connection', (wss, req) => {
         }
         await resultManager.saveResult(result)
       }
+
       let success = 0
       let failed = 0
       let count = 0
       let length = seeds.length
       let toProcess = []
+
       await time(10000)
+
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
+
       processStateManager.addState(status)
+
       for (let i = 0; i < active; i++) {
         await Promise.all([
           await resultManager.startNow({ id_seeds: seeds[i].id_seeds, id_process: data.id_process }),
@@ -666,8 +684,8 @@ wsc.on('connection', (wss, req) => {
         count++
         toProcess.push(seeds[i])
       }
-      let state = await composeManager.getProcessState(data.id_process)
 
+      let state = await composeManager.getProcessState(data.id_process)
 
       const process = async (number) => {
         state = await composeManager.getProcessState(data.id_process)
@@ -793,6 +811,7 @@ wsc.on('connection', (wss, req) => {
       //     break
       //   }
       // }
+
       (function repeat(number) {
         process(number - 1)
         if (number > 1) repeat(number - 1);
