@@ -33,19 +33,15 @@ const getAllData = (request, response) => {
 }
 
 const getData = (request, response) => {
-    let path = '/home/data'
+    let path = '/home/data/main'
     let objects = []
     let fileObjs = fs.readdirSync(path);
-    const folders = fileObjs.filter(element => fs.statSync(path.join(__dirname, element)).isDirectory());
-    const files = fileObjs.filter(element => fs.statSync(path.join(__dirname, element)).isFile);
-    console.log({ folders: folders, files: files });
-    objects.push({ folders: folders, files: files })
-    // fileObjs.forEach(file => {
-    //     let filePath = `${path}/${file}`
-    //     const data = fs.readFileSync(filePath, 'utf8');
-    //     let array = data.split('\n\r')
-    //     objects.push({ count: array.length, file: file })
-    // })
+    fileObjs.forEach(file => {
+        let filePath = `${path}/${file}`
+        const data = fs.readFileSync(filePath, 'utf8');
+        let array = data.split('\n\r')
+        objects.push({ count: array.length, file: file })
+    })
     response.status(200).send(objects)
 }
 
