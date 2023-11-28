@@ -124,17 +124,20 @@ const addCompose = data => {
 
 $('#p_offers_add').change(event => {
     let value = $(event.target).val()
-    // fetch(`http://${ip}:3000/compose/offerdata?offer=${value}`, { method: 'GET' }).then(res => { return res.text() }).then(data => { console.log(data); })
-    var settings = {
-        "url": `http://${ip}:3000/compose/offerdata?offer=${value}`,
-        "method": "GET",
-        "timeout": 0,
-    };
-    $.ajax(settings).done(function (response) {
-        $('#body').addClass('d-none')
-        $('#preview').removeClass('d-none')
-        $('#preview').html(response)
-    });
+    if (value == '') {
+        return
+    } else {
+        var settings = {
+            "url": `http://${ip}:3000/compose/offerdata?offer=${value}`,
+            "method": "GET",
+            "timeout": 0,
+        };
+        $.ajax(settings).done(function (response) {
+            $('#body').addClass('d-none')
+            $('#preview').removeClass('d-none')
+            $('#preview').html(response)
+        });
+    }
 })
 
 $(document).on('click', '#c_add', () => {
