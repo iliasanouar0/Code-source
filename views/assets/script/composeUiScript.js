@@ -198,7 +198,7 @@ $(document).on('click', '#c_add', () => {
                 var settings = {
                     "url": `http://${ip}:3000/compose/offers?offer=${offerAdd}`,
                     "method": "POST",
-                    "data": `${data}`,
+                    "data": JSON.parse({ data: data }),
                     "timeout": 0,
                 };
                 console.log(data);
