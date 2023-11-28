@@ -110,7 +110,7 @@ const addCompose = data => {
     $.ajax(settings).done(function (response) {
         console.log(response);
         Swal.fire({
-            title: data,
+            title: response,
             timer: 1500,
             showConfirmButton: false,
             icon: 'success'
