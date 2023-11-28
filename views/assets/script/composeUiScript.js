@@ -890,14 +890,12 @@ const handleImageUpload = event => {
     fetch(`http://${ip}:3000/compose/offers/upload/`, {
         method: 'POST',
         body: formData
+    }).then(response => response.json()).then(data => {
+        console.log(data.path)
+    }).catch(error => {
+        console.error(error)
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.path)
-        })
-        .catch(error => {
-            console.error(error)
-        })
+    $('#messageBody').val('')
 }
 
 $(document).on('click', '.upload', event => {
