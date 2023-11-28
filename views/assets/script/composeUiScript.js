@@ -96,7 +96,6 @@ $(document).on('click', '.upload', event => {
 })
 
 const addCompose = data => {
-    console.log(data);
     var settings = {
         "url": "http://project1.gm2reporting.com:3000/compose/",
         "method": "POST",
@@ -166,7 +165,7 @@ $(document).on('click', '#c_add', () => {
                 "data": `none`,
                 "count": 0,
             };
-            console.log(dataComposing);
+            
 
             addCompose(dataComposing)
             break;
@@ -181,7 +180,7 @@ $(document).on('click', '#c_add', () => {
                 "data": `none`,
                 "count": 0,
             };
-            console.log(dataComposing);
+            
 
             addCompose(dataComposing)
             break;
@@ -229,7 +228,7 @@ $(document).on('click', '#c_add', () => {
                 "data": `${data}`,
                 "count": `${count}`,
             };
-            console.log(dataComposing);
+            
             addCompose(dataComposing)
             break;
         default:
