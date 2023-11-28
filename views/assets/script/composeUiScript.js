@@ -68,72 +68,67 @@ const addCompose = data => {
     })
 }
 
-$(document).on('click', "#p_add", () => {
-    let p_max_open = $('#max_open').val()
-    let p_subject = $('#p_subject').val()
-    let p_max_pages = $("#max_pages").val()
-    let p_list_add = $('#p_list_add').val()
-    let p_status = $('#p_status').val()
-    let p_add_date = new Date().toLocaleString();
-    let p_update_date = new Date().toLocaleString();
+/**
+ * ~composing
+ * ! form :
+ */
+
+$(document).on('click', '.erase', () => {
+    $('#messageBody').val('')
+})
+
+const handleImageUpload = event => {
+    const files = $('#messageBody')[0].files
+    const formData = new FormData()
+    formData.append('myFile', files[0])
+
+    fetch(`http://${ip}:3000/compose/offers/upload/`, {
+        method: 'POST',
+        body: formData
+    }).then(response => response.json()).then(data => {
+        console.log(data.path)
+    }).catch(error => {
+        console.error(error)
+    })
+    $('#messageBody').val('')
+}
+
+$(document).on('click', '.upload', event => {
+    const offersAdd = document.querySelector("#p_offers_add");
+    offersAdd.innerHTML = ""
+    handleImageUpload(event)
+    fetch(`http://${ip}:3000/compose/offers`, {
+        method: "GET",
+    }).then((response) => {
+        return response.json();
+    }).then((data) => {
+        if (data.length == 0) {
+            let option = document.createElement("option");
+            option.innerHTML = `No available offers`
+            offersAdd.appendChild(option);
+        } else {
+            data.forEach((elm) => {
+                let option = document.createElement("option");
+                option.innerHTML = `${elm['file']}`
+                option.setAttribute("value", elm['file']);
+                offersAdd.appendChild(option);
+            });
+        }
+    })
+})
+
+$(document).on('click', '#c_add', () => {
+    let composingList = $('#p_list_add').val()
+    let data = $('#p_data_add')
+    let limit = $('#limit_send')
     let selected = $('.actions input:checked')
-    let login_selected = $('.login_options input:checked').val()
-    console.log(login_selected);
-    if (p_list_add == "" || p_status == "" || p_add_date == "" || p_update_date == "" || selected.length == 0 || login_selected == undefined) {
-        Swal.fire('Please fill all fields')
+    if (composingList == '' || data == '' || selected.length == 0) {
+        swal.fire('all fields requirer')
         return
     }
-
-    let valueSelect = []
-    let selected_spam = $('.spam input:checked')
-    let selected_inbox = $('.inbox input:checked')
-    let selected_other = $('.others input:checked')
-
-    if (selected_spam != 0) {
-        for (let i = 0; i < selected_spam.length; i++) {
-            valueSelect.push(selected_spam[i].value)
-        }
-    }
-
-    if (selected_inbox != 0) {
-        for (let i = 0; i < selected_inbox.length; i++) {
-            valueSelect.push(selected_inbox[i].value)
-        }
-    }
-
-    if (selected_other != 0) {
-        for (let i = 0; i < selected_other.length; i++) {
-            valueSelect.push(selected_other[i].value)
-        }
-    }
-
-    let action = `${valueSelect}`
-
-    if (p_subject != "") {
-        action += `,subject:${p_subject}`
-    }
-
-    if (p_max_pages > 1) {
-        action += `,pages:${p_max_pages}`
-    }
-
-    if (p_max_open != '' || p_max_open != 0) {
-        action += `,count:${p_max_open}`
-    }
-
-    action += `,option:${login_selected}`
-
-    const data = {
-        "name": `test`,
-        "action": action,
-        "status": `${p_status}`,
-        "date_add": `${p_add_date}`,
-        "date_update": `${p_update_date}`,
-        "id_user": `${userData['id_user']}`,
-        "id_list": `${p_list_add}`
-    };
-    addCompose(data)
-});
+    let action = selected[0].val()
+    console.log(action);
+})
 
 $(document).on('click', '.start', event => {
     const id = $(event.target)[0].attributes[2].value
@@ -876,48 +871,4 @@ $('#btn-check-compose').change(event => {
     } else {
         $('.send_message').addClass('d-none');
     }
-})
-
-$(document).on('click', '.erase', () => {
-    $('#messageBody').val('')
-})
-
-const handleImageUpload = event => {
-    const files = $('#messageBody')[0].files
-    const formData = new FormData()
-    formData.append('myFile', files[0])
-
-    fetch(`http://${ip}:3000/compose/offers/upload/`, {
-        method: 'POST',
-        body: formData
-    }).then(response => response.json()).then(data => {
-        console.log(data.path)
-    }).catch(error => {
-        console.error(error)
-    })
-    $('#messageBody').val('')
-}
-
-$(document).on('click', '.upload', event => {
-    const offersAdd = document.querySelector("#p_offers_add");
-    offersAdd.innerHTML = ""
-    handleImageUpload(event)
-    fetch(`http://${ip}:3000/compose/offers`, {
-        method: "GET",
-    }).then((response) => {
-        return response.json();
-    }).then((data) => {
-        if (data.length == 0) {
-            let option = document.createElement("option");
-            option.innerHTML = `No available offers`
-            offersAdd.appendChild(option);
-        } else {
-            data.forEach((elm) => {
-                let option = document.createElement("option");
-                option.innerHTML = `${elm['file']}`
-                option.setAttribute("value", elm['file']);
-                offersAdd.appendChild(option);
-            });
-        }
-    })
 })
