@@ -198,12 +198,10 @@ $(document).on('click', '#c_add', () => {
                 var settings = {
                     "url": `http://${ip}:3000/compose/offers?offer=${offerAdd}`,
                     "method": "POST",
-                    "data": body,
+                    "data": `${data}`,
                     "timeout": 0,
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
                 };
+                console.log(data);
                 $.ajax(settings).done(function (response) {
                     console.log(response);
                 });
