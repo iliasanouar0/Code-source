@@ -1068,6 +1068,7 @@ if (path.includes("/admin/users/")) {
       if (data.length == 0) {
         let option = document.createElement("option");
         option.innerHTML = `No available offers`
+        option.setAttribute("value", '');
         offersAdd.appendChild(option);
       } else {
         data.forEach((elm) => {
