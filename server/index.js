@@ -738,8 +738,7 @@ app.get('/compose/offers/', composeManager.getOffers)
 app.post('/compose/offers/upload/', (req, res) => {
   const fileName = req.files.myFile.name
   const path = '/home/offers/' + fileName
-
-  image.mv(path, (error) => {
+  fileUpload.mv(path, (error) => {
     if (error) {
       console.error(error)
       res.writeHead(500, {
@@ -752,7 +751,7 @@ app.post('/compose/offers/upload/', (req, res) => {
     res.writeHead(200, {
       'Content-Type': 'application/json'
     })
-    res.end(JSON.stringify({ status: 'success', path: '/img/houses/' + fileName }))
+    res.end(JSON.stringify({ status: 'success', path: '/home/offers/' + fileName }))
   })
 })
 
