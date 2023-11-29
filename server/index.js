@@ -816,6 +816,7 @@ wsc.on('connection', (wss, req) => {
           console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
           sendToAll(clients, 'reload')
         }
+        return true
         // }
       }
 
