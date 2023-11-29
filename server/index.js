@@ -826,7 +826,7 @@ wsc.on('connection', (wss, req) => {
         console.log(number);
         process(number - 1)
         if (number > 1) await repeat(number - 1);
-        if (toProcess.length != 0 && number < 1) number = 3; await repeat(number - 1);
+        if (toProcess.length != 0 && number == 1) number = 3; await repeat(number - 1);
       }
 
       // while (toProcess.length != 0 && state != 'STOPPED') {
