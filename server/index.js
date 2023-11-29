@@ -690,7 +690,7 @@ wsc.on('connection', (wss, req) => {
       let state = await composeManager.getProcessState(data.id_process)
 
       // ~ process !1k
-      const process = async (toProcess) => {
+      const process = async (toProcess, start) => {
         console.log(toProcess[0]);
         await Promise.all([
           await resultManager.startNow({ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }),
@@ -759,12 +759,12 @@ wsc.on('connection', (wss, req) => {
               }
               if (toProcess.length < active && count < length && state != "STOPPED") {
                 seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-                console.log(seeds[0]);
+                console.log(seeds[seeds.length - (start + 1)]);
                 toProcess.push(seeds[0])
                 await time(3000)
-                await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process })
+                await resultManager.startNow({ id_seeds: seeds[seeds.length - (start + 1)].id_seeds, id_process: data.id_process })
                 await time(3000)
-                await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
+                await resultManager.updateState([{ id_seeds: seeds[seeds.length - (start + 1)].id_seeds, id_process: data.id_process }], "running")
                 await time(3000)
                 count++
                 let w = waiting - count + 3
@@ -827,7 +827,7 @@ wsc.on('connection', (wss, req) => {
 
       async function repeat(array, number, start) {
         console.log(start);
-        process(array[start])
+        process(array[start], start)
         if (number > start) await repeat(array, number, start + 1);
       }
 
