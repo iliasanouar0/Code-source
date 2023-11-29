@@ -821,16 +821,18 @@ wsc.on('connection', (wss, req) => {
 
       console.log(active);
 
-      function repeat(number) {
+      async function repeat(number) {
+        console.log(number);
         process(number - 1)
         if (number > 1) repeat(number - 1);
+        else return
       }
 
-      // while (toProcess.length != 0 && state != 'STOPPED') {
-      //   await time(5000)
-      //   console.log(toProcess.length);
-      repeat(toProcess.length)
-      // }
+      while (toProcess.length != 0 && state != 'STOPPED') {
+        await time(5000)
+        console.log(toProcess.length);
+        await repeat(toProcess.length)
+      }
 
 
 
