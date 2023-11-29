@@ -641,8 +641,8 @@ wsc.on('connection', (wss, req) => {
 
     request = data.request
     if (request == "start") {
-      processManager.startedProcess(data.data)
-      let seeds = await processManager.getAllProcessSeedsServer(data.id_process)
+      composeManager.startedProcess(data.data)
+      let seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
       let active
       let waiting = seeds.length - 3
       if (seeds.length >= 3) {
@@ -679,15 +679,15 @@ wsc.on('connection', (wss, req) => {
         count++
         toProcess.push(seeds[i])
       }
-      let state = await processManager.getProcessState(data.id_process)
+      let state = await composeManager.getProcessState(data.id_process)
       while (toProcess.length != 0 && state != "STOPPED") {
-        state = await processManager.getProcessState(data.id_process)
+        state = await composeManager.getProcessState(data.id_process)
         if (state == "STOPPED") {
           break
         }
         for (let i = 0; i < toProcess.length; i++) {
           let seed = [toProcess[0]]
-          state = await processManager.getProcessState(data.id_process)
+          state = await composeManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             break
           }
@@ -711,7 +711,7 @@ wsc.on('connection', (wss, req) => {
           let r = ''
           for (let i = 0; i < actions.length; i++) {
             console.log(actions[i] + ' action start')
-            r += await processManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c, options: options, entity: data.entity, mode: mode })
+            r += await composeManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c, options: options, entity: data.entity, mode: mode })
             if (i < actions.length) {
               r += ', '
             }
@@ -735,7 +735,7 @@ wsc.on('connection', (wss, req) => {
               await resultManager.endNow(result)
             ]);
             toProcess.shift()
-            state = await processManager.getProcessState(data.id_process)
+            state = await composeManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
             }
@@ -764,7 +764,7 @@ wsc.on('connection', (wss, req) => {
               await resultManager.endNow(result)
             ]);
             toProcess.shift()
-            state = await processManager.getProcessState(data.id_process)
+            state = await composeManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
             }
@@ -789,14 +789,14 @@ wsc.on('connection', (wss, req) => {
           let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
         }
-        state = await processManager.getProcessState(data.id_process)
+        state = await composeManager.getProcessState(data.id_process)
         if (state == "STOPPED") {
           break
         }
         if (toProcess.length == 0) {
           let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
           await processStateManager.updateState(status)
-          processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
+          composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
           console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
           sendToAll(clients, 'reload')
         }
