@@ -830,7 +830,7 @@ wsc.on('connection', (wss, req) => {
         process(array[start], start)
         console.log(start);
         console.log(number);
-        while (start < number) await repeat(array, number, start + 1);
+        while (start != number) await repeat(array, number, start + 1);
       }
 
       await time(5000)
