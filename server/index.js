@@ -821,14 +821,13 @@ wsc.on('connection', (wss, req) => {
         }
       }
 
-      async function repeat(array, number) {
-        process(array[number - 1])
-        if (number > 1) await repeat(array[number - 1]);
+      async function repeat(array, number, start) {
+        process(array[start])
+        if (number > start) await repeat(array, number, start++);
       }
 
-      
       await time(5000)
-      await repeat(toProcess, active)
+      await repeat(toProcess, active, 0)
     }
 
     else if (request == "resume") {
