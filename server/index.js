@@ -687,8 +687,8 @@ wsc.on('connection', (wss, req) => {
             await resultManager.startNow({ id_seeds: seeds[j + i].id_seeds, id_process: data.id_process }),
             await resultManager.updateState([{ id_seeds: seeds[j + i].id_seeds, id_process: data.id_process }], "running")
           ])
+          toProcess[i].push(seeds[count])
           count++
-          toProcess[i].push(seeds[j + i])
         }
       }
       let v = 0
