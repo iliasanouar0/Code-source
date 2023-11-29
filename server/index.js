@@ -1116,14 +1116,12 @@ wsc.on('connection', (wss, req) => {
       console.log(active);
 
       async function repeat(number) {
-        await process(number - 1)
+        process(number - 1)
         if (number > 1) await repeat(number - 1);
-        // if (toProcess.length != 0 && number == 1) number = 3; await repeat(number - 1);
       }
 
       await time(5000)
       await repeat(toProcess.length)
-
     }
 
     else if (request == "resume") {
