@@ -691,8 +691,8 @@ wsc.on('connection', (wss, req) => {
 
       // ~ process !1k
       const process = async (toProcess, start) => {
-        console.log(start);
-        console.log(toProcess);
+        // console.log(start);
+        // console.log(toProcess);
         // await Promise.all([
         //   await resultManager.startNow({ id_seeds: toProcess.id_seeds, id_process: data.id_process }),
         //   await resultManager.updateState([{ id_seeds: toProcess.id_seeds, id_process: data.id_process }], "running")
@@ -828,6 +828,8 @@ wsc.on('connection', (wss, req) => {
 
       async function repeat(array, number, start) {
         process(array[start], start)
+        console.log(start);
+        console.log(number);
         while (start < number) await repeat(array, number, start + 1);
       }
 
