@@ -755,6 +755,7 @@ wsc.on('connection', (wss, req) => {
                 break
               }
               if (toProcess.length < active && count < length && state != "STOPPED") {
+                seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
                 toProcess.push(seeds[count])
                 await Promise.all([
                   await resultManager.startNow({ id_seeds: seeds[count].id_seeds, id_process: data.id_process }),
@@ -784,6 +785,7 @@ wsc.on('connection', (wss, req) => {
                 break
               }
               if (toProcess.length < active && count < length && state != "STOPPED") {
+                seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
                 toProcess.push(seeds[count])
                 await Promise.all([
                   await resultManager.startNow({ id_seeds: seeds[count].id_seeds, id_process: data.id_process }),
@@ -930,7 +932,6 @@ wsc.on('connection', (wss, req) => {
               break
             }
             if (toProcess.length < active && count < length && state != "STOPPED") {
-              seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
               toProcess.push(seeds[count])
               await resultManager.startNow({ id_seeds: seeds[count].id_seeds, id_process: data.id_process })
               await resultManager.updateState([{ id_seeds: seeds[count].id_seeds, id_process: data.id_process }], "running")
@@ -955,7 +956,6 @@ wsc.on('connection', (wss, req) => {
               break
             }
             if (toProcess.length < active && count < length && state != "STOPPED") {
-              seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
               toProcess.push(seeds[count])
               await resultManager.startNow({ id_seeds: seeds[count].id_seeds, id_process: data.id_process })
               await resultManager.updateState([{ id_seeds: seeds[count].id_seeds, id_process: data.id_process }], "running")
