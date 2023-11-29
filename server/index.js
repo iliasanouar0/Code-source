@@ -736,7 +736,9 @@ wsc.on('connection', (wss, req) => {
             array.pop()
             r = array.join((', '))
             console.log(r);
+            await time(3000)
             await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
+            await time(3000)
             if (r.indexOf('invalid') == -1) {
               success++
               let end_in = new Date()
@@ -758,10 +760,11 @@ wsc.on('connection', (wss, req) => {
               if (toProcess.length < active && count < length && state != "STOPPED") {
                 seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
                 toProcess.push(seeds[0])
-                await Promise.all([
-                  await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process }),
-                  await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
-                ])
+                await time(3000)
+                await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process })
+                await time(3000)
+                await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
+                await time(3000)
                 count++
                 let w = waiting - count + 3
                 let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
