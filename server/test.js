@@ -103,9 +103,6 @@
 //     await time(3000)
 //     await page.type('[name="subjectbox"]', option.subject, { delay: 200 })
 //     await time(3000)
-//     // const elementHandle = await page.$("input[type=file]");
-//     // await time(3000)
-//     // await elementHandle.uploadFile(`./${option.offer}`);
 //     fs.readFile(`./${option.offer}`, async (err, data) => {
 //         if (!err) {
 //             await page.evaluate(async (dataTo) => {
@@ -118,26 +115,46 @@
 //         page.$eval(`.T-I.J-J5-Ji.aoO.v7.T-I-atl.L3`, element =>
 //             element.click()
 //         ),
-//         await page.waitForNavigation(),
+//         await page.waitForNavigation()
 //     ]);
+//     await time(30000)
+//     let check = await page.evaluate(() => {
+//         let unread = document.querySelectorAll('.zA.zE')
+//         if (unread.length == 0) {
+//             return true
+//         }
+//         let label = document.querySelector('.zA.zE .y2').innerText
+//         if (label.includes('You have reached a limit for sending mail') || label.includes('Message blocked')) {
+//             return false
+//         }
+//         return true
+//     })
+//     await time(3000)
+//     console.log(check);
+//     await time(3000)
+//     if (!check) {
+//         console.log('you can\'t send !!');
+//     }else{
+//         console.log('sended !!');
+//     }
 //     return
 // }
 
-// // let data = {
-// //     gmail: 'hasithjayanath1994@gmail.com',
-// //     password: '761578412',
-// //     // proxy: '188.34.177.156',
-// //     // proxy: '38.34.185.143:3838',
-// //     verification: 'pelila1985@outlook.com'
-// // }
-
 // let data = {
-//     gmail: 'iliasanouar0@gmail.com',
-//     password: 'test08072001',
+//     gmail: 'ronaldorober12@gmail.com',
+//     password: '02077504',
 //     // proxy: '188.34.177.156',
 //     // proxy: '38.34.185.143:3838',
-//     // verification: 'pelila1985@outlook.com'
+//     verification: 'PeiButtorff@outlook.com'
 // }
+
+// // let data = {
+// //     gmail: 'iliasanouar0@gmail.com',
+// //     password: 'test08072001',
+// //     // proxy: '188.34.177.156',
+// //     // proxy: '38.34.185.143:3838',
+// //     // verification: 'pelila1985@outlook.com'
+// // }
 
 // let options = {
 //     subject: 'test email',
