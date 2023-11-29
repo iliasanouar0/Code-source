@@ -796,21 +796,6 @@ wsc.on('connection', (wss, req) => {
             processStateManager.updateState(status)
           }
         }
-        // }
-      }
-
-      console.log(active);
-
-      async function repeat(number) {
-        console.log(number);
-        process(number - 1)
-        if (number > 1) await repeat(number - 1);
-        else return
-      }
-
-      while (toProcess.length != 0 && state != 'STOPPED') {
-        await time(5000)
-        await repeat(toProcess.length)
         console.log(toProcess.length);
         let w = waiting - count + 3
         if (w <= 0) {
@@ -831,7 +816,26 @@ wsc.on('connection', (wss, req) => {
           console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
           sendToAll(clients, 'reload')
         }
+        // }
       }
+
+      console.log(active);
+
+      async function repeat(number) {
+        let result = false
+        console.log(number);
+        process(number - 1)
+        if (number > 1) result = await repeat(number - 1);
+        if (result) {
+          number = toProcess.length
+          result = await repeat(number - 1);
+        }
+      }
+
+      // while (toProcess.length != 0 && state != 'STOPPED') {
+      await time(5000)
+      await repeat(toProcess.length)
+      // }
 
 
 
