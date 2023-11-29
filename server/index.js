@@ -684,11 +684,11 @@ wsc.on('connection', (wss, req) => {
         toProcess[i] = []
         for (let j = 0; j < active; j++) {
           await Promise.all([
-            await resultManager.startNow({ id_seeds: seeds[k].id_seeds, id_process: data.id_process }),
-            await resultManager.updateState([{ id_seeds: seeds[k].id_seeds, id_process: data.id_process }], "running")
+            await resultManager.startNow({ id_seeds: seeds[j + i].id_seeds, id_process: data.id_process }),
+            await resultManager.updateState([{ id_seeds: seeds[j + i].id_seeds, id_process: data.id_process }], "running")
           ])
           count++
-          toProcess[i].push(seeds[i])
+          toProcess[i].push(seeds[j + i])
         }
         // toProcess.push(seeds[i])
       }
