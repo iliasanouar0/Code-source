@@ -672,8 +672,6 @@ wsc.on('connection', (wss, req) => {
       let failed = 0
       let count = 0
       let length = seeds.length
-      let toProcess = []
-
       await time(10000)
 
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
@@ -681,27 +679,32 @@ wsc.on('connection', (wss, req) => {
 
       processStateManager.addState(status)
 
+      let toProcess = []
       for (let i = 0; i < active; i++) {
-        await Promise.all([
-          await resultManager.startNow({ id_seeds: seeds[i].id_seeds, id_process: data.id_process }),
-          await resultManager.updateState([{ id_seeds: seeds[i].id_seeds, id_process: data.id_process }], "running")
-        ])
-        count++
-        toProcess.push(seeds[i])
+        toProcess[i] = []
+        for (let j = 0; j < active; j++) {
+          await Promise.all([
+            await resultManager.startNow({ id_seeds: seeds[k].id_seeds, id_process: data.id_process }),
+            await resultManager.updateState([{ id_seeds: seeds[k].id_seeds, id_process: data.id_process }], "running")
+          ])
+          count++
+          toProcess[i].push(seeds[i])
+        }
+        // toProcess.push(seeds[i])
       }
 
       let state = await composeManager.getProcessState(data.id_process)
 
       // ~ process !1k
 
-      const process = async (number) => {
+      const process = async (toProcess) => {
         while (toProcess.length != 0 && state != "STOPPED") {
           state = await composeManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             break
           }
           for (let i = 0; i < toProcess.length; i++) {
-            let seed = toProcess[number]
+            let seed = toProcess[0]
             state = await composeManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
@@ -822,13 +825,13 @@ wsc.on('connection', (wss, req) => {
 
       console.log(active);
 
-      async function repeat(number) {
-        process(number - 1)
-        if (number > 1) await repeat(number - 1);
+      async function repeat(array, number) {
+        process(array[number - 1])
+        if (number > 1) await repeat(array[number - 1]);
       }
 
       await time(5000)
-      await repeat(toProcess.length)
+      await repeat(toProcess, active)
     }
 
     else if (request == "resume") {
