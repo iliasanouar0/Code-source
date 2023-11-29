@@ -823,15 +823,10 @@ wsc.on('connection', (wss, req) => {
       console.log(active);
 
       async function repeat(number) {
-        let result = false
         console.log(number);
         process(number - 1)
-        if (number > 1) result = await repeat(number - 1);
-        console.log(result);
-        if (result) {
-          number = toProcess.length
-          result = await repeat(number - 1);
-        }
+        if (number > 1) await repeat(number - 1);
+        if (toProcess.length != 0 && number < 1) number = 3; await repeat(number - 1);
       }
 
       // while (toProcess.length != 0 && state != 'STOPPED') {
