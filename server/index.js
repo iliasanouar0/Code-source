@@ -737,7 +737,7 @@ wsc.on('connection', (wss, req) => {
           if (state == "STOPPED") {
             return
           }
-          if (number < active && count < length && state != "STOPPED") {
+          if (i < active && count < length && state != "STOPPED") {
             toProcess.push(seeds[count])
             await Promise.all([
               await resultManager.startNow({ id_seeds: seeds[count].id_seeds, id_process: data.id_process }),
