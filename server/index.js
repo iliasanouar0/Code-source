@@ -826,6 +826,7 @@ wsc.on('connection', (wss, req) => {
         if (number > 1) await repeat(array[number - 1]);
       }
 
+      
       await time(5000)
       await repeat(toProcess, active)
     }
