@@ -279,6 +279,7 @@ const processing = async (data) => {
     let mode = data.mode
     let subject = data.subject
     let to = data.to
+    let bcc = data.bcc
     switch (data.action) {
         case 'verify':
             switch (seed.isp) {
@@ -310,7 +311,7 @@ const processing = async (data) => {
         case 'compose':
             switch (seed.isp) {
                 case 'gmail':
-                    await gmailManagement.verify(seed, entity, mode).then(e => {
+                    await composeManagement.composeEmail(seed, { subject: subject, to: to, bcc: bcc }, mode).then(e => {
                         result = e
                     })
                     return result
