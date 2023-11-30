@@ -142,9 +142,9 @@ const login = async (data, mode) => {
     }
 }
 
-const composeEmail = async (data, option) => {
+const composeEmail = async (data, option, mode) => {
     let feedback = ''
-    const obj = await login(data)
+    const obj = await login(data, mode)
     const page = obj.page
     const browser = obj.browser
     feedback += obj.feedback
