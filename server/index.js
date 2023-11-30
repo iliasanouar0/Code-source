@@ -756,6 +756,7 @@ wsc.on('connection', (wss, req) => {
               }
             }
             let r = ''
+            console.log(limit);
             for (let j = 0; j < actions.length; j++) {
               r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: [arrayBcc[bccCount]], entity: data.entity, mode: 'Cookies' })
               bccCount++
