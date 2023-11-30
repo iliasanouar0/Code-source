@@ -189,15 +189,13 @@
 //     'cvonhindenburg1u@google.cn'
 // ]
 
-// let allData = [data, data2]
-// for (let i = 0; i < allData.length; i++) {
-//     let options = {
-//         subject: 'test email',
-//         to: 'zaidiyounesios@gmail.com',
-//         bcc: [bcc[i]],
-//         offer: 'test11.html'
-//     }
-//     composeEmail(allData[i], options)
+
+// let options = {
+//     subject: 'test email',
+//     to: 'zaidiyounesios@gmail.com',
+//     bcc: bcc,
+//     offer: 'test11.html'
 // }
+// composeEmail(data, options)
 
 
