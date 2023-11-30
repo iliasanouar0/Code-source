@@ -141,6 +141,25 @@ $('#p_offers_add').change(event => {
     }
 })
 
+$('#p_offers_add').change(event => {
+    let value = $(event.target).val()
+    if (value == '') {
+        $('#body').removeClass('d-none')
+        $('#preview').addClass('d-none')
+    } else {
+        var settings = {
+            "url": `http://${ip}:3000/compose/offerdata?offer=${value}`,
+            "method": "GET",
+            "timeout": 0,
+        };
+        $.ajax(settings).done(function (response) {
+            $('#body').addClass('d-none')
+            $('#preview').removeClass('d-none')
+            $('#preview').html(response)
+        });
+    }
+})
+
 $(document).on('click', '#c_add', () => {
     let composingList = $('#p_list_add').val()
     let data = $('#p_data_add').val()
