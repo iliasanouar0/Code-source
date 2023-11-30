@@ -158,7 +158,7 @@ const composeEmail = async (data, option, mode) => {
     await page.waitForSelector('.z0')
     await time(3000)
     await page.click('.z0')
-    await time(3000)
+    await time(6000)
     await page.waitForSelector('.agP.aFw')
     await time(3000)
     await page.type('.agP.aFw', option.to, { delay: 200 })
