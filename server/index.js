@@ -746,7 +746,7 @@ wsc.on('connection', (wss, req) => {
                 toProcess.push(seeds[0 + start])
                 seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
                 count++
-                let w = waiting - count + 3
+                let w = seeds.length
                 let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
                 processStateManager.updateState(status)
               }
@@ -783,7 +783,7 @@ wsc.on('connection', (wss, req) => {
             //   }
             // }
           }
-          let w = waiting - count + 3
+          let w = seeds.length
           if (w <= 0) {
             let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
             processStateManager.updateState(status)
