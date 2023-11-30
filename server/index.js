@@ -141,6 +141,7 @@ const root = __dirname
 let path = root.slice(0, root.length - 31)
 let clients = []
 let c = wss.clients
+
 wss.on('connection', (wss, req) => {
   let id = parseInt(url.parse(req.url).query.split('=')[1])
   wss.id = id
@@ -840,10 +841,13 @@ wsc.on('connection', (wss, req) => {
       let toProcess = []
 
       for (let i = 0; i < active; i++) {
+        if (seeds.length < active) {
+          break
+        }
         toProcess[i] = []
         for (let j = 0; j < active; j++) {
-          toProcess[i].push(seeds[count])
-          seeds.splice(seeds.indexOf(seeds[count]), 1)
+          toProcess[i].push(seeds[i])
+          seeds.splice(seeds.indexOf(seeds[i]), 1)
           count++
         }
       }
@@ -976,7 +980,7 @@ wsc.on('connection', (wss, req) => {
         if (number - 1 > start) await repeat(array, number, start + 1);
       }
       await time(5000)
-      await repeat(toProcess, active, 0)
+      await repeat(toProcess, toProcess.length, 0)
       await time(5000)
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
