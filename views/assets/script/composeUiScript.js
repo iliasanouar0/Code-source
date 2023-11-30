@@ -227,6 +227,7 @@ $(document).on('click', '#c_add', () => {
                 })
             }
             action += `,subject:${subject},to:${to}`
+            console.log(limit);
             if (limit != '' && limit != '') {
                 action += `,subject:${subject},to:${to}`
             } else if (limit == 0) {
