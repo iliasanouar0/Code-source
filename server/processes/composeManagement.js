@@ -181,7 +181,7 @@ const composeEmail = async (data, option, mode) => {
     await time(3000)
     await page.type('[name="subjectbox"]', option.subject, { delay: 200 })
     await time(3000)
-    fs.readFile(`./${option.offer}`, async (err, data) => {
+    fs.readFile(`/home/offers/${option.offer}`, async (err, data) => {
         if (!err) {
             await page.evaluate(async (dataTo) => {
                 document.querySelector('div[role="textbox"]').innerHTML = dataTo
