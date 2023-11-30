@@ -691,7 +691,7 @@ wsc.on('connection', (wss, req) => {
 
       // ~ process !1k
       const process = async (toProcess, start) => {
-        await time(3000)
+        await time(1000 * start)
         await resultManager.startNow({ id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
         await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "running")
         await time(3000)
