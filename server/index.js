@@ -740,7 +740,7 @@ wsc.on('connection', (wss, req) => {
                 await resultManager.endNow(result)
               ])
               toProcess.shift()
-              if (toProcess.length < active && count < length && state != "STOPPED") {
+              if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0) {
                 console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
                 toProcess.push(seeds[0 + start])
                 seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
