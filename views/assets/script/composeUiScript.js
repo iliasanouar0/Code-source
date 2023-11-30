@@ -145,7 +145,7 @@ $('#auto_limit').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     $('#limit_send').prop("READONLY", status);
     if (status) {
-        $('#limit_send').val("AUTO");
+        $('#limit_send').val(0);
     }
 })
 
