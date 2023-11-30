@@ -208,6 +208,7 @@ wss.on('connection', (wss, req) => {
           }
           for (let i = 0; i < toProcess.length; i++) {
             let seed = toProcess[0]
+            console.log(seed);
             await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
             state = await processManager.getProcessState(data.id_process)
