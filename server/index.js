@@ -694,7 +694,6 @@ wsc.on('connection', (wss, req) => {
             let seed = toProcess[0]
             await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
-            seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
             state = await composeManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
@@ -715,7 +714,6 @@ wsc.on('connection', (wss, req) => {
                 }
               }
             }
-            console.log(`Actions : ${actions}`);
             let r = ''
             for (let i = 0; i < actions.length; i++) {
               r += await composeManager.processing({ data: seed, action: actions[i], subject: subject, to: to, entity: data.entity, mode: 'Cookies' })
@@ -742,6 +740,7 @@ wsc.on('connection', (wss, req) => {
               ])
               toProcess.shift()
               if (toProcess.length < active && count < length && state != "STOPPED") {
+                seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
                 await time(3000)
                 console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
                 toProcess.push(seeds[0 + start])
