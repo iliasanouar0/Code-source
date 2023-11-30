@@ -702,26 +702,28 @@ wsc.on('connection', (wss, req) => {
           }
           for (let i = 0; i < toProcess.length; i++) {
             let seed = toProcess[0]
+            console.log('process : ' + start);
+            console.log('to process seed : ' + seed.id_seeds);
             state = await composeManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
             }
-            let actions
-            let subject
-            let to
-            if (seed.action.indexOf('subject') == -1 && seed.action.indexOf('to') == -1) {
-              actions = [seed.action]
-            } else {
-              actions = seed.action.split(',')
-              let length = actions.length
-              for (let i = 0; i < length; i++) {
-                if (actions[length - (i + 1)].indexOf('subject') != -1) {
-                  subject = actions.pop().split(':')[1]
-                } else if (actions[length - (i + 1)].indexOf('to') != -1) {
-                  to = actions.pop().split(':')[1]
-                }
-              }
-            }
+            // let actions
+            // let subject
+            // let to
+            // if (seed.action.indexOf('subject') == -1 && seed.action.indexOf('to') == -1) {
+            //   actions = [seed.action]
+            // } else {
+            //   actions = seed.action.split(',')
+            //   let length = actions.length
+            //   for (let i = 0; i < length; i++) {
+            //     if (actions[length - (i + 1)].indexOf('subject') != -1) {
+            //       subject = actions.pop().split(':')[1]
+            //     } else if (actions[length - (i + 1)].indexOf('to') != -1) {
+            //       to = actions.pop().split(':')[1]
+            //     }
+            //   }
+            // }
             // console.log(`Actions : ${actions}`);
             // let r = ''
             // for (let i = 0; i < actions.length; i++) {
@@ -736,7 +738,7 @@ wsc.on('connection', (wss, req) => {
             // r = array.join((', '))
             // console.log(r);
             let r = 'test'
-            await time(3000)
+            await time(3000 * start)
             // await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
             // await time(3000)
             if (r.indexOf('invalid') == -1) {
@@ -744,19 +746,19 @@ wsc.on('connection', (wss, req) => {
               let end_in = new Date()
               let result
               await time(1000 * start)
-              await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "finished")
-              await time(1000 * start)
+              await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished")
               result = {
-                id_seeds: toProcess[0].id_seeds,
+                id_seeds: seed.id_seeds,
                 end_in: end_in,
                 id_process: data.id_process
               }
               await resultManager.endNow(result)
-              toProcess.shift()
-              state = await composeManager.getProcessState(data.id_process)
-              if (state == "STOPPED") {
-                break
-              }
+              console.log(toProcess.slice(toProcess.indexOf(seed), 1));
+              // toProcess.slice(toProcess.indexOf(seed), 1)
+              // state = await composeManager.getProcessState(data.id_process)
+              // if (state == "STOPPED") {
+              //   break
+              // }
               if (toProcess.length < active && count < length && state != "STOPPED") {
                 seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
                 toProcess.push(seeds[seeds.length - (start + 1)])
