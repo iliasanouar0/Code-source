@@ -141,3 +141,94 @@ const login = async (data, mode) => {
         return { browser: browser, page: page, feedback: feedback }
     }
 }
+
+const composeEmail = async (data, option) => {
+    let feedback = ''
+    const obj = await login(data)
+    const page = obj.page
+    const browser = obj.browser
+    feedback += obj.feedback
+    await time(5000)
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    });
+    feedback += `${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    await time(2000)
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    await page.waitForSelector('.z0')
+    await time(3000)
+    await page.click('.z0')
+    await time(3000)
+    await page.waitForSelector('.agP.aFw')
+    await time(3000)
+    await page.type('.agP.aFw', option.to, { delay: 200 })
+    await time(3000)
+    await page.waitForSelector(".aB.gQ.pB")
+    await time(3000)
+    await page.click(".aB.gQ.pB")
+    await time(3000)
+    let bcc = await page.evaluate((b) => {
+        let inputs = document.querySelectorAll('.agP.aFw')
+        inputs[1].value = b
+        return b
+    }, option.bcc.join(','))
+    await time(3000)
+    console.log(bcc);
+    await time(3000)
+    await page.waitForSelector('[name="subjectbox"]')
+    await time(3000)
+    await page.click('[name="subjectbox"]')
+    await time(3000)
+    await page.type('[name="subjectbox"]', option.subject, { delay: 200 })
+    await time(3000)
+    fs.readFile(`./${option.offer}`, async (err, data) => {
+        if (!err) {
+            await page.evaluate(async (dataTo) => {
+                document.querySelector('div[role="textbox"]').innerHTML = dataTo
+            }, data.toString());
+        }
+    })
+    await time(3000)
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
+    });
+    feedback += `${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
+    await time(2000)
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    await time(3000)
+    await Promise.all([
+        page.$eval(`.T-I.J-J5-Ji.aoO.v7.T-I-atl.L3`, element =>
+            element.click()
+        ),
+        await page.waitForNavigation()
+    ]);
+    await time(30000)
+    let check = await page.evaluate(() => {
+        let unread = document.querySelectorAll('.zA.zE')
+        if (unread.length == 0) {
+            return true
+        }
+        let label = document.querySelector('.zA.zE .y2').innerText
+        if (label.includes('You have reached a limit for sending mail') || label.includes('Message blocked')) {
+            return false
+        }
+        return true
+    })
+    await time(3000)
+    console.log(check);
+    await time(3000)
+    if (!check) {
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        });
+        feedback += `${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        await time(2000)
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(3000)
+        console.log('you can\'t send !!');
+    } else {
+        console.log('sended !!');
+    }
+    return
+}
