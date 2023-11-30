@@ -196,13 +196,13 @@ wss.on('connection', (wss, req) => {
           count++
         }
       }
-      let state = await composeManager.getProcessState(data.id_process)
+      let state = await processManager.getProcessState(data.id_process)
 
       // ~ process !1k
       const process = async (toProcess, start) => {
         await time(3000)
         while (toProcess.length != 0 && state != "STOPPED") {
-          state = await composeManager.getProcessState(data.id_process)
+          state = await processManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             break
           }
@@ -210,7 +210,7 @@ wss.on('connection', (wss, req) => {
             let seed = toProcess[0]
             await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
-            state = await composeManager.getProcessState(data.id_process)
+            state = await processManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
             }
