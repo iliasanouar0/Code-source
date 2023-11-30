@@ -701,6 +701,7 @@ wsc.on('connection', (wss, req) => {
             break
           }
           for (let i = 0; i < toProcess.length; i++) {
+            await time(1000 * start)
             let seed = toProcess[0]
             console.log('process : ' + start);
             console.log('to process seed : ' + seed.id_seeds);
@@ -738,7 +739,9 @@ wsc.on('connection', (wss, req) => {
             // r = array.join((', '))
             // console.log(r);
             let r = 'test'
-            await time(3000 * start)
+            let t = 3000 * start
+            console.log(t);
+            await time(t)
             // await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
             // await time(3000)
             if (r.indexOf('invalid') == -1) {
@@ -753,13 +756,7 @@ wsc.on('connection', (wss, req) => {
                 id_process: data.id_process
               }
               await resultManager.endNow(result)
-              // console.log(toProcess.slice(toProcess.indexOf(seed), 1));
-              // toProcess.slice(toProcess.indexOf(seed), 1)
               console.log(toProcess.shift())
-              // state = await composeManager.getProcessState(data.id_process)
-              // if (state == "STOPPED") {
-              //   break
-              // }
               if (toProcess.length < active && count < length && state != "STOPPED") {
                 seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
                 toProcess.push(seeds[seeds.length - (start + 1)])
