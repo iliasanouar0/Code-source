@@ -816,6 +816,7 @@ wsc.on('connection', (wss, req) => {
       }
 
       async function repeat(array, number, start) {
+        await time(3000)
         process(array[start], start)
         if (number - 1 > start) await repeat(array, number, start + 1);
       }
