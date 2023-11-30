@@ -701,7 +701,6 @@ wsc.on('connection', (wss, req) => {
             break
           }
           for (let i = 0; i < toProcess.length; i++) {
-            await time(100 * start)
             let seed = toProcess[0]
             console.log('process : ' + start);
             console.log('to process seed : ' + seed.id_seeds);
@@ -738,14 +737,11 @@ wsc.on('connection', (wss, req) => {
             array.pop()
             r = array.join((', '))
             console.log(r);
-            // let r = 'test'
             await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
-            await time(3000)
             if (r.indexOf('invalid') == -1) {
               success++
               let end_in = new Date()
               let result
-              await time(1000 * start)
               await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished")
               result = {
                 id_seeds: seed.id_seeds,
