@@ -388,28 +388,10 @@ const getDataCompose = $("#composeData").DataTable({
         </div>`
       }
     },
-    // [{
-    //   "id_process": 3,
-    //   "id_list": 50,
-    //   "id_user": 20,
-    //   "action": "checkProxy",
-    //   "data": "none",
-    //   "offer": "none",
-    //   "status": "idel",
-    //   "count": "1",
-    //   "counter": null,
-    //   "add_date": "2023-11-28T14:10:29.812Z",
-    //   "update_date": "2023-11-28T14:10:29.812Z",
-    //   "start_in": null,
-    //   "end_in": null,
-    //   "list_name": "test-mailer",
-    //   "isp": "gmail",
-    //   "login": "admin"
-    // }],
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="card m-0 border-secondary">
+        return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="Count :${row.count}, Counter ${row.counter}">
           <div class="card-body p-0 text-center text-dark">
           ${row.data}
           </div>
