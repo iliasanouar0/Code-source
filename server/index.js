@@ -692,8 +692,6 @@ wsc.on('connection', (wss, req) => {
           }
           for (let i = 0; i < toProcess.length; i++) {
             let seed = toProcess[0]
-            console.log('process : ' + start);
-            console.log('to process seed : ' + seed.id_seeds);
             await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
             seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
@@ -729,7 +727,6 @@ wsc.on('connection', (wss, req) => {
             let array = r.split(', ')
             array.pop()
             r = array.join((', '))
-            console.log(r);
             await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
             if (r.indexOf('invalid') == -1) {
               success++
