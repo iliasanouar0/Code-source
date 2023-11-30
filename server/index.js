@@ -189,6 +189,8 @@ wss.on('connection', (wss, req) => {
       // }
       console.log(active);
       console.log(seeds);
+      console.log(seeds.length);
+      
       for (let i = 0; i < active; i++) {
         if (seeds.length > active) {
           toProcess[i] = []
