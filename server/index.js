@@ -349,7 +349,7 @@ wss.on('connection', (wss, req) => {
         if (number - 1 > start) await repeat(array, number, start + 1);
       }
       await time(5000)
-      await repeat(toProcess, active, 0)
+      await repeat(toProcess, toProcess.length, 0)
       await time(5000)
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
