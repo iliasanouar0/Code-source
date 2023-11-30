@@ -220,9 +220,9 @@ const composeEmail = async (data, option, mode) => {
     if (!check) {
         await time(3000)
         await page.screenshot({
-            path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+            path: `${path}/${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
         });
-        feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(3000)
