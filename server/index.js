@@ -701,7 +701,7 @@ wsc.on('connection', (wss, req) => {
             break
           }
           for (let i = 0; i < toProcess.length; i++) {
-            await time(1000 * start)
+            let t = 3000 * start
             let seed = toProcess[0]
             console.log('process : ' + start);
             console.log('to process seed : ' + seed.id_seeds);
@@ -739,8 +739,6 @@ wsc.on('connection', (wss, req) => {
             // r = array.join((', '))
             // console.log(r);
             let r = 'test'
-            let t = 3000 * start
-            console.log(t);
             await time(t)
             // await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
             // await time(3000)
