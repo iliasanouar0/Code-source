@@ -977,7 +977,7 @@ $(document).on('click', '.delete-all-this', () => {
 $('#btn-check-verify').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
-        $('.action .btn-check').prop("checked", false);
+        $('.actions .btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
         $('.send_message').addClass('d-none');
     }
@@ -987,7 +987,7 @@ $('#btn-check-verify').change(event => {
 $('#btn-check-proxy').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
-        $('.action .btn-check').prop("checked", false);
+        $('.actions .btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
         $('.send_message').addClass('d-none');
 
@@ -998,7 +998,7 @@ $('#btn-check-proxy').change(event => {
 $('#btn-check-compose').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
-        $('.action .btn-check').prop("checked", false);
+        $('.actions .btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
         $('.send_message').removeClass('d-none');
     } else {
