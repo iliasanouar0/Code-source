@@ -768,7 +768,7 @@ wsc.on('connection', (wss, req) => {
             array.pop()
             r = array.join((', '))
             await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
-            if (r.indexOf('invalid') == -1 || r.indexOf('detected') == -1) {
+            if (r.indexOf('invalid') == -1 && r.indexOf('detected') == -1) {
               success++
               let end_in = new Date()
               let result
