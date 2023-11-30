@@ -19,7 +19,7 @@
 //     }
 //     console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
 //     console.log(` `);
-//     const browser = await puppeteer.launch({ headless: false, args: arg })
+//     const browser = await puppeteer.launch({ headless: 'new', args: arg })
 //     const page = await browser.newPage()
 //     let file = `./${data.gmail.split('@')[0]}-@-init-Gmail.json`
 //     const navigationPromise = page.waitForNavigation()
@@ -124,7 +124,7 @@
 //             return true
 //         }
 //         let label = document.querySelector('.zA.zE .y2').innerText
-//         if (label.includes('You have reached a limit for sending mail') || label.includes('Message blocked')) {
+//         if (label.includes('You have reached a limit for sending mail') || label.includes('Message blocked') || label.includes('Address not found')) {
 //             return false
 //         }
 //         return true
@@ -134,7 +134,7 @@
 //     await time(3000)
 //     if (!check) {
 //         console.log('you can\'t send !!');
-//     }else{
+//     } else {
 //         console.log('sended !!');
 //     }
 //     return
@@ -148,26 +148,56 @@
 //     verification: 'PeiButtorff@outlook.com'
 // }
 
-// // let data = {
-// //     gmail: 'iliasanouar0@gmail.com',
-// //     password: 'test08072001',
-// //     // proxy: '188.34.177.156',
-// //     // proxy: '38.34.185.143:3838',
-// //     // verification: 'pelila1985@outlook.com'
-// // }
-
-// let options = {
-//     subject: 'test email',
-//     to: 'zaidiyounesios@gmail.com',
-//     bcc: ['signalgm@gmail.com', 'bizpath.med@gmail.com'],
-//     offer: 'test11.html'
+// let data2 = {
+//     gmail: 'iliasanouar0@gmail.com',
+//     password: 'test08072001',
+//     // proxy: '188.34.177.156',
+//     // proxy: '38.34.185.143:3838',
+//     // verification: 'pelila1985@outlook.com'
 // }
 
-// // let options = {
-// //     subject: 'test email',
-// //     to: 'iliasanouar0@gmail.com',
-// //     bcc: ['signalgm@gmail.com'],
-// //     offer: 'test.html'
-// // }
 
-// composeEmail(data, options)
+// let bcc = ['vivanusyev11@usnews.com',
+//     'dmcrinn12@163.com',
+//     'felverston13@ask.com',
+//     'csearsby14@last.fm',
+//     'aemanuelli15@creativecommons.org',
+//     'laudiss16@twitpic.com',
+//     'lghidetti17@slashdot.org',
+//     'cperrin18@fc2.com',
+//     'aizsak19@google.fr',
+//     'vbrownhill1a@chicagotribune.com',
+//     'cthalmann1b@zdnet.com',
+//     'sodriscoll1c@rakuten.co.jp',
+//     'kardern1d@ning.com',
+//     'wmacgee1e@miibeian.gov.cn',
+//     'agallant1f@webmd.com',
+//     'wmerrick1g@mozilla.org',
+//     'ndanhel1h@google.fr',
+//     'tkyte1i@nifty.com',
+//     'poliveti1j@ifeng.com',
+//     'satcherley1k@lulu.com',
+//     'wsurgeon1l@naver.com',
+//     'lrichard1m@fema.gov',
+//     'cbrightling1n@washington.edu',
+//     'lrappaport1o@liveinternet.ru',
+//     'cfishpool1p@csmonitor.com',
+//     'vgobat1q@guardian.co.uk',
+//     'urisdall1r@domainmarket.com',
+//     'tnaul1s@nytimes.com',
+//     'sscranedge1t@ed.gov',
+//     'cvonhindenburg1u@google.cn'
+// ]
+
+// let allData = [data, data2]
+// for (let i = 0; i < allData.length; i++) {
+//     let options = {
+//         subject: 'test email',
+//         to: 'zaidiyounesios@gmail.com',
+//         bcc: [bcc[i]],
+//         offer: 'test11.html'
+//     }
+//     composeEmail(allData[i], options)
+// }
+
+

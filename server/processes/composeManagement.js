@@ -148,7 +148,7 @@ const composeEmail = async (data, option, mode) => {
     const page = obj.page
     const browser = obj.browser
     feedback += obj.feedback
-    await time(5000)
+    await time(10000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
     }); 

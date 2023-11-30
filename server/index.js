@@ -697,6 +697,7 @@ wsc.on('connection', (wss, req) => {
       let count = 0
       let length = seeds.length
       let toProcess = []
+      
       let bccCount = 0
       if (arrayBcc != undefined) {
         arrayBcc.pop()
