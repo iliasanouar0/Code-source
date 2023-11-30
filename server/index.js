@@ -202,10 +202,10 @@ wss.on('connection', (wss, req) => {
 
       // ~ process !1k
       const process = async (toProcess, start) => {
-        console.log(toProcess);
-        console.log(toProcess.length);
         await time(3000)
         while (toProcess.length != 0 && state != "STOPPED") {
+          console.log(toProcess);
+          console.log(toProcess.length);
           state = await processManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             break
