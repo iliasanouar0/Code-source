@@ -226,10 +226,9 @@ $(document).on('click', '#c_add', () => {
                 })
             }
             action += `,subject:${subject},to:${to}`
-            console.log(typeof (limit));
-            if (limit != '' && limit != '') {
-                action += `,subject:${subject},to:${to}`
-            } else if (limit == 0) {
+            if (limit != '' && limit != '0') {
+                action += `,limit:${limit}`
+            } else {
                 action += `,limit:auto`
             }
             dataComposing = {
