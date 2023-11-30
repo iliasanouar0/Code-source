@@ -202,7 +202,6 @@ $(document).on('click', '#c_add', () => {
                 swal.fire('subject and mailto are required')
                 return
             }
-            console.log(body);
             if (body == '') {
                 offerAdd = $('#p_offers_add option:selected').val()
                 if (offerAdd == '') {
@@ -227,7 +226,7 @@ $(document).on('click', '#c_add', () => {
                 })
             }
             action += `,subject:${subject},to:${to}`
-            console.log(limit);
+            console.log(typeof (limit));
             if (limit != '' && limit != '') {
                 action += `,subject:${subject},to:${to}`
             } else if (limit == 0) {
