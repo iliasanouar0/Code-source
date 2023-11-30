@@ -147,7 +147,7 @@ $('#auto_limit').change(event => {
     if (status) {
         $('#limit_send').val(0);
     } else {
-        $('#limit_send').val();
+        $('#limit_send').val('');
 
     }
 })
