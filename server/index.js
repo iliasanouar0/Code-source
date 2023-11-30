@@ -190,12 +190,15 @@ wss.on('connection', (wss, req) => {
       console.log(active);
       console.log(seeds);
       for (let i = 0; i < active; i++) {
-        toProcess[i] = []
-        for (let j = 0; j < active; j++) {
-          toProcess[i].push(seeds[i])
-          seeds.splice(seeds.indexOf(seeds[i]), 1)
-          count++
+        if (seeds.length > active) {
+          toProcess[i] = []
+          for (let j = 0; j < active; j++) {
+            toProcess[i].push(seeds[i])
+            seeds.splice(seeds.indexOf(seeds[i]), 1)
+            count++
+          }
         }
+        break
       }
       let state = await processManager.getProcessState(data.id_process)
 
