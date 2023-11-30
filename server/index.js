@@ -693,10 +693,10 @@ wsc.on('connection', (wss, req) => {
       const process = async (toProcess, start) => {
         console.log(start);
         console.log(toProcess[0]);
-        await Promise.all([
-          await resultManager.startNow({ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }),
-          await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "running")
-        ])
+        await time(3000)
+        await resultManager.startNow({ id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
+        await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "running")
+        await time(3000)
         // while (toProcess.length != 0 && state != "STOPPED") {
         //   state = await composeManager.getProcessState(data.id_process)
         //   if (state == "STOPPED") {
