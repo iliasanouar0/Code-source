@@ -747,7 +747,7 @@ wsc.on('connection', (wss, req) => {
               console.log(toProcess[0].id_seeds)
               if (toProcess.length < active && count < length && state != "STOPPED") {
                 seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-                toProcess.push(seeds[seeds.length - 1])
+                toProcess.push(seeds[0 + start])
                 count++
                 let w = waiting - count + 3
                 let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
