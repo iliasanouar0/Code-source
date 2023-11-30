@@ -726,21 +726,21 @@ wsc.on('connection', (wss, req) => {
                 }
               }
             }
-            // console.log(`Actions : ${actions}`);
-            // let r = ''
-            // for (let i = 0; i < actions.length; i++) {
-            //   console.log(actions[i] + ' action start')
-            //   r += await composeManager.processing({ data: seed, action: actions[i], subject: subject, to: to, entity: data.entity, mode: 'Cookies' })
-            //   if (i < actions.length) {
-            //     r += ', '
-            //   }
-            // }
-            // let array = r.split(', ')
-            // array.pop()
-            // r = array.join((', '))
-            // console.log(r);
-            let r = 'test'
-            // await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
+            console.log(`Actions : ${actions}`);
+            let r = ''
+            for (let i = 0; i < actions.length; i++) {
+              console.log(actions[i] + ' action start')
+              r += await composeManager.processing({ data: seed, action: actions[i], subject: subject, to: to, entity: data.entity, mode: 'Cookies' })
+              if (i < actions.length) {
+                r += ', '
+              }
+            }
+            let array = r.split(', ')
+            array.pop()
+            r = array.join((', '))
+            console.log(r);
+            // let r = 'test'
+            await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
             await time(3000)
             if (r.indexOf('invalid') == -1) {
               success++
