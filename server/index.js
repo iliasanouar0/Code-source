@@ -752,6 +752,7 @@ wsc.on('connection', (wss, req) => {
                 await resultManager.endNow(result)
               ])
               toProcess.shift()
+              console.log(toProcess[0].id_seeds)
               if (toProcess.length < active && count < length && state != "STOPPED") {
                 seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
                 toProcess.push(seeds[seeds.length - (start + 1)])
