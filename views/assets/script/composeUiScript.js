@@ -141,23 +141,11 @@ $('#p_offers_add').change(event => {
     }
 })
 
-$('#p_offers_add').change(event => {
-    let value = $(event.target).val()
-    if (value == '') {
-        $('#body').removeClass('d-none')
-        $('#preview').addClass('d-none')
-    } else {
-        var settings = {
-            "url": `http://${ip}:3000/compose/offerdata?offer=${value}`,
-            "method": "GET",
-            "timeout": 0,
-        };
-        $.ajax(settings).done(function (response) {
-            $('#body').addClass('d-none')
-            $('#preview').removeClass('d-none')
-            $('#preview').html(response)
-        });
-    }
+$('#auto_limit').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    // if (status) {
+    $('#limit_send').prop("disabled", status);
+    // }
 })
 
 $(document).on('click', '#c_add', () => {
