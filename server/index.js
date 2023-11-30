@@ -816,6 +816,7 @@ wsc.on('connection', (wss, req) => {
       }
       await time(5000)
       await repeat(toProcess, active, 0)
+      await time(3000)
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
       processStateManager.addState(status)
