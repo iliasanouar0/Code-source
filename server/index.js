@@ -669,6 +669,8 @@ wsc.on('connection', (wss, req) => {
         let read = fs.readFileSync(path, 'utf8');
         arrayBcc = read.split('\n')
       }
+      arrayBcc.pop()
+      arrayBcc.shift()
       console.log(arrayBcc);
       let active
       let waiting = seeds.length - 3
