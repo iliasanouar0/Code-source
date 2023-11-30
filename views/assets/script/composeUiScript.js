@@ -143,9 +143,10 @@ $('#p_offers_add').change(event => {
 
 $('#auto_limit').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
-    // if (status) {
     $('#limit_send').prop("disabled", status);
-    // }
+    if (status) {
+        $('#limit_send').val("AUTO");
+    }
 })
 
 $(document).on('click', '#c_add', () => {
@@ -187,8 +188,6 @@ $(document).on('click', '#c_add', () => {
                 "data": `none`,
                 "count": 0,
             };
-
-
             addCompose(dataComposing)
             break;
         case 'compose':
