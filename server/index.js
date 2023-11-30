@@ -661,9 +661,15 @@ wsc.on('connection', (wss, req) => {
     if (request == "start") {
 
       composeManager.startedProcess(data.data)
-
+      let arrayBcc
       let seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
       let dataBcc = seeds[0].data
+      if (dataBcc != 'none') {
+        let path = `/home/data/main/${dataBcc}`
+        let read = fs.readFileSync(path, 'utf8');
+        arrayBcc = read.split('\n')
+      }
+      console.log(arrayBcc);
       let active
       let waiting = seeds.length - 3
 
@@ -741,8 +747,6 @@ wsc.on('connection', (wss, req) => {
               }
             }
             let r = ''
-            console.log(length);
-            console.log(dataBcc);
             for (let i = 0; i < actions.length; i++) {
               r += await composeManager.processing({ data: seed, action: actions[i], subject: subject, to: to, offer: seed.offer, bcc: bcc, entity: data.entity, mode: 'Cookies' })
               if (i < actions.length) {
