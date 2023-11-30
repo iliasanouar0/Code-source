@@ -692,9 +692,6 @@ wsc.on('connection', (wss, req) => {
       // ~ process !1k
       const process = async (toProcess, start) => {
         await time(3000)
-        await resultManager.startNow({ id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
-        await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "running")
-        await time(3000)
         while (toProcess.length != 0 && state != "STOPPED") {
           state = await composeManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
@@ -704,6 +701,8 @@ wsc.on('connection', (wss, req) => {
             let seed = toProcess[0]
             console.log('process : ' + start);
             console.log('to process seed : ' + seed.id_seeds);
+            await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
+            await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
             state = await composeManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
@@ -756,8 +755,6 @@ wsc.on('connection', (wss, req) => {
               if (toProcess.length < active && count < length && state != "STOPPED") {
                 seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
                 toProcess.push(seeds[seeds.length - (start + 1)])
-                await resultManager.startNow({ id_seeds: seeds[seeds.length - (start + 1)].id_seeds, id_process: data.id_process })
-                await resultManager.updateState([{ id_seeds: seeds[seeds.length - (start + 1)].id_seeds, id_process: data.id_process }], "running")
                 count++
                 let w = waiting - count + 3
                 let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
