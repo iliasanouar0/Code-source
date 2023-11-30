@@ -672,13 +672,6 @@ wsc.on('connection', (wss, req) => {
       let failed = 0
       let count = 0
       let length = seeds.length
-      await time(10000)
-
-      let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
-      console.log(status);
-
-      processStateManager.addState(status)
-
       let toProcess = []
       for (let i = 0; i < active; i++) {
         toProcess[i] = []
@@ -823,6 +816,10 @@ wsc.on('connection', (wss, req) => {
 
       await time(5000)
       await repeat(toProcess, active, 0)
+      await time(5000)
+      let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
+      console.log(status);
+      processStateManager.addState(status)
     }
 
     else if (request == "resume") {
