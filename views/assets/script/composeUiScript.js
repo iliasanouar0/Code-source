@@ -227,6 +227,11 @@ $(document).on('click', '#c_add', () => {
                 })
             }
             action += `,subject:${subject},to:${to}`
+            if (limit != '' && limit != '') {
+                action += `,subject:${subject},to:${to}`
+            } else if (limit == 0) {
+                action += `,limit:auto`
+            }
             dataComposing = {
                 "name": `test`,
                 "action": action,
