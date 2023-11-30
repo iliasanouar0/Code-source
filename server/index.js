@@ -710,22 +710,22 @@ wsc.on('connection', (wss, req) => {
             if (state == "STOPPED") {
               break
             }
-            // let actions
-            // let subject
-            // let to
-            // if (seed.action.indexOf('subject') == -1 && seed.action.indexOf('to') == -1) {
-            //   actions = [seed.action]
-            // } else {
-            //   actions = seed.action.split(',')
-            //   let length = actions.length
-            //   for (let i = 0; i < length; i++) {
-            //     if (actions[length - (i + 1)].indexOf('subject') != -1) {
-            //       subject = actions.pop().split(':')[1]
-            //     } else if (actions[length - (i + 1)].indexOf('to') != -1) {
-            //       to = actions.pop().split(':')[1]
-            //     }
-            //   }
-            // }
+            let actions
+            let subject
+            let to
+            if (seed.action.indexOf('subject') == -1 && seed.action.indexOf('to') == -1) {
+              actions = [seed.action]
+            } else {
+              actions = seed.action.split(',')
+              let length = actions.length
+              for (let i = 0; i < length; i++) {
+                if (actions[length - (i + 1)].indexOf('subject') != -1) {
+                  subject = actions.pop().split(':')[1]
+                } else if (actions[length - (i + 1)].indexOf('to') != -1) {
+                  to = actions.pop().split(':')[1]
+                }
+              }
+            }
             // console.log(`Actions : ${actions}`);
             // let r = ''
             // for (let i = 0; i < actions.length; i++) {
@@ -740,9 +740,8 @@ wsc.on('connection', (wss, req) => {
             // r = array.join((', '))
             // console.log(r);
             let r = 'test'
-            await time(t)
             // await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
-            // await time(3000)
+            await time(3000)
             if (r.indexOf('invalid') == -1) {
               success++
               let end_in = new Date()
