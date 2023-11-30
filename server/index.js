@@ -718,7 +718,6 @@ wsc.on('connection', (wss, req) => {
             console.log(`Actions : ${actions}`);
             let r = ''
             for (let i = 0; i < actions.length; i++) {
-              console.log(actions[i] + ' action start')
               r += await composeManager.processing({ data: seed, action: actions[i], subject: subject, to: to, entity: data.entity, mode: 'Cookies' })
               if (i < actions.length) {
                 r += ', '
@@ -742,7 +741,6 @@ wsc.on('connection', (wss, req) => {
                 await resultManager.endNow(result)
               ])
               toProcess.shift()
-              console.log(toProcess[0].id_seeds)
               if (toProcess.length < active && count < length && state != "STOPPED") {
                 await time(3000)
                 console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
