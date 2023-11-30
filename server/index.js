@@ -697,7 +697,7 @@ wsc.on('connection', (wss, req) => {
       let count = 0
       let length = seeds.length
       let toProcess = []
-
+      let bccCount = 0
       if (arrayBcc != undefined) {
         arrayBcc.pop()
         arrayBcc.shift()
@@ -738,7 +738,6 @@ wsc.on('connection', (wss, req) => {
             let actions
               , subject
               , to
-              , offer
               , bcc
             if (seed.action.indexOf('subject') == -1 && seed.action.indexOf('to') == -1) {
               actions = [seed.action]
@@ -754,8 +753,9 @@ wsc.on('connection', (wss, req) => {
               }
             }
             let r = ''
-            for (let i = 0; i < actions.length; i++) {
-              r += await composeManager.processing({ data: seed, action: actions[i], subject: subject, to: to, offer: seed.offer, bcc: bcc, entity: data.entity, mode: 'Cookies' })
+            for (let j = 0; j < actions.length; j++) {
+              r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: [arrayBcc[bccCount]], entity: data.entity, mode: 'Cookies' })
+              bccCount++
               if (i < actions.length) {
                 r += ', '
               }
