@@ -135,7 +135,7 @@ const getAllProcessSeedsCount = (request, response) => {
 
 const getAllProcessSeedsServer = async (id) => {
     // let sql = "SELECT composing.id_process,composing.action, seeds.* FROM composing JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds"
-    let sql = "SELECT composing*, seeds.* FROM composing JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds"
+    let sql = "SELECT composing.*, seeds.* FROM composing JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds"
     const client = await pool.connect()
     const list = await client.query(sql, [id])
     client.release()
