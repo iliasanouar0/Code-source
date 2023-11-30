@@ -702,6 +702,7 @@ wsc.on('connection', (wss, req) => {
           }
           for (let i = 0; i < toProcess.length; i++) {
             let t = 3000 * start
+            await time(t)
             let seed = toProcess[0]
             console.log('process : ' + start);
             console.log('to process seed : ' + seed.id_seeds);
