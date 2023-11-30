@@ -742,13 +742,15 @@ wsc.on('connection', (wss, req) => {
               success++
               let end_in = new Date()
               let result
-              await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished")
-              result = {
-                id_seeds: seed.id_seeds,
-                end_in: end_in,
-                id_process: data.id_process
-              }
-              await resultManager.endNow(result)
+              await Promise.all([
+                await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
+                result = {
+                  id_seeds: seed.id_seeds,
+                  end_in: end_in,
+                  id_process: data.id_process
+                },
+                await resultManager.endNow(result)
+              ])
               toProcess.shift()
               if (toProcess.length < active && count < length && state != "STOPPED") {
                 seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
