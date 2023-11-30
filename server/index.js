@@ -691,7 +691,7 @@ wsc.on('connection', (wss, req) => {
 
       // ~ process !1k
       const process = async (toProcess, start) => {
-        await time(1000 * start)
+        await time(3000)
         await resultManager.startNow({ id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
         await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "running")
         await time(3000)
@@ -701,8 +701,6 @@ wsc.on('connection', (wss, req) => {
             break
           }
           for (let i = 0; i < toProcess.length; i++) {
-            let t = 3000 * start
-            await time(t)
             let seed = toProcess[0]
             console.log('process : ' + start);
             console.log('to process seed : ' + seed.id_seeds);
@@ -746,7 +744,6 @@ wsc.on('connection', (wss, req) => {
               success++
               let end_in = new Date()
               let result
-              await time(1000 * start)
               await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished")
               result = {
                 id_seeds: seed.id_seeds,
