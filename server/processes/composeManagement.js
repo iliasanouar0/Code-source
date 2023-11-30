@@ -151,8 +151,8 @@ const composeEmail = async (data, option, mode) => {
     await time(5000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
-    });
-    feedback += `${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    }); 
+    feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
     await time(2000)
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await page.waitForSelector('.z0')
@@ -192,7 +192,7 @@ const composeEmail = async (data, option, mode) => {
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
     });
-    feedback += `${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
+    feedback += `, ${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
     await time(2000)
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await time(3000)
@@ -222,7 +222,7 @@ const composeEmail = async (data, option, mode) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
         });
-        feedback += `${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(3000)
@@ -232,7 +232,7 @@ const composeEmail = async (data, option, mode) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-sended-${data.id_process}.png`
         });
-        feedback += `${data.gmail.split('@')[0]}-@-sended-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-sended-${data.id_process}.png`
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(3000)
