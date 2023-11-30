@@ -188,6 +188,7 @@ wss.on('connection', (wss, req) => {
       //   toProcess.push(seeds[i])
       // }
       console.log(active);
+      console.log(seeds);
       for (let i = 0; i < active; i++) {
         toProcess[i] = []
         for (let j = 0; j < active; j++) {
@@ -208,7 +209,6 @@ wss.on('connection', (wss, req) => {
           }
           for (let i = 0; i < toProcess.length; i++) {
             let seed = toProcess[0]
-            console.log(seed);
             await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
             state = await processManager.getProcessState(data.id_process)
@@ -326,14 +326,14 @@ wss.on('connection', (wss, req) => {
             let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
             processStateManager.updateState(status)
           }
-          state = await composeManager.getProcessState(data.id_process)
+          state = await processManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             break
           }
           if (toProcess.length == 0) {
             let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
             await processStateManager.updateState(status)
-            composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
+            processManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
             console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
             sendToAll(clients, 'reload')
           }
