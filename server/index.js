@@ -753,8 +753,9 @@ wsc.on('connection', (wss, req) => {
                 id_process: data.id_process
               }
               await resultManager.endNow(result)
-              console.log(toProcess.slice(toProcess.indexOf(seed), 1));
-              toProcess.slice(toProcess.indexOf(seed), 1)
+              // console.log(toProcess.slice(toProcess.indexOf(seed), 1));
+              // toProcess.slice(toProcess.indexOf(seed), 1)
+              console.log(toProcess.shift())
               // state = await composeManager.getProcessState(data.id_process)
               // if (state == "STOPPED") {
               //   break
