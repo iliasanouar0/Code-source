@@ -192,8 +192,8 @@ wss.on('connection', (wss, req) => {
       for (let i = 0; i < active; i++) {
         toProcess[i] = []
         for (let j = 0; j < active; j++) {
-          toProcess[i].push(seeds[count])
-          seeds.splice(seeds.indexOf(seeds[count]), 1)
+          toProcess[i].push(seeds[i])
+          seeds.splice(seeds.indexOf(seeds[i]), 1)
           count++
         }
       }
