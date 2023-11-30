@@ -697,7 +697,7 @@ wsc.on('connection', (wss, req) => {
       let count = 0
       let length = seeds.length
       let toProcess = []
-      
+
       let bccCount = 0
       if (arrayBcc != undefined) {
         arrayBcc.pop()
@@ -739,8 +739,8 @@ wsc.on('connection', (wss, req) => {
             let actions
               , subject
               , to
-              , bcc
-            if (seed.action.indexOf('subject') == -1 && seed.action.indexOf('to') == -1) {
+              , limit
+            if (seed.action.indexOf('subject') == -1 && seed.action.indexOf('to') == -1 && seed.action.indexOf('limit') == -1) {
               actions = [seed.action]
             } else {
               actions = seed.action.split(',')
@@ -750,6 +750,8 @@ wsc.on('connection', (wss, req) => {
                   subject = actions.pop().split(':')[1]
                 } else if (actions[length - (i + 1)].indexOf('to') != -1) {
                   to = actions.pop().split(':')[1]
+                } else if (actions[length - (i + 1)].indexOf('limit') != -1) {
+                  limit = actions.pop().split(':')[1]
                 }
               }
             }
