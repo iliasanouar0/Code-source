@@ -187,10 +187,6 @@ wss.on('connection', (wss, req) => {
       //   count++
       //   toProcess.push(seeds[i])
       // }
-      console.log(active);
-      console.log(seeds);
-      console.log(seeds.length);
-
       for (let i = 0; i < active; i++) {
         if (seeds.length < active) {
           break
@@ -206,6 +202,8 @@ wss.on('connection', (wss, req) => {
 
       // ~ process !1k
       const process = async (toProcess, start) => {
+        console.log(toProcess);
+        console.log(toProcess.length);
         await time(3000)
         while (toProcess.length != 0 && state != "STOPPED") {
           state = await processManager.getProcessState(data.id_process)
