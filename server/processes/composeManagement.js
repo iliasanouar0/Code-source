@@ -206,18 +206,19 @@ const composeEmail = async (data, option, mode) => {
     let check = await page.evaluate(() => {
         let unread = document.querySelectorAll('.zA.zE')
         if (unread.length == 0) {
-            return true
+            return { status: true }
         }
         let label = document.querySelector('.zA.zE .y2').innerText
         if (label.includes('You have reached a limit for sending mail') || label.includes('Message blocked')) {
-            return false
+            return { status: false, message: label }
         }
-        return true
+        return { status: true }
     })
     await time(3000)
-    console.log(check);
+    console.log(check.status);
     await time(3000)
-    if (!check) {
+    if (!check.status) {
+        console.log(check.message);
         await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
@@ -225,7 +226,7 @@ const composeEmail = async (data, option, mode) => {
         feedback += `, ${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        await resultsManager.saveDetails({ details: 'Detected !!', id_seeds: data.id_seeds, id_process: data.id_process })
+        await resultsManager.saveDetails({ details: `test`, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(3000)
         console.log('you can\'t send !!');
     } else {
