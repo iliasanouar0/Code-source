@@ -719,10 +719,10 @@ wsc.on('connection', (wss, req) => {
           }
         }
       } else if (limit == 'auto') {
-        let divider = Math.ceil(arrayBcc.length / seeds.length)
-        console.log(divider);
+        let limit = Math.ceil(arrayBcc.length / seeds.length)
+        let divider = Math.ceil(arrayBcc.length / limit)
         let startIndex = 0
-        let endIndex = divider
+        let endIndex = limit
         for (let i = 0; i < divider; i++) {
           if (arrayBcc[endIndex] == undefined) {
             bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length))
