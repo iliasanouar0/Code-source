@@ -151,7 +151,7 @@ const composeEmail = async (data, option, mode) => {
     await time(10000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
-    }); 
+    });
     feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
     await time(2000)
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
@@ -225,6 +225,7 @@ const composeEmail = async (data, option, mode) => {
         feedback += `, ${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await resultsManager.saveDetails({ details: 'Detected !!', id_seeds: data.id_seeds, id_process: data.id_process })
         await time(3000)
         console.log('you can\'t send !!');
     } else {

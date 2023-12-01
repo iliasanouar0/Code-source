@@ -19,7 +19,7 @@
 //     }
 //     console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
 //     console.log(` `);
-//     const browser = await puppeteer.launch({ headless: 'new', args: arg })
+//     const browser = await puppeteer.launch({ headless: false, args: arg })
 //     const page = await browser.newPage()
 //     let file = `./${data.gmail.split('@')[0]}-@-init-Gmail.json`
 //     const navigationPromise = page.waitForNavigation()
@@ -141,8 +141,8 @@
 // }
 
 // let data = {
-//     gmail: 'ronaldorober12@gmail.com',
-//     password: '02077504',
+//     gmail: 'davodshah.habibi13731373@gmail.com',
+//     password: '09385585523',
 //     // proxy: '188.34.177.156',
 //     // proxy: '38.34.185.143:3838',
 //     verification: 'PeiButtorff@outlook.com'
