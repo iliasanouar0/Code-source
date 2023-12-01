@@ -958,6 +958,7 @@ wsc.on('connection', (wss, req) => {
                     toProcess.push(seeds[0 + start])
                     bccToProcess.push(bccResult[0 + start])
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
+                    bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
                     count++
                     let w = seeds.length + 3
                     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
@@ -994,6 +995,7 @@ wsc.on('connection', (wss, req) => {
                     toProcess.push(seeds[0 + start])
                     bccToProcess.push(bccResult[0 + start])
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
+                    bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
                     count++
                     let w = seeds.length + 3
                     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
