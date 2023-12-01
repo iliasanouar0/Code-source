@@ -717,7 +717,7 @@ wsc.on('connection', (wss, req) => {
           console.log('start index : ' + startIndex);
           console.log('end index : ' + endIndex);
           if (arrayBcc[endIndex] == undefined) {
-            bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length - 1))
+            bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length))
           } else {
             bccResult.push(arrayBcc.splice(startIndex, endIndex))
           }
