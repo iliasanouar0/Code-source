@@ -157,7 +157,6 @@ $('#limit_fixed').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
         $('#auto_limit').prop("checked", false);
-        console.log( $('#auto_limit').prop());
         $(event.target).prop("checked", true);
     }
 })
