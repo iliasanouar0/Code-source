@@ -895,7 +895,7 @@ wsc.on('connection', (wss, req) => {
           for (let i = 0; i < array[start].length; i++) {
             await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
-            process([array[start][i]], start, { onlyStarted: false })
+            process([array[start][i]], i, { onlyStarted: false })
           }
         } else {
           await time(3000)
