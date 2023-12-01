@@ -766,7 +766,7 @@ wsc.on('connection', (wss, req) => {
       let count = 0
       let length = seeds.length
       let toProcess = []
-      let bccToProcess
+      let bccToProcess = []
 
       let bccCount = 0
 
