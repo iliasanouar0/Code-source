@@ -782,7 +782,7 @@ wsc.on('connection', (wss, req) => {
           toProcess[i].push(seeds[i])
           bccToProcess[i].push(bccResult[i])
           seeds.splice(seeds.indexOf(seeds[i]), 1)
-          bccResult.splice(seeds.indexOf(bccResult[i]), 1)
+          bccResult.splice(bccResult.indexOf(bccResult[i]), 1)
           count++
         }
       }
