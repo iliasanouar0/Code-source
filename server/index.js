@@ -770,6 +770,8 @@ wsc.on('connection', (wss, req) => {
       let bccCount = 0
 
       for (let i = 0; i < active; i++) {
+        console.log(seeds.length);
+        console.log(active);
         if (seeds.length < active) {
           break
         }
