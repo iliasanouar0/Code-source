@@ -774,9 +774,10 @@ wsc.on('connection', (wss, req) => {
             if (limit != 'auto') {
               let divider = Math.floor(arrayBcc.length / limit)
               let startIndex = 0
+              let endIndex = 0
               console.log(divider);
               for (let i = 0; i < divider; i++) {
-                let endIndex = i + 1 * divider
+                endIndex = divider * (i + 1)
                 startIndex = endIndex - divider
                 console.log('start index : ' + startIndex);
                 console.log('end index : ' + endIndex);
