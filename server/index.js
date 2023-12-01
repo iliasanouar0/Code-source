@@ -774,7 +774,7 @@ wsc.on('connection', (wss, req) => {
             let bccResult = []
             if (limit != 'auto') {
               console.log(limit);
-              let divider = Math.ceil(arrayBcc.length / length)
+              let divider = Math.floor(arrayBcc.length / limit)
               console.log(divider);
             }
             for (let j = 0; j < actions.length; j++) {
