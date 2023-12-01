@@ -145,7 +145,7 @@ $('#auto_limit').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     $('#limit_send').prop("disabled", status);
     if (status) {
-        $('.limit_options .btn-check').prop("checked", false);
+        $('#limit_fixed').prop("checked", false);
         $(event.target).prop("checked", true);
         $('#limit_send').val(0);
     } else {
@@ -157,7 +157,7 @@ $('#auto_limit').change(event => {
 $('#limit_fixed').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
-        $('.limit_options .btn-check').prop("checked", false);
+        $('#auto_limit').prop("checked", false);
         $(event.target).prop("checked", true);
     }
 })
