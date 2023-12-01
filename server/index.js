@@ -720,6 +720,9 @@ wsc.on('connection', (wss, req) => {
         }
       } else if (limit == 'auto') {
         let limit = Math.ceil(arrayBcc.length / seeds.length)
+        if (limit > result.parsed.COMPOSE_LIMIT) {
+          limit = result.parsed.COMPOSE_LIMIT
+        }
         let divider = Math.ceil(arrayBcc.length / limit)
         let startIndex = 0
         let endIndex = limit
