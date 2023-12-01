@@ -719,7 +719,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
       } else if (limit == 'auto') {
-        let divider = Math.ceil(seeds.length / arrayBcc.length)
+        let divider = Math.ceil(arrayBcc.length / seeds.length)
         let startIndex = 0
         let endIndex = divider
         for (let i = 0; i < divider; i++) {
