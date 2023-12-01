@@ -783,7 +783,10 @@ wsc.on('connection', (wss, req) => {
           count++
         }
       }
-      console.log(toProcess);
+      console.log(seeds);
+      console.log(seeds.length);
+      console.log(active);
+      // console.log(toProcess);
 
       let state = await composeManager.getProcessState(data.id_process)
 
