@@ -720,6 +720,7 @@ wsc.on('connection', (wss, req) => {
         }
       } else if (limit == 'auto') {
         let divider = Math.ceil(arrayBcc.length / seeds.length)
+        console.log(divider);
         let startIndex = 0
         let endIndex = divider
         for (let i = 0; i < divider; i++) {
