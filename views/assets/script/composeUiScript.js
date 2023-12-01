@@ -456,7 +456,13 @@ $(document).on('click', '.status', event => {
                     if (row.statusdetails == null || row.statusdetails == "" || row.statusdetails == undefined || row.statusdetails == 'undefined') {
                         return `<p>&#9940;</p>`
                     }
-                    return `${row.statusdetails}`
+                    if (row.statusdetails.includes('limit')) {
+                        return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
+                        <div class="card-body p-1 text-center text-dark">Limit reached !!</div></div>`
+                    } else if (row.statusdetails.includes('blocked')) {
+                        return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
+                        <div class="card-body p-1 text-center text-dark">Blocked !!</div></div>`
+                    }
                 }
             },
             {
@@ -482,7 +488,11 @@ $(document).on('click', '.status', event => {
                 }
             }
         ],
-        order: [[3, 'asc']]
+        order: [[3, 'asc']],
+        drawCallback: function () {
+            $('body').tooltip('dispose');
+            $('[data-bs-toggle="tooltip"]').tooltip({ trigger: "hover" });
+        }
     })
     $('#modal-compose-view').modal('show')
     /**
