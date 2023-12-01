@@ -209,7 +209,7 @@ const composeEmail = async (data, option, mode) => {
             return { status: true }
         }
         let label = document.querySelector('.zA.zE .y2').innerText
-        if (label.includes('You have reached a limit for sending mail') || label.includes('Message blocked')) {
+        if (label.includes('You have reached a limit for sending mail') || label.includes('Message blocked') || label.includes('Address not found')) {
             return { status: false, message: label }
         }
         return { status: true }
