@@ -706,7 +706,6 @@ wsc.on('connection', (wss, req) => {
         console.log(arrayBcc.length);
       }
 
-
       for (let i = 0; i < active; i++) {
         if (seeds.length < active) {
           break
@@ -718,10 +717,12 @@ wsc.on('connection', (wss, req) => {
           count++
         }
       }
+
       let state = await composeManager.getProcessState(data.id_process)
 
       // ~ process !1k
-      const process = async (toProcess, start) => {
+
+      const process = async (toProcess, start, option) => {
         await time(3000)
         while (toProcess.length != 0 && state != "STOPPED") {
           state = await composeManager.getProcessState(data.id_process)
@@ -730,8 +731,10 @@ wsc.on('connection', (wss, req) => {
           }
           for (let i = 0; i < toProcess.length; i++) {
             let seed = toProcess[0]
-            await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
-            await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
+            if (option.onlyStarted) {
+              await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
+              await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
+            }
             state = await composeManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
@@ -844,10 +847,19 @@ wsc.on('connection', (wss, req) => {
       }
 
       async function repeat(array, number, start) {
-        await time(3000)
-        process(array[start], start)
-        if (number - 1 > start) await repeat(array, number, start + 1);
+        if (number == 1) {
+          for (let i = 0; i < array[start].length; i++) {
+            await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
+            await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
+            process(array[start], start, { onlyStarted: false })
+          }
+        } else {
+          await time(3000)
+          process(array[start], start, { onlyStarted: true })
+          if (number - 1 > start) await repeat(array, number, start + 1);
+        }
       }
+
       await time(5000)
       await repeat(toProcess, toProcess.length, 0)
       await time(5000)
