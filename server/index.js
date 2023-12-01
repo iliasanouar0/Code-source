@@ -720,6 +720,7 @@ wsc.on('connection', (wss, req) => {
         }
       } else if (limit == 'auto') {
         let limit = Math.ceil(arrayBcc.length / seeds.length)
+        console.log(result.parsed.COMPOSE_LIMIT);
         if (limit > result.parsed.COMPOSE_LIMIT) {
           limit = result.parsed.COMPOSE_LIMIT
         }
