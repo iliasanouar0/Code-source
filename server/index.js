@@ -731,6 +731,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
+
       console.log(bccResult);
 
       let active
@@ -799,8 +800,12 @@ wsc.on('connection', (wss, req) => {
             }
             let r = ''
             for (let j = 0; j < actions.length; j++) {
-              r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: [arrayBcc[bccCount]], entity: data.entity, mode: 'Cookies' })
-              bccCount++
+              if (bccResult.length != 0) {
+                r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccResult[bccCount], entity: data.entity, mode: 'Cookies' })
+                bccCount++
+              } else {
+                r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: [], entity: data.entity, mode: 'Cookies' })
+              }
               if (i < actions.length) {
                 r += ', '
               }
