@@ -995,6 +995,11 @@ wsc.on('connection', (wss, req) => {
                     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
                     processStateManager.updateState(status)
                   }
+                  if (seeds.length == 0) {
+                    seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
+                    toProcess.push(seeds[0 + start])
+                    seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
+                  }
                 }
               }
               let w = seeds.length + 1
