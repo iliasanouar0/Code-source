@@ -680,6 +680,44 @@ wsc.on('connection', (wss, req) => {
         let read = fs.readFileSync(path, 'utf8');
         arrayBcc = read.split('\n')
       }
+      let actions = seeds[0].action
+        , subject
+        , to
+        , limit
+      if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1) {
+        actions = [actions]
+      } else {
+        actions = actions.split(',')
+        let length = actions.length
+        for (let i = 0; i < length; i++) {
+          if (actions[length - (i + 1)].indexOf('limit') != -1) {
+            limit = actions.pop().split(':')[1]
+          } else if (actions[length - (i + 1)].indexOf('to') != -1) {
+            to = actions.pop().split(':')[1]
+          } else if (actions[length - (i + 1)].indexOf('subject') != -1) {
+            subject = actions.pop().split(':')[1]
+          }
+        }
+      }
+      let bccResult = []
+      if (limit != 'auto') {
+        let divider = Math.floor(arrayBcc.length / limit)
+        let startIndex = 0
+        let endIndex = 0
+        console.log(divider);
+        for (let i = 0; i < divider; i++) {
+          endIndex = divider * (i + 1)
+          startIndex = endIndex - divider
+          console.log('start index : ' + startIndex);
+          console.log('end index : ' + endIndex);
+          if (arrayBcc[endIndex] == undefined) {
+            bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length - 1))
+          } else {
+            bccResult.push(arrayBcc.splice(startIndex, endIndex))
+          }
+        }
+      }
+
       let active
       let waiting = seeds.length - 3
 
@@ -750,45 +788,7 @@ wsc.on('connection', (wss, req) => {
             if (state == "STOPPED") {
               break
             }
-            let actions
-              , subject
-              , to
-              , limit
-            if (seed.action.indexOf('subject') == -1 && seed.action.indexOf('to') == -1 && seed.action.indexOf('limit') == -1) {
-              actions = [seed.action]
-            } else {
-              actions = seed.action.split(',')
-              let length = actions.length
-              for (let i = 0; i < length; i++) {
-                if (actions[length - (i + 1)].indexOf('limit') != -1) {
-                  limit = actions.pop().split(':')[1]
-                } else if (actions[length - (i + 1)].indexOf('to') != -1) {
-                  to = actions.pop().split(':')[1]
-                } else if (actions[length - (i + 1)].indexOf('subject') != -1) {
-                  subject = actions.pop().split(':')[1]
-                }
-              }
-            }
             let r = ''
-            let bccResult = []
-            if (limit != 'auto') {
-              let divider = Math.floor(arrayBcc.length / limit)
-              let startIndex = 0
-              let endIndex = 0
-              console.log(divider);
-              for (let i = 0; i < divider; i++) {
-                endIndex = divider * (i + 1)
-                startIndex = endIndex - divider
-                console.log('start index : ' + startIndex);
-                console.log('end index : ' + endIndex);
-                if (arrayBcc[endIndex] == undefined) {
-                  bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length - 1))
-                } else {
-                  bccResult.push(arrayBcc.splice(startIndex, endIndex))
-                }
-              }
-              // console.log(bccResult);
-            }
             for (let j = 0; j < actions.length; j++) {
               r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: [arrayBcc[bccCount]], entity: data.entity, mode: 'Cookies' })
               bccCount++

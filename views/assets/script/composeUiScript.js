@@ -145,10 +145,20 @@ $('#auto_limit').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     $('#limit_send').prop("disabled", status);
     if (status) {
+        $('.limit_options .btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
         $('#limit_send').val(0);
     } else {
         $('#limit_send').val('');
 
+    }
+})
+
+$('#limit_fixed').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.limit_options .btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
     }
 })
 
