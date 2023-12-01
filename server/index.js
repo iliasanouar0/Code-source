@@ -706,16 +706,23 @@ wsc.on('connection', (wss, req) => {
         }
       }
       let bccResult = []
+      console.log(limit);
       if (limit != 'auto') {
         let divider = Math.ceil(arrayBcc.length / limit)
         let startIndex = 0
         let endIndex = limit
-        console.log(divider);
         for (let i = 0; i < divider; i++) {
-          // endIndex = divider * (i + 1)
-          // startIndex = endIndex - divider
-          console.log('start index : ' + startIndex);
-          console.log('end index : ' + endIndex);
+          if (arrayBcc[endIndex] == undefined) {
+            bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length))
+          } else {
+            bccResult.push(arrayBcc.splice(startIndex, endIndex))
+          }
+        }
+      } else if (limit == 'auto') {
+        let divider = Math.ceil(seeds.length / arrayBcc.length)
+        let startIndex = 0
+        let endIndex = divider
+        for (let i = 0; i < divider; i++) {
           if (arrayBcc[endIndex] == undefined) {
             bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length))
           } else {
