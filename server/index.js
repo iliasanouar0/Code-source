@@ -194,7 +194,7 @@ wss.on('connection', (wss, req) => {
       let state = await processManager.getProcessState(data.id_process)
 
       // ~ process !1k
-      const process = async (toProcess, start) => {
+      const process = async (toProcess, start, option) => {
         await time(3000)
         while (toProcess.length != 0 && state != "STOPPED") {
           console.log(toProcess);
@@ -205,8 +205,12 @@ wss.on('connection', (wss, req) => {
           }
           for (let i = 0; i < toProcess.length; i++) {
             let seed = toProcess[0]
-            await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
-            await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
+
+            if (option.onlyStarted) {
+              await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
+              await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
+            }
+
             state = await processManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
@@ -332,17 +336,24 @@ wss.on('connection', (wss, req) => {
         }
       }
 
-      console.log(toProcess)
+
       async function repeat(array, number, start) {
-        await time(3000)
-        process(array[start], start)
-        if (number - 1 > start) await repeat(array, number, start + 1);
+        if (number == 1) {
+          for (let i = 0; i < array[start].length; i++) {
+            await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
+            await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
+            process([array[start][i]], start, { onlyStarted: false })
+          }
+        } else {
+          await time(3000)
+          process(array[start], start, { onlyStarted: true })
+          if (number - 1 > start) await repeat(array, number, start + 1);
+        }
       }
       await time(5000)
       await repeat(toProcess, toProcess.length, 0)
       await time(5000)
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
-      console.log(status);
       processStateManager.addState(status)
 
     } else if (request == "resume") {
@@ -759,7 +770,10 @@ wsc.on('connection', (wss, req) => {
               }
             }
             let r = ''
-            console.log(limit);
+            // console.log(limit);
+            if (limit != 'auto') {
+              console.log(limit);
+            }
             for (let j = 0; j < actions.length; j++) {
               r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: [arrayBcc[bccCount]], entity: data.entity, mode: 'Cookies' })
               bccCount++
@@ -847,8 +861,6 @@ wsc.on('connection', (wss, req) => {
       }
 
       async function repeat(array, number, start) {
-        console.log(number);
-        console.log(array[start]);
         if (number == 1) {
           for (let i = 0; i < array[start].length; i++) {
             await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
