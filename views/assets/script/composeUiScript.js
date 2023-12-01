@@ -385,27 +385,6 @@ $(document).on('click', '.status', event => {
             url: `http://${ip}:3000/compose/seeds/${id}`,
             dataSrc: '',
         },
-        // [
-        //     {
-        //         "id_process": 3,
-        //         "action": "checkProxy",
-        //         "pstatus": "idel",
-        //         "id_seeds": 17270,
-        //         "gmail": "test2@gmail.com",
-        //         "password": "0000",
-        //         "isp": "gmail",
-        //         "proxy": "38.34.185.143:3838",
-        //         "status": "active",
-        //         "date_add": "2023-11-13T05:00:00.000Z",
-        //         "date_update": "2023-11-13T05:00:00.000Z",
-        //         "verification": "0000",
-        //         "id_list": 50,
-        //         "start_in": null,
-        //         "end_in": null,
-        //         "rstatus": null,
-        //         "statusdetails": null
-        //     }
-        // ]
         columns: [
             {
                 data: null,
@@ -505,7 +484,6 @@ $(document).on('click', '.status', event => {
         ],
         order: [[3, 'asc']]
     })
-
     $('#modal-compose-view').modal('show')
     /**
      * * Websocket connection :
