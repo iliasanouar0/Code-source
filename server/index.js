@@ -711,7 +711,7 @@ wsc.on('connection', (wss, req) => {
         let startIndex = 0
         let endIndex = limit
         console.log(divider);
-        for (let i = 1; i < divider; i++) {
+        for (let i = 0; i < divider; i++) {
           // endIndex = divider * (i + 1)
           // startIndex = endIndex - divider
           console.log('start index : ' + startIndex);
