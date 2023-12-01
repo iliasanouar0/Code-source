@@ -680,6 +680,12 @@ wsc.on('connection', (wss, req) => {
         let read = fs.readFileSync(path, 'utf8');
         arrayBcc = read.split('\n')
       }
+      if (arrayBcc != undefined) {
+        // arrayBcc.pop()
+        // arrayBcc.shift()
+        console.log(arrayBcc);
+        console.log(arrayBcc.length);
+      }
       let actions = seeds[0].action
         , subject
         , to
@@ -748,12 +754,6 @@ wsc.on('connection', (wss, req) => {
       let toProcess = []
 
       let bccCount = 0
-      if (arrayBcc != undefined) {
-        arrayBcc.pop()
-        arrayBcc.shift()
-        console.log(arrayBcc);
-        console.log(arrayBcc.length);
-      }
 
       for (let i = 0; i < active; i++) {
         if (seeds.length < active) {
