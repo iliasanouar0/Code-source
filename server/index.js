@@ -760,8 +760,6 @@ wsc.on('connection', (wss, req) => {
               actions = seed.action.split(',')
               let length = actions.length
               for (let i = 0; i < length; i++) {
-                console.log(actions[length - (i + 1)].indexOf('limit'));
-                console.log(actions.pop().split(':')[1]);
                 console.log(actions);
                 if (actions[length - (i + 1)].indexOf('limit') != -1) {
                   limit = actions.pop().split(':')[1]
