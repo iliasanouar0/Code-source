@@ -903,8 +903,10 @@ wsc.on('connection', (wss, req) => {
       }
 
       async function repeat(array, bccToProcess, number, start) {
+        console.log(array[start]);
         if (number == 1) {
           for (let i = 0; i < array[start].length; i++) {
+            console.log([bccToProcess[start][i]]);
             await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
             process([array[start][i]], [bccToProcess[start][i]], i, { onlyStarted: false })
