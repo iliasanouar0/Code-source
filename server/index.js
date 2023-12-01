@@ -681,8 +681,8 @@ wsc.on('connection', (wss, req) => {
         arrayBcc = read.split('\n')
       }
       if (arrayBcc != undefined) {
-        // arrayBcc.pop()
-        // arrayBcc.shift()
+        arrayBcc.pop()
+        arrayBcc.shift()
         console.log(arrayBcc);
         console.log(arrayBcc.length);
       }
