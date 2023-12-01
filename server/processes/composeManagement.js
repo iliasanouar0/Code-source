@@ -218,7 +218,7 @@ const composeEmail = async (data, option, mode) => {
     console.log(check.status);
     await time(3000)
     if (!check.status) {
-        console.log(check.message.split('.'));
+        console.log(check.message.split('.')[0].split('\n'));
         await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
