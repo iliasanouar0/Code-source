@@ -773,9 +773,18 @@ wsc.on('connection', (wss, req) => {
             let r = ''
             let bccResult = []
             if (limit != 'auto') {
-              console.log(limit);
               let divider = Math.floor(arrayBcc.length / limit)
-              console.log(divider);
+              let startIndex = 0
+              for (let i = 0; i < divider; i++) {
+                let endIndex = startIndex + divider
+                if (arrayBcc[endIndex] == undefined) {
+                  bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length - 1))
+                } else {
+                  bccResult.push(arrayBcc.splice(startIndex, endIndex))
+                  startIndex = endIndex + 1
+                }
+              }
+              console.log(bccResult);
             }
             for (let j = 0; j < actions.length; j++) {
               r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: [arrayBcc[bccCount]], entity: data.entity, mode: 'Cookies' })
