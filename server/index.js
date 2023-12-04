@@ -997,7 +997,7 @@ wsc.on('connection', (wss, req) => {
                   }
                   console.log("seeds.length : " + seeds.length);
                   console.log(toProcess);
-                  if (seeds.length == 0 || toProcess.length == 0) {
+                  if (seeds.length == 0 || toProcess.length == 0 && bccResult.length != 0) {
                     seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
                     toProcess.push(seeds[0 + start])
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
