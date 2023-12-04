@@ -899,8 +899,6 @@ wsc.on('connection', (wss, req) => {
                 break
               }
               for (let i = 0; i < toProcess.length; i++) {
-                console.log(bccToProcess.length);
-                console.log(bccToProcess);
                 if (bccToProcess.length == 0) {
                   break
                 }
@@ -915,7 +913,6 @@ wsc.on('connection', (wss, req) => {
                 }
                 let r = ''
                 for (let j = 0; j < actions.length; j++) {
-                  console.log(bccToProcess);
                   r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
                   bccCount++
                   if (i < actions.length) {
@@ -940,7 +937,6 @@ wsc.on('connection', (wss, req) => {
                     await resultManager.endNow(result)
                   ])
                   bccToProcess.shift()
-                  console.log(bccToProcess);
                   toProcess.shift()
                   if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0) {
                     console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
