@@ -1014,7 +1014,10 @@ wsc.on('connection', (wss, req) => {
               if (state == "STOPPED") {
                 break
               }
+              console.log(start);
+              console.log('bccToProcess');
               console.log(bccToProcess);
+              console.log('ToProcess');
               console.log(toProcess);
               if (bccToProcess.length == 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
