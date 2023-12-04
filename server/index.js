@@ -1003,6 +1003,7 @@ wsc.on('connection', (wss, req) => {
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
                     count++
                   }
+                  console.log(toProcess);
                 }
               }
               let w = seeds.length + 1
