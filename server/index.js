@@ -996,9 +996,9 @@ wsc.on('connection', (wss, req) => {
                     processStateManager.updateState(status)
                   }
                   console.log("seeds.length : " + seeds.length);
+                  console.log(toProcess);
                   if (seeds.length == 0) {
                     seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
-                    console.log(seeds);
                     toProcess.push(seeds[0 + start])
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
                     count++
