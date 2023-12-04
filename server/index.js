@@ -989,6 +989,7 @@ wsc.on('connection', (wss, req) => {
                     console.log(seeds);
                     console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
                     toProcess.push(seeds[0 + start])
+                    await resultManager.updateState([{ id_seeds: seeds[0 + start].id_seeds, id_process: data.id_process }], "running")
                     bccToProcess.push(bccResult[0 + start])
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
                     bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
@@ -1000,6 +1001,7 @@ wsc.on('connection', (wss, req) => {
                   if (seeds.length == 0) {
                     seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
                     toProcess.push(seeds[0 + start])
+                    await resultManager.updateState([{ id_seeds: seeds[0 + start].id_seeds, id_process: data.id_process }], "running")
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
                     bccToProcess.push(bccResult[0 + start])
                     bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
