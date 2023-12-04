@@ -905,6 +905,9 @@ wsc.on('connection', (wss, req) => {
                 break
               }
               for (let i = 0; i < toProcess.length; i++) {
+                if (bccToProcess.length == 0) {
+                  break
+                }
                 let seed = toProcess[0]
                 if (option.onlyStarted) {
                   await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
@@ -916,11 +919,8 @@ wsc.on('connection', (wss, req) => {
                 }
                 let r = ''
                 for (let j = 0; j < actions.length; j++) {
-                  if (bccToProcess.length != 0) {
-                    r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
-                    bccCount++
-                    break
-                  }
+                  r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
+                  bccCount++
                   if (i < actions.length) {
                     r += ', '
                   }
