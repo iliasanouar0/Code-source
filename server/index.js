@@ -1018,6 +1018,7 @@ wsc.on('connection', (wss, req) => {
               if (state == "STOPPED") {
                 break
               }
+              console.log(bccToProcess);
               if (bccToProcess.length == 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
                 await processStateManager.updateState(status)
