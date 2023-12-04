@@ -984,13 +984,6 @@ wsc.on('connection', (wss, req) => {
                   if (state == "STOPPED") {
                     break
                   }
-                  console.log('toProcess length : ' + toProcess.length);
-                  console.log('seeds : ');
-                  console.log(seeds);
-                  console.log('bccResult.length : ');
-                  console.log(bccResult.length);
-                  console.log('active : ');
-                  console.log(active);
                   if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0) {
                     console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
                     toProcess.push(seeds[0 + start])
@@ -1002,13 +995,14 @@ wsc.on('connection', (wss, req) => {
                     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
                     processStateManager.updateState(status)
                   }
+                  console.log("seeds.length : " + seeds.length);
                   if (seeds.length == 0) {
                     seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
+                    console.log(seeds);
                     toProcess.push(seeds[0 + start])
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
                     count++
                   }
-                  console.log(seeds);
                 }
               }
               let w = seeds.length + 1
@@ -1023,11 +1017,6 @@ wsc.on('connection', (wss, req) => {
               if (state == "STOPPED") {
                 break
               }
-              console.log('start : ' + start);
-              console.log('bccToProcess');
-              console.log(bccToProcess);
-              console.log('ToProcess');
-              console.log(toProcess);
               if (bccToProcess.length == 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
                 await processStateManager.updateState(status)
