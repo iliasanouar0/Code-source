@@ -841,8 +841,7 @@ wsc.on('connection', (wss, req) => {
                     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
                     processStateManager.updateState(status)
                   }
-                }
-                else {
+                } else {
                   failed++
                   let end_in = new Date()
                   let result
@@ -900,6 +899,7 @@ wsc.on('connection', (wss, req) => {
                 break
               }
               for (let i = 0; i < toProcess.length; i++) {
+                console.log(bccToProcess.length);
                 if (bccToProcess.length == 0) {
                   break
                 }
