@@ -683,8 +683,6 @@ wsc.on('connection', (wss, req) => {
       if (arrayBcc != undefined) {
         arrayBcc.pop()
         arrayBcc.shift()
-        console.log(arrayBcc);
-        console.log(arrayBcc.length);
       }
       let actions = seeds[0].action
         , subject
@@ -706,7 +704,6 @@ wsc.on('connection', (wss, req) => {
         }
       }
       let bccResult = []
-      console.log(limit);
       if (limit != 'auto') {
         let divider = Math.ceil(arrayBcc.length / limit)
         let startIndex = 0
@@ -720,7 +717,6 @@ wsc.on('connection', (wss, req) => {
         }
       } else if (limit == 'auto') {
         let limit = Math.ceil(arrayBcc.length / seeds.length)
-        console.log(result.parsed.COMPOSE_LIMIT);
         if (limit > result.parsed.COMPOSE_LIMIT) {
           limit = result.parsed.COMPOSE_LIMIT
         }
@@ -736,7 +732,6 @@ wsc.on('connection', (wss, req) => {
         }
       }
 
-      console.log(bccResult);
 
       let active
       let waiting = seeds.length - 3
@@ -771,8 +766,6 @@ wsc.on('connection', (wss, req) => {
       let bccCount = 0
 
       for (let i = 0; i < active; i++) {
-        console.log(seeds.length);
-        console.log(active);
         if (seeds.length < active) {
           break
         }
@@ -1021,6 +1014,8 @@ wsc.on('connection', (wss, req) => {
               if (state == "STOPPED") {
                 break
               }
+              console.log(bccToProcess);
+              console.log(toProcess);
               if (bccToProcess.length == 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
                 await processStateManager.updateState(status)
