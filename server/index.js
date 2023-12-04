@@ -937,7 +937,8 @@ wsc.on('connection', (wss, req) => {
                     },
                     await resultManager.endNow(result)
                   ])
-                  bccToProcess.shift()
+                  // bccToProcess.shift()
+                  console.log(bccToProcess.shift());
                   toProcess.shift()
                   if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0) {
                     console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
