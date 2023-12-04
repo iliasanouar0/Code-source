@@ -950,6 +950,7 @@ wsc.on('connection', (wss, req) => {
                   if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0) {
                     console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
                     toProcess.push(seeds[0 + start])
+                    await resultManager.updateState([{ id_seeds: seeds[0 + start].id_seeds, id_process: data.id_process }], "running")
                     bccToProcess.push(bccResult[0 + start])
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
                     bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
@@ -961,7 +962,7 @@ wsc.on('connection', (wss, req) => {
                   if (seeds.length == 0) {
                     seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
                     toProcess.push(seeds[0 + start])
-                    seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
+                    await resultManager.updateState([{ id_seeds: seeds[0 + start].id_seeds, id_process: data.id_process }], "running")
                     count++
                   }
                 }
@@ -1018,7 +1019,6 @@ wsc.on('connection', (wss, req) => {
               if (state == "STOPPED") {
                 break
               }
-              console.log(bccToProcess);
               if (bccToProcess.length == 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
                 await processStateManager.updateState(status)
