@@ -900,6 +900,7 @@ wsc.on('connection', (wss, req) => {
               }
               for (let i = 0; i < toProcess.length; i++) {
                 console.log(bccToProcess.length);
+                console.log(bccToProcess);
                 if (bccToProcess.length == 0) {
                   break
                 }
