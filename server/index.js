@@ -983,6 +983,7 @@ wsc.on('connection', (wss, req) => {
                   if (state == "STOPPED") {
                     break
                   }
+                  console.log(toProcess.length);
                   if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0) {
                     console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
                     toProcess.push(seeds[0 + start])
