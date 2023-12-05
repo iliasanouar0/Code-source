@@ -1042,7 +1042,7 @@ $(document).on('click', '.manage_offers', () => {
     $('.edit_offers').modal('show')
 })
 
-$('.delete_offer').on('click', event => {
+$(document).on('click', '.delete_offer', event => {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
