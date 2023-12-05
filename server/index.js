@@ -689,6 +689,7 @@ wsc.on('connection', (wss, req) => {
         , to
         , limit
         , methods = { fixedLimit: false }
+      console.log(actions);
       if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1) {
         actions = [actions]
       } else {
