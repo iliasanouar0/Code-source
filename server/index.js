@@ -899,7 +899,6 @@ wsc.on('connection', (wss, req) => {
                 break
               }
               for (let i = 0; i < toProcess.length; i++) {
-                console.log(bccToProcess);
                 if (bccToProcess.length == 0) {
                   break
                 }
@@ -1024,7 +1023,7 @@ wsc.on('connection', (wss, req) => {
 
 
       }
-
+      console.log(bccToProcess);
       async function repeat(array, bccToProcess, number, start) {
         if (number == 1) {
           for (let i = 0; i < array[start].length; i++) {
