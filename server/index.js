@@ -698,9 +698,9 @@ wsc.on('connection', (wss, req) => {
         let length = actions.length
         for (let i = 0; i < length; i++) {
           console.log(actions[length - (i + 1)].split(':')[0]);
-
           switch (actions[length - (i + 1)].split(':')[0]) {
             case 'Fixed':
+              actions.pop()
               methods.fixedLimit = true
               break;
             case 'limit':
