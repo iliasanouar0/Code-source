@@ -688,13 +688,16 @@ wsc.on('connection', (wss, req) => {
         , subject
         , to
         , limit
-      if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1) {
+        , limitFixed
+      if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('limitFixed') == -1) {
         actions = [actions]
       } else {
         actions = actions.split(',')
         let length = actions.length
         for (let i = 0; i < length; i++) {
-          if (actions[length - (i + 1)].indexOf('limit') != -1) {
+          if (actions[length - (i + 1)].indexOf('limitFixed') != -1) {
+            limitFixed = actions.pop().split(':')[1]
+          } else if (actions[length - (i + 1)].indexOf('limit') != -1) {
             limit = actions.pop().split(':')[1]
           } else if (actions[length - (i + 1)].indexOf('to') != -1) {
             to = actions.pop().split(':')[1]
@@ -1038,7 +1041,7 @@ wsc.on('connection', (wss, req) => {
           for (let i = 0; i < array[start].length; i++) {
             await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
-            process([array[start][i]], [bccToProcess[start][i]], i, { onlyStarted: false }, { fixedLimit: false })
+            process([array[start][i]], [bccToProcess[start][i]], i, { onlyStarted: false }, { fixedLimit: limitFixed })
           }
         } else {
           await time(3000)
