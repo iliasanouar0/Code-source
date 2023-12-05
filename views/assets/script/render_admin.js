@@ -1098,7 +1098,7 @@ if (path.includes("/admin/users/")) {
         offersAdd.appendChild(option);
         data.forEach((elm) => {
           let option = document.createElement("option");
-          option.append('<button>test</button>')
+          option.innerHTML('<button>test</button>')
           // option.innerHTML = `${elm['file']}`
           option.setAttribute("value", elm['file']);
           offersAdd.appendChild(option);
