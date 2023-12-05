@@ -1059,10 +1059,9 @@ $(document).on('click', '.delete_offer', event => {
                 method: "DELETE",
             }).then(res => {
                 return res.text()
-            }).then(data => {
-                console.log(data);
+            }).then(() => {
+                data.ajax.reload(null, false)
             })
-            data.ajax.reload(null, false)
         } else if (result.isDismissed) {
             Swal.fire({
                 position: 'top-end',
