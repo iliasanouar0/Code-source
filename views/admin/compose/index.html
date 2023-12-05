@@ -233,7 +233,7 @@
                                 <div class="row mb-3">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label for="messageBody" class="form-label">HTML body :</label>
+                                            <label for="messageBody" class="form-label">Upload body (offer) :</label>
                                             <div class="input-group">
                                                 <input type="file" class="form-control" id="messageBody"
                                                     aria-describedby="messageBody" aria-label="Upload">
@@ -247,13 +247,13 @@
                                         <div class="form-group">
                                             <label>Offers :</label>
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-9">
                                                     <select class="form-control offers" style="width: 100%;"
                                                         tabindex="-1" aria-hidden="true" id="p_offers_add">
                                                     </select>
                                                 </div>
                                                 <div class="col">
-                                                    <button class="btn btn-outline-danger">Offers</button>
+                                                    <button class="btn btn-outline-danger manage_offers">Offers</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -282,6 +282,33 @@
                             </div>
                         </div>
                         <button type="button" class="btn btn-success" id="c_add">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade edit_offers" data-bs-backdrop="static" data-bs-keyboard="false" style=" display: none;"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row w-100">
+                            <div class="col">
+                                <h4 class="modal-title">Offers managing</h4>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body justify-content-center">
+                        <table id="edit_offers">
+                            <thead>
+                                <tr>
+                                    <th>Offer</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
             </div>

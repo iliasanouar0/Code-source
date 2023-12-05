@@ -467,7 +467,7 @@ $(document).on('click', '.status', event => {
                         <div class="card-body p-1 text-center text-dark">Address not found !!</div></div>`
                     }
 
-                    
+
                 }
             },
             {
@@ -1012,4 +1012,31 @@ $('#btn-check-compose').change(event => {
     } else {
         $('.send_message').addClass('d-none');
     }
+})
+
+
+$(document).on('click', '.manage_offers', () => {
+    $('#edit_offers').DataTable({
+        responsive: true,
+        deferRender: true,
+        destroy: true,
+        autoWidth: false,
+        ajax: {
+            url: `http://${ip}:3000/compose/offers`,
+            dataSrc: '',
+        },
+        columns: [
+            {
+                data: 'file',
+            },
+            {
+                data: null,
+                render: (row) => {
+                    return `<button type="button" class="btn btn-danger delete_offer" data-id="${row.file}"><i class="far fa-trash-alt"></i></button>`
+                }
+            },
+
+        ]
+    })
+    $('.edit_offers').modal('show')
 })
