@@ -697,8 +697,7 @@ wsc.on('connection', (wss, req) => {
         console.log(actions);
         let length = actions.length
         for (let i = 0; i < length; i++) {
-          console.log(actions[length - (i + 1)]);
-          console.log(actions[length - (i + 1)].split(':')[1]);
+          console.log(actions[length - (i + 1)].split(':')[0]);
           if (actions[length - (i + 1)].indexOf('Fixed') != -1) {
             methods.fixedLimit = true
           } else if (actions[length - (i + 1)].indexOf('limit') != -1) {
