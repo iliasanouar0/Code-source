@@ -688,14 +688,15 @@ wsc.on('connection', (wss, req) => {
         , subject
         , to
         , limit
-        , limitFixed
         , methods = { fixedLimit: false }
       if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1) {
         actions = [actions]
       } else {
         actions = actions.split(',')
         let length = actions.length
+        console.log(length);
         for (let i = 0; i < length; i++) {
+          console.log(actions);
           if (actions[length - (i + 1)].indexOf('Fixed') != -1) {
             methods.fixedLimit = true
           } else if (actions[length - (i + 1)].indexOf('limit') != -1) {
@@ -707,7 +708,6 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
-      console.log(actions);
       console.log(methods);
       let bccResult = []
       if (limit != 'auto') {
