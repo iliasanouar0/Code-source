@@ -1075,6 +1075,7 @@ $(document).on('click', '.delete_offer', event => {
 
 $(document).on('hide.bs.modal', '.edit_offers', () => {
     const offersAdd = document.querySelector("#p_offers_add");
+    offersAdd.innerHTML = ''
     fetch(`http://${ip}:3000/compose/offers`, {
         method: "GET",
     }).then((response) => {
