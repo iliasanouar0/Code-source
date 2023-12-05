@@ -727,7 +727,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
       } else if (limit == 'auto') {
-        let limit = Math.ceil(arrayBcc.length / seeds.length)
+        limit = Math.ceil(arrayBcc.length / seeds.length)
         if (limit > result.parsed.COMPOSE_LIMIT) {
           limit = result.parsed.COMPOSE_LIMIT
         }
