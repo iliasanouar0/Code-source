@@ -706,12 +706,13 @@ wsc.on('connection', (wss, req) => {
             to = actions.pop().split(':')[1]
           } else if (actions[length - (i + 1)].indexOf('subject') != -1) {
             console.log('sususus');
-            console.log(actions.pop().split(':')[1]);
             subject = actions.pop().split(':')[1]
           }
         }
       }
       console.log(actions);
+      console.log(subject);
+      console.log(limit);
       console.log(methods);
       let bccResult = []
       if (limit != 'auto') {
