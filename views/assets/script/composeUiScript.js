@@ -241,7 +241,7 @@ $(document).on('click', '#c_add', () => {
                 action += `,limit:auto`
             }
             if ($(limit_fixed).is(":checked")) {
-                action += `,limitFixed:true`
+                action += `,Fixed:true`
             }
             dataComposing = {
                 "name": `test`,

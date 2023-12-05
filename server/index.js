@@ -690,13 +690,13 @@ wsc.on('connection', (wss, req) => {
         , limit
         , limitFixed
         , methods = { fixedLimit: false }
-      if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('limitFixed') == -1) {
+      if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1) {
         actions = [actions]
       } else {
         actions = actions.split(',')
         let length = actions.length
         for (let i = 0; i < length; i++) {
-          if (actions[length - (i + 1)].indexOf('limitFixed') != -1) {
+          if (actions[length - (i + 1)].indexOf('Fixed') != -1) {
             methods.fixedLimit = true
           } else if (actions[length - (i + 1)].indexOf('limit') != -1) {
             limit = actions.pop().split(':')[1]
