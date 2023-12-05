@@ -3,7 +3,7 @@ const fs = require('fs')
 const data = require('../db');
 const gmailManagement = require("../processes/gmailManagement");
 const checkManagement = require("../processes/checkManagement");
-const composeManagement = require("../processes/composeManagement")
+const composeManagement = require("../processes/composeManagement");
 const root = __dirname
 let path = root.slice(0, root.length - 31)
 let config = data.data
@@ -88,6 +88,15 @@ const uploadOffer = (request, response) => {
     let file = (request.body)
     console.log(file);
     response.status(200).send(file)
+}
+
+const deleteOffer = (request, response) => {
+    let name = (request.params.offer)
+    let path = `/home/offers/${name}`
+    fs.unlink(path, function (err) {
+        if (err) throw err;
+        response.status(200).send('offer deleted')
+    });
 }
 
 const getAllUserDate = (request, response) => {
@@ -410,5 +419,6 @@ module.exports = {
     getOffers,
     uploadOffer,
     getOfferData,
-    addOfferData
+    addOfferData,
+    deleteOffer
 }

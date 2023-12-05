@@ -1453,6 +1453,7 @@ app.post('/compose/', composeManager.addProcess)
 app.get("/compose/seeds/:id", composeManager.getAllProcessSeeds)
 app.get('/compose/offerdata', composeManager.getOfferData)
 app.patch("/compose/", composeManager.deleteProcess);
+app.delete("/compose/offer/:offer", composeManager.deleteOffer)
 app.post('/compose/offers/upload/', (req, res) => {
   const file = req.files.File
   const fileName = req.files.File.name
