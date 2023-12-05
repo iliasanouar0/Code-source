@@ -704,6 +704,7 @@ wsc.on('connection', (wss, req) => {
           } else if (actions[length - (i + 1)].indexOf('to') != -1) {
             to = actions.pop().split(':')[1]
           } else if (actions[length - (i + 1)].indexOf('subject') != -1) {
+            console.log('sususus');
             subject = actions.pop().split(':')[1]
           }
         }
