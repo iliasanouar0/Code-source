@@ -48,7 +48,7 @@ const getData = (request, response) => {
 }
 
 const saveCounter = async (data) => {
-    let sql = `UPDATE results SET counter=($1) WHERE id_process=($2)`
+    let sql = `UPDATE composing SET counter=($1) WHERE id_process=($2)`
     let values = [data.counter, data.id_process]
     const client = await pool.connect()
     client.query(sql, values, (err) => {
