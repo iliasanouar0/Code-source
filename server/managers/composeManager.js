@@ -47,6 +47,19 @@ const getData = (request, response) => {
     response.status(200).send(objects)
 }
 
+const saveCounter = async (data) => {
+    let sql = `UPDATE results SET counter=($1) WHERE id_process=($2)`
+    let values = [data.counter, data.id_process]
+    const client = await pool.connect()
+    client.query(sql, values, (err) => {
+        if (err) {
+            return err;
+        }
+        client.release()
+        return true
+    })
+}
+
 const getOffers = (request, response) => {
     let objects = []
     let path = '/home/offers'
@@ -420,5 +433,6 @@ module.exports = {
     uploadOffer,
     getOfferData,
     addOfferData,
-    deleteOffer
+    deleteOffer,
+    saveCounter
 }

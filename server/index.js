@@ -822,8 +822,10 @@ wsc.on('connection', (wss, req) => {
                 }
                 let r = ''
                 for (let j = 0; j < actions.length; j++) {
+
                   r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
                   bccCount++
+                  await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process })
                   if (i < actions.length) {
                     r += ', '
                   }
@@ -934,6 +936,7 @@ wsc.on('connection', (wss, req) => {
                   }
                   r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
                   bccCount++
+                  await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process })
                   if (i < actions.length) {
                     r += ', '
                   }
