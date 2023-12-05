@@ -684,7 +684,6 @@ wsc.on('connection', (wss, req) => {
         arrayBcc.pop()
         arrayBcc.shift()
       }
-      console.log(arrayBcc);
       let actions = seeds[0].action
         , subject
         , to
@@ -695,6 +694,8 @@ wsc.on('connection', (wss, req) => {
         actions = actions.split(',')
         let length = actions.length
         for (let i = 0; i < length; i++) {
+          console.log(actions[length - (i + 1)].indexOf('limit') != -1);
+          console.log(actions[length - (i + 1)]);
           if (actions[length - (i + 1)].indexOf('limit') != -1) {
             limit = actions.pop().split(':')[1]
           } else if (actions[length - (i + 1)].indexOf('to') != -1) {
