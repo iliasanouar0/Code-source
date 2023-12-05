@@ -817,8 +817,8 @@ wsc.on('connection', (wss, req) => {
                 for (let j = 0; j < actions.length; j++) {
 
                   r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
-                  bccCount++
-                  await composeManager.saveCounter({ counter: bccCount * limit, id_process: data.id_process })
+                  bccCount = bccCount + bccToProcess[0].length
+                  await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process })
                   sendToAll(clients, 'reload')
                   if (i < actions.length) {
                     r += ', '
@@ -929,8 +929,8 @@ wsc.on('connection', (wss, req) => {
                     break
                   }
                   r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
-                  bccCount++
-                  await composeManager.saveCounter({ counter: bccToProcess[0].length * bccCount, id_process: data.id_process })
+                  bccCount = bccCount + bccToProcess[0].length
+                  await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process })
                   sendToAll(clients, 'reload')
                   if (i < actions.length) {
                     r += ', '
