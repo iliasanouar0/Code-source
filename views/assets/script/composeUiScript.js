@@ -1073,5 +1073,31 @@ $(document).on('click', '.delete_offer', event => {
     })
 })
 
+$(document).on('hide.bs.modal', '.edit_offers', () => {
+    fetch(`http://${ip}:3000/compose/offers`, {
+        method: "GET",
+    }).then((response) => {
+        return response.json();
+    }).then((data) => {
+        if (data.length == 0) {
+            let option = document.createElement("option");
+            option.innerHTML = `No available offers`
+            option.setAttribute("value", '');
+            offersAdd.appendChild(option);
+        } else {
+            let option = document.createElement("option");
+            option.innerHTML = `--SELECT OFFER--`
+            option.setAttribute("value", '');
+            offersAdd.appendChild(option);
+            data.forEach((elm) => {
+                let option = document.createElement("option");
+                option.innerHTML = `${elm['file']}`
+                option.setAttribute("value", elm['file']);
+                offersAdd.appendChild(option);
+            });
+        }
+    })
+})
+
 
 
