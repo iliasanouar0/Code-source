@@ -764,7 +764,7 @@ wsc.on('connection', (wss, req) => {
       let bccToProcess = []
 
       let bccCount = 0
-
+      console.log(bccResult);
       for (let i = 0; i < active; i++) {
         if (seeds.length < active) {
           break
