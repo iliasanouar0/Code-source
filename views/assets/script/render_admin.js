@@ -1047,9 +1047,17 @@ if (path.includes("/admin/users/")) {
     const select = document.querySelector("#p_list_add");
     const dataAdd = document.querySelector("#p_data_add");
     const offersAdd = document.querySelector("#p_offers_add");
+    let default_limit = document.querySelector('.default_limit')
     select.innerHTML = ""
     dataAdd.innerHTML = ""
     offersAdd.innerHTML = ""
+    fetch(`http://${ip}:3000/compose/limit`, {
+      method: "GET",
+    }).then((response) => {
+      return response.text();
+    }).then((data) => {
+      default_limit.innerHTML = data
+    })
     fetch(`http://${ip}:3000/lists`, {
       method: "GET",
     }).then((response) => {

@@ -1470,6 +1470,9 @@ app.patch("/process/", processManager.deleteProcess);
 
 // composing API
 app.get('/compose/admin', composeManager.getAllData)
+app.get('/compose/limit', (req, res) => {
+  res.status(200).send(result.parsed.COMPOSE_LIMIT)
+})
 app.get('/compose/data/', composeManager.getData)
 app.get('/compose/offers/', composeManager.getOffers)
 app.post('/compose/offers', composeManager.addOfferData)
