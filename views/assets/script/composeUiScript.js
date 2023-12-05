@@ -1037,29 +1037,7 @@ const data = $('#edit_offers').DataTable({
 })
 
 $(document).on('click', '.manage_offers', () => {
-    // data
     data.ajax.reload(null, false)
-    // $('#edit_offers').DataTable({
-    //     responsive: true,
-    //     deferRender: true,
-    //     destroy: true,
-    //     autoWidth: false,
-    //     ajax: {
-    //         url: `http://${ip}:3000/compose/offers`,
-    //         dataSrc: '',
-    //     },
-    //     columns: [
-    //         {
-    //             data: 'file',
-    //         },
-    //         {
-    //             data: null,
-    //             render: (row) => {
-    //                 return `<button type="button" class="btn btn-danger delete_offer" data-offer="${row.file}"><i class="far fa-trash-alt"></i></button>`
-    //             }
-    //         },
-    //     ]
-    // })
     $('.edit_offers').modal('show')
 })
 
@@ -1082,27 +1060,6 @@ $(document).on('click', '.delete_offer', event => {
                 return res.text()
             }).then(() => {
                 data.ajax.reload(null, false)
-                // $('#edit_offers').DataTable({
-                //     responsive: true,
-                //     deferRender: true,
-                //     destroy: true,
-                //     autoWidth: false,
-                //     ajax: {
-                //         url: `http://${ip}:3000/compose/offers`,
-                //         dataSrc: '',
-                //     },
-                //     columns: [
-                //         {
-                //             data: 'file',
-                //         },
-                //         {
-                //             data: null,
-                //             render: (row) => {
-                //                 return `<button type="button" class="btn btn-danger delete_offer" data-offer="${row.file}"><i class="far fa-trash-alt"></i></button>`
-                //             }
-                //         },
-                //     ]
-                // })
             })
         } else if (result.isDismissed) {
             Swal.fire({
