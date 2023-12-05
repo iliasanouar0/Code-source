@@ -707,6 +707,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
+      console.log(actions);
       console.log(methods);
       let bccResult = []
       if (limit != 'auto') {
