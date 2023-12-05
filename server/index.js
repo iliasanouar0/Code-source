@@ -689,15 +689,12 @@ wsc.on('connection', (wss, req) => {
         , to
         , limit
         , methods = { fixedLimit: false }
-      console.log(actions);
       if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1) {
         actions = [actions]
       } else {
         actions = actions.split(',')
-        console.log(actions);
         let length = actions.length
         for (let i = 0; i < length; i++) {
-          console.log(actions[length - (i + 1)].split(':')[0]);
           switch (actions[length - (i + 1)].split(':')[0]) {
             case 'Fixed':
               actions.pop()
@@ -933,7 +930,7 @@ wsc.on('connection', (wss, req) => {
                   }
                   r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
                   bccCount++
-                  await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process })
+                  await composeManager.saveCounter({ counter: bccCount * limit, id_process: data.id_process })
                   sendToAll(clients, 'reload')
                   if (i < actions.length) {
                     r += ', '
