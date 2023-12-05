@@ -694,10 +694,6 @@ wsc.on('connection', (wss, req) => {
         actions = actions.split(',')
         let length = actions.length
         for (let i = 0; i < length; i++) {
-          console.log(actions);
-          console.log(actions[length - (i + 1)].indexOf('limit') != -1);
-          console.log(actions[length - (i + 1)]);
-          console.log(limit);
           if (actions[length - (i + 1)].indexOf('limit') != -1) {
             limit = actions.pop().split(':')[1]
           } else if (actions[length - (i + 1)].indexOf('to') != -1) {
