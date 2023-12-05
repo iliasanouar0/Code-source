@@ -698,19 +698,26 @@ wsc.on('connection', (wss, req) => {
         let length = actions.length
         for (let i = 0; i < length; i++) {
           console.log(actions[length - (i + 1)]);
+          console.log(actions[length - (i + 1)].split(':')[1]);
           if (actions[length - (i + 1)].indexOf('Fixed') != -1) {
             methods.fixedLimit = true
-          } else
-            if (actions[length - (i + 1)].indexOf('limit') != -1) {
-              limit = actions.pop().split(':')[1]
-            } else
-              if (actions[length - (i + 1)].indexOf('to') != -1) {
-                to = actions.pop().split(':')[1]
-              } else
-                if (actions[length - (i + 1)].indexOf('subject') != -1) {
-                  console.log('sususus');
-                  subject = actions.pop().split(':')[1]
-                }
+          } else if (actions[length - (i + 1)].indexOf('limit') != -1) {
+            limit = actions.pop().split(':')[1]
+          } else if (actions[length - (i + 1)].indexOf('to') != -1) {
+            to = actions.pop().split(':')[1]
+          } else if (actions[length - (i + 1)].indexOf('subject') != -1) {
+            console.log('sususus');
+            subject = actions.pop().split(':')[1]
+          }
+
+          // switch (actions[length - (i + 1)].split(':')[1]) {
+          //   case value:
+
+          //     break;
+
+          //   default:
+          //     break;
+          // }
         }
       }
       console.log(actions);
