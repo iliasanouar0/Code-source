@@ -1037,38 +1037,39 @@ $(document).on('click', '.manage_offers', () => {
             },
 
         ]
-    })
-    $('.edit_offers').modal('show')
-    $('.delete_offer').on('click', event => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: 'black',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                let offer = $(event.target).data('offer')
-                console.log(offer);
-                fetch(`http://${ip}:3000/compose/offer/${offer}`, {
-                    method: "DELETE",
-                }).then(res => {
-                    return res.text()
-                }).then(data => {
-                    console.log(data);
-                })
-                data.ajax.reload(null, false)
-            } else if (result.isDismissed) {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'warning',
-                    title: 'Cancelled',
-                    showConfirmButton: false,
-                    timer: 3000
-                })
-            }
+    }).then(() => {
+        $('.edit_offers').modal('show')
+        $('.delete_offer').on('click', event => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: 'black',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let offer = $(event.target).data('offer')
+                    console.log(offer);
+                    fetch(`http://${ip}:3000/compose/offer/${offer}`, {
+                        method: "DELETE",
+                    }).then(res => {
+                        return res.text()
+                    }).then(data => {
+                        console.log(data);
+                    })
+                    data.ajax.reload(null, false)
+                } else if (result.isDismissed) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: 'Cancelled',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                }
+            })
         })
     })
 
