@@ -684,6 +684,7 @@ wsc.on('connection', (wss, req) => {
         arrayBcc.pop()
         arrayBcc.shift()
       }
+      console.log(arrayBcc);
       let actions = seeds[0].action
         , subject
         , to
@@ -762,9 +763,8 @@ wsc.on('connection', (wss, req) => {
       let length = seeds.length
       let toProcess = []
       let bccToProcess = []
-
       let bccCount = 0
-      console.log(bccResult);
+
       for (let i = 0; i < active; i++) {
         if (seeds.length < active) {
           break
