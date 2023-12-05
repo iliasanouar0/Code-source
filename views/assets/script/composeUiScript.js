@@ -1032,7 +1032,7 @@ $(document).on('click', '.manage_offers', () => {
             {
                 data: null,
                 render: (row) => {
-                    return `<button type="button" class="btn btn-danger delete_offer" data-id="${row.file}"><i class="far fa-trash-alt"></i></button>`
+                    return `<button type="button" class="btn btn-danger delete_offer" data-offer="${row.file}"><i class="far fa-trash-alt"></i></button>`
                 }
             },
 
@@ -1052,7 +1052,7 @@ $(document).on('click', '.delete_offer', event => {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-            let offer = $(event.target).data()
+            let offer = $(event.target).data('offer')
             console.log(offer);
             fetch(`http://${ip}:3000/compose/offer/${offer}`, {
                 method: "DELETE",
