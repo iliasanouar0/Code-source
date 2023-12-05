@@ -917,6 +917,9 @@ wsc.on('connection', (wss, req) => {
                 }
                 let r = ''
                 for (let j = 0; j < actions.length; j++) {
+                  if (bccToProcess.length == 0) {
+                    break
+                  }
                   r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
                   bccCount++
                   if (i < actions.length) {
