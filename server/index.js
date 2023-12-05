@@ -694,7 +694,6 @@ wsc.on('connection', (wss, req) => {
       } else {
         actions = actions.split(',')
         let length = actions.length
-        console.log(length);
         for (let i = 0; i < length; i++) {
           console.log(actions[length - (i + 1)].indexOf('subject') != -1);
           console.log(actions[length - (i + 1)]);
@@ -709,6 +708,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
+      console.log(actions);
       console.log(methods);
       let bccResult = []
       if (limit != 'auto') {
