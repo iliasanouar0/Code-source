@@ -729,16 +729,17 @@ wsc.on('connection', (wss, req) => {
         let startIndex = 0
         let endIndex = limit
         for (let i = 0; i < divider; i++) {
+          console.log(arrayBcc[endIndex]);
           if (arrayBcc[endIndex] == undefined) {
-            console.log(arrayBcc.splice(startIndex, arrayBcc.length));
+            // console.log(arrayBcc.splice(startIndex, arrayBcc.length));
             bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length))
           } else {
-            console.log(arrayBcc.splice(startIndex, endIndex));
+            // console.log(arrayBcc.splice(startIndex, endIndex));
             bccResult.push(arrayBcc.splice(startIndex, endIndex))
           }
         }
       }
-
+      console.log(bccResult);
 
       let active
       let waiting = seeds.length - 3
