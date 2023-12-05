@@ -985,9 +985,12 @@ wsc.on('connection', (wss, req) => {
                     console.log('the indexed seed : ' + seeds[0].id_seeds);
                     toProcess.push(seeds[0])
                     await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
-                    bccToProcess.push(bccResult[0 + start])
                     seeds.splice(seeds.indexOf(seeds[0]), 1)
-                    bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
+                    if (bccResult[0 + start] != undefined) {
+                      bccToProcess.push(bccResult[0 + start])
+                      bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
+
+                    }
                     count++
                     let w = seeds.length + 3
                     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
