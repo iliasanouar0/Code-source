@@ -1014,64 +1014,66 @@ $('#btn-check-compose').change(event => {
     }
 })
 
+const data = $('#edit_offers').DataTable({
+    responsive: true,
+    deferRender: true,
+    destroy: true,
+    autoWidth: false,
+    ajax: {
+        url: `http://${ip}:3000/compose/offers`,
+        dataSrc: '',
+    },
+    columns: [
+        {
+            data: 'file',
+        },
+        {
+            data: null,
+            render: (row) => {
+                return `<button type="button" class="btn btn-danger delete_offer" data-offer="${row.file}"><i class="far fa-trash-alt"></i></button>`
+            }
+        },
+
+    ]
+})
 
 $(document).on('click', '.manage_offers', () => {
-    const data = $('#edit_offers').DataTable({
-        responsive: true,
-        deferRender: true,
-        destroy: true,
-        autoWidth: false,
-        ajax: {
-            url: `http://${ip}:3000/compose/offers`,
-            dataSrc: '',
-        },
-        columns: [
-            {
-                data: 'file',
-            },
-            {
-                data: null,
-                render: (row) => {
-                    return `<button type="button" class="btn btn-danger delete_offer" data-offer="${row.file}"><i class="far fa-trash-alt"></i></button>`
-                }
-            },
-
-        ]
-    }).then(() => {
-        $('.edit_offers').modal('show')
-        $('.delete_offer').on('click', event => {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: 'black',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    let offer = $(event.target).data('offer')
-                    console.log(offer);
-                    fetch(`http://${ip}:3000/compose/offer/${offer}`, {
-                        method: "DELETE",
-                    }).then(res => {
-                        return res.text()
-                    }).then(data => {
-                        console.log(data);
-                    })
-                    data.ajax.reload(null, false)
-                } else if (result.isDismissed) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'warning',
-                        title: 'Cancelled',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-                }
-            })
-        })
-    })
-
+    data
+    $('.edit_offers').modal('show')
 })
+
+$('.delete_offer').on('click', event => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: 'black',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let offer = $(event.target).data('offer')
+            console.log(offer);
+            fetch(`http://${ip}:3000/compose/offer/${offer}`, {
+                method: "DELETE",
+            }).then(res => {
+                return res.text()
+            }).then(data => {
+                console.log(data);
+            })
+            data.ajax.reload(null, false)
+        } else if (result.isDismissed) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Cancelled',
+                showConfirmButton: false,
+                timer: 3000
+            })
+        }
+    })
+})
+
+
 
