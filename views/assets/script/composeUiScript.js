@@ -26,6 +26,9 @@ Date.prototype.toDateInputValue = function () {
 };
 
 $(document).on("click", "#add_compose", () => {
+    $('#c_update').addClass('d-none')
+    $('#c_add').removeClass('d-none')
+    $('.composeEditTitle').html('Create new compose')
     $(".add_compose").modal("show");
 });
 
@@ -37,9 +40,17 @@ $(document).ready(function () {
 
 $(document).on('click', '.edit', event => {
     let id = $(event.target).data('id')
-    $('#c_add').data('id', id)
-    $('#c_add').html('Update')
+    $('#c_update').data('id', id)
+    $('#c_update').removeClass('d-none')
+    $('#c_add').addClass('d-none')
     $('.composeEditTitle').html('Update compose')
+    fetch(`http://${ip}:3000/compose/one/${id}`, {
+        method: "GET",
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        console.log(data);
+    })
     $('.add_compose').modal('show')
 })
 
