@@ -220,6 +220,7 @@ $(document).on('click', '#c_update', event => {
     switch (action) {
         case 'checkProxy':
             dataComposing = {
+                "id_process": id,
                 "name": `test`,
                 "action": action,
                 "status": `idel`,
@@ -233,6 +234,7 @@ $(document).on('click', '#c_update', event => {
             break;
         case 'verify':
             dataComposing = {
+                "id_process": id,
                 "name": `test`,
                 "action": action,
                 "status": `idel`,
@@ -286,6 +288,7 @@ $(document).on('click', '#c_update', event => {
                 action += `,Fixed:true`
             }
             dataComposing = {
+                "id_process": id,
                 "name": `test`,
                 "action": action,
                 "status": `idel`,

@@ -12,8 +12,8 @@ const pool = new pg.Pool(config);
 
 const updateProcess = (request, response) => {
     const obj = (request.body)
-    let sql = `UPDATE composing SET id_list =$1,id_user=$2 ,action=$3 ,data=$4 ,offer=$5,status=$6 ,count=$7 returning id_process`
-    let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count]
+    let sql = `UPDATE composing SET id_list =$1,id_user=$2 ,action=$3 ,data=$4 ,offer=$5,status=$6 ,count=$7 WHERE id_process=$8 returning id_process`
+    let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count, obj.id_process]
     pool.query(sql, data, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
