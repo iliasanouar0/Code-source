@@ -28,6 +28,11 @@ Date.prototype.toDateInputValue = function () {
 $(document).on('hide.bs.modal', '.add_compose', () => {
     $('.add_compose input:text').val('')
     $('.add_compose input:checkbox').prop("checked", false)
+    $('#body').removeClass('d-none')
+    $('#preview').addClass('d-none')
+    $('.send_message').addClass('d-none');
+    $('#limit_send').prop("disabled", false);
+    $('#limit_send').val(0);
 })
 
 $(document).on("click", "#add_compose", () => {
