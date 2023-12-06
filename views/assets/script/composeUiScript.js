@@ -37,8 +37,10 @@ $(document).ready(function () {
 
 $(document).on('click', '.edit', event => {
     let id = $(event.target).data('id')
-    $('#edit_action').modal('show')
-    $('#p_a_add').data('id', id)
+    $('#c_add').data('id', id)
+    $('#c_add').html('Update')
+    $('.composeEditTitle').html('Update compose')
+    $('.add_compose').modal('show')
 })
 
 /**

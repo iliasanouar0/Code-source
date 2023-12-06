@@ -1472,9 +1472,11 @@ app.get('/compose/limit', (req, res) => {
   res.status(200).send(result.parsed.COMPOSE_LIMIT)
 })
 app.get('/compose/data/', composeManager.getData)
+app.get('/compose/:id', composeManager.getData)
 app.get('/compose/offers/', composeManager.getOffers)
 app.post('/compose/offers', composeManager.addOfferData)
 app.post('/compose/', composeManager.addProcess)
+app.put('/compose/', composeManager.updateProcess)
 app.get("/compose/seeds/:id", composeManager.getAllProcessSeeds)
 app.get('/compose/offerdata', composeManager.getOfferData)
 app.patch("/compose/", composeManager.deleteProcess);

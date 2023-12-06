@@ -12,8 +12,18 @@ const pool = new pg.Pool(config);
 
 const addProcess = (request, response) => {
     const obj = (request.body)
-    console.log(obj);
-    // response.status(200).send(obj)
+    let sql = `INSERT INTO composing (id_list ,id_user ,action ,data ,offer,status ,count) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
+    let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count]
+    pool.query(sql, data, (error, result) => {
+        if (error) {
+            response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
+        }
+        response.status(200).send(`Compose added with ID : ${result.rows[0].id_process}`)
+    })
+}
+
+const updateProcess = (request, response) => {
+    const obj = (request.body)
     let sql = `INSERT INTO composing (id_list ,id_user ,action ,data ,offer,status ,count) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
     let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count]
     pool.query(sql, data, (error, result) => {
@@ -27,6 +37,17 @@ const addProcess = (request, response) => {
 const getAllData = (request, response) => {
     let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS seedsCount FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list GROUP BY composing.id_process,list.id_list,users.id_user"
     pool.query(sql, (error, result) => {
+        if (error) {
+            response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
+        }
+        response.status(200).send(result.rows)
+    })
+}
+
+const getAllDataBtId = (request, response) => {
+    const id = (request.params.id)
+    let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS seedsCount FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_process=$1 GROUP BY composing.id_process,list.id_list,users.id_user"
+    pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
         }
@@ -410,7 +431,7 @@ const getProcessStateServer = (request, response) => {
 module.exports = {
     addProcess,
     getAllData,
-    updateActions,
+    updateProcess,
     deleteProcess,
     startedProcess,
     getAllProcessSeeds,
@@ -434,5 +455,6 @@ module.exports = {
     getOfferData,
     addOfferData,
     deleteOffer,
-    saveCounter
+    saveCounter,
+    getAllDataBtId
 }
