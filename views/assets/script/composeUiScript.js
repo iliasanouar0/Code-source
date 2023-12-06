@@ -176,6 +176,11 @@ $(document).on('click', '.edit', event => {
     })
 })
 
+$(document).on('click', '#c_update', event => {
+    let id = $(event.target).data('id')
+    console.log(id);
+})
+
 /**
  * ~composing
  * ! form :
