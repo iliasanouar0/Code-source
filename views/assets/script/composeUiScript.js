@@ -172,8 +172,8 @@ $(document).on('click', '.edit', event => {
                 $('#preview').html(response)
             });
         }
+        $('.add_compose').modal('show')
     })
-    $('.add_compose').modal('show')
 })
 
 /**
