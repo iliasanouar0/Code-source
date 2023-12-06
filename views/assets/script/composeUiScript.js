@@ -70,6 +70,7 @@ $(document).on('click', '.edit', event => {
         let list = $('#p_list_add').children()
         for (let i = 0; i < list.length; i++) {
             if ($(list[i]).val() == json[0].id_list) {
+                console.log($(list[i]).val());
                 $(list[i]).attr('selected', true)
                 break
             }
