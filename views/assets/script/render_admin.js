@@ -1063,6 +1063,7 @@ if (path.includes("/admin/users/")) {
     }).then((response) => {
       return response.json();
     }).then((data) => {
+      console.log(data);
       data.forEach((elm) => {
         let option = document.createElement("option");
         option.innerHTML = elm["name"];
@@ -1081,6 +1082,7 @@ if (path.includes("/admin/users/")) {
         dataAdd.appendChild(option);
       } else {
         data.forEach((elm) => {
+          console.log(data);
           let option = document.createElement("option");
           option.innerHTML = `${elm['file']} / Count : ${elm['count']}`
           option.setAttribute("value", elm['file']);
@@ -1095,6 +1097,7 @@ if (path.includes("/admin/users/")) {
       return response.json();
     }).then((data) => {
       if (data.length == 0) {
+        console.log(data);
         let option = document.createElement("option");
         option.innerHTML = `No available offers`
         option.setAttribute("value", '');
