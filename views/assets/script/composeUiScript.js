@@ -68,6 +68,11 @@ $(document).on('click', '.edit', event => {
                 }
             ]
         let list = $('#p_list_add').children()
+        for (let i = 0; i < array.length; i++) {
+            if ($(list[0]).val() == json[0].id_list) {
+                console.log(json[0].id_list);
+            }
+        }
         let data = $('#p_data_add').children()
         console.log(list);
 
