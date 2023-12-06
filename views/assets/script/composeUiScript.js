@@ -176,9 +176,132 @@ $(document).on('click', '.edit', event => {
     })
 })
 
+const updateCompose = data => {
+    var settings = {
+        "url": "http://project1.gm2reporting.com:3000/compose/",
+        "method": "PUT",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify(data),
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        Swal.fire({
+            title: response,
+            timer: 1500,
+            showConfirmButton: false,
+            icon: 'success'
+        }).then(() => {
+            $('.add_compose input:text').val('')
+            $('.add_compose input:checkbox').prop("checked", false)
+            $(".add_compose").modal("hide");
+            getDataCompose.ajax.reload(null, false)
+        })
+    });
+}
+
 $(document).on('click', '#c_update', event => {
     let id = $(event.target).data('id')
     console.log(id);
+    let composingList = $('#p_list_add').val()
+    let data = $('#p_data_add').val()
+    let count = $('#p_data_add option:selected').data('count')
+    let limit = $('#limit_send').val()
+    let selected = $('.actions input:checked')
+    if (data == 'No available data' || selected.length == 0) {
+        swal.fire('all fields requirer')
+        return
+    }
+    let action = selected[0].value
+    let dataComposing
+    switch (action) {
+        case 'checkProxy':
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `none`,
+                "data": `none`,
+                "count": 0,
+            };
+            updateCompose(dataComposing)
+            break;
+        case 'verify':
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `none`,
+                "data": `none`,
+                "count": 0,
+            };
+            updateCompose(dataComposing)
+            break;
+        case 'compose':
+            let offerAdd
+            let subject = $('#subject').val()
+            let body = $('#body').val()
+            let to = $('#to').val()
+            if (subject == '' || to == '') {
+                swal.fire('subject and mailto are required')
+                return
+            }
+            if (body == '') {
+                offerAdd = $('#p_offers_add option:selected').val()
+                if (offerAdd == '') {
+                    swal.fire('Select or upload offer !!')
+                    return
+                }
+            } else {
+                offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer.html`
+                fetch(`http://${ip}:3000/compose/offers?offer=${offerAdd}`, {
+                    method: 'POST',
+                    body: `${JSON.stringify({ data: body })}`,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                        'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+                    }
+                }).then(r => {
+                    return r.text()
+                }).then(d => {
+                    console.log(d);
+                })
+            }
+            action += `,subject:${subject},to:${to}`
+            if (limit != '' && limit != '0') {
+                action += `,limit:${limit}`
+            } else {
+                action += `,limit:auto`
+            }
+            if ($('#limit_fixed').is(":checked")) {
+                action += `,Fixed:true`
+            }
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `${offerAdd}`,
+                "data": `${data}`,
+                "count": `${count}`,
+            };
+
+            updateCompose(dataComposing)
+            break;
+        default:
+            break;
+    }
+
 })
 
 /**

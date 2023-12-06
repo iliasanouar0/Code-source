@@ -10,19 +10,19 @@ let config = data.data
 
 const pool = new pg.Pool(config);
 
-const addProcess = (request, response) => {
+const updateProcess = (request, response) => {
     const obj = (request.body)
-    let sql = `INSERT INTO composing (id_list ,id_user ,action ,data ,offer,status ,count) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
+    let sql = `UPDATE composing SET id_list =$1,id_user=$2 ,action=$3 ,data=$4 ,offer=$5,status=$6 ,count=$7 returning id_process`
     let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count]
     pool.query(sql, data, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
         }
-        response.status(200).send(`Compose added with ID : ${result.rows[0].id_process}`)
+        response.status(200).send(`Compose updated with ID : ${result.rows[0].id_process}`)
     })
 }
 
-const updateProcess = (request, response) => {
+const addProcess = (request, response) => {
     const obj = (request.body)
     let sql = `INSERT INTO composing (id_list ,id_user ,action ,data ,offer,status ,count) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
     let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count]
