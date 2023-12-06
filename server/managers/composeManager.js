@@ -46,7 +46,7 @@ const getAllData = (request, response) => {
 
 const getAllDataBtId = (request, response) => {
     const id = (request.params.id)
-    let sql = "SELECT * FROM composing WHERE composing.id_process=$1"
+    let sql = "SELECT * FROM composing WHERE id_process=$1"
     pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
