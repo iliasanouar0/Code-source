@@ -133,8 +133,13 @@ $(document).on('click', '.edit', event => {
                     break;
             }
         }
-
-
+        let offers = $('#p_offers_add').children()
+        for (let i = 0; i < offers.length; i++) {
+            if ($(offers[i]).val() == json[0].offer) {
+                $(offers[i]).attr('selected', true)
+                break
+            }
+        }
     })
     $('.add_compose').modal('show')
 })
