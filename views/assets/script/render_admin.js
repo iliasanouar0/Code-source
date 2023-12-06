@@ -1043,11 +1043,77 @@ if (path.includes("/admin/users/")) {
   getAccessGranted
   getMode()
 } else if (path.includes("/admin/compose/")) {
+  const select = document.querySelector("#p_list_add");
+  const dataAdd = document.querySelector("#p_data_add");
+  const offersAdd = document.querySelector("#p_offers_add");
+  let default_limit = document.querySelector('.default_limit')
+  select.innerHTML = ""
+  dataAdd.innerHTML = ""
+  offersAdd.innerHTML = ""
+  fetch(`http://${ip}:3000/compose/limit`, {
+    method: "GET",
+  }).then((response) => {
+    return response.text();
+  }).then((data) => {
+    default_limit.innerHTML = data
+  })
+  fetch(`http://${ip}:3000/lists`, {
+    method: "GET",
+  }).then((response) => {
+    return response.json();
+  }).then((data) => {
+
+    data.forEach((elm) => {
+      let option = document.createElement("option");
+      option.innerHTML = elm["name"];
+      option.setAttribute("value", elm["id_list"]);
+      select.appendChild(option);
+    });
+  })
+  fetch(`http://${ip}:3000/compose/data`, {
+    method: "GET",
+  }).then((response) => {
+    return response.json();
+  }).then((data) => {
+    if (data.length == 0) {
+      let option = document.createElement("option");
+      option.innerHTML = `No available data`
+      dataAdd.appendChild(option);
+    } else {
+      data.forEach((elm) => {
+
+        let option = document.createElement("option");
+        option.innerHTML = `${elm['file']} / Count : ${elm['count']}`
+        option.setAttribute("value", elm['file']);
+        option.dataset.count = elm['count'];
+        dataAdd.appendChild(option);
+      });
+    }
+  })
+  fetch(`http://${ip}:3000/compose/offers`, {
+    method: "GET",
+  }).then((response) => {
+    return response.json();
+  }).then((data) => {
+    if (data.length == 0) {
+      let option = document.createElement("option");
+      option.innerHTML = `No available offers`
+      option.setAttribute("value", '');
+      offersAdd.appendChild(option);
+    } else {
+      let option = document.createElement("option");
+      option.innerHTML = `--SELECT OFFER--`
+      option.setAttribute("value", '');
+      offersAdd.appendChild(option);
+      data.forEach((elm) => {
+        let option = document.createElement("option");
+        option.innerHTML = `${elm['file']}`
+        option.setAttribute("value", elm['file']);
+        offersAdd.appendChild(option);
+      });
+    }
+  })
   document.querySelector("#add_compose").addEventListener("click", () => {
-    const select = document.querySelector("#p_list_add");
-    const dataAdd = document.querySelector("#p_data_add");
-    const offersAdd = document.querySelector("#p_offers_add");
-    let default_limit = document.querySelector('.default_limit')
     select.innerHTML = ""
     dataAdd.innerHTML = ""
     offersAdd.innerHTML = ""
