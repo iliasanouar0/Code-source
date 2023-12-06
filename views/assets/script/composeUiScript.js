@@ -86,14 +86,17 @@ $(document).on('click', '.edit', event => {
         for (let i = 0; i < actions.length; i++) {
             switch (actions[i]) {
                 case "compose":
+                    $('.add_compose input:checkbox').prop("checked", false)
                     $('#btn-check-compose').prop("checked", true);
                     $('.send_message').removeClass('d-none');
                     break;
                 case "verify":
+                    $('.add_compose input:checkbox').prop("checked", false)
                     $('#btn-check-verify').prop("checked", true);
                     $('.send_message').addClass('d-none');
                     break;
                 case "checkProxy":
+                    $('.add_compose input:checkbox').prop("checked", false)
                     $('#btn-check-proxy').prop("checked", true);
                     $('.send_message').addClass('d-none');
                     break;
