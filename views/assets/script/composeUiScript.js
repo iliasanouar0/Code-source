@@ -140,6 +140,22 @@ $(document).on('click', '.edit', event => {
                 break
             }
         }
+
+        if (json[0].offer == '' || json[0].offer == 'none') {
+            $('#body').removeClass('d-none')
+            $('#preview').addClass('d-none')
+        } else {
+            var settings = {
+                "url": `http://${ip}:3000/compose/offerdata?offer=${json[0].offer}`,
+                "method": "GET",
+                "timeout": 0,
+            };
+            $.ajax(settings).done(function (response) {
+                $('#body').addClass('d-none')
+                $('#preview').removeClass('d-none')
+                $('#preview').html(response)
+            });
+        }
     })
     $('.add_compose').modal('show')
 })
