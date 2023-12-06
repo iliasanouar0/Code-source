@@ -48,8 +48,30 @@ $(document).on('click', '.edit', event => {
         method: "GET",
     }).then(response => {
         return response.json()
-    }).then(data => {
-        console.log(data);
+    }).then(json => {
+        let t =
+            [
+                {
+                    "id_process": 50,
+                    "id_list": 17,
+                    "id_user": 20,
+                    "action": "compose,subject:test compose 666,to:iliasanouar0@gmail.com,limit:30,Fixed:true",
+                    "data": "test.txt",
+                    "offer": "test11.html",
+                    "status": "FINISHED",
+                    "count": 69,
+                    "counter": 60,
+                    "add_date": "2023-12-06T08:28:35.798Z",
+                    "update_date": "2023-12-06T08:28:35.798Z",
+                    "start_in": "2023-12-06T03:28:54.410-05:00",
+                    "end_in": "2023-12-06T03:31:03.738-05:00"
+                }
+            ]
+        let list = $('#p_list_add').children
+        let data = $('#p_data_add').children
+        console.log(list);
+
+
     })
     $('.add_compose').modal('show')
 })
