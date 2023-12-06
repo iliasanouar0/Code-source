@@ -82,8 +82,7 @@ $(document).on('click', '.edit', event => {
             }
         }
         let actions = json[0].action.split(',')
-        console.log(actions);
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < actions.length; i++) {
             switch (actions[i]) {
                 case "compose":
                     $('#btn-check-compose').prop("checked", true);
@@ -94,7 +93,7 @@ $(document).on('click', '.edit', event => {
                     $('.send_message').addClass('d-none');
                     break;
                 case "checkProxy":
-                    $('#btn-check-verify').prop("checked", true);
+                    $('#btn-check-proxy').prop("checked", true);
                     $('.send_message').addClass('d-none');
                     break;
                 default:
