@@ -73,7 +73,6 @@ $(document).on('click', '.edit', event => {
         }
         for (let i = 0; i < list.length; i++) {
             if ($(list[i]).val() == json[0].id_list) {
-                console.log($(list[i]).val());
                 $(list[i]).attr('selected', true)
                 break
             }
@@ -104,6 +103,33 @@ $(document).on('click', '.edit', event => {
                     $('.send_message').addClass('d-none');
                     break;
                 default:
+                    switch (actions[i].split(':')[0]) {
+                        case 'Fixed':
+                            $('#limit_fixed').prop("checked", true);
+                            $('#limit_send').prop("disabled", false);
+                            break;
+                        case 'limit':
+                            switch (actions[i].split(':')[1]) {
+                                case 'auto':
+                                    $('#auto_limit').prop("checked", true);
+                                    $('#limit_send').prop("disabled", true);
+                                    $('#limit_send').val(0);
+                                    break;
+                                default:
+                                    $('#limit_send').prop("disabled", false);
+                                    $('#limit_send').val(actions[i].split(':')[1]);
+                                    break;
+                            }
+                            break;
+                        case 'to':
+                            $('#to').val(actions[i].split(':')[1])
+                            break;
+                        case 'subject':
+                            $('#subject').val(actions[i].split(':')[1])
+                            break;
+                        default:
+                            break;
+                    }
                     break;
             }
         }
@@ -311,7 +337,7 @@ $(document).on('click', '#c_add', () => {
             } else {
                 action += `,limit:auto`
             }
-            if ($(limit_fixed).is(":checked")) {
+            if ($('#limit_fixed').is(":checked")) {
                 action += `,Fixed:true`
             }
             dataComposing = {
