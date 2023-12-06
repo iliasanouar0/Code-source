@@ -70,12 +70,17 @@ $(document).on('click', '.edit', event => {
         let list = $('#p_list_add').children()
         for (let i = 0; i < list.length; i++) {
             if ($(list[i]).val() == json[0].id_list) {
-                console.log(json[0].id_list);
                 $(list[i]).attr('selected', true)
                 break
             }
         }
         let data = $('#p_data_add').children()
+        for (let i = 0; i < data.length; i++) {
+            if ($(data[i]).val() == json[0].data) {
+                $(data[i]).attr('selected', true)
+                break
+            }
+        }
         // console.log(list);
 
 
