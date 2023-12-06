@@ -25,6 +25,11 @@ Date.prototype.toDateInputValue = function () {
     return local.toJSON().slice(0, 10);
 };
 
+$(document).on('hide.bs.modal', '.add_compose', () => {
+    $('.add_compose input:text').val('')
+    $('.add_compose input:checkbox').prop("checked", false)
+})
+
 $(document).on("click", "#add_compose", () => {
     $('#c_update').addClass('d-none')
     $('#c_add').removeClass('d-none')
