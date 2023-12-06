@@ -67,8 +67,8 @@ $(document).on('click', '.edit', event => {
                     "end_in": "2023-12-06T03:31:03.738-05:00"
                 }
             ]
-        let list = $('#p_list_add').children
-        let data = $('#p_data_add').children
+        let list = $('#p_list_add').children()
+        let data = $('#p_data_add').children()
         console.log(list);
 
 
