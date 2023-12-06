@@ -83,6 +83,21 @@ $(document).on('click', '.edit', event => {
         }
         let actions = json[0].action.split(',')
         console.log(actions);
+        for (let i = 0; i < array.length; i++) {
+            switch (actions[i]) {
+                case "compose":
+                    $('#btn-check-compose').prop("checked", true);
+                    $('.send_message').removeClass('d-none');
+                    break;
+                case "verify":
+                    $('#btn-check-verify').prop("checked", true);
+                    $('.send_message').addClass('d-none');
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
 
     })
@@ -233,8 +248,6 @@ $(document).on('click', '#c_add', () => {
                 "data": `none`,
                 "count": 0,
             };
-
-
             addCompose(dataComposing)
             break;
         case 'verify':
