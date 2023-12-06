@@ -79,6 +79,9 @@ $(document).on('click', '.edit', event => {
         }
         let data = $('#p_data_add').children()
         for (let i = 0; i < data.length; i++) {
+            $(data[i]).attr('selected', false)
+        }
+        for (let i = 0; i < data.length; i++) {
             if ($(data[i]).val() == json[0].data) {
                 $(data[i]).attr('selected', true)
                 break
@@ -134,6 +137,9 @@ $(document).on('click', '.edit', event => {
             }
         }
         let offers = $('#p_offers_add').children()
+        for (let i = 0; i < offers.length; i++) {
+            $(offers[i]).attr('selected', false)
+        }
         for (let i = 0; i < offers.length; i++) {
             if ($(offers[i]).val() == json[0].offer) {
                 $(offers[i]).attr('selected', true)
