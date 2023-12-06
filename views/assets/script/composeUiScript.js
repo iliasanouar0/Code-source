@@ -81,7 +81,8 @@ $(document).on('click', '.edit', event => {
                 break
             }
         }
-        // console.log(list);
+        let actions = json[0].action.split(',')
+        console.log(actions);
 
 
     })
