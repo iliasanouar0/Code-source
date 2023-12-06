@@ -74,7 +74,7 @@ $(document).on('click', '.edit', event => {
             }
         }
         let data = $('#p_data_add').children()
-        console.log(list);
+        // console.log(list);
 
 
     })
