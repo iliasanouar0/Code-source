@@ -93,7 +93,10 @@ $(document).on('click', '.edit', event => {
                     $('#btn-check-verify').prop("checked", true);
                     $('.send_message').addClass('d-none');
                     break;
-
+                case "checkProxy":
+                    $('#btn-check-verify').prop("checked", true);
+                    $('.send_message').addClass('d-none');
+                    break;
                 default:
                     break;
             }
