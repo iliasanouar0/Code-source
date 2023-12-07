@@ -135,7 +135,7 @@ const deleteOffer = (request, response) => {
 
 const getAllUserDate = (request, response) => {
     const id = (request.params.id)
-    let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_user=($1) GROUP BY composing.id_process,list.id_list,users.id_user"
+    let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS seedsCount FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_user=($1) GROUP BY composing.id_process,list.id_list,users.id_user"
     pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -145,7 +145,7 @@ const getAllUserDate = (request, response) => {
 }
 
 const getAllSupDate = (request, response) => {
-    let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS count FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list WHERE users.type!='IT' GROUP BY composing.id_process,list.id_list,users.id_user"
+    let sql = "SELECT composing.*,list.name AS list_name,list.isp,users.login, COUNT(id_seeds) AS seedsCount FROM composing JOIN list ON list.id_list=composing.id_list JOIN users ON composing.id_user=users.id_user JOIN seeds ON seeds.id_list=composing.id_list WHERE users.type!='IT' GROUP BY composing.id_process,list.id_list,users.id_user"
     pool.query(sql, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
