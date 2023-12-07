@@ -149,7 +149,6 @@ const composeEmail = async (data, option, mode) => {
     const browser = obj.browser
     feedback += obj.feedback
     await time(10000)
-    console.log(option.bcc);
     if (option.bcc == undefined) {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-noData-${data.id_process}.png`
@@ -183,7 +182,6 @@ const composeEmail = async (data, option, mode) => {
         return b
     }, option.bcc.join(','))
     await time(3000)
-    console.log(bcc);
     await time(3000)
     await page.waitForSelector('[name="subjectbox"]')
     await time(3000)
