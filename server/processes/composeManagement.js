@@ -256,6 +256,23 @@ const composeEmail = async (data, option, mode) => {
     return feedback
 }
 
+const kill = (id_process) => {
+    pidProcess.forEach(Element => {
+        if (Element.id_process == id_process) {
+            let state = require('is-running')(Element.pid)
+            if (state) {
+                try {
+                    process.kill(Element.pid, 'SIGINT')
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    pidProcess.splice(pidProcess.indexOf(Element.pid), 1)
+                }
+            }
+        }
+    })
+}
 module.exports = {
-    composeEmail
+    composeEmail,
+    kill
 }

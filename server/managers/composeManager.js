@@ -341,7 +341,7 @@ const processing = async (data) => {
         case 'kill':
             switch (data.isp) {
                 case 'gmail':
-                    gmailManagement.kill(data.id_process)
+                    composeManagement.kill(data.id_process)
                     break
                 default:
                     console.log('data invalid');
