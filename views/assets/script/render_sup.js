@@ -73,7 +73,7 @@ fetch(supervisorSidebarUrl)
             lists.setAttribute("href", "./");
             process.setAttribute('href', '../process/')
             compose.setAttribute('href', '../compose/')
-        } else if (path == "/mailer/compose/") {
+        } else if (path == "/supervisor/compose/") {
             home.setAttribute("href", "../");
             compose.classList.add("active");
             compose.setAttribute("href", "./");
