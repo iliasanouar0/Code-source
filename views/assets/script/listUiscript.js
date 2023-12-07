@@ -978,6 +978,8 @@ $(document).on('click', '.submit_bulk_edit', event => {
                     timer: 2000
                 })
             }).then(() => {
+                $('#updateOptions input').val('')
+                $('#updateOptions textarea').val('')
                 $('#updateOptions').modal('hide')
                 seedsViewRender(data)
             })
