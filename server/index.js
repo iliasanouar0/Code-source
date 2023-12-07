@@ -560,7 +560,7 @@ wss.on('connection', (wss, req) => {
       await time(5000)
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       processStateManager.addState(status)
-      
+
     } else if (request == "pause") {
       processManager.stoppedProcess(data.data)
       let seeds = await processManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
@@ -964,6 +964,10 @@ wsc.on('connection', (wss, req) => {
                 if (bccToProcess.length == 0) {
                   break
                 }
+                if (bccToProcess[0] == undefined) {
+                  bccToProcess.shift()
+                  break
+                }
                 let seed = toProcess[0]
                 if (option.onlyStarted) {
                   await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
@@ -974,6 +978,7 @@ wsc.on('connection', (wss, req) => {
                   break
                 }
                 let r = ''
+
                 for (let j = 0; j < actions.length; j++) {
                   if (bccToProcess.length == 0) {
                     break
