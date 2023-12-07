@@ -1069,6 +1069,7 @@ wsc.on('connection', (wss, req) => {
                   if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0) {
                     seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
                     toProcess.push(seeds[0])
+                    console.log(seeds[0]);
                     await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
                     seeds.splice(seeds.indexOf(seeds[0]), 1)
                     bccToProcess.push(bccResult[0 + start])
