@@ -51,6 +51,7 @@ fetch(mailerSidebarUrl)
     const home = document.querySelector(".home");
     const list = document.querySelector(".lists");
     const process = document.querySelector(".process");
+    const compose = document.querySelector('.compose')
 
     if (path == "/mailer/") {
       home.classList.add("active");
@@ -60,11 +61,19 @@ fetch(mailerSidebarUrl)
       process.classList.add("active");
       process.setAttribute("href", "./");
       list.setAttribute("href", "../lists/");
+      compose.setAttribute("href", "../compose/");
     } else if (path == "/mailer/lists/") {
       home.setAttribute("href", "../");
       list.classList.add("active");
       list.setAttribute("href", "./");
       process.setAttribute("href", "../process/");
+      compose.setAttribute("href", "../compose/");
+    } else if (path == "/mailer/compose/") {
+      home.setAttribute("href", "../");
+      compose.classList.add("active");
+      compose.setAttribute("href", "./");
+      process.setAttribute("href", "../process/");
+      list.setAttribute("href", "../lists/");
     }
   });
 

@@ -56,6 +56,7 @@ fetch(supervisorSidebarUrl)
         const home = document.querySelector(".home");
         const process = document.querySelector(".process");
         const lists = document.querySelector(".lists");
+        const compose = document.querySelector('.compose')
         console.log(path);
         if (path == "/supervisor/") {
             home.classList.add("active");
@@ -65,11 +66,19 @@ fetch(supervisorSidebarUrl)
             process.classList.add("active");
             process.setAttribute("href", "./");
             lists.setAttribute('href', '../lists/')
+            compose.setAttribute('href', '../compose/')
         } else if (path == "/supervisor/lists/") {
             home.setAttribute("href", "../");
             lists.classList.add("active");
             lists.setAttribute("href", "./");
             process.setAttribute('href', '../process/')
+            compose.setAttribute('href', '../compose/')
+        } else if (path == "/mailer/compose/") {
+            home.setAttribute("href", "../");
+            compose.classList.add("active");
+            compose.setAttribute("href", "./");
+            process.setAttribute("href", "../process/");
+            lists.setAttribute("href", "../lists/");
         }
     });
 
