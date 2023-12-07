@@ -1468,6 +1468,8 @@ app.patch("/process/", processManager.deleteProcess);
 
 // composing API
 app.get('/compose/admin', composeManager.getAllData)
+app.get("/compose/sup/", composeManager.getAllSupDate)
+app.get("/compose/mailer/:id", composeManager.getAllUserDate)
 app.get('/compose/limit', (req, res) => {
   res.status(200).send(result.parsed.COMPOSE_LIMIT)
 })
