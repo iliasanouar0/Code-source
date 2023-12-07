@@ -35,10 +35,12 @@ $(document).on('click', "#info", () => {
 })
 
 $(document).on('click', '.updateOptions', event => {
-    $('#updateOptions').modal('show');
     $('.submit_proxy')[0].dataset.id = $(event.target)[0].dataset.id
+    $('.submit_proxy').val('Submit')
     $('.submit_bulk_edit')[0].dataset.id = $(event.target)[0].dataset.id
+    $('.submit_bulk_edit').val('Submit')
     $('.list_s_u').html($(event.target)[0].dataset.id)
+    $('#updateOptions').modal('show');
 })
 
 $(document).on('click', '#add_list', () => {
