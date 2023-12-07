@@ -859,6 +859,8 @@ $(document).on('click', '.submit_proxy', event => {
                         timer: 1400
                     })
                 }).then(() => {
+                    $('#updateOptions input').val('')
+                    $('#updateOptions textarea').val('')
                     $('#updateOptions').modal('hide')
                     seedsViewRender(data)
                 })
@@ -906,6 +908,8 @@ $(document).on('click', '.submit_proxy', event => {
                 timer: 1400
             })
         }).then(() => {
+            $('#updateOptions input').val('')
+            $('#updateOptions textarea').val('')
             $('#updateOptions').modal('hide')
             seedsViewRender(data)
         })
