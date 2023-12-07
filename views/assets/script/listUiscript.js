@@ -719,32 +719,32 @@ const seedsViewRender = data => {
         }
     }
     $.ajax(settings).done(function (responseText) {
-        let timerInterval
-        Swal.fire({
-            title: 'loading !!',
-            html: '<b></b>',
-            timer: responseText.length,
-            timerProgressBar: true,
-            didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                }, 100)
-            },
-            willClose: () => {
-                clearInterval(timerInterval)
-            }
-        }).then((result) => {
-            if (result.dismiss === Swal.DismissReason.timer) {
-                Swal.fire({
-                    title: 'done !',
-                    icon: 'success',
-                    timer: 1000,
-                    showConfirmButton: false
-                })
-            }
-        })
+        // let timerInterval
+        // Swal.fire({
+        //     title: 'loading !!',
+        //     html: '<b></b>',
+        //     timer: responseText.length,
+        //     timerProgressBar: true,
+        //     didOpen: () => {
+        //         Swal.showLoading()
+        //         const b = Swal.getHtmlContainer().querySelector('b')
+        //         timerInterval = setInterval(() => {
+        //             b.textContent = Swal.getTimerLeft()
+        //         }, 100)
+        //     },
+        //     willClose: () => {
+        //         clearInterval(timerInterval)
+        //     }
+        // }).then((result) => {
+        //     if (result.dismiss === Swal.DismissReason.timer) {
+        //         Swal.fire({
+        //             title: 'done !',
+        //             icon: 'success',
+        //             timer: 1000,
+        //             showConfirmButton: false
+        //         })
+        //     }
+        // })
         $('#pagination-container').pagination({
             dataSource: responseText,
             pageSize: 10,
