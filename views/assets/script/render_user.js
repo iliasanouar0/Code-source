@@ -663,7 +663,7 @@ if (path == "/mailer/lists/") {
     }).then((data) => {
       default_limit.innerHTML = data
     })
-    fetch(`http://${ip}:3000/lists`, {
+    fetch(`http://${ip}:3000/lists/${user.id_user}`, {
       method: "GET",
     }).then((response) => {
       return response.json();
