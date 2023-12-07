@@ -110,7 +110,7 @@ submitButton.addEventListener("click", (e) => {
           }
           sessionStorage.setItem("user", JSON.stringify(data[0]));
           window.sessionStorage.setItem('auth', '1')
-          if (data[0].type == "IT" && data[0].status == "active") {
+          if (data[0].type == "admin" && data[0].status == "active") {
             window.location.href = "../admin/process";
           } else if (data[0].type == "sup") {
             document.location.href = "../supervisor/compose";
