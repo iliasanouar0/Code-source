@@ -65,6 +65,10 @@ const addUser = (data) => {
     });
 };
 
+$(".add_user").on('hide.bs.modal', () => {
+    $(".add_user input").val("");
+})
+
 const loginGenerate = (f_name_add, l_name_add, uniqNumber) => {
     if (f_name_add == "" || l_name_add == "") {
         Swal.fire("Please fill all fields");
@@ -80,13 +84,6 @@ const passwordGenerate = (f_name_add, uniqNumber) => {
     // }
     return `${f_name_add}@${uniqNumber}`;
 };
-
-// () => {
-//     // let password = passwordGenerate(f_name_add, getRndInteger(10000, 99999));
-//     if ($("#f_name_add").val() != '') {
-
-//     }
-// }
 
 $(document).on('blur', "#f_name_add", event => {
     let f_name = $(event.target).val()
