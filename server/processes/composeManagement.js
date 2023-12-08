@@ -144,111 +144,144 @@ const login = async (data, mode) => {
 
 const composeEmail = async (data, option, mode) => {
     let feedback = ''
-    const obj = await login(data, mode)
-    const page = obj.page
-    const browser = obj.browser
-    feedback += obj.feedback
+    let arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+    const browser = await puppeteer.launch({ headless: 'new', args: arg })
+    const browserPID = browser.process().pid
+    const page = await browser.newPage()
+    pidProcess.push({ id_process: data.id_process, pid: browserPID })
+    await page.setViewport({ width: 1440, height: 720 });
+    const navigationPromise = page.waitForNavigation()
+    await page.goto('https://google.com')
     await time(10000)
-    if (option.bcc == undefined) {
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-OPEN-${data.id_process}.png`
+    });
+    feedback += `${data.gmail.split('@')[0]}-@-OPEN-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    await navigationPromise
+    if (option.bcc != undefined) {
+        await time(3000)
         await page.screenshot({
-            path: `${path}/${data.gmail.split('@')[0]}-@-noData-${data.id_process}.png`
+            path: `${path}/${data.gmail.split('@')[0]}-@-BCC-${data.id_process}.png`
         });
-        feedback += `, ${data.gmail.split('@')[0]}-@-noData-${data.id_process}.png`
-        await page.close()
-        await browser.close()
-        return feedback
-    }
-    await page.screenshot({
-        path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
-    });
-    feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
-    await time(2000)
-    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    await page.waitForSelector('.z0')
-    await time(3000)
-    await page.click('.z0')
-    await time(6000)
-    await page.waitForSelector('.agP.aFw')
-    await time(3000)
-    await page.type('.agP.aFw', option.to, { delay: 200 })
-    await time(3000)
-    await page.waitForSelector(".aB.gQ.pB")
-    await time(3000)
-    await page.click(".aB.gQ.pB")
-    await time(3000)
-    let bcc = await page.evaluate((b) => {
-        let inputs = document.querySelectorAll('.agP.aFw')
-        inputs[1].value = b
-        return b
-    }, option.bcc.join(','))
-    await time(3000)
-    await time(3000)
-    await page.waitForSelector('[name="subjectbox"]')
-    await time(3000)
-    await page.click('[name="subjectbox"]')
-    await time(3000)
-    await page.type('[name="subjectbox"]', option.subject, { delay: 200 })
-    await time(3000)
-    fs.readFile(`/home/offers/${option.offer}`, async (err, data) => {
-        if (!err) {
-            await page.evaluate(async (dataTo) => {
-                document.querySelector('div[role="textbox"]').innerHTML = dataTo
-            }, data.toString());
-        }
-    })
-    await time(3000)
-    await page.screenshot({
-        path: `${path}/${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
-    });
-    feedback += `, ${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
-    await time(2000)
-    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    await time(3000)
-    await Promise.all([
-        page.$eval(`.T-I.J-J5-Ji.aoO.v7.T-I-atl.L3`, element =>
-            element.click()
-        ),
-        await page.waitForNavigation()
-    ]);
-    await time(30000)
-    let check = await page.evaluate(() => {
-        let unread = document.querySelectorAll('.zA.zE')
-        if (unread.length == 0) {
-            return { status: true }
-        }
-        let label = document.querySelector('.zA.zE .y2').innerText
-        if (label.includes('You have reached a limit for sending mail') || label.includes('Message blocked') || label.includes('Address not found')) {
-            return { status: false, message: label }
-        }
-        return { status: true }
-    })
-    await time(3000)
-    console.log(check.status);
-    await time(3000)
-    if (!check.status) {
-        console.log(check.message.split('.')[0].split('\n')[1]);
-        let details = check.message.split('.')[0].split('\n')[1]
+        feedback += `, ${data.gmail.split('@')[0]}-@-BCC-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    } else {
         await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
         });
         feedback += `, ${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
-        await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-        await time(3000)
-        console.log('you can\'t send !!');
-    } else {
-        await time(3000)
-        await page.screenshot({
-            path: `${path}/${data.gmail.split('@')[0]}-@-sended-${data.id_process}.png`
-        });
-        feedback += `, ${data.gmail.split('@')[0]}-@-sended-${data.id_process}.png`
-        await time(2000)
-        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        await time(3000)
-        console.log('sended !!');
     }
+    await time(10000)
+
+    // let feedback = ''
+    // const obj = await login(data, mode)
+    // const page = obj.page
+    // const browser = obj.browser
+    // feedback += obj.feedback
+    // await time(10000)
+    // if (option.bcc == undefined) {
+    //     await page.screenshot({
+    //         path: `${path}/${data.gmail.split('@')[0]}-@-noData-${data.id_process}.png`
+    //     });
+    //     feedback += `, ${data.gmail.split('@')[0]}-@-noData-${data.id_process}.png`
+    //     await page.close()
+    //     await browser.close()
+    //     return feedback
+    // }
+    // await page.screenshot({
+    //     path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    // });
+    // feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+    // await time(2000)
+    // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    // await page.waitForSelector('.z0')
+    // await time(3000)
+    // await page.click('.z0')
+    // await time(6000)
+    // await page.waitForSelector('.agP.aFw')
+    // await time(3000)
+    // await page.type('.agP.aFw', option.to, { delay: 200 })
+    // await time(3000)
+    // await page.waitForSelector(".aB.gQ.pB")
+    // await time(3000)
+    // await page.click(".aB.gQ.pB")
+    // await time(3000)
+    // let bcc = await page.evaluate((b) => {
+    //     let inputs = document.querySelectorAll('.agP.aFw')
+    //     inputs[1].value = b
+    //     return b
+    // }, option.bcc.join(','))
+    // await time(3000)
+    // await time(3000)
+    // await page.waitForSelector('[name="subjectbox"]')
+    // await time(3000)
+    // await page.click('[name="subjectbox"]')
+    // await time(3000)
+    // await page.type('[name="subjectbox"]', option.subject, { delay: 200 })
+    // await time(3000)
+    // fs.readFile(`/home/offers/${option.offer}`, async (err, data) => {
+    //     if (!err) {
+    //         await page.evaluate(async (dataTo) => {
+    //             document.querySelector('div[role="textbox"]').innerHTML = dataTo
+    //         }, data.toString());
+    //     }
+    // })
+    // await time(3000)
+    // await page.screenshot({
+    //     path: `${path}/${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
+    // });
+    // feedback += `, ${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
+    // await time(2000)
+    // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    // await time(3000)
+    // await Promise.all([
+    //     page.$eval(`.T-I.J-J5-Ji.aoO.v7.T-I-atl.L3`, element =>
+    //         element.click()
+    //     ),
+    //     await page.waitForNavigation()
+    // ]);
+    // await time(30000)
+    // let check = await page.evaluate(() => {
+    //     let unread = document.querySelectorAll('.zA.zE')
+    //     if (unread.length == 0) {
+    //         return { status: true }
+    //     }
+    //     let label = document.querySelector('.zA.zE .y2').innerText
+    //     if (label.includes('You have reached a limit for sending mail') || label.includes('Message blocked') || label.includes('Address not found')) {
+    //         return { status: false, message: label }
+    //     }
+    //     return { status: true }
+    // })
+    // await time(3000)
+    // console.log(check.status);
+    // await time(3000)
+    // if (!check.status) {
+    //     console.log(check.message.split('.')[0].split('\n')[1]);
+    //     let details = check.message.split('.')[0].split('\n')[1]
+    //     await time(3000)
+    //     await page.screenshot({
+    //         path: `${path}/${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
+    //     });
+    //     feedback += `, ${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
+    //     await time(2000)
+    //     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    //     await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+    //     await time(3000)
+    //     console.log('you can\'t send !!');
+    // } else {
+    //     await time(3000)
+    //     await page.screenshot({
+    //         path: `${path}/${data.gmail.split('@')[0]}-@-sended-${data.id_process}.png`
+    //     });
+    //     feedback += `, ${data.gmail.split('@')[0]}-@-sended-${data.id_process}.png`
+    //     await time(2000)
+    //     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    //     await time(3000)
+    //     console.log('sended !!');
+    // }
     await page.close()
     await browser.close()
     return feedback
