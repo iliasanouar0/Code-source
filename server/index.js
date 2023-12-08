@@ -1122,7 +1122,7 @@ wsc.on('connection', (wss, req) => {
         while (toProcess.length != 0 && state != "STOPPED") {
           console.log(toProcess);
           console.log(toProcess.length);
-          state = await composManager.getProcessState(data.id_process)
+          state = await composeManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             break
           }
@@ -1134,7 +1134,7 @@ wsc.on('connection', (wss, req) => {
               await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
             }
 
-            state = await composManager.getProcessState(data.id_process)
+            state = await composeManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
             }
@@ -1176,7 +1176,7 @@ wsc.on('connection', (wss, req) => {
             let r = ''
             for (let i = 0; i < actions.length; i++) {
               console.log(actions[i] + ' action start')
-              r += await composManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c, options: options, entity: data.entity, mode: mode })
+              r += await composeManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c, options: options, entity: data.entity, mode: mode })
               if (i < actions.length) {
                 r += ', '
               }
@@ -1245,14 +1245,14 @@ wsc.on('connection', (wss, req) => {
             let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
             processStateManager.updateState(status)
           }
-          state = await composManager.getProcessState(data.id_process)
+          state = await composeManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             break
           }
           if (toProcess.length == 0) {
             let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
             await processStateManager.updateState(status)
-            composManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
+            composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
             console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
             sendToAll(clients, 'reload')
           }
