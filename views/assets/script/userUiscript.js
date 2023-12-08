@@ -88,6 +88,7 @@ const passwordGenerate = (f_name_add, uniqNumber) => {
 $(document).on('input', "#f_name_add", event => {
     let f_name = $(event.target).val()
     if (f_name == '') {
+        $("#Password").val('')
         return
     }
     $("#Password").val(passwordGenerate(f_name, getRndInteger(10000, 99999)))
