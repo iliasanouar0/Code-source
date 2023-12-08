@@ -156,7 +156,7 @@ const composeEmail = async (data, option, mode) => {
     const page = await browser.newPage()
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
     await page.setViewport({ width: 1440, height: 720 });
-    await page.goto('https://gmail.com')
+    await page.goto('https://google.com')
     await time(3000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-OPEN-${data.id_process}.png`
@@ -165,10 +165,10 @@ const composeEmail = async (data, option, mode) => {
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await navigationPromise
     if (option.bcc != undefined) {
-        await page.waitForSelector('input[type="email"]')
-        await page.click('input[type="email"]')
-        await navigationPromise
-        await page.type('input[type="email"]', option.bcc.join(','), { delay: 100 })
+        // await page.waitForSelector('input[type="email"]')
+        // await page.click('input[type="email"]')
+        // await navigationPromise
+        // await page.type('input[type="email"]', option.bcc.join(','), { delay: 100 })
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-BCC-${data.id_process}.png`
         });
@@ -176,9 +176,9 @@ const composeEmail = async (data, option, mode) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     } else {
         await page.screenshot({
-            path: `${path}/${data.gmail.split('@')[0]}-@-NoBCC-${data.id_process}.png`
+            path: `${path}/${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
         });
-        feedback += `, ${data.gmail.split('@')[0]}-@-NoBCC-${data.id_process}.png`
+        feedback += `, ${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     }
     // let feedback = ''
@@ -308,6 +308,7 @@ const kill = (id_process) => {
         }
     })
 }
+
 module.exports = {
     composeEmail,
     kill
