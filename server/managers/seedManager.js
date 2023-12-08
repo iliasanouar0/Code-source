@@ -117,6 +117,7 @@ const updateSeeds = (request, response) => {
     query.push({ query: qr, data: data })
   }
   query.forEach((data) => {
+    console.log(data.query);
     pool.query(data.query, data.data, (error, result) => {
       if (error) {
         response.status(409).json(error);
