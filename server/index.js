@@ -771,10 +771,13 @@ wsc.on('connection', (wss, req) => {
           arrayBcc.pop()
           arrayBcc.shift()
         }
+        console.log(arrayBcc);
+        console.log(arrayBcc.length);
         if (limit != 'auto') {
           methods.fixedLimit = 'none'
 
           let divider = Math.ceil(arrayBcc.length / limit)
+          console.log(divider);
           let startIndex = 0
           let endIndex = limit
           for (let i = 0; i < divider; i++) {
