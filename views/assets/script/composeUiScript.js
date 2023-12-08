@@ -485,7 +485,7 @@ $(document).on('click', '#c_add', () => {
             } else {
                 let time = new Data().toLocalString()
                 console.log(time);
-                offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${}.html`
+                // offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${}.html`
                 // fetch(`http://${ip}:3000/compose/offers?offer=${offerAdd}`, {
                 //     method: 'POST',
                 //     body: `${JSON.stringify({ data: body })}`,
