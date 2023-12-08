@@ -1069,7 +1069,7 @@ wsc.on('connection', (wss, req) => {
                     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
                     processStateManager.updateState(status)
                   }
-                  if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0) {
+                  if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
                     seeds = Origins
                     await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
                     toProcess.push(seeds[0])
