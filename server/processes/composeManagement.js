@@ -150,6 +150,7 @@ const composeEmail = async (data, option, mode) => {
     const page = await browser.newPage()
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
     await page.setViewport({ width: 1440, height: 720 });
+    const navigationPromise = page.waitForNavigation()
     await page.goto('https://google.com')
     await time(3000)
     await page.screenshot({
