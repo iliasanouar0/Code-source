@@ -144,13 +144,7 @@ const login = async (data, mode) => {
 
 const composeEmail = async (data, option, mode) => {
     let feedback = ''
-    let arg
-    if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
-        arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-    } else {
-        const proxyServer = `${data.proxy}`;
-        arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-    }
+    let arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     const browser = await puppeteer.launch({ headless: 'new', args: arg })
     const browserPID = browser.process().pid
     const page = await browser.newPage()
@@ -165,10 +159,6 @@ const composeEmail = async (data, option, mode) => {
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await navigationPromise
     if (option.bcc != undefined) {
-        // await page.waitForSelector('input[type="email"]')
-        // await page.click('input[type="email"]')
-        // await navigationPromise
-        // await page.type('input[type="email"]', option.bcc.join(','), { delay: 100 })
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-BCC-${data.id_process}.png`
         });
