@@ -1107,14 +1107,6 @@ $(document).on('click', '#restart_s', () => {
                     })
                 }
             }
-        } else if (result.isDismissed) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'warning',
-                title: 'Cancelled',
-                showConfirmButton: false,
-                timer: 3000
-            })
         }
     })
 })
