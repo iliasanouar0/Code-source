@@ -1013,7 +1013,8 @@ wsc.on('connection', (wss, req) => {
                   if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0) {
                     console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
                     toProcess.push(seeds[0 + start])
-                    bccToProcess.push(bccResult[0 + start])
+                    bccToProcess.push(bccResult[0])
+                    bccResult.shift()
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
                     count++
                     let w = seeds.length + 3
@@ -1038,7 +1039,8 @@ wsc.on('connection', (wss, req) => {
                   if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0) {
                     console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
                     toProcess.push(seeds[0 + start])
-                    bccToProcess.push(bccResult[0 + start])
+                    bccToProcess.push(bccResult[0])
+                    bccResult.shift()
                     seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
                     count++
                     let w = seeds.length + 3
