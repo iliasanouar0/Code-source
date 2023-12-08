@@ -391,8 +391,7 @@ const getDataCompose = $("#composeData").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="Count : ${row.count}, Counter : ${row.counter == null ? 0 : row.counter}
-      }">
+        return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="Count : ${row.count}, Counter : ${row.counter == null ? 0 : row.counter}">
         <div class= "card-body p-0 text-center text-dark" >
           ${row.data.substring(0, 10)}...
           </div >
