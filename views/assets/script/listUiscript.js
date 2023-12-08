@@ -157,7 +157,7 @@ $(document).on('click', '.edit', event => {
     td.innerHTML = `<input type="text" class="form-control" id="list_new_name" value="${name}"/>`
     $(event.target).html('<i class="fas fa-check"></i>')
     $(event.target).toggleClass('save edit')
-    $(event.target).parent()[0].append('<button class="cancel_name_update">Cancel</button>')
+    $(event.target).parent()[0].append(<button class="cancel_name_update">Cancel</button>)
 })
 
 $(document).on('click', '.save', event => {
