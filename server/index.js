@@ -860,6 +860,7 @@ wsc.on('connection', (wss, req) => {
 
         switch (methods.fixedLimit) {
           case true:
+            console.log('true');
             while (toProcess.length != 0 && state != "STOPPED") {
               state = await composeManager.getProcessState(data.id_process)
               if (state == "STOPPED") {
@@ -966,6 +967,7 @@ wsc.on('connection', (wss, req) => {
             }
             break;
           case 'none':
+            console.log('none');
             while (toProcess.length != 0 && state != "STOPPED") {
               state = await composeManager.getProcessState(data.id_process)
               if (state == "STOPPED") {
@@ -1073,6 +1075,7 @@ wsc.on('connection', (wss, req) => {
             }
             break;
           default:
+            console.log('default');
             while (bccToProcess.length != 0 && state != "STOPPED") {
               state = await composeManager.getProcessState(data.id_process)
               if (state == "STOPPED") {
