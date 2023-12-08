@@ -125,7 +125,7 @@ const updateSeeds = (request, response) => {
       }
     });
   });
-  response.status(200).send(`seeds updated successfully`);
+  // response.status(200).send(`seeds updated successfully`);
 }
 
 const searchSeeds = (request, response) => {
