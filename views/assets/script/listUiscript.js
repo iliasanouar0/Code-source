@@ -920,7 +920,7 @@ $(document).on('click', '.submit_proxy', event => {
 
 $(document).on('click', '.submit_bulk_edit', event => {
     event.preventDefault()
-    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4},([a-zA-Z]\w{3,14}|none)\,((\d+\.\d+\.\d+\.\d+\:\d+)|\s{1}|none)\,(\w{3,14}|none)/i
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4},(\w{3,14}|none)\,((\d+\.\d+\.\d+\.\d+\:\d+)|\s{1}|none)\,(\w{3,14}|none)/i
     const data = $(event.target).data().id
     let text = $("#seedsUpdateText").val()
     if (text != "") {
