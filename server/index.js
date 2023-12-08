@@ -1115,30 +1115,186 @@ wsc.on('connection', (wss, req) => {
             break;
         }
       }
-      console.log(bccToProcess);
-      async function repeat(array, bccToProcess, number, start, check) {
-        bccToProcess[start]
-        console.log(check);
-        if (check) {
-          console.log('when it\'s equal to 1');
-          console.log(number);
-          for (let i = 0; i < array[start].length; i++) {
-            await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
-            await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
-            process([array[start][i]], [bccToProcess[start][i]], i, { onlyStarted: false }, methods)
+
+
+      const processV = async (toProcess, start, option) => {
+        await time(3000)
+        while (toProcess.length != 0 && state != "STOPPED") {
+          console.log(toProcess);
+          console.log(toProcess.length);
+          state = await composManager.getProcessState(data.id_process)
+          if (state == "STOPPED") {
+            break
           }
-        } else {
-          console.log(number);
-          await time(3000)
-          process(array[start], bccToProcess[start], start, { onlyStarted: true }, methods)
-          if (number - 1 > start) await repeat(array, bccToProcess, number, start + 1, check);
+          for (let i = 0; i < toProcess.length; i++) {
+            let seed = toProcess[0]
+
+            if (option.onlyStarted) {
+              await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
+              await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
+            }
+
+            state = await composManager.getProcessState(data.id_process)
+            if (state == "STOPPED") {
+              break
+            }
+
+            let actions
+            let subject
+            let pages
+            let c
+            let options = { markAsImportant: false, markAsStarted: false, click: false }
+            let mode
+
+            if (toProcess[0].action.indexOf('click') == -1 && toProcess[0].action.indexOf('count') == -1 && toProcess[0].action.indexOf('pages') == -1 && toProcess[0].action.indexOf('subject') == -1 && toProcess[0].action.indexOf('option') == -1) {
+              actions = [toProcess[0].action]
+            } else {
+              actions = toProcess[0].action.split(',')
+              let length = actions.length
+              for (let i = 0; i < length; i++) {
+                if (actions[length - (i + 1)].indexOf('option') != -1) {
+                  mode = actions.pop().split(':')[1]
+                } else if (actions[length - (i + 1)].indexOf('markAsStarted') != -1) {
+                  actions.pop()
+                  options.markAsStarted = true;
+                } else if (actions[length - (i + 1)].indexOf('click') != -1) {
+                  actions.pop()
+                  options.click = true;
+                } else if (actions[length - (i + 1)].indexOf('markAsImportant') != -1) {
+                  actions.pop()
+                  options.markAsImportant = true;
+                } else if (actions[length - (i + 1)].indexOf('count') != -1) {
+                  c = actions.pop().split(':')[1]
+                } else if (actions[length - (i + 1)].indexOf('pages') != -1) {
+                  pages = parseInt(actions.pop().split(':')[1])
+                } else if (actions[length - (i + 1)].indexOf('subject') != -1) {
+                  subject = actions.pop().split(':')[1]
+                }
+              }
+            }
+            console.log(`Actions : ${actions}`);
+            let r = ''
+            for (let i = 0; i < actions.length; i++) {
+              console.log(actions[i] + ' action start')
+              r += await composManager.processing({ data: toProcess[0], action: actions[i], subject: subject, pages: pages, count: c, options: options, entity: data.entity, mode: mode })
+              if (i < actions.length) {
+                r += ', '
+              }
+            }
+            let array = r.split(', ')
+            array.pop()
+            r = array.join((', '))
+            await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
+            if (r.indexOf('invalid') == -1) {
+              success++
+              let end_in = new Date()
+              let result
+              await Promise.all([
+                await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
+                result = {
+                  id_seeds: seed.id_seeds,
+                  end_in: end_in,
+                  id_process: data.id_process
+                },
+                await resultManager.endNow(result)
+              ])
+              toProcess.shift()
+              if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0) {
+                console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
+                toProcess.push(seeds[0 + start])
+                seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
+                count++
+                let w = seeds.length + 3
+                let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+                processStateManager.updateState(status)
+              }
+            } else {
+              failed++
+              let end_in = new Date()
+              let result
+              await Promise.all([
+                await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "failed"),
+                result = {
+                  id_seeds: toProcess[0].id_seeds,
+                  end_in: end_in,
+                  id_process: data.id_process
+                },
+                await resultManager.endNow(result)
+              ]);
+              toProcess.shift()
+              state = await composeManager.getProcessState(data.id_process)
+              if (state == "STOPPED") {
+                break
+              }
+              if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0) {
+                console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
+                toProcess.push(seeds[0 + start])
+                seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
+                count++
+                let w = seeds.length + 3
+                let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+                processStateManager.updateState(status)
+              }
+            }
+          }
+          let w = seeds.length + 3
+          if (w <= 0) {
+            let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+            processStateManager.updateState(status)
+          } else {
+            let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+            processStateManager.updateState(status)
+          }
+          state = await composManager.getProcessState(data.id_process)
+          if (state == "STOPPED") {
+            break
+          }
+          if (toProcess.length == 0) {
+            let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
+            await processStateManager.updateState(status)
+            composManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
+            console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
+            sendToAll(clients, 'reload')
+          }
         }
       }
+
+
+      async function repeat(array, bccToProcess, number, start, check, action) {
+        if (action == 'compose') {
+          bccToProcess[start]
+          if (check) {
+            for (let i = 0; i < array[start].length; i++) {
+              await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
+              await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
+              process([array[start][i]], [bccToProcess[start][i]], i, { onlyStarted: false }, methods)
+            }
+          } else {
+            await time(3000)
+            process(array[start], bccToProcess[start], start, { onlyStarted: true }, methods)
+            if (number - 1 > start) await repeat(array, bccToProcess, number, start + 1, check);
+          }
+        } else {
+          if (check) {
+            for (let i = 0; i < array[start].length; i++) {
+              await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
+              await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
+              processV([array[start][i]], start, { onlyStarted: false })
+            }
+          } else {
+            await time(3000)
+            processV(array[start], start, { onlyStarted: true })
+            if (number - 1 > start) await repeat(array, number, start + 1);
+          }
+        }
+      }
+
       await time(5000)
       let check = { startingIndexed: toProcess.length == 3 ? false : true }
-      await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed)
+      await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       processStateManager.addState(status)
+
     } else if (request == "resume") {
       composeManager.resumedProcess(data.data)
       let seeds = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "paused" })
