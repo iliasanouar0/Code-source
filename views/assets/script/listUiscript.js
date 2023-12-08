@@ -313,7 +313,9 @@ document.getElementById("demo").onchange = evt => {
             progress.innerHTML = `${currentWidth + 0.1}%`
             data.push([]);
             for (let col = range.s.c; col <= range.e.c; col++) {
+                console.log(col);
                 let cell = worksheet[XLSX.utils.encode_cell({ r: row, c: col })];
+                console.log(cell);
                 if (cell != undefined) {
                     data[i].push(cell.v);
                 } else {
