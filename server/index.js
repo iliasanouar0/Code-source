@@ -1112,7 +1112,7 @@ wsc.on('connection', (wss, req) => {
       console.log(bccToProcess);
       async function repeat(array, bccToProcess, number, start, check) {
         bccToProcess[start]
-        if (check.) {
+        if (check) {
           console.log('when it\'s equal to 1');
           console.log(number);
           for (let i = 0; i < array[start].length; i++) {
