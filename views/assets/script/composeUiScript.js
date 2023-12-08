@@ -483,7 +483,7 @@ $(document).on('click', '#c_add', () => {
                     return
                 }
             } else {
-                let time = new Data().toLocalString()
+                let time = new Date().toLocaleString()
                 console.log(time);
                 // offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${}.html`
                 // fetch(`http://${ip}:3000/compose/offers?offer=${offerAdd}`, {
