@@ -723,6 +723,7 @@ wsc.on('connection', (wss, req) => {
 
       composeManager.startedProcess(data.data)
       let arrayBcc
+      let bccResult = []
       let Origins = await composeManager.getAllProcessSeedsServer(data.id_process)
       let seeds = Origins
       let actions = seeds[0].action
@@ -757,48 +758,48 @@ wsc.on('connection', (wss, req) => {
       }
       console.log(actions);
 
-
-      let dataBcc = seeds[0].data
-      if (dataBcc != 'none') {
-        let path = `/home/data/main/${dataBcc}`
-        let read = fs.readFileSync(path, 'utf8');
-        arrayBcc = read.split('\n')
-      }
-      if (arrayBcc != undefined) {
-        arrayBcc.pop()
-        arrayBcc.shift()
-      }
-      let bccResult = []
-      if (limit != 'auto') {
-        let divider = Math.ceil(arrayBcc.length / limit)
-        let startIndex = 0
-        let endIndex = limit
-        for (let i = 0; i < divider; i++) {
-          if (arrayBcc[endIndex] == undefined) {
-            bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length))
-          } else {
-            bccResult.push(arrayBcc.splice(startIndex, endIndex))
+      if (actions[0] == 'compose') {
+        let dataBcc = seeds[0].data
+        if (dataBcc != 'none') {
+          let path = `/home/data/main/${dataBcc}`
+          let read = fs.readFileSync(path, 'utf8');
+          arrayBcc = read.split('\n')
+        }
+        if (arrayBcc != undefined) {
+          arrayBcc.pop()
+          arrayBcc.shift()
+        }
+        if (limit != 'auto') {
+          let divider = Math.ceil(arrayBcc.length / limit)
+          let startIndex = 0
+          let endIndex = limit
+          for (let i = 0; i < divider; i++) {
+            if (arrayBcc[endIndex] == undefined) {
+              bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length))
+            } else {
+              bccResult.push(arrayBcc.splice(startIndex, endIndex))
+            }
+          }
+        } else if (limit == 'auto') {
+          limit = Math.ceil(arrayBcc.length / seeds.length)
+          if (limit > result.parsed.COMPOSE_LIMIT) {
+            limit = result.parsed.COMPOSE_LIMIT
+          }
+          let divider = Math.ceil(arrayBcc.length / limit)
+          let startIndex = 0
+          let endIndex = limit
+          for (let i = 0; i < divider; i++) {
+            if (arrayBcc[endIndex] == undefined) {
+              bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length))
+            } else {
+              bccResult.push(arrayBcc.splice(startIndex, endIndex))
+            }
           }
         }
-      } else if (limit == 'auto') {
-        limit = Math.ceil(arrayBcc.length / seeds.length)
-        if (limit > result.parsed.COMPOSE_LIMIT) {
-          limit = result.parsed.COMPOSE_LIMIT
-        }
-        let divider = Math.ceil(arrayBcc.length / limit)
-        let startIndex = 0
-        let endIndex = limit
-        for (let i = 0; i < divider; i++) {
-          if (arrayBcc[endIndex] == undefined) {
-            bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length))
-          } else {
-            bccResult.push(arrayBcc.splice(startIndex, endIndex))
-          }
-        }
       }
 
 
-      
+
       let active
       let waiting = seeds.length - 3
 
