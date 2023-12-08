@@ -298,6 +298,8 @@ document.getElementById("demo").onchange = evt => {
         var workbook = XLSX.read(evt.target.result, { type: "binary" }),
             worksheet = workbook.Sheets[workbook.SheetNames[0]],
             range = XLSX.utils.decode_range(worksheet["!ref"]);
+        console.log(range.s.r);
+        console.log(range.e.r);
         let progression = (100 / (range.e.r))
         var data = [];
         let noData = false
