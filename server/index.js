@@ -725,7 +725,7 @@ wsc.on('connection', (wss, req) => {
       let arrayBcc
       let bccResult = []
       let Origins = await composeManager.getAllProcessSeedsServer(data.id_process)
-      let seeds =[...Origins]
+      let seeds = [...Origins]
       let actions = seeds[0].action
         , subject
         , to
@@ -772,7 +772,9 @@ wsc.on('connection', (wss, req) => {
         }
 
         if (limit != 'auto') {
-          methods.fixedLimit = 'none'
+          if (methods.fixedLimit == false) {
+            methods.fixedLimit = 'none'
+          }
           let divider = Math.ceil(arrayBcc.length / limit)
           let startIndex = 0
           let endIndex = limit
@@ -1153,7 +1155,7 @@ wsc.on('connection', (wss, req) => {
                   console.log(bccResult.length);
                   console.log(Origins.length);
                   if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
-                    seeds =[...Origins]
+                    seeds = [...Origins]
                     await time(2000)
                     await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
                     toProcess.push(seeds[0])
@@ -1197,7 +1199,7 @@ wsc.on('connection', (wss, req) => {
                     processStateManager.updateState(status)
                   }
                   if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
-                    seeds =[...Origins]
+                    seeds = [...Origins]
                     await time(2000)
                     await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
                     toProcess.push(seeds[0])
