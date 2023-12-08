@@ -319,7 +319,9 @@ document.getElementById("demo").onchange = evt => {
                 let cell = worksheet[XLSX.utils.encode_cell({ r: row, c: col })];
                 console.log(cell);
                 if (cell != undefined) {
+                    console.log(cell.v);
                     data[i].push(cell.v);
+                    console.log(data[i]);
                 } else {
                     console.log('no data');
                     noData = true
@@ -328,7 +330,7 @@ document.getElementById("demo").onchange = evt => {
             }
         }
         const objects = []
-        for (let i = 1; i < data.length - 1; i++) {
+        for (let i = 0; i < data.length - 1; i++) {
             let obj = {
                 "email": `${data[i][0]}`,
                 "password": `${data[i][1]}`,
