@@ -717,13 +717,14 @@ wsc.on('connection', (wss, req) => {
   wss.on('message', async (message) => {
 
     let data = JSON.parse(message.toString())
-
     request = data.request
+
     if (request == "start") {
 
       composeManager.startedProcess(data.data)
       let arrayBcc
-      let seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
+      let Origins = await composeManager.getAllProcessSeedsServer(data.id_process)
+      let seeds = Origins
       let dataBcc = seeds[0].data
       if (dataBcc != 'none') {
         let path = `/home/data/main/${dataBcc}`
@@ -1025,11 +1026,13 @@ wsc.on('connection', (wss, req) => {
                     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
                     processStateManager.updateState(status)
                   }
-                  if (seeds.length == 0) {
-                    seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
-                    toProcess.push(seeds[0 + start])
-                    await resultManager.updateState([{ id_seeds: seeds[0 + start].id_seeds, id_process: data.id_process }], "running")
-                    count++
+                  if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0) {
+                    seeds = Origins
+                    await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
+                    toProcess.push(seeds[0])
+                    seeds.splice(seeds.indexOf(seeds[0]), 1)
+                    bccToProcess.push(bccResult[0 + start])
+                    bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
                   }
                 }
                 else {
@@ -1045,6 +1048,7 @@ wsc.on('connection', (wss, req) => {
                     },
                     await resultManager.endNow(result)
                   ]);
+                  Origins.splice(Origins.indexOf(toProcess[0]), 1)
                   bccToProcess.shift()
                   toProcess.shift()
                   state = await composeManager.getProcessState(data.id_process)
@@ -1059,7 +1063,6 @@ wsc.on('connection', (wss, req) => {
                     if (bccResult[0 + start] != undefined) {
                       bccToProcess.push(bccResult[0 + start])
                       bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
-
                     }
                     count++
                     let w = seeds.length + 3
@@ -1067,10 +1070,9 @@ wsc.on('connection', (wss, req) => {
                     processStateManager.updateState(status)
                   }
                   if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0) {
-                    seeds = await composeManager.getAllProcessSeedsServer(data.id_process)
-                    toProcess.push(seeds[0])
-                    console.log(seeds[0]);
+                    seeds = Origins
                     await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
+                    toProcess.push(seeds[0])
                     seeds.splice(seeds.indexOf(seeds[0]), 1)
                     bccToProcess.push(bccResult[0 + start])
                     bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
