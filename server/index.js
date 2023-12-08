@@ -1149,6 +1149,9 @@ wsc.on('connection', (wss, req) => {
                   }
                   console.log(bccToProcess);
                   console.log(bccToProcess.length);
+                  console.log(bccResult[0 + start]);
+                  console.log(bccResult.length);
+                  console.log(Origins.length);
                   if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
                     console.log('do it again');
                     seeds = Origins
