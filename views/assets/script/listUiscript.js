@@ -303,7 +303,7 @@ document.getElementById("demo").onchange = evt => {
         let progression = (100 / (range.e.r))
         var data = [];
         let noData = false
-        for (let row = range.s.r; row < range.e.r; row++) {
+        for (let row = range.s.r; row <= range.e.r; row++) {
             console.log(row);
             if (noData) {
                 progress.style.width = '100%'
