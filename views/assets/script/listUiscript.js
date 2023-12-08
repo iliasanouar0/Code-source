@@ -304,7 +304,6 @@ document.getElementById("demo").onchange = evt => {
         var data = [];
         let noData = false
         for (let row = range.s.r; row <= range.e.r; row++) {
-            console.log(row);
             if (noData) {
                 progress.style.width = '100%'
                 progress.innerHTML = '100%'
@@ -317,20 +316,17 @@ document.getElementById("demo").onchange = evt => {
             data.push([]);
             for (let col = range.s.c; col <= range.e.c; col++) {
                 let cell = worksheet[XLSX.utils.encode_cell({ r: row, c: col })];
-                console.log(cell);
                 if (cell != undefined) {
-                    console.log(cell.v);
                     data[i].push(cell.v);
-                    console.log(data[i]);
                 } else {
-                    console.log('no data');
                     noData = true
                     break
                 }
             }
         }
         const objects = []
-        for (let i = 0; i < data.length - 1; i++) {
+        data.shift()
+        for (let i = 0; i <= data.length - 1; i++) {
             let obj = {
                 "email": `${data[i][0]}`,
                 "password": `${data[i][1]}`,
