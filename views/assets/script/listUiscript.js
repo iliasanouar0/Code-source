@@ -293,6 +293,8 @@ $(document).on('click', '#l_seeds_add', event => {
 
 $('#modal-bulk-add').on('hide.bs.modal', () => {
     let progress = document.querySelector('.progress-bar')
+    let btn = document.querySelector('.preview')
+    btn.style.display = 'none'
     $('#modal-bulk-add input').val('');
     progress.style.width = '0%'
     progress.innerHTML = '0%'
