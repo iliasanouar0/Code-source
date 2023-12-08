@@ -89,7 +89,7 @@ const passwordGenerate = (f_name_add, uniqNumber) => {
 // }
 
 $(document).on('blur', "#f_name_add", event => {
-    let f_name = (event.target).val()
+    let f_name = $(event.target).val()
     console.log(f_name);
     if (f_name == '') {
         return
