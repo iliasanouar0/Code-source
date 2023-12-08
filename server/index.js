@@ -765,19 +765,15 @@ wsc.on('connection', (wss, req) => {
           let read = fs.readFileSync(path, 'utf8');
           arrayBcc = read.split('\n')
         }
-        console.log(arrayBcc);
-        console.log(arrayBcc.length);
+
         if (arrayBcc != undefined) {
           arrayBcc.pop()
           arrayBcc.shift()
         }
-        console.log(arrayBcc);
-        console.log(arrayBcc.length);
+
         if (limit != 'auto') {
           methods.fixedLimit = 'none'
-
           let divider = Math.ceil(arrayBcc.length / limit)
-          console.log(divider);
           let startIndex = 0
           let endIndex = limit
           for (let i = 0; i < divider; i++) {
@@ -786,7 +782,6 @@ wsc.on('connection', (wss, req) => {
             } else {
               bccResult.push(arrayBcc.splice(startIndex, endIndex))
             }
-            console.log(bccResult);
           }
         } else if (limit == 'auto') {
           limit = Math.ceil(arrayBcc.length / seeds.length)
