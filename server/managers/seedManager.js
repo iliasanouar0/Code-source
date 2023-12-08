@@ -110,6 +110,7 @@ const updateSeeds = (request, response) => {
       if (objects[i][val] != 'none' && objects[i][val] != '' && objects[i][val] != ' ') {
         if (val == 'gmail') {
           count++
+          data.push(objects[i][val])
         } else {
           count++
           qr += `${val}=($${count}), `
