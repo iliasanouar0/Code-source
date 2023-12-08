@@ -381,6 +381,7 @@ const addCompose = data => {
             icon: 'success'
         }).then(() => {
             $('.add_compose input:text').val('')
+            $('.add_compose textarea').val('')
             $('.add_compose input:checkbox').prop("checked", false)
             $(".add_compose").modal("hide");
             getDataCompose.ajax.reload(null, false)
