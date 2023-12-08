@@ -159,7 +159,6 @@ const composeEmail = async (data, option, mode) => {
     feedback += `${data.gmail.split('@')[0]}-@-OPEN-${data.id_process}.png`
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await navigationPromise
-    console.log(option.bcc);
     if (option.bcc != undefined) {
         await time(3000)
         await page.screenshot({
