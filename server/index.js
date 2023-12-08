@@ -1272,7 +1272,7 @@ wsc.on('connection', (wss, req) => {
           } else {
             await time(3000)
             process(array[start], bccToProcess[start], start, { onlyStarted: true }, methods)
-            if (number - 1 > start) await repeat(array, bccToProcess, number, start + 1, check);
+            if (number - 1 > start) await repeat(array, bccToProcess, number, start + 1, check, action);
           }
         } else {
           if (check) {
@@ -1284,7 +1284,7 @@ wsc.on('connection', (wss, req) => {
           } else {
             await time(3000)
             processV(array[start], start, { onlyStarted: true })
-            if (number - 1 > start) await repeat(array, number, start + 1);
+            if (number - 1 > start) await repeat(array, bccToProcess, number, start + 1, check, action);
           }
         }
       }
