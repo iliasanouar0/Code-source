@@ -345,6 +345,7 @@ document.getElementById("demo").onchange = evt => {
         const btn = document.querySelector('.preview')
         btn.style.display = 'block'
         btn.addEventListener('click', () => {
+            $('#modal-bulk-add input').val('');
             $('#modal-bulk-add').modal('hide');
             $('#modal-preview-data').modal('show')
             let tbody = $('#bulk_add_table')
