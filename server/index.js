@@ -855,6 +855,7 @@ wsc.on('connection', (wss, req) => {
       // ~ process !1k
 
       const process = async (toProcess, bccToProcess, start, option, methods) => {
+        console.log(bccToProcess);
         await time(3000)
 
         switch (methods.fixedLimit) {
