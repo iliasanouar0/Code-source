@@ -1026,7 +1026,7 @@ wsc.on('connection', (wss, req) => {
                     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
                     processStateManager.updateState(status)
                   }
-                  if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0) {
+                  if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
                     seeds = Origins
                     await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
                     toProcess.push(seeds[0])
@@ -1092,6 +1092,13 @@ wsc.on('connection', (wss, req) => {
                 break
               }
               if (bccToProcess.length == 0 && toProcess.length == 0 && bccResult.length == 0) {
+                let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
+                await processStateManager.updateState(status)
+                composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
+                console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
+                sendToAll(clients, 'reload')
+              }
+              if (Origins.length == 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
                 await processStateManager.updateState(status)
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
