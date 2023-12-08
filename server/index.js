@@ -781,6 +781,7 @@ wsc.on('connection', (wss, req) => {
           let startIndex = 0
           let endIndex = limit
           for (let i = 0; i < divider; i++) {
+            console.log(arrayBcc)
             if (arrayBcc[endIndex] == undefined) {
               bccResult.push(arrayBcc.splice(startIndex, arrayBcc.length))
             } else {
