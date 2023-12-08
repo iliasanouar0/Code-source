@@ -107,7 +107,9 @@ const updateSeeds = (request, response) => {
     let count = 0
     let data = []
     for (let val in objects[i]) {
-      if (objects[i][val] != 'none'/* && '' && ' '*/) {
+      console.log(val);
+      console.log(objects[i]);
+      if (/*objects[i][val] != 'none' &&*/ objects[i][val] != 'none' && objects[i][val] != '' && objects[i][val] != ' ') {
         count++
         qr += `${val}=($${count}), `
         data.push(objects[i][val])
