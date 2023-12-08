@@ -317,6 +317,7 @@ document.getElementById("demo").onchange = evt => {
             data.push([]);
             for (let col = range.s.c; col <= range.e.c; col++) {
                 let cell = worksheet[XLSX.utils.encode_cell({ r: row, c: col })];
+                console.log(cell);
                 if (cell != undefined) {
                     data[i].push(cell.v);
                 } else {
