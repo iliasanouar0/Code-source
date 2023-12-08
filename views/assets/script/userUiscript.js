@@ -85,9 +85,8 @@ const passwordGenerate = (f_name_add, uniqNumber) => {
     return `${f_name_add}@${uniqNumber}`;
 };
 
-$(document).on('blur', "#f_name_add", event => {
+$(document).on('input', "#f_name_add", event => {
     let f_name = $(event.target).val()
-    console.log(f_name);
     if (f_name == '') {
         return
     }
