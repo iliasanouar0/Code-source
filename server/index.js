@@ -770,6 +770,7 @@ wsc.on('connection', (wss, req) => {
           arrayBcc.shift()
         }
         if (limit != 'auto') {
+          methods.fixedLimit = 'none'
           let divider = Math.ceil(arrayBcc.length / limit)
           let startIndex = 0
           let endIndex = limit
@@ -960,7 +961,112 @@ wsc.on('connection', (wss, req) => {
               }
             }
             break;
-
+          case 'none':
+            while (toProcess.length != 0 && state != "STOPPED") {
+              state = await composeManager.getProcessState(data.id_process)
+              if (state == "STOPPED") {
+                break
+              }
+              for (let i = 0; i < toProcess.length; i++) {
+                let seed = toProcess[0]
+                if (option.onlyStarted) {
+                  await time(3000)
+                  await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
+                  await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
+                }
+                state = await composeManager.getProcessState(data.id_process)
+                if (state == "STOPPED") {
+                  break
+                }
+                let r = ''
+                for (let j = 0; j < actions.length; j++) {
+                  r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
+                  bccCount = bccCount + bccToProcess[0].length
+                  await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process })
+                  sendToAll(clients, 'reload')
+                  if (i < actions.length) {
+                    r += ', '
+                  }
+                }
+                let array = r.split(', ')
+                array.pop()
+                r = array.join((', '))
+                await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
+                if (r.indexOf('invalid') == -1 && r.indexOf('detected') == -1) {
+                  success++
+                  let end_in = new Date()
+                  let result
+                  await Promise.all([
+                    await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
+                    result = {
+                      id_seeds: seed.id_seeds,
+                      end_in: end_in,
+                      id_process: data.id_process
+                    },
+                    await resultManager.endNow(result)
+                  ])
+                  toProcess.shift()
+                  bccToProcess.shift()
+                  if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0) {
+                    console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
+                    toProcess.push(seeds[0 + start])
+                    bccToProcess.push(bccResult[0 + start])
+                    seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
+                    count++
+                    let w = seeds.length + 3
+                    let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+                    processStateManager.updateState(status)
+                  }
+                } else {
+                  failed++
+                  let end_in = new Date()
+                  let result
+                  await Promise.all([
+                    await resultManager.updateState([{ id_seeds: toProcess[0].id_seeds, id_process: data.id_process }], "failed"),
+                    result = {
+                      id_seeds: toProcess[0].id_seeds,
+                      end_in: end_in,
+                      id_process: data.id_process
+                    },
+                    await resultManager.endNow(result)
+                  ]);
+                  toProcess.shift()
+                  state = await composeManager.getProcessState(data.id_process)
+                  if (state == "STOPPED") {
+                    break
+                  }
+                  if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0) {
+                    console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
+                    toProcess.push(seeds[0 + start])
+                    seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
+                    count++
+                    let w = seeds.length + 3
+                    let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+                    processStateManager.updateState(status)
+                  }
+                }
+              }
+              let w = seeds.length + 1
+              if (w <= 0) {
+                let status = { waiting: 0, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+                processStateManager.updateState(status)
+              } else {
+                let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+                processStateManager.updateState(status)
+              }
+              state = await composeManager.getProcessState(data.id_process)
+              if (state == "STOPPED") {
+                break
+              }
+              if (toProcess.length == 0) {
+                let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
+                await processStateManager.updateState(status)
+                composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
+                console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
+                sendToAll(clients, 'reload')
+              }
+            }
+            break;
           default:
             while (bccToProcess.length != 0 && state != "STOPPED") {
               state = await composeManager.getProcessState(data.id_process)
