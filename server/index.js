@@ -1112,14 +1112,16 @@ wsc.on('connection', (wss, req) => {
       console.log(bccToProcess);
       async function repeat(array, bccToProcess, number, start) {
         bccToProcess[start]
-        console.log(number);
         if (number === 1) {
+          console.log('when it\'s equal to 1');
+          console.log(number);
           for (let i = 0; i < array[start].length; i++) {
             await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
             process([array[start][i]], [bccToProcess[start][i]], i, { onlyStarted: false }, methods)
           }
         } else {
+          console.log(number);
           await time(3000)
           process(array[start], bccToProcess[start], start, { onlyStarted: true }, methods)
           if (number - 1 > start) await repeat(array, number, start + 1);
