@@ -302,6 +302,7 @@ document.getElementById("demo").onchange = evt => {
         var data = [];
         let noData = false
         for (let row = range.s.r; row < range.e.r; row++) {
+            console.log(row);
             if (noData) {
                 progress.style.width = '100%'
                 progress.innerHTML = '100%'
@@ -314,7 +315,6 @@ document.getElementById("demo").onchange = evt => {
             data.push([]);
             for (let col = range.s.c; col <= range.e.c; col++) {
                 let cell = worksheet[XLSX.utils.encode_cell({ r: row, c: col })];
-                console.log(cell);
                 if (cell != undefined) {
                     data[i].push(cell.v);
                 } else {
