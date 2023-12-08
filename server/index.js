@@ -739,7 +739,7 @@ wsc.on('connection', (wss, req) => {
         , subject
         , to
         , limit
-        , methods = { fixedLimit: false ,}
+        , methods = { fixedLimit: false}
       if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1) {
         actions = [actions]
       } else {
@@ -857,6 +857,7 @@ wsc.on('connection', (wss, req) => {
               for (let i = 0; i < toProcess.length; i++) {
                 let seed = toProcess[0]
                 if (option.onlyStarted) {
+                  await time(3000)
                   await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
                   await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
                 }
@@ -866,7 +867,6 @@ wsc.on('connection', (wss, req) => {
                 }
                 let r = ''
                 for (let j = 0; j < actions.length; j++) {
-
                   r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
                   bccCount = bccCount + bccToProcess[0].length
                   await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process })
