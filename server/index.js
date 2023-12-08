@@ -787,6 +787,7 @@ wsc.on('connection', (wss, req) => {
           methods.fixedLimit = 'none'
           limit = Math.ceil(arrayBcc.length / seeds.length)
           if (limit > result.parsed.COMPOSE_LIMIT) {
+            methods.fixedLimit = 'null'
             limit = result.parsed.COMPOSE_LIMIT
           }
           let divider = Math.ceil(arrayBcc.length / limit)
