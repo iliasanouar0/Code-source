@@ -765,12 +765,15 @@ wsc.on('connection', (wss, req) => {
           let read = fs.readFileSync(path, 'utf8');
           arrayBcc = read.split('\n')
         }
+        console.log(arrayBcc);
+        console.log(arrayBcc.length);
         if (arrayBcc != undefined) {
           arrayBcc.pop()
           arrayBcc.shift()
         }
         if (limit != 'auto') {
           methods.fixedLimit = 'none'
+
           let divider = Math.ceil(arrayBcc.length / limit)
           let startIndex = 0
           let endIndex = limit
