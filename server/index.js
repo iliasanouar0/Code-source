@@ -739,7 +739,7 @@ wsc.on('connection', (wss, req) => {
         , subject
         , to
         , limit
-        , methods = { fixedLimit: false }
+        , methods = { fixedLimit: false ,}
       if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1) {
         actions = [actions]
       } else {
@@ -1128,7 +1128,6 @@ wsc.on('connection', (wss, req) => {
           if (number - 1 > start) await repeat(array, bccToProcess, number, start + 1, check);
         }
       }
-
       await time(5000)
       let check = { startingIndexed: toProcess.length == 3 ? false : true }
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed)

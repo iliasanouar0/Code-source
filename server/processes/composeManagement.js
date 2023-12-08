@@ -152,7 +152,7 @@ const composeEmail = async (data, option, mode) => {
     await page.setViewport({ width: 1440, height: 720 });
     const navigationPromise = page.waitForNavigation()
     await page.goto('https://google.com')
-    await time(3000)
+    await time(10000)
     await page.screenshot({
         path: `${path}/${data.gmail.split('@')[0]}-@-OPEN-${data.id_process}.png`
     });
@@ -160,18 +160,22 @@ const composeEmail = async (data, option, mode) => {
     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     await navigationPromise
     if (option.bcc != undefined) {
+        await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-BCC-${data.id_process}.png`
         });
         feedback += `, ${data.gmail.split('@')[0]}-@-BCC-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     } else {
+        await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
         });
         feedback += `, ${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     }
+    await time(10000)
+
     // let feedback = ''
     // const obj = await login(data, mode)
     // const page = obj.page
