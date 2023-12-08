@@ -840,6 +840,7 @@ wsc.on('connection', (wss, req) => {
         }
         toProcess[i] = []
         bccToProcess[i] = []
+        console.log(bccResult);
         for (let j = 0; j < active; j++) {
           toProcess[i].push(seeds[i])
           bccToProcess[i].push(bccResult[i])
