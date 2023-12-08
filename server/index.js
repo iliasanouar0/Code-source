@@ -909,6 +909,7 @@ wsc.on('connection', (wss, req) => {
                   ])
                   toProcess.shift()
                   bccToProcess.shift()
+                  console.log(seeds.length);
                   if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0) {
                     console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
                     toProcess.push(seeds[0 + start])
@@ -1239,7 +1240,6 @@ wsc.on('connection', (wss, req) => {
         }
       }
 
-
       const processV = async (toProcess, start, option) => {
         await time(3000)
         while (toProcess.length != 0 && state != "STOPPED") {
@@ -1381,7 +1381,6 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
-
 
       async function repeat(array, bccToProcess, number, start, check, action) {
         if (action == 'compose') {
