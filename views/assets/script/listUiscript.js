@@ -291,6 +291,13 @@ $(document).on('click', '#l_seeds_add', event => {
 
 })
 
+$('#modal-bulk-add').on('hide.bs.modal', () => {
+    let progress = document.querySelector('.progress-bar')
+    $('#modal-bulk-add input').val('');
+    progress.style.width = '0%'
+    progress.innerHTML = '0%'
+})
+
 document.getElementById("demo").onchange = evt => {
     var reader = new FileReader();
     reader.addEventListener("loadend", evt => {
