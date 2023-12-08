@@ -312,8 +312,8 @@ document.getElementById("demo").onchange = evt => {
             }
             let i = data.length;
             let currentWidth = row * progression
-            progress.style.width = `${currentWidth + 0.1}%`
-            progress.innerHTML = `${currentWidth + 0.1}%`
+            progress.style.width = `${currentWidth}%`
+            progress.innerHTML = `${currentWidth}%`
             data.push([]);
             for (let col = range.s.c; col <= range.e.c; col++) {
                 let cell = worksheet[XLSX.utils.encode_cell({ r: row, c: col })];
