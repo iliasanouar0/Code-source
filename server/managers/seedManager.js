@@ -107,12 +107,14 @@ const updateSeeds = (request, response) => {
     let count = 0
     let data = []
     for (let val in objects[i]) {
-      console.log(val);
-      console.log(objects[i]);
-      if (/*objects[i][val] != 'none' &&*/ objects[i][val] != 'none' && objects[i][val] != '' && objects[i][val] != ' ') {
-        count++
-        qr += `${val}=($${count}), `
-        data.push(objects[i][val])
+      if (objects[i][val] != 'none' && objects[i][val] != '' && objects[i][val] != ' ') {
+        if (val == 'gmail') {
+          count++
+        } else {
+          count++
+          qr += `${val}=($${count}), `
+          data.push(objects[i][val])
+        }
       }
     }
     qr += `date_update=(now()) WHERE gmail=($1)`
