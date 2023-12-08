@@ -116,11 +116,12 @@ const updateSeeds = (request, response) => {
     qr += `date_update=(now()) WHERE gmail=($1)`
     query.push({ query: qr, data: data })
   }
+  console.log(query);
   query.forEach((data) => {
     console.log(data.query);
     pool.query(data.query, data.data, (error, result) => {
       if (error) {
-        response.status(409).json(error);
+        response.status(409).send(error);
       }
     });
   });
