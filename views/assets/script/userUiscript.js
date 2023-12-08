@@ -74,12 +74,27 @@ const loginGenerate = (f_name_add, l_name_add, uniqNumber) => {
 };
 
 const passwordGenerate = (f_name_add, uniqNumber) => {
-    if (f_name_add == "" || l_name_add == "") {
-        Swal.fire("Please fill all fields");
-        return;
-    }
+    // if (f_name_add == "") {
+    //     Swal.fire("Please fill all fields");
+    //     return;
+    // }
     return `${f_name_add}@${uniqNumber}`;
 };
+
+// () => {
+//     // let password = passwordGenerate(f_name_add, getRndInteger(10000, 99999));
+//     if ($("#f_name_add").val() != '') {
+
+//     }
+// }
+
+$(document).on('blur', "#f_name_add", event => {
+    let f_name = (event.target).val()
+    if (f_name == '') {
+        return
+    }
+    $("#Password").val(passwordGenerate(f_name, getRndInteger(10000, 99999)))
+})
 
 $(document).on("click", "#add", () => {
     let f_name_add = $("#f_name_add").val();
@@ -94,7 +109,7 @@ $(document).on("click", "#add", () => {
     }
     let add_date = new Date().toDateInputValue();
     let add_update = new Date().toDateInputValue();
-    let password = passwordGenerate(f_name_add, getRndInteger(10000, 99999));
+    let password = $("#Password").val()
     let isp_add = $("#isp_add option:selected");
     let isp = []
     for (let i = 0; i < isp_add.length; i++) {

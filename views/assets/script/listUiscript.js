@@ -158,13 +158,17 @@ $(document).on('click', '.edit', event => {
     $(event.target).html('<i class="fas fa-check"></i>')
     $(event.target).toggleClass('save edit')
     let btn = document.createElement('button')
-    btn.classList.add('cancel_name_update', 'btn', 'btn-secondary')
+    btn.classList.add('btn', 'btn-secondary', 'cancel_name_update')
     btn.innerHTML = '<i class="fas fa-times"></i>'
     btn.type = 'button'
     $(event.target).parent()[0].appendChild(btn)
     $('.add_seeds').prop("disabled", true);
     $('.view').prop("disabled", true);
     $('.edit').prop("disabled", true);
+})
+
+$(document).on('click', '.cancel_name_update', () => {
+    getDatalist.ajax.reload(null, false)
 })
 
 $(document).on('click', '.save', event => {
