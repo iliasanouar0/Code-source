@@ -160,7 +160,7 @@ $(document).on('click', '.edit', event => {
     let btn = document.createElement('button')
     btn.classList.add('cancel_name_update', 'btn', 'btn-secondary')
     btn.innerHTML = '<i class="fas fa-times"></i>'
-    btn.type('button')
+    btn.type = 'button'
     $(event.target).parent()[0].appendChild(btn)
     $('.add_seeds').prop("disabled", true);
     $('.view').prop("disabled", true);
