@@ -1108,8 +1108,6 @@ wsc.on('connection', (wss, req) => {
             }
             break;
         }
-
-
       }
 
       async function repeat(array, bccToProcess, number, start) {
