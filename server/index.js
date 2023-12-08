@@ -841,10 +841,10 @@ wsc.on('connection', (wss, req) => {
         toProcess[i] = []
         bccToProcess[i] = []
         for (let j = 0; j < active; j++) {
-          toProcess[i].push(seeds[j])
-          bccToProcess[i].push(bccResult[j])
-          seeds.splice(seeds.indexOf(seeds[j]), 1)
-          bccResult.splice(bccResult.indexOf(bccResult[j]), 1)
+          toProcess[i].push(seeds[0])
+          bccToProcess[i].push(bccResult[0])
+          seeds.shift()
+          bccResult.shift()
           count++
         }
       }
