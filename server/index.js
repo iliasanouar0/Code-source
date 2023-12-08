@@ -1110,9 +1110,9 @@ wsc.on('connection', (wss, req) => {
         }
       }
       console.log(bccToProcess);
-      async function repeat(array, bccToProcess, number, start) {
+      async function repeat(array, bccToProcess, number, start, check) {
         bccToProcess[start]
-        if (number === 1) {
+        if (check) {
           console.log('when it\'s equal to 1');
           console.log(number);
           for (let i = 0; i < array[start].length; i++) {
@@ -1129,7 +1129,10 @@ wsc.on('connection', (wss, req) => {
       }
 
       await time(5000)
-      await repeat(toProcess, bccToProcess, toProcess.length, 0)
+      let check = { startingIndexed: toProcess.length == 3 ? false : true }
+      console.log(toProcess.length);
+      console.log(check.startingIndexed);
+      await repeat(toProcess, bccToProcess, toProcess.length, 0, check)
       // await time(5000)
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
