@@ -1141,7 +1141,6 @@ wsc.on('connection', (wss, req) => {
                     if (bccResult[0 + start] != undefined) {
                       bccToProcess.push(bccResult[0 + start])
                       bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1)
-
                     }
                     count++
                     let w = seeds.length + 3
@@ -1149,6 +1148,7 @@ wsc.on('connection', (wss, req) => {
                     processStateManager.updateState(status)
                   }
                   if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
+                    console.log('do it again');
                     seeds = Origins
                     await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
                     toProcess.push(seeds[0])
