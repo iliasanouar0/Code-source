@@ -483,9 +483,10 @@ $(document).on('click', '#c_add', () => {
                     return
                 }
             } else {
-                let time = new Date().toTimeString()
+                let time = new Date().toTimeString().split(' ')[0]
                 console.log(time);
-                // offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${}.html`
+                offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${time}.html`
+                console.log(offerAdd);
                 // fetch(`http://${ip}:3000/compose/offers?offer=${offerAdd}`, {
                 //     method: 'POST',
                 //     body: `${JSON.stringify({ data: body })}`,
