@@ -725,21 +725,11 @@ wsc.on('connection', (wss, req) => {
       let arrayBcc
       let Origins = await composeManager.getAllProcessSeedsServer(data.id_process)
       let seeds = Origins
-      let dataBcc = seeds[0].data
-      if (dataBcc != 'none') {
-        let path = `/home/data/main/${dataBcc}`
-        let read = fs.readFileSync(path, 'utf8');
-        arrayBcc = read.split('\n')
-      }
-      if (arrayBcc != undefined) {
-        arrayBcc.pop()
-        arrayBcc.shift()
-      }
       let actions = seeds[0].action
         , subject
         , to
         , limit
-        , methods = { fixedLimit: false}
+        , methods = { fixedLimit: false }
       if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1) {
         actions = [actions]
       } else {
@@ -764,6 +754,19 @@ wsc.on('connection', (wss, req) => {
               break;
           }
         }
+      }
+      console.log(actions);
+
+
+      let dataBcc = seeds[0].data
+      if (dataBcc != 'none') {
+        let path = `/home/data/main/${dataBcc}`
+        let read = fs.readFileSync(path, 'utf8');
+        arrayBcc = read.split('\n')
+      }
+      if (arrayBcc != undefined) {
+        arrayBcc.pop()
+        arrayBcc.shift()
       }
       let bccResult = []
       if (limit != 'auto') {
@@ -794,6 +797,8 @@ wsc.on('connection', (wss, req) => {
         }
       }
 
+
+      
       let active
       let waiting = seeds.length - 3
 
