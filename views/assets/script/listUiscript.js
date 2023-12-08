@@ -158,7 +158,7 @@ $(document).on('click', '.edit', event => {
     $(event.target).html('<i class="fas fa-check"></i>')
     $(event.target).toggleClass('save edit')
     let btn = document.createElement('button')
-    btn.classList.add('cancel_name_update btn btn-secondary')
+    btn.classList.add('cancel_name_update', ' btn ', 'btn-secondary')
     btn.innerHTML = '<i class="fas fa-time"></i>'
     $(event.target).parent()[0].appendChild(btn)
     $('.add_seeds').prop("disabled", true);
