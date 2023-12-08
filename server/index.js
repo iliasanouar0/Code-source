@@ -833,7 +833,6 @@ wsc.on('connection', (wss, req) => {
       let toProcess = []
       let bccToProcess = []
       let bccCount = 0
-      console.log(bccResult);
       for (let i = 0; i < active; i++) {
         if (seeds.length < active) {
           break
@@ -849,10 +848,7 @@ wsc.on('connection', (wss, req) => {
         }
       }
 
-      for (let i = 0; i < bccToProcess.length; i++) {
-        console.log("bcc to process " + i);
-        console.log(bccToProcess[i]);
-      }
+
 
       let state = await composeManager.getProcessState(data.id_process)
 
@@ -987,9 +983,11 @@ wsc.on('connection', (wss, req) => {
                 let r = ''
                 for (let j = 0; j < actions.length; j++) {
                   r += await composeManager.processing({ data: seed, action: actions[j], subject: subject, to: to, offer: seed.offer, bcc: bccToProcess[0], entity: data.entity, mode: 'Cookies' })
+                  console.log(toProcess[0]);
                   if (bccToProcess[0] != undefined) {
                     bccCount = bccCount + bccToProcess[0].length
                     await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process })
+                    console.log(bccCount);
                     sendToAll(clients, 'reload')
                   }
                   if (i < actions.length) {
@@ -1404,7 +1402,6 @@ wsc.on('connection', (wss, req) => {
       }
 
       await time(5000)
-      console.log(bccToProcess);
       let check = { startingIndexed: toProcess.length == 3 ? false : true }
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       await time(5000)
