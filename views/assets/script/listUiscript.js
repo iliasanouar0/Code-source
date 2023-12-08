@@ -346,6 +346,8 @@ document.getElementById("demo").onchange = evt => {
         btn.style.display = 'block'
         btn.addEventListener('click', () => {
             $('#modal-bulk-add input').val('');
+            progress.style.width = '0%'
+            progress.innerHTML = '0%'
             $('#modal-bulk-add').modal('hide');
             $('#modal-preview-data').modal('show')
             let tbody = $('#bulk_add_table')
