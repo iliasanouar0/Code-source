@@ -30,6 +30,32 @@ const addProcess = (request, response) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
         }
+        console.log(obj.data);
+        // let objData = 'none'
+        let arrayBcc = []
+        if (obj.data != 'none') {
+            let path = `/home/data/main/${obj.data}`
+            let read = fs.readFileSync(path, 'utf8');
+            let bccData = read.split('\n')
+            bccData.flatMap(e => {
+                let n = e.split(',')
+                if (n[1] == undefined) {
+                    arrayBcc.push(n[0])
+                } else {
+                    arrayBcc.push(n[1])
+                }
+            })
+            arrayBcc.shift()
+            arrayBcc.pop()
+            let processPath = `/home/data/process/data${result.rows[0].id_process}`
+            fs.writeFile(processPath, arrayBcc.join('\n'), function (err, data) {
+                if (!err) {
+                    response.status(200).send(path)
+                } else {
+                    response.status(500).send(err)
+                }
+            });
+        }
         response.status(200).send(`Compose added with ID : ${result.rows[0].id_process}`)
     })
 }
