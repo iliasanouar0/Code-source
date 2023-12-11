@@ -178,7 +178,7 @@ $(document).on('click', '.edit', event => {
 
 const updateCompose = data => {
     var settings = {
-        "url": "http://project1.gm2reporting.com:3000/compose/",
+        "url": `http://${ip}:3000/compose/`,
         "method": "PUT",
         "timeout": 0,
         "headers": {
