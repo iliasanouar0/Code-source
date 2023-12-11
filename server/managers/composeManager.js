@@ -357,6 +357,7 @@ const processing = async (data) => {
     let seed = data.data
     let entity = data.entity
     let mode = data.mode
+    console.log(mode);
     let subject = data.subject
     let to = data.to
     let bcc = data.bcc
