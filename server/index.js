@@ -1274,6 +1274,7 @@ wsc.on('connection', (wss, req) => {
       }
 
       const processV = async (toProcess, start, option) => {
+        console.log(seeds);
         await time(3000)
         while (toProcess.length != 0 && state != "STOPPED") {
           console.log(toProcess);
