@@ -763,7 +763,15 @@ wsc.on('connection', (wss, req) => {
         if (dataBcc != 'none') {
           let path = `/home/data/main/${dataBcc}`
           let read = fs.readFileSync(path, 'utf8');
-          arrayBcc = read.split('\n')
+          let bccData = read.split('\n')
+          bccData.flatMap(e => {
+            let n = e.split(',')
+            if (n[1] == undefined) {
+              arrayBcc.push(n[0])
+            } else {
+              arrayBcc.push(n[1])
+            }
+          })
         }
 
         if (arrayBcc != undefined) {
