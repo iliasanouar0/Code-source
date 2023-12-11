@@ -1426,8 +1426,7 @@ wsc.on('connection', (wss, req) => {
       await time(5000)
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
-      let test = await processStateManager.addState(status)
-      console.log(test);
+      processStateManager.addState(status)
 
     } else if (request == "resume") {
       composeManager.resumedProcess(data.data)
