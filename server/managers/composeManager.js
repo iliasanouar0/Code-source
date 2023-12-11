@@ -7,7 +7,6 @@ const composeManagement = require("../processes/composeManagement");
 const root = __dirname
 let path = root.slice(0, root.length - 31)
 let config = data.data
-
 const pool = new pg.Pool(config);
 
 const updateProcess = (request, response) => {
@@ -23,6 +22,7 @@ const updateProcess = (request, response) => {
 }
 
 const addProcess = (request, response) => {
+    console.log(config);
     const obj = (request.body)
     let sql = `INSERT INTO composing (id_list ,id_user ,action ,data ,offer,status ,count) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
     let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count]
