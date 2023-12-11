@@ -766,8 +766,6 @@ wsc.on('connection', (wss, req) => {
           let bccData = read.split('\n')
           bccData.flatMap(e => {
             let n = e.split(',')
-            console.log(n);
-            console.log(n[0]);
             if (n[1] == undefined) {
               arrayBcc.push(n[0])
             } else {
