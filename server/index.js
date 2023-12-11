@@ -1445,7 +1445,7 @@ wsc.on('connection', (wss, req) => {
       }
       console.log(toProcess);
       console.log(toProcess.length);
-      let check = { startingIndexed: toProcess.length > 2 ? false : true }
+      let check = { startingIndexed: toProcess.length >= 2 ? false : true }
       console.log(check);
       await time(3000)
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
