@@ -46,6 +46,7 @@ const addProcess = (request, response) => {
             arrayBcc.shift()
             arrayBcc.pop()
             let objData = `data${result.rows[0].id_process}`
+            console.log(objData);
             let processPath = `/home/data/process/${objData}`
             fs.writeFile(processPath, arrayBcc.join('\n'), function (err, data) {
                 if (!err) {
