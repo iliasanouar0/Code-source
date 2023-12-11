@@ -69,8 +69,6 @@ const getUserLists = (request, response) => {
   );
 };
 
-
-
 const deleteList = (request, response) => {
   const id = parseInt(request.params.id);
   pool.query("DELETE FROM list WHERE id_list = $1", [id], (error, results) => {
