@@ -761,7 +761,7 @@ wsc.on('connection', (wss, req) => {
       if (actions[0] == 'compose') {
         let dataBcc = seeds[0].data
         if (dataBcc != 'none') {
-          let path = `/home/data/main/${dataBcc}`
+          let path = `/home/data/process/${dataBcc}`
           let read = fs.readFileSync(path, 'utf8');
           let bccData = read.split('\n')
           bccData.flatMap(e => {

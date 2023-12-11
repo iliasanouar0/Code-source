@@ -98,7 +98,6 @@ const getData = (request, response) => {
             array.shift()
             array.pop()
         }
-        console.log(array);
         objects.push({ count: array.length, file: file })
     })
     response.status(200).send(objects)
