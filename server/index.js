@@ -1420,8 +1420,6 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
-
-      await time(5000)
       let check = { startingIndexed: toProcess.length == 3 ? false : true }
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       await time(5000)
