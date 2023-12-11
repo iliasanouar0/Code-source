@@ -1421,6 +1421,7 @@ wsc.on('connection', (wss, req) => {
         }
       }
       let check = { startingIndexed: toProcess.length == 3 ? false : true }
+      await time(3000)
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       await time(5000)
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
