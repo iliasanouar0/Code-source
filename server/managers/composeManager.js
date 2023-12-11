@@ -30,8 +30,6 @@ const addProcess = (request, response) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
         }
-        console.log(obj.data);
-        // let objData = 'none'
         let arrayBcc = []
         if (obj.data != 'none') {
             let path = `/home/data/main/${obj.data}`
@@ -47,12 +45,19 @@ const addProcess = (request, response) => {
             })
             arrayBcc.shift()
             arrayBcc.pop()
-            let processPath = `/home/data/process/data${result.rows[0].id_process}`
+            let objData = `data${result.rows[0].id_process}`
+            let processPath = `/home/data/process/${objData}`
             fs.writeFile(processPath, arrayBcc.join('\n'), function (err, data) {
                 if (!err) {
-                    response.status(200).send(path)
+                    let sql = `UPDATE composing SET data=($1) WHERE id_process=($2)`
+                    let values = [data.counter, result.rows[0].id_process]
+                    pool.query(sql, values, (err, res) => {
+                        if (err) {
+                            throw err
+                        }
+                    })
                 } else {
-                    response.status(500).send(err)
+                    throw err
                 }
             });
         }
