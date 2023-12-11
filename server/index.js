@@ -764,6 +764,7 @@ wsc.on('connection', (wss, req) => {
           let path = `/home/data/main/${dataBcc}`
           let read = fs.readFileSync(path, 'utf8');
           let bccData = read.split('\n')
+          console.log(bccData);
           bccData.flatMap(e => {
             let n = e.split(',')
             if (n[1] == undefined) {
