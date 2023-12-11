@@ -774,9 +774,13 @@ wsc.on('connection', (wss, req) => {
           })
         }
 
-        if (arrayBcc != undefined) {
-          arrayBcc.pop()
-          arrayBcc.shift()
+        if (arrayBcc.length != 0) {
+          if (arrayBcc[0] == '') {
+            arrayBcc.shift()
+          }
+          if (arrayBcc[arrayBcc.length - 1] == '') {
+            arrayBcc.pop()
+          }
         }
         console.log(arrayBcc);
         if (limit != 'auto') {
