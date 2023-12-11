@@ -1443,6 +1443,8 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
+      console.log(toProcess);
+      console.log(toProcess.length);
       let check = { startingIndexed: toProcess.length == 3 ? false : true }
       console.log(check);
       await time(3000)
