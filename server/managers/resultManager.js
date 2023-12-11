@@ -39,7 +39,7 @@ const saveFeedback = async (data) => {
     const client = await pool.connect()
     client.query(sql, values, (err) => {
         if (err) {
-            return err;
+            throw err;
         }
         client.release()
         return true
