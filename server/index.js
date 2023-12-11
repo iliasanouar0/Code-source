@@ -1277,20 +1277,16 @@ wsc.on('connection', (wss, req) => {
         console.log(seeds);
         await time(3000)
         while (toProcess.length != 0 && state != "STOPPED") {
-          console.log(toProcess);
-          console.log(toProcess.length);
           state = await composeManager.getProcessState(data.id_process)
           if (state == "STOPPED") {
             break
           }
           for (let i = 0; i < toProcess.length; i++) {
             let seed = toProcess[0]
-
             if (option.onlyStarted) {
               await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process })
               await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running")
             }
-
             state = await composeManager.getProcessState(data.id_process)
             if (state == "STOPPED") {
               break
@@ -1438,7 +1434,7 @@ wsc.on('connection', (wss, req) => {
             for (let i = 0; i < array[start].length; i++) {
               await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
               await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
-              processV([array[start][i]], start, { onlyStarted: true })
+              processV([array[start][i]], start, { onlyStarted: false })
             }
           } else {
             await time(3000)
@@ -1449,7 +1445,7 @@ wsc.on('connection', (wss, req) => {
       }
       console.log(toProcess);
       console.log(toProcess.length);
-      let check = { startingIndexed: toProcess.length == 3 ? false : true }
+      let check = { startingIndexed: toProcess.length > 2 ? false : true }
       console.log(check);
       await time(3000)
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
