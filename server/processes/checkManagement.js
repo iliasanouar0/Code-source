@@ -13,6 +13,7 @@ let pidProcess = []
 
 const checkProxy = async (data) => {
     let arg
+    console.log(data.proxy);
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     } else {
