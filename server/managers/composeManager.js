@@ -61,6 +61,7 @@ const addProcess = (request, response) => {
                 }
             });
         }
+        console.log(result);
         response.status(200).send(`Compose added with ID : ${result.rows[0].id_process}`)
     })
 }
