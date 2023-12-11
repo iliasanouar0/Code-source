@@ -8,6 +8,7 @@ let config = data.data
 const pool = new pg.Pool(config);
 
 const createList = (request, response) => {
+  console.log(config);
   let obj = request.body;
   let add = new Date()
   let update = new Date()
