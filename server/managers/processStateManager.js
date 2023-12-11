@@ -10,7 +10,7 @@ const addState = (data) => {
     let sql = 'INSERT INTO processstate (waiting, active, finished, failed, id_process) VALUES ($1,$2,$3,$4,$5)'
     pool.query(sql, values, (error, result) => {
         if (error) {
-            return error
+            throw error
         }
         return true
     })
