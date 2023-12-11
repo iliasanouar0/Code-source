@@ -778,7 +778,7 @@ wsc.on('connection', (wss, req) => {
           arrayBcc.pop()
           arrayBcc.shift()
         }
-
+        console.log(arrayBcc);
         if (limit != 'auto') {
           if (methods.fixedLimit == false) {
             methods.fixedLimit = 'none'
