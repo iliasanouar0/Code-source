@@ -200,6 +200,7 @@ const verify = async (data, entity, mode) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(5000)
         if (grantAccess.entity == entity) {
+            await time(3000)
             await page.waitForSelector('.FH')
             await time(2000)
             await page.click('.FH')
