@@ -1337,6 +1337,7 @@ wsc.on('connection', (wss, req) => {
             let array = r.split(', ')
             array.pop()
             r = array.join((', '))
+            console.log(r);
             await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process })
             if (r.indexOf('invalid') == -1) {
               success++
