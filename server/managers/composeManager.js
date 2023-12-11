@@ -22,7 +22,6 @@ const updateProcess = (request, response) => {
 }
 
 const addProcess = (request, response) => {
-    console.log(config);
     const obj = (request.body)
     let sql = `INSERT INTO composing (id_list ,id_user ,action ,data ,offer,status ,count) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
     let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count]
@@ -46,7 +45,6 @@ const addProcess = (request, response) => {
             arrayBcc.shift()
             arrayBcc.pop()
             let objData = `data${result.rows[0].id_process}`
-            console.log(objData);
             let processPath = `/home/data/process/${objData}`
             fs.writeFile(processPath, arrayBcc.join('\n'), function (err, data) {
                 if (!err) {
@@ -62,7 +60,6 @@ const addProcess = (request, response) => {
                 }
             });
         }
-        console.log(result);
         response.status(200).send(`Compose added with ID : ${result.rows[0].id_process}`)
     })
 }
