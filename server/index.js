@@ -1356,9 +1356,9 @@ wsc.on('connection', (wss, req) => {
               ])
               toProcess.shift()
               if (toProcess.length < active && count < length && state != "STOPPED" && seeds.length != 0) {
-                console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
-                toProcess.push(seeds[0 + start])
-                seeds.splice(seeds.indexOf(seeds[0 + start]), 1)
+                console.log('the indexed seed : ' + seeds[0].id_seeds);
+                toProcess.push(seeds[0])
+                seeds.splice(seeds.indexOf(seeds[0]), 1)
                 count++
                 let w = seeds.length + 3
                 let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
