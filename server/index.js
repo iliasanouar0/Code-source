@@ -1443,6 +1443,8 @@ wsc.on('connection', (wss, req) => {
           }
         } else {
           if (check) {
+            console.log(check);
+            console.log('i will start here');
             for (let i = 0; i < array[start].length; i++) {
               await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
               await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
