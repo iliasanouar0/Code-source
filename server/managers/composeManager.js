@@ -17,6 +17,37 @@ const updateProcess = (request, response) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
         }
+        let arrayBcc = []
+        if (obj.data != 'none') {
+            let path = `/home/data/main/${obj.data}`
+            let read = fs.readFileSync(path, 'utf8');
+            let bccData = read.split('\n')
+            bccData.flatMap(e => {
+                let n = e.split(',')
+                if (n[1] == undefined) {
+                    arrayBcc.push(n[0])
+                } else {
+                    arrayBcc.push(n[1])
+                }
+            })
+            arrayBcc.shift()
+            arrayBcc.pop()
+            let objData = `data${result.rows[0].id_process}`
+            let processPath = `/home/data/process/${objData}`
+            fs.writeFile(processPath, arrayBcc.join('\n'), function (err, data) {
+                if (!err) {
+                    let sql = `UPDATE composing SET data=($1) WHERE id_process=($2)`
+                    let values = [objData, result.rows[0].id_process]
+                    pool.query(sql, values, (err, res) => {
+                        if (err) {
+                            throw err
+                        }
+                    })
+                } else {
+                    throw err
+                }
+            });
+        }
         response.status(200).send(`Compose updated with ID : ${result.rows[0].id_process}`)
     })
 }
