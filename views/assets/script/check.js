@@ -3,7 +3,13 @@ console.log(sessionStorage.auth);
 if (sessionStorage.auth == undefined) {
     location.href = '../../access.html'
 }
-
+fetch(`http://${ip}:3000/proxy/`, {
+    method: "GET"
+}).then(res => {
+    return res.json()
+}).then(data => {
+    console.log(data);
+})
 let authO = JSON.parse(sessionStorage.auth)
 if (authO == 0 || authO == 'undefined') {
     location.href = '../../access.html'
