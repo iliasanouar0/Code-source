@@ -94,6 +94,8 @@ const getData = (request, response) => {
         let filePath = `${path}/${file}`
         const data = fs.readFileSync(filePath, 'utf8');
         let array = data.split('\n')
+        console.log(array[0]);
+        console.log(array[array.length - 1]);
         if (array[0] == '') {
             array.shift()
         }
