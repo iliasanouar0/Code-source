@@ -1356,8 +1356,6 @@ wsc.on('connection', (wss, req) => {
               if (toProcess.length < active && state != "STOPPED" && seeds.length != 0) {
                 console.log('the indexed seed : ' + seeds[0].id_seeds);
                 toProcess.push(seeds[0])
-                await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process })
-                await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running")
                 seeds.splice(seeds.indexOf(seeds[0]), 1)
                 count++
                 let w = seeds.length + 3
@@ -1443,10 +1441,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
-      console.log(toProcess);
-      console.log(toProcess.length);
       let check = { startingIndexed: toProcess.length >= 2 ? false : true }
-      console.log(check);
       await time(3000)
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       await time(5000)
