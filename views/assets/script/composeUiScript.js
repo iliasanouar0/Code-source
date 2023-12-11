@@ -722,7 +722,6 @@ $(document).on('click', '.status', event => {
             {
                 data: null,
                 render: function (row) {
-                    console.log(row.statusdetails);
                     if (row.statusdetails == null || row.statusdetails == "" || row.statusdetails == undefined || row.statusdetails == 'undefined') {
                         return `<p>&#9940;</p>`
                     }
