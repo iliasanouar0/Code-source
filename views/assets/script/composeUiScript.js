@@ -326,6 +326,29 @@ const handleImageUpload = event => {
         body: formData
     }).then(response => response.json()).then(data => {
         console.log(data.path)
+        fetch(`http://${ip}:3000/compose/offers`, {
+            method: "GET",
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            if (data.length == 0) {
+                let option = document.createElement("option");
+                option.innerHTML = `No available offers`
+                option.setAttribute("value", '');
+                offersAdd.appendChild(option);
+            } else {
+                let option = document.createElement("option");
+                option.innerHTML = `--SELECT OFFER--`
+                option.setAttribute("value", '');
+                offersAdd.appendChild(option);
+                data.forEach((elm) => {
+                    let option = document.createElement("option");
+                    option.innerHTML = `${elm['file']}`
+                    option.setAttribute("value", elm['file']);
+                    offersAdd.appendChild(option);
+                });
+            }
+        })
     }).catch(error => {
         console.error(error)
     })
@@ -336,29 +359,6 @@ $(document).on('click', '.upload', event => {
     const offersAdd = document.querySelector("#p_offers_add");
     offersAdd.innerHTML = ""
     handleImageUpload(event)
-    fetch(`http://${ip}:3000/compose/offers`, {
-        method: "GET",
-    }).then((response) => {
-        return response.json();
-    }).then((data) => {
-        if (data.length == 0) {
-            let option = document.createElement("option");
-            option.innerHTML = `No available offers`
-            option.setAttribute("value", '');
-            offersAdd.appendChild(option);
-        } else {
-            let option = document.createElement("option");
-            option.innerHTML = `--SELECT OFFER--`
-            option.setAttribute("value", '');
-            offersAdd.appendChild(option);
-            data.forEach((elm) => {
-                let option = document.createElement("option");
-                option.innerHTML = `${elm['file']}`
-                option.setAttribute("value", elm['file']);
-                offersAdd.appendChild(option);
-            });
-        }
-    })
 })
 
 const addCompose = data => {

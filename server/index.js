@@ -1164,10 +1164,6 @@ wsc.on('connection', (wss, req) => {
                     let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
                     processStateManager.updateState(status)
                   }
-                  console.log(bccToProcess);
-                  console.log(bccToProcess.length);
-                  console.log(bccResult.length);
-                  console.log(Origins.length);
                   if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
                     seeds = [...Origins]
                     await time(2000)
