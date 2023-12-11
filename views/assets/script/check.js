@@ -12,6 +12,7 @@ fetch(`http://${loop}:3000/proxy/`, {
     return res.json()
 }).then(data => {
     console.log(data);
+    console.log(data.message)
 })
 let authO = JSON.parse(sessionStorage.auth)
 if (authO == 0 || authO == 'undefined') {
