@@ -11,9 +11,11 @@ fetch(`http://${loop}:3000/proxy/`, {
 }).then(res => {
     return res.json()
 }).then(data => {
-    console.log(data);
-    console.log(data.message)
+    if (data.message == 'You shall not pass') {
+        location.href = '../../access.html'
+    }
 })
+
 let authO = JSON.parse(sessionStorage.auth)
 if (authO == 0 || authO == 'undefined') {
     location.href = '../../access.html'
