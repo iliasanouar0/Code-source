@@ -326,6 +326,8 @@ const handleImageUpload = event => {
         body: formData
     }).then(response => response.json()).then(data => {
         console.log(data.path)
+        const offersAdd = document.querySelector("#p_offers_add");
+        offersAdd.innerHTML = ""
         fetch(`http://${ip}:3000/compose/offers`, {
             method: "GET",
         }).then((response) => {
@@ -356,8 +358,6 @@ const handleImageUpload = event => {
 }
 
 $(document).on('click', '.upload', event => {
-    const offersAdd = document.querySelector("#p_offers_add");
-    offersAdd.innerHTML = ""
     handleImageUpload(event)
 })
 
