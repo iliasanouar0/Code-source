@@ -735,6 +735,9 @@ $(document).on('click', '.status', event => {
                     } else if (row.statusdetails.includes('Address not found')) {
                         return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
                         <div class="card-body p-1 text-center text-dark">Address not found !!</div></div>`
+                    } else {
+                        return `<div class="card m-0">
+                        <div class="card-body p-1 text-center text-dark">${row.statusdetails}</div></div>`
                     }
 
 
