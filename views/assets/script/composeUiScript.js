@@ -639,6 +639,7 @@ $(document).on('click', '.status', event => {
         , active = 0
         , finished = 0
         , failed = 0
+        , count = 0
     let dataTable = $('#process_result').DataTable({
         responsive: true,
         deferRender: true,
@@ -652,6 +653,8 @@ $(document).on('click', '.status', event => {
             {
                 data: null,
                 render: function (row) {
+                    count++
+                    console.log('callBack :' + count);
                     return `<div class="card m-0">
                     <div class="card-body p-1 text-center text-dark">
                     ${row.gmail}
