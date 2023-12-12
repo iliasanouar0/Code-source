@@ -655,7 +655,7 @@ $(document).on('click', '.status', event => {
                 render: function (row) {
                     count++
                     console.log('callBack :' + count);
-                    console.log(row);
+                    console.log(row.gmail);
                     return `<div class="card m-0">
                     <div class="card-body p-1 text-center text-dark">
                     ${row.gmail}
@@ -812,6 +812,9 @@ $(document).on('click', '.status', event => {
             failed = 0
             count = 0
             // dataTable.ajax.reload(null, false)
+            let statusCount = $('.statusCount')
+            console.log(statusCount);
+            console.log(statusCount.length);
             console.log(waiting);
             console.log(active);
             console.log(finished);
