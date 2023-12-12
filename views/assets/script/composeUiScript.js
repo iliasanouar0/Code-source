@@ -783,10 +783,6 @@ $(document).on('click', '.status', event => {
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
     websocket.onopen = (e) => {
-        waiting = 0
-        active = 0
-        finished = 0
-        failed = 0
         $('.w_seeds').html(0)
         $('.a_seeds').html(0)
         $('.f_seeds').html(0)
@@ -799,6 +795,10 @@ $(document).on('click', '.status', event => {
         if (data.length == 0) {
             return
         } else {
+            waiting = 0
+            active = 0
+            finished = 0
+            failed = 0
             $('#process_result').DataTable().ajax.reload(null, false)
             // $('.w_seeds').html(data[0].waiting)
             // $('.a_seeds').html(data[0].active)
