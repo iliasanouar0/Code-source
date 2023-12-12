@@ -690,6 +690,7 @@ $(document).on('click', '.status', event => {
                 render: function (row) {
                     let status
                     if (row.rstatus == 'running') {
+                        active++
                         status = `<div class="d-flex justify-content-center">
                         <div class="spinner-border spinner-border-sm text-primary m-auto" role="status">
                           <span class="visually-hidden statusCount">running</span>
@@ -700,14 +701,17 @@ $(document).on('click', '.status', event => {
                     } else if (row.rstatus === null && row.pstatus === 'STOPPED') {
                         status = `<span class="text-danger">${row.pstatus}</span>`
                     } else if (row.rstatus == 'finished') {
+                        finished++
                         return `<div class="p-0 text-center f-action statusCount">
                                 ${row.rstatus}
                             </div>`
                     } else if (row.rstatus == 'failed') {
+                        failed++
                         return `<div class="p-0 text-center fr-action statusCount">
                             ${row.rstatus}
                         </div>`
                     } else {
+                        waiting++
                         status = `<div class="p-0 text-center statusCount">
                         ${row.rstatus}
                     </div>`
@@ -772,6 +776,10 @@ $(document).on('click', '.status', event => {
             $('[data-bs-toggle="tooltip"]').tooltip({ trigger: "hover" });
         }
     })
+    console.log(waiting);
+    console.log(active);
+    console.log(finished);
+    console.log(failed);
     $('#modal-compose-view').modal('show')
     /**
      * * Websocket connection :
