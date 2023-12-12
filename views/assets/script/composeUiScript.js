@@ -639,7 +639,7 @@ $(document).on('click', '.status', event => {
         , active = 0
         , finished = 0
         , failed = 0
-    $('#process_result').DataTable({
+    let dataTable = $('#process_result').DataTable({
         responsive: true,
         deferRender: true,
         destroy: true,
@@ -793,7 +793,10 @@ $(document).on('click', '.status', event => {
         if (data.length == 0) {
             return
         } else {
-            $('#process_result').DataTable().ajax.reload(null, false)
+            dataTable.ajax.reload(null, false)
+            var dataCount = dataTable.rows(':contains("waiting")').data().length;
+            $('#output').text('Number of rows that contain Unknown: ' + dataCount)
+            console.log(dataCount);
             let status = $('.statusCount')
             console.log(status.length);
             console.log(status);
