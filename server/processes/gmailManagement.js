@@ -274,8 +274,7 @@ const verify = async (data, entity, mode) => {
     try {
         await page.waitForSelector('input[type="password"]', { timeout: 5000 })
     } catch (e) {
-        console.log(puppeteer);
-        console.log(PuppeteerErrors);
+        console.log(puppeteer._pptr.errors);
         if (e instanceof PuppeteerErrors.TimeoutError) {
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
