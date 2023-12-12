@@ -144,30 +144,30 @@ const login = async (data, mode) => {
 }
 
 const verify = async (data, entity, mode) => {
-    try {
-        const result = dotenv.config()
-        if (result.error) {
-            throw result.error
-        }
-        let string = result.parsed.SERVER_ENTITY
-        let grantAccess = { entity: string }
+    const result = dotenv.config()
+    if (result.error) {
+        throw result.error
+    }
+    let string = result.parsed.SERVER_ENTITY
+    let grantAccess = { entity: string }
 
-        let details = ''
-        let arg
-        if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
-            arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox', `--user-data-dir=${userDir}${data.gmail.split('@')[0]}-@-init-Gmail`]
-        } else {
-            const proxyServer = `${data.proxy}`;
-            arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox', `--user-data-dir=${userDir}${data.gmail.split('@')[0]}-@-init-Gmail`]
-        }
-        console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
-        console.log(` `);
-        let feedback = ''
-        const browser = await puppeteer.launch({ headless: 'new', args: arg })
-        const browserPID = browser.process().pid
-        const page = await browser.newPage()
-        pidProcess.push({ id_process: data.id_process, pid: browserPID })
-        await page.setViewport({ width: 1280, height: 720 });
+    let details = ''
+    let arg
+    if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
+        arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox', `--user-data-dir=${userDir}${data.gmail.split('@')[0]}-@-init-Gmail`]
+    } else {
+        const proxyServer = `${data.proxy}`;
+        arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox', `--user-data-dir=${userDir}${data.gmail.split('@')[0]}-@-init-Gmail`]
+    }
+    console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
+    console.log(` `);
+    let feedback = ''
+    const browser = await puppeteer.launch({ headless: 'new', args: arg })
+    const browserPID = browser.process().pid
+    const page = await browser.newPage()
+    pidProcess.push({ id_process: data.id_process, pid: browserPID })
+    await page.setViewport({ width: 1280, height: 720 });
+    try {
         await page.setDefaultNavigationTimeout(60000)
         const navigationPromise = page.waitForNavigation({ timeout: 30000 })
 
