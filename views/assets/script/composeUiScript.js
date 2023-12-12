@@ -653,9 +653,9 @@ $(document).on('click', '.status', event => {
             {
                 data: null,
                 render: function (row) {
-                    console.log(row);
                     count++
                     console.log('callBack :' + count);
+                    console.log(row);
                     return `<div class="card m-0">
                     <div class="card-body p-1 text-center text-dark">
                     ${row.gmail}
