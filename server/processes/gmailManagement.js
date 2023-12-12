@@ -275,11 +275,14 @@ const verify = async (data, entity, mode) => {
         await page.waitForSelector('input[type="password"]', { timeout: 5000 })
     } catch (e) {
         if (e instanceof puppeteer._pptr.errors.TimeoutError) {
+            await time(3000)
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
             });
             feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+            await time(3000)
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+            await time(3000)
             await page.close()
             await browser.close()
             return feedback
