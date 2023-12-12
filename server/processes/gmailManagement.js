@@ -286,6 +286,7 @@ const verify = async (data, entity, mode) => {
             await time(3000)
             await page.close()
             await browser.close()
+            console.log(feedback);
             return feedback
         }
     }

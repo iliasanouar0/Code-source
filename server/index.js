@@ -1483,6 +1483,7 @@ wsc.on('connection', (wss, req) => {
 
           r = removeTrailingComma(r);
 
+
           console.log(r);
           await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process });
 
