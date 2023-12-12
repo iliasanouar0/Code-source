@@ -671,10 +671,9 @@ $(document).on('click', '.status', event => {
         , active = 0
         , finished = 0
         , failed = 0
-        , count = 0
     $('#process_result').DataTable({
         responsive: true,
-        // deferRender: true,
+        deferRender: true,
         destroy: true,
         autoWidth: false,
         ajax: {
@@ -688,9 +687,6 @@ $(document).on('click', '.status', event => {
             {
                 data: null,
                 render: function (row) {
-                    count++
-                    console.log('callBack :' + count);
-                    console.log(row.gmail);
                     return `<div class="card m-0">
                     <div class="card-body p-1 text-center text-dark">
                     ${row.gmail}
@@ -830,10 +826,6 @@ $(document).on('click', '.status', event => {
             return
         } else {
             $('#process_result').DataTable().ajax.reload(function (json) { getCount(json) }, false)
-            // $('.w_seeds').html(data[0].waiting)
-            // $('.a_seeds').html(data[0].active)
-            // $('.f_seeds').html(data[0].finished)
-            // $('.ff_seeds').html(data[0].failed)
             $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
         }
     };
