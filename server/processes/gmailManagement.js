@@ -266,7 +266,12 @@ const verify = async (data, entity, mode) => {
         return feedback
     }
     await navigationPromise
-    await page.waitForSelector('input[type="password"]', { timeout: 10000 })
+    await page.screenshot({
+        path: `${path}/${data.gmail.split('@')[0]}-@-check-${data.id_process}.png`
+    });
+    feedback += `, ${data.gmail.split('@')[0]}-@-check-${data.id_process}.png`
+    await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+    await page.waitForSelector('input[type="password"]')
     await time(3000)
     await page.type('input[type="password"]', data.password, { delay: 200 })
     await time(5000)
