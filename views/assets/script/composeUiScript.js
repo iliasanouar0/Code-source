@@ -714,7 +714,11 @@ $(document).on('click', '.status', event => {
                 render: function (row) {
                     let html
                     if (row.statusdetails == null || row.statusdetails == "" || row.statusdetails == undefined || row.statusdetails == 'undefined') {
-                        html = `<p>&#9940;</p>`
+                        if (row.rstatus == 'running' || row.rstatus == 'waiting' || row.rstatus == 'finished') {
+                            html = ''
+                        } else {
+                            html = `<p>&#9940;</p>`
+                        }
                     } else {
                         if (row.statusdetails.includes('limit')) {
                             html = `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
@@ -730,9 +734,6 @@ $(document).on('click', '.status', event => {
                             <div class="card-body p-1 text-center text-dark">${row.statusdetails}</div></div>`
                         }
                     }
-                    // if (row.rstatus == 'running' || row.rstatus == 'waiting' || row.rstatus == 'finished') {
-                    //     html = ''
-                    // }
                     return html
                 }
             },
