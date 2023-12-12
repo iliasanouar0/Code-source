@@ -774,12 +774,16 @@ $(document).on('click', '.status', event => {
         drawCallback: function () {
             $('body').tooltip('dispose');
             $('[data-bs-toggle="tooltip"]').tooltip({ trigger: "hover" });
+            console.log(waiting);
+            console.log(active);
+            console.log(finished);
+            console.log(failed);
         }
     })
-    console.log(waiting);
-    console.log(active);
-    console.log(finished);
-    console.log(failed);
+    // console.log(waiting);
+    // console.log(active);
+    // console.log(finished);
+    // console.log(failed);
     $('#modal-compose-view').modal('show')
     /**
      * * Websocket connection :
