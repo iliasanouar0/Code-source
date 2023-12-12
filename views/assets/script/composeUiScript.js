@@ -829,7 +829,7 @@ $(document).on('click', '.status', event => {
         if (data.length == 0) {
             return
         } else {
-            $('#process_result').DataTable().ajax.reload(getCount(json), false)
+            $('#process_result').DataTable().ajax.reload(function (json) { getCount(json) }, false)
             // $('.w_seeds').html(data[0].waiting)
             // $('.a_seeds').html(data[0].active)
             // $('.f_seeds').html(data[0].finished)
