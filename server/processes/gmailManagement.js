@@ -266,7 +266,7 @@ const verify = async (data, entity, mode) => {
         return feedback
     }
     await navigationPromise
-    await page.waitForSelector('input[type="password"]', { timeout: 500 })
+    await page.waitForSelector('input[type="password"]', { timeout: 10000 })
     await time(3000)
     await page.type('input[type="password"]', data.password, { delay: 200 })
     await time(5000)
