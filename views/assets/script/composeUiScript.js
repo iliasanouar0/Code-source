@@ -640,7 +640,7 @@ $(document).on('click', '.status', event => {
         , finished = 0
         , failed = 0
         , count = 0
-    let dataTable = $('#process_result').DataTable({
+    $('#process_result').DataTable({
         responsive: true,
         // deferRender: true,
         destroy: true,
@@ -825,7 +825,7 @@ $(document).on('click', '.status', event => {
         if (data.length == 0) {
             return
         } else {
-            dataTable.ajax.reload(null, false)
+            $('#process_result').DataTable.ajax.reload(null, false)
             // $('.w_seeds').html(data[0].waiting)
             // $('.a_seeds').html(data[0].active)
             // $('.f_seeds').html(data[0].finished)
