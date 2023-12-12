@@ -283,35 +283,35 @@ const verify = async (data, entity, mode) => {
             feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
             await time(3000)
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        }
-        await time(3000)
-        await page.close()
-        await browser.close()
-        return feedback
-    } finally {
-        await time(3000)
-        await page.type('input[type="password"]', data.password, { delay: 200 })
-
-        await time(5000)
-        await page.waitForSelector('#passwordNext')
-        await time(2000)
-        await page.click('#passwordNext')
-        await time(10000)
-        if (await page.$('[aria-invalid="true"]') != null) {
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
-            });
+            await time(3000)
             await page.close()
             await browser.close()
-            console.log(`invalid pass : ${data.gmail}`);
-            feedback += `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
             return feedback
         }
-        await navigationPromise
-        await time(3000)
-        console.log(page.url());
     }
+    await time(3000)
+    await page.type('input[type="password"]', data.password, { delay: 200 })
+
+    await time(5000)
+    await page.waitForSelector('#passwordNext')
+    await time(2000)
+    await page.click('#passwordNext')
+    await time(10000)
+    if (await page.$('[aria-invalid="true"]') != null) {
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+        });
+        await page.close()
+        await browser.close()
+        console.log(`invalid pass : ${data.gmail}`);
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        return feedback
+    }
+    await navigationPromise
+    await time(3000)
+    console.log(page.url());
+
 
     if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
         console.log('here');
