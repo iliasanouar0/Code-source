@@ -854,7 +854,7 @@ wsc.on('connection', (wss, req) => {
       let bccToProcess = []
       let bccCount = 0
       for (let i = 0; i < active; i++) {
-        if (seeds[0] == undefined) {
+        if (seeds.length < active) {
           break
         }
         toProcess[i] = []
@@ -1523,7 +1523,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
-      let check = { startingIndexed: toProcess.length <= 3 ? false : true }
+      let check = { startingIndexed: toProcess.length == 3 ? false : true }
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
