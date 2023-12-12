@@ -811,7 +811,7 @@ $(document).on('click', '.status', event => {
             finished = 0
             failed = 0
             count = 0
-            dataTable.ajax.reload(null, false)
+            // dataTable.ajax.reload(null, false)
             console.log(waiting);
             console.log(active);
             console.log(finished);
