@@ -1612,12 +1612,12 @@ wsc.on('connection', (wss, req) => {
         }
 
         async function handleProcessCompletion() {
-          let w = seeds.length + 3;
+          let w = waiting - success - failed
           if (w <= 0) {
-            let status = { waiting: 0, active: toProcess.length, finished: success, failed, id_process: data.id_process };
+            let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
             processStateManager.updateState(status);
           } else {
-            let status = { waiting: w, active: toProcess.length, finished: success, failed, id_process: data.id_process };
+            let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
             processStateManager.updateState(status);
           }
 
@@ -1627,7 +1627,7 @@ wsc.on('connection', (wss, req) => {
             return;
           }
           if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
-            let status = { waiting: 0, active: 0, finished: success, failed, id_process: data.id_process };
+            let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
             await processStateManager.updateState(status);
             composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
             console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()}`);
