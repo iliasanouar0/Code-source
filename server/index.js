@@ -1558,9 +1558,8 @@ wsc.on('connection', (wss, req) => {
           await Promise.all([
             resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
             resultManager.endNow(result),
-            running--
           ]);
-
+          running--
           toProcess.shift();
 
           console.log(seeds.length);
@@ -1569,6 +1568,7 @@ wsc.on('connection', (wss, req) => {
             toProcess.push(seeds[0]);
             seeds.splice(seeds.indexOf(seeds[0]), 1);
             count++;
+            running++
             await updateProcessState();
           }
         }
@@ -1586,8 +1586,8 @@ wsc.on('connection', (wss, req) => {
           await Promise.all([
             resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "failed"),
             resultManager.endNow(result),
-            running--
           ]);
+          running--
 
           toProcess.shift();
           state = await composeManager.getProcessState(data.id_process);
@@ -1601,6 +1601,7 @@ wsc.on('connection', (wss, req) => {
             toProcess.push(seeds[0 + start]);
             seeds.splice(seeds.indexOf(seeds[0 + start]), 1);
             count++;
+            running++
             await updateProcessState();
           }
         }
