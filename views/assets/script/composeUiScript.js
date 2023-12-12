@@ -690,10 +690,9 @@ $(document).on('click', '.status', event => {
                 render: function (row) {
                     let status
                     if (row.rstatus == 'running') {
-                        active++
                         status = `<div class="d-flex justify-content-center">
                         <div class="spinner-border spinner-border-sm text-primary m-auto" role="status">
-                          <span class="visually-hidden">Loading...</span>
+                          <span class="visually-hidden status">running</span>
                         </div>
                       </div>`
                     } else if (row.rstatus === null && row.pstatus != 'STOPPED') {
@@ -701,18 +700,17 @@ $(document).on('click', '.status', event => {
                     } else if (row.rstatus === null && row.pstatus === 'STOPPED') {
                         status = `<span class="text-danger">${row.pstatus}</span>`
                     } else if (row.rstatus == 'finished') {
-                        finished++
-                        return `<div class="p-0 text-center f-action">
+                        return `<div class="p-0 text-center f-action status">
                                 ${row.rstatus}
                             </div>`
                     } else if (row.rstatus == 'failed') {
-                        failed++
-                        return `<div class="p-0 text-center fr-action">
+                        return `<div class="p-0 text-center fr-action status">
                             ${row.rstatus}
                         </div>`
                     } else {
-                        waiting++
-                        status = row.rstatus
+                        status = `<div class="p-0 text-center status">
+                        ${row.rstatus}
+                    </div>`
                     }
                     return status
                 }
@@ -795,10 +793,6 @@ $(document).on('click', '.status', event => {
         if (data.length == 0) {
             return
         } else {
-            // waiting = 0
-            // active = 0
-            // finished = 0
-            // failed = 0
             $('#process_result').DataTable().ajax.reload(null, false)
             // $('.w_seeds').html(data[0].waiting)
             // $('.a_seeds').html(data[0].active)
