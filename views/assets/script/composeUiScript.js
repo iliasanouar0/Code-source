@@ -547,6 +547,7 @@ $(document).on('click', '.start', event => {
             },
         };
         $.ajax(settings).done(function (response) {
+            console.log(response);
             websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj, entity: response[0].nom }))
             getDataCompose.ajax.reload(null, false)
             $('body .tooltip').removeClass('show');
