@@ -143,7 +143,7 @@ const addList = (data) => {
             icon: 'success',
             confirmButtonText: 'ok'
         }).then(() => {
-            $('.add_list input').val('');
+            $('.add_list #la_name').val('');
             $('.add_list').modal('hide');
             getDatalist.ajax.reload(null, false)
         })
