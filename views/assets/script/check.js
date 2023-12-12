@@ -18,7 +18,7 @@ fetch(`http://${loop}:3000/proxy/`, {
 
 let authO = JSON.parse(sessionStorage.auth)
 if (authO == 0 || authO == 'undefined') {
-    location.href = '../../access.html'
+    location.href = '/'
 }
 
 if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
