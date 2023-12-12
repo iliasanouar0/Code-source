@@ -650,7 +650,8 @@ $(document).on('click', '.status', event => {
             dataSrc: '',
         },
         initComplete: function (settings, json) {
-            alert('DataTables has finished its initialisation.');
+            console.log(json);
+            // alert('DataTables has finished its initialisation.');
         },
         columns: [
             {
