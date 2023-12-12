@@ -653,6 +653,7 @@ $(document).on('click', '.status', event => {
             {
                 data: null,
                 render: function (row) {
+                    console.log(row);
                     count++
                     console.log('callBack :' + count);
                     return `<div class="card m-0">
