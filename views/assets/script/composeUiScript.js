@@ -795,10 +795,10 @@ $(document).on('click', '.status', event => {
         if (data.length == 0) {
             return
         } else {
-            waiting = 0
-            active = 0
-            finished = 0
-            failed = 0
+            // waiting = 0
+            // active = 0
+            // finished = 0
+            // failed = 0
             $('#process_result').DataTable().ajax.reload(null, false)
             // $('.w_seeds').html(data[0].waiting)
             // $('.a_seeds').html(data[0].active)
@@ -812,10 +812,6 @@ $(document).on('click', '.status', event => {
             console.log(active);
             console.log(finished);
             console.log(failed);
-            waiting = 0
-            active = 0
-            finished = 0
-            failed = 0
             $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
         }
     };
