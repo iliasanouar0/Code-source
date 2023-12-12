@@ -854,9 +854,6 @@ wsc.on('connection', (wss, req) => {
       let bccToProcess = []
       let bccCount = 0
       for (let i = 0; i < active; i++) {
-        if (seeds.length < active) {
-          break
-        }
         toProcess[i] = []
         bccToProcess[i] = []
         for (let j = 0; j < active; j++) {
@@ -868,6 +865,10 @@ wsc.on('connection', (wss, req) => {
           seeds.shift()
           bccResult.shift()
           count++
+        }
+        console.log(Origins.length / active < 3);
+        if (Origins.length / active < 3) {
+          break
         }
       }
       console.log(toProcess);
