@@ -3,7 +3,8 @@ const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 const setTimeout = require('timers/promises');
 const fs = require('fs');
-let dotenv = require('dotenv')
+let dotenv = require('dotenv');
+const { error } = require('console');
 let time = setTimeout.setTimeout
 puppeteer.use(StealthPlugin())
 
@@ -250,25 +251,7 @@ const verify = async (data, entity, mode) => {
         });
         feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        try {
-            await page.waitForSelector('input[type="email"]', { timeout: 5000 })
-        } catch (e) {
-            console.log("catch error");
-            if (e instanceof puppeteer._pptr.errors.TimeoutError) {
-                await time(3000)
-                await page.screenshot({
-                    path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
-                });
-                feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
-                await time(3000)
-                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-                await time(3000)
-                await page.close()
-                await browser.close()
-                console.log(feedback);
-                return feedback
-            }
-        }
+        await page.waitForSelector('input[type="email"]', { timeout: 5000 })
         await page.click('input[type="email"]')
         await navigationPromise
         await page.type('input[type="email"]', data.gmail, { delay: 100 })
@@ -288,25 +271,7 @@ const verify = async (data, entity, mode) => {
             return feedback
         }
         await navigationPromise
-        try {
-            await page.waitForSelector('input[type="password"]', { timeout: 5000 })
-        } catch (e) {
-            console.log("catch error");
-            if (e instanceof puppeteer._pptr.errors.TimeoutError) {
-                await time(3000)
-                await page.screenshot({
-                    path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
-                });
-                feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
-                await time(3000)
-                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-                await time(3000)
-                await page.close()
-                await browser.close()
-                console.log(feedback);
-                return feedback
-            }
-        }
+        await page.waitForSelector('input[type="password"]', { timeout: 5000 })
         await time(3000)
         await page.type('input[type="password"]', data.password, { delay: 200 })
 
@@ -508,6 +473,7 @@ const verify = async (data, entity, mode) => {
             // }
         }
     } catch (e) {
+        console.log(e);
         console.log("catch error");
         if (e instanceof puppeteer._pptr.errors.TimeoutError) {
             await time(3000)
