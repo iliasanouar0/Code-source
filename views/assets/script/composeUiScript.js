@@ -657,7 +657,7 @@ $(document).on('click', '.status', event => {
                     console.log('callBack :' + count);
                     return `<div class="card m-0">
                     <div class="card-body p-1 text-center text-dark">
-                    ${row.gmail} || ${count}
+                    ${row.gmail}
                     </div>
                    </div>`
                 }
