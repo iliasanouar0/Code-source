@@ -538,20 +538,9 @@ $(document).on('click', '.start', event => {
     }
     let socketState = websocket_s.readyState
     if (socketState !== websocket_s.CLOSED) {
-        var settings = {
-            "url": `http://${ip}:3000/entity/${user.id_entity}`,
-            "method": "GET",
-            "timeout": 0,
-            "headers": {
-                "Content-Type": "application/json"
-            },
-        };
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-            websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj, entity: response[0].nom }))
-            getDataCompose.ajax.reload(null, false)
-            $('body .tooltip').removeClass('show');
-        });
+        websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
+        getDataCompose.ajax.reload(null, false)
+        $('body .tooltip').removeClass('show');
     } else {
         swal.fire({
             title: 'connection lost !',
