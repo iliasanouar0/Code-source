@@ -288,6 +288,7 @@ const verify = async (data, entity, mode) => {
     await time(3000)
     console.log(page.url());
     if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
+        console.log('here');
         console.log('verified email : ' + data.gmail);
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
@@ -353,13 +354,12 @@ const verify = async (data, entity, mode) => {
             details += `Entre unread inbox : ${countEnter[0].count}`
             await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
         }
-        await page.close()
-        await browser.close()
         feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await page.close()
+        await browser.close()
         return feedback
     }
-
     await navigationPromise
     await time(2000)
     console.log(page.url());
@@ -386,11 +386,10 @@ const verify = async (data, entity, mode) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalid-verification-${data.id_process}.png`
         });
-
-        await page.close()
-        await browser.close()
         feedback += `, ${data.gmail.split('@')[0]}-@-invalid-verification-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await page.close()
+        await browser.close()
         return feedback
     }
 
