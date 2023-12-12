@@ -804,6 +804,10 @@ $(document).on('click', '.status', event => {
             $('.a_seeds').html(active)
             $('.f_seeds').html(finished)
             $('.ff_seeds').html(failed)
+            console.log(waiting);
+            console.log(active);
+            console.log(finished);
+            console.log(failed);
             waiting = 0
             active = 0
             finished = 0
