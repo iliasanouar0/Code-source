@@ -198,44 +198,44 @@ const verify = async (data, entity, mode) => {
             await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
         }
         await time(5000)
-        if (grantAccess.entity == entity) {
-            await time(3000)
-            await page.waitForSelector('.FH')
-            await time(2000)
-            await page.click('.FH')
-            await time(2000)
-            let op = await page.$$("label:nth-child(6) span")
-            await time(2000)
-            await op[0].click()
-            await time(2000)
-            let cos = await page.$$("label:nth-child(6) div button")
-            await time(2000)
-            await cos[0].click()
-            await time(7000)
-            let s = 0
-            let checkSpan = await page.$$("td.r9 table tr td")
-            for (let i = 0; i < 3; i++) {
-                s = s + 1
-                if (s % 2 == 0) {
-                    s = s + 1
-                }
-                console.log(s);
-                await time(1000)
-                checkSpan[s].click()
-                await time(1000)
-                let sp = await page.$$('[act="z"] .J-N-Jz')
-                await time(1000)
-                await sp[sp.length - 1].click()
-                await time(1000)
-            }
-            await time(3000)
-            let btn = await page.$$('[guidedhelpid="save_changes_button"]')
-            await time(2000)
-            await btn[0].click()
+        // if (grantAccess.entity == entity) {
+        //     await time(3000)
+        //     await page.waitForSelector('.FH')
+        //     await time(2000)
+        //     await page.click('.FH')
+        //     await time(2000)
+        //     let op = await page.$$("label:nth-child(6) span")
+        //     await time(2000)
+        //     await op[0].click()
+        //     await time(2000)
+        //     let cos = await page.$$("label:nth-child(6) div button")
+        //     await time(2000)
+        //     await cos[0].click()
+        //     await time(7000)
+        //     let s = 0
+        //     let checkSpan = await page.$$("td.r9 table tr td")
+        //     for (let i = 0; i < 3; i++) {
+        //         s = s + 1
+        //         if (s % 2 == 0) {
+        //             s = s + 1
+        //         }
+        //         console.log(s);
+        //         await time(1000)
+        //         checkSpan[s].click()
+        //         await time(1000)
+        //         let sp = await page.$$('[act="z"] .J-N-Jz')
+        //         await time(1000)
+        //         await sp[sp.length - 1].click()
+        //         await time(1000)
+        //     }
+        //     await time(3000)
+        //     let btn = await page.$$('[guidedhelpid="save_changes_button"]')
+        //     await time(2000)
+        //     await btn[0].click()
 
-        } else {
-            console.log("no access !!");
-        }
+        // } else {
+        //     console.log("no access !!");
+        // }
         await page.close()
         await browser.close()
         return feedback
@@ -294,45 +294,45 @@ const verify = async (data, entity, mode) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
-        await time(5000)
+        // await time(5000)
 
-        if (grantAccess.entity == entity) {
-            await page.waitForSelector('.FH')
-            await time(2000)
-            await page.click('.FH')
-            await time(2000)
-            let op = await page.$$("label:nth-child(6) span")
-            await time(2000)
-            await op[0].click()
-            await time(2000)
-            let cos = await page.$$("label:nth-child(6) div button")
-            await time(2000)
-            await cos[0].click()
-            await time(7000)
-            let s = 0
-            let checkSpan = await page.$$("td.r9 table tr td")
-            for (let i = 0; i < 3; i++) {
-                s = s + 1
-                if (s % 2 == 0) {
-                    s = s + 1
-                }
-                console.log(s);
-                await time(1000)
-                checkSpan[s].click()
-                await time(1000)
-                let sp = await page.$$('[act="z"] .J-N-Jz')
-                await time(1000)
-                await sp[sp.length - 1].click()
-                await time(1000)
-            }
-            await time(3000)
-            let btn = await page.$$('[guidedhelpid="save_changes_button"]')
-            await time(2000)
-            await btn[0].click()
+        // if (grantAccess.entity == entity) {
+        //     await page.waitForSelector('.FH')
+        //     await time(2000)
+        //     await page.click('.FH')
+        //     await time(2000)
+        //     let op = await page.$$("label:nth-child(6) span")
+        //     await time(2000)
+        //     await op[0].click()
+        //     await time(2000)
+        //     let cos = await page.$$("label:nth-child(6) div button")
+        //     await time(2000)
+        //     await cos[0].click()
+        //     await time(7000)
+        //     let s = 0
+        //     let checkSpan = await page.$$("td.r9 table tr td")
+        //     for (let i = 0; i < 3; i++) {
+        //         s = s + 1
+        //         if (s % 2 == 0) {
+        //             s = s + 1
+        //         }
+        //         console.log(s);
+        //         await time(1000)
+        //         checkSpan[s].click()
+        //         await time(1000)
+        //         let sp = await page.$$('[act="z"] .J-N-Jz')
+        //         await time(1000)
+        //         await sp[sp.length - 1].click()
+        //         await time(1000)
+        //     }
+        //     await time(3000)
+        //     let btn = await page.$$('[guidedhelpid="save_changes_button"]')
+        //     await time(2000)
+        //     await btn[0].click()
 
-        } else {
-            console.log("no access !!");
-        }
+        // } else {
+        //     console.log("no access !!");
+        // }
 
         await time(4000)
 
@@ -395,10 +395,13 @@ const verify = async (data, entity, mode) => {
     }
 
     if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
+        console.log('here 5656565');
         console.log('verified email : ' + data.gmail);
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
+        feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         const countEnter = await page.evaluate(() => {
             let html = []
             let el = document.querySelectorAll('.bsU')
@@ -421,47 +424,45 @@ const verify = async (data, entity, mode) => {
         }
         await page.close()
         await browser.close()
-        feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        await time(5000)
-        if (grantAccess.entity == entity) {
-            await page.waitForSelector('.FH')
-            await time(2000)
-            await page.click('.FH')
-            await time(2000)
-            let op = await page.$$("label:nth-child(6) span")
-            await time(2000)
-            await op[0].click()
-            await time(2000)
-            let cos = await page.$$("label:nth-child(6) div button")
-            await time(2000)
-            await cos[0].click()
-            await time(7000)
-            let s = 0
-            let checkSpan = await page.$$("td.r9 table tr td")
-            for (let i = 0; i < 3; i++) {
-                s = s + 1
-                if (s % 2 == 0) {
-                    s = s + 1
-                }
-                console.log(s);
-                await time(1000)
-                checkSpan[s].click()
-                await time(1000)
-                let sp = await page.$$('[act="z"] .J-N-Jz')
-                await time(1000)
-                await sp[sp.length - 1].click()
-                await time(1000)
-            }
-            await time(3000)
-            let btn = await page.$$('[guidedhelpid="save_changes_button"]')
-            await time(2000)
-            await btn[0].click()
-
-        } else {
-            console.log("no access !!");
-        }
         return feedback
+        // await time(5000)
+        // if (grantAccess.entity == entity) {
+        //     await page.waitForSelector('.FH')
+        //     await time(2000)
+        //     await page.click('.FH')
+        //     await time(2000)
+        //     let op = await page.$$("label:nth-child(6) span")
+        //     await time(2000)
+        //     await op[0].click()
+        //     await time(2000)
+        //     let cos = await page.$$("label:nth-child(6) div button")
+        //     await time(2000)
+        //     await cos[0].click()
+        //     await time(7000)
+        //     let s = 0
+        //     let checkSpan = await page.$$("td.r9 table tr td")
+        //     for (let i = 0; i < 3; i++) {
+        //         s = s + 1
+        //         if (s % 2 == 0) {
+        //             s = s + 1
+        //         }
+        //         console.log(s);
+        //         await time(1000)
+        //         checkSpan[s].click()
+        //         await time(1000)
+        //         let sp = await page.$$('[act="z"] .J-N-Jz')
+        //         await time(1000)
+        //         await sp[sp.length - 1].click()
+        //         await time(1000)
+        //     }
+        //     await time(3000)
+        //     let btn = await page.$$('[guidedhelpid="save_changes_button"]')
+        //     await time(2000)
+        //     await btn[0].click()
+
+        // } else {
+        //     console.log("no access !!");
+        // }
     }
 }
 
