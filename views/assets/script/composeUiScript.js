@@ -783,6 +783,10 @@ $(document).on('click', '.status', event => {
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
     websocket.onopen = (e) => {
+        waiting = 0
+        active = 0
+        finished = 0
+        failed = 0
         $('.w_seeds').html(0)
         $('.a_seeds').html(0)
         $('.f_seeds').html(0)
