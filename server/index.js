@@ -1941,11 +1941,12 @@ wsc.on('connection', (wss, req) => {
       let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
       await processStateManager.updateState(status)
       if (seeds.length == 0) {
-        await composeManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
+        composeManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
       } else {
-        await composeManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
+        composeManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
       }
       sendToAll(clients, 'reload')
+
     } else if (request == 'reset') {
       await composeManager.restedProcess(data.data)
       await resultManager.deleteResultsProcess(data.id_process)
@@ -1960,7 +1961,6 @@ wsc.on('connection', (wss, req) => {
         composeManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
       } else {
         composeManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
-
       }
       sendToAll(clients, 'reload')
     } else if (request == 'restart') {
