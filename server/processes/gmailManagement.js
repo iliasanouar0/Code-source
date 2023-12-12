@@ -166,8 +166,27 @@ const verify = async (data, entity, mode) => {
     const page = await browser.newPage()
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
     await page.setViewport({ width: 1280, height: 720 });
+    await page.setDefaultNavigationTimeout(60000)
     const navigationPromise = page.waitForNavigation()
-    await page.goto('https://gmail.com/')
+    try {
+        await page.goto('https://gmail.com/')
+    } catch (e) {
+        console.log("catch error");
+        if (e instanceof puppeteer._pptr.errors.TimeoutError) {
+            await time(3000)
+            await page.screenshot({
+                path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+            });
+            feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+            await time(3000)
+            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+            await time(3000)
+            await page.close()
+            await browser.close()
+            console.log(feedback);
+            return feedback
+        }
+    }
     await time(3000)
     if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
         console.log('here 111');
