@@ -283,11 +283,11 @@ const verify = async (data, entity, mode) => {
             feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
             await time(3000)
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            await time(3000)
-            await page.close()
-            await browser.close()
-            return feedback
         }
+        await time(3000)
+        await page.close()
+        await browser.close()
+        return feedback
     } finally {
         await time(3000)
         await page.type('input[type="password"]', data.password, { delay: 200 })
