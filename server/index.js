@@ -870,6 +870,7 @@ wsc.on('connection', (wss, req) => {
           count++
         }
       }
+      console.log(toProcess);
 
 
 
