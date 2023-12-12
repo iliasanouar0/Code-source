@@ -1606,7 +1606,7 @@ wsc.on('connection', (wss, req) => {
           let running = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
           let w = waiting.length
           console.log('running :' + running.length);
-          let status = { waiting: w, active: running.length, finished: success, failed: failed, id_process: data.id_process }
+          let status = { waiting: w, active: running.length + 1, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
           // const w = seeds.length + 3;
           // const status = { waiting: Math.max(0, w), active: toProcess.length, finished: success, failed, id_process: data.id_process };
