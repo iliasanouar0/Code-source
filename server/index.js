@@ -1455,7 +1455,7 @@ wsc.on('connection', (wss, req) => {
 
         await handleProcessCompletion();
 
-        async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running"); running++ }
+        async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running"); running++; console.log('running :' + running); }
 
         async function processSeedActions(seed, option) {
           let { actions, subject, pages, c, options, mode } = extractActions(seed);
