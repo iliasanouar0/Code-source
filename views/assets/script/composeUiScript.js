@@ -651,7 +651,35 @@ $(document).on('click', '.status', event => {
         },
         initComplete: function (settings, json) {
             console.log(json);
-            // alert('DataTables has finished its initialisation.');
+            waiting = 0
+            active = 0
+            finished = 0
+            failed = 0
+            count = 0
+            for (let i = 0; i < json.length; i++) {
+                console.log(json[i].rstatus);
+                switch (json[i].rstatus) {
+                    case 'running':
+                        active++
+                        break;
+                    case 'failed':
+                        failed++
+                        break;
+                    case 'waiting':
+                        waiting++
+                        break;
+                    case 'finished':
+                        finished++
+                        break;
+                    default:
+                        console.log('none');
+                        break;
+                }
+            }
+            $('.w_seeds').html(waiting)
+            $('.a_seeds').html(active)
+            $('.f_seeds').html(finished)
+            $('.ff_seeds').html(failed)
         },
         columns: [
             {
@@ -698,7 +726,6 @@ $(document).on('click', '.status', event => {
                 render: function (row) {
                     let status
                     if (row.rstatus == 'running') {
-                        active++
                         status = `<div class="d-flex justify-content-center">
                         <div class="spinner-border spinner-border-sm text-primary m-auto" role="status">
                           <span class="visually-hidden statusCount">running</span>
@@ -709,17 +736,14 @@ $(document).on('click', '.status', event => {
                     } else if (row.rstatus === null && row.pstatus === 'STOPPED') {
                         status = `<span class="text-danger">${row.pstatus}</span>`
                     } else if (row.rstatus == 'finished') {
-                        finished++
                         return `<div class="p-0 text-center f-action statusCount">
                                 ${row.rstatus}
                             </div>`
                     } else if (row.rstatus == 'failed') {
-                        failed++
                         return `<div class="p-0 text-center fr-action statusCount">
                             ${row.rstatus}
                         </div>`
                     } else {
-                        waiting++
                         status = `<div class="p-0 text-center statusCount">
                         ${row.rstatus}
                     </div>`
@@ -793,11 +817,6 @@ $(document).on('click', '.status', event => {
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
     websocket.onopen = (e) => {
-        waiting = 0
-        active = 0
-        finished = 0
-        failed = 0
-        count = 0
         $('.w_seeds').html(0)
         $('.a_seeds').html(0)
         $('.f_seeds').html(0)
@@ -810,27 +829,11 @@ $(document).on('click', '.status', event => {
         if (data.length == 0) {
             return
         } else {
-            waiting = 0
-            active = 0
-            finished = 0
-            failed = 0
-            count = 0
-            // dataTable.ajax.reload(null, false)
-            let statusCount = $('.statusCount')
-            console.log(statusCount);
-            console.log(statusCount.length);
-            console.log(waiting);
-            console.log(active);
-            console.log(finished);
-            console.log(failed);
+            dataTable.ajax.reload(null, false)
             // $('.w_seeds').html(data[0].waiting)
             // $('.a_seeds').html(data[0].active)
             // $('.f_seeds').html(data[0].finished)
             // $('.ff_seeds').html(data[0].failed)
-            $('.w_seeds').html(waiting)
-            $('.a_seeds').html(active)
-            $('.f_seeds').html(finished)
-            $('.ff_seeds').html(failed)
             $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
         }
     };
