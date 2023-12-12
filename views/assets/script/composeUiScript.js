@@ -817,10 +817,6 @@ $(document).on('click', '.status', event => {
     const wsUri = `ws://${ip}:7074/wss`;
     const websocket = new WebSocket(wsUri);
     websocket.onopen = (e) => {
-        $('.w_seeds').html(0)
-        $('.a_seeds').html(0)
-        $('.f_seeds').html(0)
-        $('.ff_seeds').html(0)
         websocket.send(`${id}`)
     }
 
