@@ -852,12 +852,15 @@ wsc.on('connection', (wss, req) => {
       let bccToProcess = []
       let bccCount = 0
       for (let i = 0; i < active; i++) {
-        if (seeds.length < active) {
+        if (seeds[0] == undefined) {
           break
         }
         toProcess[i] = []
         bccToProcess[i] = []
         for (let j = 0; j < active; j++) {
+          if (seeds[0] == undefined) {
+            break
+          }
           toProcess[i].push(seeds[0])
           bccToProcess[i].push(bccResult[0])
           seeds.shift()
