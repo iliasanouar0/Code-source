@@ -692,7 +692,7 @@ $(document).on('click', '.status', event => {
                     if (row.rstatus == 'running') {
                         status = `<div class="d-flex justify-content-center">
                         <div class="spinner-border spinner-border-sm text-primary m-auto" role="status">
-                          <span class="visually-hidden status">running</span>
+                          <span class="visually-hidden statusCount">running</span>
                         </div>
                       </div>`
                     } else if (row.rstatus === null && row.pstatus != 'STOPPED') {
@@ -700,15 +700,15 @@ $(document).on('click', '.status', event => {
                     } else if (row.rstatus === null && row.pstatus === 'STOPPED') {
                         status = `<span class="text-danger">${row.pstatus}</span>`
                     } else if (row.rstatus == 'finished') {
-                        return `<div class="p-0 text-center f-action status">
+                        return `<div class="p-0 text-center f-action statusCount">
                                 ${row.rstatus}
                             </div>`
                     } else if (row.rstatus == 'failed') {
-                        return `<div class="p-0 text-center fr-action status">
+                        return `<div class="p-0 text-center fr-action statusCount">
                             ${row.rstatus}
                         </div>`
                     } else {
-                        status = `<div class="p-0 text-center status">
+                        status = `<div class="p-0 text-center statusCount">
                         ${row.rstatus}
                     </div>`
                     }
@@ -794,7 +794,7 @@ $(document).on('click', '.status', event => {
             return
         } else {
             $('#process_result').DataTable().ajax.reload(null, false)
-            let status = $('.status')
+            let status = $('.statusCount')
             console.log(status.length);
             console.log(status);
             // $('.w_seeds').html(data[0].waiting)
