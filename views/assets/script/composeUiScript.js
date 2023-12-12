@@ -712,25 +712,27 @@ $(document).on('click', '.status', event => {
             {
                 data: null,
                 render: function (row) {
+                    let html
                     if (row.statusdetails == null || row.statusdetails == "" || row.statusdetails == undefined || row.statusdetails == 'undefined') {
-                        return `<p>&#9940;</p>`
+                        html = `<p>&#9940;</p>`
                     }
-                    // if (row.rstatus == 'running' || row.rstatus == 'waiting' || row.rstatus == 'finished') {
-                    //     return ''
-                    // }
+                    if (row.rstatus == 'running' || row.rstatus == 'waiting' || row.rstatus == 'finished') {
+                        html = ''
+                    }
                     if (row.statusdetails.includes('limit')) {
-                        return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
+                        html = `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
                         <div class="card-body p-1 text-center text-dark">Limit reached !!</div></div>`
                     } else if (row.statusdetails.includes('blocked')) {
-                        return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
+                        html = `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
                         <div class="card-body p-1 text-center text-dark">Blocked !!</div></div>`
                     } else if (row.statusdetails.includes('Address not found')) {
-                        return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
+                        html = `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
                         <div class="card-body p-1 text-center text-dark">Address not found !!</div></div>`
                     } else {
-                        return `<div class="card m-0">
+                        html = `<div class="card m-0">
                         <div class="card-body p-1 text-center text-dark">${row.statusdetails}</div></div>`
                     }
+                    return html
                 }
             },
             {
