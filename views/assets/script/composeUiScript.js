@@ -794,9 +794,6 @@ $(document).on('click', '.status', event => {
             return
         } else {
             dataTable.ajax.reload(null, false)
-            var dataCount = dataTable.rows(':contains("<div class="p-0 text-center f-action statusCount">finished</div>').data().length;
-            $('#output').text('Number of rows that contain Unknown: ' + dataCount)
-            console.log(dataCount);
             let status = $('.statusCount')
             console.log(status.length);
             console.log(status);
