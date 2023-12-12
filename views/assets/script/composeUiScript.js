@@ -642,7 +642,7 @@ $(document).on('click', '.status', event => {
         , count = 0
     let dataTable = $('#process_result').DataTable({
         responsive: true,
-        deferRender: true,
+        // deferRender: true,
         destroy: true,
         autoWidth: false,
         ajax: {
