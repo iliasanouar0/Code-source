@@ -1442,6 +1442,7 @@ wsc.on('connection', (wss, req) => {
               running++
             }
             console.log('running :' + running);
+            await updateProcessState();
             state = await composeManager.getProcessState(data.id_process);
 
             if (state === "STOPPED") {
@@ -1568,7 +1569,6 @@ wsc.on('connection', (wss, req) => {
             toProcess.push(seeds[0]);
             seeds.splice(seeds.indexOf(seeds[0]), 1);
             count++;
-            running++
             await updateProcessState();
           }
         }
@@ -1601,7 +1601,6 @@ wsc.on('connection', (wss, req) => {
             toProcess.push(seeds[0 + start]);
             seeds.splice(seeds.indexOf(seeds[0 + start]), 1);
             count++;
-            running++
             await updateProcessState();
           }
         }
