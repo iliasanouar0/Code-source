@@ -1541,7 +1541,7 @@ wsc.on('connection', (wss, req) => {
           return { actions, subject, pages, c, options, mode };
         }
 
-        function removeTrailingComma(str) { const array = str.split(', '); array.pop(); return array.join(', '); }
+        function removeTrailingComma(str) { const array = str.split(', '); console.log(array); console.log(array[array.length - 1]); array.pop(); return array.join(', '); }
 
         async function handleSuccess(seed) {
           success++;
