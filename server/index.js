@@ -1532,7 +1532,9 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
-      let check = { startingIndexed: seeds.length / active < 3 ? true : false }
+      console.log(Origins.length);
+      console.log(toProcess.length);
+      let check = { startingIndexed: Origins.length / active < 3 ? true : false }
       console.log(check);
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
