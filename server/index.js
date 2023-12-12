@@ -1279,7 +1279,7 @@ wsc.on('connection', (wss, req) => {
       }
 
       const processV = async (toProcess, start, option) => {
-        while (toProcess.length !== 0 && state !== "STOPPED") {
+        while (toProcess.length !== 0 && state !== "STOPPED" && state !== "PAUSED") {
           state = await composeManager.getProcessState(data.id_process);
           if (state === "STOPPED") {
             break;
@@ -1443,7 +1443,7 @@ wsc.on('connection', (wss, req) => {
           toProcess.shift();
           state = await composeManager.getProcessState(data.id_process);
 
-          if (state === "STOPPED") {
+          if (state === "STOPPED" || state === "PAUSED") {
             return;
           }
 
