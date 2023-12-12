@@ -681,7 +681,9 @@ $(document).on('click', '.status', event => {
             url: `http://${ip}:3000/compose/seeds/${id}`,
             dataSrc: '',
         },
-        initComplete: getCount(json),
+        initComplete: function (settings, json) {
+            getCount(json)
+        },
         columns: [
             {
                 data: null,
