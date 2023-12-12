@@ -1613,7 +1613,6 @@ wsc.on('connection', (wss, req) => {
 
         async function handleProcessCompletion() {
           let w = seeds.length + 3;
-
           if (w <= 0) {
             let status = { waiting: 0, active: toProcess.length, finished: success, failed, id_process: data.id_process };
             processStateManager.updateState(status);
@@ -1627,8 +1626,7 @@ wsc.on('connection', (wss, req) => {
           if (state === "STOPPED") {
             return;
           }
-
-          if (toProcess.length === 0) {
+          if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
             let status = { waiting: 0, active: 0, finished: success, failed, id_process: data.id_process };
             await processStateManager.updateState(status);
             composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
