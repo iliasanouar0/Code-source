@@ -1413,7 +1413,11 @@ wsc.on('connection', (wss, req) => {
           ]);
           running--
           toProcess.shift();
+          state = await composeManager.getProcessState(data.id_process);
 
+          if (state === "STOPPED" || state === "PAUSED") {
+            return;
+          }
           console.log(seeds.length);
           if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
