@@ -629,6 +629,38 @@ function msToMnSc(duration) {
 }
 
 $(document).on('click', '.status', event => {
+
+    const getCount = json => {
+        waiting = 0
+        active = 0
+        finished = 0
+        failed = 0
+        count = 0
+        for (let i = 0; i < json.length; i++) {
+            console.log(json[i].rstatus);
+            switch (json[i].rstatus) {
+                case 'running':
+                    active++
+                    break;
+                case 'failed':
+                    failed++
+                    break;
+                case 'waiting':
+                    waiting++
+                    break;
+                case 'finished':
+                    finished++
+                    break;
+                default:
+                    console.log('none');
+                    break;
+            }
+        }
+        $('.w_seeds').html(waiting)
+        $('.a_seeds').html(active)
+        $('.f_seeds').html(finished)
+        $('.ff_seeds').html(failed)
+    }
     $('body').tooltip('dispose');
     let id = $(event.target).data('id')
     let children = $(event.target).parent().parent()[0].children
@@ -649,38 +681,7 @@ $(document).on('click', '.status', event => {
             url: `http://${ip}:3000/compose/seeds/${id}`,
             dataSrc: '',
         },
-        initComplete: function (settings, json) {
-            console.log(json);
-            waiting = 0
-            active = 0
-            finished = 0
-            failed = 0
-            count = 0
-            for (let i = 0; i < json.length; i++) {
-                console.log(json[i].rstatus);
-                switch (json[i].rstatus) {
-                    case 'running':
-                        active++
-                        break;
-                    case 'failed':
-                        failed++
-                        break;
-                    case 'waiting':
-                        waiting++
-                        break;
-                    case 'finished':
-                        finished++
-                        break;
-                    default:
-                        console.log('none');
-                        break;
-                }
-            }
-            $('.w_seeds').html(waiting)
-            $('.a_seeds').html(active)
-            $('.f_seeds').html(finished)
-            $('.ff_seeds').html(failed)
-        },
+        initComplete: getCount(json),
         columns: [
             {
                 data: null,
@@ -820,12 +821,13 @@ $(document).on('click', '.status', event => {
         websocket.send(`${id}`)
     }
 
+
     websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
         if (data.length == 0) {
             return
         } else {
-            $('#process_result').DataTable().ajax.reload(null, false)
+            $('#process_result').DataTable().ajax.reload(getCount(json), false)
             // $('.w_seeds').html(data[0].waiting)
             // $('.a_seeds').html(data[0].active)
             // $('.f_seeds').html(data[0].finished)
