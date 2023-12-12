@@ -167,7 +167,7 @@ const verify = async (data, entity, mode) => {
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
     await page.setViewport({ width: 1280, height: 720 });
     await page.setDefaultNavigationTimeout(60000)
-    const navigationPromise = page.waitForNavigation()
+    const navigationPromise = page.waitForNavigation({ timeout: 3000 })
     try {
         await page.goto('https://gmail.com/')
     } catch (e) {
