@@ -43,7 +43,8 @@ const resultManager = require("./managers/resultManager")
 const settingsManager = require("./managers/settingsManager")
 const authorizationManager = require('./managers/authorizationManager')
 const nodeEnvManager = require('./managers/nodeEnvManager')
-const composeManager = require('./managers/composeManager')
+const composeManager = require('./managers/composeManager');
+const { finished } = require("stream");
 
 const port = 3000;
 const app = express(); // setup express application
@@ -1602,11 +1603,8 @@ wsc.on('connection', (wss, req) => {
         }
 
         async function updateProcessState() {
-          let waiting = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
-          let running = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
-          let w = waiting.length
-          console.log('running :' + running.length);
-          let status = { waiting: w, active: running.length + 1, finished: success, failed: failed, id_process: data.id_process }
+          let w = waiting - success - failed
+          let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
           // const w = seeds.length + 3;
           // const status = { waiting: Math.max(0, w), active: toProcess.length, finished: success, failed, id_process: data.id_process };
