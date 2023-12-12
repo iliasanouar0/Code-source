@@ -846,6 +846,7 @@ wsc.on('connection', (wss, req) => {
       }
 
       let success = 0
+      let running = 0
       let failed = 0
       let count = 0
       let length = seeds.length
@@ -1454,7 +1455,7 @@ wsc.on('connection', (wss, req) => {
 
         await handleProcessCompletion();
 
-        async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running"); }
+        async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running"); running++ }
 
         async function processSeedActions(seed, option) {
           let { actions, subject, pages, c, options, mode } = extractActions(seed);
@@ -1556,6 +1557,7 @@ wsc.on('connection', (wss, req) => {
           await Promise.all([
             resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
             resultManager.endNow(result),
+            running--
           ]);
 
           toProcess.shift();
@@ -1566,7 +1568,6 @@ wsc.on('connection', (wss, req) => {
             toProcess.push(seeds[0]);
             seeds.splice(seeds.indexOf(seeds[0]), 1);
             count++;
-
             await updateProcessState();
           }
         }
@@ -1584,6 +1585,7 @@ wsc.on('connection', (wss, req) => {
           await Promise.all([
             resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "failed"),
             resultManager.endNow(result),
+            running--
           ]);
 
           toProcess.shift();
@@ -1598,18 +1600,14 @@ wsc.on('connection', (wss, req) => {
             toProcess.push(seeds[0 + start]);
             seeds.splice(seeds.indexOf(seeds[0 + start]), 1);
             count++;
-
             await updateProcessState();
           }
         }
 
         async function updateProcessState() {
           let w = waiting - success - failed
-          let status = { waiting: w, active: toProcess.length, finished: success, failed: failed, id_process: data.id_process }
+          let status = { waiting: w, active: running, finished: success, failed: failed, id_process: data.id_process }
           processStateManager.updateState(status)
-          // const w = seeds.length + 3;
-          // const status = { waiting: Math.max(0, w), active: toProcess.length, finished: success, failed, id_process: data.id_process };
-          // processStateManager.updateState(status);
         }
 
         async function handleProcessCompletion() {
@@ -1646,6 +1644,7 @@ wsc.on('connection', (wss, req) => {
             for (let i = 0; i < array[start].length; i++) {
               await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
               await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
+              running++
               process([array[start][i]], [bccToProcess[start][i]], i, { onlyStarted: false }, methods)
             }
           } else {
@@ -1658,6 +1657,7 @@ wsc.on('connection', (wss, req) => {
             for (let i = 0; i < array[start].length; i++) {
               await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
               await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
+              running++
               processV([array[start][i]], start, { onlyStarted: false })
             }
           } else {
