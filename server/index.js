@@ -1425,7 +1425,6 @@ wsc.on('connection', (wss, req) => {
       // }
 
       const processV = async (toProcess, start, option) => {
-        console.log(seeds);
         while (toProcess.length !== 0 && state !== "STOPPED") {
           state = await composeManager.getProcessState(data.id_process);
 
@@ -1449,10 +1448,10 @@ wsc.on('connection', (wss, req) => {
             await processSeedActions(seed, option);
           }
 
-          updateProcessState();
+          await updateProcessState();
         }
 
-       await handleProcessCompletion();
+        await handleProcessCompletion();
 
         async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running"); }
 
@@ -1566,7 +1565,7 @@ wsc.on('connection', (wss, req) => {
             seeds.splice(seeds.indexOf(seeds[0]), 1);
             count++;
 
-            updateProcessState();
+            await updateProcessState();
           }
         }
 
@@ -1598,11 +1597,20 @@ wsc.on('connection', (wss, req) => {
             seeds.splice(seeds.indexOf(seeds[0 + start]), 1);
             count++;
 
-            updateProcessState();
+            await updateProcessState();
           }
         }
 
-        function updateProcessState() { const w = seeds.length + 3; const status = { waiting: Math.max(0, w), active: toProcess.length, finished: success, failed, id_process: data.id_process }; processStateManager.updateState(status); }
+        async function updateProcessState() {
+          let waiting = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" })
+          let running = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
+          let w = waiting.length
+          let status = { waiting: w, active: running.length, finished: success, failed: failed, id_process: data.id_process }
+          processStateManager.updateState(status)
+          // const w = seeds.length + 3;
+          // const status = { waiting: Math.max(0, w), active: toProcess.length, finished: success, failed, id_process: data.id_process };
+          // processStateManager.updateState(status);
+        }
 
         async function handleProcessCompletion() {
           let w = seeds.length + 3;
