@@ -774,16 +774,8 @@ $(document).on('click', '.status', event => {
         drawCallback: function () {
             $('body').tooltip('dispose');
             $('[data-bs-toggle="tooltip"]').tooltip({ trigger: "hover" });
-            console.log(waiting);
-            console.log(active);
-            console.log(finished);
-            console.log(failed);
         }
     })
-    // console.log(waiting);
-    // console.log(active);
-    // console.log(finished);
-    // console.log(failed);
     $('#modal-compose-view').modal('show')
     /**
      * * Websocket connection :
@@ -806,9 +798,10 @@ $(document).on('click', '.status', event => {
             return
         } else {
             dataTable.ajax.reload(null, false)
-            let status = $('.statusCount')
-            console.log(status.length);
-            console.log(status);
+            console.log(waiting);
+            console.log(active);
+            console.log(finished);
+            console.log(failed);
             // $('.w_seeds').html(data[0].waiting)
             // $('.a_seeds').html(data[0].active)
             // $('.f_seeds').html(data[0].finished)
@@ -817,10 +810,6 @@ $(document).on('click', '.status', event => {
             $('.a_seeds').html(active)
             $('.f_seeds').html(finished)
             $('.ff_seeds').html(failed)
-            console.log(waiting);
-            console.log(active);
-            console.log(finished);
-            console.log(failed);
             $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
         }
     };
