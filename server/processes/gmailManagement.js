@@ -170,10 +170,13 @@ const verify = async (data, entity, mode) => {
     await page.goto('https://gmail.com/')
     await time(3000)
     if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
+        console.log('here 111');
         console.log('verified email : ' + data.gmail);
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
         });
+        feedback += `${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         const countEnter = await page.evaluate(() => {
             let html = []
             let el = document.querySelectorAll('.bsU')
@@ -194,10 +197,6 @@ const verify = async (data, entity, mode) => {
             details += `Entre unread inbox : ${countEnter[0].count}`
             await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
         }
-        await page.close()
-        await browser.close()
-        feedback += `${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(5000)
         if (grantAccess.entity == entity) {
             await time(3000)
@@ -237,6 +236,8 @@ const verify = async (data, entity, mode) => {
         } else {
             console.log("no access !!");
         }
+        await page.close()
+        await browser.close()
         return feedback
     }
     await navigationPromise
