@@ -795,6 +795,7 @@ $(document).on('click', '.status', event => {
         } else {
             $('#process_result').DataTable().ajax.reload(null, false)
             let status = $('.status')
+            console.log(status.length);
             console.log(status);
             // $('.w_seeds').html(data[0].waiting)
             // $('.a_seeds').html(data[0].active)
