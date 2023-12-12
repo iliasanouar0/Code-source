@@ -649,6 +649,9 @@ $(document).on('click', '.status', event => {
             url: `http://${ip}:3000/compose/seeds/${id}`,
             dataSrc: '',
         },
+        initComplete: function (settings, json) {
+            alert('DataTables has finished its initialisation.');
+        },
         columns: [
             {
                 data: null,
