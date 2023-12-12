@@ -635,7 +635,6 @@ $(document).on('click', '.status', event => {
         active = 0
         finished = 0
         failed = 0
-        count = 0
         for (let i = 0; i < json.length; i++) {
             console.log(json[i].rstatus);
             switch (json[i].rstatus) {
