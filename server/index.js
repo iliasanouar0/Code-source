@@ -1423,6 +1423,10 @@ wsc.on('connection', (wss, req) => {
           if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
+            if (!option.onlyStarted) {
+              await startSeedProcessing(seeds[0]);
+              running++
+            }
             seeds.splice(seeds.indexOf(seeds[0]), 1);
             count++;
             await updateProcessState();
@@ -1453,9 +1457,13 @@ wsc.on('connection', (wss, req) => {
           }
 
           if (toProcess.length < active && count < length && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
-            console.log('The indexed seed: ' + seeds[0 + start].id_seeds);
-            toProcess.push(seeds[0 + start]);
-            seeds.splice(seeds.indexOf(seeds[0 + start]), 1);
+            console.log('The indexed seed: ' + seeds[0].id_seeds);
+            toProcess.push(seeds[0]);
+            if (!option.onlyStarted) {
+              await startSeedProcessing(seeds[0]);
+              running++
+            }
+            seeds.splice(seeds.indexOf(seeds[0]), 1);
             count++;
             await updateProcessState();
           }
@@ -1524,7 +1532,6 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
-      console.log(toProcess.length);
       let check = { startingIndexed: toProcess.length == 1 ? true : false }
       console.log(check);
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
