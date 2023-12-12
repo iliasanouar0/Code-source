@@ -1296,7 +1296,7 @@ wsc.on('connection', (wss, req) => {
             await updateProcessState();
             state = await composeManager.getProcessState(data.id_process);
 
-            if (state === "STOPPED") {
+            if (state === "STOPPED" || state === "PAUSED") {
               break;
             }
 
@@ -1415,7 +1415,7 @@ wsc.on('connection', (wss, req) => {
           toProcess.shift();
 
           console.log(seeds.length);
-          if (toProcess.length < active && state !== "STOPPED" && seeds.length !== 0) {
+          if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
             seeds.splice(seeds.indexOf(seeds[0]), 1);
@@ -1447,7 +1447,7 @@ wsc.on('connection', (wss, req) => {
             return;
           }
 
-          if (toProcess.length < active && count < length && state !== "STOPPED" && seeds.length !== 0) {
+          if (toProcess.length < active && count < length && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0 + start].id_seeds);
             toProcess.push(seeds[0 + start]);
             seeds.splice(seeds.indexOf(seeds[0 + start]), 1);
@@ -1479,7 +1479,7 @@ wsc.on('connection', (wss, req) => {
 
           state = await composeManager.getProcessState(data.id_process);
 
-          if (state === "STOPPED") {
+          if (state === "STOPPED" || state === "PAUSED") {
             return;
           }
           if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
