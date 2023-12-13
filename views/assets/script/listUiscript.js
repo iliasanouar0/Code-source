@@ -282,6 +282,7 @@ $(document).on('click', '#l_seeds_add', event => {
         let dataArray = data.split(`\n`);
         console.log(dataArray);
         for (let i = 0; i < dataArray.length; i++) {
+            dataArray[i].trim()
             let clean = dataArray[i].split(',')
             seeds.push(clean)
         }
