@@ -1288,7 +1288,7 @@ wsc.on('connection', (wss, req) => {
             console.log('defined as seed :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
             if (option.onlyStarted) {
               await startSeedProcessing(seed);
-              console.log('set as running : ' + array[start][i].gmail + ` ,At ${new Date().toLocaleString()}`);
+              console.log('set as running : ' + seed.gmail + ` ,At ${new Date().toLocaleString()}`);
               running++
             }
             console.log('processing :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
