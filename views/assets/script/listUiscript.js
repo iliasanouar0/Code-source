@@ -280,12 +280,13 @@ $(document).on('click', '#l_seeds_add', event => {
         console.log(data);
         data.trim()
         let dataArray = data.split(`\n`);
-        console.log(dataArray);
         for (let i = 0; i < dataArray.length; i++) {
             dataArray[i].trim()
+            console.log(dataArray[i]);
             let clean = dataArray[i].split(',')
             seeds.push(clean)
         }
+        console.log(seeds);
         let date_add = new Date().toDateInputValue()
         let date_update = new Date().toDateInputValue()
         seeds.forEach(one => {
