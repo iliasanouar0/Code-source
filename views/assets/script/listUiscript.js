@@ -259,6 +259,7 @@ $(document).on('click', "#l_add", () => {
 $(document).on('click', '#l_seeds_add', event => {
     let listId = $(event.target).data('id')
     let data = $('#FormControlTextarea').val();
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4},(\w{3,14}|none)\,((\d+\.\d+\.\d+\.\d+\:\d+)|\s{1}|none)\,(\w{3,14}|none)/i
     if (data == '') {
         Swal.fire('no data provided')
         return
@@ -276,36 +277,54 @@ $(document).on('click', '#l_seeds_add', event => {
         }
     };
     $.ajax(settings).done(function (responseText) {
-        let isp = responseText.isp
-        data.trim()
-        let dataArray = data.split(`\n`);
-        for (let i = 0; i < dataArray.length; i++) {
-            if (dataArray[i] != '') {
-                let clean = dataArray[i].trim().split(',')
-                console.log(clean);
-                seeds.push(clean.map(e => { e.trim(); return e }))
-                console.log(seeds);
+        // let isp = responseText.isp
+        // data.trim()
+        // let dataArray = data.split(`\n`);
+        // for (let i = 0; i < dataArray.length; i++) {
+        //     if (dataArray[i] != '') {
+        //         let clean = dataArray[i].trim().split(',')
+        //         console.log(clean);
+        //         seeds.push(clean)
+        //     }
+        // }
+        // console.log(seeds);
+        // let date_add = new Date().toDateInputValue()
+        // let date_update = new Date().toDateInputValue()
+        // seeds.forEach(one => {
+        //     let seed = {
+        //         "email": `${one[0].toLowerCase()}`,
+        //         "password": `${one[1]}`,
+        //         "proxy": `${one[2]}`,
+        //         "verification": `${one[3]}`,
+        //         "id_list": `${listId}`,
+        //         "date_add": `${date_add}`,
+        //         "date_update": `${date_update}`,
+        //         "status": `active`,
+        //         "isp": `${isp}`
+        //     }
+        //     obj.push(seed)
+        // })
+        let textResult = [];
+        $.each(data.split(`\n`), function (index, item) {
+            let clean = item.replaceAll('***', '')
+            if (clean.match(pattern)) {
+                textResult.push(clean);
+            }
+            else {
+                textResult.push(`***${clean}***`);
+            }
+        });
+        let valid = false
+
+        for (let i = 0; i < textResult.length; i++) {
+            if (textResult[i].includes('***')) {
+                valid = false
+                break;
             } else {
-                console.log(dataArray[i]);
+                valid = true
             }
         }
-        console.log(seeds);
-        let date_add = new Date().toDateInputValue()
-        let date_update = new Date().toDateInputValue()
-        seeds.forEach(one => {
-            let seed = {
-                "email": `${one[0].toLowerCase()}`,
-                "password": `${one[1]}`,
-                "proxy": `${one[2]}`,
-                "verification": `${one[3]}`,
-                "id_list": `${listId}`,
-                "date_add": `${date_add}`,
-                "date_update": `${date_update}`,
-                "status": `active`,
-                "isp": `${isp}`
-            }
-            obj.push(seed)
-        })
+        $('#FormControlTextarea').val(textResult.join(`\n`))
         // addSeeds(obj)
     })
 
