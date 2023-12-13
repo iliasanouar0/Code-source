@@ -331,7 +331,6 @@ $(document).on('click', '#l_seeds_add', event => {
             for (let i = 0; i < dataArray.length; i++) {
                 if (dataArray[i] != '') {
                     let clean = dataArray[i].trim().split(',')
-                    console.log(clean);
                     seeds.push(clean)
                 }
             }
@@ -352,7 +351,7 @@ $(document).on('click', '#l_seeds_add', event => {
                 }
                 obj.push(seed)
             })
-            addSeeds(obj)
+            // addSeeds(obj)
         } else {
             Swal.fire({
                 icon: "error",
