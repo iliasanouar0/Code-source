@@ -298,10 +298,10 @@ const verify = async (data, entity, mode) => {
             await browser.close()
             return feedback
         }
-        console.log('301 :' + data.gmaiL);
+        console.log('301 :' + data.gmail);
         await navigationPromise
-        console.log('303 :' + data.gmaiL);
-        console.log('passed :' + data.gmaiL);
+        console.log('303 :' + data.gmail);
+        console.log('passed :' + data.gmail);
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
         });
@@ -310,17 +310,17 @@ const verify = async (data, entity, mode) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await page.waitForSelector('input[type="email"]', { timeout: 5000 })
         await page.click('input[type="email"]')
-        console.log('313 :' + data.gmaiL);
+        console.log('313 :' + data.gmail);
         await navigationPromise
-        console.log('315 :' + data.gmaiL);
-        console.log('passed :' + data.gmaiL);
+        console.log('315 :' + data.gmail);
+        console.log('passed :' + data.gmail);
         await page.type('input[type="email"]', data.gmail, { delay: 100 })
         await page.waitForSelector('#identifierNext')
         await page.click('#identifierNext')
-        console.log('320 :' + data.gmaiL);
+        console.log('320 :' + data.gmail);
         await navigationPromise
-        console.log('322 :' + data.gmaiL);
-        console.log('passed :' + data.gmaiL);
+        console.log('322 :' + data.gmail);
+        console.log('passed :' + data.gmail);
         await time(10000)
         if (await page.$('[aria-invalid="true"]') != null) {
             await page.screenshot({
@@ -333,10 +333,10 @@ const verify = async (data, entity, mode) => {
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
             return feedback
         }
-        console.log('336 :' + data.gmaiL);
+        console.log('336 :' + data.gmail);
         await navigationPromise
-        console.log('338 :' + data.gmaiL);
-        console.log('passed :' + data.gmaiL);
+        console.log('338 :' + data.gmail);
+        console.log('passed :' + data.gmail);
         await page.waitForSelector('input[type="password"]', { timeout: 5000 })
         await time(3000)
         await page.type('input[type="password"]', data.password, { delay: 200 })
@@ -357,10 +357,10 @@ const verify = async (data, entity, mode) => {
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
             return feedback
         }
-        console.log('360 :' + data.gmaiL);
+        console.log('360 :' + data.gmail);
         await navigationPromise
-        console.log('362 :' + data.gmaiL);
-        console.log('passed :' + data.gmaiL);
+        console.log('362 :' + data.gmail);
+        console.log('passed :' + data.gmail);
         await time(3000)
         console.log(page.url());
 
