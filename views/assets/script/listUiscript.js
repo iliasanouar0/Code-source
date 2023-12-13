@@ -351,7 +351,7 @@ $(document).on('click', '#l_seeds_add', event => {
                 }
                 obj.push(seed)
             })
-            // addSeeds(obj)
+            addSeeds(obj)
         } else {
             Swal.fire({
                 icon: "error",
