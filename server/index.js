@@ -1287,7 +1287,7 @@ wsc.on('connection', (wss, req) => {
               await startSeedProcessing(seed);
               running++
             }
-
+            console.log('processing :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
             console.log('running :' + running);
             await updateProcessState();
             state = await composeManager.getProcessState(data.id_process);
@@ -1309,12 +1309,13 @@ wsc.on('connection', (wss, req) => {
         async function processSeedActions(seed, option) {
           let { actions, subject, pages, c, options, mode } = extractActions(seed);
 
-          console.log(`Actions: ${actions}`);
+          console.log(`Actions: ${actions} `);
 
           let r = '';
 
           for (let i = 0; i < actions.length; i++) {
             console.log(`${actions[i]} action start`);
+            console.log('starting :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
             r += await composeManager.processing({
               data: toProcess[0],
               action: actions[i],
@@ -1333,8 +1334,6 @@ wsc.on('connection', (wss, req) => {
 
           r = removeTrailingComma(r);
 
-
-          console.log(r);
           await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process });
 
           if (r.indexOf('invalid') === -1) {
@@ -1391,9 +1390,10 @@ wsc.on('connection', (wss, req) => {
           return { actions, subject, pages, c, options, mode };
         }
 
-        function removeTrailingComma(str) { const array = str.split(', '); console.log(array); console.log(array[array.length - 1]); /*array.pop();*/ return array.join(', '); }
+        function removeTrailingComma(str) { const array = str.split(', '); /*array.pop();*/ return array.join(', '); }
 
         async function handleSuccess(seed) {
+          console.log('success :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
           success++;
 
           const end_in = new Date();
@@ -1429,6 +1429,7 @@ wsc.on('connection', (wss, req) => {
         }
 
         async function handleFailure(seed) {
+          console.log('failed :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
           failed++;
 
           const end_in = new Date();
@@ -1494,7 +1495,7 @@ wsc.on('connection', (wss, req) => {
             let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
             await processStateManager.updateState(status);
             composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
-            console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()}`);
+            console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()} `);
             sendToAll(clients, 'reload');
           }
         }
@@ -1538,7 +1539,7 @@ wsc.on('connection', (wss, req) => {
 
     } else if (request == "resume") {
       composeManager.resumedProcess(data.data)
-      sendToAll(clients,'reload')
+      sendToAll(clients, 'reload')
       let arrayBcc = []
       let bccResult = []
       let Origins = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "paused" })
@@ -1578,7 +1579,7 @@ wsc.on('connection', (wss, req) => {
       if (actions[0] == 'compose') {
         let dataBcc = seeds[0].data
         if (dataBcc != 'none') {
-          let path = `/home/data/process/${dataBcc}`
+          let path = `/ home / data / process / ${dataBcc} `
           let read = fs.readFileSync(path, 'utf8');
           let bccData = read.split('\n')
           bccData.flatMap(e => {
@@ -1803,7 +1804,7 @@ wsc.on('connection', (wss, req) => {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
                 await processStateManager.updateState(status)
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
-                console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
+                console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()} `);
                 sendToAll(clients, 'reload')
               }
             }
@@ -1918,7 +1919,7 @@ wsc.on('connection', (wss, req) => {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
                 await processStateManager.updateState(status)
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
-                console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
+                console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()} `);
                 sendToAll(clients, 'reload')
               }
             }
@@ -2073,14 +2074,14 @@ wsc.on('connection', (wss, req) => {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
                 await processStateManager.updateState(status)
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
-                console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
+                console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()} `);
                 sendToAll(clients, 'reload')
               }
               if (Origins.length == 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process }
                 await processStateManager.updateState(status)
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` })
-                console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
+                console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()} `);
                 sendToAll(clients, 'reload')
               }
             }
@@ -2123,7 +2124,7 @@ wsc.on('connection', (wss, req) => {
         async function processSeedActions(seed, option) {
           let { actions, subject, pages, c, options, mode } = extractActions(seed);
 
-          console.log(`Actions: ${actions}`);
+          console.log(`Actions: ${actions} `);
 
           let r = '';
 
@@ -2308,7 +2309,7 @@ wsc.on('connection', (wss, req) => {
             let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
             await processStateManager.updateState(status);
             composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
-            console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()}`);
+            console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()} `);
             sendToAll(clients, 'reload');
           }
         }
@@ -2397,12 +2398,12 @@ wsc.on('connection', (wss, req) => {
       if (ip_process.length == 0) {
         await time(5000)
         var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
-        let file = `/home/LogReportingAction/${date}.txt`
+        let file = `/ home / LogReportingAction / ${date}.txt`
         fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
           if (err) {
             console.error(
-              `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-            fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+              `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'} `);
+            fs.writeFile(file, `User: ${data.login},perform a system restart in ${new Date().toLocaleString()} \n`, (e) => {
               if (e) throw e
               console.log('log added');
               sendToAll(clients, 'location reload')
@@ -2410,7 +2411,7 @@ wsc.on('connection', (wss, req) => {
             })
           } else {
             console.log(`${file} exists, and it is writable`);
-            fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+            fs.appendFile(file, `User: ${data.login},perform a system restart in ${new Date().toLocaleString()} \n`, (e) => {
               if (e) throw e
               console.log('log added');
               sendToAll(clients, 'location reload')
@@ -2423,7 +2424,7 @@ wsc.on('connection', (wss, req) => {
       for (let i = 0; i < action; i++) {
         await time(5000)
         let val = {
-          id_process: `${ip_process[0].id_process}`,
+          id_process: `${ip_process[0].id_process} `,
           status: `PAUSED`,
         }
         composeManager.stoppedProcess(val)
@@ -2458,19 +2459,19 @@ wsc.on('connection', (wss, req) => {
         if (ip_process.length == 0) {
           await time(5000)
           var date = new Date().toLocaleString().split(',')[0].split('/').join("-");
-          let file = `${root}/logApp/${date}.txt`
+          let file = `${root} /logApp/${date}.txt`
           fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
             if (err) {
               console.error(
-                `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-              fs.writeFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+                `${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'} `);
+              fs.writeFile(file, `User: ${data.login},perform a system restart in ${new Date().toLocaleString()} \n`, (e) => {
                 if (e) throw e
                 console.log('log added');
                 sendToAll(clients, 'location reload')
               })
             } else {
               console.log(`${file} exists, and it is writable`);
-              fs.appendFile(file, `User : ${data.login},perform a system restart in ${new Date().toLocaleString()}\n`, (e) => {
+              fs.appendFile(file, `User: ${data.login},perform a system restart in ${new Date().toLocaleString()} \n`, (e) => {
                 if (e) throw e
                 console.log('log added');
                 sendToAll(clients, 'location reload')
@@ -2535,7 +2536,7 @@ wsv.on('connection', async wsv => {
     console.log('closed');
   })
   wsv.on('error', event => {
-    console.log(`error : ${event.data}`);
+    console.log(`error: ${event.data} `);
   })
 })
 
@@ -2656,5 +2657,5 @@ app.post('/node/env/', nodeEnvManager.setMode)
 app.get('/node/access/', nodeEnvManager.getAccessGranted)
 app.post('/node/access/', nodeEnvManager.grantAccess)
 app.listen(port, result.parsed.IP, '0.0.0.0', () => {
-  console.log(`Server ip : ${result.parsed.IP} running at ${port}`);
+  console.log(`Server ip: ${result.parsed.IP} running at ${port} `);
 });
