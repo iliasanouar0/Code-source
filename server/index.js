@@ -1285,6 +1285,7 @@ wsc.on('connection', (wss, req) => {
 
             if (option.onlyStarted) {
               await startSeedProcessing(seed);
+              console.log('set as running : ' + array[start][i].gmail + ` ,At ${new Date().toLocaleString()}`);
               running++
             }
             console.log('processing :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
@@ -1519,10 +1520,13 @@ wsc.on('connection', (wss, req) => {
             for (let i = 0; i < array[start].length; i++) {
               await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
               await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
+              console.log('set as running : ' + array[start][i].gmail + ` ,At ${new Date().toLocaleString()}`);
               running++
               processV([array[start][i]], start, { onlyStarted: false })
             }
           } else {
+            console.log('The entered array :')
+            console.log(array[start]);
             processV(array[start], start, { onlyStarted: true })
             if (number - 1 > start) await repeat(array, bccToProcess, number, start + 1, check, action);
           }
@@ -1531,7 +1535,6 @@ wsc.on('connection', (wss, req) => {
       console.log(Origins.length);
       console.log(toProcess.length);
       let check = { startingIndexed: Origins.length / active < 3 ? true : false }
-      console.log(check);
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
