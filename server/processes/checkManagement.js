@@ -13,20 +13,57 @@ let pidProcess = []
 
 const checkProxy = async (data) => {
     let arg
+    let proxyServer
     console.log("checkProxy start: " + data.gmail);
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
-        arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+        arg = [
+            '--no-sandbox',
+            '--ignore-certifcate-errors',
+            '--disable-client-side-phishing-detection',
+            '--ignore-certifcate-errors-spki-list',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--no-first-run',
+            '--no-zygote',
+            '--proxy-bypass-list=*',
+            '--disable-infobars',
+            '--disable-gpu',
+            '--disable-web-security',
+            '--disable-site-isolation-trials',
+            '--enable-experimental-web-platform-features',
+            '--start-maximized'
+        ]
     } else {
-        const proxyServer = `${data.proxy}`;
-        arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+        console.log('there is proxy');
+        proxyServer = `${data.proxy}`;
+        arg = [
+            '--no-sandbox',
+            `--proxy-server=${proxyServer}`,
+            '--ignore-certifcate-errors',
+            '--disable-client-side-phishing-detection',
+            '--ignore-certifcate-errors-spki-list',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--no-first-run',
+            '--no-zygote',
+            '--proxy-bypass-list=*',
+            '--disable-infobars',
+            '--disable-gpu',
+            '--disable-web-security',
+            '--disable-site-isolation-trials',
+            '--enable-experimental-web-platform-features',
+            '--start-maximized'
+        ]
     }
     console.log("Lunch puppeteer: " + `--proxy-server=${data.proxy}`);
-    const browser = await puppeteer.launch({ headless: 'new', args: arg })
-
-    const browserPID = browser.process().pid
-    const page = await browser.newPage()
-    let feedback = ''
+    const browser = await puppeteer.launch({ headless: false, ignoreHTTPSErrors: true, ignoreDefaultArgs: ['--enable-automation', '--disable-extensions'], args: arg })
+    let c = await browser.createIncognitoBrowserContext({ proxyServer: proxyServer })
+    const browserPID = c.process().pid
+    const page = await c.newPage();
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
+    await (await browser.pages())[0].close()
+    let feedback = ''
+
     try {
         console.log("Goto: http://monip.org/ " + `--proxy-server=${data.proxy} ` + data.gmail);
         await page.goto(`http://monip.org/`)
