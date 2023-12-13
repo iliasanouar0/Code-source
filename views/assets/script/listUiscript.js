@@ -259,7 +259,7 @@ $(document).on('click', "#l_add", () => {
 $(document).on('click', '#l_seeds_add', event => {
     let listId = $(event.target).data('id')
     let data = $('#FormControlTextarea').val();
-    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\,(\w+[^none])\,((\d+\.\d+\.\d+\.\d+\:\d+)|\s{1}|none)\,([\w-\.]+@([\w-]+\.)+[\w-]{2,4}|none)/i
+    // const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\,(\w+[^none])\,((\d+\.\d+\.\d+\.\d+\:\d+)|\s{1}|none)\,([\w-\.]+@([\w-]+\.)+[\w-]{2,4}|none)/i
     if (data == '') {
         Swal.fire('no data provided')
         return
@@ -307,6 +307,8 @@ $(document).on('click', '#l_seeds_add', event => {
             console.log(seed);
             obj.push(seed)
         })
+        addSeeds(obj)
+
 
         // let textResult = [];
         // $.each(data.split(`\n`), function (index, item) {
@@ -354,7 +356,6 @@ $(document).on('click', '#l_seeds_add', event => {
         //         }
         //         obj.push(seed)
         //     })
-        //     addSeeds(obj)
         // } else {
         //     Swal.fire({
         //         icon: "error",
