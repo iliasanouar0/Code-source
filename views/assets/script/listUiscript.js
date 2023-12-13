@@ -277,7 +277,7 @@ $(document).on('click', '#l_seeds_add', event => {
         }
     };
     $.ajax(settings).done(function (responseText) {
-        // let isp = responseText.isp
+        let isp = responseText.isp
         // data.trim()
         // let dataArray = data.split(`\n`);
         // for (let i = 0; i < dataArray.length; i++) {
@@ -325,7 +325,42 @@ $(document).on('click', '#l_seeds_add', event => {
             }
         }
         $('#FormControlTextarea').val(textResult.join(`\n`))
-        // addSeeds(obj)
+        if (valid) {
+            data.trim()
+            let dataArray = data.split(`\n`);
+            for (let i = 0; i < dataArray.length; i++) {
+                if (dataArray[i] != '') {
+                    let clean = dataArray[i].trim().split(',')
+                    console.log(clean);
+                    seeds.push(clean)
+                }
+            }
+            console.log(seeds);
+            let date_add = new Date().toDateInputValue()
+            let date_update = new Date().toDateInputValue()
+            seeds.forEach(one => {
+                let seed = {
+                    "email": `${one[0].toLowerCase()}`,
+                    "password": `${one[1]}`,
+                    "proxy": `${one[2]}`,
+                    "verification": `${one[3]}`,
+                    "id_list": `${listId}`,
+                    "date_add": `${date_add}`,
+                    "date_update": `${date_update}`,
+                    "status": `active`,
+                    "isp": `${isp}`
+                }
+                obj.push(seed)
+            })
+            addSeeds(obj)
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Check invalid data",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
     })
 
 })
