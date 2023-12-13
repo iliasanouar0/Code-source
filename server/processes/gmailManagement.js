@@ -154,7 +154,7 @@ const verify = async (data, entity, mode) => {
     let details = ''
     let arg
     let proxyServer
-    console.log("checkProxy start: " + data.gmail);
+    console.log("Verify start: " + data.gmail);
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
         arg = [
             '--no-sandbox',
@@ -287,7 +287,6 @@ const verify = async (data, entity, mode) => {
             // } else {
             //     console.log("no access !!");
             // }
-
             const cookiesObject = await page.cookies()
             let NewFileJson = JSON.stringify(cookiesObject)
             fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
@@ -295,12 +294,14 @@ const verify = async (data, entity, mode) => {
                     throw err
                 }
             })
-
             await page.close()
             await browser.close()
             return feedback
         }
+        console.log('301 :' + data.gmaiL);
         await navigationPromise
+        console.log('303 :' + data.gmaiL);
+        console.log('passed :' + data.gmaiL);
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
         });
@@ -309,11 +310,17 @@ const verify = async (data, entity, mode) => {
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await page.waitForSelector('input[type="email"]', { timeout: 5000 })
         await page.click('input[type="email"]')
+        console.log('313 :' + data.gmaiL);
         await navigationPromise
+        console.log('315 :' + data.gmaiL);
+        console.log('passed :' + data.gmaiL);
         await page.type('input[type="email"]', data.gmail, { delay: 100 })
         await page.waitForSelector('#identifierNext')
         await page.click('#identifierNext')
+        console.log('320 :' + data.gmaiL);
         await navigationPromise
+        console.log('322 :' + data.gmaiL);
+        console.log('passed :' + data.gmaiL);
         await time(10000)
         if (await page.$('[aria-invalid="true"]') != null) {
             await page.screenshot({
@@ -326,7 +333,10 @@ const verify = async (data, entity, mode) => {
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
             return feedback
         }
+        console.log('336 :' + data.gmaiL);
         await navigationPromise
+        console.log('338 :' + data.gmaiL);
+        console.log('passed :' + data.gmaiL);
         await page.waitForSelector('input[type="password"]', { timeout: 5000 })
         await time(3000)
         await page.type('input[type="password"]', data.password, { delay: 200 })
@@ -347,7 +357,10 @@ const verify = async (data, entity, mode) => {
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
             return feedback
         }
+        console.log('360 :' + data.gmaiL);
         await navigationPromise
+        console.log('362 :' + data.gmaiL);
+        console.log('passed :' + data.gmaiL);
         await time(3000)
         console.log(page.url());
 
