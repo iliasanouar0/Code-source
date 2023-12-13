@@ -159,13 +159,14 @@ const verify = async (data, entity, mode) => {
         const proxyServer = `${data.proxy}`;
         arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox', `--user-data-dir=${userDir}${data.gmail.split('@')[0]}-@-init-Gmail`]
     }
-    console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
+    console.log(`Starting verify seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     console.log(` `);
     let feedback = ''
     let browser
     let browserPID
     let page
     try {
+        console.log(`Lunching puppeteer : ${data.gmail}, At ${new Date().toLocaleString()}`);
         browser = await puppeteer.launch({ headless: 'new', args: arg })
         browserPID = browser.process().pid
         page = await browser.newPage()
@@ -180,12 +181,12 @@ const verify = async (data, entity, mode) => {
         await page.setDefaultNavigationTimeout(60000)
         const navigationPromise = page.waitForNavigation({ timeout: 30000 })
 
+        console.log(`Goto => https://gmail.com/ : ${data.gmail}, At ${new Date().toLocaleString()}`);
         await page.goto('https://gmail.com/')
 
         await time(3000)
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
-            console.log('here 111');
-            console.log('verified email : ' + data.gmail);
+            console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
             });
@@ -258,6 +259,7 @@ const verify = async (data, entity, mode) => {
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
         });
+        console.log(`opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
         feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await page.waitForSelector('input[type="email"]', { timeout: 5000 })
@@ -306,8 +308,8 @@ const verify = async (data, entity, mode) => {
 
 
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
-            console.log('here');
-            console.log('verified email : ' + data.gmail);
+            console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
+
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
             });
@@ -412,8 +414,7 @@ const verify = async (data, entity, mode) => {
         }
 
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
-            console.log('here 5656565');
-            console.log('verified email : ' + data.gmail);
+            console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
             });
@@ -482,7 +483,7 @@ const verify = async (data, entity, mode) => {
             // }
         }
     } catch (e) {
-        console.log(e);
+        console.log(e.message);
         console.log("catch error");
         if (e instanceof puppeteer._pptr.errors.TimeoutError) {
             await time(3000)
