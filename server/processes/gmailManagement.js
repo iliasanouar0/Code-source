@@ -169,329 +169,332 @@ const verify = async (data, entity, mode) => {
         pidProcess.push({ id_process: data.id_process, pid: browserPID })
         await page.setViewport({ width: 1280, height: 720 });
     } catch (error) {
+        console.log('catch here before action');
         console.log(error);
-    }
-    try {
-        await page.setDefaultNavigationTimeout(60000)
-        const navigationPromise = page.waitForNavigation({ timeout: 30000 })
+        return
+    } finally {
+        try {
+            await page.setDefaultNavigationTimeout(60000)
+            const navigationPromise = page.waitForNavigation({ timeout: 30000 })
 
-        await page.goto('https://gmail.com/')
+            await page.goto('https://gmail.com/')
 
-        await time(3000)
-        if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
-            console.log('here 111');
-            console.log('verified email : ' + data.gmail);
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-            });
-            feedback += `${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            const countEnter = await page.evaluate(() => {
-                let html = []
-                let el = document.querySelectorAll('.bsU')
-                let elSpan = document.querySelectorAll('.nU.n1 a')
-                for (let i = 0; i < el.length; i++) {
-                    html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+            await time(3000)
+            if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
+                console.log('here 111');
+                console.log('verified email : ' + data.gmail);
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+                });
+                feedback += `${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                const countEnter = await page.evaluate(() => {
+                    let html = []
+                    let el = document.querySelectorAll('.bsU')
+                    let elSpan = document.querySelectorAll('.nU.n1 a')
+                    for (let i = 0; i < el.length; i++) {
+                        html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+                    }
+                    return html
+                })
+                await time(4000)
+                if (countEnter.length == 0) {
+                    details += `Entre unread inbox : 0`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
+                    details += `Entre unread inbox : 0`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                } else {
+                    details += `Entre unread inbox : ${countEnter[0].count}`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
                 }
-                return html
-            })
-            await time(4000)
-            if (countEnter.length == 0) {
-                details += `Entre unread inbox : 0`
-                await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-            } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
-                details += `Entre unread inbox : 0`
-                await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-            } else {
-                details += `Entre unread inbox : ${countEnter[0].count}`
-                await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                await time(5000)
+                // if (grantAccess.entity == entity) {
+                //     await time(3000)
+                //     await page.waitForSelector('.FH')
+                //     await time(2000)
+                //     await page.click('.FH')
+                //     await time(2000)
+                //     let op = await page.$$("label:nth-child(6) span")
+                //     await time(2000)
+                //     await op[0].click()
+                //     await time(2000)
+                //     let cos = await page.$$("label:nth-child(6) div button")
+                //     await time(2000)
+                //     await cos[0].click()
+                //     await time(7000)
+                //     let s = 0
+                //     let checkSpan = await page.$$("td.r9 table tr td")
+                //     for (let i = 0; i < 3; i++) {
+                //         s = s + 1
+                //         if (s % 2 == 0) {
+                //             s = s + 1
+                //         }
+                //         console.log(s);
+                //         await time(1000)
+                //         checkSpan[s].click()
+                //         await time(1000)
+                //         let sp = await page.$$('[act="z"] .J-N-Jz')
+                //         await time(1000)
+                //         await sp[sp.length - 1].click()
+                //         await time(1000)
+                //     }
+                //     await time(3000)
+                //     let btn = await page.$$('[guidedhelpid="save_changes_button"]')
+                //     await time(2000)
+                //     await btn[0].click()
+
+                // } else {
+                //     console.log("no access !!");
+                // }
+                await page.close()
+                await browser.close()
+                return feedback
             }
+            await navigationPromise
+            await page.screenshot({
+                path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+            });
+            feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+            await page.waitForSelector('input[type="email"]', { timeout: 5000 })
+            await page.click('input[type="email"]')
+            await navigationPromise
+            await page.type('input[type="email"]', data.gmail, { delay: 100 })
+            await page.waitForSelector('#identifierNext')
+            await page.click('#identifierNext')
+            await navigationPromise
+            await time(10000)
+            if (await page.$('[aria-invalid="true"]') != null) {
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+                });
+                await page.close()
+                await browser.close()
+                console.log(`invalid email : ${data.gmail}`);
+                feedback += `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                return feedback
+            }
+            await navigationPromise
+            await page.waitForSelector('input[type="password"]', { timeout: 5000 })
+            await time(3000)
+            await page.type('input[type="password"]', data.password, { delay: 200 })
+
             await time(5000)
-            // if (grantAccess.entity == entity) {
-            //     await time(3000)
-            //     await page.waitForSelector('.FH')
-            //     await time(2000)
-            //     await page.click('.FH')
-            //     await time(2000)
-            //     let op = await page.$$("label:nth-child(6) span")
-            //     await time(2000)
-            //     await op[0].click()
-            //     await time(2000)
-            //     let cos = await page.$$("label:nth-child(6) div button")
-            //     await time(2000)
-            //     await cos[0].click()
-            //     await time(7000)
-            //     let s = 0
-            //     let checkSpan = await page.$$("td.r9 table tr td")
-            //     for (let i = 0; i < 3; i++) {
-            //         s = s + 1
-            //         if (s % 2 == 0) {
-            //             s = s + 1
-            //         }
-            //         console.log(s);
-            //         await time(1000)
-            //         checkSpan[s].click()
-            //         await time(1000)
-            //         let sp = await page.$$('[act="z"] .J-N-Jz')
-            //         await time(1000)
-            //         await sp[sp.length - 1].click()
-            //         await time(1000)
-            //     }
-            //     await time(3000)
-            //     let btn = await page.$$('[guidedhelpid="save_changes_button"]')
-            //     await time(2000)
-            //     await btn[0].click()
-
-            // } else {
-            //     console.log("no access !!");
-            // }
-            await page.close()
-            await browser.close()
-            return feedback
-        }
-        await navigationPromise
-        await page.screenshot({
-            path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
-        });
-        feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
-        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        await page.waitForSelector('input[type="email"]', { timeout: 5000 })
-        await page.click('input[type="email"]')
-        await navigationPromise
-        await page.type('input[type="email"]', data.gmail, { delay: 100 })
-        await page.waitForSelector('#identifierNext')
-        await page.click('#identifierNext')
-        await navigationPromise
-        await time(10000)
-        if (await page.$('[aria-invalid="true"]') != null) {
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
-            });
-            await page.close()
-            await browser.close()
-            console.log(`invalid email : ${data.gmail}`);
-            feedback += `, ${data.gmail.split('@')[0]}-@-invalidEmail-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            return feedback
-        }
-        await navigationPromise
-        await page.waitForSelector('input[type="password"]', { timeout: 5000 })
-        await time(3000)
-        await page.type('input[type="password"]', data.password, { delay: 200 })
-
-        await time(5000)
-        await page.waitForSelector('#passwordNext')
-        await time(2000)
-        await page.click('#passwordNext')
-        await time(10000)
-        if (await page.$('[aria-invalid="true"]') != null) {
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
-            });
-            await page.close()
-            await browser.close()
-            console.log(`invalid pass : ${data.gmail}`);
-            feedback += `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            return feedback
-        }
-        await navigationPromise
-        await time(3000)
-        console.log(page.url());
-
-
-        if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
-            console.log('here');
-            console.log('verified email : ' + data.gmail);
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-            });
-            // await time(5000)
-
-            // if (grantAccess.entity == entity) {
-            //     await page.waitForSelector('.FH')
-            //     await time(2000)
-            //     await page.click('.FH')
-            //     await time(2000)
-            //     let op = await page.$$("label:nth-child(6) span")
-            //     await time(2000)
-            //     await op[0].click()
-            //     await time(2000)
-            //     let cos = await page.$$("label:nth-child(6) div button")
-            //     await time(2000)
-            //     await cos[0].click()
-            //     await time(7000)
-            //     let s = 0
-            //     let checkSpan = await page.$$("td.r9 table tr td")
-            //     for (let i = 0; i < 3; i++) {
-            //         s = s + 1
-            //         if (s % 2 == 0) {
-            //             s = s + 1
-            //         }
-            //         console.log(s);
-            //         await time(1000)
-            //         checkSpan[s].click()
-            //         await time(1000)
-            //         let sp = await page.$$('[act="z"] .J-N-Jz')
-            //         await time(1000)
-            //         await sp[sp.length - 1].click()
-            //         await time(1000)
-            //     }
-            //     await time(3000)
-            //     let btn = await page.$$('[guidedhelpid="save_changes_button"]')
-            //     await time(2000)
-            //     await btn[0].click()
-
-            // } else {
-            //     console.log("no access !!");
-            // }
-
-            await time(4000)
-
-            const countEnter = await page.evaluate(() => {
-                let html = []
-                let el = document.querySelectorAll('.bsU')
-                let elSpan = document.querySelectorAll('.nU.n1 a')
-                for (let i = 0; i < el.length; i++) {
-                    html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-                }
-                return html
-            })
-            if (countEnter.length == 0) {
-                details += `Entre unread inbox : 0`
-                await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-            } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
-                details += `Entre unread inbox : 0`
-                await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-            } else {
-                details += `Entre unread inbox : ${countEnter[0].count}`
-                await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+            await page.waitForSelector('#passwordNext')
+            await time(2000)
+            await page.click('#passwordNext')
+            await time(10000)
+            if (await page.$('[aria-invalid="true"]') != null) {
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+                });
+                await page.close()
+                await browser.close()
+                console.log(`invalid pass : ${data.gmail}`);
+                feedback += `, ${data.gmail.split('@')[0]}-@-invalidPass-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                return feedback
             }
-            feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            await page.close()
-            await browser.close()
-            return feedback
-        }
-        await navigationPromise
-        await time(2000)
-        console.log(page.url());
-        let recovery = await page.$$('.lCoei.YZVTmd.SmR8')
-        await time(2000)
-        await recovery[2].click()
-        await time(2000)
-        page.waitForSelector('#knowledge-preregistered-email-response')
-        await time(2000)
-        await page.type('#knowledge-preregistered-email-response', data.verification, { delay: 200 })
-        await page.screenshot({
-            path: `${path}/${data.gmail.split('@')[0]}-@-verification-${data.id_process}.png`
-        });
-        feedback += `, ${data.gmail.split('@')[0]}-@-verification-${data.id_process}.png`
-        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        await time(2000)
-        let confirm = await page.$$('.VfPpkd-Jh9lGc')
-        await time(2000)
-        await confirm[0].click()
-        await navigationPromise
-        await time(10000)
-        if (await page.$('[aria-invalid="true"]') != null) {
-            console.log('invalid verification : ' + data.verification);
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-invalid-verification-${data.id_process}.png`
-            });
-            feedback += `, ${data.gmail.split('@')[0]}-@-invalid-verification-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            await page.close()
-            await browser.close()
-            return feedback
-        }
+            await navigationPromise
+            await time(3000)
+            console.log(page.url());
 
-        if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
-            console.log('here 5656565');
-            console.log('verified email : ' + data.gmail);
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-            });
-            feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            const countEnter = await page.evaluate(() => {
-                let html = []
-                let el = document.querySelectorAll('.bsU')
-                let elSpan = document.querySelectorAll('.nU.n1 a')
-                for (let i = 0; i < el.length; i++) {
-                    html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+
+            if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
+                console.log('here');
+                console.log('verified email : ' + data.gmail);
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+                });
+                // await time(5000)
+
+                // if (grantAccess.entity == entity) {
+                //     await page.waitForSelector('.FH')
+                //     await time(2000)
+                //     await page.click('.FH')
+                //     await time(2000)
+                //     let op = await page.$$("label:nth-child(6) span")
+                //     await time(2000)
+                //     await op[0].click()
+                //     await time(2000)
+                //     let cos = await page.$$("label:nth-child(6) div button")
+                //     await time(2000)
+                //     await cos[0].click()
+                //     await time(7000)
+                //     let s = 0
+                //     let checkSpan = await page.$$("td.r9 table tr td")
+                //     for (let i = 0; i < 3; i++) {
+                //         s = s + 1
+                //         if (s % 2 == 0) {
+                //             s = s + 1
+                //         }
+                //         console.log(s);
+                //         await time(1000)
+                //         checkSpan[s].click()
+                //         await time(1000)
+                //         let sp = await page.$$('[act="z"] .J-N-Jz')
+                //         await time(1000)
+                //         await sp[sp.length - 1].click()
+                //         await time(1000)
+                //     }
+                //     await time(3000)
+                //     let btn = await page.$$('[guidedhelpid="save_changes_button"]')
+                //     await time(2000)
+                //     await btn[0].click()
+
+                // } else {
+                //     console.log("no access !!");
+                // }
+
+                await time(4000)
+
+                const countEnter = await page.evaluate(() => {
+                    let html = []
+                    let el = document.querySelectorAll('.bsU')
+                    let elSpan = document.querySelectorAll('.nU.n1 a')
+                    for (let i = 0; i < el.length; i++) {
+                        html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+                    }
+                    return html
+                })
+                if (countEnter.length == 0) {
+                    details += `Entre unread inbox : 0`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
+                    details += `Entre unread inbox : 0`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                } else {
+                    details += `Entre unread inbox : ${countEnter[0].count}`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
                 }
-                return html
-            })
-            await time(4000)
-            if (countEnter.length == 0) {
-                details += `Entre unread inbox : 0`
-                await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-            } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
-                details += `Entre unread inbox : 0`
-                await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
-            } else {
-                details += `Entre unread inbox : ${countEnter[0].count}`
-                await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                await page.close()
+                await browser.close()
+                return feedback
             }
-            await page.close()
-            await browser.close()
-            return feedback
-            // await time(5000)
-            // if (grantAccess.entity == entity) {
-            //     await page.waitForSelector('.FH')
-            //     await time(2000)
-            //     await page.click('.FH')
-            //     await time(2000)
-            //     let op = await page.$$("label:nth-child(6) span")
-            //     await time(2000)
-            //     await op[0].click()
-            //     await time(2000)
-            //     let cos = await page.$$("label:nth-child(6) div button")
-            //     await time(2000)
-            //     await cos[0].click()
-            //     await time(7000)
-            //     let s = 0
-            //     let checkSpan = await page.$$("td.r9 table tr td")
-            //     for (let i = 0; i < 3; i++) {
-            //         s = s + 1
-            //         if (s % 2 == 0) {
-            //             s = s + 1
-            //         }
-            //         console.log(s);
-            //         await time(1000)
-            //         checkSpan[s].click()
-            //         await time(1000)
-            //         let sp = await page.$$('[act="z"] .J-N-Jz')
-            //         await time(1000)
-            //         await sp[sp.length - 1].click()
-            //         await time(1000)
-            //     }
-            //     await time(3000)
-            //     let btn = await page.$$('[guidedhelpid="save_changes_button"]')
-            //     await time(2000)
-            //     await btn[0].click()
-
-            // } else {
-            //     console.log("no access !!");
-            // }
-        }
-    } catch (e) {
-        console.log(e);
-        console.log("catch error");
-        if (e instanceof puppeteer._pptr.errors.TimeoutError) {
-            await time(3000)
+            await navigationPromise
+            await time(2000)
+            console.log(page.url());
+            let recovery = await page.$$('.lCoei.YZVTmd.SmR8')
+            await time(2000)
+            await recovery[2].click()
+            await time(2000)
+            page.waitForSelector('#knowledge-preregistered-email-response')
+            await time(2000)
+            await page.type('#knowledge-preregistered-email-response', data.verification, { delay: 200 })
             await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+                path: `${path}/${data.gmail.split('@')[0]}-@-verification-${data.id_process}.png`
             });
-            feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
-            await time(3000)
+            feedback += `, ${data.gmail.split('@')[0]}-@-verification-${data.id_process}.png`
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            await time(3000)
-            await page.close()
-            await browser.close()
-            console.log(feedback);
-            return feedback
+            await time(2000)
+            let confirm = await page.$$('.VfPpkd-Jh9lGc')
+            await time(2000)
+            await confirm[0].click()
+            await navigationPromise
+            await time(10000)
+            if (await page.$('[aria-invalid="true"]') != null) {
+                console.log('invalid verification : ' + data.verification);
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-invalid-verification-${data.id_process}.png`
+                });
+                feedback += `, ${data.gmail.split('@')[0]}-@-invalid-verification-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                await page.close()
+                await browser.close()
+                return feedback
+            }
+
+            if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
+                console.log('here 5656565');
+                console.log('verified email : ' + data.gmail);
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+                });
+                feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                const countEnter = await page.evaluate(() => {
+                    let html = []
+                    let el = document.querySelectorAll('.bsU')
+                    let elSpan = document.querySelectorAll('.nU.n1 a')
+                    for (let i = 0; i < el.length; i++) {
+                        html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+                    }
+                    return html
+                })
+                await time(4000)
+                if (countEnter.length == 0) {
+                    details += `Entre unread inbox : 0`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
+                    details += `Entre unread inbox : 0`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                } else {
+                    details += `Entre unread inbox : ${countEnter[0].count}`
+                    await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+                }
+                await page.close()
+                await browser.close()
+                return feedback
+                // await time(5000)
+                // if (grantAccess.entity == entity) {
+                //     await page.waitForSelector('.FH')
+                //     await time(2000)
+                //     await page.click('.FH')
+                //     await time(2000)
+                //     let op = await page.$$("label:nth-child(6) span")
+                //     await time(2000)
+                //     await op[0].click()
+                //     await time(2000)
+                //     let cos = await page.$$("label:nth-child(6) div button")
+                //     await time(2000)
+                //     await cos[0].click()
+                //     await time(7000)
+                //     let s = 0
+                //     let checkSpan = await page.$$("td.r9 table tr td")
+                //     for (let i = 0; i < 3; i++) {
+                //         s = s + 1
+                //         if (s % 2 == 0) {
+                //             s = s + 1
+                //         }
+                //         console.log(s);
+                //         await time(1000)
+                //         checkSpan[s].click()
+                //         await time(1000)
+                //         let sp = await page.$$('[act="z"] .J-N-Jz')
+                //         await time(1000)
+                //         await sp[sp.length - 1].click()
+                //         await time(1000)
+                //     }
+                //     await time(3000)
+                //     let btn = await page.$$('[guidedhelpid="save_changes_button"]')
+                //     await time(2000)
+                //     await btn[0].click()
+
+                // } else {
+                //     console.log("no access !!");
+                // }
+            }
+        } catch (e) {
+            console.log(e);
+            console.log("catch error");
+            if (e instanceof puppeteer._pptr.errors.TimeoutError) {
+                await time(3000)
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+                });
+                feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+                await time(3000)
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                await time(3000)
+                await page.close()
+                await browser.close()
+                console.log(feedback);
+                return feedback
+            }
         }
     }
 }
