@@ -277,13 +277,11 @@ $(document).on('click', '#l_seeds_add', event => {
     };
     $.ajax(settings).done(function (responseText) {
         let isp = responseText.isp
-        console.log(data);
         data.trim()
         let dataArray = data.split(`\n`);
         for (let i = 0; i < dataArray.length; i++) {
-            console.log(dataArray[i].trim())
-            console.log(dataArray[i]);
-            let clean = dataArray[i].split(',')
+            let clean = dataArray[i].trim().split(',')
+            console.log(clean);
             seeds.push(clean)
         }
         console.log(seeds);
