@@ -4,6 +4,7 @@ const data = require('../db');
 const gmailManagement = require("../processes/gmailManagement");
 const checkManagement = require("../processes/checkManagement");
 const composeManagement = require("../processes/composeManagement");
+const { channel } = require("diagnostics_channel");
 const root = __dirname
 let path = root.slice(0, root.length - 31)
 let config = data.data
@@ -410,6 +411,8 @@ const processing = async (data) => {
             switch (data.isp) {
                 case 'gmail':
                     gmailManagement.kill(data.id_process)
+                    composeManagement.kill(data.id_process)
+                    checkManagement.kill(data.id_process)
                     break
                 default:
                     console.log('data invalid');
