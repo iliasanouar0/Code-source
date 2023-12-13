@@ -3,9 +3,11 @@ console.log(sessionStorage.auth);
 let str = { ...localStorage }
 let loop = str.ip
 
+
 if (sessionStorage.auth == undefined) {
-    location.href = '../../access.html'
+    location.href = '/'
 }
+
 fetch(`http://${loop}:3000/proxy/`, {
     method: "GET"
 }).then(res => {
