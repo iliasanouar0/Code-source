@@ -280,7 +280,9 @@ $(document).on('click', '#l_seeds_add', event => {
         let isp = responseText.isp
         data.trim()
         let dataArray = data.split(`\n`);
+        console.log(dataArray);
         for (let i = 0; i < dataArray.length; i++) {
+            console.log(dataArray[i]);
             if (dataArray[i] != '') {
                 let clean = dataArray[i].trim().split(',')
                 console.log(clean);
