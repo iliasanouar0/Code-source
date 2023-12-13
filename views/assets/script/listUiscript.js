@@ -280,6 +280,10 @@ $(document).on('click', '#l_seeds_add', event => {
         data.trim()
         let dataArray = data.split(`\n`);
         for (let i = 0; i < dataArray.length; i++) {
+            if (dataArray[i] == '') {
+                console.log(dataArray[i]);
+                return
+            }
             let clean = dataArray[i].trim().split(',')
             console.log(clean);
             seeds.push(clean)
