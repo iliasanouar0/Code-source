@@ -1275,17 +1275,17 @@ wsc.on('connection', (wss, req) => {
       }
 
       const processV = async (toProcess, start, option) => {
-        console.log('Entered Process V' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
+        console.log('Entered Process V :' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
         while (toProcess.length !== 0 && state !== "STOPPED" && state !== "PAUSED") {
-          console.log('Entered while loop' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
+          console.log('Entered while loop :' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
           state = await composeManager.getProcessState(data.id_process);
           if (state === "STOPPED") {
             break;
           }
           for (let i = 0; i < toProcess.length; i++) {
-            console.log('Entered for loop' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
+            console.log('Entered for loop :' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
             let seed = toProcess[0];
-            console.log('defined as seed' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+            console.log('defined as seed :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
             if (option.onlyStarted) {
               await startSeedProcessing(seed);
               console.log('set as running : ' + array[start][i].gmail + ` ,At ${new Date().toLocaleString()}`);
