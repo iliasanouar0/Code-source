@@ -1538,6 +1538,7 @@ wsc.on('connection', (wss, req) => {
 
     } else if (request == "resume") {
       composeManager.resumedProcess(data.data)
+      sendToAll(clients,'reload')
       let arrayBcc = []
       let bccResult = []
       let Origins = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "paused" })
