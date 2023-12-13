@@ -277,6 +277,7 @@ $(document).on('click', '#l_seeds_add', event => {
     };
     $.ajax(settings).done(function (responseText) {
         let isp = responseText.isp
+        console.log(data);
         let dataArray = data.split(`\n`);
         for (let i = 0; i < dataArray.length; i++) {
             let clean = dataArray[i].split(',')
