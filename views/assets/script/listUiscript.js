@@ -319,7 +319,7 @@ $(document).on('click', '#l_seeds_add', event => {
         for (let i = 0; i < textResult.length; i++) {
             if (textResult[i].includes('***')) {
                 valid = false
-                textResult.unshift('The lines with (***) are invalid')
+                textResult.unshift('--> The lines with (***) are invalid (remove this line before submitting)')
                 break;
             } else {
                 valid = true
