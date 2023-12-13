@@ -56,7 +56,7 @@ const checkProxy = async (data) => {
         ]
     }
     console.log("Lunch puppeteer: " + `--proxy-server=${data.proxy}`);
-    const browser = await puppeteer.launch({ headless: false, ignoreHTTPSErrors: true, ignoreDefaultArgs: ['--enable-automation', '--disable-extensions'], args: arg })
+    const browser = await puppeteer.launch({ headless: 'new', ignoreHTTPSErrors: true, ignoreDefaultArgs: ['--enable-automation', '--disable-extensions'], args: arg })
     let c = await browser.createIncognitoBrowserContext({ proxyServer: proxyServer })
     const browserPID = c.process().pid
     const page = await c.newPage();
