@@ -292,18 +292,20 @@ $(document).on('click', '#l_seeds_add', event => {
         let date_update = new Date().toDateInputValue()
         seeds.forEach(one => {
             let seed = {
-                "email": `${one[0].toLowerCase()}`,
-                "password": `${one[1]}`,
-                "proxy": `${one[2]}`,
-                "verification": `${one[3]}`,
+                "email": `${one[0].toLowerCase().trim()}`,
+                "password": `${one[1].trim()}`,
+                "proxy": `${one[2].trim()}`,
+                "verification": `${one[3].trim()}`,
                 "id_list": `${listId}`,
                 "date_add": `${date_add}`,
                 "date_update": `${date_update}`,
                 "status": `active`,
                 "isp": `${isp}`
             }
+            console.log(seed);
             obj.push(seed)
         })
+
         // let textResult = [];
         // $.each(data.split(`\n`), function (index, item) {
         //     let clean = item.replaceAll('***', '')
