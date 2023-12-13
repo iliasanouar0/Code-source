@@ -153,37 +153,73 @@ const verify = async (data, entity, mode) => {
 
     let details = ''
     let arg
+    let proxyServer
+    console.log("checkProxy start: " + data.gmail);
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
-        arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox', `--user-data-dir=${userDir}${data.gmail.split('@')[0]}-@-init-Gmail`]
+        arg = [
+            '--no-sandbox',
+            '--ignore-certifcate-errors',
+            '--disable-client-side-phishing-detection',
+            '--ignore-certifcate-errors-spki-list',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--no-first-run',
+            '--no-zygote',
+            '--proxy-bypass-list=*',
+            '--disable-infobars',
+            '--disable-gpu',
+            '--disable-web-security',
+            '--disable-site-isolation-trials',
+            '--enable-experimental-web-platform-features',
+            '--start-maximized'
+        ]
     } else {
-        const proxyServer = `${data.proxy}`;
-        arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox', `--user-data-dir=${userDir}${data.gmail.split('@')[0]}-@-init-Gmail`]
+        console.log('there is proxy');
+        proxyServer = `${data.proxy}`;
+        arg = [
+            '--no-sandbox',
+            `--proxy-server=${proxyServer}`,
+            '--ignore-certifcate-errors',
+            '--disable-client-side-phishing-detection',
+            '--ignore-certifcate-errors-spki-list',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--no-first-run',
+            '--no-zygote',
+            '--proxy-bypass-list=*',
+            '--disable-infobars',
+            '--disable-gpu',
+            '--disable-web-security',
+            '--disable-site-isolation-trials',
+            '--enable-experimental-web-platform-features',
+            '--start-maximized'
+        ]
     }
-    console.log(`Starting verify seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
-    console.log(` `);
-    let feedback = ''
-    let browser
-    let browserPID
-    let page
-    try {
-        console.log(`Lunching puppeteer : ${data.gmail}, At ${new Date().toLocaleString()}`);
-        browser = await puppeteer.launch({ headless: 'new', args: arg })
-        browserPID = browser.process().pid
-        page = await browser.newPage()
-    } catch (e) {
-        console.log('error ppt');
-        console.log(e);
-    }
+    console.log("Lunch puppeteer: " + `--proxy-server=${data.proxy}`);
+    const browser = await puppeteer.launch({ headless: 'new', ignoreHTTPSErrors: true, ignoreDefaultArgs: ['--enable-automation', '--disable-extensions'], args: arg })
+    let c = await browser.createIncognitoBrowserContext({ proxyServer: proxyServer })
+    const browserPID = browser.process().pid
+    const page = await c.newPage();
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
-    await page.setViewport({ width: 1280, height: 720 });
+    await (await browser.pages())[0].close()
+    let feedback = ''
+
 
     try {
         await page.setDefaultNavigationTimeout(60000)
         const navigationPromise = page.waitForNavigation({ timeout: 30000 })
-
+        let file = `${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`
+        fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
+            if (err) {
+                console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+            } else {
+                let cookies = JSON.parse(fs.readFileSync(file));
+                await page.setCookie(...cookies);
+            }
+        })
         console.log(`Goto => https://gmail.com/ : ${data.gmail}, At ${new Date().toLocaleString()}`);
-        await page.goto('https://gmail.com/')
-
+        await page.goto('https://gmail.com')
+        await time(3000)
         await time(3000)
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
@@ -251,6 +287,15 @@ const verify = async (data, entity, mode) => {
             // } else {
             //     console.log("no access !!");
             // }
+
+            const cookiesObject = await page.cookies()
+            let NewFileJson = JSON.stringify(cookiesObject)
+            fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
+                if (err) {
+                    throw err
+                }
+            })
+
             await page.close()
             await browser.close()
             return feedback
@@ -376,6 +421,14 @@ const verify = async (data, entity, mode) => {
             }
             feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+
+            const cookiesObject = await page.cookies()
+            let NewFileJson = JSON.stringify(cookiesObject)
+            fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
+                if (err) {
+                    throw err
+                }
+            })
             await page.close()
             await browser.close()
             return feedback
@@ -440,6 +493,14 @@ const verify = async (data, entity, mode) => {
                 details += `Entre unread inbox : ${countEnter[0].count}`
                 await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
             }
+
+            const cookiesObject = await page.cookies()
+            let NewFileJson = JSON.stringify(cookiesObject)
+            fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
+                if (err) {
+                    throw err
+                }
+            })
             await page.close()
             await browser.close()
             return feedback
