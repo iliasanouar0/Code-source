@@ -283,7 +283,8 @@ $(document).on('click', '#l_seeds_add', event => {
             if (dataArray[i] != '') {
                 let clean = dataArray[i].trim().split(',')
                 console.log(clean);
-                seeds.push(clean)
+                seeds.push(clean.map(e => { e.trim() }))
+                console.log(seeds);
             } else {
                 console.log(dataArray[i]);
             }
