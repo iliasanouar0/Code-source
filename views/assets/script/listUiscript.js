@@ -334,7 +334,6 @@ $(document).on('click', '#l_seeds_add', event => {
                     seeds.push(clean)
                 }
             }
-            console.log(seeds);
             let date_add = new Date().toDateInputValue()
             let date_update = new Date().toDateInputValue()
             seeds.forEach(one => {
