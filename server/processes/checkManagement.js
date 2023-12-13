@@ -13,26 +13,31 @@ let pidProcess = []
 
 const checkProxy = async (data) => {
     let arg
-    console.log(data.proxy);
+    console.log("checkProxy start: " + data.gmail);
     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     } else {
         const proxyServer = `${data.proxy}`;
         arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
     }
+    console.log("Lunch puppeteer: " + `--proxy-server=${proxyServer}`);
     const browser = await puppeteer.launch({ headless: 'new', args: arg })
+
     const browserPID = browser.process().pid
     const page = await browser.newPage()
     let feedback = ''
     pidProcess.push({ id_process: data.id_process, pid: browserPID })
     try {
+        console.log("Goto: http://monip.org/ " + `--proxy-server=${proxyServer} ` + data.gmail);
         await page.goto(`http://monip.org/`)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-ip-${data.id_process}.png`
         });
         feedback += `${data.gmail.split('@')[0]}-@-ip-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+
         await time(10000)
+        console.log("Goto: https://bot.sannysoft.com/ " + `--proxy-server=${proxyServer} ` + data.gmail);
         await page.goto('https://bot.sannysoft.com/', { waitUntil: ['load', 'domcontentloaded'] })
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-bot-${data.id_process}.png`,
@@ -41,8 +46,9 @@ const checkProxy = async (data) => {
         feedback += `, ${data.gmail.split('@')[0]}-@-bot-${data.id_process}.png`
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
     } catch (error) {
-
+        throw error
     } finally {
+        console.log("checkProxy finished: " + data.gmail);
         await page.close()
         await browser.close()
         return feedback
