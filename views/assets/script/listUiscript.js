@@ -306,12 +306,12 @@ $(document).on('click', '#l_seeds_add', event => {
         // })
         let textResult = [];
         $.each(data.split(`\n`), function (index, item) {
-            let clean = item.replaceAll('***', '')
+            let clean = item.replaceAll('*** ERROR-!!', '')
             if (clean.match(pattern)) {
                 textResult.push(clean);
             }
             else {
-                textResult.push(`***${clean}***`);
+                textResult.push(`***${clean}*** ERROR-!!`);
             }
         });
         let valid = false
@@ -319,7 +319,7 @@ $(document).on('click', '#l_seeds_add', event => {
         for (let i = 0; i < textResult.length; i++) {
             if (textResult[i].includes('***')) {
                 valid = false
-                textResult.unshift('--> The lines with (***) are invalid (remove this line before submitting)')
+                // textResult.unshift('--> The lines with (***) are invalid (remove this line before submitting).')
                 break;
             } else {
                 valid = true
