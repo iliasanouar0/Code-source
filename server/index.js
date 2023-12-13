@@ -1393,7 +1393,7 @@ wsc.on('connection', (wss, req) => {
         function removeTrailingComma(str) { const array = str.split(', '); /*array.pop();*/ return array.join(', '); }
 
         async function handleSuccess(seed) {
-          console.log('success :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
+          console.log('success :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
           success++;
 
           const end_in = new Date();
@@ -1429,7 +1429,7 @@ wsc.on('connection', (wss, req) => {
         }
 
         async function handleFailure(seed) {
-          console.log('failed :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
+          console.log('failed :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
           failed++;
 
           const end_in = new Date();
