@@ -259,7 +259,7 @@ $(document).on('click', "#l_add", () => {
 $(document).on('click', '#l_seeds_add', event => {
     let listId = $(event.target).data('id')
     let data = $('#FormControlTextarea').val();
-    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4},(\w{3,14}|none)\,((\d+\.\d+\.\d+\.\d+\:\d+)|\s{1}|none)\,(\w{3,14}|none)/i
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4},(\w{3,14})\,((\d+\.\d+\.\d+\.\d+\:\d+)|\s{1}|none)\,(\w{3,14}|none)/i
     if (data == '') {
         Swal.fire('no data provided')
         return
