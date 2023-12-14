@@ -343,7 +343,6 @@ const getData = $("#example1").DataTable({
   }
 })
 
-
 const getDataCompose = $("#composeData").DataTable({
   responsive: true,
   order: [[1, 'desc']],

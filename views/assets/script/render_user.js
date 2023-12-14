@@ -161,15 +161,22 @@ const getData = $("#processDate").DataTable({
       render: function (data, type, row) {
         switch (row.status) {
           case 'FINISHED':
-            return `<div class="card status-p-${row.id_process} m-0 border-success">
+            return `<div class="card status-p-${row.id_process} m-0 border-success ">
                 <div class="card-body p-0 text-center text-success">
                 ${row.status}
                 </div>
               </div>`
           case 'RUNNING':
+            // return `<div class="card status-p-${row.id_process} m-0 border-primary">
+            //       <div class="card-body p-0 text-center text-primary">
+            //       ${row.status}
+            //       </div>
+            //     </div>`
             return `<div class="card status-p-${row.id_process} m-0 border-primary">
                   <div class="card-body p-0 text-center text-primary">
-                  ${row.status}
+                  <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
                   </div>
                 </div>`
           case 'PAUSED':
