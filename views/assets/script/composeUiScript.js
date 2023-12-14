@@ -763,9 +763,6 @@ $(document).on('click', '.status', event => {
                         let message = row.statusdetails.split('/')[0]/*.split(':')[1]*/
                         let send = row.statusdetails.split('/')[1]/*.split(':')[1]*/
                         let bounced = row.statusdetails.split('/')[2]/*.split(':')[1]*/
-                        let obj = { b: bounced, m: message, s: send }
-                        console.log(obj);
-                        // return bounced
                         if (message.includes('limit')) {
                             html = `
                             <div class="row">
@@ -776,7 +773,7 @@ $(document).on('click', '.status', event => {
                                 </div>
                                 <div class="col">
                                     <div class="card m-0">
-                                        <div class="card-body p-1 text-center text-dark">${bounced}, ${send}</div>
+                                    <div class="card-body p-1 text-center text-dark">${send}, <p class="text-danger">${bounced}</p></div>
                                     </div>
                                 </div>
                             </div>`
@@ -790,7 +787,7 @@ $(document).on('click', '.status', event => {
                             </div>
                             <div class="col">
                                 <div class="card m-0">
-                                    <div class="card-body p-1 text-center text-dark">${bounced}, ${send}</div>
+                                <div class="card-body p-1 text-center text-dark">${send}, <p class="text-danger">${bounced}</p></div>
                                 </div>
                             </div>
                         </div>`
@@ -803,7 +800,7 @@ $(document).on('click', '.status', event => {
                             </div>
                             <div class="col">
                                 <div class="card m-0">
-                                    <div class="card-body p-1 text-center text-dark">${bounced}, ${send}</div>
+                                <div class="card-body p-1 text-center text-dark">${send}, <p class="text-danger">${bounced}</p></div>
                                 </div>
                             </div>
                         </div>`
@@ -816,35 +813,13 @@ $(document).on('click', '.status', event => {
                             </div>
                             <div class="col">
                                 <div class="card m-0">
-                                    <div class="card-body p-1 text-center text-dark">${bounced}, ${send}</div>
+                                <div class="card-body p-1 text-center text-dark">${send}, <p class="text-danger">${bounced}</p></div>
                                 </div>
                             </div>
                         </div> `
                         }
                     }
                     return html
-                    // if (row.statusdetails == null || row.statusdetails == "" || row.statusdetails == undefined || row.statusdetails == 'undefined') {
-                    //     if (row.rstatus == 'running' || row.rstatus == 'waiting' || row.rstatus == 'finished') {
-                    //         html = ''
-                    //     } else {
-                    //         html = `<p>&#9940;</p>`
-                    //     }
-                    // } else {
-                    //     if (row.statusdetails.includes('limit')) {
-                    //         html = `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
-                    //         <div class="card-body p-1 text-center text-dark">Limit reached !!</div></div>`
-                    //     } else if (row.statusdetails.includes('blocked')) {
-                    //         html = `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
-                    //         <div class="card-body p-1 text-center text-dark">Blocked !!</div></div>`
-                    //     } else if (row.statusdetails.includes('Address not found')) {
-                    //         html = `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.statusdetails}">
-                    //         <div class="card-body p-1 text-center text-dark">Address not found !!</div></div>`
-                    //     } else {
-                    //         html = `<div class="card m-0">
-                    //         <div class="card-body p-1 text-center text-dark">${row.statusdetails}</div></div>`
-                    //     }
-                    // }
-                    // return html
                 }
             },
             {
