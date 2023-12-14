@@ -60,7 +60,7 @@ const saveDetails = async (data) => {
 }
 
 const composeDetails = async (data) => {
-    let getDetails = "SELECT statusdetails FROM results WHERE id_seeds=($2) AND id_process=($3)"
+    let getDetails = "SELECT statusdetails FROM results WHERE id_seeds=($1) AND id_process=($2)"
     pool.query(getDetails, [data.id_seeds, data.id_process], (er, re) => {
         if (er) {
             throw er
