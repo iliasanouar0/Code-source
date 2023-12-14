@@ -457,9 +457,12 @@ const getDataCompose = $("#composeData").DataTable({
                 </div>
               </div>`
           case 'RUNNING':
+            console.log('spinner');
             return `<div class="card status-p-${row.id_process} m-0 border-primary">
                   <div class="card-body p-0 text-center text-primary">
-                  ${row.status}
+                  <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                  </div>
                   </div>
                 </div>`
           case 'PAUSED':
