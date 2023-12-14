@@ -1403,7 +1403,7 @@ wsc.on('connection', (wss, req) => {
                 processStateManager.updateState(status);
               }
             }
-            console.log(Origins.length +' : Origins');
+            console.log(Origins.length + ' : Origins');
             await time(3000);
             if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
               seeds = [...Origins];
@@ -1533,14 +1533,16 @@ wsc.on('connection', (wss, req) => {
               state = await composeManager.getProcessState(data.id_process);
 
               if (state === "STOPPED" || state === "PAUSED") {
-                return;
+                break;
               }
+              
               if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
                 await processStateManager.updateState(status);
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
                 console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()} `);
                 sendToAll(clients, 'reload');
+                break
               }
 
               if (Origins.length == 0) {
@@ -1549,6 +1551,7 @@ wsc.on('connection', (wss, req) => {
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
                 console.log(`process with id : ${data.id_process} Finished At ${new Date().toLocaleString()}`);
                 sendToAll(clients, 'reload');
+                break
               }
             }
             break;
