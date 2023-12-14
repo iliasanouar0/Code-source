@@ -1355,6 +1355,7 @@ wsc.on('connection', (wss, req) => {
             if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
               seeds = [...Origins];
               await time(2000);
+              await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
               await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
               running++
               toProcess.push(seeds[0]);
