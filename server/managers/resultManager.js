@@ -62,7 +62,7 @@ const saveDetails = async (data) => {
 const composeDetails = async (data) => {
     let details
     let getDetails = "SELECT statusdetails FROM results WHERE id_seeds=($1) AND id_process=($2)"
-    pool.query(getDetails, [data.id_seeds, data.id_process], (er, re) => {
+    pool.query(getDetails, [data.id_seeds, data.id_process], async (er, re) => {
         if (er) {
             throw er
         }
@@ -76,17 +76,17 @@ const composeDetails = async (data) => {
             let d = old.statusdetails.split('/')
             console.log(d);
         }
+        let sql = `UPDATE results SET statusdetails=($1) WHERE id_seeds=($2) AND id_process=($3)`
+        let values = [details, data.id_seeds, data.id_process]
+        const client = await pool.connect()
+        client.query(sql, values, (err) => {
+            if (err) {
+                throw err;
+            }
+            client.release()
+            return true
+        })
     })
-    // let sql = `UPDATE results SET statusdetails=($1) WHERE id_seeds=($2) AND id_process=($3)`
-    // let values = [data.details, data.id_seeds, data.id_process]
-    // const client = await pool.connect()
-    // client.query(sql, values, (err) => {
-    //     if (err) {
-    //         throw err;
-    //     }
-    //     client.release()
-    //     return true
-    // })
 }
 
 const getFeedback = (request, response) => {
