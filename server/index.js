@@ -1429,16 +1429,12 @@ wsc.on('connection', (wss, req) => {
                 await processSeed(toProcess[0]);
               }
 
-              let waiting = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" });
-              let w = waiting.length;
-
+              let w = waiting - success - failed
               if (w <= 0) {
-                let running = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" });
-                let status = { waiting: 0, active: running.length, finished: success, failed: failed, id_process: data.id_process };
+                let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
                 processStateManager.updateState(status);
               } else {
-                let running = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" });
-                let status = { waiting: w, active: running.length, finished: success, failed: failed, id_process: data.id_process };
+                let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
                 processStateManager.updateState(status);
               }
 
@@ -1468,16 +1464,12 @@ wsc.on('connection', (wss, req) => {
                 await processSeed(toProcess[0]);
               }
 
-              let waiting = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" });
-              let w = waiting.length;
-
+              let w = waiting - success - failed
               if (w <= 0) {
-                let running = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" });
-                let status = { waiting: 0, active: running.length, finished: success, failed: failed, id_process: data.id_process };
+                let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
                 processStateManager.updateState(status);
               } else {
-                let running = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" });
-                let status = { waiting: w, active: running.length, finished: success, failed: failed, id_process: data.id_process };
+                let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
                 processStateManager.updateState(status);
               }
 
@@ -1516,16 +1508,12 @@ wsc.on('connection', (wss, req) => {
                 await processSeed(toProcess[0]);
               }
 
-              let waiting = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "waiting" });
-              let w = waiting.length;
-
+              let w = waiting - success - failed
               if (w <= 0) {
-                let running = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" });
-                let status = { waiting: 0, active: running.length, finished: success, failed: failed, id_process: data.id_process };
+                let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
                 processStateManager.updateState(status);
               } else {
-                let running = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" });
-                let status = { waiting: w, active: running.length, finished: success, failed: failed, id_process: data.id_process };
+                let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
                 processStateManager.updateState(status);
               }
 
@@ -1535,7 +1523,7 @@ wsc.on('connection', (wss, req) => {
               if (state === "STOPPED" || state === "PAUSED") {
                 break;
               }
-              
+
               if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
                 await processStateManager.updateState(status);
