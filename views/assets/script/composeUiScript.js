@@ -773,7 +773,7 @@ $(document).on('click', '.status', event => {
                                 </div>
                                 <div class="col">
                                     <div class="card m-0">
-                                    <div class="card-body p-1 text-center text-dark">${send}, <p class="text-danger">${bounced}</p></div>
+                                    <div class="card-body p-1 text-center text-dark">${send}, <span class="text-danger">${bounced}</span></div>
                                     </div>
                                 </div>
                             </div>`
@@ -787,7 +787,7 @@ $(document).on('click', '.status', event => {
                             </div>
                             <div class="col">
                                 <div class="card m-0">
-                                <div class="card-body p-1 text-center text-dark">${send}, <p class="text-danger">${bounced}</p></div>
+                                <div class="card-body p-1 text-center text-dark">${send}, <span class="text-danger">${bounced}</span></div>
                                 </div>
                             </div>
                         </div>`
@@ -800,7 +800,7 @@ $(document).on('click', '.status', event => {
                             </div>
                             <div class="col">
                                 <div class="card m-0">
-                                <div class="card-body p-1 text-center text-dark">${send}, <p class="text-danger">${bounced}</p></div>
+                                <div class="card-body p-1 text-center text-dark">${send}, <span class="text-danger">${bounced}</span></div>
                                 </div>
                             </div>
                         </div>`
@@ -813,7 +813,7 @@ $(document).on('click', '.status', event => {
                             </div>
                             <div class="col">
                                 <div class="card m-0">
-                                <div class="card-body p-1 text-center text-dark">${send}, <p class="text-danger">${bounced}</p></div>
+                                <div class="card-body p-1 text-center text-dark">${send}, <span class="text-danger">${bounced}</span></div>
                                 </div>
                             </div>
                         </div> `
