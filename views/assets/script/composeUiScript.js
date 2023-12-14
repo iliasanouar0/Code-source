@@ -755,7 +755,7 @@ $(document).on('click', '.status', event => {
                     let html
                     let message = row.statusdetails.split('/')[0]/*.split(':')[1]*/
                     let send = row.statusdetails.split('/')[1]/*.split(':')[1]*/
-                    let bounced = row.statusdetails.split('/')[3]/*.split(':')[1]*/
+                    let bounced = row.statusdetails.split('/')[2]/*.split(':')[1]*/
                     let obj = { b: bounced, m: message, s: send }
                     console.log(obj);
                     return bounced
