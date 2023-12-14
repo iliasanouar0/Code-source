@@ -1404,6 +1404,7 @@ wsc.on('connection', (wss, req) => {
               }
             }
             console.log(Origins.length +' : Origins');
+            await time(3000);
             if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
               seeds = [...Origins];
               await time(2000);
