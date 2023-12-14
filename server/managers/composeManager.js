@@ -321,18 +321,24 @@ const deleteProcess = (request, response) => {
     response.status(200).send('composing deleted');
 }
 
-const startedProcess = (data) => {
+const startedProcess = async (data) => {
     let start_in = new Date()
     let end_in
-    let query = "UPDATE composing SET status=($1), start_in=($2), end_in=($3) WHERE id_process=($4)"
+    let sql = "UPDATE composing SET status=($1), start_in=($2), end_in=($3) WHERE id_process=($4) RETURNING id_process"
     let values = [data.status, start_in, end_in, data.id_process]
-    let obj = { query: query, data: values }
-    pool.query(obj.query, obj.data, (error, result) => {
-        if (error) {
-            return `${error.name, error.stack, error.message, error}`
-        }
-        return 'Process started successfully'
-    })
+    let obj = { query: sql, data: values }
+    // pool.query(obj.query, obj.data, (error, result) => {
+    //     if (error) {
+    //         return `${error.name, error.stack, error.message, error}`
+    //     }
+    //     return 'Process started successfully'
+    // })
+
+    // sql = 'SELECT status FROM composing WHERE id_process=($1)'
+    const client = await pool.connect()
+    const list = await client.query(obj.query, obj.data);
+    client.release()
+    return true
 }
 
 const resumedProcess = (data) => {
