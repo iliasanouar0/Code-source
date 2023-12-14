@@ -1532,7 +1532,6 @@ const openInbox = async (data, count, options, mode, subject) => {
                 i++
             }
         }
-
     } else {
         for (let i = 0; i < count; i++) {
             await time(3000)
