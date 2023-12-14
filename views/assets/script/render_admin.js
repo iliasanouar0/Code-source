@@ -209,9 +209,9 @@ const getData = $("#example1").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="card m-0 border-secondary">
+        return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="${row.list_name}">
           <div class="card-body p-0 text-center text-dark">
-          ${row.list_name}
+          ${row.list_name.substring(0, 10)}...
           </div>
         </div>`
       }
@@ -237,16 +237,12 @@ const getData = $("#example1").DataTable({
                 </div>
               </div>`
           case 'RUNNING':
-            // return `<div class="card status-p-${row.id_process} m-0 border-primary">
-            //       <div class="card-body p-0 text-center text-primary">
-            //       ${row.status}
-            //       </div>
-            //     </div>`
+            console.log('spinner');
             return `<div class="card status-p-${row.id_process} m-0 border-primary">
                   <div class="card-body p-0 text-center text-primary">
                   <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
+                  <span class="visually-hidden">Loading...</span>
+                  </div>
                   </div>
                 </div>`
           case 'PAUSED':
