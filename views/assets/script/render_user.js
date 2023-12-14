@@ -460,7 +460,7 @@ const getDataCompose = $("#composeData").DataTable({
             console.log('spinner');
             return `<div class="card status-p-${row.id_process} m-0 border-primary">
                   <div class="card-body p-0 text-center text-primary">
-                  <div class="spinner-border text-primary" role="status">
+                  <div class="spinner-border  spinner-border-sm text-primary" role="status">
                   <span class="visually-hidden">Loading...</span>
                   </div>
                   </div>
