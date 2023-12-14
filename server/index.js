@@ -1388,14 +1388,11 @@ wsc.on('connection', (wss, req) => {
               // await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
               // await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
               seeds.splice(seeds.indexOf(seeds[0]), 1);
-
               if (bccResult[0 + start] != undefined) {
                 bccToProcess.push(bccResult[0 + start]);
                 bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
               }
-
               count++;
-
               let w = waiting - success - failed
               if (w <= 0) {
                 let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
@@ -1406,6 +1403,7 @@ wsc.on('connection', (wss, req) => {
               }
             }
             console.log(Origins.length + ' : Origins');
+            console.log(seeds.length + ' : seeds');
             await time(3000);
             if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
               seeds = [...Origins];
@@ -1481,6 +1479,7 @@ wsc.on('connection', (wss, req) => {
               if (state === "STOPPED" || state === "PAUSED") {
                 return;
               }
+
               if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
                 await processStateManager.updateState(status);
