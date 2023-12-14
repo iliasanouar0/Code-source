@@ -724,7 +724,7 @@ wsc.on('connection', (wss, req) => {
 
     if (request == "start") {
 
-      composeManager.startedProcess(data.data)
+      await composeManager.startedProcess(data.data)
       let arrayBcc = []
       let bccResult = []
       let Origins = await composeManager.getAllProcessSeedsServer(data.id_process)
