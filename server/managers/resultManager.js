@@ -70,10 +70,12 @@ const composeDetails = async (data) => {
         console.log('this is the old');
         console.log(old);
         if (old.statusdetails == null) {
-            let d = data.details.split('/')
+            details = `message:${data.details.message}/send:${data.details.send}/bounced:${data.details.bounced}`
+            console.log(details);
+        } else {
+            let d = old.statusdetails.split('/')
             console.log(d);
         }
-        return true
     })
     // let sql = `UPDATE results SET statusdetails=($1) WHERE id_seeds=($2) AND id_process=($3)`
     // let values = [data.details, data.id_seeds, data.id_process]
