@@ -863,7 +863,6 @@ $(document).on('click', '.status', event => {
         websocket.send(`${id}`)
     }
 
-
     websocket.onmessage = function (event) {
         let data = JSON.parse(event.data)
         if (data.length == 0) {
