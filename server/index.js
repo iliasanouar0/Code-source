@@ -1275,7 +1275,7 @@ wsc.on('connection', (wss, req) => {
       // }
 
 
-      process = async (toProcess, bccToProcess, start, option, methods) => {
+      const process = async (toProcess, bccToProcess, start, option, methods) => {
         console.log(bccToProcess); await time(3000);
 
         const processSeed = async (seed) => {
@@ -1776,6 +1776,7 @@ wsc.on('connection', (wss, req) => {
         if (action == 'compose') {
           if (check) {
             for (let i = 0; i < array[start].length; i++) {
+              console.log(array[start][i]);
               await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
               await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
               running++
