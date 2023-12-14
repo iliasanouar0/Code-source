@@ -1385,8 +1385,9 @@ wsc.on('connection', (wss, req) => {
             if (toProcess.length < active && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0 && bccResult[0 + start] != undefined) {
               console.log('the indexed seed : ' + seeds[0].id_seeds);
               toProcess.push(seeds[0]);
-              // await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
-              // await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
+              await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
+              await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
+              running++
               seeds.splice(seeds.indexOf(seeds[0]), 1);
               if (bccResult[0 + start] != undefined) {
                 bccToProcess.push(bccResult[0 + start]);
