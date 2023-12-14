@@ -1403,7 +1403,7 @@ wsc.on('connection', (wss, req) => {
                 processStateManager.updateState(status);
               }
             }
-
+            console.log(Origins.length +' : Origins');
             if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
               seeds = [...Origins];
               await time(2000);
@@ -1417,7 +1417,7 @@ wsc.on('connection', (wss, req) => {
           }
         };
 
-        
+
         switch (methods.fixedLimit) {
           case true:
             console.log('true');
