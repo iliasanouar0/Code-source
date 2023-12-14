@@ -1280,7 +1280,7 @@ wsc.on('connection', (wss, req) => {
         let state = await composeManager.getProcessState(data.id_process)
         console.log(state + ' ' + toProcess[0].gmail);
         console.log(toProcess.length + ' ' + toProcess[0].gmail);
-        await time(2000)
+        await time(100000)
         while (toProcess.length !== 0 && state !== "STOPPED" && state !== "PAUSED") {
           console.log('Entered while loop :' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
           state = await composeManager.getProcessState(data.id_process);
