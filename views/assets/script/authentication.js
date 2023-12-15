@@ -109,6 +109,8 @@ submitButton.addEventListener("click", (e) => {
             return;
           }
           sessionStorage.setItem("user", JSON.stringify(data[0]));
+          sessionStorage.setItem("login", true);
+          document.cookie = '{isLogin=true}'
           window.sessionStorage.setItem('auth', '1')
           if (data[0].type == "admin" || data[0].type == "IT") {
             window.location.href = "../admin/process";
