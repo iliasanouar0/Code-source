@@ -1432,7 +1432,6 @@ wsc.on('connection', (wss, req) => {
           }
         };
 
-
         switch (methods.fixedLimit) {
           case true:
             console.log('true');
