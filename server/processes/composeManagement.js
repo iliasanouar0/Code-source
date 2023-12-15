@@ -243,7 +243,7 @@ const composeEmail = async (data, option, mode) => {
         ),
         await page.waitForNavigation()
     ]);
-    await time(40000)
+    await time(50000)
     let check = await page.evaluate(bcc => {
         let unread = document.querySelectorAll('.zA.zE')
         if (unread.length == 0) {
