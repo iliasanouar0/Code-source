@@ -424,12 +424,16 @@ const getDataCompose = $("#composeData").DataTable({
         {
             data: null,
             render: function (data, type, row) {
-                return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="Count : ${row.count}, Counter : ${row.counter == null ? 0 : row.counter}
-            ">
-              <div class= "card-body p-0 text-center text-dark" >
-                ${row.data.substring(0, 10)}...
-                </div >
-              </div > `
+            //     return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="Count : ${row.count}, Counter : ${row.counter == null ? 0 : row.counter}">
+            //   <div class= "card-body p-0 text-center text-dark" >
+            //     ${row.data.substring(0, 10)}...
+            //     </div >
+            //   </div > `
+            return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="Count : ${row.count}">
+            <div class= "card-body p-0 text-center text-dark" >
+              ${row.data.substring(0, 10)}...
+              </div >
+            </div > `
             }
         },
         {
@@ -455,43 +459,43 @@ const getDataCompose = $("#composeData").DataTable({
         {
             data: null,
             render: function (data, type, row) {
-              switch (row.status) {
-                case 'FINISHED':
-                  return `<div class="card status-p-${row.id_process} m-0 border-success ">
+                switch (row.status) {
+                    case 'FINISHED':
+                        return `<div class="card status-p-${row.id_process} m-0 border-success ">
                       <div class="card-body p-0 text-center text-success">
                       ${row.status}
                       </div>
                     </div>`
-                case 'RUNNING':
-                  console.log('spinner');
-                  return `<div class="card status-p-${row.id_process} m-0 border-primary">
+                    case 'RUNNING':
+                        console.log('spinner');
+                        return `<div class="card status-p-${row.id_process} m-0 border-primary">
                         <div class="card-body p-0 text-center text-primary">
                         <div class="spinner-border  spinner-border-sm text-primary" role="status">
                         <span class="visually-hidden">Loading...</span>
                         </div>
                         </div>
                       </div>`
-                case 'PAUSED':
-                  return `<div class="card status-p-${row.id_process} m-0 border-warning">
+                    case 'PAUSED':
+                        return `<div class="card status-p-${row.id_process} m-0 border-warning">
                           <div class="card-body p-0 text-center text-warning">
                           ${row.status}
                            </div>
                         </div>`
-                case 'STOPPED':
-                  return `<div class="card status-p-${row.id_process} m-0 border-danger">
+                    case 'STOPPED':
+                        return `<div class="card status-p-${row.id_process} m-0 border-danger">
                            <div class="card-body p-0 text-center text-danger">
                             ${row.status}
                             </div>
                           </div>`
-                default:
-                  return `<div class="card status-p-${row.id_process} m-0 border-info">
+                    default:
+                        return `<div class="card status-p-${row.id_process} m-0 border-info">
                             <div class="card-body p-0 text-center text-info">
                             ${row.status}
                             </div>
                           </div>`
-              }
+                }
             }
-          },
+        },
         {
             data: null,
             render: function (data, type, row) {
