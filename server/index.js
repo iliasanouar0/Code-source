@@ -715,6 +715,10 @@ wsc.on('connection', (wss, req) => {
   console.log('connected!')
 
   let request = ""
+  wss.on('close', () => {
+    console.log('disconnected!');
+    clients.slice(clients.indexOf(wss), 1)
+  })
 
   wss.on('message', async (message) => {
 
