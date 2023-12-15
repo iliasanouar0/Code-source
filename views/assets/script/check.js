@@ -26,7 +26,7 @@ function getCookieValue(name) {
     }
 }
 
-let st = JSON.stringify(getCookieValue('status'))
+let st = JSON.parse(getCookieValue('status'))
 console.log(st.isLogin);
 console.log(st);
 
