@@ -763,12 +763,66 @@ $(document).on('click', '.status', event => {
                         let message = row.statusdetails.split('/')[0]/*.split(':')[1]*/
                         let send = row.statusdetails.split('/')[1]/*.split(':')[1]*/
                         let bounced = row.statusdetails.split('/')[2]/*.split(':')[1]*/
-                        if (message.includes('limit')) {
-                            html = `
-                            <div class="row">
+
+
+                        if (send == undefined || bounced == undefined) {
+                            if (message.includes('limit')) {
+                                html = `
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${message}">
+                                            <div class="card-body p-1 text-center text-dark">Limit reached !!</div>
+                                        </div>
+                                    </div>                               
+                                </div>`
+                            } else if (message.includes('blocked')) {
+                                html = `
+                                <div class="row">
                                 <div class="col">
                                     <div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${message}">
-                                        <div class="card-body p-1 text-center text-dark">Limit reached !!</div>
+                                        <div class="card-body p-1 text-center text-dark">Blocked !!</div>
+                                    </div>
+                                </div>
+ 
+                            </div>`
+                            } else if (message.includes('Address not found')) {
+                                html = `<div class="row">
+                                <div class="col">
+                                    <div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${message}">
+                                        <div class="card-body p-1 text-center text-dark">Address not found !!</div>
+                                    </div>
+                                </div>                         
+                            </div>`
+                            } else {
+                                html = `<div class="row">
+                                <div class="col">
+                                    <div class="card m-0">
+                                        <div class="card-body p-1 text-center text-dark">${message}</div>
+                                    </div>
+                                </div>
+                            </div> `
+                            }
+                        } else {
+                            if (message.includes('limit')) {
+                                html = `
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${message}">
+                                            <div class="card-body p-1 text-center text-dark">Limit reached !!</div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card m-0">
+                                        <div class="card-body p-1 text-center text-dark">${send}, <span class="text-danger">${bounced}</span></div>
+                                        </div>
+                                    </div>
+                                </div>`
+                            } else if (message.includes('blocked')) {
+                                html = `
+                                <div class="row">
+                                <div class="col">
+                                    <div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${message}">
+                                        <div class="card-body p-1 text-center text-dark">Blocked !!</div>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -777,46 +831,33 @@ $(document).on('click', '.status', event => {
                                     </div>
                                 </div>
                             </div>`
-                        } else if (message.includes('blocked')) {
-                            html = `
-                            <div class="row">
-                            <div class="col">
-                                <div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${message}">
-                                    <div class="card-body p-1 text-center text-dark">Blocked !!</div>
+                            } else if (message.includes('Address not found')) {
+                                html = `<div class="row">
+                                <div class="col">
+                                    <div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${message}">
+                                        <div class="card-body p-1 text-center text-dark">Address not found !!</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="card m-0">
-                                <div class="card-body p-1 text-center text-dark">${send}, <span class="text-danger">${bounced}</span></div>
+                                <div class="col">
+                                    <div class="card m-0">
+                                    <div class="card-body p-1 text-center text-dark">${send}, <span class="text-danger">${bounced}</span></div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>`
-                        } else if (message.includes('Address not found')) {
-                            html = `<div class="row">
-                            <div class="col">
-                                <div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${message}">
-                                    <div class="card-body p-1 text-center text-dark">Address not found !!</div>
+                            </div>`
+                            } else {
+                                html = `<div class="row">
+                                <div class="col">
+                                    <div class="card m-0">
+                                        <div class="card-body p-1 text-center text-dark">${message}</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="card m-0">
-                                <div class="card-body p-1 text-center text-dark">${send}, <span class="text-danger">${bounced}</span></div>
+                                <div class="col">
+                                    <div class="card m-0">
+                                    <div class="card-body p-1 text-center text-dark">${send}, <span class="text-danger">${bounced}</span></div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>`
-                        } else {
-                            html = `<div class="row">
-                            <div class="col">
-                                <div class="card m-0">
-                                    <div class="card-body p-1 text-center text-dark">${message}</div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card m-0">
-                                <div class="card-body p-1 text-center text-dark">${send}, <span class="text-danger">${bounced}</span></div>
-                                </div>
-                            </div>
-                        </div> `
+                            </div> `
+                            }
                         }
                     }
                     return html
