@@ -550,7 +550,7 @@ $(document).on('click', '.start', event => {
             confirmButtonText: 'reload page',
             allowOutsideClick: false,
             allowEscapeKey: false,
-            allowEnterKey: false,
+            allowEnterKey: true,
         }).then(result => {
             if (result.isConfirmed) {
                 location.reload()
