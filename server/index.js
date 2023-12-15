@@ -1343,6 +1343,7 @@ wsc.on('connection', (wss, req) => {
               toProcess.push(seeds[0]);
               await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
               await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
+              running++
               bccToProcess.push(bccResult[0 + start]);
               seeds.splice(seeds.indexOf(seeds[0]), 1);
               count++;
