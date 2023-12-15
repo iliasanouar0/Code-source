@@ -711,7 +711,7 @@ wsc.on('connection', (wss, req) => {
   wss.id = id
 
   clients.push(wss)
-
+  console.log(clients.length);
   console.log('connected!')
 
   let request = ""
