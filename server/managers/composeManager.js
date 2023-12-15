@@ -4,7 +4,7 @@ const data = require('../db');
 const gmailManagement = require("../processes/gmailManagement");
 const checkManagement = require("../processes/checkManagement");
 const composeManagement = require("../processes/composeManagement");
-const { channel } = require("diagnostics_channel");
+const resultManager = require('../managers/resultManager')
 const root = __dirname
 let path = root.slice(0, root.length - 31)
 let config = data.data
@@ -12,6 +12,7 @@ const pool = new pg.Pool(config);
 
 const updateProcess = (request, response) => {
     const obj = (request.body)
+    resultManager.deleteResultsProcess(obj.id_process)
     let sql = `UPDATE composing SET id_list =$1,id_user=$2 ,action=$3 ,data=$4 ,offer=$5,status=$6 ,count=$7 WHERE id_process=$8 returning id_process`
     let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count, obj.id_process]
     pool.query(sql, data, (error, result) => {
