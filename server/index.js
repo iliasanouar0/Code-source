@@ -1325,9 +1325,14 @@ wsc.on('connection', (wss, req) => {
           if (r.indexOf('invalid') == -1 && r.indexOf('noData') == -1) {
             console.log(r.indexOf('detected') + ' ' + seed.gmail);
             console.log(r.indexOf('detected') != -1 + ' ' + seed.gmail);
+            console.log(seeds);
+            console.log(Origins);
             if (r.indexOf('detected') != -1) {
               Origins.splice(Origins.indexOf(seed), 1);
+              seeds.splice(seeds.indexOf(seed), 1)
             }
+            console.log(seeds);
+            console.log(Origins);
             success++;
             let end_in = new Date();
             let result;
