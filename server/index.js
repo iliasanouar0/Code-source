@@ -1323,6 +1323,7 @@ wsc.on('connection', (wss, req) => {
           await resultManager.saveFeedback({ feedback: r, id_seeds: seed.id_seeds, id_process: data.id_process });
 
           if (r.indexOf('invalid') == -1 && r.indexOf('noData') == -1) {
+            console.log(r.indexOf('detected') + ' ' + seed.gmail);
             if (r.indexOf('detected') > -1) {
               Origins.splice(Origins.indexOf(seed), 1);
             }
