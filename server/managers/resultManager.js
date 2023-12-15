@@ -70,11 +70,13 @@ const composeDetails = async (data) => {
         console.log('this is the old');
         console.log(old);
         if (old.statusdetails == null) {
-            details = `message:${data.details.message}/send:${data.details.send}/bounced:${data.details.bounced}`
+            details = `message:${data.details.message}/send : ${data.details.send}/bounced : ${data.details.bounced}`
             console.log(details);
         } else {
-            let d = old.statusdetails.split('/')
-            console.log(d);
+            let send = parseInt(old.statusdetails.split('/')[1].split(' : ')[1])
+            let bounced = parseInt(old.statusdetails.split('/')[2].split(' : ')[1])
+            details = `message:${data.details.message}/send : ${send + data.details.send}/bounced : ${bounced + data.details.bounced}`
+            console.log(details);
         }
         let sql = `UPDATE results SET statusdetails=($1) WHERE id_seeds=($2) AND id_process=($3)`
         let values = [details, data.id_seeds, data.id_process]
