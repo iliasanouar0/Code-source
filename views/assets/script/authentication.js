@@ -111,7 +111,8 @@ submitButton.addEventListener("click", (e) => {
           }
           sessionStorage.setItem("user", JSON.stringify(data[0]));
           sessionStorage.setItem("login", true);
-          document.cookie = 'status={isLogin:true,session-user:user};path=/'
+          let date = new Date(new Date() + 1, new Date().getMonth(), new Date().getDate())
+          document.cookie = `status={isLogin:true,session-user:user};expires=${date};path=/`
           window.sessionStorage.setItem('auth', '1')
           if (data[0].type == "admin" || data[0].type == "IT") {
             window.location.href = "../admin/process";
