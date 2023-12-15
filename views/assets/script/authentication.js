@@ -2,6 +2,7 @@ console.log(sessionStorage.auth);
 if (sessionStorage.auth == undefined) {
   location.href = '/'
 }
+
 let auth = JSON.parse(sessionStorage.auth)
 if (auth == 0 || auth == 'undefined') {
   location.href = '/'
@@ -110,7 +111,7 @@ submitButton.addEventListener("click", (e) => {
           }
           sessionStorage.setItem("user", JSON.stringify(data[0]));
           sessionStorage.setItem("login", true);
-          document.cookie = 'status={isLogin:true,session-user:user}'
+          document.cookie = 'status={isLogin:true,session-user:user};path=/'
           window.sessionStorage.setItem('auth', '1')
           if (data[0].type == "admin" || data[0].type == "IT") {
             window.location.href = "../admin/process";
