@@ -725,6 +725,7 @@ wsc.on('connection', (wss, req) => {
     if (request == "start") {
 
       await composeManager.startedProcess(data.data)
+      sendToAll(clients, 'reload')
       let arrayBcc = []
       let bccResult = []
       let Origins = await composeManager.getAllProcessSeedsServer(data.id_process)
@@ -1363,7 +1364,7 @@ wsc.on('connection', (wss, req) => {
                 processStateManager.updateState(status);
               }
             }
-            console.log('Origins length ' +Origins.length);
+            console.log('Origins length ' + Origins.length);
             if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
               seeds = [...Origins];
               await time(2000);
