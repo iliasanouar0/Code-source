@@ -2,6 +2,10 @@ const user = JSON.parse(sessionStorage.user);
 const wssUri = `ws://${ip}:7072/wss?id=${user.id_user}`;
 const websocket_s = new WebSocket(wssUri);
 
+websocket_s.on('connect', () => {
+    websocket_s.send('connected')
+})
+
 websocket_s.onmessage = (event) => {
     let data = event.data
     console.log(data);
