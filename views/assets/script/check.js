@@ -22,11 +22,7 @@ function getCookieValue(name) {
 }
 
 let st = JSON.parse(getCookieValue('status'))
-console.log(st[0].isLogin);
-console.log(st);
-
 if (st[0].isLogin) {
-    console.log(JSON.parse(getCookieValue(st[0].session)))
     let user = JSON.parse(getCookieValue(st[0].session))
     sessionStorage.setItem("user", JSON.stringify(user));
     window.sessionStorage.setItem('auth', '1')
