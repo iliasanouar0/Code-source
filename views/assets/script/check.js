@@ -26,7 +26,8 @@ function getCookieValue(name) {
     }
 }
 
-let st = getCookieValue('status')
+let st = JSON.parse(getCookieValue('status'))
+console.log(st.isLogin);
 console.log(st);
 
 // let authO = JSON.parse(sessionStorage.auth)
