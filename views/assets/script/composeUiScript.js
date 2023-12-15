@@ -528,6 +528,7 @@ $(document).on('click', '#c_add', () => {
 })
 
 $(document).on('click', '.start', event => {
+    $(event.target).attr('disabled', true)
     const id = $(event.target)[0].attributes[2].value
     const status = "RUNNING"
     const start_in = new Date()
