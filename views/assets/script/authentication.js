@@ -112,7 +112,7 @@ submitButton.addEventListener("click", (e) => {
           sessionStorage.setItem("user", JSON.stringify(data[0]));
           sessionStorage.setItem("login", true);
           const daysToExpire = new Date(2147483647 * 1000).toUTCString();
-          document.cookie = `status={isLogin:true,session-user:user};expires=${daysToExpire};path=/`
+          document.cookie = `status=[{"isLogin":"true","session":"user"}];expires=${daysToExpire};path=/`
           document.cookie = `user=${JSON.stringify(data[0])};expires=${daysToExpire};path=/`
           // document.cookie = `status={Login:true,session-user:user};expires=${daysToExpire};path=/`
           window.sessionStorage.setItem('auth', '1')
