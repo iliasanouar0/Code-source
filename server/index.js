@@ -729,7 +729,7 @@ wsc.on('connection', (wss, req) => {
     if (request == "start") {
 
       await composeManager.startedProcess(data.data)
-      sendToAll(clients, 'reload')
+      // sendToAll(clients, 'reload')
       let arrayBcc = []
       let bccResult = []
       let Origins = await composeManager.getAllProcessSeedsServer(data.id_process)
