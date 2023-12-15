@@ -1322,7 +1322,10 @@ wsc.on('connection', (wss, req) => {
 
           await resultManager.saveFeedback({ feedback: r, id_seeds: seed.id_seeds, id_process: data.id_process });
 
-          if (r.indexOf('invalid') == -1 && r.indexOf('detected') == -1 && r.indexOf('noData') == -1) {
+          if (r.indexOf('invalid') == -1 && r.indexOf('noData') == -1) {
+            if (r.indexOf('detected') > -1) {
+              Origins.splice(Origins.indexOf(seed), 1);
+            }
             success++;
             let end_in = new Date();
             let result;
