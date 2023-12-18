@@ -141,33 +141,45 @@ const login = async (data, mode) => {
     } catch (e) {
         console.log(e.message);
         console.log("catch error");
-        if (e instanceof puppeteer._pptr.errors.TimeoutError) {
-            await time(3000)
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
-            });
-            feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
-            await time(3000)
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            await time(3000)
-            await page.close()
-            await browser.close()
-            console.log(feedback);
-            return feedback
-        } else if (e instanceof puppeteer._pptr.errors.ReferenceError) {
-            await time(3000)
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
-            });
-            feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
-            await time(3000)
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            await time(3000)
-            await page.close()
-            await browser.close()
-            console.log(feedback);
-            return feedback
-        }
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        await time(3000)
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(3000)
+        await page.close()
+        await browser.close()
+        console.log(feedback);
+        return feedback
+        // if (e instanceof puppeteer._pptr.errors.TimeoutError) {
+        //     await time(3000)
+        //     await page.screenshot({
+        //         path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        //     });
+        //     feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        //     await time(3000)
+        //     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        //     await time(3000)
+        //     await page.close()
+        //     await browser.close()
+        //     console.log(feedback);
+        //     return feedback
+        // } else if (e instanceof puppeteer._pptr.errors.ReferenceError) {
+        //     await time(3000)
+        //     await page.screenshot({
+        //         path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        //     });
+        //     feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        //     await time(3000)
+        //     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        //     await time(3000)
+        //     await page.close()
+        //     await browser.close()
+        //     console.log(feedback);
+        //     return feedback
+        // }
     }
 
 }
