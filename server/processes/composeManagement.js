@@ -298,7 +298,7 @@ const composeEmail = async (data, option, mode) => {
             }
         }
         return { status: true, message: 'No bounced', send: bcc.length, bounced: bounced }
-    }, option.bcc, translate)
+    }, (option.bcc, translate))
     await time(3000)
     if (!check.status) {
         console.log(check.message);
