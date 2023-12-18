@@ -32,114 +32,141 @@ const login = async (data, mode) => {
     }
     console.log(`Opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
     console.log(` `);
-    if (mode == 'Cookies') {
-        const browser = await puppeteer.launch({ headless: 'new', args: arg })
-        const browserPID = browser.process().pid
-        const page = await browser.newPage()
-        pidProcess.push({ id_process: data.id_process, pid: browserPID })
-        await page.setViewport({ width: 1440, height: 720 });
-        let file = `${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`
-        const navigationPromise = page.waitForNavigation()
-        fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
-            if (err) {
-                console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+    const browser = await puppeteer.launch({ headless: 'new', args: arg })
+    const browserPID = browser.process().pid
+    const page = await browser.newPage()
+    pidProcess.push({ id_process: data.id_process, pid: browserPID })
+    await page.setViewport({ width: 1440, height: 720 });
+    try {
+        if (mode == 'Cookies') {
+            let file = `${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`
+            const navigationPromise = page.waitForNavigation()
+            fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
+                if (err) {
+                    console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+                } else {
+                    let cookies = JSON.parse(fs.readFileSync(file));
+                    await page.setCookie(...cookies);
+                }
+            })
+            await page.goto('https://gmail.com')
+            await time(3000)
+            if (await page.url() == "https://mail.google.com/mail/u/0/#inbox") {
+                await time(3000)
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
+                });
+                feedback += `${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                const cookiesObject = await page.cookies()
+                let NewFileJson = JSON.stringify(cookiesObject)
+                fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
+                    if (err) {
+                        throw err
+                    }
+                })
             } else {
-                let cookies = JSON.parse(fs.readFileSync(file));
-                await page.setCookie(...cookies);
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+                });
+                feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                await navigationPromise
+                await page.waitForSelector('input[type="email"]')
+                await page.click('input[type="email"]')
+                await navigationPromise
+                await page.type('input[type="email"]', data.gmail, { delay: 100 })
+                await page.waitForSelector('#identifierNext')
+                await page.click('#identifierNext')
+                await time(3000)
+                await page.waitForSelector('input[type="password"]')
+                await time(3000)
+                page.type('input[type="password"]', data.password, { delay: 200 })
+                await time(3000)
+                page.waitForSelector('#passwordNext')
+                await time(3000)
+                page.click('#passwordNext')
+                await navigationPromise
+                await time(10000)
+                const cookiesObject = await page.cookies()
+                let NewFileJson = JSON.stringify(cookiesObject)
+                fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
+                    if (err) {
+                        throw err
+                    }
+                })
             }
-        })
-        await page.goto('https://gmail.com')
-        await time(3000)
-        if (await page.url() == "https://mail.google.com/mail/u/0/#inbox") {
+            return { browser: browser, page: page, feedback: feedback }
+        } else if (mode == 'Profile') {
+            const navigationPromise = page.waitForNavigation()
+            await page.goto('https://gmail.com/')
             await time(3000)
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
-            });
-            feedback += `${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            const cookiesObject = await page.cookies()
-            let NewFileJson = JSON.stringify(cookiesObject)
-            fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
-                if (err) {
-                    throw err
-                }
-            })
-        } else {
-            await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
-            });
-            feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
-            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            await navigationPromise
-            await page.waitForSelector('input[type="email"]')
-            await page.click('input[type="email"]')
-            await navigationPromise
-            await page.type('input[type="email"]', data.gmail, { delay: 100 })
-            await page.waitForSelector('#identifierNext')
-            await page.click('#identifierNext')
-            await time(3000)
-            await page.waitForSelector('input[type="password"]')
-            await time(3000)
-            page.type('input[type="password"]', data.password, { delay: 200 })
-            await time(3000)
-            page.waitForSelector('#passwordNext')
-            await time(3000)
-            page.click('#passwordNext')
-            await navigationPromise
-            await time(10000)
-            const cookiesObject = await page.cookies()
-            let NewFileJson = JSON.stringify(cookiesObject)
-            fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
-                if (err) {
-                    throw err
-                }
-            })
+            if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
+                console.log('verified email : ' + data.gmail);
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
+                });
+                feedback += `${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                await time(5000)
+            } else {
+                await page.screenshot({
+                    path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+                });
+                feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+                await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+                await navigationPromise
+                await page.waitForSelector('input[type="email"]')
+                await page.click('input[type="email"]')
+                await navigationPromise
+                await page.type('input[type="email"]', data.gmail, { delay: 100 })
+                await page.waitForSelector('#identifierNext')
+                await page.click('#identifierNext')
+                await time(3000)
+                await page.waitForSelector('input[type="password"]')
+                await time(3000)
+                page.type('input[type="password"]', data.password, { delay: 200 })
+                await time(3000)
+                page.waitForSelector('#passwordNext')
+                await time(3000)
+                page.click('#passwordNext')
+                await navigationPromise
+                await time(10000)
+            }
+            return { browser: browser, page: page, feedback: feedback }
         }
-        return { browser: browser, page: page, feedback: feedback }
-    } else if (mode == 'Profile') {
-        arg.push(`--user-data-dir=${userDir}${data.gmail.split('@')[0]}-@-init-Gmail`)
-        const browser = await puppeteer.launch({ headless: 'new', args: arg })
-        const browserPID = browser.process().pid
-        const page = await browser.newPage()
-        pidProcess.push({ id_process: data.id_process, pid: browserPID })
-        await page.setViewport({ width: 1280, height: 720 });
-        const navigationPromise = page.waitForNavigation()
-        await page.goto('https://gmail.com/')
-        await time(3000)
-        if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
-            console.log('verified email : ' + data.gmail);
+    } catch (e) {
+        console.log(e.message);
+        console.log("catch error");
+        if (e instanceof puppeteer._pptr.errors.TimeoutError) {
+            await time(3000)
             await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
+                path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
             });
-            feedback += `${data.gmail.split('@')[0]}-@-AUTO_LOGIN-${data.id_process}.png`
+            feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+            await time(3000)
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            await time(5000)
-        } else {
+            await time(3000)
+            await page.close()
+            await browser.close()
+            console.log(feedback);
+            return feedback
+        } else if (e instanceof puppeteer._pptr.errors.ReferenceError) {
+            await time(3000)
             await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+                path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
             });
-            feedback += `${data.gmail.split('@')[0]}-@-open-${data.id_process}.png`
+            feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+            await time(3000)
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-            await navigationPromise
-            await page.waitForSelector('input[type="email"]')
-            await page.click('input[type="email"]')
-            await navigationPromise
-            await page.type('input[type="email"]', data.gmail, { delay: 100 })
-            await page.waitForSelector('#identifierNext')
-            await page.click('#identifierNext')
             await time(3000)
-            await page.waitForSelector('input[type="password"]')
-            await time(3000)
-            page.type('input[type="password"]', data.password, { delay: 200 })
-            await time(3000)
-            page.waitForSelector('#passwordNext')
-            await time(3000)
-            page.click('#passwordNext')
-            await navigationPromise
-            await time(10000)
+            await page.close()
+            await browser.close()
+            console.log(feedback);
+            return feedback
         }
-        return { browser: browser, page: page, feedback: feedback }
     }
+
 }
 
 const composeEmail = async (data, option, mode) => {
