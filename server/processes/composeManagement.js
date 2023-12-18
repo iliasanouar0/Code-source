@@ -295,12 +295,14 @@ const composeEmail = async (data, option, mode) => {
         if (unread.length == 0) {
             return { status: true }
         }
-        let bounced = 0
         let first = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"]')[0]
         if (first.className != 'zA yO') {
             first.click()
             let label = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0].innerText
-            return label
+            let bounced = 0
+            bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
+            return { label: label, bounced: bounced }
+
             // let text = translate(label, { to: 'en' }).then(res => {
             //     console.log(res)
             //     return res
@@ -317,7 +319,7 @@ const composeEmail = async (data, option, mode) => {
         }
     }, option.bcc)
     let c
-    let text = await translate(check, { to: 'en' }).then(res => {
+    let text = await translate(check.label, { to: 'en' }).then(res => {
         console.log(res)
         return res
     }).catch(err => {
@@ -325,12 +327,11 @@ const composeEmail = async (data, option, mode) => {
     })
     console.log(text);
     if (text.includes('You have reached a limit for sending mail')) {
-        c = { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
+        c = { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: check.bounced }
     } else if (text.includes('Message blocked') || text.includes('Address not found') || text.includes('Recipient inbox full')) {
-        bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
-        c = { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
+        c = { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: check.bounced }
     } else {
-        c = { status: true, message: 'No bounced', send: bcc.length, bounced: bounced }
+        c = { status: true, message: 'No bounced', send: bcc.length, bounced: check.bounced }
     }
     await time(3000)
     if (!c.status) {
