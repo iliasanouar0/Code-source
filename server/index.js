@@ -1384,6 +1384,9 @@ wsc.on('connection', (wss, req) => {
               bccToProcess.push(bccResult[0 + start]);
               bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
             }
+            if (Origins.length / active < 3) {
+              option.onlyStarted = false
+            }
           } else {
             failed++;
             let end_in = new Date();

@@ -626,7 +626,7 @@ function msToMnSc(duration) {
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-    if (hours < 0 || minutes < 0 || seconds) {
+    if (hours < 0 && minutes < 0 && seconds) {
         return '00:02:00'
     }
     return hours + ":" + minutes + ":" + seconds;
