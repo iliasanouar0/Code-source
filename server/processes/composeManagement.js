@@ -301,7 +301,7 @@ const composeEmail = async (data, option, mode) => {
             let label = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0].innerText
             let bounced = 0
             bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
-            return { label: label, bounced: bounced }
+            return { status: false, label: label, bounced: bounced }
 
             // let text = translate(label, { to: 'en' }).then(res => {
             //     console.log(res)
@@ -319,6 +319,8 @@ const composeEmail = async (data, option, mode) => {
         }
     }, option.bcc)
     let c
+    console.log('check :');
+    console.log(check);
     let text = await translate(check.label, { to: 'en' }).then(res => {
         console.log(res)
         return res
