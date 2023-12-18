@@ -17,6 +17,10 @@ if (authO === 0 || authO === undefined) {
     location.href = '/'
 }
 
+if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
+    location.href = '/'
+}
+
 function getCookieValue(name) {
     const regex = new RegExp(`(^| )${name}=([^;]+)`)
     const match = document.cookie.match(regex)
@@ -37,10 +41,6 @@ if (st[0].isLogin) {
 // if (authO == 0 || authO == undefined) {
 //     location.href = '/'
 // }
-
-if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
-    location.href = '/'
-}
 
 let link = document.location.toString()
 
