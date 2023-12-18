@@ -1,7 +1,7 @@
 let authO = JSON.parse(sessionStorage.auth)
 console.log(authO);
 if (authO === 0 || authO === undefined) {
-    // location.href = '/'
+    location.href = '/'
     console.log(authO);
 }
 
@@ -25,8 +25,13 @@ function getCookieValue(name) {
         return match[2]
     }
 }
-
-let st = JSON.parse(getCookieValue('status'))
+let st
+let dt = getCookieValue('status')
+if (dt == undefined) {
+    location.href = '/'
+} else {
+    st = JSON.parse(dt)
+}
 if (st[0].isLogin) {
     let user = JSON.parse(getCookieValue(st[0].session))
     sessionStorage.setItem("user", JSON.stringify(user));
@@ -34,7 +39,7 @@ if (st[0].isLogin) {
 }
 
 if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
-    // location.href = '/'
+    location.href = '/'
     console.log(sessionStorage.user);
 }
 
