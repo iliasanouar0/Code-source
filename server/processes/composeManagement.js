@@ -273,7 +273,7 @@ const composeEmail = async (data, option, mode) => {
         await page.waitForNavigation()
     ]);
     await time(50000)
-    let check = await page.evaluate(bcc => {
+    let check = await page.evaluate((bcc, trans) => {
         let unread = document.querySelectorAll('.zA.zE')
         if (unread.length == 0) {
             return { status: true }
@@ -283,7 +283,7 @@ const composeEmail = async (data, option, mode) => {
         if (first.className != 'zA yO') {
             first.click()
             let label = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0].innerText
-            let text = translate(label, { to: 'en' }).then(res => {
+            let text = trans(label, { to: 'en' }).then(res => {
                 console.log(res)
                 return res
             }).catch(err => {
@@ -298,7 +298,7 @@ const composeEmail = async (data, option, mode) => {
             }
         }
         return { status: true, message: 'No bounced', send: bcc.length, bounced: bounced }
-    }, option.bcc)
+    }, option.bcc, translate)
     await time(3000)
     if (!check.status) {
         console.log(check.message);
