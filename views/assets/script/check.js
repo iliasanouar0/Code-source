@@ -1,11 +1,13 @@
 let authO = JSON.parse(sessionStorage.auth)
 console.log(authO);
 if (authO === 0 || authO === undefined) {
-    location.href = '/'
+    // location.href = '/'
+    console.log(authO);
 }
 
 if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
-    location.href = '/'
+    // location.href = '/'
+    console.log(sessionStorage.user);
 }
 
 let str = { ...localStorage }
