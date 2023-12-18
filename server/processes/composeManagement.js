@@ -256,7 +256,7 @@ const composeEmail = async (data, option, mode) => {
             let label = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0].innerText
 
             if (label.includes('You have reached a limit for sending mail')) {
-                return { status: false, message: label.split('.')[0].split('\n')[1], send:0, bounced: bounced }
+                return { status: false, message: label.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
             }
             if (label.includes('Message blocked') || label.includes('Address not found') || label.includes('Recipient inbox full')) {
                 bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
