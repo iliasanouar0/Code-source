@@ -299,25 +299,25 @@ const composeEmail = async (data, option, mode) => {
             //     return { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
             // }
         }
-        let c
-        let text = translate(check, { to: 'en' }).then(res => {
-            console.log(res)
-            return res
-        }).catch(err => {
-            console.error(err)
-        })
-        if (text.includes('You have reached a limit for sending mail')) {
-            c = { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
-        } else if (text.includes('Message blocked') || text.includes('Address not found') || text.includes('Recipient inbox full')) {
-            bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
-            c = { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
-        } else {
-            c = { status: true, message: 'No bounced', send: bcc.length, bounced: bounced }
-        }
     }, option.bcc)
+    let c
+    let text = translate(check, { to: 'en' }).then(res => {
+        console.log(res)
+        return res
+    }).catch(err => {
+        console.error(err)
+    })
+    if (text.includes('You have reached a limit for sending mail')) {
+        c = { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
+    } else if (text.includes('Message blocked') || text.includes('Address not found') || text.includes('Recipient inbox full')) {
+        bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
+        c = { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
+    } else {
+        c = { status: true, message: 'No bounced', send: bcc.length, bounced: bounced }
+    }
     await time(3000)
-    if (! c.status) {
-        console.log( c.message);
+    if (!c.status) {
+        console.log(c.message);
         await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
@@ -325,7 +325,7 @@ const composeEmail = async (data, option, mode) => {
         feedback += `, ${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        await resultsManager.composeDetails({ details:  c, id_seeds: data.id_seeds, id_process: data.id_process })
+        await resultsManager.composeDetails({ details: c, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(3000)
         console.log('you can\'t send !!');
     } else {
@@ -336,7 +336,7 @@ const composeEmail = async (data, option, mode) => {
         feedback += `, ${data.gmail.split('@')[0]}-@-sended-${data.id_process}.png`
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-        await resultsManager.composeDetails({ details: check, id_seeds: data.id_seeds, id_process: data.id_process })
+        await resultsManager.composeDetails({ details: c, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(3000)
         console.log('sended !!');
     }
