@@ -7,7 +7,7 @@ let dotenv = require('dotenv')
 let time = setTimeout.setTimeout
 puppeteer.use(StealthPlugin())
 const translate = require('translate-google');
-const { la } = require('translate-google/languages');
+const { la, te } = require('translate-google/languages');
 
 
 /**
@@ -323,6 +323,7 @@ const composeEmail = async (data, option, mode) => {
     }).catch(err => {
         console.error(err)
     })
+    console.log(text);
     if (text.includes('You have reached a limit for sending mail')) {
         c = { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
     } else if (text.includes('Message blocked') || text.includes('Address not found') || text.includes('Recipient inbox full')) {
