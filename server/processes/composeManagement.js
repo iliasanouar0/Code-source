@@ -220,6 +220,10 @@ const composeEmail = async (data, option, mode) => {
 
     let feedback = ''
     const obj = await login(data, mode)
+    if (obj.page == undefined) {
+        console.log(obj);
+        return obj
+    }
     const page = obj.page
     const browser = obj.browser
     feedback += obj.feedback
