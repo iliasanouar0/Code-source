@@ -185,39 +185,6 @@ const login = async (data, mode) => {
 }
 
 const composeEmail = async (data, option, mode) => {
-    // let feedback = ''
-    // let arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-    // const browser = await puppeteer.launch({ headless: 'new', args: arg })
-    // const browserPID = browser.process().pid
-    // const page = await browser.newPage()
-    // pidProcess.push({ id_process: data.id_process, pid: browserPID })
-    // await page.setViewport({ width: 1440, height: 720 });
-    // const navigationPromise = page.waitForNavigation()
-    // await page.goto('https://google.com')
-    // await time(10000)
-    // await page.screenshot({
-    //     path: `${path}/${data.gmail.split('@')[0]}-@-OPEN-${data.id_process}.png`
-    // });
-    // feedback += `${data.gmail.split('@')[0]}-@-OPEN-${data.id_process}.png`
-    // await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    // await navigationPromise
-    // if (option.bcc != undefined) {
-    //     await time(3000)
-    //     await page.screenshot({
-    //         path: `${path}/${data.gmail.split('@')[0]}-@-BCC-${data.id_process}.png`
-    //     });
-    //     feedback += `, ${data.gmail.split('@')[0]}-@-BCC-${data.id_process}.png`
-    //     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    // } else {
-    //     await time(3000)
-    //     await page.screenshot({
-    //         path: `${path}/${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
-    //     });
-    //     feedback += `, ${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
-    //     await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
-    // }
-    // await time(10000)
-
     let feedback = ''
     const obj = await login(data, mode)
     if (obj.page == undefined) {
@@ -302,20 +269,8 @@ const composeEmail = async (data, option, mode) => {
             let bounced = 0
             bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
             return { status: false, label: label, bounced: bounced }
-
-            // let text = translate(label, { to: 'en' }).then(res => {
-            //     console.log(res)
-            //     return res
-            // }).catch(err => {
-            //     console.error(err)
-            // })
-            // if (text.includes('You have reached a limit for sending mail')) {
-            //     return { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
-            // }
-            // if (text.includes('Message blocked') || text.includes('Address not found') || text.includes('Recipient inbox full')) {
-            //     bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
-            //     return { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
-            // }
+        } else {
+            return { status: false, label: 'no bounce', bounced: bounced }
         }
     }, option.bcc)
     let c
@@ -329,11 +284,11 @@ const composeEmail = async (data, option, mode) => {
     })
     console.log(text);
     if (text.includes('You have reached a limit for sending mail')) {
-        c = { status: false, message: text.split('.')[0].split('\n')[1], send:  option.bcc.length, bounced: check.bounced }
+        c = { status: false, message: text.split('.')[0].split('\n')[1], send: option.bcc.length, bounced: check.bounced }
     } else if (text.includes('Message blocked') || text.includes('Address not found') || text.includes('Recipient inbox full')) {
-        c = { status: false, message: text.split('.')[0].split('\n')[1], send:  option.bcc.length, bounced: check.bounced }
+        c = { status: false, message: text.split('.')[0].split('\n')[1], send: option.bcc.length, bounced: check.bounced }
     } else {
-        c = { status: true, message: 'No bounced', send:  option.bcc.length, bounced: check.bounced }
+        c = { status: true, message: 'No bounced', send: option.bcc.length, bounced: check.bounced }
     }
     await time(3000)
     if (!c.status) {
