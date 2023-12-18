@@ -317,7 +317,7 @@ const composeEmail = async (data, option, mode) => {
         }
     }, option.bcc)
     let c
-    let text = translate(check, { to: 'en' }).then(res => {
+    let text = await translate(check, { to: 'en' }).then(res => {
         console.log(res)
         return res
     }).catch(err => {
