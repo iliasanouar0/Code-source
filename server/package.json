@@ -27,6 +27,7 @@
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
     "replace-in-file": "^7.0.2",
+    "translate-google": "^1.5.0",
     "ws": "^8.14.2"
   },
   "devDependencies": {

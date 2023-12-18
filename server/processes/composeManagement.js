@@ -6,6 +6,8 @@ const fs = require('fs');
 let dotenv = require('dotenv')
 let time = setTimeout.setTimeout
 puppeteer.use(StealthPlugin())
+const translate = require('translate-google')
+
 
 /**
  * @default
@@ -281,13 +283,18 @@ const composeEmail = async (data, option, mode) => {
         if (first.className != 'zA yO') {
             first.click()
             let label = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0].innerText
-
-            if (label.includes('You have reached a limit for sending mail')) {
-                return { status: false, message: label.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
+            let text = translate(label, { to: 'en' }).then(res => {
+                console.log(res)
+                return res
+            }).catch(err => {
+                console.error(err)
+            })
+            if (text.includes('You have reached a limit for sending mail')) {
+                return { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
             }
-            if (label.includes('Message blocked') || label.includes('Address not found') || label.includes('Recipient inbox full')) {
+            if (text.includes('Message blocked') || text.includes('Address not found') || text.includes('Recipient inbox full')) {
                 bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
-                return { status: false, message: label.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
+                return { status: false, message: text.split('.')[0].split('\n')[1], send: bcc.length, bounced: bounced }
             }
         }
         return { status: true, message: 'No bounced', send: bcc.length, bounced: bounced }
