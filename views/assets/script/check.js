@@ -5,11 +5,6 @@ if (authO === 0 || authO === undefined) {
     console.log(authO);
 }
 
-if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
-    // location.href = '/'
-    console.log(sessionStorage.user);
-}
-
 let str = { ...localStorage }
 let loop = str.ip
 
@@ -36,6 +31,11 @@ if (st[0].isLogin) {
     let user = JSON.parse(getCookieValue(st[0].session))
     sessionStorage.setItem("user", JSON.stringify(user));
     window.sessionStorage.setItem('auth', '1')
+}
+
+if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
+    // location.href = '/'
+    console.log(sessionStorage.user);
 }
 
 // let authO = JSON.parse(sessionStorage.auth)
