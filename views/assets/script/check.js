@@ -1,9 +1,5 @@
-let authO = JSON.parse(sessionStorage.auth)
-console.log(authO);
-if (authO === 0 || authO === undefined) {
-    location.href = '/'
-    console.log(authO);
-}
+// let authO = JSON.parse(sessionStorage.auth)
+// console.log(authO);
 
 let str = { ...localStorage }
 let loop = str.ip
@@ -43,11 +39,11 @@ if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
     console.log(sessionStorage.user);
 }
 
-// let authO = JSON.parse(sessionStorage.auth)
-// console.log(authO);
-// if (authO == 0 || authO == undefined) {
-//     location.href = '/'
-// }
+let authO = JSON.parse(sessionStorage.auth)
+console.log(authO);
+if (authO == 0 || authO == undefined) {
+    location.href = '/'
+}
 
 let link = document.location.toString()
 
