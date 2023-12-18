@@ -1,3 +1,13 @@
+let authO = JSON.parse(sessionStorage.auth)
+console.log(authO);
+if (authO === 0 || authO === undefined) {
+    location.href = '/'
+}
+
+if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
+    location.href = '/'
+}
+
 let str = { ...localStorage }
 let loop = str.ip
 
@@ -10,16 +20,6 @@ fetch(`http://${loop}:3000/proxy/`, {
         location.href = '../../access.html'
     }
 })
-
-let authO = JSON.parse(sessionStorage.auth)
-console.log(authO);
-if (authO === 0 || authO === undefined) {
-    location.href = '/'
-}
-
-if (sessionStorage.user == undefined && sessionStorage.auth != undefined) {
-    location.href = '/'
-}
 
 function getCookieValue(name) {
     const regex = new RegExp(`(^| )${name}=([^;]+)`)
