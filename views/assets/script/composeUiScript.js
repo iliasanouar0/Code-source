@@ -355,6 +355,7 @@ $(document).on('click', '#c_update', event => {
                 action += `,all:true`
             }
             dataComposing = {
+                "id_process": id,
                 "name": `test`,
                 "action": action,
                 "status": `idel`,
