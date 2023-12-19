@@ -429,6 +429,10 @@ $('#limit_fixed').change(event => {
 })
 
 $(document).on('click', '#c_add', () => {
+    let offerAdd
+    let subject
+    let body
+    let to
     let composingList = $('#p_list_add').val()
     let data = $('#p_data_add').val()
     let count = $('#p_data_add option:selected').data('count')
@@ -468,11 +472,59 @@ $(document).on('click', '#c_add', () => {
             };
             addCompose(dataComposing)
             break;
+        case 'test-compose':
+            subject = $('#subject').val()
+            body = $('#body').val()
+            to = $('#to').val()
+            if (subject == '' || to == '') {
+                swal.fire('subject and mailto are required')
+                return
+            }
+            if (body == '') {
+                offerAdd = $('#p_offers_add option:selected').val()
+                if (offerAdd == '') {
+                    swal.fire('Select or upload offer !!')
+                    return
+                }
+            } else {
+                let time = new Date().toTimeString().split(' ')[0]
+                offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${time}.html`
+                fetch(`http://${ip}:3000/compose/offers?offer=${offerAdd}`, {
+                    method: 'POST',
+                    body: `${JSON.stringify({ data: body })}`,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                        'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+                    }
+                }).then(r => {
+                    return r.text()
+                }).then(d => {
+                    console.log(d);
+                })
+            }
+            action += `,subject:${subject},to:${to}`
+
+            if ($('#all').is(":checked")) {
+                action += `,all:true`
+            }
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `${offerAdd}`,
+                "data": `none`,
+                "count": 0,
+            };
+            addCompose(dataComposing)
+            break;
         case 'compose':
-            let offerAdd
-            let subject = $('#subject').val()
-            let body = $('#body').val()
-            let to = $('#to').val()
+            subject = $('#subject').val()
+            body = $('#body').val()
+            to = $('#to').val()
             if (subject == '' || to == '') {
                 swal.fire('subject and mailto are required')
                 return
