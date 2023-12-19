@@ -1399,6 +1399,23 @@ $('#btn-check-compose').change(event => {
     }
 })
 
+// test
+$('#btn-check-test').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.actions .btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+        $('.send_message').removeClass('d-none');
+        $('.all').removeClass('d-none');
+        $('#p_data_add').addClass('d-none');
+    } else {
+        $('#p_data_add').removeClass('d-none');
+        $('.send_message').addClass('d-none');
+        $('.all').addClass('d-none');
+    }
+})
+
+
 const data = $('#edit_offers').DataTable({
     responsive: true,
     deferRender: true,
