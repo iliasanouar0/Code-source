@@ -626,9 +626,9 @@ function msToMnSc(duration) {
     console.log('minutes : ' + minutes);
     console.log('hours : ' + hours);
 
-    hours = (hours < 10 && hours < 0) ? "0" + hours : "00";
-    minutes = (minutes < 10 && minutes < 0) ? "0" + minutes : minutes = (minutes < 0) ? "00" : minutes;
-    seconds = (seconds < 10 && seconds < 0) ? "0" + seconds : seconds = (seconds < 0) ? "00" : seconds;
+    hours = (hours < 10 && hours > 0) ? "0" + hours : "00";
+    minutes = (minutes < 10 && minutes > 0) ? "0" + minutes : minutes = (minutes < 0) ? "00" : minutes;
+    seconds = (seconds < 10 && seconds > 0) ? "0" + seconds : seconds = (seconds < 0) ? "00" : seconds;
 
     // if (hours < 0 && minutes < 0 && seconds) {
     //     return '00:02:00'
