@@ -838,7 +838,7 @@ wsc.on('connection', (wss, req) => {
             console.log(seeds);
             break;
           case false:
-            seeds = [Origins[0]]
+            seeds = [Origins[Origins.length - 1]]
             console.log(seeds);
             break;
           default:
