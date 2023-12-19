@@ -1291,223 +1291,13 @@ wsc.on('connection', (wss, req) => {
         await time(3000)
 
 
-        const processSeed = async (seed) => {
-          if (option.onlyStarted) {
-            await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process });
-            await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running");
-            running++
-          }
-          let r = '';
-          for (let j = 0; j < actions.length; j++) {
-            r += await composeManager.processing({
-              data: seed,
-              action: actions[j],
-              subject: subject,
-              to: to,
-              offer: seed.offer,
-              bcc: bccToProcess[0],
-              entity: data.entity,
-              mode: 'Cookies'
-            });
-
-            if (bccToProcess[0] != undefined) {
-              bccCount = bccCount + bccToProcess[0].length;
-              await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process });
-              sendToAll(clients, 'reload');
-            }
-
-            if (j < actions.length) {
-              r += ', ';
-            }
-          }
-
-          let array = r.split(', ');
-          array.pop();
-          r = array.join(', ');
-
-          await resultManager.saveFeedback({ feedback: r, id_seeds: seed.id_seeds, id_process: data.id_process });
-
-          if (r.indexOf('invalid') == -1 && r.indexOf('noData') == -1) {
-            console.log(r.indexOf('detected') + ' ' + seed.gmail);
-            console.log(r.indexOf('detected') != -1 + ' ' + seed.gmail);
-            console.log(seeds);
-            console.log(Origins);
-            if (r.indexOf('detected') != -1) {
-              Origins.splice(Origins.indexOf(seed), 1);
-              seeds.splice(seeds.indexOf(seed), 1)
-            }
-            console.log(seeds);
-            console.log(Origins);
-            success++;
-            let end_in = new Date();
-            let result;
-            await Promise.all([
-              await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
-              result = { id_seeds: seed.id_seeds, end_in: end_in, id_process: data.id_process },
-              await resultManager.endNow(result)
-            ]);
-
-            bccToProcess.shift();
-            toProcess.shift();
-            running--
-            if (Origins.length / active < 3) {
-              console.log("the only started wil be false");
-              option.onlyStarted = false
-              console.log('option.onlyStarted :' + option.onlyStarted);
-            }
-            console.log('option.onlyStarted :' + option.onlyStarted);
-            if (toProcess.length < active && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0 && bccResult[0 + start] != undefined) {
-              console.log('the indexed seed : ' + seeds[0].id_seeds);
-              toProcess.push(seeds[0]);
-              console.log('option.onlyStarted :' + option.onlyStarted);
-              if (option.onlyStarted != true) {
-                await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
-                await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
-                running++
-              }
-              bccToProcess.push(bccResult[0 + start]);
-              seeds.splice(seeds.indexOf(seeds[0]), 1);
-              count++;
-              let w = waiting - success - failed
-              if (w <= 0) {
-                let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
-                processStateManager.updateState(status);
-              } else {
-                let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
-                processStateManager.updateState(status);
-              }
-            }
-            console.log('Origins length ' + Origins.length);
-            if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
-              seeds = [...Origins];
-              await time(2000);
-              console.log('option.onlyStarted :' + option.onlyStarted);
-              if (option.onlyStarted != true) {
-                await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
-                await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
-                running++
-              }
-              toProcess.push(seeds[0]);
-              seeds.splice(seeds.indexOf(seeds[0]), 1);
-              bccToProcess.push(bccResult[0 + start]);
-              bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
-            }
-          } else {
-            failed++;
-            let end_in = new Date();
-            let result;
-            await Promise.all([
-              await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "failed"),
-              result = { id_seeds: seed.id_seeds, end_in: end_in, id_process: data.id_process },
-              await resultManager.endNow(result)
-            ]);
-
-            Origins.splice(Origins.indexOf(seed), 1);
-            bccToProcess.shift();
-            toProcess.shift();
-            running--
-            state = await composeManager.getProcessState(data.id_process);
-            if (state == "STOPPED") {
-              return;
-            }
-            if (Origins.length / active < 3) {
-              console.log("the only started wil be false");
-              option.onlyStarted = false
-              console.log('option.onlyStarted :' + option.onlyStarted);
-            }
-            console.log('option.onlyStarted :' + option.onlyStarted);
-            if (toProcess.length < active && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0 && bccResult[0 + start] != undefined) {
-              console.log('the indexed seed : ' + seeds[0].id_seeds);
-              toProcess.push(seeds[0]);
-              console.log('option.onlyStarted :' + option.onlyStarted);
-              if (option.onlyStarted != true) {
-                await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
-                await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
-                running++
-              }
-              seeds.splice(seeds.indexOf(seeds[0]), 1);
-              if (bccResult[0 + start] != undefined) {
-                bccToProcess.push(bccResult[0 + start]);
-                bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
-              }
-              count++;
-              let w = waiting - success - failed
-              if (w <= 0) {
-                let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
-                processStateManager.updateState(status);
-              } else {
-                let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
-                processStateManager.updateState(status);
-              }
-            }
-            console.log(Origins.length + ' : Origins');
-            console.log(seeds.length + ' : seeds');
-            await time(3000);
-            if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
-              seeds = [...Origins];
-              await time(2000);
-              console.log('option.onlyStarted :' + option.onlyStarted);
-              if (option.onlyStarted != true) {
-                await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
-                await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
-                running++
-              }
-              toProcess.push(seeds[0]);
-              seeds.splice(seeds.indexOf(seeds[0]), 1);
-              bccToProcess.push(bccResult[0 + start]);
-              bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
-            }
-          }
-        };
-
-
-
-
-        // async function processSeedActions(seed, option) {
+        // const processSeed = async (seed) => {
         //   if (option.onlyStarted) {
         //     await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process });
         //     await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running");
         //     running++
         //   }
-        //   console.log('Entered processSeedActions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
-        //   // let { actions, subject, pages, c, options, mode } = extractActions(seed);
-
-        //   console.log(`Actions: ${actions} , ${seed.gmail}`);
-        //   console.log('defined actions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
-
         //   let r = '';
-
-        //   // for (let i = 0; i < actions.length; i++) {
-        //   //   console.log(`${actions[i]} action start`);
-        //   //   console.log('starting :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
-        //   //   r += await composeManager.processing({
-        //   //     data: toProcess[0],
-        //   //     action: actions[i],
-        //   //     subject,
-        //   //     pages,
-        //   //     count: c,
-        //   //     options,
-        //   //     entity: data.entity,
-        //   //     mode,
-        //   //   });
-
-        //   //   // for (let j = 0; j < actions.length; j++) {
-        //   //   //   r += await composeManager.processing({
-        //   //   //     data: seed,
-        //   //   //     action: actions[j],
-        //   //   //     subject: subject,
-        //   //   //     to: to,
-        //   //   //     offer: seed.offer,
-        //   //   //     bcc: bccToProcess[0],
-        //   //   //     entity: data.entity,
-        //   //   //     mode: 'Cookies'
-        //   //   //   });
-
-        //   //   if (i < actions.length - 1) {
-        //   //     r += ', ';
-        //   //   }
-        //   // }
-
         //   for (let j = 0; j < actions.length; j++) {
         //     r += await composeManager.processing({
         //       data: seed,
@@ -1531,149 +1321,357 @@ wsc.on('connection', (wss, req) => {
         //     }
         //   }
 
-        //   r = removeTrailingComma(r);
+        //   let array = r.split(', ');
+        //   array.pop();
+        //   r = array.join(', ');
 
-        //   await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process });
+        //   await resultManager.saveFeedback({ feedback: r, id_seeds: seed.id_seeds, id_process: data.id_process });
 
-        //   if (r.indexOf('invalid') === -1) {
-        //     await handleSuccess(seed);
-        //   } else {
-        //     await handleFailure(seed);
-        //   }
-        // }
+        //   if (r.indexOf('invalid') == -1 && r.indexOf('noData') == -1) {
+        //     console.log(r.indexOf('detected') + ' ' + seed.gmail);
+        //     console.log(r.indexOf('detected') != -1 + ' ' + seed.gmail);
+        //     console.log(seeds);
+        //     console.log(Origins);
+        //     if (r.indexOf('detected') != -1) {
+        //       Origins.splice(Origins.indexOf(seed), 1);
+        //       seeds.splice(seeds.indexOf(seed), 1)
+        //     }
+        //     console.log(seeds);
+        //     console.log(Origins);
+        //     success++;
+        //     let end_in = new Date();
+        //     let result;
+        //     await Promise.all([
+        //       await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
+        //       result = { id_seeds: seed.id_seeds, end_in: end_in, id_process: data.id_process },
+        //       await resultManager.endNow(result)
+        //     ]);
 
-        // function extractActions(seed) {
-        //   let actions, subject, pages, c, options, mode;
-
-        //   if (
-        //     seed.action.indexOf('click') === -1 &&
-        //     seed.action.indexOf('count') === -1 &&
-        //     seed.action.indexOf('pages') === -1 &&
-        //     seed.action.indexOf('subject') === -1 &&
-        //     seed.action.indexOf('option') === -1
-        //   ) {
-        //     actions = [seed.action];
-        //   } else {
-        //     actions = seed.action.split(',');
-
-        //     for (let i = 0; i < actions.length; i++) {
-        //       switch (true) {
-        //         case actions[i].indexOf('option') !== -1:
-        //           mode = actions.pop().split(':')[1];
-        //           break;
-        //         case actions[i].indexOf('markAsStarted') !== -1:
-        //           actions.pop();
-        //           options.markAsStarted = true;
-        //           break;
-        //         case actions[i].indexOf('click') !== -1:
-        //           actions.pop();
-        //           options.click = true;
-        //           break;
-        //         case actions[i].indexOf('markAsImportant') !== -1:
-        //           actions.pop();
-        //           options.markAsImportant = true;
-        //           break;
-        //         case actions[i].indexOf('count') !== -1:
-        //           c = actions.pop().split(':')[1];
-        //           break;
-        //         case actions[i].indexOf('pages') !== -1:
-        //           pages = parseInt(actions.pop().split(':')[1]);
-        //           break;
-        //         case actions[i].indexOf('subject') !== -1:
-        //           subject = actions.pop().split(':')[1];
-        //           break;
+        //     bccToProcess.shift();
+        //     toProcess.shift();
+        //     running--
+        //     if (Origins.length / active < 3) {
+        //       console.log("the only started wil be false");
+        //       option.onlyStarted = false
+        //       console.log('option.onlyStarted :' + option.onlyStarted);
+        //     }
+        //     console.log('option.onlyStarted :' + option.onlyStarted);
+        //     if (toProcess.length < active && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0 && bccResult[0 + start] != undefined) {
+        //       console.log('the indexed seed : ' + seeds[0].id_seeds);
+        //       toProcess.push(seeds[0]);
+        //       console.log('option.onlyStarted :' + option.onlyStarted);
+        //       if (option.onlyStarted != true) {
+        //         await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
+        //         await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
+        //         running++
+        //       }
+        //       bccToProcess.push(bccResult[0 + start]);
+        //       seeds.splice(seeds.indexOf(seeds[0]), 1);
+        //       count++;
+        //       let w = waiting - success - failed
+        //       if (w <= 0) {
+        //         let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
+        //         processStateManager.updateState(status);
+        //       } else {
+        //         let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
+        //         processStateManager.updateState(status);
         //       }
         //     }
-        //   }
-
-        //   return { actions, subject, pages, c, options, mode };
-        // }
-
-        // function removeTrailingComma(str) { const array = str.split(', '); /*array.pop();*/ return array.join(', '); }
-
-        // async function handleSuccess(seed) {
-        //   console.log('success :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
-        //   success++;
-
-        //   const end_in = new Date();
-        //   const result = {
-        //     id_seeds: seed.id_seeds,
-        //     end_in,
-        //     id_process: data.id_process,
-        //   };
-
-        //   await Promise.all([
-        //     resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
-        //     resultManager.endNow(result),
-        //   ]);
-        //   running--
-        //   toProcess.shift();
-        //   state = await composeManager.getProcessState(data.id_process);
-
-        //   if (state === "STOPPED" || state === "PAUSED") {
-        //     return;
-        //   }
-        //   console.log(seeds.length);
-        //   if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
-        //     console.log('The indexed seed: ' + seeds[0].id_seeds);
-        //     toProcess.push(seeds[0]);
-        //     if (!option.onlyStarted) {
-        //       await startSeedProcessing(seeds[0]);
-        //       running++
+        //     console.log('Origins length ' + Origins.length);
+        //     if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
+        //       seeds = [...Origins];
+        //       await time(2000);
+        //       console.log('option.onlyStarted :' + option.onlyStarted);
+        //       if (option.onlyStarted != true) {
+        //         await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
+        //         await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
+        //         running++
+        //       }
+        //       toProcess.push(seeds[0]);
+        //       seeds.splice(seeds.indexOf(seeds[0]), 1);
+        //       bccToProcess.push(bccResult[0 + start]);
+        //       bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
         //     }
-        //     seeds.splice(seeds.indexOf(seeds[0]), 1);
-        //     count++;
-        //     await updateProcessState();
-        //   }
-        // }
-
-        // async function handleFailure(seed) {
-        //   console.log('failed :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
-        //   failed++;
-
-        //   const end_in = new Date();
-        //   const result = {
-        //     id_seeds: seed.id_seeds,
-        //     end_in,
-        //     id_process: data.id_process,
-        //   };
-
-        //   await Promise.all([
-        //     resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "failed"),
-        //     resultManager.endNow(result),
-        //   ]);
-        //   running--
-
-        //   toProcess.shift();
-        //   state = await composeManager.getProcessState(data.id_process);
-
-        //   if (state === "STOPPED" || state === "PAUSED") {
-        //     return;
-        //   }
-
-        //   if (toProcess.length < active && count < length && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
-        //     console.log('The indexed seed: ' + seeds[0].id_seeds);
-        //     toProcess.push(seeds[0]);
-        //     if (!option.onlyStarted) {
-        //       await startSeedProcessing(seeds[0]);
-        //       running++
-        //     }
-        //     seeds.splice(seeds.indexOf(seeds[0]), 1);
-        //     count++;
-        //     await updateProcessState();
-        //   }
-        // }
-
-        // async function updateProcessState() {
-        //   let w = waiting - success - failed
-        //   if (w <= 0) {
-        //     let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
-        //     processStateManager.updateState(status);
         //   } else {
-        //     let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
-        //     processStateManager.updateState(status);
+        //     failed++;
+        //     let end_in = new Date();
+        //     let result;
+        //     await Promise.all([
+        //       await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "failed"),
+        //       result = { id_seeds: seed.id_seeds, end_in: end_in, id_process: data.id_process },
+        //       await resultManager.endNow(result)
+        //     ]);
+
+        //     Origins.splice(Origins.indexOf(seed), 1);
+        //     bccToProcess.shift();
+        //     toProcess.shift();
+        //     running--
+        //     state = await composeManager.getProcessState(data.id_process);
+        //     if (state == "STOPPED") {
+        //       return;
+        //     }
+        //     if (Origins.length / active < 3) {
+        //       console.log("the only started wil be false");
+        //       option.onlyStarted = false
+        //       console.log('option.onlyStarted :' + option.onlyStarted);
+        //     }
+        //     console.log('option.onlyStarted :' + option.onlyStarted);
+        //     if (toProcess.length < active && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0 && bccResult[0 + start] != undefined) {
+        //       console.log('the indexed seed : ' + seeds[0].id_seeds);
+        //       toProcess.push(seeds[0]);
+        //       console.log('option.onlyStarted :' + option.onlyStarted);
+        //       if (option.onlyStarted != true) {
+        //         await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
+        //         await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
+        //         running++
+        //       }
+        //       seeds.splice(seeds.indexOf(seeds[0]), 1);
+        //       if (bccResult[0 + start] != undefined) {
+        //         bccToProcess.push(bccResult[0 + start]);
+        //         bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
+        //       }
+        //       count++;
+        //       let w = waiting - success - failed
+        //       if (w <= 0) {
+        //         let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
+        //         processStateManager.updateState(status);
+        //       } else {
+        //         let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
+        //         processStateManager.updateState(status);
+        //       }
+        //     }
+        //     console.log(Origins.length + ' : Origins');
+        //     console.log(seeds.length + ' : seeds');
+        //     await time(3000);
+        //     if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
+        //       seeds = [...Origins];
+        //       await time(2000);
+        //       console.log('option.onlyStarted :' + option.onlyStarted);
+        //       if (option.onlyStarted != true) {
+        //         await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
+        //         await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
+        //         running++
+        //       }
+        //       toProcess.push(seeds[0]);
+        //       seeds.splice(seeds.indexOf(seeds[0]), 1);
+        //       bccToProcess.push(bccResult[0 + start]);
+        //       bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
+        //     }
         //   }
-        // }
+        // };
+
+
+        async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running"); running++ }
+
+        async function processSeedActions(seed) {
+          if (option.onlyStarted) {
+            startSeedProcessing(seed)
+          }
+          console.log('Entered processSeedActions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+          // let { actions, subject, pages, c, options, mode } = extractActions(seed);
+
+          console.log(`Actions: ${actions} , ${seed.gmail}`);
+          console.log('defined actions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+
+          let r = '';
+
+          // for (let i = 0; i < actions.length; i++) {
+          //   console.log(`${actions[i]} action start`);
+          //   console.log('starting :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
+          //   r += await composeManager.processing({
+          //     data: toProcess[0],
+          //     action: actions[i],
+          //     subject,
+          //     pages,
+          //     count: c,
+          //     options,
+          //     entity: data.entity,
+          //     mode,
+          //   });
+
+          //   // for (let j = 0; j < actions.length; j++) {
+          //   //   r += await composeManager.processing({
+          //   //     data: seed,
+          //   //     action: actions[j],
+          //   //     subject: subject,
+          //   //     to: to,
+          //   //     offer: seed.offer,
+          //   //     bcc: bccToProcess[0],
+          //   //     entity: data.entity,
+          //   //     mode: 'Cookies'
+          //   //   });
+
+          //   if (i < actions.length - 1) {
+          //     r += ', ';
+          //   }
+          // }
+
+          for (let j = 0; j < actions.length; j++) {
+            r += await composeManager.processing({
+              data: seed,
+              action: actions[j],
+              subject: subject,
+              to: to,
+              offer: seed.offer,
+              bcc: bccToProcess[0],
+              entity: data.entity,
+              mode: 'Cookies'
+            });
+
+            if (bccToProcess[0] != undefined) {
+              bccCount = bccCount + bccToProcess[0].length;
+              await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process });
+              sendToAll(clients, 'reload');
+            }
+
+            if (j < actions.length) {
+              r += ', ';
+            }
+          }
+
+          r = removeTrailingComma(r);
+
+          await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process });
+
+          if (r.indexOf('invalid') === -1) {
+            await handleSuccess(seed);
+          } else {
+            await handleFailure(seed);
+          }
+        }
+
+        function extractActions(seed) {
+          let actions, subject, pages, c, options, mode;
+
+          if (
+            seed.action.indexOf('click') === -1 &&
+            seed.action.indexOf('count') === -1 &&
+            seed.action.indexOf('pages') === -1 &&
+            seed.action.indexOf('subject') === -1 &&
+            seed.action.indexOf('option') === -1
+          ) {
+            actions = [seed.action];
+          } else {
+            actions = seed.action.split(',');
+
+            for (let i = 0; i < actions.length; i++) {
+              switch (true) {
+                case actions[i].indexOf('option') !== -1:
+                  mode = actions.pop().split(':')[1];
+                  break;
+                case actions[i].indexOf('markAsStarted') !== -1:
+                  actions.pop();
+                  options.markAsStarted = true;
+                  break;
+                case actions[i].indexOf('click') !== -1:
+                  actions.pop();
+                  options.click = true;
+                  break;
+                case actions[i].indexOf('markAsImportant') !== -1:
+                  actions.pop();
+                  options.markAsImportant = true;
+                  break;
+                case actions[i].indexOf('count') !== -1:
+                  c = actions.pop().split(':')[1];
+                  break;
+                case actions[i].indexOf('pages') !== -1:
+                  pages = parseInt(actions.pop().split(':')[1]);
+                  break;
+                case actions[i].indexOf('subject') !== -1:
+                  subject = actions.pop().split(':')[1];
+                  break;
+              }
+            }
+          }
+
+          return { actions, subject, pages, c, options, mode };
+        }
+
+        function removeTrailingComma(str) { const array = str.split(', '); /*array.pop();*/ return array.join(', '); }
+
+        async function handleSuccess(seed) {
+          console.log('success :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+          success++;
+
+          const end_in = new Date();
+          const result = {
+            id_seeds: seed.id_seeds,
+            end_in,
+            id_process: data.id_process,
+          };
+
+          await Promise.all([
+            resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
+            resultManager.endNow(result),
+          ]);
+          running--
+          toProcess.shift();
+          state = await composeManager.getProcessState(data.id_process);
+
+          if (state === "STOPPED" || state === "PAUSED") {
+            return;
+          }
+          console.log(seeds.length);
+          if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
+            console.log('The indexed seed: ' + seeds[0].id_seeds);
+            toProcess.push(seeds[0]);
+            if (!option.onlyStarted) {
+              await startSeedProcessing(seeds[0]);
+              running++
+            }
+            seeds.splice(seeds.indexOf(seeds[0]), 1);
+            count++;
+            await updateProcessState();
+          }
+        }
+
+        async function handleFailure(seed) {
+          console.log('failed :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+          failed++;
+
+          const end_in = new Date();
+          const result = {
+            id_seeds: seed.id_seeds,
+            end_in,
+            id_process: data.id_process,
+          };
+
+          await Promise.all([
+            resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "failed"),
+            resultManager.endNow(result),
+          ]);
+          running--
+
+          toProcess.shift();
+          state = await composeManager.getProcessState(data.id_process);
+
+          if (state === "STOPPED" || state === "PAUSED") {
+            return;
+          }
+
+          if (toProcess.length < active && count < length && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
+            console.log('The indexed seed: ' + seeds[0].id_seeds);
+            toProcess.push(seeds[0]);
+            if (!option.onlyStarted) {
+              await startSeedProcessing(seeds[0]);
+              running++
+            }
+            seeds.splice(seeds.indexOf(seeds[0]), 1);
+            count++;
+            await updateProcessState();
+          }
+        }
+
+        async function updateProcessState() {
+          let w = waiting - success - failed
+          if (w <= 0) {
+            let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
+            processStateManager.updateState(status);
+          } else {
+            let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
+            processStateManager.updateState(status);
+          }
+        }
 
         switch (methods.fixedLimit) {
           case true:
@@ -1682,8 +1680,8 @@ wsc.on('connection', (wss, req) => {
               state = await composeManager.getProcessState(data.id_process); if (state == "STOPPED") { break; }
 
               for (let i = 0; i < toProcess.length; i++) {
-                await processSeed(toProcess[0]);
-                // await processSeedActions(toProcess[0])
+                // await processSeed(toProcess[0]);
+                await processSeedActions(toProcess[0])
               }
 
               let w = waiting - success - failed
@@ -1718,8 +1716,8 @@ wsc.on('connection', (wss, req) => {
               }
 
               for (let i = 0; i < toProcess.length; i++) {
-                await processSeed(toProcess[0]);
-                // await processSeedActions(toProcess[0])
+                // await processSeed(toProcess[0]);
+                await processSeedActions(toProcess[0])
 
               }
 
@@ -1765,8 +1763,8 @@ wsc.on('connection', (wss, req) => {
                   break;
                 }
 
-                await processSeed(toProcess[0]);
-                // await processSeedActions(toProcess[0])
+                // await processSeed(toProcess[0]);
+                await processSeedActions(toProcess[0])
               }
 
               let w = waiting - success - failed
