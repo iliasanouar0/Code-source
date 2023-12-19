@@ -622,6 +622,10 @@ function msToMnSc(duration) {
         minutes = Math.floor((duration / (1000 * 60)) % 60),
         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
+    console.log('seconds : ' + seconds);
+    console.log('minutes : ' + minutes);
+    console.log('hours : ' + hours);
+
     hours = (hours < 10 && hours > 0) ? "0" + hours : "00";
     minutes = (minutes < 10 && minutes > 0) ? "0" + minutes : "00";
     seconds = (seconds < 10 && seconds > 0) ? "0" + seconds : "00";
