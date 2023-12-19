@@ -1464,6 +1464,11 @@ wsc.on('connection', (wss, req) => {
 
 
         async function processSeedActions(seed, option) {
+          if (option.onlyStarted) {
+            await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process });
+            await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running");
+            running++
+          }
           console.log('Entered processSeedActions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
           // let { actions, subject, pages, c, options, mode } = extractActions(seed);
 
