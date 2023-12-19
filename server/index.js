@@ -1350,6 +1350,12 @@ wsc.on('connection', (wss, req) => {
             bccToProcess.shift();
             toProcess.shift();
             running--
+            if (Origins.length / active < 3) {
+              console.log("the only started wil be false");
+              option.onlyStarted = false
+              console.log('option.onlyStarted :' + option.onlyStarted);
+            }
+            console.log('option.onlyStarted :' + option.onlyStarted);
             if (toProcess.length < active && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0 && bccResult[0 + start] != undefined) {
               console.log('the indexed seed : ' + seeds[0].id_seeds);
               toProcess.push(seeds[0]);
@@ -1386,9 +1392,6 @@ wsc.on('connection', (wss, req) => {
               bccToProcess.push(bccResult[0 + start]);
               bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
             }
-            if (Origins.length / active < 3) {
-              option.onlyStarted = false
-            }
           } else {
             failed++;
             let end_in = new Date();
@@ -1407,7 +1410,12 @@ wsc.on('connection', (wss, req) => {
             if (state == "STOPPED") {
               return;
             }
-
+            if (Origins.length / active < 3) {
+              console.log("the only started wil be false");
+              option.onlyStarted = false
+              console.log('option.onlyStarted :' + option.onlyStarted);
+            }
+            console.log('option.onlyStarted :' + option.onlyStarted);
             if (toProcess.length < active && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0 && bccResult[0 + start] != undefined) {
               console.log('the indexed seed : ' + seeds[0].id_seeds);
               toProcess.push(seeds[0]);
