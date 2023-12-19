@@ -2291,7 +2291,7 @@ wsc.on('connection', (wss, req) => {
             console.log('The entered array :')
             console.log(array[start]);
             processT(array[start], start, { onlyStarted: true })
-            if (number - 1 > start) await repeat(array, start + 1, action);
+            if (number - 1 > start) await repeat(array, number, start + 1, check, action);
           }
         } else {
           if (check) {
