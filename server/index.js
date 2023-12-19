@@ -1587,7 +1587,10 @@ wsc.on('connection', (wss, req) => {
           return { actions, subject, pages, c, options, mode };
         }
 
-        function removeTrailingComma(str) { const array = str.split(', '); /*array.pop();*/ return array.join(', '); }
+        function removeTrailingComma(str) {
+          const array = str.split(', ');
+          array.pop(); return array.join(', ');
+        }
 
         async function handleSuccess(seed) {
           console.log('success :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
