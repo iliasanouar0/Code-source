@@ -283,9 +283,9 @@ const composeEmail = async (data, option, mode) => {
         console.error(err)
     })
     console.log(text);
-    if (text.includes('You have reached a limit for sending mail')) {
+    if (text.includes('sending')) {
         c = { status: false, message: text.split('.')[0].split('\n')[1], send: option.bcc.length, bounced: check.bounced }
-    } else if (text.includes('Message blocked') || text.includes('Address not found') || text.includes('Recipient inbox full')) {
+    } else if (text.includes('send') /* || text.includes('Address not found') || text.includes('Recipient inbox full')*/) {
         c = { status: false, message: text.split('.')[0].split('\n')[1], send: option.bcc.length, bounced: check.bounced }
     } else {
         c = { status: true, message: 'No bounced', send: option.bcc.length, bounced: check.bounced }
