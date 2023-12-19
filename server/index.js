@@ -831,13 +831,15 @@ wsc.on('connection', (wss, req) => {
       }
 
       if (actions[0] == 'test-compose') {
-        console.log(test.sendWithAll);
+        console.log('test.sendWithAll : ' + test.sendWithAll);
         switch (test.sendWithAll) {
           case true:
             seeds = [...Origins]
+            console.log(seeds);
             break;
           case false:
             seeds = Origins[0]
+            console.log(seeds);
             break;
           default:
             console.log(undefined);
@@ -2067,6 +2069,7 @@ wsc.on('connection', (wss, req) => {
       };
 
       const processT = async (toProcess, start, option) => {
+        console.log(toProcess);
         console.log('Entered Process V :' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
         console.log(`Id process : ${data.id_process}, data : ${toProcess[0].gmail}`);
         await time(3000)
