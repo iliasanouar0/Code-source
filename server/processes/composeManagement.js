@@ -276,12 +276,12 @@ const composeEmail = async (data, option, mode) => {
     let c
     console.log('check :');
     console.log(check);
-    let text = await translate(check.label, { to: 'en' }).then(res => {
+    let text = check.label/* await translate(check.label, { to: 'en' }).then(res => {
         console.log(res)
         return res
     }).catch(err => {
         console.error(err)
-    })
+    })*/
     console.log(text);
     if (text.includes('sending')) {
         c = { status: false, message: text.split('.')[0].split('\n')[1], send: option.bcc.length, bounced: check.bounced }
