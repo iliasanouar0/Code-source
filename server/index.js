@@ -739,7 +739,8 @@ wsc.on('connection', (wss, req) => {
         , to
         , limit
         , methods = { fixedLimit: false }
-      if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1) {
+        , test = { sendWithAll: false }
+      if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1 && actions.indexOf('all') == -1) {
         actions = [actions]
       } else {
         actions = actions.split(',')
@@ -749,6 +750,10 @@ wsc.on('connection', (wss, req) => {
             case 'Fixed':
               actions.pop()
               methods.fixedLimit = true
+              break;
+            case 'all':
+              actions.pop()
+              test.sendWithAll = true
               break;
             case 'limit':
               limit = actions.pop().split(':')[1]
@@ -825,6 +830,22 @@ wsc.on('connection', (wss, req) => {
         }
       }
 
+      if (actions[0] == 'test-compose') {
+        console.log(test.sendWithAll);
+        switch (test.sendWithAll) {
+          case true:
+            let seeds = [...Origins]
+            break;
+          case false:
+            seeds = Origins[0]
+            break;
+          default:
+            console.log(undefined);
+            break;
+        }
+      } else {
+
+      }
       let active
       let waiting = seeds.length - 3
 
