@@ -217,6 +217,10 @@ const updateCompose = data => {
 }
 
 $(document).on('click', '#c_update', event => {
+    let offerAdd
+    let subject
+    let body
+    let to
     let id = $(event.target).data('id')
     console.log(id);
     let composingList = $('#p_list_add').val()
@@ -260,10 +264,10 @@ $(document).on('click', '#c_update', event => {
             updateCompose(dataComposing)
             break;
         case 'compose':
-            let offerAdd
-            let subject = $('#subject').val()
-            let body = $('#body').val()
-            let to = $('#to').val()
+            offerAdd
+            subject = $('#subject').val()
+            body = $('#body').val()
+            to = $('#to').val()
             if (subject == '' || to == '') {
                 swal.fire('subject and mailto are required')
                 return
