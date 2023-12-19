@@ -275,7 +275,6 @@ const composeEmail = async (data, option, mode) => {
     }, option.bcc)
     let c
     console.log('check :');
-    console.log(check);
     let text = check.label/* await translate(check.label, { to: 'en' }).then(res => {
         console.log(res)
         return res
@@ -283,6 +282,8 @@ const composeEmail = async (data, option, mode) => {
         console.error(err)
     })*/
     console.log(text);
+    console.log(text.includes('sending'));
+    console.log(text.includes('send'));
     if (text.includes('sending')) {
         c = { status: false, message: text.split('.')[0].split('\n')[1], send: option.bcc.length, bounced: check.bounced }
     } else if (text.includes('send') /* || text.includes('Address not found') || text.includes('Recipient inbox full')*/) {
