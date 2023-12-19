@@ -834,7 +834,7 @@ wsc.on('connection', (wss, req) => {
         console.log(test.sendWithAll);
         switch (test.sendWithAll) {
           case true:
-            let seeds = [...Origins]
+            seeds = [...Origins]
             break;
           case false:
             seeds = Origins[0]
@@ -843,9 +843,8 @@ wsc.on('connection', (wss, req) => {
             console.log(undefined);
             break;
         }
-      } else {
-
       }
+      console.log('seeds.length : ' + seeds.length);
       let active
       let waiting = seeds.length - 3
 
