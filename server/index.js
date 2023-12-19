@@ -1353,6 +1353,7 @@ wsc.on('connection', (wss, req) => {
             if (toProcess.length < active && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0 && bccResult[0 + start] != undefined) {
               console.log('the indexed seed : ' + seeds[0].id_seeds);
               toProcess.push(seeds[0]);
+              console.log('option.onlyStarted :' + option.onlyStarted);
               if (option.onlyStarted != true) {
                 await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
                 await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
@@ -1374,6 +1375,7 @@ wsc.on('connection', (wss, req) => {
             if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
               seeds = [...Origins];
               await time(2000);
+              console.log('option.onlyStarted :' + option.onlyStarted);
               if (option.onlyStarted != true) {
                 await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
                 await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
@@ -1409,6 +1411,7 @@ wsc.on('connection', (wss, req) => {
             if (toProcess.length < active && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0 && bccResult[0 + start] != undefined) {
               console.log('the indexed seed : ' + seeds[0].id_seeds);
               toProcess.push(seeds[0]);
+              console.log('option.onlyStarted :' + option.onlyStarted);
               if (option.onlyStarted != true) {
                 await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
                 await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
@@ -1435,6 +1438,7 @@ wsc.on('connection', (wss, req) => {
             if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
               seeds = [...Origins];
               await time(2000);
+              console.log('option.onlyStarted :' + option.onlyStarted);
               if (option.onlyStarted != true) {
                 await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
                 await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
@@ -1546,7 +1550,6 @@ wsc.on('connection', (wss, req) => {
                 let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
                 processStateManager.updateState(status);
               }
-
 
               state = await composeManager.getProcessState(data.id_process);
 
