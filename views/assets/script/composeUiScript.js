@@ -105,6 +105,15 @@ $(document).on('click', '.edit', event => {
                     $('#btn-check-compose').prop("checked", true);
                     $('.send_message').removeClass('d-none');
                     break;
+                case "test-compose":
+                    $('.add_compose input:checkbox').prop("checked", false)
+                    $('#btn-check-test').prop("checked", true);
+                    $('.send_message').removeClass('d-none');
+                    $('.all').removeClass('d-none');
+                    $('.p_data_add').addClass('d-none');
+                    $('.limit_send').addClass('d-none');
+                    $('.limit_options').addClass('d-none');
+                    break;
                 case "verify":
                     $('.add_compose input:checkbox').prop("checked", false)
                     $('#btn-check-verify').prop("checked", true);
@@ -120,6 +129,10 @@ $(document).on('click', '.edit', event => {
                         case 'Fixed':
                             $('#limit_fixed').prop("checked", true);
                             $('#limit_send').prop("disabled", false);
+                            break;
+                        case 'all':
+                            $('#all').prop("checked", true);
+                            $('#all').prop("disabled", false);
                             break;
                         case 'limit':
                             switch (actions[i].split(':')[1]) {
