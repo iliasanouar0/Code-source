@@ -1472,21 +1472,56 @@ wsc.on('connection', (wss, req) => {
 
           let r = '';
 
-          for (let i = 0; i < actions.length; i++) {
-            console.log(`${actions[i]} action start`);
-            console.log('starting :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
+          // for (let i = 0; i < actions.length; i++) {
+          //   console.log(`${actions[i]} action start`);
+          //   console.log('starting :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
+          //   r += await composeManager.processing({
+          //     data: toProcess[0],
+          //     action: actions[i],
+          //     subject,
+          //     pages,
+          //     count: c,
+          //     options,
+          //     entity: data.entity,
+          //     mode,
+          //   });
+
+          //   // for (let j = 0; j < actions.length; j++) {
+          //   //   r += await composeManager.processing({
+          //   //     data: seed,
+          //   //     action: actions[j],
+          //   //     subject: subject,
+          //   //     to: to,
+          //   //     offer: seed.offer,
+          //   //     bcc: bccToProcess[0],
+          //   //     entity: data.entity,
+          //   //     mode: 'Cookies'
+          //   //   });
+
+          //   if (i < actions.length - 1) {
+          //     r += ', ';
+          //   }
+          // }
+
+          for (let j = 0; j < actions.length; j++) {
             r += await composeManager.processing({
-              data: toProcess[0],
-              action: actions[i],
-              subject,
-              pages,
-              count: c,
-              options,
+              data: seed,
+              action: actions[j],
+              subject: subject,
+              to: to,
+              offer: seed.offer,
+              bcc: bccToProcess[0],
               entity: data.entity,
-              mode,
+              mode: 'Cookies'
             });
 
-            if (i < actions.length - 1) {
+            if (bccToProcess[0] != undefined) {
+              bccCount = bccCount + bccToProcess[0].length;
+              await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process });
+              sendToAll(clients, 'reload');
+            }
+
+            if (j < actions.length) {
               r += ', ';
             }
           }
