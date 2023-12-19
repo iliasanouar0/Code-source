@@ -1357,16 +1357,16 @@ wsc.on('connection', (wss, req) => {
             }
             console.log('option.onlyStarted :' + option.onlyStarted);
             if (toProcess.length < active && state != "STOPPED" && seeds.length != 0 && bccResult.length != 0 && bccResult[0 + start] != undefined) {
-              console.log('the indexed seed : ' + seeds[0 + start].id_seeds);
-              toProcess.push(seeds[0 + start]);
+              console.log('the indexed seed : ' + seeds[0].id_seeds);
+              toProcess.push(seeds[0]);
               console.log('option.onlyStarted :' + option.onlyStarted);
               if (option.onlyStarted != true) {
-                await resultManager.startNow({ id_seeds: seeds[0 + start].id_seeds, id_process: data.id_process });
-                await resultManager.updateState([{ id_seeds: seeds[0 + start].id_seeds, id_process: data.id_process }], "running");
+                await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
+                await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
                 running++
               }
               bccToProcess.push(bccResult[0 + start]);
-              seeds.splice(seeds.indexOf(seeds[0 + start]), 1);
+              seeds.splice(seeds.indexOf(seeds[0]), 1);
               count++;
               let w = waiting - success - failed
               if (w <= 0) {
