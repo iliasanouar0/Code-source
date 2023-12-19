@@ -622,9 +622,9 @@ function msToMnSc(duration) {
         minutes = Math.floor((duration / (1000 * 60)) % 60),
         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-    hours = (hours < 10 && hours > 0) ? "0" + hours : hours;
-    minutes = (minutes < 10 && minutes > 0) ? "0" + minutes : minutes;
-    seconds = (seconds < 10 && seconds > 0) ? "0" + seconds : seconds;
+    hours = (hours < 10 && hours > 0) ? "0" + hours : "00";
+    minutes = (minutes < 10 && minutes > 0) ? "0" + minutes : "00";
+    seconds = (seconds < 10 && seconds > 0) ? "0" + seconds : "00";
 
     // if (hours < 0 && minutes < 0 && seconds) {
     //     return '00:02:00'
