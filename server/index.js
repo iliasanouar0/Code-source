@@ -2278,6 +2278,7 @@ wsc.on('connection', (wss, req) => {
             if (number - 1 > start) await repeat(array, bccToProcess, number, start + 1, check, action);
           }
         } else if (action == 'test-compose') {
+          console.log("action == 'test-compose'");
           if (check) {
             for (let i = 0; i < array[start].length; i++) {
               await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
