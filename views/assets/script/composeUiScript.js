@@ -1374,6 +1374,8 @@ $('#btn-check-verify').change(event => {
         $(event.target).prop("checked", true);
         $('.send_message').addClass('d-none');
         $('.p_data_add').addClass('d-none');
+        $('.limit_send').addClass('d-none');
+        $('.limit_options').addClass('d-none');
     }
 })
 
@@ -1385,6 +1387,8 @@ $('#btn-check-proxy').change(event => {
         $(event.target).prop("checked", true);
         $('.send_message').addClass('d-none');
         $('.p_data_add').addClass('d-none');
+        $('.limit_send').addClass('d-none');
+        $('.limit_options').addClass('d-none');
     }
 })
 
@@ -1396,6 +1400,8 @@ $('#btn-check-compose').change(event => {
         $(event.target).prop("checked", true);
         $('.send_message').removeClass('d-none');
         $('.p_data_add').removeClass('d-none');
+        $('.limit_send').removeClass('d-none');
+        $('.limit_options').removeClass('d-none');
         $('.all').addClass('d-none');
     } else {
         $('.send_message').addClass('d-none');
@@ -1411,6 +1417,8 @@ $('#btn-check-test').change(event => {
         $('.send_message').removeClass('d-none');
         $('.all').removeClass('d-none');
         $('.p_data_add').addClass('d-none');
+        $('.limit_send').addClass('d-none');
+        $('.limit_options').addClass('d-none');
     } else {
         $('.p_data_add').removeClass('d-none');
         $('.send_message').addClass('d-none');
@@ -1418,6 +1426,8 @@ $('#btn-check-test').change(event => {
     }
 })
 
+// limit_send
+// limit_options
 
 const data = $('#edit_offers').DataTable({
     responsive: true,
