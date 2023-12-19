@@ -195,7 +195,7 @@ const composeEmail = async (data, option, mode) => {
     const browser = obj.browser
     feedback += obj.feedback
     await time(10000)
-    try { 
+    try {
         if (option.bcc == undefined) {
             await page.screenshot({
                 path: `${path}/${data.gmail.split('@')[0]}-@-noData-${data.id_process}.png`
@@ -340,6 +340,142 @@ const composeEmail = async (data, option, mode) => {
     }
 }
 
+const TestComposeEmail = async (data, option, mode) => {
+    let feedback = ''
+    const obj = await login(data, mode)
+    if (obj.page == undefined) {
+        console.log(obj);
+        return obj
+    }
+    const page = obj.page
+    const browser = obj.browser
+    feedback += obj.feedback
+    await time(10000)
+    try {
+        await page.goto('https://mail.google.com/mail/u/0/#inbox')
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+        await time(2000)
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await page.waitForSelector('.z0')
+        await time(3000)
+        await page.click('.z0')
+        await time(6000)
+        await page.waitForSelector('.agP.aFw')
+        await time(3000)
+        await page.type('.agP.aFw', option.to, { delay: 200 })
+        await time(3000)
+        await page.waitForSelector('[name="subjectbox"]')
+        await time(3000)
+        await page.click('[name="subjectbox"]')
+        await time(3000)
+        await page.type('[name="subjectbox"]', option.subject, { delay: 200 })
+        await time(3000)
+        fs.readFile(`/home/offers/${option.offer}`, async (err, data) => {
+            if (!err) {
+                await page.evaluate(async (dataTo) => {
+                    document.querySelector('div[role="textbox"]').innerHTML = dataTo
+                }, data.toString());
+            }
+        })
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
+        await time(2000)
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(3000)
+        await Promise.all([
+            page.$eval(`.T-I.J-J5-Ji.aoO.v7.T-I-atl.L3`, element =>
+                element.click()
+            ),
+            await page.waitForNavigation()
+        ]);
+        await time(50000)
+        let check = await page.evaluate(() => {
+            let bounced = 0
+            let unread = document.querySelectorAll('.zA.zE')
+            if (unread.length == 0) {
+                return { status: true }
+            }
+            let first = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"]')[0]
+            if (first.className != 'zA yO') {
+                first.click()
+                let label = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0].innerText
+                bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
+                return { status: false, label: label, bounced: bounced }
+            } else {
+                return { status: false, label: 'no bounce', bounced: bounced }
+            }
+        })
+        let c
+        console.log('check :');
+        let text = check.label/* await translate(check.label, { to: 'en' }).then(res => {
+            console.log(res)
+            return res
+        }).catch(err => {
+            console.error(err)
+        })*/
+        console.log(text);
+        console.log(text.includes('sending'));
+        console.log(text.includes('send'));
+        if (text.includes('sending')) {
+            c = { status: false, message: text.split('.')[0].split('\n')[1], send: 1, bounced: check.bounced }
+        } else if (text.includes('send') /* || text.includes('Address not found') || text.includes('Recipient inbox full')*/) {
+            c = { status: false, message: text.split('.')[0].split('\n')[1], send: 1, bounced: check.bounced }
+        } else {
+            c = { status: true, message: 'No bounced', send: 1, bounced: check.bounced }
+        }
+        await time(3000)
+        if (!c.status) {
+            console.log(c.message);
+            await time(3000)
+            await page.screenshot({
+                path: `${path}/${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
+            });
+            feedback += `, ${data.gmail.split('@')[0]}-@-detected-${data.id_process}.png`
+            await time(2000)
+            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+            await resultsManager.composeDetails({ details: c, id_seeds: data.id_seeds, id_process: data.id_process })
+            await time(3000)
+            console.log('you can\'t send !!');
+        } else {
+            await time(3000)
+            await page.screenshot({
+                path: `${path}/${data.gmail.split('@')[0]}-@-sended-${data.id_process}.png`
+            });
+            feedback += `, ${data.gmail.split('@')[0]}-@-sended-${data.id_process}.png`
+            await time(2000)
+            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+            await resultsManager.composeDetails({ details: c, id_seeds: data.id_seeds, id_process: data.id_process })
+            await time(3000)
+            console.log('sended !!');
+        }
+        await page.close()
+        await browser.close()
+        return feedback
+    } catch (error) {
+        console.log(e.message);
+        console.log("catch error");
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        await time(3000)
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(3000)
+        await page.close()
+        await browser.close()
+        console.log(feedback);
+        return feedback
+    }
+}
+
 const kill = (id_process) => {
     pidProcess.forEach(Element => {
         if (Element.id_process == id_process) {
@@ -359,5 +495,6 @@ const kill = (id_process) => {
 
 module.exports = {
     composeEmail,
-    kill
+    kill,
+    TestComposeEmail
 }

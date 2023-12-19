@@ -443,6 +443,18 @@ const processing = async (data) => {
                     break;
             }
             break;
+        case 'test-compose':
+            switch (seed.isp) {
+                case 'gmail':
+                    await composeManagement.TestComposeEmail(seed, { subject: subject, to: to, offer: offer }, mode).then(e => {
+                        result = e
+                    })
+                    return result
+                default:
+                    console.log('data invalid');
+                    break;
+            }
+            break;
         default:
             console.log('data invalid');
             break;
