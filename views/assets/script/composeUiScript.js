@@ -1373,6 +1373,7 @@ $('#btn-check-verify').change(event => {
         $('.actions .btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
         $('.send_message').addClass('d-none');
+        $('.p_data_add').addClass('d-none');
     }
 })
 
@@ -1383,7 +1384,7 @@ $('#btn-check-proxy').change(event => {
         $('.actions .btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
         $('.send_message').addClass('d-none');
-
+        $('.p_data_add').addClass('d-none');
     }
 })
 
@@ -1394,6 +1395,8 @@ $('#btn-check-compose').change(event => {
         $('.actions .btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
         $('.send_message').removeClass('d-none');
+        $('.p_data_add').removeClass('d-none');
+        $('.all').addClass('d-none');
     } else {
         $('.send_message').addClass('d-none');
     }
@@ -1406,12 +1409,12 @@ $('#btn-check-test').change(event => {
         $('.actions .btn-check').prop("checked", false);
         $(event.target).prop("checked", true);
         $('.send_message').removeClass('d-none');
-        $('#all').removeClass('d-none');
+        $('.all').removeClass('d-none');
         $('.p_data_add').addClass('d-none');
     } else {
         $('.p_data_add').removeClass('d-none');
         $('.send_message').addClass('d-none');
-        $('#all').addClass('d-none');
+        $('.all').addClass('d-none');
     }
 })
 
