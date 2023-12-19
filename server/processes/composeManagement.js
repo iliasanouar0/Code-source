@@ -258,6 +258,7 @@ const composeEmail = async (data, option, mode) => {
     ]);
     await time(50000)
     let check = await page.evaluate((bcc) => {
+        let bounced = 0
         let unread = document.querySelectorAll('.zA.zE')
         if (unread.length == 0) {
             return { status: true }
@@ -266,7 +267,6 @@ const composeEmail = async (data, option, mode) => {
         if (first.className != 'zA yO') {
             first.click()
             let label = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0].innerText
-            let bounced = 0
             bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
             return { status: false, label: label, bounced: bounced }
         } else {
