@@ -2106,7 +2106,6 @@ wsc.on('connection', (wss, req) => {
 
           await updateProcessState();
         }
-
         await handleProcessCompletion();
 
         async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running") }
@@ -2310,8 +2309,8 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
-      console.log(Origins.length);
-      console.log(toProcess.length);
+      console.log('Origins.length : ' + Origins.length);
+      console.log('toProcess.length : ' + toProcess.length);
       let check = { startingIndexed: Origins.length / active < 3 ? true : false }
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
