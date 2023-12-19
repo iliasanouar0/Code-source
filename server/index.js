@@ -1642,7 +1642,8 @@ wsc.on('connection', (wss, req) => {
               state = await composeManager.getProcessState(data.id_process); if (state == "STOPPED") { break; }
 
               for (let i = 0; i < toProcess.length; i++) {
-                await processSeed(toProcess[0]);
+                // await processSeed(toProcess[0]);
+                await processSeedActions(toProcess[0])
               }
 
               let w = waiting - success - failed
@@ -1677,7 +1678,9 @@ wsc.on('connection', (wss, req) => {
               }
 
               for (let i = 0; i < toProcess.length; i++) {
-                await processSeed(toProcess[0]);
+                // await processSeed(toProcess[0]);
+                await processSeedActions(toProcess[0])
+
               }
 
               let w = waiting - success - failed
