@@ -2276,7 +2276,20 @@ wsc.on('connection', (wss, req) => {
             if (number - 1 > start) await repeat(array, bccToProcess, number, start + 1, check, action);
           }
         } else if (action == 'test-compose') {
-
+          if (check) {
+            for (let i = 0; i < array[start].length; i++) {
+              await resultManager.startNow({ id_seeds: array[start][i].id_seeds, id_process: data.id_process })
+              await resultManager.updateState([{ id_seeds: array[start][i].id_seeds, id_process: data.id_process }], "running")
+              console.log('set as running : ' + array[start][i].gmail + ` ,At ${new Date().toLocaleString()}`);
+              running++
+              processT([array[start][i]], start, { onlyStarted: false })
+            }
+          } else {
+            console.log('The entered array :')
+            console.log(array[start]);
+            processT(array[start], start, { onlyStarted: true })
+            if (number - 1 > start) await repeat(array, start + 1, action);
+          }
         } else {
           if (check) {
             for (let i = 0; i < array[start].length; i++) {
