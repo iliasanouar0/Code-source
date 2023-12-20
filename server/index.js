@@ -1536,8 +1536,8 @@ wsc.on('connection', (wss, req) => {
             console.log(r.indexOf('detected') + ' ' + seed.gmail + ' ,r.indexOf("detected")');
             console.log(r.indexOf('detected') != -1 + ' ' + seed.gmail);
             if (r.indexOf('detected') > -1) {
-              Origins.splice(Origins.indexOf(seed), 1);
-              seeds.splice(seeds.indexOf(seed), 1)
+              console.log(Origins.splice(Origins.indexOf(seed), 1) + ' ' + ' ,r.indexOf("detected")');
+              console.log(seeds.splice(seeds.indexOf(seed), 1) + ' ' + ' ,r.indexOf("detected")');
             }
             switch (mode) {
               case ('default'):
