@@ -887,9 +887,11 @@ wsc.on('connection', (wss, req) => {
             break
           }
           toProcess[i].push(seeds[0])
-          bccToProcess[i].push(bccResult[0])
           seeds.shift()
-          bccResult.shift()
+          if (bccResult[0] != undefined) {
+            bccToProcess[i].push(bccResult[0])
+            bccResult.shift()
+          }
           count++
         }
         console.log(Origins.length / active < 3);
