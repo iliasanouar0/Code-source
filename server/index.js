@@ -796,6 +796,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
         console.log(arrayBcc);
+        console.log('arrayBcc.length = ' + arrayBcc.length);
         if (limit != 'auto') {
           if (methods.fixedLimit == false) {
             methods.fixedLimit = 'none'
