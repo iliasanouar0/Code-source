@@ -896,6 +896,8 @@ wsc.on('connection', (wss, req) => {
           break
         }
       }
+      console.log(bccToProcess);
+      console.log(toProcess);
       let state = await composeManager.getProcessState(data.id_process)
 
       // ~ process !1k
