@@ -1672,11 +1672,11 @@ wsc.on('connection', (wss, req) => {
             return;
           }
 
-          if (Origins.length / active < 3) {
-            console.log("the only started wil be false");
-            option.onlyStarted = false
-            console.log('option.onlyStarted :' + option.onlyStarted);
-          }
+          // if (Origins.length / active < 3) {
+          //   console.log("the only started wil be false");
+          //   option.onlyStarted = false
+          //   console.log('option.onlyStarted :' + option.onlyStarted);
+          // }
           if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
