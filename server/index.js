@@ -830,6 +830,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
+      console.log('methods.fixedLimit : ' + methods.fixedLimit);
 
       if (actions[0] == 'test-compose') {
         console.log('test.sendWithAll : ' + test.sendWithAll);
