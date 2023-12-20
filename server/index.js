@@ -796,6 +796,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
         console.log('limit : ' + limit);
+        console.log('methods.fixedLimit : ' + methods.fixedLimit);
         if (limit != 'auto') {
           if (methods.fixedLimit == false) {
             methods.fixedLimit = 'none'
