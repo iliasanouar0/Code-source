@@ -812,7 +812,7 @@ wsc.on('connection', (wss, req) => {
             }
           }
         } else if (limit == 'auto') {
-          methods.fixedLimit = 'none'
+          // methods.fixedLimit = 'none'
           limit = Math.ceil(arrayBcc.length / seeds.length)
           if (limit > result.parsed.COMPOSE_LIMIT) {
             methods.fixedLimit = 'null'
