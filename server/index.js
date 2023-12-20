@@ -1493,7 +1493,7 @@ wsc.on('connection', (wss, req) => {
 
         async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running"); running++ }
 
-        async function processSeedActions(seed) {
+        async function processSeedActions(seed, mode) {
           if (option.onlyStarted) {
             startSeedProcessing(seed)
           }
@@ -1504,37 +1504,6 @@ wsc.on('connection', (wss, req) => {
           console.log('defined actions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
 
           let r = '';
-
-          // for (let i = 0; i < actions.length; i++) {
-          //   console.log(`${actions[i]} action start`);
-          //   console.log('starting :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
-          //   r += await composeManager.processing({
-          //     data: toProcess[0],
-          //     action: actions[i],
-          //     subject,
-          //     pages,
-          //     count: c,
-          //     options,
-          //     entity: data.entity,
-          //     mode,
-          //   });
-
-          //   // for (let j = 0; j < actions.length; j++) {
-          //   //   r += await composeManager.processing({
-          //   //     data: seed,
-          //   //     action: actions[j],
-          //   //     subject: subject,
-          //   //     to: to,
-          //   //     offer: seed.offer,
-          //   //     bcc: bccToProcess[0],
-          //   //     entity: data.entity,
-          //   //     mode: 'Cookies'
-          //   //   });
-
-          //   if (i < actions.length - 1) {
-          //     r += ', ';
-          //   }
-          // }
 
           for (let j = 0; j < actions.length; j++) {
             r += await composeManager.processing({
@@ -1564,7 +1533,14 @@ wsc.on('connection', (wss, req) => {
           await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process });
 
           if (r.indexOf('invalid') === -1) {
-            await handleSuccess(seed);
+            switch (mode) {
+              case ('default'):
+                await handleSuccessDefault(seed)
+                break;
+              default:
+                await handleSuccess(seed);
+                break;
+            }
           } else {
             await handleFailure(seed);
           }
@@ -1661,6 +1637,60 @@ wsc.on('connection', (wss, req) => {
           }
         }
 
+        async function handleSuccessDefault(seed) {
+          console.log('success :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+          success++;
+
+          const end_in = new Date();
+          const result = {
+            id_seeds: seed.id_seeds,
+            end_in,
+            id_process: data.id_process,
+          };
+
+          await Promise.all([
+            resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
+            resultManager.endNow(result),
+          ]);
+          running--
+          bccToProcess.shift();
+          toProcess.shift();
+          state = await composeManager.getProcessState(data.id_process);
+
+          if (state === "STOPPED" || state === "PAUSED") {
+            return;
+          }
+          console.log(seeds.length);
+          if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
+            console.log('The indexed seed: ' + seeds[0].id_seeds);
+            toProcess.push(seeds[0]);
+            bccToProcess.push(bccResult[0]);
+            if (!option.onlyStarted) {
+              await startSeedProcessing(seeds[0]);
+              running++
+            }
+            seeds.splice(seeds.indexOf(seeds[0]), 1);
+            bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
+            count++;
+            await updateProcessState();
+          }
+          console.log('Origins length ' + Origins.length);
+          if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
+            seeds = [...Origins];
+            await time(2000);
+            console.log('option.onlyStarted :' + option.onlyStarted);
+            if (option.onlyStarted != true) {
+              await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
+              await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
+              running++
+            }
+            toProcess.push(seeds[0]);
+            seeds.splice(seeds.indexOf(seeds[0]), 1);
+            bccToProcess.push(bccResult[0 + start]);
+            bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
+          }
+        }
+
         async function handleFailure(seed) {
           console.log('failed :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
           failed++;
@@ -1719,7 +1749,7 @@ wsc.on('connection', (wss, req) => {
               state = await composeManager.getProcessState(data.id_process); if (state == "STOPPED") { break; }
 
               for (let i = 0; i < toProcess.length; i++) {
-                await processSeedActions(toProcess[0])
+                await processSeedActions(toProcess[0], 'true')
               }
 
               let w = waiting - success - failed
@@ -1800,7 +1830,7 @@ wsc.on('connection', (wss, req) => {
                 }
 
                 // await processSeed(toProcess[0]);
-                await processSeedActions(toProcess[0])
+                await processSeedActions(toProcess[0], 'default')
               }
 
               let w = waiting - success - failed
