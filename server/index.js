@@ -1630,6 +1630,7 @@ wsc.on('connection', (wss, req) => {
             resultManager.endNow(result),
           ]);
           running--
+          bccToProcess.shift();
           toProcess.shift();
           state = await composeManager.getProcessState(data.id_process);
 
@@ -1640,11 +1641,13 @@ wsc.on('connection', (wss, req) => {
           if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
+            bccToProcess.push(bccResult[0]);
             if (!option.onlyStarted) {
               await startSeedProcessing(seeds[0]);
               running++
             }
             seeds.splice(seeds.indexOf(seeds[0]), 1);
+            bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
             count++;
             await updateProcessState();
           }
@@ -1667,21 +1670,24 @@ wsc.on('connection', (wss, req) => {
           ]);
           running--
 
+          bccToProcess.shift();
           toProcess.shift();
           state = await composeManager.getProcessState(data.id_process);
 
           if (state === "STOPPED" || state === "PAUSED") {
             return;
           }
-
-          if (toProcess.length < active && count < length && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
+          console.log(seeds.length);
+          if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
+            bccToProcess.push(bccResult[0]);
             if (!option.onlyStarted) {
               await startSeedProcessing(seeds[0]);
               running++
             }
             seeds.splice(seeds.indexOf(seeds[0]), 1);
+            bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
             count++;
             await updateProcessState();
           }
@@ -1705,7 +1711,6 @@ wsc.on('connection', (wss, req) => {
               state = await composeManager.getProcessState(data.id_process); if (state == "STOPPED") { break; }
 
               for (let i = 0; i < toProcess.length; i++) {
-                // await processSeed(toProcess[0]);
                 await processSeedActions(toProcess[0])
               }
 
