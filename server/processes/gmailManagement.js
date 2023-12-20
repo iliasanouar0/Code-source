@@ -294,6 +294,20 @@ const verify = async (data, entity, mode) => {
                     throw err
                 }
             })
+            let st = await page.$$('.Xy')
+            await time(3000)
+            await st[0].click()
+            await time(3000)
+            let bt = await page.$$('.Tj')
+            await time(3000)
+            await bt[0].click()
+            await time(3000)
+            await page.select('.a5p', 'en')
+            await time(3000)
+            await page.waitForSelector('[guidedhelpid="save_changes_button"]')
+            await time(3000)
+            await page.click('[guidedhelpid="save_changes_button"]')
+            await time(3000)
             await page.close()
             await browser.close()
             return feedback
@@ -442,6 +456,20 @@ const verify = async (data, entity, mode) => {
                     throw err
                 }
             })
+            let st = await page.$$('.Xy')
+            await time(3000)
+            await st[0].click()
+            await time(3000)
+            let bt = await page.$$('.Tj')
+            await time(3000)
+            await bt[0].click()
+            await time(3000)
+            await page.select('.a5p', 'en')
+            await time(3000)
+            await page.waitForSelector('[guidedhelpid="save_changes_button"]')
+            await time(3000)
+            await page.click('[guidedhelpid="save_changes_button"]')
+            await time(3000)
             await page.close()
             await browser.close()
             return feedback
@@ -514,6 +542,20 @@ const verify = async (data, entity, mode) => {
                     throw err
                 }
             })
+            let st = await page.$$('.Xy')
+            await time(3000)
+            await st[0].click()
+            await time(3000)
+            let bt = await page.$$('.Tj')
+            await time(3000)
+            await bt[0].click()
+            await time(3000)
+            await page.select('.a5p', 'en')
+            await time(3000)
+            await page.waitForSelector('[guidedhelpid="save_changes_button"]')
+            await time(3000)
+            await page.click('[guidedhelpid="save_changes_button"]')
+            await time(3000)
             await page.close()
             await browser.close()
             return feedback
