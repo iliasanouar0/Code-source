@@ -1802,8 +1802,6 @@ wsc.on('connection', (wss, req) => {
           }
         }
 
-
-
         async function updateProcessState() {
           let w = waiting - success - failed
           if (w <= 0) {
