@@ -814,6 +814,7 @@ wsc.on('connection', (wss, req) => {
         } else if (limit == 'auto') {
           // methods.fixedLimit = 'none'
           limit = Math.ceil(arrayBcc.length / seeds.length)
+          console.log('limit calculated : ' + limit);
           if (limit > result.parsed.COMPOSE_LIMIT) {
             methods.fixedLimit = 'null'
             limit = result.parsed.COMPOSE_LIMIT
@@ -830,6 +831,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
+      console.log('limit : ' + limit);
       console.log('methods.fixedLimit : ' + methods.fixedLimit);
 
       if (actions[0] == 'test-compose') {
