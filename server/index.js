@@ -795,8 +795,7 @@ wsc.on('connection', (wss, req) => {
             arrayBcc.pop()
           }
         }
-        console.log(arrayBcc);
-        console.log('arrayBcc.length = ' + arrayBcc.length);
+        console.log('limit : ' + limit);
         if (limit != 'auto') {
           if (methods.fixedLimit == false) {
             methods.fixedLimit = 'none'
@@ -1749,11 +1748,9 @@ wsc.on('connection', (wss, req) => {
               if (state == "STOPPED") {
                 break;
               }
-
               for (let i = 0; i < toProcess.length; i++) {
                 // await processSeed(toProcess[0]);
-                await processSeedActions(toProcess[0])
-
+                await processSeedActions(toProcess[0], 'none')
               }
 
               let w = waiting - success - failed
