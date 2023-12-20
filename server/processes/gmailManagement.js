@@ -601,18 +601,32 @@ const verify = async (data, entity, mode) => {
     } catch (e) {
         console.log(e.message);
         console.log("catch error");
+        if (e.message == 'No element found for selector: .a5p') {
             await time(3000)
             await page.screenshot({
-                path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+                path: `${path}/${data.gmail.split('@')[0]}-@-English-${data.id_process}.png`
             });
-            feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+            feedback += `, ${data.gmail.split('@')[0]}-@-English-${data.id_process}.png`
             await time(3000)
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
             await time(3000)
             await page.close()
             await browser.close()
             console.log(feedback);
-            return feedback       
+            return feedback
+        }
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        await time(3000)
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(3000)
+        await page.close()
+        await browser.close()
+        console.log(feedback);
+        return feedback
     }
 
 }
