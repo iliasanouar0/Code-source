@@ -1694,14 +1694,13 @@ wsc.on('connection', (wss, req) => {
             await time(2000);
             console.log('option.onlyStarted :' + option.onlyStarted);
             if (option.onlyStarted != true) {
-              await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
-              await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
+              await startSeedProcessing(seeds[0]);
               running++
             }
             toProcess.push(seeds[0]);
             seeds.splice(seeds.indexOf(seeds[0]), 1);
-            bccToProcess.push(bccResult[0 + start]);
-            bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
+            bccToProcess.push(bccResult[0]);
+            bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
             await updateProcessState();
           }
         }
