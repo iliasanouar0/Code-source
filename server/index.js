@@ -1537,6 +1537,7 @@ wsc.on('connection', (wss, req) => {
             console.log(r.indexOf('detected') != -1 + ' ' + seed.gmail);
             if (r.indexOf('detected') > -1) {
               Origins.splice(Origins.indexOf(seed), 1)
+              seeds.splice(seeds.indexOf(seed), 1)
             }
             switch (mode) {
               case ('default'):
@@ -1764,6 +1765,7 @@ wsc.on('connection', (wss, req) => {
           ]);
           running--
           Origins.splice(Origins.indexOf(seed), 1)
+          seeds.splice(seeds.indexOf(seed), 1)
           bccToProcess.shift();
           toProcess.shift();
           state = await composeManager.getProcessState(data.id_process);
