@@ -1537,6 +1537,8 @@ wsc.on('connection', (wss, req) => {
             console.log(r.indexOf('detected') != -1 + ' ' + seed.gmail);
             if (r.indexOf('detected') > -1) {
               Origins.splice(Origins.indexOf(seed), 1)
+              console.log('Origins.indexOf(seed) length : ' + Origins.indexOf(seed));
+
               // seeds.splice(seeds.indexOf(seed), 1)
             }
             switch (mode) {
@@ -1689,6 +1691,7 @@ wsc.on('connection', (wss, req) => {
               running++
             }
             seeds.splice(seeds.indexOf(seeds[0]), 1);
+            console.log('seeds.indexOf(seeds[0]) length : ' + seeds.indexOf(seeds[0]));
             bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
             count++;
             await updateProcessState();
