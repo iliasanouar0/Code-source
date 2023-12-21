@@ -1538,7 +1538,6 @@ wsc.on('connection', (wss, req) => {
             if (r.indexOf('detected') > -1) {
               Origins.splice(Origins.indexOf(seed), 1)
               console.log('Origins.indexOf(seed) length : ' + Origins.indexOf(seed));
-
               // seeds.splice(seeds.indexOf(seed), 1)
             }
             switch (mode) {
@@ -1696,7 +1695,7 @@ wsc.on('connection', (wss, req) => {
             count++;
             await updateProcessState();
           }
-
+          console.log('seeds.length ' + seeds.length);
           console.log('Origins length ' + Origins.length);
           console.log('running length ' + running);
           console.log('bcc to process length ' + bccToProcess.length);
@@ -1785,7 +1784,7 @@ wsc.on('connection', (wss, req) => {
             return;
           }
           console.log('seeds.length ' + seeds.length);
-          if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
+          if (toProcess.length < active && state != "STOPPED" && state != "PAUSED" && seeds.length != 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
             bccToProcess.push(bccResult[0]);
@@ -1794,11 +1793,12 @@ wsc.on('connection', (wss, req) => {
               running++
             }
             seeds.splice(seeds.indexOf(seeds[0]), 1);
+            console.log('seeds.indexOf(seeds[0]) length : ' + seeds.indexOf(seeds[0]));
             bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
             count++;
             await updateProcessState();
           }
-
+          console.log('seeds.length ' + seeds.length);
           console.log('Origins length ' + Origins.length);
           console.log('running length ' + running);
           console.log('bcc to process length ' + bccToProcess.length);
