@@ -1679,7 +1679,7 @@ wsc.on('connection', (wss, req) => {
           //   console.log('option.onlyStarted :' + option.onlyStarted);
           // }
           console.log('seeds.length ' + seeds.length);
-          if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
+          if (toProcess.length < active && state != "STOPPED" && state != "PAUSED" && seeds.length != 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
             bccToProcess.push(bccResult[0]);
@@ -1692,8 +1692,10 @@ wsc.on('connection', (wss, req) => {
             count++;
             await updateProcessState();
           }
+
           console.log('Origins length ' + Origins.length);
-          if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
+          console.log('running length ' + running);
+          if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0] != undefined && bccResult.length != 0 && Origins.length != 0 && running > 3) {
             seeds = [...Origins];
             await time(2000);
             console.log('option.onlyStarted :' + option.onlyStarted);
