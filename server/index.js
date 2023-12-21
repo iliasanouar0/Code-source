@@ -1537,7 +1537,6 @@ wsc.on('connection', (wss, req) => {
             console.log(r.indexOf('detected') != -1 + ' ' + seed.gmail);
             if (r.indexOf('detected') > -1) {
               Origins.splice(Origins.indexOf(seed), 1)
-              // seeds.splice(seeds.indexOf(seed), 1)
             }
             switch (mode) {
               case ('default'):
@@ -1679,6 +1678,7 @@ wsc.on('connection', (wss, req) => {
           //   option.onlyStarted = false
           //   console.log('option.onlyStarted :' + option.onlyStarted);
           // }
+          console.log('seeds.length ' + seeds.length);
           if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
@@ -1766,7 +1766,6 @@ wsc.on('connection', (wss, req) => {
           ]);
           running--
           Origins.splice(Origins.indexOf(seed), 1)
-          // seeds.splice(seeds.indexOf(seed), 1)
           console.log(toProcess.indexOf(seed) + ' ' + ' toProcess.indexOf(seed)');
           bccToProcess.shift();
           toProcess.shift();
@@ -1789,6 +1788,7 @@ wsc.on('connection', (wss, req) => {
             count++;
             await updateProcessState();
           }
+
           console.log('Origins length ' + Origins.length);
           if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
             seeds = [...Origins];
