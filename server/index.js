@@ -1703,7 +1703,7 @@ wsc.on('connection', (wss, req) => {
           console.log('running length ' + running);
           console.log('bcc to process length ' + bccToProcess.length);
           console.log('to process length ' + toProcess.length);
-          if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined && Origins.length != 0 && running < 2) {
+          if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined && Origins.length != 0 && toProcess.indexOf(Origins[0]) == -1) {
             seeds = [...Origins];
             console.log('seeds.length after Origins ' + seeds.length);
             console.log('Origins length after seeds ' + Origins.length);
