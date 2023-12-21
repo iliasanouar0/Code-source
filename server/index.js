@@ -1763,7 +1763,7 @@ wsc.on('connection', (wss, req) => {
             resultManager.endNow(result),
           ]);
           running--
-
+          Origins.splice(Origins.indexOf(seed), 1)
           bccToProcess.shift();
           toProcess.shift();
           state = await composeManager.getProcessState(data.id_process);
