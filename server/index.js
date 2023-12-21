@@ -1695,8 +1695,10 @@ wsc.on('connection', (wss, req) => {
 
           console.log('Origins length ' + Origins.length);
           console.log('running length ' + running);
-          if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0] != undefined && bccResult.length != 0 && Origins.length != 0 && !(running < 3)) {
+          if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0] != undefined && bccResult.length != 0 && Origins.length != 0) {
             seeds = [...Origins];
+            console.log('seeds.length after Origins' + seeds.length);
+            console.log('Origins length after seeds' + Origins.length);
             await time(2000);
             console.log('option.onlyStarted :' + option.onlyStarted);
             if (option.onlyStarted != true) {
@@ -1792,8 +1794,11 @@ wsc.on('connection', (wss, req) => {
           }
 
           console.log('Origins length ' + Origins.length);
+          console.log('running length ' + running);
           if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
             seeds = [...Origins];
+            console.log('seeds.length after Origins' + seeds.length);
+            console.log('Origins length after seeds' + Origins.length);
             await time(2000);
             console.log('option.onlyStarted :' + option.onlyStarted);
             if (option.onlyStarted != true) {
