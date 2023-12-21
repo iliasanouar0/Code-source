@@ -1666,7 +1666,7 @@ wsc.on('connection', (wss, req) => {
             resultManager.endNow(result),
           ]);
           running--
-          console.log(toProcess.indexOf(seed)+' '+ ' toProcess.indexOf(seed)');
+          console.log(toProcess.indexOf(seed) + ' ' + ' toProcess.indexOf(seed)');
           bccToProcess.shift();
           toProcess.shift();
           state = await composeManager.getProcessState(data.id_process);
@@ -1767,7 +1767,7 @@ wsc.on('connection', (wss, req) => {
           running--
           Origins.splice(Origins.indexOf(seed), 1)
           // seeds.splice(seeds.indexOf(seed), 1)
-          console.log(toProcess.indexOf(seed)+' '+ ' toProcess.indexOf(seed)');
+          console.log(toProcess.indexOf(seed) + ' ' + ' toProcess.indexOf(seed)');
           bccToProcess.shift();
           toProcess.shift();
           state = await composeManager.getProcessState(data.id_process);
@@ -1775,7 +1775,7 @@ wsc.on('connection', (wss, req) => {
           if (state === "STOPPED" || state === "PAUSED") {
             return;
           }
-          console.log(seeds.length);
+          console.log('seeds.length ' + seeds.length);
           if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
