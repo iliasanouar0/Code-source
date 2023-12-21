@@ -1695,10 +1695,12 @@ wsc.on('connection', (wss, req) => {
 
           console.log('Origins length ' + Origins.length);
           console.log('running length ' + running);
-          if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0] != undefined && bccResult.length != 0 && Origins.length != 0) {
+          console.log('bcc to process length ' + bccToProcess.length);
+          console.log('to process length ' + toProcess.length);
+          if (seeds.length == 0 && bccResult[0] != undefined && Origins.length != 0) {
             seeds = [...Origins];
-            console.log('seeds.length after Origins' + seeds.length);
-            console.log('Origins length after seeds' + Origins.length);
+            console.log('seeds.length after Origins ' + seeds.length);
+            console.log('Origins length after seeds ' + Origins.length);
             await time(2000);
             console.log('option.onlyStarted :' + option.onlyStarted);
             if (option.onlyStarted != true) {
@@ -1795,21 +1797,22 @@ wsc.on('connection', (wss, req) => {
 
           console.log('Origins length ' + Origins.length);
           console.log('running length ' + running);
-          if (seeds.length == 0 && bccToProcess.length == 0 && bccResult[0 + start] != undefined && bccResult.length != 0 && Origins.length != 0) {
+          console.log('bcc to process length ' + bccToProcess.length);
+          console.log('to process length ' + toProcess.length);
+          if (seeds.length == 0 && bccResult[0] != undefined && Origins.length != 0) {
             seeds = [...Origins];
-            console.log('seeds.length after Origins' + seeds.length);
-            console.log('Origins length after seeds' + Origins.length);
+            console.log('seeds.length after Origins ' + seeds.length);
+            console.log('Origins length after seeds ' + Origins.length);
             await time(2000);
             console.log('option.onlyStarted :' + option.onlyStarted);
             if (option.onlyStarted != true) {
-              await resultManager.startNow({ id_seeds: seeds[0].id_seeds, id_process: data.id_process });
-              await resultManager.updateState([{ id_seeds: seeds[0].id_seeds, id_process: data.id_process }], "running");
+              await startSeedProcessing(seeds[0]);
               running++
             }
             toProcess.push(seeds[0]);
             seeds.splice(seeds.indexOf(seeds[0]), 1);
-            bccToProcess.push(bccResult[0 + start]);
-            bccResult.splice(bccResult.indexOf(bccResult[0 + start]), 1);
+            bccToProcess.push(bccResult[0]);
+            bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
             await updateProcessState();
           }
         }
