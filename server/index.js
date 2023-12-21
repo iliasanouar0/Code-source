@@ -1496,6 +1496,7 @@ wsc.on('connection', (wss, req) => {
         async function processSeedActions(seed, mode) {
           if (option.onlyStarted) {
             startSeedProcessing(seed)
+            await updateProcessState()
           }
           console.log('Entered processSeedActions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
           // let { actions, subject, pages, c, options, mode } = extractActions(seed);
@@ -1628,6 +1629,7 @@ wsc.on('connection', (wss, req) => {
             resultManager.endNow(result),
           ]);
           running--
+          await updateProcessState()
           bccToProcess.shift();
           toProcess.shift();
           state = await composeManager.getProcessState(data.id_process);
@@ -1667,6 +1669,7 @@ wsc.on('connection', (wss, req) => {
             resultManager.endNow(result),
           ]);
           running--
+          await updateProcessState()
           console.log(toProcess.indexOf(seed) + ' ' + ' toProcess.indexOf(seed)');
           bccToProcess.shift();
           toProcess.shift();
@@ -1734,7 +1737,7 @@ wsc.on('connection', (wss, req) => {
             resultManager.endNow(result),
           ]);
           running--
-
+          await updateProcessState()
           bccToProcess.shift();
           toProcess.shift();
           state = await composeManager.getProcessState(data.id_process);
@@ -1774,6 +1777,7 @@ wsc.on('connection', (wss, req) => {
             resultManager.endNow(result),
           ]);
           running--
+          await updateProcessState()
           Origins.splice(Origins.indexOf(seed), 1)
           console.log(toProcess.indexOf(seed) + ' ' + ' toProcess.indexOf(seed)');
           bccToProcess.shift();
@@ -2492,7 +2496,7 @@ wsc.on('connection', (wss, req) => {
       if (actions[0] == 'compose') {
         let dataBcc = seeds[0].data
         if (dataBcc != 'none') {
-          let path = `/ home / data / process / ${dataBcc} `
+          let path = `/home/data/process/${dataBcc} `
           let read = fs.readFileSync(path, 'utf8');
           let bccData = read.split('\n')
           bccData.flatMap(e => {
