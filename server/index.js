@@ -1685,10 +1685,12 @@ wsc.on('connection', (wss, req) => {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
             bccToProcess.push(bccResult[0]);
-            // if (!option.onlyStarted) {
-            //   await startSeedProcessing(seeds[0]);
-            //   running++
-            // }
+            if (!option.onlyStarted) {
+              await startSeedProcessing(seeds[0]);
+              console.log('this is before finishing : ' + running)
+                running++
+              console.log('this is after finishing : ' + running)
+            }
             seeds.splice(seeds.indexOf(seeds[0]), 1);
             console.log('seeds.indexOf(seeds[0]) length : ' + seeds.indexOf(seeds[0]));
             bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
