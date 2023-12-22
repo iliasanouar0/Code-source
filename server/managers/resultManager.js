@@ -177,6 +177,15 @@ const startNow = async (data) => {
     });
 }
 
+const setBounced = async (id) => {
+    let sql = 'SELECT * FROM processstate WHERE id_process=($1)'
+    let data = [id]
+    const client = await pool.connect()
+    const list = await client.query(sql, data);
+    client.release()
+    return list.rows;
+}
+
 module.exports = {
     saveResult,
     endNow,
@@ -186,5 +195,5 @@ module.exports = {
     deleteResultsProcess,
     updateState,
     startNow,
-    saveFeedback, saveDetails, composeDetails
+    saveFeedback, saveDetails, composeDetails, setBounced
 }
