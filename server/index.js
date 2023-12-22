@@ -1669,8 +1669,9 @@ wsc.on('connection', (wss, req) => {
             resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
             resultManager.endNow(result),
           ]);
+          console.log('this is before finishing : ' + running);
           running--
-          console.log('running length : ' + running);
+          console.log('this is after finishing : ' + running);
           await updateProcessState()
           console.log(toProcess.indexOf(seed) + ' ' + ' toProcess.indexOf(seed)');
           bccToProcess.shift();
@@ -1751,8 +1752,9 @@ wsc.on('connection', (wss, req) => {
             resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "failed"),
             resultManager.endNow(result),
           ]);
+          console.log('this is before finishing : ' + running);
           running--
-          await updateProcessState()
+          console.log('this is after finishing : ' + running);          await updateProcessState()
           await resultManager.setBounced({ id_seeds: seed.id_seeds, id_process: data.id_process })
           Origins.splice(Origins.indexOf(seed), 1)
           console.log(toProcess.indexOf(seed) + ' ' + ' toProcess.indexOf(seed)');
