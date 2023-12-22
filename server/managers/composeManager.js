@@ -256,7 +256,7 @@ const getAllProcessSeedsServer = async (id) => {
 
 const getAllProcessSeedsNotBounce = async (id) => {
     // let sql = "SELECT composing.id_process,composing.action, seeds.* FROM composing JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds"
-    let sql = "SELECT composing.*, seeds.*,results.bounced FROM composing JOIN seeds ON seeds.id_list=composing.id_list JOIN results ON results.id_process=composing.id_process WHERE composing.id_process=$1 AND results.bounced!='true' GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds,results.bounced"
+    let sql = "SELECT composing.*, seeds.*,results.bounced FROM composing JOIN seeds ON seeds.id_list=composing.id_list JOIN results ON results.id_process=composing.id_process WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds,results.bounced"
     const client = await pool.connect()
     const list = await client.query(sql, [id])
     client.release()
