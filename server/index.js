@@ -1687,9 +1687,9 @@ wsc.on('connection', (wss, req) => {
             bccToProcess.push(bccResult[0]);
             if (!option.onlyStarted) {
               await startSeedProcessing(seeds[0]);
-              console.log('this is before finishing : ' + running)
+              console.log('this is before finishing insert : ' + running)
                 running++
-              console.log('this is after finishing : ' + running)
+              console.log('this is after finishing insert : ' + running)
             }
             seeds.splice(seeds.indexOf(seeds[0]), 1);
             console.log('seeds.indexOf(seeds[0]) length : ' + seeds.indexOf(seeds[0]));
