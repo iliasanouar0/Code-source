@@ -1532,7 +1532,7 @@ wsc.on('connection', (wss, req) => {
           r = removeTrailingComma(r);
 
           await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process });
-
+          console.log('is invalid : '+r.indexOf('invalid') == -1);
           if (r.indexOf('invalid') == -1 && r.indexOf('noData') == -1) {
             console.log(r.indexOf('detected') + ' ' + seed.gmail + ' ,r.indexOf("detected")');
             console.log(r.indexOf('detected') != -1 + ' ' + seed.gmail);
@@ -1542,6 +1542,7 @@ wsc.on('connection', (wss, req) => {
               console.log('Origins.indexOf(seed) length : ' + Origins.indexOf(seed));
               // seeds.splice(seeds.indexOf(seed), 1)
             }
+            console.log('will be handled as success');
             switch (mode) {
               case ('default'):
                 await handleSuccessDefault(seed)
@@ -1551,6 +1552,7 @@ wsc.on('connection', (wss, req) => {
                 break;
             }
           } else {
+            console.log('will be handled as failed');
             switch (mode) {
               case ('default'):
                 await handleFailureDefault(seed)
@@ -1692,7 +1694,7 @@ wsc.on('connection', (wss, req) => {
               console.log('finishing inside start : ' + running)
               await startSeedProcessing(seeds[0]);
               console.log('this is before finishing insert : ' + running)
-                running++
+              running++
               console.log('this is after finishing insert : ' + running)
             }
             seeds.splice(seeds.indexOf(seeds[0]), 1);
