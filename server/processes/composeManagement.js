@@ -319,7 +319,7 @@ const composeEmail = async (data, option, mode) => {
         await page.close()
         await browser.close()
         return feedback
-    } catch (error) {
+    } catch (e) {
         console.log(e.message);
         console.log("catch error");
         await time(3000)
