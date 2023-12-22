@@ -1757,7 +1757,7 @@ wsc.on('connection', (wss, req) => {
           };
 
           await Promise.all([
-            resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
+            resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "failed"),
             resultManager.endNow(result),
             console.log('this is before finishing : ' + running),
             running--,
