@@ -1678,12 +1678,6 @@ wsc.on('connection', (wss, req) => {
           if (state === "STOPPED" || state === "PAUSED") {
             return;
           }
-
-          // if (Origins.length / active < 3) {
-          //   console.log("the only started wil be false");
-          //   option.onlyStarted = false
-          //   console.log('option.onlyStarted :' + option.onlyStarted);
-          // }
           console.log('seeds.length ' + seeds.length);
           if (toProcess.length < active && state != "STOPPED" && state != "PAUSED" && seeds.length != 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
@@ -1936,7 +1930,7 @@ wsc.on('connection', (wss, req) => {
                 }
               }
 
-              if (Origins.length == 0 && running === 0 && seeds.length === 0) {
+              if (Origins.length == 0 &&  seeds.length === 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
                 await processStateManager.updateState(status);
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
