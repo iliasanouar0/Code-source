@@ -1495,7 +1495,7 @@ wsc.on('connection', (wss, req) => {
 
         async function processSeedActions(seed, mode) {
           if (option.onlyStarted) {
-            startSeedProcessing(seed)
+            await startSeedProcessing(seed)
             await updateProcessState()
           }
           console.log('Entered processSeedActions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
@@ -1755,7 +1755,7 @@ wsc.on('connection', (wss, req) => {
             running--,
             console.log('this is after finishing : ' + running)
           ]);
-          
+
           await resultManager.setBounced({ id_seeds: seed.id_seeds, id_process: data.id_process })
           Origins.splice(Origins.indexOf(seed), 1)
           console.log(toProcess.indexOf(seed) + ' ' + ' toProcess.indexOf(seed)');
