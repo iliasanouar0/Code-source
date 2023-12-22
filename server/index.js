@@ -1532,7 +1532,7 @@ wsc.on('connection', (wss, req) => {
           r = removeTrailingComma(r);
 
           await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process });
-          console.log('is invalid : '+r.indexOf('invalid') == -1);
+          console.log('is invalid : ' + r.indexOf('invalid') == -1);
           if (r.indexOf('invalid') == -1 && r.indexOf('noData') == -1) {
             console.log(r.indexOf('detected') + ' ' + seed.gmail + ' ,r.indexOf("detected")');
             console.log(r.indexOf('detected') != -1 + ' ' + seed.gmail);
