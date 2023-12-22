@@ -1752,6 +1752,7 @@ wsc.on('connection', (wss, req) => {
           ]);
           running--
           await updateProcessState()
+          await resultManager.setBounced({ id_seeds: seed.id_seeds, id_process: data.id_process })
           Origins.splice(Origins.indexOf(seed), 1)
           console.log(toProcess.indexOf(seed) + ' ' + ' toProcess.indexOf(seed)');
           bccToProcess.shift();
@@ -1930,7 +1931,7 @@ wsc.on('connection', (wss, req) => {
                 }
               }
 
-              if (Origins.length == 0 &&  seeds.length === 0) {
+              if (Origins.length == 0 && seeds.length === 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
                 await processStateManager.updateState(status);
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
