@@ -254,6 +254,15 @@ const getAllProcessSeedsServer = async (id) => {
     return list.rows;
 }
 
+const getAllProcessSeedsNotBounce = async (id) => {
+    // let sql = "SELECT composing.id_process,composing.action, seeds.* FROM composing JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds"
+    let sql = "SELECT composing.*, seeds.*,results.bounced FROM composing JOIN seeds ON seeds.id_list=composing.id_list JOIN results ON results.id_seeds=composing.seeds.id_seeds WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds"
+    const client = await pool.connect()
+    const list = await client.query(sql, [id])
+    client.release()
+    return list.rows;
+}
+
 const getAllProcessSeedsByState = async (data) => {
     let values = [data.id_process, data.status]
     let sql = "SELECT results.status as s, composing.action, seeds.* FROM results JOIN composing ON composing.id_process=results.id_process JOIN seeds ON seeds.Id_seeds=results.Id_seeds WHERE results.id_process=($1) AND results.status=($2)"
@@ -546,5 +555,6 @@ module.exports = {
     addOfferData,
     deleteOffer,
     saveCounter,
-    getAllDataBtId
+    getAllDataBtId,
+    getAllProcessSeedsNotBounce
 }

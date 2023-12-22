@@ -177,11 +177,11 @@ const startNow = async (data) => {
     });
 }
 
-const setBounced = async (id) => {
-    let sql = 'SELECT * FROM processstate WHERE id_process=($1)'
-    let data = [id]
+const setBounced = async (data) => {
+    const sql = `UPDATE results SET bounced=($3) WHERE id_seeds=($1) AND id_process=($2)`
+    let values = [data.id_seeds, data.id_process, true]
     const client = await pool.connect()
-    const list = await client.query(sql, data);
+    const list = await client.query(sql, values);
     client.release()
     return list.rows;
 }
