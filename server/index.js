@@ -1896,15 +1896,6 @@ wsc.on('connection', (wss, req) => {
                 break;
               }
 
-              if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
-                let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
-                await processStateManager.updateState(status);
-                composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
-                console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()} `);
-                sendToAll(clients, 'reload');
-                break
-              }
-
               console.log('seeds.length ' + seeds.length);
               console.log('Origins length ' + Origins.length);
               console.log('running length ' + running);
@@ -1931,7 +1922,16 @@ wsc.on('connection', (wss, req) => {
                 }
               }
 
-              if (Origins.length == 0 && seeds.length === 0) {
+              if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
+                let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
+                await processStateManager.updateState(status);
+                composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
+                console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()} `);
+                sendToAll(clients, 'reload');
+                break
+              }
+
+              if (Origins.length == 0 && seeds.length === 0 && running === 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
                 await processStateManager.updateState(status);
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
