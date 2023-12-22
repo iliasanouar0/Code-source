@@ -1670,6 +1670,7 @@ wsc.on('connection', (wss, req) => {
             resultManager.endNow(result),
           ]);
           running--
+          console.log('running length : ' + running);
           await updateProcessState()
           console.log(toProcess.indexOf(seed) + ' ' + ' toProcess.indexOf(seed)');
           bccToProcess.shift();
