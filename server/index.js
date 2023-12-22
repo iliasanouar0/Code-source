@@ -1683,10 +1683,13 @@ wsc.on('connection', (wss, req) => {
           console.log('seeds.length ' + seeds.length);
           console.log('finishing insert : ' + running)
           if (toProcess.length < active && state != "STOPPED" && state != "PAUSED" && seeds.length != 0) {
+            console.log('finishing inside : ' + running)
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
             bccToProcess.push(bccResult[0]);
+            console.log('finishing after : ' + running)
             if (!option.onlyStarted) {
+              console.log('finishing inside start : ' + running)
               await startSeedProcessing(seeds[0]);
               console.log('this is before finishing insert : ' + running)
                 running++
