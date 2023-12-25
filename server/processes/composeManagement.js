@@ -214,7 +214,7 @@ const composeEmail = async (data, option, mode) => {
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
 
-        
+
         let link
         link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread`
         await page.goto(link)
@@ -467,9 +467,6 @@ const TestComposeEmail = async (data, option, mode) => {
         }).catch(err => {
             console.error(err)
         })*/
-        console.log(text);
-        console.log(text.includes('sending'));
-        console.log(text.includes('send'));
         if (text.includes('sending')) {
             c = { status: false, message: text.split('.')[0].split('\n')[1], send: 1, bounced: check.bounced }
         } else if (text.includes('send') /* || text.includes('Address not found') || text.includes('Recipient inbox full')*/) {
