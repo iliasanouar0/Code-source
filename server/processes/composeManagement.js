@@ -213,17 +213,28 @@ const composeEmail = async (data, option, mode) => {
         feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+
+        
+        let link
+        link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread`
+        await page.goto(link)
         await time(3000)
-        const span = page.evaluate(() => {
-            console.log('evaluate');
-            span = document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
-            console.log(span);
+        const status = await page.evaluate(() => {
+            let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
+            checkSpan.item(1).click()
+            return checkSpan.item(1).ariaChecked
         })
         await time(3000)
-        page.waitForSelector('div[act="1"]')
-        await time(3000)
-        page.click('div[act="1"]')
-        await time(3000)
+        console.log(status);
+        if (status == 'true') {
+            await time(3000)
+            let c = await page.$$('div[act="1"]')
+            await time(3000)
+            await c[1].click();
+            await time(3000)
+            await page.goto(link)
+        }
+
         await page.goto('https://mail.google.com/mail/u/0/#inbox')
 
         await time(3000)
@@ -371,18 +382,30 @@ const TestComposeEmail = async (data, option, mode) => {
         feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+
+        let link
+        link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread`
+        await page.goto(link)
         await time(3000)
-        const span = page.evaluate(() => {
-            console.log('evaluate');
-            span = document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
-            console.log(span);
+        const status = await page.evaluate(() => {
+            let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
+            checkSpan.item(1).click()
+            return checkSpan.item(1).ariaChecked
         })
         await time(3000)
-        page.waitForSelector('div[act="1"]')
-        await time(3000)
-        page.click('div[act="1"]')
-        await time(3000)
+        console.log(status);
+        if (status == 'true') {
+            await time(3000)
+            let c = await page.$$('div[act="1"]')
+            await time(3000)
+            await c[1].click();
+            await time(3000)
+            await page.goto(link)
+        }
+
         await page.goto('https://mail.google.com/mail/u/0/#inbox')
+
+
         await time(3000)
         await page.waitForSelector('.z0')
         await time(3000)
