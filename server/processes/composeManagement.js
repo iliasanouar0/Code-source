@@ -452,8 +452,14 @@ const TestComposeEmail = async (data, option, mode) => {
             await time(3000)
             console.log('sended !!');
         }
-        await page.close()
-        await browser.close()
+        if (page) {
+            await page.close()
+            console.log('page closed : ' + data.gmail);
+        }
+        if (browser) {
+            await browser.close()
+            console.log('browser closed : ' + data.gmail);
+        }
         return feedback
     } catch (e) {
         console.log(e.message + ' ' + data.gmail);
@@ -466,9 +472,14 @@ const TestComposeEmail = async (data, option, mode) => {
         await time(3000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
         await time(3000)
-        await page.close()
-        await browser.close()
-        console.log(feedback);
+        if (page) {
+            await page.close()
+            console.log('page closed after catch : ' + data.gmail);
+        }
+        if (browser) {
+            await browser.close()
+            console.log('browser closed after catch : ' + data.gmail);
+        }
         return feedback
     }
 }
