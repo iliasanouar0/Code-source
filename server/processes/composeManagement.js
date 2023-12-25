@@ -408,9 +408,9 @@ const TestComposeEmail = async (data, option, mode) => {
             //     checkSpan.item(0).click()
             //     return checkSpan.item(0).ariaChecked
             // }
-            return {checkSpan1:checkSpan.item(0),checkSpan2:checkSpan.item(1)}
+            return { checkSpan: checkSpan.length, checkSpanAll: checkSpan }
         })
-        
+
         await time(3000)
         console.log(status);
         return
