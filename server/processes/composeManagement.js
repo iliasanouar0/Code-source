@@ -420,6 +420,7 @@ const TestComposeEmail = async (data, option, mode) => {
             await page.goto(link)
         }
         await time(3000)
+        
         // await page.waitForSelector('span[role=checkbox]', { visible: true })
         // await time(3000)
         // await page.click('span[role=checkbox]');
