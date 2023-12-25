@@ -223,7 +223,7 @@ const composeEmail = async (data, option, mode) => {
         await time(3000)
         const status = await page.evaluate(() => {
             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-            if (checkSpan.item(1) != null) {
+            if (checkSpan.item(1) != undefined) {
                 checkSpan.item(1).click()
                 return checkSpan.item(1).ariaChecked
             } else {
@@ -401,7 +401,7 @@ const TestComposeEmail = async (data, option, mode) => {
         await page.goto(link)
         const status = await page.evaluate(() => {
             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-            if (checkSpan.item(1) != null) {
+            if (checkSpan.item(1) != undefined) {
                 checkSpan.item(1).click()
                 return checkSpan.item(1).ariaChecked
             } else {
@@ -420,7 +420,7 @@ const TestComposeEmail = async (data, option, mode) => {
             await page.goto(link)
         }
         await time(3000)
-        
+
         // await page.waitForSelector('span[role=checkbox]', { visible: true })
         // await time(3000)
         // await page.click('span[role=checkbox]');
