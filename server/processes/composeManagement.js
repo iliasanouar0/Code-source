@@ -320,8 +320,8 @@ const composeEmail = async (data, option, mode) => {
         await browser.close()
         return feedback
     } catch (e) {
-        console.log(e.message);
-        console.log("catch error");
+        console.log(e.message + ' ' + data.gmail);
+        console.log("catch error : " + data.gmail);
         await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
@@ -456,8 +456,8 @@ const TestComposeEmail = async (data, option, mode) => {
         await browser.close()
         return feedback
     } catch (e) {
-        console.log(e.message);
-        console.log("catch error");
+        console.log(e.message + ' ' + data.gmail);
+        console.log("catch error : " + data.gmail);
         await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
