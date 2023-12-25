@@ -401,16 +401,19 @@ const TestComposeEmail = async (data, option, mode) => {
         await page.goto(link)
         const status = await page.evaluate(() => {
             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-            checkSpan.item(1).click()
-            return checkSpan.item(1).ariaChecked
+            // checkSpan.item(1).click()
+            // return checkSpan.item(1).ariaChecked
             // if (checkSpan.item(1) != undefined) {
             // } else {
             //     checkSpan.item(0).click()
             //     return checkSpan.item(0).ariaChecked
             // }
+            return {checkSpan1:checkSpan.item(0),checkSpan1:checkSpan.item(1)}
         })
+        
         await time(3000)
         console.log(status);
+        return
         if (status == 'true') {
             await time(3000)
             let c = await page.$$('div[act="1"]')
