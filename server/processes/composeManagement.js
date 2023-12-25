@@ -42,6 +42,7 @@ const login = async (data, mode) => {
     await page.setViewport({ width: 1440, height: 720 });
     try {
         if (mode == 'Cookies') {
+            console.log('mode is cookies : ' + data.gmail);
             let file = `${cookies}/${data.gmail.split('@')[0]}-@-init-Gmail.json`
             const navigationPromise = page.waitForNavigation()
             fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
