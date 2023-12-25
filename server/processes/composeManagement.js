@@ -224,6 +224,7 @@ const composeEmail = async (data, option, mode) => {
         await time(3000)
         page.click('div[act="1"]')
         await time(3000)
+        await page.goto('https://mail.google.com/mail/u/0/#inbox')
 
         await time(3000)
         await page.waitForSelector('.z0')
@@ -380,6 +381,8 @@ const TestComposeEmail = async (data, option, mode) => {
         page.waitForSelector('div[act="1"]')
         await time(3000)
         page.click('div[act="1"]')
+        await time(3000)
+        await page.goto('https://mail.google.com/mail/u/0/#inbox')
         await time(3000)
         await page.waitForSelector('.z0')
         await time(3000)
