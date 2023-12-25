@@ -49,7 +49,7 @@ const login = async (data, mode) => {
                 if (err) {
                     console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
                 } else {
-                    console.log(`${file} ,exist & is wirable`);
+                    console.log(`${file} ,exist & is wirable, ${data.gmail}`);
                     let cookies = JSON.parse(fs.readFileSync(file));
                     await page.setCookie(...cookies);
                 }
