@@ -377,8 +377,6 @@ const verify = async (data, entity, mode) => {
         console.log('passed :' + data.gmail);
         await time(3000)
         console.log(page.url());
-
-
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
 
@@ -476,7 +474,6 @@ const verify = async (data, entity, mode) => {
         }
         await navigationPromise
         await time(2000)
-        console.log(page.url());
         let recovery = await page.$$('.lCoei.YZVTmd.SmR8')
         await time(2000)
         await recovery[2].click()
@@ -506,6 +503,7 @@ const verify = async (data, entity, mode) => {
             await browser.close()
             return feedback
         }
+        console.log(page.url());
 
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
