@@ -285,11 +285,11 @@ const composeEmail = async (data, option, mode) => {
             await page.waitForNavigation()
         ]);
         await time(50000)
-        let check = await page.evaluate((bcc) => {
+        let check = await page.evaluate(() => {
             let bounced = 0
             let unread = document.querySelectorAll('.zA.zE')
             if (unread.length == 0) {
-                return { status: true }
+                return { status: true, label: 'no bounce', bounced: bounced }
             }
             let first = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"]')[0]
             if (first.className != 'zA yO') {
@@ -300,7 +300,7 @@ const composeEmail = async (data, option, mode) => {
             } else {
                 return { status: false, label: 'no bounce', bounced: bounced }
             }
-        }, option.bcc)
+        })
         let c
         console.log('check :');
         let text = check.label/* await translate(check.label, { to: 'en' }).then(res => {
@@ -447,7 +447,7 @@ const TestComposeEmail = async (data, option, mode) => {
             let bounced = 0
             let unread = document.querySelectorAll('.zA.zE')
             if (unread.length == 0) {
-                return { status: true }
+                return { status: true, label: 'no bounce', bounced: bounced }
             }
             let first = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"]')[0]
             if (first.className != 'zA yO') {
