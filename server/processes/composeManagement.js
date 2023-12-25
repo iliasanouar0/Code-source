@@ -47,7 +47,7 @@ const login = async (data, mode) => {
             const navigationPromise = page.waitForNavigation()
             fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
                 if (err) {
-                    console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+                    console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}, ${data.gmail}`);
                 } else {
                     console.log(`${file} ,exist & is wirable, ${data.gmail}`);
                     let cookies = JSON.parse(fs.readFileSync(file));
