@@ -223,13 +223,13 @@ const composeEmail = async (data, option, mode) => {
         await time(3000)
         const status = await page.evaluate(() => {
             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-            if (checkSpan.item(1) != undefined) {
-                checkSpan.item(1).click()
-                return checkSpan.item(1).ariaChecked
-            } else {
-                checkSpan.item(0).click()
-                return checkSpan.item(0).ariaChecked
-            }
+            checkSpan.item(1).click()
+            return checkSpan.item(1).ariaChecked
+            // if (checkSpan.item(1) != undefined) {
+            // } else {
+            //     checkSpan.item(0).click()
+            //     return checkSpan.item(0).ariaChecked
+            // }
         })
         await time(3000)
         console.log(status);
@@ -401,13 +401,13 @@ const TestComposeEmail = async (data, option, mode) => {
         await page.goto(link)
         const status = await page.evaluate(() => {
             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
-            if (checkSpan.item(1) != undefined) {
-                checkSpan.item(1).click()
-                return checkSpan.item(1).ariaChecked
-            } else {
-                checkSpan.item(0).click()
-                return checkSpan.item(0).ariaChecked
-            }
+            checkSpan.item(1).click()
+            return checkSpan.item(1).ariaChecked
+            // if (checkSpan.item(1) != undefined) {
+            // } else {
+            //     checkSpan.item(0).click()
+            //     return checkSpan.item(0).ariaChecked
+            // }
         })
         await time(3000)
         console.log(status);
