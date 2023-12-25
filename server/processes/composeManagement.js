@@ -452,8 +452,13 @@ const TestComposeEmail = async (data, option, mode) => {
             let first = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"]')[0]
             if (first.className != 'zA yO') {
                 first.click()
-                let label = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0].innerText
-                bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
+                let label = 'Not for bounce'
+                if (document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0] != undefined) {
+                    label = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0].innerText
+                }
+                if (document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0] != undefined) {
+                    bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
+                }
                 return { status: false, label: label, bounced: bounced }
             } else {
                 return { status: false, label: 'no bounce', bounced: bounced }
