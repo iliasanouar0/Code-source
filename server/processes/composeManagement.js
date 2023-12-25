@@ -219,8 +219,11 @@ const composeEmail = async (data, option, mode) => {
             span = document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
             console.log(span);
         })
+        await time(3000)
         page.waitForSelector('div[act="1"]')
+        await time(3000)
         page.click('div[act="1"]')
+        await time(3000)
 
         await time(3000)
         await page.waitForSelector('.z0')
@@ -373,7 +376,9 @@ const TestComposeEmail = async (data, option, mode) => {
             span = document.querySelector('div.J-J5-Ji.J-JN-M-I-Jm  span[role="checkbox"]').click()
             console.log(span);
         })
+        await time(3000)
         page.waitForSelector('div[act="1"]')
+        await time(3000)
         page.click('div[act="1"]')
         await time(3000)
         await page.waitForSelector('.z0')
