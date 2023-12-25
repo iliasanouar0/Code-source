@@ -213,6 +213,21 @@ const composeEmail = async (data, option, mode) => {
         feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
         await time(2000)
         await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+
+        let click = await page.evaluate(() => {
+            let first = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"]')[0]
+            if (first.className != 'zA yO') {
+                first.click()
+                return true
+            } else {
+                return true
+            }
+        })
+
+        if (click) {
+            await page.goto('https://mail.google.com/mail/u/0/#inbox')
+        }
+        await time(3000)
         await page.waitForSelector('.z0')
         await time(3000)
         await page.click('.z0')
