@@ -220,11 +220,13 @@ const verify = async (data, entity, mode) => {
         console.log(`Goto => https://gmail.com/ : ${data.gmail}, At ${new Date().toLocaleString()}`);
         await page.goto('https://gmail.com')
         await time(3000)
+        console.log(await page.url());
         if (await page.url() == 'https://www.google.com/intl/fr/gmail/about/') {
             page = await c.newPage();
             await (await browser.pages())[0].close()
+            await page.goto('https://gmail.com')
+            console.log(await page.url());
         }
-        await page.goto('https://gmail.com')
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
             await page.screenshot({
