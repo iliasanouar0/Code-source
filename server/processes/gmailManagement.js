@@ -224,7 +224,7 @@ const verify = async (data, entity, mode) => {
         if (await page.url() == 'https://www.google.com/intl/fr/gmail/about/') {
             page = await c.newPage();
             await (await browser.pages())[0].close()
-            await page.goto('https://gmail.com')
+            await page.goto('https://accounts.google.com/b/0/AddMailService')
             console.log(await page.url());
         }
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
