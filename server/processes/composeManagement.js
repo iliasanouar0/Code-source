@@ -59,9 +59,7 @@ const login = async (data, mode) => {
             console.log(await page.url());
             await time(3000)
             if (await page.url() == 'https://www.google.com/intl/fr/gmail/about/') {
-                await page.goto("https://mail.google.com/mail/u/0/#inbox")
-                console.log(await page.url());
-                await page.goto('https://gmail.com')
+                await page.goto('https://accounts.google.com/b/0/AddMailService')
                 console.log(await page.url());
             }
             if (await page.url() == "https://mail.google.com/mail/u/0/#inbox") {
