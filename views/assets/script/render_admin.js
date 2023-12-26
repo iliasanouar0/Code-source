@@ -343,7 +343,7 @@ const getDataCompose = $("#composeData").DataTable({
   responsive: true,
   order: [[1, 'desc']],
   destroy: true,
-  autoWidth: false,
+  autoWidth: true,
   ajax: {
     url: `http://${ip}:3000/compose/admin`,
     dataSrc: '',
