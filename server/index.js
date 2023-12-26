@@ -1872,6 +1872,33 @@ wsc.on('connection', (wss, req) => {
                 console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()} `);
                 sendToAll(clients, 'reload');
               }
+              
+              console.log('seeds.length ' + seeds.length);
+              console.log('Origins length ' + Origins.length);
+              console.log('running length ' + running);
+              console.log('bcc to process length ' + bccToProcess.length);
+              console.log('to process length ' + toProcess.length);
+              if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined) {
+                Origins = await composeManager.getAllProcessSeedsNotBounce(data.id_process)
+                console.log(Origins);
+                if (Origins.length != 0) {
+                  seeds = [...Origins];
+                  console.log('seeds.length after Origins ' + seeds.length);
+                  console.log('Origins length after seeds ' + Origins.length);
+                  await time(2000);
+                  console.log('option.onlyStarted :' + option.onlyStarted);
+                  if (option.onlyStarted != true) {
+                    await startSeedProcessing(seeds[0]);
+                    running++
+                  }
+                  toProcess.push(seeds[0]);
+                  seeds.splice(seeds.indexOf(seeds[0]), 1);
+                  bccToProcess.push(bccResult[0]);
+                  bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
+                  await updateProcessState();
+                }
+              }
+
             }
             break;
           default:
