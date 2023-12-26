@@ -45,6 +45,7 @@ const authorizationManager = require('./managers/authorizationManager')
 const nodeEnvManager = require('./managers/nodeEnvManager')
 const composeManager = require('./managers/composeManager');
 const { finished } = require("stream");
+const { co } = require("translate-google/languages");
 
 const port = 3000;
 const app = express(); // setup express application
@@ -795,6 +796,13 @@ wsc.on('connection', (wss, req) => {
             arrayBcc.pop()
           }
         }
+
+        let counter = await composeManager.getCounter(data.id_process)
+        console.log('counter : ' + counter);
+        if (counter != 0 && counter != null) {
+          arrayBcc.slice(0, counter)
+        }
+
         console.log('limit : ' + limit);
         console.log('methods.fixedLimit : ' + methods.fixedLimit);
         if (limit != 'auto') {
@@ -831,6 +839,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
       }
+
       console.log('limit : ' + limit);
       console.log('methods.fixedLimit : ' + methods.fixedLimit);
 
@@ -1872,7 +1881,7 @@ wsc.on('connection', (wss, req) => {
                 console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()} `);
                 sendToAll(clients, 'reload');
               }
-              
+
               console.log('seeds.length ' + seeds.length);
               console.log('Origins length ' + Origins.length);
               console.log('running length ' + running);

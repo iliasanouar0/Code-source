@@ -107,6 +107,15 @@ const getAllData = (request, response) => {
     })
 }
 
+const getCounter = async (data) => {
+    let sql = "SELECT counter FROM composing WHERE id_process=$1"
+    let values = [data.id_process]
+    const client = await pool.connect()
+    const counter = await client.query(sql, values);
+    client.release()
+    return counter.rows
+}
+
 const getAllDataBtId = (request, response) => {
     const id = (request.params.id)
     let sql = "SELECT * FROM composing WHERE id_process=$1"
@@ -556,5 +565,6 @@ module.exports = {
     deleteOffer,
     saveCounter,
     getAllDataBtId,
-    getAllProcessSeedsNotBounce
+    getAllProcessSeedsNotBounce,
+    getCounter
 }
