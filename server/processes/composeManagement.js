@@ -90,6 +90,8 @@ const login = async (data, mode) => {
                 await page.waitForSelector('#identifierNext')
                 await page.click('#identifierNext')
                 await time(3000)
+                console.log(await page.url() + ' ' + data.gmail);
+                await time(3000)
                 await page.waitForSelector('input[type="password"]')
                 await time(3000)
                 page.type('input[type="password"]', data.password, { delay: 200 })
@@ -98,6 +100,8 @@ const login = async (data, mode) => {
                 await time(3000)
                 page.click('#passwordNext')
                 await navigationPromise
+                await time(3000)
+                console.log(await page.url() + ' ' + data.gmail + ' after.');
                 await time(10000)
                 const cookiesObject = await page.cookies()
                 let NewFileJson = JSON.stringify(cookiesObject)
