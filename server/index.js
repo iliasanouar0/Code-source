@@ -1529,7 +1529,7 @@ wsc.on('connection', (wss, req) => {
             });
 
             if (bccToProcess[0] != undefined) {
-              bccCount = bccCount + bccToProcess[0].length + counter;
+              bccCount = (bccCount + counter) + bccToProcess[0].length;
               await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process });
               sendToAll(clients, 'reload');
             }
