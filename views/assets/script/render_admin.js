@@ -499,7 +499,7 @@ const getDataCompose = $("#composeData").DataTable({
       data: null,
       render: function (data, type, row) {
         if (row.status == 'idel' || row.status == 'STOPPED') {
-          return `${new Date(row.add_date).toLocaleString()} <span class="text-danger">(Create at)</span>`
+          return `${new Date(row.add_date).toLocaleString()} <span class="text-danger" data-bs-toggle="tooltip" data-bs-title="Create at">(C.A)</span>`
         }
         let start_in = new Date(row.start_in)
         let start = `${start_in.toLocaleString()} `
