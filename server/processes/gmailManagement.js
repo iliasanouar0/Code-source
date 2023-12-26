@@ -453,6 +453,32 @@ const verify = async (data, entity, mode) => {
             feedback += `, ${data.gmail.split('@')[0]}-@-login-${data.id_process}.png`
             await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
 
+
+            let smart = await page.evaluate(() => {
+                let s = document.querySelectorAll('.ahj.ai6.Kj-JD-Jh')
+                if (s.length == 0) {
+                    return false
+                }
+                return true
+            })
+
+            if (smart) {
+                let ch = await page.$$('.aho')
+                await ch[0].click()
+                await time(3000)
+                await page.waitForSelector('[name="data_consent_dialog_next"]')
+                await time(3000)
+                await page.click('[name="data_consent_dialog_next"]')
+                await time(3000)
+                let ch2 = await page.$$('.aho')
+                await ch2[0].click()
+                await time(3000)
+                await page.waitForSelector('[name="data_consent_dialog_next"]')
+                await time(3000)
+                await page.click('[name="data_consent_dialog_next"]')
+            }
+
+
             const cookiesObject = await page.cookies()
             let NewFileJson = JSON.stringify(cookiesObject)
             fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
@@ -538,6 +564,30 @@ const verify = async (data, entity, mode) => {
             } else {
                 details += `Entre unread inbox : ${countEnter[0].count}`
                 await resultsManager.saveDetails({ details: details, id_seeds: data.id_seeds, id_process: data.id_process })
+            }
+
+            let smart = await page.evaluate(() => {
+                let s = document.querySelectorAll('.ahj.ai6.Kj-JD-Jh')
+                if (s.length == 0) {
+                    return false
+                }
+                return true
+            })
+
+            if (smart) {
+                let ch = await page.$$('.aho')
+                await ch[0].click()
+                await time(3000)
+                await page.waitForSelector('[name="data_consent_dialog_next"]')
+                await time(3000)
+                await page.click('[name="data_consent_dialog_next"]')
+                await time(3000)
+                let ch2 = await page.$$('.aho')
+                await ch2[0].click()
+                await time(3000)
+                await page.waitForSelector('[name="data_consent_dialog_next"]')
+                await time(3000)
+                await page.click('[name="data_consent_dialog_next"]')
             }
 
             const cookiesObject = await page.cookies()

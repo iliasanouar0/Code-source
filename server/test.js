@@ -287,6 +287,30 @@
 //                 details += `Entre unread inbox : ${countEnter[0].count}`
 //             }
 
+//             let smart = await page.evaluate(() => {
+//                 let s = document.querySelectorAll('.ahj.ai6.Kj-JD-Jh')
+//                 if (s.length == 0) {
+//                     return false
+//                 }
+//                 return true
+//             })
+
+//             if (smart) {
+//                 let ch = await page.$$('.aho')
+//                 await ch[0].click()
+//                 await time(3000)
+//                 await page.waitForSelector('[name="data_consent_dialog_next"]')
+//                 await time(3000)
+//                 await page.click('[name="data_consent_dialog_next"]')
+//                 await time(3000)
+//                 let ch2 = await page.$$('.aho')
+//                 await ch2[0].click()
+//                 await time(3000)
+//                 await page.waitForSelector('[name="data_consent_dialog_next"]')
+//                 await time(3000)
+//                 await page.click('[name="data_consent_dialog_next"]')
+//             }
+
 //             const cookiesObject = await page.cookies()
 //             let NewFileJson = JSON.stringify(cookiesObject)
 //             fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
@@ -321,13 +345,14 @@
 // }
 
 
-// 	// 97548283	none	gmail	peitopho@outlook.com
+// // 97548283	none	gmail	peitopho@outlook.com
+// // afsbygesani@gmail.com	mnbvcxz9900	82.98.170.171:3838	gmail	chandaaleman@outlook.com
 // let data = {
-//     gmail: 'mamanes107@gmail.com',
-//     password: '97548283',
-//     verification: 'peitopho@outlook.com',
-//     proxy: '82.98.162.136:3838',
-//     // proxy: 'none',
+//     gmail: 'afsbygesani@gmail.com',
+//     password: 'mnbvcxz9900',
+//     verification: 'chandaaleman@outlook.com',
+//     // proxy: '82.98.170.171:3838',
+//     proxy: 'none',
 // }
 
 // verify(data, 'GML', 'Cookies')
