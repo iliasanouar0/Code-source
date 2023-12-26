@@ -510,7 +510,8 @@ const verify = async (data, entity, mode) => {
             return feedback
         }
         console.log(page.url());
-
+        await page.goto("https://mail.google.com/mail/u/0/#inbox")
+        console.log(page.url());
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
             await page.screenshot({
