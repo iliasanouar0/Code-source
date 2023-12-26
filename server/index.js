@@ -1864,7 +1864,8 @@ wsc.on('connection', (wss, req) => {
               console.log('Origins.length : ' + Origins.length);
               console.log('toProcess.length : ' + toProcess.length);
               console.log("actions[0] : " + actions[0]);
-              if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
+              let seedsRunning = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
+              if (toProcess.length === 0 && seeds.length === 0 && seedsRunning.length === 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
                 await processStateManager.updateState(status);
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
