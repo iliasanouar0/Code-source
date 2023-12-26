@@ -732,6 +732,7 @@ wsc.on('connection', (wss, req) => {
       await composeManager.startedProcess(data.data)
       // sendToAll(clients, 'reload')
       let arrayBcc = []
+      let counter = 0
       let bccResult = []
       let Origins = await composeManager.getAllProcessSeedsServer(data.id_process)
       let seeds = [...Origins]
@@ -797,7 +798,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
 
-        let counter = await composeManager.getCounter(data.id_process)
+        counter = await composeManager.getCounter(data.id_process)
         console.log('counter : ' + counter);
         if (counter != 0 && counter != null) {
           arrayBcc.slice(0, counter)
@@ -1528,7 +1529,7 @@ wsc.on('connection', (wss, req) => {
             });
 
             if (bccToProcess[0] != undefined) {
-              bccCount = bccCount + bccToProcess[0].length;
+              bccCount = bccCount + bccToProcess[0].length + counter;
               await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process });
               sendToAll(clients, 'reload');
             }
