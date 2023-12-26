@@ -58,6 +58,9 @@ const login = async (data, mode) => {
             await time(3000)
             console.log(await page.url());
             await time(3000)
+            if (await page.url() == 'https://www.google.com/intl/fr/gmail/about/') {
+                await page.goto("https://mail.google.com/mail/u/0/#inbox")
+            }
             if (await page.url() == "https://mail.google.com/mail/u/0/#inbox") {
                 await time(3000)
                 await page.screenshot({
