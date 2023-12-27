@@ -550,7 +550,7 @@ const getDataCompose = $("#composeData").DataTable({
       orderable: false,
       render: function (data, type, row) {
 
-        if (row.count == row.counter) {
+        if (row.count == row.counter && row.count > 0 && row.counter > 0) {
           return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
   <button type="button" class="btn btn-success" disabled data-id="${row.id_process}" title="Default tooltip">limit</button>
   <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
