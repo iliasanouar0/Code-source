@@ -12,9 +12,16 @@ const pool = new pg.Pool(config);
 
 const updateProcess = (request, response) => {
     const obj = (request.body)
+    let data
+    let objData
     resultManager.deleteResultsProcess(obj.id_process)
-    let sql = `UPDATE composing SET id_list =$1,id_user=$2 ,action=$3 ,data=$4 ,offer=$5,status=$6 ,count=$7 WHERE id_process=$8 returning id_process`
-    let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count, obj.id_process]
+    let sql = `UPDATE composing SET id_list=$1,id_user=$2 ,action=$3 ,data=$4 ,offer=$5,status=$6 ,count=$7 WHERE id_process=$8 returning id_process`
+    if (obj.data != 'none') {
+        objData = `data${obj.id_process}`
+        data = [obj.id_list, obj.id_user, obj.action, objData, obj.offer, obj.status, obj.count, obj.id_process]
+    } else {
+        data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count, obj.id_process]
+    }
     pool.query(sql, data, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
@@ -38,19 +45,10 @@ const updateProcess = (request, response) => {
             if (arrayBcc[arrayBcc.length - 1] == '') {
                 arrayBcc.pop()
             }
-            let objData = `data${obj.id_process}`
             let processPath = `/home/data/process/${objData}`
             fs.writeFile(processPath, arrayBcc.join('\n'), function (err, data) {
                 if (!err) {
-                    let sql = `UPDATE composing SET data=($1) WHERE id_process=($2)`
-                    let values = [objData, obj.id_process]
-                    pool.query(sql, values, (err, res) => {
-                        if (err) {
-                            console.log(err);
-                            throw err
-                        }
-                        response.status(200).send(`Compose updated with ID : ${obj.id_process}`)
-                    })
+                    response.status(200).send(`Compose updated with ID : ${obj.id_process}`)
                 } else {
                     console.log(err);
                     throw err
