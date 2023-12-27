@@ -237,18 +237,23 @@
 
 //             if (smart) {
 //                 let ch = await page.$$('.aho')
-//                 await ch[1].click()
+//                 await ch[0].click()
 //                 await time(3000)
 //                 await page.waitForSelector('[name="data_consent_dialog_next"]')
 //                 await time(3000)
 //                 await page.click('[name="data_consent_dialog_next"]')
-//                 await time(5000)
-//                 await page.waitForSelector('[name="turn_off_in_product"]')
 //                 await time(3000)
-//                 await page.click('[name="turn_off_in_product"]')
+//                 let ch2 = await page.$$('.aho')
+//                 await ch2[0].click()
+//                 await time(3000)
+//                 await page.waitForSelector('[name="data_consent_dialog_next"]')
+//                 await time(3000)
+//                 await page.click('[name="data_consent_dialog_next"]')
+//                 await time(3000)
+//                 await page.waitForSelector('[name="r"]')
+//                 await time(3000)
+//                 await page.click('[name="r"]')
 //             }
-
-//             await page.goto('https://mail.google.com/mail/u/0/#inbox')
 
 //             const cookiesObject = await page.cookies()
 //             let NewFileJson = JSON.stringify(cookiesObject)
@@ -291,6 +296,9 @@
 //         if (await page.$('[aria-invalid="true"]') != null) {
 //             console.log('invalid verification : ' + data.verification);
 //         }
+//         console.log(page.url());
+//         await page.goto("https://mail.google.com/mail/u/0/#inbox")
+//         console.log(page.url());
 //         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
 //             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
 //             const countEnter = await page.evaluate(() => {
@@ -333,6 +341,10 @@
 //                 await page.waitForSelector('[name="data_consent_dialog_next"]')
 //                 await time(3000)
 //                 await page.click('[name="data_consent_dialog_next"]')
+//                 await time(3000)
+//                 await page.waitForSelector('[name="r"]')
+//                 await time(3000)
+//                 await page.click('[name="r"]')
 //             }
 
 //             const cookiesObject = await page.cookies()
@@ -369,15 +381,11 @@
 // }
 
 
-// // 97548283	none	gmail	peitopho@outlook.com
-// // afsbygesani@gmail.com	mnbvcxz9900	82.98.170.171:3838	gmail	chandaaleman@outlook.com
-// // tesyjdsani@gmail.com	mnbvcxz9900	82.98.170.171:3838	gmail	rosalinechappell@outlook.com
 // let data = {
-//     gmail: 'tesyjdsani@gmail.com',
-//     password: 'mnbvcxz9900',
-//     verification: 'rosalinechappell@outlook.com',
+//     gmail: 'sampollerds580@gmail.com',
+//     password: 'mnbvcx890',
+//     verification: 'wducaixbtq953885@outlook.com',
 //     proxy: '82.98.170.171:3838',
-//     // proxy: 'none',
 // }
 
 // verify(data, 'GML', 'Cookies')
