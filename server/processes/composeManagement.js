@@ -85,7 +85,7 @@ const login = async (data, mode) => {
                 await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
                 await navigationPromise
                 await page.waitForSelector('input[type="email"]')
-                // await page.click('input[type="email"]')
+                await page.click('input[type="email"]')
                 await navigationPromise
                 await page.type('input[type="email"]', data.gmail, { delay: 100 })
                 await page.waitForSelector('#identifierNext')
