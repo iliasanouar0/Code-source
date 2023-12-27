@@ -42,6 +42,7 @@ $(document).on("click", "#add_compose", () => {
     $('#limit_send').prop("disabled", false);
     $('#auto_limit').prop("checked", false);
     $('#limit_fixed').prop("checked", true);
+    $('#p_data_add').prop("disabled", false);
     $(".add_compose").modal("show");
 });
 
