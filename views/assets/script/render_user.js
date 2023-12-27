@@ -409,9 +409,9 @@ const getDataCompose = $("#composeData").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="card m-0 border-secondary">
+        return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="${row.list_name}">
           <div class="card-body p-0 text-center text-dark">
-          ${row.list_name}
+          ${row.list_name.substring(0, 10)}...
           </div>
         </div>`
       }
@@ -424,9 +424,29 @@ const getDataCompose = $("#composeData").DataTable({
         //   ${row.data.substring(0, 10)}...
         //   </div >
         // </div > `
-        return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="Count : ${row.count}">
+        return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="${row.dataorigin}">
         <div class= "card-body p-0 text-center text-dark" >
           ${row.data.substring(0, 10)}...
+          </div >
+        </div > `
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-secondary">
+        <div class= "card-body p-0 text-center text-dark" >
+        ${row.count}
+          </div >
+        </div > `
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="card m-0 border-secondary">
+        <div class= "card-body p-0 text-center text-dark" >
+        ${row.counter == null ? 0 : row.counter}
           </div >
         </div > `
       }
@@ -444,11 +464,11 @@ const getDataCompose = $("#composeData").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="card m-0 border-danger">
-          <div class="card-body p-0 text-center text-danger text-capitalize">
-          ${row.isp}
-          </div>
-        </div>`
+        return `<div class="card m-0 border-danger" >
+  <div class="card-body p-0 text-center text-danger text-capitalize">
+    ${row.isp}
+  </div>
+        </div > `
       }
     },
     {
@@ -494,21 +514,21 @@ const getDataCompose = $("#composeData").DataTable({
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.action}">
-          <div class="card-body p-0 text-center text-dark">
-          ${row.action.substring(0, 20)}...
-          </div>
-         </div>`
+        return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.action}" >
+  <div class="card-body p-0 text-center text-dark">
+    ${row.action.substring(0, 20)}...
+  </div>
+         </div > `
       }
     },
     {
       data: null,
       render: function (data, type, row) {
         if (row.status == 'idel' || row.status == 'STOPPED') {
-          return `${new Date(row.add_date).toLocaleString()} <span class="text-danger">(Create at)</span>`
+          return `${new Date(row.add_date).toLocaleString()} <span class="text-danger" data-bs-toggle="tooltip" data-bs-title="Create at">(C.A)</span>`
         }
         let start_in = new Date(row.start_in)
-        let start = `${start_in.toLocaleString()}`
+        let start = `${start_in.toLocaleString()} `
         return start
       }
     },
@@ -516,7 +536,7 @@ const getDataCompose = $("#composeData").DataTable({
       data: null,
       render: function (data, type, row) {
         if (row.end_in == null || row.status == 'STOPPED') {
-          return `<i class="fas fa-minus"></i>`
+          return `<i class="fas fa-minus" ></i > `
         }
         let end_in = new Date(row.end_in)
         let start_in = new Date(row.start_in)
@@ -529,7 +549,13 @@ const getDataCompose = $("#composeData").DataTable({
       searchable: false,
       orderable: false,
       render: function (data, type, row) {
-        if (row.status == 'FINISHED') {
+
+        if (row.count == row.counter) {
+          return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
+  <button type="button" class="btn btn-success" disabled data-id="${row.id_process}" title="Default tooltip">limit</button>
+  <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
+  <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
+        } else if (row.status == 'FINISHED') {
           return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
   <button type="button" class="btn btn-success" disabled data-id="${row.id_process}" title="Default tooltip"><i class="fas fa-check"></i></button>
   <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>

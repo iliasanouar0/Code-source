@@ -395,41 +395,41 @@ const getDataCompose = $("#composeData").DataTable({
             searchable: false,
             render: function (data, type, row) {
                 return `<div class="card m-0 bg-info w-50">
-            <div class="card-body p-0 text-center text-light">
-            ${row.seedscount}
-            </div>
-          </div>`
+              <div class="card-body p-0 text-center text-light">
+              ${row.seedscount}
+              </div>
+            </div>`
             }
         },
         {
             data: null,
             render: function (data, type, row) {
                 return `<div class="card m-0 border-dark">
-            <div class="card-body p-0 text-center text-dark">
-            ${row.login}
-            </div>
-          </div>`
+              <div class="card-body p-0 text-center text-dark">
+              ${row.login}
+              </div>
+            </div>`
             }
         },
         {
             data: null,
             render: function (data, type, row) {
-                return `<div class="card m-0 border-secondary">
-            <div class="card-body p-0 text-center text-dark">
-            ${row.list_name}
-            </div>
-          </div>`
+                return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="${row.list_name}">
+              <div class="card-body p-0 text-center text-dark">
+              ${row.list_name.substring(0, 10)}...
+              </div>
+            </div>`
             }
         },
         {
             data: null,
             render: function (data, type, row) {
-            //     return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="Count : ${row.count}, Counter : ${row.counter == null ? 0 : row.counter}">
-            //   <div class= "card-body p-0 text-center text-dark" >
-            //     ${row.data.substring(0, 10)}...
-            //     </div >
-            //   </div > `
-            return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="Count : ${row.count}">
+                // return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="Count : ${row.count}, Counter : ${row.counter == null ? 0 : row.counter}">
+                // <div class= "card-body p-0 text-center text-dark" >
+                //   ${row.data.substring(0, 10)}...
+                //   </div >
+                // </div > `
+                return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="${row.dataorigin}">
             <div class= "card-body p-0 text-center text-dark" >
               ${row.data.substring(0, 10)}...
               </div >
@@ -439,21 +439,41 @@ const getDataCompose = $("#composeData").DataTable({
         {
             data: null,
             render: function (data, type, row) {
-                return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="${row.offer}">
-                <div class="card-body p-0 text-center text-dark">
-                ${row.offer.substring(0, 10)}...
-                </div>
-              </div>`
+                return `<div class="card m-0 border-secondary">
+            <div class= "card-body p-0 text-center text-dark" >
+            ${row.count}
+              </div >
+            </div > `
             }
         },
         {
             data: null,
             render: function (data, type, row) {
-                return `<div class="card m-0 border-danger">
-            <div class="card-body p-0 text-center text-danger text-capitalize">
-            ${row.isp}
-            </div>
-          </div>`
+                return `<div class="card m-0 border-secondary">
+            <div class= "card-body p-0 text-center text-dark" >
+            ${row.counter == null ? 0 : row.counter}
+              </div >
+            </div > `
+            }
+        },
+        {
+            data: null,
+            render: function (data, type, row) {
+                return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="${row.offer}">
+              <div class="card-body p-0 text-center text-dark">
+              ${row.offer.substring(0, 10)}...
+              </div>
+            </div>`
+            }
+        },
+        {
+            data: null,
+            render: function (data, type, row) {
+                return `<div class="card m-0 border-danger" >
+      <div class="card-body p-0 text-center text-danger text-capitalize">
+        ${row.isp}
+      </div>
+            </div > `
             }
         },
         {
@@ -462,58 +482,58 @@ const getDataCompose = $("#composeData").DataTable({
                 switch (row.status) {
                     case 'FINISHED':
                         return `<div class="card status-p-${row.id_process} m-0 border-success ">
-                      <div class="card-body p-0 text-center text-success">
-                      ${row.status}
-                      </div>
-                    </div>`
+                    <div class="card-body p-0 text-center text-success">
+                    ${row.status}
+                    </div>
+                  </div>`
                     case 'RUNNING':
                         console.log('spinner');
                         return `<div class="card status-p-${row.id_process} m-0 border-primary">
-                        <div class="card-body p-0 text-center text-primary">
-                        <div class="spinner-border  spinner-border-sm text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                        </div>
-                        </div>
-                      </div>`
+                      <div class="card-body p-0 text-center text-primary">
+                      <div class="spinner-border  spinner-border-sm text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                      </div>
+                      </div>
+                    </div>`
                     case 'PAUSED':
                         return `<div class="card status-p-${row.id_process} m-0 border-warning">
-                          <div class="card-body p-0 text-center text-warning">
-                          ${row.status}
-                           </div>
-                        </div>`
+                        <div class="card-body p-0 text-center text-warning">
+                        ${row.status}
+                         </div>
+                      </div>`
                     case 'STOPPED':
                         return `<div class="card status-p-${row.id_process} m-0 border-danger">
-                           <div class="card-body p-0 text-center text-danger">
-                            ${row.status}
-                            </div>
-                          </div>`
+                         <div class="card-body p-0 text-center text-danger">
+                          ${row.status}
+                          </div>
+                        </div>`
                     default:
                         return `<div class="card status-p-${row.id_process} m-0 border-info">
-                            <div class="card-body p-0 text-center text-info">
-                            ${row.status}
-                            </div>
-                          </div>`
+                          <div class="card-body p-0 text-center text-info">
+                          ${row.status}
+                          </div>
+                        </div>`
                 }
             }
         },
         {
             data: null,
             render: function (data, type, row) {
-                return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.action}">
-            <div class="card-body p-0 text-center text-dark">
-            ${row.action.substring(0, 20)}...
-            </div>
-           </div>`
+                return `<div class="card m-0" data-bs-toggle="tooltip" data-bs-title="${row.action}" >
+      <div class="card-body p-0 text-center text-dark">
+        ${row.action.substring(0, 20)}...
+      </div>
+             </div > `
             }
         },
         {
             data: null,
             render: function (data, type, row) {
                 if (row.status == 'idel' || row.status == 'STOPPED') {
-                    return `${new Date(row.add_date).toLocaleString()} <span class="text-danger">(Create at)</span>`
+                    return `${new Date(row.add_date).toLocaleString()} <span class="text-danger" data-bs-toggle="tooltip" data-bs-title="Create at">(C.A)</span>`
                 }
                 let start_in = new Date(row.start_in)
-                let start = `${start_in.toLocaleString()}`
+                let start = `${start_in.toLocaleString()} `
                 return start
             }
         },
@@ -521,7 +541,7 @@ const getDataCompose = $("#composeData").DataTable({
             data: null,
             render: function (data, type, row) {
                 if (row.end_in == null || row.status == 'STOPPED') {
-                    return `<i class="fas fa-minus"></i>`
+                    return `<i class="fas fa-minus" ></i > `
                 }
                 let end_in = new Date(row.end_in)
                 let start_in = new Date(row.start_in)
@@ -534,31 +554,37 @@ const getDataCompose = $("#composeData").DataTable({
             searchable: false,
             orderable: false,
             render: function (data, type, row) {
-                if (row.status == 'FINISHED') {
+
+                if (row.count == row.counter) {
                     return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
-        <button type="button" class="btn btn-success" disabled data-id="${row.id_process}" title="Default tooltip"><i class="fas fa-check"></i></button>
-        <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
-        <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
+      <button type="button" class="btn btn-success" disabled data-id="${row.id_process}" title="Default tooltip">limit</button>
+      <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
+      <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
+                } else if (row.status == 'FINISHED') {
+                    return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
+      <button type="button" class="btn btn-success" disabled data-id="${row.id_process}" title="Default tooltip"><i class="fas fa-check"></i></button>
+      <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
+      <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
                 } else if (row.status == 'RUNNING') {
                     return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
-      <button type="button" class="btn btn-warning pause"  data-id="${row.id_process}" title="Pause process"><i class="fas fa-pause"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
-      <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
+    <button type="button" class="btn btn-warning pause"  data-id="${row.id_process}" title="Pause process"><i class="fas fa-pause"></i></button>
+    <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
+    <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
                 } else if (row.status == 'PAUSED') {
                     return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
-      <button type="button" class="btn btn-warning resume"  data-id="${row.id_process}" title="Resume process"><i class="fa fa-play"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
-      <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
+    <button type="button" class="btn btn-warning resume"  data-id="${row.id_process}" title="Resume process"><i class="fa fa-play"></i></button>
+    <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
+    <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
                 } else if (row.status == 'STOPPED') {
                     return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
-      <button type="button" class="btn btn-success start"  data-id="${row.id_process}" title="Restart process"><i class="fas fa-redo"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" disabled title="Reset process"><i class="fas fa-power-off reset"></i></button>
-      <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
+    <button type="button" class="btn btn-success start"  data-id="${row.id_process}" title="Restart process"><i class="fas fa-redo"></i></button>
+    <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" disabled title="Reset process"><i class="fas fa-power-off reset"></i></button>
+    <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
                 } else {
                     return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
-      <button type="button" class="btn btn-success start"  data-id="${row.id_process}" title="Start process"><i class="fa fa-play"></i></button>
-      <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" disabled title="Reset process"><i class="fas fa-power-off"></i></button>
-      <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action action"><i class="fas fa-edit"></i></button>`
+    <button type="button" class="btn btn-success start"  data-id="${row.id_process}" title="Start process"><i class="fa fa-play"></i></button>
+    <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" disabled title="Reset process"><i class="fas fa-power-off"></i></button>
+    <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action action"><i class="fas fa-edit"></i></button>`
                 }
             },
         }
