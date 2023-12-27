@@ -232,6 +232,7 @@ $(document).on('click', '#c_update', event => {
         swal.fire('all fields requirer')
         return
     }
+    console.log(data);
     let action = selected[0].value
     let dataComposing
     switch (action) {
