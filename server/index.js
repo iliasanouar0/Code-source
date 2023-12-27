@@ -815,7 +815,7 @@ wsc.on('connection', (wss, req) => {
         console.log('counter arrayBcc length before : ' + arrayBcc.length);
         console.log(counter > 0 ? "counter > 0 is true" : "counter > 0 is false");
         if (counter > 0) {
-          arrayBcc.slice(0, counter)
+          arrayBcc.splice(0, counter)
         }
         console.log('counter arrayBcc length after : ' + arrayBcc.length);
         console.log('counter result : ' + counter);
