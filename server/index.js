@@ -805,6 +805,7 @@ wsc.on('connection', (wss, req) => {
         } else {
           counter = 0
         }
+        console.log('counter result : ' + counter);
 
         console.log('limit : ' + limit);
         console.log('methods.fixedLimit : ' + methods.fixedLimit);
@@ -1531,7 +1532,9 @@ wsc.on('connection', (wss, req) => {
             });
 
             if (bccToProcess[0] != undefined) {
-              bccCount = (bccCount + counter) + bccToProcess[0].length;
+              bccCount = bccCount + counter + bccToProcess[0].length;
+              console.log('counter result  bcc: ' + bccCount);
+
               await composeManager.saveCounter({ counter: bccCount, id_process: data.id_process });
               sendToAll(clients, 'reload');
             }
