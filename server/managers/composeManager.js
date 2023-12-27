@@ -13,8 +13,8 @@ const pool = new pg.Pool(config);
 const updateProcess = (request, response) => {
     const obj = (request.body)
     resultManager.deleteResultsProcess(obj.id_process)
-    let sql = `UPDATE composing SET id_list=$1,id_user=$2 ,action=$3 ,offer=$4,status=$5 ,count=$6 WHERE id_process=$7 returning id_process`
-    let data = [obj.id_list, obj.id_user, obj.action, obj.offer, obj.status, obj.count, obj.id_process]
+    let sql = `UPDATE composing SET id_list=$1,id_user=$2 ,action=$3 ,offer=$4,status=$5 WHERE id_process=$6 returning id_process`
+    let data = [obj.id_list, obj.id_user, obj.action, obj.offer, obj.status, obj.id_process]
     pool.query(sql, data, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
