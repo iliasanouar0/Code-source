@@ -804,7 +804,7 @@ wsc.on('connection', (wss, req) => {
         console.log(counter == null ? 'yes counter is null' : 'no !! is not null');
         console.log(counter == '' ? 'yes counter is ""' : 'no !! is not ""');
         console.log(counter == ' ' ? 'yes counter is " "' : 'no !! is not " "');
-        if (counter == ' ' || counter == null) {
+        if (counter == '' || counter == null) {
           counter = 0
         } else {
           counter = parseInt(counter)
