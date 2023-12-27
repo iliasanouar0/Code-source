@@ -275,13 +275,15 @@ const composeEmail = async (data, option, mode) => {
         await time(3000)
         await page.type('[name="subjectbox"]', option.subject, { delay: 200 })
         await time(3000)
-        fs.readFile(`/home/offers/${option.offer}`, async (err, data) => {
-            if (!err) {
-                await page.evaluate(async (dataTo) => {
-                    document.querySelector('div[role="textbox"]').innerHTML = dataTo
-                }, data.toString());
-            }
-        })
+        if (option.offer != '' && option.offer != null) {
+            fs.readFile(`/home/offers/${option.offer}`, async (err, data) => {
+                if (!err) {
+                    await page.evaluate(async (dataTo) => {
+                        document.querySelector('div[role="textbox"]').innerHTML = dataTo
+                    }, data.toString());
+                }
+            })
+        }
         await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
@@ -433,13 +435,15 @@ const TestComposeEmail = async (data, option, mode) => {
         await time(3000)
         await page.type('[name="subjectbox"]', option.subject, { delay: 200 })
         await time(3000)
-        fs.readFile(`/home/offers/${option.offer}`, async (err, data) => {
-            if (!err) {
-                await page.evaluate(async (dataTo) => {
-                    document.querySelector('div[role="textbox"]').innerHTML = dataTo
-                }, data.toString());
-            }
-        })
+        if (option.offer != '' && option.offer != null) {
+            fs.readFile(`/home/offers/${option.offer}`, async (err, data) => {
+                if (!err) {
+                    await page.evaluate(async (dataTo) => {
+                        document.querySelector('div[role="textbox"]').innerHTML = dataTo
+                    }, data.toString());
+                }
+            })
+        }
         await time(3000)
         await page.screenshot({
             path: `${path}/${data.gmail.split('@')[0]}-@-compose-${data.id_process}.png`
