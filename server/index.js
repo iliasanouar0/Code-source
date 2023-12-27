@@ -802,7 +802,7 @@ wsc.on('connection', (wss, req) => {
         console.log('counter : ' + counter);
         if (counter != 0) {
           arrayBcc.slice(0, counter)
-        } else {
+        } else if (counter == 'NaN' || counter == NaN) {
           counter = 0
         }
         console.log('counter result : ' + counter);
