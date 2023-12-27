@@ -22,6 +22,8 @@ const updateProcess = (request, response) => {
     } else {
         data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count, obj.id_process]
     }
+    console.log(data);
+    console.log(objData);
     pool.query(sql, data, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
