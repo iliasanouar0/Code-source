@@ -428,6 +428,7 @@ const TestComposeEmail = async (data, option, mode) => {
         await time(6000)
         await page.waitForSelector('.agP.aFw')
         await time(3000)
+        console.log('option.to : ' + option.to);
         await page.type('.agP.aFw', option.to, { delay: 200 })
         await time(3000)
         await page.waitForSelector('[name="subjectbox"]')
