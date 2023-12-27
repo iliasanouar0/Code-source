@@ -800,11 +800,17 @@ wsc.on('connection', (wss, req) => {
 
         counter = await composeManager.getCounter(data.id_process)
         console.log('counter first : ' + counter);
+        console.log(counter == 'null' ? 'yes counter is "null"' : 'no !! is not "null"');
+        console.log(counter == null ? 'yes counter is null' : 'no !! is not null');
+        console.log(counter == '' ? 'yes counter is ""' : 'no !! is not ""');
+        console.log(counter == ' ' ? 'yes counter is " "' : 'no !! is not " "');
         if (counter == ' ' || counter == null) {
           counter = 0
         } else {
           counter = parseInt(counter)
         }
+        console.log(counter == 'NaN' ? 'yes counter is "NaN' : 'no !! is not "NaN');
+        console.log(counter == NaN ? 'yes counter is NaN' : 'no !! is not NaN');
         console.log('counter : ' + counter);
         if (counter > 0) {
           arrayBcc.slice(0, counter)
