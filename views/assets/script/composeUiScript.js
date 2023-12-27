@@ -235,6 +235,7 @@ $(document).on('click', '#c_update', event => {
     console.log(data);
     let action = selected[0].value
     let dataComposing
+    console.log(action);
     switch (action) {
         case 'checkProxy':
             dataComposing = {
@@ -316,8 +317,8 @@ $(document).on('click', '#c_update', event => {
                 "data": `${data}`,
                 "count": `${count}`,
             };
-
             updateCompose(dataComposing)
+            break
         case 'test-compose':
             subject = $('#subject').val()
             body = $('#body').val()
