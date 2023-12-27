@@ -49,14 +49,16 @@ const updateProcess = (request, response) => {
                             console.log(err);
                             throw err
                         }
+                        response.status(200).send(`Compose updated with ID : ${obj.id_process}`)
                     })
                 } else {
                     console.log(err);
                     throw err
                 }
             });
+        } else {
+            response.status(200).send(`Compose updated with ID : ${result.rows[0].id_process}`)
         }
-        response.status(200).send(`Compose updated with ID : ${result.rows[0].id_process}`)
     })
 }
 
