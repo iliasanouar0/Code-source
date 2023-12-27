@@ -398,7 +398,7 @@ const getDataCompose = $("#composeData").DataTable({
         //   ${row.data.substring(0, 10)}...
         //   </div >
         // </div > `
-        return `<div class="card m-0 border-secondary">
+        return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="${row.dataorigin}">
         <div class= "card-body p-0 text-center text-dark" >
           ${row.data.substring(0, 10)}...
           </div >

@@ -26,8 +26,8 @@ const updateProcess = (request, response) => {
 
 const addProcess = (request, response) => {
     const obj = (request.body)
-    let sql = `INSERT INTO composing (id_list ,id_user ,action ,data ,offer,status ,count) values ($1,$2,$3,$4,$5,$6,$7) returning id_process`
-    let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count]
+    let sql = `INSERT INTO composing (id_list ,id_user ,action ,data ,offer,status ,count,dataorigin) values ($1,$2,$3,$4,$5,$6,$7,$7,$8) returning id_process`
+    let data = [obj.id_list, obj.id_user, obj.action, obj.data, obj.offer, obj.status, obj.count, obj.data]
     pool.query(sql, data, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message })
