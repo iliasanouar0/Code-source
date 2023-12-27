@@ -42,10 +42,12 @@ const updateProcess = (request, response) => {
                     let values = [objData, result.rows[0].id_process]
                     pool.query(sql, values, (err, res) => {
                         if (err) {
+                            console.log(err);
                             throw err
                         }
                     })
                 } else {
+                    console.log(err);
                     throw err
                 }
             });
