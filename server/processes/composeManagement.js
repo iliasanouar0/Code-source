@@ -436,14 +436,18 @@ const TestComposeEmail = async (data, option, mode) => {
         await time(3000)
         await page.type('[name="subjectbox"]', option.subject, { delay: 200 })
         await time(3000)
+        console.log("the offer is : " + option.offer + " for " + data.gmail);
         if (option.offer != '' && option.offer != null) {
+            console.log("reading offer : " + option.offer + " for " + data.gmail);
             fs.readFile(`/home/offers/${option.offer}`, async (err, data) => {
                 if (!err) {
+                    await page.waitForSelector('div[role="textbox"]')
                     await page.evaluate(async (dataTo) => {
                         document.querySelector('div[role="textbox"]').innerHTML = dataTo
                     }, data.toString());
                 }
             })
+            console.log("offer readd: " + option.offer + " for " + data.gmail);
         }
         await time(3000)
         await page.screenshot({
