@@ -799,6 +799,8 @@ wsc.on('connection', (wss, req) => {
         }
 
         counter = parseInt(await composeManager.getCounter(data.id_process))
+        console.log('is counter NaN : ' + counter == 'NaN');
+        console.log('is counter NaN 2: ' + counter == NaN);
         console.log('counter : ' + counter);
         if (counter != 0) {
           arrayBcc.slice(0, counter)
