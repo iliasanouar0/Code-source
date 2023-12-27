@@ -55,7 +55,7 @@ const addProcess = (request, response) => {
             let processPath = `/home/data/process/${objData}`
             fs.writeFile(processPath, arrayBcc.join('\n'), function (err, data) {
                 if (!err) {
-                    let sql = `UPDATE composing SET data=($1),counter=$2 WHERE id_process=($3)`
+                    let sql = `UPDATE composing SET data=($1),count=$2 WHERE id_process=($3)`
                     let values = [objData, arrayBcc.length, result.rows[0].id_process]
                     pool.query(sql, values, (err, res) => {
                         if (err) {
