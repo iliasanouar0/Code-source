@@ -39,6 +39,9 @@ $(document).on("click", "#add_compose", () => {
     $('#c_update').addClass('d-none')
     $('#c_add').removeClass('d-none')
     $('.composeEditTitle').html('Create new compose')
+    $('#limit_send').prop("disabled", false);
+    $('#auto_limit').prop("checked", false);
+    $('#limit_fixed').prop("checked", true);
     $(".add_compose").modal("show");
 });
 
@@ -53,6 +56,7 @@ $(document).on('click', '.edit', event => {
     $('#c_update').data('id', id)
     $('#c_update').removeClass('d-none')
     $('#c_add').addClass('d-none')
+    $('#p_data_add').prop("disabled", true);
     $('.composeEditTitle').html('Update compose')
     fetch(`http://${ip}:3000/compose/one/${id}`, {
         method: "GET",
