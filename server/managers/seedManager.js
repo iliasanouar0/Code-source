@@ -194,7 +194,7 @@ const updateProxy = (request, response) => {
   query.forEach((data) => {
     pool.query(Update, data, (error, result) => {
       if (error) {
-        response.status(409).json(error);
+        response.status(409).send(error);
       }
       response.status(200).send(`seeds updated successfully`);
     });
