@@ -45,8 +45,12 @@ const addProcess = (request, response) => {
                     arrayBcc.push(n[1])
                 }
             })
-            arrayBcc.shift()
-            arrayBcc.pop()
+            if (arrayBcc[0] == '' || arrayBcc[0] == ' ') {
+                arrayBcc.shift()
+            }
+            if (arrayBcc[arrayBcc.length - 1] == '' || arrayBcc[arrayBcc.length - 1] == ' ') {
+                arrayBcc.pop()
+            }
             let objData = `data${result.rows[0].id_process}`
             let processPath = `/home/data/process/${objData}`
             fs.writeFile(processPath, arrayBcc.join('\n'), function (err, data) {
