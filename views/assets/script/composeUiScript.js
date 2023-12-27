@@ -228,7 +228,6 @@ $(document).on('click', '#c_update', event => {
     let id = $(event.target).data('id')
     console.log(id);
     let composingList = $('#p_list_add').val()
-    let data = $('#p_data_add').val()
     let count = $('#p_data_add option:selected').data('count')
     let limit = $('#limit_send').val()
     let selected = $('.actions input:checked')
@@ -236,7 +235,6 @@ $(document).on('click', '#c_update', event => {
         swal.fire('all fields requirer')
         return
     }
-    console.log(data);
     let action = selected[0].value
     let dataComposing
     console.log(action);
@@ -318,7 +316,6 @@ $(document).on('click', '#c_update', event => {
                 "id_user": `${user['id_user']}`,
                 "id_list": `${composingList}`,
                 "offer": `${offerAdd}`,
-                "data": `${data}`,
                 "count": `${count}`,
             };
             updateCompose(dataComposing)
