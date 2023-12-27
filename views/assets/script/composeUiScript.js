@@ -602,10 +602,6 @@ $(document).on('click', '#c_add', () => {
             }
             if (body == '') {
                 offerAdd = $('#p_offers_add option:selected').val()
-                if (offerAdd == '') {
-                    swal.fire('Select or upload offer !!')
-                    return
-                }
             } else {
                 let time = new Date().toTimeString().split(' ')[0]
                 offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${time}.html`
