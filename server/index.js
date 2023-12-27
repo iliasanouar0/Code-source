@@ -1545,6 +1545,7 @@ wsc.on('connection', (wss, req) => {
             if (bccToProcess[0] != undefined) {
               bccCount = bccCount + bccToProcess[0].length;
               console.log('counter  bcc: ' + counter);
+              console.log(counter > 0 ? "counter > 0 is true" : "counter > 0 is false");
               if (counter > 0) {
                 bccCount = bccCount + counter
                 counter = 0
