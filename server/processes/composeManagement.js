@@ -62,6 +62,7 @@ const login = async (data, mode) => {
                 await page.goto('https://accounts.google.com/b/0/AddMailService')
                 console.log(await page.url());
             }
+            await time(5000)
             if (await page.url() == "https://mail.google.com/mail/u/0/#inbox") {
                 await time(3000)
                 await page.screenshot({
@@ -84,7 +85,7 @@ const login = async (data, mode) => {
                 await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
                 await navigationPromise
                 await page.waitForSelector('input[type="email"]')
-                await page.click('input[type="email"]')
+                // await page.click('input[type="email"]')
                 await navigationPromise
                 await page.type('input[type="email"]', data.gmail, { delay: 100 })
                 await page.waitForSelector('#identifierNext')
