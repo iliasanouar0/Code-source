@@ -798,7 +798,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
 
-        counter = await composeManager.getCounter(data.id_process)
+        counter = seeds[0].counter
         console.log('counter first : ' + counter);
         console.log(counter == 'null' ? 'yes counter is "null"' : 'no !! is not "null"');
         console.log(counter == null ? 'yes counter is null' : 'no !! is not null');
