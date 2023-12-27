@@ -109,10 +109,10 @@ const getData = (request, response) => {
         let filePath = `${path}/${file}`
         const data = fs.readFileSync(filePath, 'utf8');
         let array = data.split('\n')
-        if (array[0] == '') {
+        if (array[0] == '' || array[0] == ' ') {
             array.shift()
         }
-        if (array[array.length - 1] == '') {
+        if (array[array.length - 1] == '' || array[array.length - 1] == ' ') {
             array.pop()
         }
         objects.push({ count: array.length, file: file })
