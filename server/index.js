@@ -812,11 +812,12 @@ wsc.on('connection', (wss, req) => {
         console.log(counter == 'NaN' ? 'yes counter is "NaN' : 'no !! is not "NaN');
         console.log(counter == NaN ? 'yes counter is NaN' : 'no !! is not NaN');
         console.log('counter : ' + counter);
+        console.log('counter arrayBcc length before : ' + arrayBcc.length);
         if (counter > 0) {
           arrayBcc.slice(0, counter)
         }
+        console.log('counter arrayBcc length after : ' + arrayBcc.length);
         console.log('counter result : ' + counter);
-
         console.log('limit : ' + limit);
         console.log('methods.fixedLimit : ' + methods.fixedLimit);
         if (limit != 'auto') {
