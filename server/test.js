@@ -237,19 +237,16 @@
 
 //             if (smart) {
 //                 let ch = await page.$$('.aho')
-//                 await ch[0].click()
+//                 await ch[1].click()
 //                 await time(3000)
 //                 await page.waitForSelector('[name="data_consent_dialog_next"]')
 //                 await time(3000)
 //                 await page.click('[name="data_consent_dialog_next"]')
 //                 await time(3000)
-//                 let ch2 = await page.$$('.aho')
-//                 await ch2[0].click()
+//                 await page.waitForSelector('[name="turn_off_in_product"]')
 //                 await time(3000)
-//                 await page.waitForSelector('[name="data_consent_dialog_next"]')
-//                 await time(3000)
-//                 await page.click('[name="data_consent_dialog_next"]')
-//                 await time(3000)
+//                 await page.click('[name="turn_off_in_product"]')
+//                 await time(5000)
 //                 await page.waitForSelector('[name="r"]')
 //                 await time(3000)
 //                 await page.click('[name="r"]')
@@ -329,19 +326,16 @@
 
 //             if (smart) {
 //                 let ch = await page.$$('.aho')
-//                 await ch[0].click()
+//                 await ch[1].click()
 //                 await time(3000)
 //                 await page.waitForSelector('[name="data_consent_dialog_next"]')
 //                 await time(3000)
 //                 await page.click('[name="data_consent_dialog_next"]')
 //                 await time(3000)
-//                 let ch2 = await page.$$('.aho')
-//                 await ch2[0].click()
+//                 await page.waitForSelector('[name="turn_off_in_product"]')
 //                 await time(3000)
-//                 await page.waitForSelector('[name="data_consent_dialog_next"]')
-//                 await time(3000)
-//                 await page.click('[name="data_consent_dialog_next"]')
-//                 await time(3000)
+//                 await page.click('[name="turn_off_in_product"]')
+//                 await time(5000)
 //                 await page.waitForSelector('[name="r"]')
 //                 await time(3000)
 //                 await page.click('[name="r"]')
@@ -380,12 +374,12 @@
 //     }
 // }
 
-
+// // pollerdss236@gmail.com	mnbvcx890	38.34.185.143:3838	gmail	pfsrzsrq711064@outlook.com
 // let data = {
-//     gmail: 'sampollerds580@gmail.com',
+//     gmail: 'pollerdss236@gmail.com',
 //     password: 'mnbvcx890',
-//     verification: 'wducaixbtq953885@outlook.com',
-//     proxy: '82.98.170.171:3838',
+//     verification: 'pfsrzsrq711064@outlook.com',
+//     proxy: '38.34.185.143:3838',
 // }
 
 // verify(data, 'GML', 'Cookies')
