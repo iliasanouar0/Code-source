@@ -798,7 +798,7 @@ wsc.on('connection', (wss, req) => {
           }
         }
 
-        counter = await parseInt(composeManager.getCounter(data.id_process))
+        counter = parseInt(await composeManager.getCounter(data.id_process))
         console.log('counter : ' + counter);
         if (counter != 0 && counter != null) {
           arrayBcc.slice(0, counter)
