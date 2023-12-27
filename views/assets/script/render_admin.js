@@ -428,6 +428,7 @@ const getDataCompose = $("#composeData").DataTable({
     {
       data: null,
       render: function (data, type, row) {
+        console.log("row.offer :" + row.offer);
         return `<div class="card m-0 border-secondary" data-bs-toggle="tooltip" data-bs-title="${row.offer == null ? "no Offer" : row.offer}">
           <div class="card-body p-0 text-center text-dark">
           ${row.offer.substring(0, 10)}...
