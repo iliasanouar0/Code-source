@@ -65,23 +65,24 @@ $(document).on('click', '.edit', event => {
         return response.json()
     }).then(json => {
         let t =
-            [
-                {
-                    "id_process": 50,
-                    "id_list": 17,
-                    "id_user": 20,
-                    "action": "compose,subject:test compose 666,to:iliasanouar0@gmail.com,limit:30,Fixed:true",
-                    "data": "test.txt",
-                    "offer": "test11.html",
-                    "status": "FINISHED",
-                    "count": 69,
-                    "counter": 60,
-                    "add_date": "2023-12-06T08:28:35.798Z",
-                    "update_date": "2023-12-06T08:28:35.798Z",
-                    "start_in": "2023-12-06T03:28:54.410-05:00",
-                    "end_in": "2023-12-06T03:31:03.738-05:00"
-                }
-            ]
+        [
+            {
+                "id_process": 145,
+                "id_list": 14,
+                "id_user": 20,
+                "action": "compose,subject:test compose,to:iliasanouar0@gmail.com,limit:100,Fixed:true",
+                "offer": "tes20offer12:40:42.html",
+                "status": "idel",
+                "count": 1000,
+                "counter": null,
+                "add_date": "2023-12-27T11:45:42.257Z",
+                "update_date": "2023-12-27T11:45:42.257Z",
+                "start_in": null,
+                "end_in": null,
+                "data": "data145",
+                "dataorigin": "dataTest.txt"
+            }
+        ]
         let list = $('#p_list_add').children()
         for (let i = 0; i < list.length; i++) {
             $(list[i]).attr('selected', false)
@@ -97,7 +98,7 @@ $(document).on('click', '.edit', event => {
             $(data[i]).attr('selected', false)
         }
         for (let i = 0; i < data.length; i++) {
-            if ($(data[i]).val() == json[0].data) {
+            if ($(data[i]).val() == json[0].dataorigin) {
                 $(data[i]).attr('selected', true)
                 break
             }
