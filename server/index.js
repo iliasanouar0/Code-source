@@ -802,6 +802,8 @@ wsc.on('connection', (wss, req) => {
         console.log('counter first : ' + counter);
         console.log(counter == 'null' ? 'yes counter is "null"' : 'no !! is not "null"');
         console.log(counter == null ? 'yes counter is null' : 'no !! is not null');
+        console.log(counter == '' ? 'yes counter is ""' : 'no !! is not ""');
+        console.log(counter == ' ' ? 'yes counter is " "' : 'no !! is not " "');
         if (counter == 'null' || counter == null) {
           counter = 0
         } else {
