@@ -321,7 +321,13 @@ const verify = async (data, entity, mode) => {
             }
 
             await page.goto('https://mail.google.com/mail/u/0/#inbox')
-            
+
+            await page.screenshot({
+                path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+            });
+            feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+
             const cookiesObject = await page.cookies()
             let NewFileJson = JSON.stringify(cookiesObject)
             fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
@@ -510,6 +516,11 @@ const verify = async (data, entity, mode) => {
 
             await page.goto('https://mail.google.com/mail/u/0/#inbox')
 
+            await page.screenshot({
+                path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+            });
+            feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
 
             const cookiesObject = await page.cookies()
             let NewFileJson = JSON.stringify(cookiesObject)
@@ -624,6 +635,12 @@ const verify = async (data, entity, mode) => {
             }
 
             await page.goto('https://mail.google.com/mail/u/0/#inbox')
+
+            await page.screenshot({
+                path: `${path}/${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+            });
+            feedback += `, ${data.gmail.split('@')[0]}-@-inbox-${data.id_process}.png`
+            await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
 
             const cookiesObject = await page.cookies()
             let NewFileJson = JSON.stringify(cookiesObject)
