@@ -280,10 +280,10 @@ $(document).on('click', '#c_update', event => {
             }
             if (body == '') {
                 offerAdd = $('#p_offers_add option:selected').val()
-                if (offerAdd == '') {
-                    swal.fire('Select or upload offer !!')
-                    return
-                }
+                // if (offerAdd == '') {
+                //     swal.fire('Select or upload offer !!')
+                //     return
+                // }
             } else {
                 offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer.html`
                 fetch(`http://${ip}:3000/compose/offers?offer=${offerAdd}`, {
@@ -332,10 +332,10 @@ $(document).on('click', '#c_update', event => {
             }
             if (body == '') {
                 offerAdd = $('#p_offers_add option:selected').val()
-                if (offerAdd == '') {
-                    swal.fire('Select or upload offer !!')
-                    return
-                }
+                // if (offerAdd == '') {
+                //     swal.fire('Select or upload offer !!')
+                //     return
+                // }
             } else {
                 let time = new Date().toTimeString().split(' ')[0]
                 offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${time}.html`
