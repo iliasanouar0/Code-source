@@ -636,7 +636,7 @@ $(document).on('click', '#c_add', () => {
             let test
             to = spt.map((e) => {
                 console.log(e);
-                test = pattern.test(e)
+                test = pattern.test(e.trim())
                 console.log(test);
                 if (!test) {
                     return false
