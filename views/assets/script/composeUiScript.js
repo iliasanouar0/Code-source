@@ -621,7 +621,7 @@ $(document).on('click', '#c_add', () => {
             if (sp[sp.length - 1] == '') {
                 sp.pop()
             }
-            let to = sp.map((e) => { return e.trim() }).join(';')
+            to = sp.map((e) => { return e.trim() }).join(';')
             console.log(to);
             if (body == '') {
                 offerAdd = $('#p_offers_add option:selected').val()
