@@ -65,24 +65,24 @@ $(document).on('click', '.edit', event => {
         return response.json()
     }).then(json => {
         let t =
-        [
-            {
-                "id_process": 145,
-                "id_list": 14,
-                "id_user": 20,
-                "action": "compose,subject:test compose,to:iliasanouar0@gmail.com,limit:100,Fixed:true",
-                "offer": "tes20offer12:40:42.html",
-                "status": "idel",
-                "count": 1000,
-                "counter": null,
-                "add_date": "2023-12-27T11:45:42.257Z",
-                "update_date": "2023-12-27T11:45:42.257Z",
-                "start_in": null,
-                "end_in": null,
-                "data": "data145",
-                "dataorigin": "dataTest.txt"
-            }
-        ]
+            [
+                {
+                    "id_process": 145,
+                    "id_list": 14,
+                    "id_user": 20,
+                    "action": "compose,subject:test compose,to:iliasanouar0@gmail.com,limit:100,Fixed:true",
+                    "offer": "tes20offer12:40:42.html",
+                    "status": "idel",
+                    "count": 1000,
+                    "counter": null,
+                    "add_date": "2023-12-27T11:45:42.257Z",
+                    "update_date": "2023-12-27T11:45:42.257Z",
+                    "start_in": null,
+                    "end_in": null,
+                    "data": "data145",
+                    "dataorigin": "dataTest.txt"
+                }
+            ]
         let list = $('#p_list_add').children()
         for (let i = 0; i < list.length; i++) {
             $(list[i]).attr('selected', false)
@@ -547,6 +547,14 @@ $(document).on('click', '#c_add', () => {
             subject = $('#subject').val()
             body = $('#body').val()
             to = $('#to').val()
+            if (to.includes(',')) {
+                swal.fire('mailto error : invalid separator use ";" instead')
+                return
+            }
+            if (to.split(';').length > 10) {
+                swal.fire('mailto error : maximum mail to is 10')
+                return
+            }
             if (subject == '' || to == '') {
                 swal.fire('subject and mailto are required')
                 return
@@ -596,6 +604,14 @@ $(document).on('click', '#c_add', () => {
             subject = $('#subject').val()
             body = $('#body').val()
             to = $('#to').val()
+            if (to.includes(',')) {
+                swal.fire('mailto error : invalid separator use ";" instead')
+                return
+            }
+            if (to.split(';').length > 10) {
+                swal.fire('mailto error : maximum mail to is 10')
+                return
+            }
             if (subject == '' || to == '') {
                 swal.fire('subject and mailto are required')
                 return
