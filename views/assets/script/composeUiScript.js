@@ -618,10 +618,12 @@ $(document).on('click', '#c_add', () => {
                 swal.fire('mailto error : invalid separator use ";" instead')
                 return
             }
+
             if (to.split(';').length > 10) {
                 swal.fire('mailto error : maximum mail to is 10')
                 return
             }
+
             if (subject == '' || to == '') {
                 swal.fire('subject and mailto are required')
                 return
@@ -631,9 +633,10 @@ $(document).on('click', '#c_add', () => {
             if (spt[spt.length - 1] == '') {
                 spt.pop()
             }
+            let test
             to = spt.map((e) => {
                 console.log(e);
-                let test = pattern.test(e)
+                test = pattern.test(e)
                 console.log(test);
                 if (!test) {
                     return false
