@@ -622,6 +622,7 @@ $(document).on('click', '#c_add', () => {
                 sp.pop()
             }
             let to = sp.map((e) => { return e.trim() }).join(';')
+            console.log(to);
             if (body == '') {
                 offerAdd = $('#p_offers_add option:selected').val()
             } else {
