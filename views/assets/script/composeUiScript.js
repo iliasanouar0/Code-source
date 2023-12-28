@@ -227,7 +227,7 @@ $(document).on('click', '#c_update', event => {
     let subject
     let body
     let to
-    let pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    let pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
     let id = $(event.target).data('id')
     console.log(id);
     let composingList = $('#p_list_add').val()
@@ -569,7 +569,7 @@ $(document).on('click', '#c_add', () => {
     let subject
     let body
     let to
-    let pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    let pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
     let composingList = $('#p_list_add').val()
     let data = $('#p_data_add').val()
     let count = $('#p_data_add option:selected').data('count')
