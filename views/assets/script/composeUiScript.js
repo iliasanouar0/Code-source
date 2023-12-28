@@ -616,6 +616,12 @@ $(document).on('click', '#c_add', () => {
                 swal.fire('subject and mailto are required')
                 return
             }
+
+            let sp = to.split(';')
+            if (sp[sp.length - 1] == '') {
+                sp.pop()
+            }
+            let to = sp.map((e) => { return e.trim() }).join(';')
             if (body == '') {
                 offerAdd = $('#p_offers_add option:selected').val()
             } else {
