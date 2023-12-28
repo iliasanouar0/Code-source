@@ -295,7 +295,7 @@ $(document).on('click', '#c_update', event => {
             }
             to = spt.map((e) => {
                 console.log(e);
-                let test = pattern.test(e)
+                let test = pattern.test(e.trim())
                 console.log(test);
                 if (!test) {
                     return false
@@ -379,7 +379,7 @@ $(document).on('click', '#c_update', event => {
             }
             to = sp.map((e) => {
                 console.log(e);
-                let test = pattern.test(e)
+                let test = pattern.test(e.trim())
                 console.log(test);
                 if (!test) {
                     return false
@@ -717,7 +717,7 @@ $(document).on('click', '#c_add', () => {
             }
             to = sp.map((e) => {
                 console.log(e);
-                let test = pattern.test(e)
+                let test = pattern.test(e.trim())
                 console.log(test);
                 if (!test) {
                     return false
