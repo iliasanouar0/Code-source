@@ -604,6 +604,7 @@ $(document).on('click', '#c_add', () => {
             subject = $('#subject').val()
             body = $('#body').val()
             to = $('#to').val()
+
             if (to.includes(',')) {
                 swal.fire('mailto error : invalid separator use ";" instead')
                 return
@@ -621,7 +622,10 @@ $(document).on('click', '#c_add', () => {
             if (sp[sp.length - 1] == '') {
                 sp.pop()
             }
-            to = sp.map((e) => { return e.trim() }).join(';')
+            to = sp.map((e) => {
+                console.log(e);
+                return e.trim()
+            }).join(';')
             console.log(to);
             if (body == '') {
                 offerAdd = $('#p_offers_add option:selected').val()
