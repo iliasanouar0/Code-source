@@ -622,11 +622,21 @@ $(document).on('click', '#c_add', () => {
             if (sp[sp.length - 1] == '') {
                 sp.pop()
             }
+            let pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
             to = sp.map((e) => {
                 console.log(e);
+                let test = pattern.test(e)
+                console.log(test);
+                if (!test) {
+                    return false
+                }
                 return e.trim()
             }).join(';')
             console.log(to);
+            if (to == false) {
+                swal.fire('mailto error : enter valid data !!')
+                return
+            }
             if (body == '') {
                 offerAdd = $('#p_offers_add option:selected').val()
             } else {
