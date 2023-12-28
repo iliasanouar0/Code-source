@@ -227,6 +227,7 @@ $(document).on('click', '#c_update', event => {
     let subject
     let body
     let to
+    let pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
     let id = $(event.target).data('id')
     console.log(id);
     let composingList = $('#p_list_add').val()
@@ -274,6 +275,38 @@ $(document).on('click', '#c_update', event => {
             subject = $('#subject').val()
             body = $('#body').val()
             to = $('#to').val()
+
+            if (to.includes(',')) {
+                swal.fire('mailto error : invalid separator use ";" instead')
+                return
+            }
+            if (to.split(';').length > 10) {
+                swal.fire('mailto error : maximum mail to is 10')
+                return
+            }
+            if (subject == '' || to == '') {
+                swal.fire('subject and mailto are required')
+                return
+            }
+
+            let spt = to.split(';')
+            if (spt[spt.length - 1] == '') {
+                spt.pop()
+            }
+            to = spt.map((e) => {
+                console.log(e);
+                let test = pattern.test(e)
+                console.log(test);
+                if (!test) {
+                    return false
+                }
+                return e.trim()
+            }).join(';')
+            console.log(to);
+            if (to.includes(false)) {
+                swal.fire('mailto error : enter valid data !!')
+                return
+            }
             if (subject == '' || to == '') {
                 swal.fire('subject and mailto are required')
                 return
@@ -326,6 +359,38 @@ $(document).on('click', '#c_update', event => {
             subject = $('#subject').val()
             body = $('#body').val()
             to = $('#to').val()
+
+            if (to.includes(',')) {
+                swal.fire('mailto error : invalid separator use ";" instead')
+                return
+            }
+            if (to.split(';').length > 10) {
+                swal.fire('mailto error : maximum mail to is 10')
+                return
+            }
+            if (subject == '' || to == '') {
+                swal.fire('subject and mailto are required')
+                return
+            }
+
+            let sp = to.split(';')
+            if (sp[sp.length - 1] == '') {
+                sp.pop()
+            }
+            to = sp.map((e) => {
+                console.log(e);
+                let test = pattern.test(e)
+                console.log(test);
+                if (!test) {
+                    return false
+                }
+                return e.trim()
+            }).join(';')
+            console.log(to);
+            if (to.includes(false)) {
+                swal.fire('mailto error : enter valid data !!')
+                return
+            }
             if (subject == '' || to == '') {
                 swal.fire('subject and mailto are required')
                 return
@@ -504,6 +569,7 @@ $(document).on('click', '#c_add', () => {
     let subject
     let body
     let to
+    let pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
     let composingList = $('#p_list_add').val()
     let data = $('#p_data_add').val()
     let count = $('#p_data_add option:selected').data('count')
@@ -547,12 +613,36 @@ $(document).on('click', '#c_add', () => {
             subject = $('#subject').val()
             body = $('#body').val()
             to = $('#to').val()
+
             if (to.includes(',')) {
                 swal.fire('mailto error : invalid separator use ";" instead')
                 return
             }
             if (to.split(';').length > 10) {
                 swal.fire('mailto error : maximum mail to is 10')
+                return
+            }
+            if (subject == '' || to == '') {
+                swal.fire('subject and mailto are required')
+                return
+            }
+
+            let spt = to.split(';')
+            if (spt[spt.length - 1] == '') {
+                spt.pop()
+            }
+            to = spt.map((e) => {
+                console.log(e);
+                let test = pattern.test(e)
+                console.log(test);
+                if (!test) {
+                    return false
+                }
+                return e.trim()
+            }).join(';')
+            console.log(to);
+            if (to.includes(false)) {
+                swal.fire('mailto error : enter valid data !!')
                 return
             }
             if (subject == '' || to == '') {
@@ -622,7 +712,6 @@ $(document).on('click', '#c_add', () => {
             if (sp[sp.length - 1] == '') {
                 sp.pop()
             }
-            let pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
             to = sp.map((e) => {
                 console.log(e);
                 let test = pattern.test(e)
