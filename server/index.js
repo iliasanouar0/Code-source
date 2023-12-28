@@ -882,7 +882,7 @@ wsc.on('connection', (wss, req) => {
       let waiting = seeds.length - 3
 
       if (seeds.length >= 3) {
-        active = 3
+        active = 30
       } else {
         active = seeds.length
         waiting = 0
