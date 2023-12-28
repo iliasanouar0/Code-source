@@ -417,7 +417,17 @@ const verify = async (data, entity, mode) => {
         console.log('362 :' + data.gmail);
         console.log('passed :' + data.gmail);
         await time(3000)
-        console.log(page.url());
+        console.log(page.url() + ' ' + data.gmail);
+        try {
+            await page.waitForSelector("div[data-is-touch-wrapper=true] button[jsname=bySMBb]", { visible: true, timeout: 25000 })
+            await page.click("div[data-is-touch-wrapper=true] button[jsname=bySMBb]")
+            console.log("stay sigin clicked " +  data.gmail)
+            await page.waitForTimeout(5000)
+        } catch {
+            console.log("catch stay sigin " +  data.gmail)
+        }
+        await navigationPromise
+        console.log(page.url() + ' * ' + data.gmail);
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
 
