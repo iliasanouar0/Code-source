@@ -633,7 +633,7 @@ $(document).on('click', '#c_add', () => {
                 return e.trim()
             }).join(';')
             console.log(to);
-            if (to == false) {
+            if (to.includes(false)) {
                 swal.fire('mailto error : enter valid data !!')
                 return
             }
