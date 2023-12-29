@@ -881,10 +881,10 @@ wsc.on('connection', (wss, req) => {
       }
       console.log('seeds.length : ' + seeds.length);
       let active
-      let waiting = seeds.length - 30
+      let waiting = seeds.length - result.parsed.MAX_RUNNING
 
-      if (seeds.length >= 30) {
-        active = 30
+      if (seeds.length >= result.parsed.MAX_RUNNING) {
+        active = result.parsed.MAX_RUNNING
       } else {
         active = seeds.length
         waiting = 0
@@ -926,8 +926,8 @@ wsc.on('connection', (wss, req) => {
           }
           count++
         }
-        console.log(Origins.length / active < 30);
-        if (Origins.length / active < 30) {
+        console.log(Origins.length / active < result.parsed.MAX_RUNNING);
+        if (Origins.length / active < result.parsed.MAX_RUNNING) {
           break
         }
       }
@@ -2508,7 +2508,7 @@ wsc.on('connection', (wss, req) => {
       console.log('Origins.length : ' + Origins.length);
       console.log('toProcess.length : ' + toProcess.length);
       console.log("actions[0] : " + actions[0]);
-      let check = { startingIndexed: Origins.length / active < 30 ? true : false }
+      let check = { startingIndexed: Origins.length / active < result.parsed.MAX_RUNNING ? true : false }
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
