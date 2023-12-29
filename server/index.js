@@ -2177,6 +2177,9 @@ wsc.on('connection', (wss, req) => {
             return;
           }
           console.log(seeds.length);
+          console.log('active : ' + active);
+          console.log('toProcess.length : ' + toProcess.length);
+          console.log('seeds.length : ' + seeds.length);
           if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
@@ -2213,7 +2216,9 @@ wsc.on('connection', (wss, req) => {
           if (state === "STOPPED" || state === "PAUSED") {
             return;
           }
-
+          console.log('active : ' + active);
+          console.log('toProcess.length : ' + toProcess.length);
+          console.log('seeds.length : ' + seeds.length);
           if (toProcess.length < active && count < length && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
