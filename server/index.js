@@ -926,8 +926,8 @@ wsc.on('connection', (wss, req) => {
           }
           count++
         }
-        console.log(Origins.length / active < 3);
-        if (Origins.length / active < 3) {
+        console.log(Origins.length / active < 20);
+        if (Origins.length / active < 20) {
           break
         }
       }
@@ -2508,7 +2508,7 @@ wsc.on('connection', (wss, req) => {
       console.log('Origins.length : ' + Origins.length);
       console.log('toProcess.length : ' + toProcess.length);
       console.log("actions[0] : " + actions[0]);
-      let check = { startingIndexed: Origins.length / active < 3 ? true : false }
+      let check = { startingIndexed: Origins.length / active < 20 ? true : false }
       await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
