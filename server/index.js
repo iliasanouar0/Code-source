@@ -823,10 +823,12 @@ wsc.on('connection', (wss, req) => {
         console.log('counter result : ' + counter);
         console.log('limit : ' + limit);
         console.log('methods.fixedLimit : ' + methods.fixedLimit);
+
+        
         if (limit != 'auto') {
-          if (methods.fixedLimit == false) {
-            methods.fixedLimit = 'none'
-          }
+          // if (methods.fixedLimit == false) {
+          //   methods.fixedLimit = 'none'
+          // }
           let divider = Math.ceil(arrayBcc.length / limit)
           let startIndex = 0
           let endIndex = limit
@@ -879,10 +881,10 @@ wsc.on('connection', (wss, req) => {
       }
       console.log('seeds.length : ' + seeds.length);
       let active
-      let waiting = seeds.length - 10
+      let waiting = seeds.length - 3
 
-      if (seeds.length >= 10) {
-        active = 10
+      if (seeds.length >= 3) {
+        active = 3
       } else {
         active = seeds.length
         waiting = 0
