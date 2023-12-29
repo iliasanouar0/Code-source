@@ -227,16 +227,15 @@ const verify = async (data, entity, mode) => {
         await page.goto('https://gmail.com')
         await time(3000)
         console.log(await page.url());
-        const timeRandom = randomRange(1000, 50000)
         console.log('waiting for ' + timeRandom + ' ms :  ' + data.gmail)
-        await time(timeRandom)
+        
         if (await page.url() == 'https://www.google.com/intl/fr/gmail/about/') {
             page = await c.newPage();
             await (await browser.pages())[0].close()
             await page.goto('https://accounts.google.com/b/0/AddMailService')
             console.log(await page.url());
         }
-        await time(timeRandom)
+        
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
             await page.screenshot({
@@ -438,7 +437,7 @@ const verify = async (data, entity, mode) => {
         }
         await navigationPromise
         console.log(page.url() + ' * ' + data.gmail);
-        await time(timeRandom)
+        
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
 
@@ -600,10 +599,10 @@ const verify = async (data, entity, mode) => {
             return feedback
         }
         console.log(page.url());
-        await time(timeRandom)
+        
         await page.goto("https://mail.google.com/mail/u/0/#inbox")
         console.log(page.url());
-        await time(timeRandom)
+        
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
             await page.screenshot({
