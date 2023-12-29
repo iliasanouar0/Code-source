@@ -881,10 +881,10 @@ wsc.on('connection', (wss, req) => {
       }
       console.log('seeds.length : ' + seeds.length);
       let active
-      let waiting = seeds.length - 30
+      let waiting = seeds.length - 20
 
-      if (seeds.length >= 30) {
-        active = 30
+      if (seeds.length >= 20) {
+        active = 20
       } else {
         active = seeds.length
         waiting = 0
