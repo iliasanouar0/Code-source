@@ -1979,6 +1979,7 @@ wsc.on('connection', (wss, req) => {
               console.log('running length ' + running);
               console.log('bcc to process length ' + bccToProcess.length);
               console.log('to process length ' + toProcess.length);
+              console.log("bccResult[0] != undefined : " + bccResult[0] != undefined);
               if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined) {
                 Origins = await composeManager.getAllProcessSeedsNotBounce(data.id_process)
                 console.log(Origins);
