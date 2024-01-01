@@ -1989,8 +1989,8 @@ wsc.on('connection', (wss, req) => {
                   console.log('Origins length after seeds ' + Origins.length);
                   await time(2000);
                   console.log('option.onlyStarted :' + option.onlyStarted);
-                  await time(randomRange(1000, 5000));
                   if (option.onlyStarted != true && bccResult[0] != undefined) {
+                    await time(randomRange(1000, 5000));
                     console.log('check after finishing onlyStarted : ' + seeds[seeds.length - 1].gmail);
                     console.log('onlyStarted : ' + seeds[seeds.length - 1].gmail);
                     await startSeedProcessing(seeds[seeds.length - 1]);
