@@ -1726,7 +1726,8 @@ wsc.on('connection', (wss, req) => {
             toProcess.push(seeds[0]);
             bccToProcess.push(bccResult[0]);
             console.log('finishing after : ' + running)
-            if (!option.onlyStarted) {
+            if (option.onlyStarted != true) {
+              await time(randomRange(1000,5000))
               console.log('finishing inside start : ' + running)
               await startSeedProcessing(seeds[0]);
               console.log('this is before finishing insert : ' + running)
@@ -1990,7 +1991,7 @@ wsc.on('connection', (wss, req) => {
                   await time(2000);
                   console.log('option.onlyStarted :' + option.onlyStarted);
                   if (option.onlyStarted != true) {
-                    await time(randomRange(1000,5000));
+                    await time(randomRange(1000, 5000));
                     console.log('onlyStarted : ' + seeds[0].gmail);
                     await startSeedProcessing(seeds[0]);
                     running++
