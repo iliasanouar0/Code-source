@@ -1991,6 +1991,7 @@ wsc.on('connection', (wss, req) => {
                   console.log('option.onlyStarted :' + option.onlyStarted);
                   if (option.onlyStarted != true) {
                     await time(2000);
+                    console.log('onlyStarted : ' + seeds[0].gmail);
                     await startSeedProcessing(seeds[0]);
                     running++
                   }
