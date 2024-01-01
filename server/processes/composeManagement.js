@@ -302,18 +302,18 @@ const composeEmail = async (data, option, mode) => {
         await time(50000)
         let check = await page.evaluate(() => {
             let bounced = 0
-            // let unread = document.querySelectorAll('.zA.zE')
-            // if (unread.length == 0) {
-            //     return { status: true, label: 'no bounce', bounced: bounced }
-            // }
-            let first = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"]')[0]
+            let unread = document.querySelectorAll('.zA.zE')
+            if (unread.length == 0) {
+                return { status: true, label: 'no bounce', bounced: bounced, from: 'no unread' }
+            }
+            let first = document.querySelectorAll('tbody tr[jsmodel="nXDxbd"]')[0]
             if (first.className != 'zA yO') {
                 first.click()
-                let label = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] .y2')[0].innerText
-                bounced = parseInt(document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"] td span.bx0')[0].innerText)
-                return { status: false, label: label, bounced: bounced }
+                let label = document.querySelectorAll('tbody tr[jsmodel="nXDxbd"] .y2')[0].innerText
+                bounced = parseInt(document.querySelectorAll('tbody tr[jsmodel="nXDxbd"] td span.bx0')[0].innerText)
+                return { status: false, label: label, bounced: bounced, from: 'zA check' }
             } else {
-                return { status: false, label: 'no bounce', bounced: bounced }
+                return { status: false, label: 'no bounce', bounced: bounced, from: 'else' }
             }
         })
         let c

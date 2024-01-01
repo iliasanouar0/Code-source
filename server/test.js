@@ -1,385 +1,271 @@
-// // let dotenv = require('dotenv')
-// // const replace = require('replace-in-file');
-// // const result = dotenv.config()
-// // if (result.error) {
-// //     throw result.error
-// // }
-
-// // let count = result.parsed.RUNNING_PROCESS
-
-// // if (parseInt(result.parsed.RUNNING_PROCESS) < parseInt(result.parsed.MAX_PROCESS)) {
-// //     count++
-// //     let options = {
-// //         files: '.env',
-// //         from: /RUNNING_PROCESS=\d+/g,
-// //         to: `RUNNING_PROCESS=${count}`,
-// //     }
-// //     try {
-// //         const results = replace.sync(options);
-// //         console.log('Replacement results:', results);
-// //         // res.status(200).send(granted)
-// //     } catch (error) {
-// //         console.error('Error occurred:', error);
-// //     }
-// // }
-
 // const puppeteer = require('puppeteer-extra')
 // const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 // const setTimeout = require('timers/promises');
-// const fs = require('fs')
+// const fs = require('fs');
+// let dotenv = require('dotenv')
 // let time = setTimeout.setTimeout
 // puppeteer.use(StealthPlugin())
 
-// // const login = async (data) => {
-// //     let feedback = ''
-// //     let arg
-// //     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
-// //         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-// //     } else {
-// //         const proxyServer = `${data.proxy}`;
-// //         arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
-// //     }
-// //     console.log(`Opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
-// //     const browser = await puppeteer.launch({ headless: false, args: arg })
-// //     const page = await browser.newPage()
-// //     const navigationPromise = page.waitForNavigation()
-// //     await page.goto(`https://developers.google.com/oauthplayground`)
-// // }
-// // let data = {
-// //     proxy:'none'
-// // }
-// // login(data)
 
+// /**
+//  * @default
+//  * @constant
+//  * ~ root dir => { -/var/www/html/Code-source- } :
+//  * ? dirname.substring : /var/www/html/Code-source/server/processes = /var/www/html/Code-source/
+//  * ~ path dir => { -/var/www/html/Code-source/views/assets/images/process_result- }
+//  */
 
-// const verify = async (data, entity, mode) => {
-//     let details = ''
-//     let arg
-//     let proxyServer
-//     console.log("Verify start: " + data.gmail);
-//     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
-//         arg = [
-//             '--no-sandbox',
-//             '--ignore-certifcate-errors',
-//             '--disable-client-side-phishing-detection',
-//             '--ignore-certifcate-errors-spki-list',
-//             '--disable-setuid-sandbox',
-//             '--disable-dev-shm-usage',
-//             '--no-first-run',
-//             '--no-zygote',
-//             '--proxy-bypass-list=*',
-//             '--disable-infobars',
-//             '--disable-gpu',
-//             '--disable-web-security',
-//             '--disable-site-isolation-trials',
-//             '--enable-experimental-web-platform-features',
-//             '--start-maximized'
-//         ]
-//     } else {
-//         console.log('there is proxy');
-//         proxyServer = `${data.proxy}`;
-//         arg = [
-//             '--no-sandbox',
-//             `--proxy-server=${proxyServer}`,
-//             '--ignore-certifcate-errors',
-//             '--disable-client-side-phishing-detection',
-//             '--ignore-certifcate-errors-spki-list',
-//             '--disable-setuid-sandbox',
-//             '--disable-dev-shm-usage',
-//             '--no-first-run',
-//             '--no-zygote',
-//             '--proxy-bypass-list=*',
-//             '--disable-infobars',
-//             '--disable-gpu',
-//             '--disable-web-security',
-//             '--disable-site-isolation-trials',
-//             '--enable-experimental-web-platform-features',
-//             '--start-maximized'
-//         ]
-//     }
-//     console.log("Lunch puppeteer: " + `--proxy-server=${data.proxy}`);
-//     const browser = await puppeteer.launch({ headless: false, ignoreHTTPSErrors: true, ignoreDefaultArgs: ['--enable-automation', '--disable-extensions'], args: arg })
-//     let c = await browser.createIncognitoBrowserContext({ proxyServer: proxyServer })
-//     const page = await c.newPage();
-//     await (await browser.pages())[0].close()
+// const login = async (data, mode) => {
 //     let feedback = ''
-
-
+//     let arg
+//     if (data.proxy == 'none' || data.proxy == null || data.proxy == '' || data.proxy == 'undefined') {
+//         arg = ['--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+//     } else {
+//         const proxyServer = `${data.proxy}`;
+//         arg = [`--proxy-server=${proxyServer}`, '--no-sandbox', '--single-process', '--no-zygote', '--disable-setuid-sandbox']
+//     }
+//     console.log(`Opening seed : ${data.gmail}, At ${new Date().toLocaleString()}`);
+//     console.log(` `);
+//     const browser = await puppeteer.launch({ headless: false, args: arg })
+//     const page = await browser.newPage()
 //     try {
-//         await page.setDefaultNavigationTimeout(60000)
-//         const navigationPromise = page.waitForNavigation({ timeout: 30000 })
-//         let file = `${data.gmail.split('@')[0]}-@-init-Gmail.json`
-//         fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
-//             if (err) {
-//                 console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
-//             } else {
-//                 let cookies = JSON.parse(fs.readFileSync(file));
-//                 await page.setCookie(...cookies);
-//             }
-//         })
-//         console.log(`Goto => https://gmail.com/ : ${data.gmail}, At ${new Date().toLocaleString()}`);
-//         await page.goto('https://gmail.com')
-//         await time(3000)
-//         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
-//             const countEnter = await page.evaluate(() => {
-//                 let html = []
-//                 let el = document.querySelectorAll('.bsU')
-//                 let elSpan = document.querySelectorAll('.nU.n1 a')
-//                 for (let i = 0; i < el.length; i++) {
-//                     html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
+//         if (mode == 'Cookies') {
+//             console.log('mode is cookies : ' + data.gmail);
+//             let file = `./${data.gmail.split('@')[0]}-@-init-Gmail.json`
+//             const navigationPromise = page.waitForNavigation()
+//             fs.access(file, fs.constants.F_OK | fs.constants.W_OK, async (err) => {
+//                 if (err) {
+//                     console.error(`${file} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}, ${data.gmail}`);
+//                 } else {
+//                     console.log(`${file} ,exist & is wirable, ${data.gmail}`);
+//                     let cookies = JSON.parse(fs.readFileSync(file));
+//                     await page.setCookie(...cookies);
 //                 }
-//                 return html
 //             })
-//             await time(4000)
-//             if (countEnter.length == 0) {
-//                 details += `Entre unread inbox : 0`
-//             } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
-//                 details += `Entre unread inbox : 0`
-//             } else {
-//                 details += `Entre unread inbox : ${countEnter[0].count}`
+//             await page.goto('https://gmail.com')
+//             await time(3000)
+//             console.log(await page.url());
+//             await time(3000)
+//             if (await page.url() == 'https://www.google.com/intl/fr/gmail/about/') {
+//                 await page.goto('https://accounts.google.com/b/0/AddMailService')
+//                 console.log(await page.url());
 //             }
 //             await time(5000)
-//             const cookiesObject = await page.cookies()
-//             let NewFileJson = JSON.stringify(cookiesObject)
-//             fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
-//                 if (err) {
-//                     throw err
-//                 }
-//             })
-//             let st = await page.$$('.Xy')
-//             await time(3000)
-//             await st[0].click()
-//             await time(3000)
-//             let bt = await page.$$('.Tj')
-//             await time(3000)
-//             await bt[0].click()
-//             await time(3000)
-//             await page.select('.a5p', 'en')
-//             await time(3000)
-//             await page.waitForSelector('[guidedhelpid="save_changes_button"]')
-//             await time(3000)
-//             await page.click('[guidedhelpid="save_changes_button"]')
-//             await time(3000)
-//         }
-//         console.log('301 :' + data.gmail);
-//         await navigationPromise
-//         console.log('303 :' + data.gmail);
-//         console.log('passed :' + data.gmail);
-//         await page.waitForSelector('input[type="email"]', { timeout: 5000 })
-//         await page.click('input[type="email"]')
-//         console.log('313 :' + data.gmail);
-//         await navigationPromise
-//         console.log('315 :' + data.gmail);
-//         console.log('passed :' + data.gmail);
-//         await page.type('input[type="email"]', data.gmail, { delay: 100 })
-//         await page.waitForSelector('#identifierNext')
-//         await page.click('#identifierNext')
-//         console.log('320 :' + data.gmail);
-//         await navigationPromise
-//         console.log('322 :' + data.gmail);
-//         console.log('passed :' + data.gmail);
-//         await time(10000)
-//         if (await page.$('[aria-invalid="true"]') != null) {
-//             console.log(`invalid email : ${data.gmail}`);
-//         }
-//         console.log('336 :' + data.gmail);
-//         await navigationPromise
-//         console.log('338 :' + data.gmail);
-//         console.log('passed :' + data.gmail);
-//         await page.waitForSelector('input[type="password"]', { timeout: 5000 })
-//         await time(3000)
-//         await page.type('input[type="password"]', data.password, { delay: 200 })
-
-//         await time(5000)
-//         await page.waitForSelector('#passwordNext')
-//         await time(2000)
-//         await page.click('#passwordNext')
-//         await time(10000)
-//         if (await page.$('[aria-invalid="true"]') != null) {
-//             console.log(`invalid pass : ${data.gmail}`);
-//         }
-//         console.log('360 :' + data.gmail);
-//         await navigationPromise
-//         console.log('362 :' + data.gmail);
-//         console.log('passed :' + data.gmail);
-//         await time(3000)
-//         console.log(page.url());
-
-
-//         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
-//             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
-//             await time(4000)
-
-//             const countEnter = await page.evaluate(() => {
-//                 let html = []
-//                 let el = document.querySelectorAll('.bsU')
-//                 let elSpan = document.querySelectorAll('.nU.n1 a')
-//                 for (let i = 0; i < el.length; i++) {
-//                     html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-//                 }
-//                 return html
-//             })
-//             if (countEnter.length == 0) {
-//                 details += `Entre unread inbox : 0`
-//             } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
-//                 details += `Entre unread inbox : 0`
+//             if (await page.url() == "https://mail.google.com/mail/u/0/#inbox") {
+//                 await time(3000)
+//                 const cookiesObject = await page.cookies()
+//                 let NewFileJson = JSON.stringify(cookiesObject)
+//                 fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
+//                     if (err) {
+//                         throw err
+//                     }
+//                 })
 //             } else {
-//                 details += `Entre unread inbox : ${countEnter[0].count}`
+//                 await navigationPromise
+//                 await page.waitForSelector('input[type="email"]')
+//                 await page.click('input[type="email"]')
+//                 await navigationPromise
+//                 await page.type('input[type="email"]', data.gmail, { delay: 100 })
+//                 await page.waitForSelector('#identifierNext')
+//                 await page.click('#identifierNext')
+//                 await time(3000)
+//                 console.log(await page.url() + ' ' + data.gmail);
+//                 await time(3000)
+//                 await page.waitForSelector('input[type="password"]')
+//                 await time(3000)
+//                 page.type('input[type="password"]', data.password, { delay: 200 })
+//                 await time(3000)
+//                 page.waitForSelector('#passwordNext')
+//                 await time(3000)
+//                 page.click('#passwordNext')
+//                 await navigationPromise
+//                 await time(3000)
+//                 console.log(await page.url() + ' ' + data.gmail + ' after.');
+//                 await time(10000)
+//                 const cookiesObject = await page.cookies()
+//                 let NewFileJson = JSON.stringify(cookiesObject)
+//                 fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
+//                     if (err) {
+//                         throw err
+//                     }
+//                 })
 //             }
-
-
-//             let smart = await page.evaluate(() => {
-//                 let s = document.querySelectorAll('.ahj.ai6.Kj-JD-Jh')
-//                 if (s.length == 0) {
-//                     return false
-//                 }
-//                 return true
-//             })
-
-//             if (smart) {
-//                 let ch = await page.$$('.aho')
-//                 await ch[1].click()
-//                 await time(3000)
-//                 await page.waitForSelector('[name="data_consent_dialog_next"]')
-//                 await time(3000)
-//                 await page.click('[name="data_consent_dialog_next"]')
-//                 await time(3000)
-//                 await page.waitForSelector('[name="turn_off_in_product"]')
-//                 await time(3000)
-//                 await page.click('[name="turn_off_in_product"]')
+//             return { browser: browser, page: page, feedback: feedback }
+//         } else if (mode == 'Profile') {
+//             const navigationPromise = page.waitForNavigation()
+//             await page.goto('https://gmail.com/')
+//             await time(3000)
+//             if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
+//                 console.log('verified email : ' + data.gmail);
 //                 await time(5000)
-//                 await page.waitForSelector('[name="r"]')
-//                 await time(3000)
-//                 await page.click('[name="r"]')
-//             }
-
-//             const cookiesObject = await page.cookies()
-//             let NewFileJson = JSON.stringify(cookiesObject)
-//             fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
-//                 if (err) {
-//                     throw err
-//                 }
-//             })
-//             let st = await page.$$('.Xy')
-//             await time(3000)
-//             await st[0].click()
-//             await time(3000)
-//             let bt = await page.$$('.Tj')
-//             await time(3000)
-//             await bt[0].click()
-//             await time(3000)
-//             await page.select('.a5p', 'en')
-//             await time(3000)
-//             await page.waitForSelector('[guidedhelpid="save_changes_button"]')
-//             await time(3000)
-//             await page.click('[guidedhelpid="save_changes_button"]')
-//             await time(3000)
-//         }
-//         await navigationPromise
-//         await time(2000)
-//         console.log(page.url());
-//         let recovery = await page.$$('.lCoei.YZVTmd.SmR8')
-//         await time(2000)
-//         await recovery[2].click()
-//         await time(2000)
-//         page.waitForSelector('#knowledge-preregistered-email-response')
-//         await time(2000)
-//         await page.type('#knowledge-preregistered-email-response', data.verification, { delay: 200 })
-//         await time(2000)
-//         let confirm = await page.$$('.VfPpkd-Jh9lGc')
-//         await time(2000)
-//         await confirm[0].click()
-//         await navigationPromise
-//         await time(10000)
-//         if (await page.$('[aria-invalid="true"]') != null) {
-//             console.log('invalid verification : ' + data.verification);
-//         }
-//         console.log(page.url());
-//         await page.goto("https://mail.google.com/mail/u/0/#inbox")
-//         console.log(page.url());
-//         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
-//             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
-//             const countEnter = await page.evaluate(() => {
-//                 let html = []
-//                 let el = document.querySelectorAll('.bsU')
-//                 let elSpan = document.querySelectorAll('.nU.n1 a')
-//                 for (let i = 0; i < el.length; i++) {
-//                     html.push({ count: el.item(i).innerHTML, element: elSpan.item(i).innerHTML })
-//                 }
-//                 return html
-//             })
-//             await time(4000)
-//             if (countEnter.length == 0) {
-//                 details += `Entre unread inbox : 0`
-//             } else if (countEnter[0].element != "Inbox" && countEnter[0].element != "Boîte de réception" && countEnter[0].element != "البريد الوارد") {
-//                 details += `Entre unread inbox : 0`
 //             } else {
-//                 details += `Entre unread inbox : ${countEnter[0].count}`
+//                 await navigationPromise
+//                 await page.waitForSelector('input[type="email"]')
+//                 await page.click('input[type="email"]')
+//                 await navigationPromise
+//                 await page.type('input[type="email"]', data.gmail, { delay: 100 })
+//                 await page.waitForSelector('#identifierNext')
+//                 await page.click('#identifierNext')
+//                 await time(3000)
+//                 await page.waitForSelector('input[type="password"]')
+//                 await time(3000)
+//                 page.type('input[type="password"]', data.password, { delay: 200 })
+//                 await time(3000)
+//                 page.waitForSelector('#passwordNext')
+//                 await time(3000)
+//                 page.click('#passwordNext')
+//                 await navigationPromise
+//                 await time(10000)
 //             }
-
-//             let smart = await page.evaluate(() => {
-//                 let s = document.querySelectorAll('.ahj.ai6.Kj-JD-Jh')
-//                 if (s.length == 0) {
-//                     return false
-//                 }
-//                 return true
-//             })
-
-//             if (smart) {
-//                 let ch = await page.$$('.aho')
-//                 await ch[1].click()
-//                 await time(3000)
-//                 await page.waitForSelector('[name="data_consent_dialog_next"]')
-//                 await time(3000)
-//                 await page.click('[name="data_consent_dialog_next"]')
-//                 await time(3000)
-//                 await page.waitForSelector('[name="turn_off_in_product"]')
-//                 await time(3000)
-//                 await page.click('[name="turn_off_in_product"]')
-//                 await time(5000)
-//                 await page.waitForSelector('[name="r"]')
-//                 await time(3000)
-//                 await page.click('[name="r"]')
-//             }
-
-//             const cookiesObject = await page.cookies()
-//             let NewFileJson = JSON.stringify(cookiesObject)
-//             fs.writeFile(file, NewFileJson, { spaces: 2 }, (err) => {
-//                 if (err) {
-//                     throw err
-//                 }
-//             })
-//             let st = await page.$$('.Xy')
-//             await time(3000)
-//             await st[0].click()
-//             await time(3000)
-//             let bt = await page.$$('.Tj')
-//             await time(3000)
-//             await bt[0].click()
-//             await time(3000)
-//             await page.select('.a5p', 'en')
-//             await time(3000)
-//             await page.waitForSelector('[guidedhelpid="save_changes_button"]')
-//             await time(3000)
-//             await page.click('[guidedhelpid="save_changes_button"]')
-//             await time(3000)
+//             return { browser: browser, page: page, feedback: feedback }
 //         }
 //     } catch (e) {
-//         console.log("catch error");
 //         console.log(e.message);
-//         // if (e instanceof puppeteer._pptr.errors.TimeoutError) {
-//         //     console.log(e.message);
-//         // } else if (e instanceof puppeteer._pptr.errors.ReferenceError) {
-//         //     console.log(e.message);
-//         // }
+//         console.log("catch error");
+//         return
+//     }
+
+// }
+
+// const composeEmail = async (data, option, mode) => {
+//     let feedback = ''
+//     const obj = await login(data, mode)
+//     if (obj.page == undefined) {
+//         console.log(obj);
+//         return obj
+//     }
+//     const page = obj.page
+//     const browser = obj.browser
+//     feedback += obj.feedback
+//     await time(10000)
+//     try {
+//         if (option.bcc == undefined) {
+//             console.log('no data');
+//             return
+//         }
+//         await page.goto('https://mail.google.com/mail/u/0/#inbox')
+//         await time(3000)
+
+//         let link
+//         link = `https://mail.google.com/mail/u/0/#search/in%3Ainbox+is%3Aunread`
+//         await page.goto(link)
+//         await time(3000)
+//         const status = await page.evaluate(() => {
+//             let checkSpan = document.querySelectorAll('div.J-J5-Ji.J-JN-M-I-Jm  span')
+//             checkSpan.item(1).click()
+//             return checkSpan.item(1).ariaChecked
+//         })
+//         await time(3000)
+//         console.log(status);
+//         if (status == 'true') {
+//             await time(3000)
+//             let c = await page.$$('div[act="1"]')
+//             await time(3000)
+//             await c[1].click();
+//             await time(3000)
+//             await page.goto(link)
+//         }
+
+//         await page.goto('https://mail.google.com/mail/u/0/#inbox')
+
+//         await time(3000)
+//         await page.waitForSelector('.z0')
+//         await time(3000)
+//         await page.click('.z0')
+//         await time(6000)
+//         await page.waitForSelector('.agP.aFw')
+//         await time(3000)
+//         await page.type('.agP.aFw', option.to, { delay: 200 })
+//         await time(3000)
+//         await page.waitForSelector(".aB.gQ.pB")
+//         await time(3000)
+//         await page.click(".aB.gQ.pB")
+//         await time(3000)
+//         let bcc = await page.evaluate((b) => {
+//             let inputs = document.querySelectorAll('.agP.aFw')
+//             inputs[1].value = b
+//             return b
+//         }, option.bcc.join(','))
+//         await time(3000)
+//         await time(3000)
+//         await page.waitForSelector('[name="subjectbox"]')
+//         await time(3000)
+//         await page.click('[name="subjectbox"]')
+//         await time(3000)
+//         await page.type('[name="subjectbox"]', option.subject, { delay: 200 })
+//         await time(3000)
+//         if (option.offer != '' && option.offer != null) {
+//             fs.readFile(`${option.offer}`, async (err, data) => {
+//                 if (!err) {
+//                     await page.evaluate(async (dataTo) => {
+//                         document.querySelector('div[role="textbox"]').innerHTML = dataTo
+//                     }, data.toString());
+//                 }
+//             })
+//         }
+//         await time(3000)
+//         await Promise.all([
+//             page.$eval(`.T-I.J-J5-Ji.aoO.v7.T-I-atl.L3`, element =>
+//                 element.click()
+//             ),
+//             await page.waitForNavigation()
+//         ]);
+//         await time(60000)
+//         let check = await page.evaluate(() => {
+//             let bounced = 0
+//             let unread = document.querySelectorAll('.zA.zE')
+//             if (unread.length == 0) {
+//                 return { status: true, label: 'no bounce', bounced: bounced, from: 'no unread' }
+//             }
+//             let first = document.querySelectorAll('tbody tr[jsmodel="nXDxbd"]')[0]
+//             if (first.className != 'zA yO') {
+//                 first.click()
+//                 let label = document.querySelectorAll('tbody tr[jsmodel="nXDxbd"] .y2')[0].innerText
+//                 bounced = parseInt(document.querySelectorAll('tbody tr[jsmodel="nXDxbd"] td span.bx0')[0].innerText)
+//                 return { status: false, label: label, bounced: bounced, from: 'zA check' }
+//             } else {
+//                 return { status: false, label: 'no bounce', bounced: bounced, from: 'else' }
+//             }
+//         })
+//         let c
+//         console.log('check :');
+//         console.log(check)
+//         let text = check.label
+//         console.log(text + ' ' + data.gmail);
+//         if (text.includes('limit')) {
+//             c = { status: false, message: text.split('.')[0].split('\n')[1], send: option.bcc.length, bounced: check.bounced }
+//         } else if (text.includes('blocked') /*|| text.includes('Address not found')|| text.includes('Recipient inbox full') || text.includes('Delivery incomplete') || text.includes('Message not delivered')*/) {
+//             c = { status: false, message: text.split('.')[0].split('\n')[1], send: option.bcc.length, bounced: check.bounced }
+//         } else {
+//             c = { status: true, message: 'No bounced', send: option.bcc.length, bounced: check.bounced }
+//         }
+//         await time(3000)
+//         if (!c.status) {
+//             console.log(c.message);
+//             console.log('you can\'t send !!');
+//             return
+//         } else {
+//             console.log('sended !!');
+//             return
+//         }
+//     } catch (e) {
+//         console.log(e.message + ' ' + data.gmail);
+//         console.log("catch error : " + data.gmail);
+//         return
 //     }
 // }
-
-// // pollerdss236@gmail.com	mnbvcx890	38.34.185.143:3838	gmail	pfsrzsrq711064@outlook.com
+// // aminouhassan771@gmail.com	97845024	none	gmail	peholafa@outlook.com
 // let data = {
-//     gmail: 'pollerdss236@gmail.com',
-//     password: 'mnbvcx890',
-//     verification: 'pfsrzsrq711064@outlook.com',
-//     proxy: '38.34.185.143:3838',
+//     gmail: "aminouhassan771@gmail.com",
+//     password: "97845024",
+//     proxy: "none"
 // }
 
-// verify(data, 'GML', 'Cookies')
+// let option = {
+//     offer: './test11.html',
+//     bcc: ['ilyasanouar01@gmail.com'],
+//     subject: 'HEY',
+//     to: 'iliasanouar0@gmail.com'
+// }
+
+// composeEmail(data, option, 'Cookies')
