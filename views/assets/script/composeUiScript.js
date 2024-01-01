@@ -1179,6 +1179,11 @@ $(document).on('click', '.status', event => {
     $('#modal-compose-view').on('hide.bs.modal', () => {
         websocket.close()
     })
+
+    $('#refresh_result').on('click', e => {
+        $('#process_result').DataTable().ajax.reload(function (json) { getCount(json) }, false)
+        $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
+    })
 })
 
 $(document).on('click', '.details', event => {
@@ -1765,4 +1770,8 @@ $(document).on('hide.bs.modal', '.edit_offers', () => {
 })
 
 
+$(document).on('click', '#refresh_process', e => {
+    $('body .tooltip').removeClass('show');
+    getDataCompose.ajax.reload(null, false)
+})
 
