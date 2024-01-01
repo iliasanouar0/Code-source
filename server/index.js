@@ -1727,7 +1727,7 @@ wsc.on('connection', (wss, req) => {
             bccToProcess.push(bccResult[0]);
             console.log('finishing after : ' + running)
             if (option.onlyStarted != true) {
-              await time(randomRange(1000,5000))
+              await time(randomRange(1000, 5000))
               console.log('finishing inside start : ' + running)
               await startSeedProcessing(seeds[0]);
               console.log('this is before finishing insert : ' + running)
