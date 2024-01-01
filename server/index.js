@@ -1990,6 +1990,7 @@ wsc.on('connection', (wss, req) => {
                   await time(2000);
                   console.log('option.onlyStarted :' + option.onlyStarted);
                   if (option.onlyStarted != true) {
+                    await time(2000);
                     await startSeedProcessing(seeds[0]);
                     running++
                   }
