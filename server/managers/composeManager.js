@@ -239,7 +239,7 @@ const getAllProcessSeedsServer = async (id) => {
 
 const getAllProcessSeedsNotBounce = async (id) => {
     // let sql = "SELECT composing.id_process,composing.action, seeds.* FROM composing JOIN seeds ON seeds.id_list=composing.id_list WHERE composing.id_process=$1 GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds"
-    let sql = "SELECT composing.id_process,composing.action, seeds.*,results.bounced, results.status as rstatus FROM composing JOIN seeds ON seeds.id_list=composing.id_list JOIN results ON results.id_seeds=seeds.id_seeds WHERE composing.id_process=($1) AND results.bounced IS NULL AND results.status='running' GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds,results.bounced,results.status"
+    let sql = "SELECT composing.id_process,composing.action, seeds.*,results.bounced, results.status as rstatus FROM composing JOIN seeds ON seeds.id_list=composing.id_list JOIN results ON results.id_seeds=seeds.id_seeds WHERE composing.id_process=($1) AND results.bounced IS NULL AND results.status='finished' GROUP BY seeds.id_list,composing.id_list,composing.id_process,seeds.id_seeds,results.bounced,results.status"
     const client = await pool.connect()
     const list = await client.query(sql, [id])
     client.release()
