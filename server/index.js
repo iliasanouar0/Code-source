@@ -1727,7 +1727,7 @@ wsc.on('connection', (wss, req) => {
             bccToProcess.push(bccResult[0]);
             console.log('finishing after : ' + running)
             if (option.onlyStarted != true) {
-              await time(randomRange(1000, 5000));
+              // await time(randomRange(1000, 5000));
               console.log('handleSuccessDefault onlyStarted : ' + seeds[0].gmail);
               console.log('onlyStarted : ' + seeds[0].gmail);
               await startSeedProcessing(seeds[0]);
