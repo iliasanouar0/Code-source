@@ -1993,7 +1993,10 @@ wsc.on('connection', (wss, req) => {
                   if (option.onlyStarted != true && bccResult[0] != undefined) {
                     console.log('check after finishing onlyStarted : ' + seeds[seeds.length - 1].gmail);
                     console.log('onlyStarted : ' + seeds[seeds.length - 1].gmail);
-                    await startSeedProcessing(seeds[seeds.length - 1]);
+                    // await startSeedProcessing(seeds[seeds.length - 1]);
+                    await resultManager.startNow({ id_seeds: seeds[seeds.length - 1].id_seeds, id_process: data.id_process })
+                    await resultManager.updateState([{ id_seeds: seeds[seeds.length - 1].id_seeds, id_process: data.id_process }], "running")
+                    console.log('onlyStarted  after starting : ' + seeds[seeds.length - 1].gmail);
                     running++
                   }
                   toProcess.push(seeds[seeds.length - 1]);
