@@ -1728,6 +1728,7 @@ wsc.on('connection', (wss, req) => {
             console.log('finishing after : ' + running)
             if (option.onlyStarted != true) {
               await time(randomRange(1000, 5000));
+              console.log('handleSuccessDefault onlyStarted : ' + seeds[0].gmail);
               console.log('onlyStarted : ' + seeds[0].gmail);
               await startSeedProcessing(seeds[0]);
               running++
@@ -1990,6 +1991,7 @@ wsc.on('connection', (wss, req) => {
                   console.log('option.onlyStarted :' + option.onlyStarted);
                   if (option.onlyStarted != true) {
                     await time(randomRange(1000, 5000));
+                    console.log('check after finishing onlyStarted : ' + seeds[seeds.length - 1].gmail);
                     console.log('onlyStarted : ' + seeds[seeds.length - 1].gmail);
                     await startSeedProcessing(seeds[seeds.length - 1]);
                     running++
