@@ -324,9 +324,10 @@ const composeEmail = async (data, option, mode) => {
         }).catch(err => {
             console.error(err)
         })*/
+        console.log(text + ' ' + data.gmail);
         if (text.includes('limit')) {
             c = { status: false, message: text.split('.')[0].split('\n')[1], send: option.bcc.length, bounced: check.bounced }
-        } else if (text.includes('blocked') /*|| text.includes('Address not found')|| text.includes('Recipient inbox full') || text.includes('Delivery incomplete') || text.includes('Message not delivered')*/ ) {
+        } else if (text.includes('blocked') /*|| text.includes('Address not found')|| text.includes('Recipient inbox full') || text.includes('Delivery incomplete') || text.includes('Message not delivered')*/) {
             c = { status: false, message: text.split('.')[0].split('\n')[1], send: option.bcc.length, bounced: check.bounced }
         } else {
             c = { status: true, message: 'No bounced', send: option.bcc.length, bounced: check.bounced }
