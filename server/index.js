@@ -1994,7 +1994,7 @@ wsc.on('connection', (wss, req) => {
                     await startSeedProcessing(seeds[seeds.length - 1]);
                     running++
                   }
-                  toProcess.push(seeds[0]);
+                  toProcess.push(seeds[seeds.length - 1]);
                   seeds.splice(seeds.indexOf(seeds[seeds.length - 1]), 1);
                   bccToProcess.push(bccResult[0]);
                   bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
