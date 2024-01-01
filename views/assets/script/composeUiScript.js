@@ -1182,6 +1182,7 @@ $(document).on('click', '.status', event => {
 
     $('#refresh_result').on('click', e => {
         console.log('refresh result');
+        $('#refresh_result tbody').html('')
         $('#process_result').DataTable().ajax.reload(function (json) { getCount(json) }, false)
         $('.status_bg').html($(`.status-p-${id}`).prop('outerHTML'))
     })
