@@ -1720,7 +1720,7 @@ wsc.on('connection', (wss, req) => {
           }
           console.log('seeds.length ' + seeds.length);
           console.log('finishing insert : ' + running)
-          if (toProcess.length < active && state != "STOPPED" && state != "PAUSED" && seeds.length != 0) {
+          if (toProcess.length < active && state != "STOPPED" && state != "PAUSED" && seeds.length != 0 && bccResult.length != 0) {
             console.log('finishing inside : ' + running)
             console.log('The indexed seed: ' + seeds[0].id_seeds);
             toProcess.push(seeds[0]);
