@@ -1773,8 +1773,7 @@ $(document).on('hide.bs.modal', '.edit_offers', () => {
 
 $(document).on('click', '#refresh_process', e => {
     console.log('refresh process');
-    $("#composeData tbody").html('loading')
-    $('body .tooltip').removeClass('show');
+    $("#composeData tbody").html('')
     getDataCompose.ajax.reload(null, false)
 })
 
