@@ -302,10 +302,10 @@ const composeEmail = async (data, option, mode) => {
         await time(50000)
         let check = await page.evaluate(() => {
             let bounced = 0
-            let unread = document.querySelectorAll('.zA.zE')
-            if (unread.length == 0) {
-                return { status: true, label: 'no bounce', bounced: bounced }
-            }
+            // let unread = document.querySelectorAll('.zA.zE')
+            // if (unread.length == 0) {
+            //     return { status: true, label: 'no bounce', bounced: bounced }
+            // }
             let first = document.querySelectorAll('tbody tr[jscontroller="ZdOxDb"]')[0]
             if (first.className != 'zA yO') {
                 first.click()
