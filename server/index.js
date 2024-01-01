@@ -1999,6 +1999,13 @@ wsc.on('connection', (wss, req) => {
                   bccToProcess.push(bccResult[0]);
                   bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
                   await updateProcessState();
+                } else {
+                  let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
+                  await processStateManager.updateState(status);
+                  composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
+                  console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()} `);
+                  sendToAll(clients, 'reload');
+                  break
                 }
               }
 
