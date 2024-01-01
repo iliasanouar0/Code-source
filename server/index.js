@@ -1983,14 +1983,14 @@ wsc.on('connection', (wss, req) => {
               if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined) {
                 Origins = await composeManager.getAllProcessSeedsNotBounce(data.id_process)
                 console.log(Origins);
-                if (Origins.length != 0) {
+                if (Origins.length != 0 && bccResult[0] != undefined) {
                   seeds = [...Origins];
                   console.log('seeds.length after Origins ' + seeds.length);
                   console.log('Origins length after seeds ' + Origins.length);
                   await time(2000);
                   console.log('option.onlyStarted :' + option.onlyStarted);
-                  if (option.onlyStarted != true) {
-                    await time(randomRange(1000, 5000));
+                  await time(randomRange(1000, 5000));
+                  if (option.onlyStarted != true && bccResult[0] != undefined) {
                     console.log('check after finishing onlyStarted : ' + seeds[seeds.length - 1].gmail);
                     console.log('onlyStarted : ' + seeds[seeds.length - 1].gmail);
                     await startSeedProcessing(seeds[seeds.length - 1]);
