@@ -881,6 +881,7 @@ wsc.on('connection', (wss, req) => {
       }
       console.log('seeds.length : ' + seeds.length);
       let active
+      console.log('MAX_RUNNING : ' + result.parsed.MAX_RUNNING);
       let waiting = seeds.length - result.parsed.MAX_RUNNING
 
       if (seeds.length >= result.parsed.MAX_RUNNING) {
@@ -1601,7 +1602,7 @@ wsc.on('connection', (wss, req) => {
                   bccToProcess.push(bccResult[0]);
                   bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
                   await updateProcessState();
-                } 
+                }
                 // else {
                 //   let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
                 //   await processStateManager.updateState(status);
