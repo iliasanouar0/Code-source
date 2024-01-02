@@ -117,7 +117,7 @@ submitButton.addEventListener("click", (e) => {
           // document.cookie = `status={Login:true,session-user:user};expires=${daysToExpire};path=/`
           window.sessionStorage.setItem('auth', '1')
           if (data[0].type == "admin" || data[0].type == "IT") {
-            window.location.href = "../admin/process";
+            window.location.href = "../admin/compose";
           } else if (data[0].type == "sup") {
             document.location.href = "../supervisor/compose";
           } else {
