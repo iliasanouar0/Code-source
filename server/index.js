@@ -1602,7 +1602,7 @@ wsc.on('connection', (wss, req) => {
               }
 
 
-              if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined) {
+              if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined && seedsRunning.length < active) {
                 Origins = await composeManager.getAllProcessSeedsNotBounce(data.id_process)
                 console.log(Origins);
                 if (Origins.length != 0 && bccResult[0] != undefined) {
