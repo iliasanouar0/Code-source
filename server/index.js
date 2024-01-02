@@ -1580,6 +1580,7 @@ wsc.on('connection', (wss, req) => {
               console.log('to process length ' + toProcess.length);
               console.log("bccResult[0] != undefined : " + bccResult[0] != undefined);
               let seedsRunning = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
+
               if (toProcess.length < active && state != "STOPPED" && state != "PAUSED" && seeds.length != 0 && bccResult.length != 0) {
                 console.log('finishing inside : ' + running)
                 console.log('The indexed seed: ' + seeds[0].id_seeds);
@@ -1606,22 +1607,21 @@ wsc.on('connection', (wss, req) => {
                 console.log(Origins);
                 if (Origins.length != 0 && bccResult[0] != undefined) {
                   seeds = [...Origins];
-                  console.log('seeds.length after Origins ' + seeds.length);
-                  console.log('Origins length after seeds ' + Origins.length);
-                  await time(2000);
-                  console.log('option.onlyStarted :' + option.onlyStarted);
-                  if (option.onlyStarted != true && bccResult[0] != undefined) {
-                    await time(3000)
-                    console.log('check after finishing onlyStarted : ' + seeds[seeds.length - 1].gmail);
-                    console.log('onlyStarted : ' + seeds[seeds.length - 1].gmail);
-                    await startSeedProcessing(seeds[seeds.length - 1]);
-                    console.log('onlyStarted  after starting : ' + seeds[seeds.length - 1].gmail);
+                  console.log('The indexed seed: ' + seeds[0].id_seeds);
+                  toProcess.push(seeds[0]);
+                  bccToProcess.push(bccResult[0]);
+                  console.log('finishing after : ' + running)
+                  if (option.onlyStarted != true) {
+                    // await time(randomRange(1000, 5000));
+                    console.log('handleSuccessDefault onlyStarted : ' + seeds[0].gmail);
+                    console.log('onlyStarted : ' + seeds[0].gmail);
+                    await startSeedProcessing(seeds[0]);
                     running++
                   }
-                  toProcess.push(seeds[seeds.length - 1]);
-                  seeds.splice(seeds.indexOf(seeds[seeds.length - 1]), 1);
-                  bccToProcess.push(bccResult[0]);
+                  seeds.splice(seeds.indexOf(seeds[0]), 1);
+                  console.log('seeds.indexOf(seeds[0]) length : ' + seeds.indexOf(seeds[0]));
                   bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
+                  count++;
                   await updateProcessState();
                 }
               }
