@@ -1611,13 +1611,13 @@ wsc.on('connection', (wss, req) => {
                   toProcess.push(seeds[0]);
                   bccToProcess.push(bccResult[0]);
                   console.log('finishing after : ' + running)
-                  // if (option.onlyStarted != true) {
-                  //   // await time(randomRange(1000, 5000));
-                  //   console.log('handleSuccessDefault onlyStarted : ' + seeds[0].gmail);
-                  //   console.log('onlyStarted : ' + seeds[0].gmail);
-                  //   await startSeedProcessing(seeds[0]);
-                  //   running++
-                  // }
+                  if (option.onlyStarted != true) {
+                    // await time(randomRange(1000, 5000));
+                    console.log('handleSuccessDefault onlyStarted : ' + seeds[0].gmail);
+                    console.log('onlyStarted : ' + seeds[0].gmail);
+                    await startSeedProcessing(seeds[0]);
+                    running++
+                  }
                   seeds.splice(seeds.indexOf(seeds[0]), 1);
                   console.log('seeds.indexOf(seeds[0]) length : ' + seeds.indexOf(seeds[0]));
                   bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
