@@ -1589,6 +1589,7 @@ wsc.on('connection', (wss, req) => {
                   await time(2000);
                   console.log('option.onlyStarted :' + option.onlyStarted);
                   if (option.onlyStarted != true && bccResult[0] != undefined) {
+                    await time(3000)
                     console.log('check after finishing onlyStarted : ' + seeds[seeds.length - 1].gmail);
                     console.log('onlyStarted : ' + seeds[seeds.length - 1].gmail);
                     await startSeedProcessing(seeds[seeds.length - 1]);
