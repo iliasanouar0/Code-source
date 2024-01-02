@@ -1338,7 +1338,7 @@ wsc.on('connection', (wss, req) => {
             count++;
             await updateProcessState();
           }
-          if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined && seedsRunning.length < active) {
+          if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined) {
             Origins = await composeManager.getAllProcessSeedsNotBounce(data.id_process)
             console.log(Origins);
             if (Origins.length != 0 && bccResult[0] != undefined) {
@@ -1458,7 +1458,7 @@ wsc.on('connection', (wss, req) => {
             count++;
             await updateProcessState();
           }
-          if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined && seedsRunning.length < active) {
+          if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined) {
             Origins = await composeManager.getAllProcessSeedsNotBounce(data.id_process)
             console.log(Origins);
             if (Origins.length != 0 && bccResult[0] != undefined) {
