@@ -1581,25 +1581,25 @@ wsc.on('connection', (wss, req) => {
               console.log("bccResult[0] != undefined : " + bccResult[0] != undefined);
               let seedsRunning = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
 
-              if (toProcess.length < active && state != "STOPPED" && state != "PAUSED" && seeds.length != 0 && bccResult.length != 0) {
-                console.log('finishing inside : ' + running)
-                console.log('The indexed seed: ' + seeds[0].id_seeds);
-                toProcess.push(seeds[0]);
-                bccToProcess.push(bccResult[0]);
-                console.log('finishing after : ' + running)
-                if (option.onlyStarted != true) {
-                  // await time(randomRange(1000, 5000));
-                  console.log('handleSuccessDefault onlyStarted : ' + seeds[0].gmail);
-                  console.log('onlyStarted : ' + seeds[0].gmail);
-                  await startSeedProcessing(seeds[0]);
-                  running++
-                }
-                seeds.splice(seeds.indexOf(seeds[0]), 1);
-                console.log('seeds.indexOf(seeds[0]) length : ' + seeds.indexOf(seeds[0]));
-                bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
-                count++;
-                await updateProcessState();
-              }
+              // if (toProcess.length < active && state != "STOPPED" && state != "PAUSED" && seeds.length != 0 && bccResult.length != 0) {
+              //   console.log('finishing inside : ' + running)
+              //   console.log('The indexed seed: ' + seeds[0].id_seeds);
+              //   toProcess.push(seeds[0]);
+              //   bccToProcess.push(bccResult[0]);
+              //   console.log('finishing after : ' + running)
+              //   // if (option.onlyStarted != true) {
+              //   //   // await time(randomRange(1000, 5000));
+              //   //   console.log('handleSuccessDefault onlyStarted : ' + seeds[0].gmail);
+              //   //   console.log('onlyStarted : ' + seeds[0].gmail);
+              //   //   await startSeedProcessing(seeds[0]);
+              //   //   running++
+              //   // }
+              //   seeds.splice(seeds.indexOf(seeds[0]), 1);
+              //   console.log('seeds.indexOf(seeds[0]) length : ' + seeds.indexOf(seeds[0]));
+              //   bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
+              //   count++;
+              //   await updateProcessState();
+              // }
 
               console.log("seedsRunning.length : " + seedsRunning.length);
               if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined && seedsRunning.length < active) {
