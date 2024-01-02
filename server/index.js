@@ -1613,6 +1613,27 @@ wsc.on('connection', (wss, req) => {
                 //   break
                 // }
               }
+
+              if (toProcess.length < active && state != "STOPPED" && state != "PAUSED" && seeds.length != 0 && bccResult.length != 0) {
+                console.log('finishing inside : ' + running)
+                console.log('The indexed seed: ' + seeds[0].id_seeds);
+                toProcess.push(seeds[0]);
+                bccToProcess.push(bccResult[0]);
+                console.log('finishing after : ' + running)
+                if (option.onlyStarted != true) {
+                  // await time(randomRange(1000, 5000));
+                  console.log('handleSuccessDefault onlyStarted : ' + seeds[0].gmail);
+                  console.log('onlyStarted : ' + seeds[0].gmail);
+                  await startSeedProcessing(seeds[0]);
+                  running++
+                }
+                seeds.splice(seeds.indexOf(seeds[0]), 1);
+                console.log('seeds.indexOf(seeds[0]) length : ' + seeds.indexOf(seeds[0]));
+                bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
+                count++;
+                await updateProcessState();
+              }
+
               let seedsRunning = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
 
               if (toProcess.length === 0 && seeds.length === 0 && seedsRunning.length === 0) {
