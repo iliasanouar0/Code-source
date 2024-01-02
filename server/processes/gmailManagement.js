@@ -227,7 +227,6 @@ const verify = async (data, entity, mode) => {
         await page.goto('https://gmail.com')
         await time(3000)
         console.log(await page.url());
-        console.log('waiting for ' + timeRandom + ' ms :  ' + data.gmail)
         
         if (await page.url() == 'https://www.google.com/intl/fr/gmail/about/') {
             page = await c.newPage();
