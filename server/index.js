@@ -1657,7 +1657,7 @@ wsc.on('connection', (wss, req) => {
               console.log("bccResult[0] != undefined : " + bccResult[0] != undefined);
               console.log("seedsRunning.length : " + seedsRunning.length);
 
-              if (bccToProcess.length === 0 && seeds.length === 0 && seedsRunning.length === 0) {
+              if (bccToProcess.length === 0 && toProcess.length === 0 && seeds.length === 0 && seedsRunning.length === 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
                 await processStateManager.updateState(status);
                 composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
