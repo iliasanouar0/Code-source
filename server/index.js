@@ -1579,7 +1579,8 @@ wsc.on('connection', (wss, req) => {
               console.log('bcc to process length ' + bccToProcess.length);
               console.log('to process length ' + toProcess.length);
               console.log("bccResult[0] != undefined : " + bccResult[0] != undefined);
-              if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined) {
+              let seedsRunning = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
+              if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined && seedsRunning.length < active) {
                 Origins = await composeManager.getAllProcessSeedsNotBounce(data.id_process)
                 console.log(Origins);
                 if (Origins.length != 0 && bccResult[0] != undefined) {
@@ -1634,7 +1635,7 @@ wsc.on('connection', (wss, req) => {
                 await updateProcessState();
               }
 
-              let seedsRunning = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
+              seedsRunning = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
 
               if (toProcess.length === 0 && seeds.length === 0 && seedsRunning.length === 0) {
                 let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
