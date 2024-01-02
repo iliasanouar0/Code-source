@@ -1338,30 +1338,6 @@ wsc.on('connection', (wss, req) => {
             count++;
             await updateProcessState();
           }
-          if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined) {
-            Origins = await composeManager.getAllProcessSeedsNotBounce(data.id_process)
-            console.log(Origins);
-            if (Origins.length != 0 && bccResult[0] != undefined) {
-              seeds = [...Origins];
-              console.log('seeds.length after Origins ' + seeds.length);
-              console.log('Origins length after seeds ' + Origins.length);
-              await time(2000);
-              console.log('option.onlyStarted :' + option.onlyStarted);
-              if (option.onlyStarted != true && bccResult[0] != undefined) {
-                await time(3000)
-                console.log('check after finishing onlyStarted : ' + seeds[seeds.length - 1].gmail);
-                console.log('onlyStarted : ' + seeds[seeds.length - 1].gmail);
-                await startSeedProcessing(seeds[seeds.length - 1]);
-                console.log('onlyStarted  after starting : ' + seeds[seeds.length - 1].gmail);
-                running++
-              }
-              toProcess.push(seeds[seeds.length - 1]);
-              seeds.splice(seeds.indexOf(seeds[seeds.length - 1]), 1);
-              bccToProcess.push(bccResult[0]);
-              bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
-              await updateProcessState();
-            }
-          }
         }
 
         async function handleFailure(seed) {
@@ -1447,40 +1423,6 @@ wsc.on('connection', (wss, req) => {
             bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
             count++;
             await updateProcessState();
-          }
-          if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined) {
-            Origins = await composeManager.getAllProcessSeedsNotBounce(data.id_process)
-            console.log(Origins);
-            if (Origins.length != 0 && bccResult[0] != undefined) {
-              seeds = [...Origins];
-              console.log('seeds.length after Origins ' + seeds.length);
-              console.log('Origins length after seeds ' + Origins.length);
-              await time(2000);
-              console.log('option.onlyStarted :' + option.onlyStarted);
-              if (option.onlyStarted != true && bccResult[0] != undefined) {
-                await time(3000)
-                console.log('check after finishing onlyStarted : ' + seeds[seeds.length - 1].gmail);
-                console.log('onlyStarted : ' + seeds[seeds.length - 1].gmail);
-                await startSeedProcessing(seeds[seeds.length - 1]);
-                // await resultManager.startNow({ id_seeds: seeds[seeds.length - 1].id_seeds, id_process: data.id_process })
-                // await resultManager.updateState([{ id_seeds: seeds[seeds.length - 1].id_seeds, id_process: data.id_process }], "running")
-                console.log('onlyStarted  after starting : ' + seeds[seeds.length - 1].gmail);
-                running++
-              }
-              toProcess.push(seeds[seeds.length - 1]);
-              seeds.splice(seeds.indexOf(seeds[seeds.length - 1]), 1);
-              bccToProcess.push(bccResult[0]);
-              bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
-              await updateProcessState();
-            }
-            // else {
-            //   let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
-            //   await processStateManager.updateState(status);
-            //   composeManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
-            //   console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()} `);
-            //   sendToAll(clients, 'reload');
-            //   break
-            // }
           }
         }
 
@@ -1656,6 +1598,32 @@ wsc.on('connection', (wss, req) => {
                 bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
                 count++;
                 await updateProcessState();
+              }
+
+
+              if (seeds.length == 0 && bccToProcess.length == 0 && toProcess == 0 && bccResult[0] != undefined) {
+                Origins = await composeManager.getAllProcessSeedsNotBounce(data.id_process)
+                console.log(Origins);
+                if (Origins.length != 0 && bccResult[0] != undefined) {
+                  seeds = [...Origins];
+                  console.log('seeds.length after Origins ' + seeds.length);
+                  console.log('Origins length after seeds ' + Origins.length);
+                  await time(2000);
+                  console.log('option.onlyStarted :' + option.onlyStarted);
+                  if (option.onlyStarted != true && bccResult[0] != undefined) {
+                    await time(3000)
+                    console.log('check after finishing onlyStarted : ' + seeds[seeds.length - 1].gmail);
+                    console.log('onlyStarted : ' + seeds[seeds.length - 1].gmail);
+                    await startSeedProcessing(seeds[seeds.length - 1]);
+                    console.log('onlyStarted  after starting : ' + seeds[seeds.length - 1].gmail);
+                    running++
+                  }
+                  toProcess.push(seeds[seeds.length - 1]);
+                  seeds.splice(seeds.indexOf(seeds[seeds.length - 1]), 1);
+                  bccToProcess.push(bccResult[0]);
+                  bccResult.splice(bccResult.indexOf(bccResult[0]), 1);
+                  await updateProcessState();
+                }
               }
 
               seedsRunning = await composeManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
