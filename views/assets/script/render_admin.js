@@ -176,66 +176,62 @@ fetch(adminSidebarUrl)
       cloudproject.setAttribute('href', '../cloud/project/')
       cloudlist.setAttribute('href', '../cloud/list/')
       cloudprocess.setAttribute('href', '../cloud/process/')
-    }
-    else if (path == "/admin/cloud/account/") {
+    } else if (path == "/admin/cloud/account/") {
       home.setAttribute("href", "../");
       cloudaccount.classList.add("active");
       cloudaccount.setAttribute("href", "./");
-      entities.setAttribute("href", "../entities/");
-      process.setAttribute('href', '../process/')
-      users.setAttribute('href', '../users/')
-      lists.setAttribute("href", '../lists/')
-      settings.setAttribute("href", '../database/')
-      authorization.setAttribute("href", '../authorization/')
-      compose.setAttribute("href", '../compose/')
-      cloudproject.setAttribute('href', '../cloud/project/')
-      cloudlist.setAttribute('href', '../cloud/list/')
-      cloudprocess.setAttribute('href', '../cloud/process/')
-    }
-    else if (path == "/admin/cloud/project/") {
+      entities.setAttribute("href", "../../entities/");
+      process.setAttribute('href', '../../process/')
+      users.setAttribute('href', '../../users/')
+      lists.setAttribute("href", '../../lists/')
+      settings.setAttribute("href", '../../database/')
+      authorization.setAttribute("href", '../../authorization/')
+      compose.setAttribute("href", '../../compose/')
+      cloudproject.setAttribute('href', '../../cloud/project/')
+      cloudlist.setAttribute('href', '../../cloud/list/')
+      cloudprocess.setAttribute('href', '../../cloud/process/')
+    } else if (path == "/admin/cloud/project/") {
       home.setAttribute("href", "../");
       cloudproject.classList.add("active");
       cloudproject.setAttribute("href", "./");
-      entities.setAttribute("href", "../entities/");
-      process.setAttribute('href', '../process/')
-      users.setAttribute('href', '../users/')
-      lists.setAttribute("href", '../lists/')
-      settings.setAttribute("href", '../database/')
-      authorization.setAttribute("href", '../authorization/')
-      compose.setAttribute("href", '../compose/')
-      cloudaccount.setAttribute('href', '../cloud/account/')
-      cloudlist.setAttribute('href', '../cloud/list/')
-      cloudprocess.setAttribute('href', '../cloud/process/')
-    }
-    else if (path == "/admin/cloud/list/") {
+      entities.setAttribute("href", "../../entities/");
+      process.setAttribute('href', '../../process/')
+      users.setAttribute('href', '../../users/')
+      lists.setAttribute("href", '../../lists/')
+      settings.setAttribute("href", '../../database/')
+      authorization.setAttribute("href", '../../authorization/')
+      compose.setAttribute("href", '../../compose/')
+      cloudaccount.setAttribute('href', '../../cloud/account/')
+      cloudlist.setAttribute('href', '../../cloud/list/')
+      cloudprocess.setAttribute('href', '../../cloud/process/')
+    } else if (path == "/admin/cloud/list/") {
       home.setAttribute("href", "../");
       cloudlist.classList.add("active");
       cloudlist.setAttribute("href", "./");
-      entities.setAttribute("href", "../entities/");
-      process.setAttribute('href', '../process/')
-      users.setAttribute('href', '../users/')
-      lists.setAttribute("href", '../lists/')
-      settings.setAttribute("href", '../database/')
-      authorization.setAttribute("href", '../authorization/')
-      compose.setAttribute("href", '../compose/')
-      cloudaccount.setAttribute('href', '../cloud/account/')
-      cloudproject.setAttribute('href', '../cloud/project/')
-      cloudprocess.setAttribute('href', '../cloud/process/')
-    }
-    else if (path == "/admin/cloud/process/") {
+      entities.setAttribute("href", "../../entities/");
+      process.setAttribute('href', '../../process/')
+      users.setAttribute('href', '../../users/')
+      lists.setAttribute("href", '../../lists/')
+      settings.setAttribute("href", '../../database/')
+      authorization.setAttribute("href", '../../authorization/')
+      compose.setAttribute("href", '../../compose/')
+      cloudaccount.setAttribute('href', '../../cloud/account/')
+      cloudproject.setAttribute('href', '../../cloud/project/')
+      cloudprocess.setAttribute('href', '../../cloud/process/')
+    } else if (path == "/admin/cloud/process/") {
       home.setAttribute("href", "../");
       cloudprocess.classList.add("active");
       cloudprocess.setAttribute("href", "./");
-      entities.setAttribute("href", "../entities/");
-      process.setAttribute('href', '../process/')
-      users.setAttribute('href', '../users/')
-      lists.setAttribute("href", '../lists/')
-      settings.setAttribute("href", '../database/')
-      authorization.setAttribute("href", '../authorization/')
-      compose.setAttribute("href", '../compose/')
-      cloudaccount.setAttribute('href', '../cloud/account/')
-      cloudproject.setAttribute('href', '../cloud/project/')
-      cloudlist.setAttribute('href', '../cloud/list/')
+      entities.setAttribute("href", "../../entities/");
+      process.setAttribute('href', '../../process/')
+      users.setAttribute('href', '../../users/')
+      lists.setAttribute("href", '../../lists/')
+      settings.setAttribute("href", '../../database/')
+      authorization.setAttribute("href", '../../authorization/')
+      compose.setAttribute("href", '../../compose/')
+      cloudaccount.setAttribute('href', '../../cloud/account/')
+      cloudproject.setAttribute('href', '../../cloud/project/')
+      cloudlist.setAttribute('href', '../../cloud/list/')
     }
   });
 
