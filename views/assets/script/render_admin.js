@@ -177,8 +177,6 @@ fetch(adminSidebarUrl)
       cloudlist.setAttribute('href', '../cloud/list/')
       cloudprocess.setAttribute('href', '../cloud/process/')
     }
-    
-
     else if (path == "/admin/cloud/account/") {
       home.setAttribute("href", "../");
       cloudaccount.classList.add("active");
@@ -194,7 +192,6 @@ fetch(adminSidebarUrl)
       cloudlist.setAttribute('href', '../cloud/list/')
       cloudprocess.setAttribute('href', '../cloud/process/')
     }
-
     else if (path == "/admin/cloud/project/") {
       home.setAttribute("href", "../");
       cloudproject.classList.add("active");
@@ -210,7 +207,6 @@ fetch(adminSidebarUrl)
       cloudlist.setAttribute('href', '../cloud/list/')
       cloudprocess.setAttribute('href', '../cloud/process/')
     }
-
     else if (path == "/admin/cloud/list/") {
       home.setAttribute("href", "../");
       cloudlist.classList.add("active");
@@ -226,7 +222,6 @@ fetch(adminSidebarUrl)
       cloudproject.setAttribute('href', '../cloud/project/')
       cloudprocess.setAttribute('href', '../cloud/process/')
     }
-
     else if (path == "/admin/cloud/process/") {
       home.setAttribute("href", "../");
       cloudprocess.classList.add("active");
@@ -242,7 +237,6 @@ fetch(adminSidebarUrl)
       cloudproject.setAttribute('href', '../cloud/project/')
       cloudlist.setAttribute('href', '../cloud/list/')
     }
-
   });
 
 fetch(adminNavbarUrl)
