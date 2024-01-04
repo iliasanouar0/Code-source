@@ -811,7 +811,7 @@ $(document).on('click', '.edit-this-seed', event => {
             "proxy": `${n_proxy}`,
             "verification": `${n_vrf}`,
         }
-        fetch(`http://${ip}:3000/seeds`, {
+        fetch(`http://${ip}:3000/cloud/seeds`, {
             method: "PUT",
             body: JSON.stringify(seed),
             headers: {
