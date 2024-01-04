@@ -923,6 +923,17 @@ const getDataUser = $("#userTable").DataTable({
   ],
 })
 
+const getDataCloudAccount = $('#cloudAccountData').DataTable({
+  responsive: true,
+  deferRender: true,
+  destroy: true,
+  autoWidth: false,
+  ajax: {
+    url: `http://${ip}:3000/cloud/account/project/`,
+    dataSrc: '',
+  },
+})
+
 const getDataSettings = () => {
   $('.tables').empty()
   fetch(`http://${ip}:3000/settings/tables/`, { method: "GET" })
@@ -1308,4 +1319,6 @@ if (path.includes("/admin/users/")) {
     })
   })
   getDataCompose
+} else if (path.includes("/admin/cloud/account")) {
+  getDataCloudAccount()
 }

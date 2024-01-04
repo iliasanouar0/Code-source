@@ -44,8 +44,7 @@ const settingsManager = require("./managers/settingsManager")
 const authorizationManager = require('./managers/authorizationManager')
 const nodeEnvManager = require('./managers/nodeEnvManager')
 const composeManager = require('./managers/composeManager');
-const { finished } = require("stream");
-const { co } = require("translate-google/languages");
+const cloudAccountManager = require('./managers/cloudAccountManager')
 
 const port = 3000;
 const app = express(); // setup express application
@@ -3893,3 +3892,14 @@ app.post('/node/access/', nodeEnvManager.grantAccess)
 app.listen(port, result.parsed.IP, '0.0.0.0', () => {
   console.log(`Server ip: ${result.parsed.IP} running at ${port} `);
 });
+
+
+// cloud accounts API
+
+app.get('/cloud/account/', cloudAccountManager.getAccountsData)
+app.get('/cloud/account/project/', cloudAccountManager.getAccounts)
+app.get('/cloud/account/:id', cloudAccountManager.getAccountsById)
+app.put('/cloud/account/', cloudAccountManager.editAccount)
+app.delete('/cloud/account/:id', cloudAccountManager.deleteAccount)
+app.post('/cloud/account/', cloudAccountManager.addAccount)
+
