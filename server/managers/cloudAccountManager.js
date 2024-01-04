@@ -23,6 +23,7 @@ const editAccount = (req, res) => {
     let obj = (req.body)
     let sql = 'UPDATE cloudaccount SET password=$1 WHERE cloudaccount.id=$2'
     let values = [obj.password, obj.id]
+    console.log(values);
     pool.query(sql, values, (e, r) => {
         if (e) {
             res.status(200).send({ name: e.name, message: e.message, stack: e.stack })
