@@ -94,7 +94,7 @@ $(document).on('click', '.delete', event => {
     }).then((result) => {
         if (result.isConfirmed) {
             let id = $(event.target).data('id')
-            fetch(`http://${ip}:3000/clooud/account/${id}`, {
+            fetch(`http://${ip}:3000/cloud/account/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
