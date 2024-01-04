@@ -52,7 +52,7 @@ const createSeed = (request, response) => {
 const getSeedsById = (request, response) => {
   const id = parseInt(request.params.id);
   pool.query(
-    "SELECT Id_seeds,gmail,password,proxy,isp,verification,id_list FROM cloudseed WHERE Id_list=$1",
+    "SELECT Id_seeds,gmail,password,proxy,isp,verification,id_list,refresh_token FROM cloudseed WHERE Id_list=$1",
     [id],
     (error, results) => {
       if (error) {
@@ -90,7 +90,7 @@ const deleteSeed = (request, response) => {
 const updateSeed = (request, response) => {
   let obj = request.body;
   const sql =
-    "UPDATE cloudseed SET password=($2), proxy=($3),verification=($4), date_update=(now())  WHERE id_seeds=$1";
+    "UPDATE cloudseed SET password=($2), proxy=($3),verification=($4), date_update=(now())  WHERE id_seed=$1";
   const params = [obj.id_seed, obj.password, obj.proxy, obj.verification];
   pool.query(sql, params, (error, results) => {
     if (error) {
@@ -156,7 +156,7 @@ const checkProxy = (request, response) => {
   for (let i = 0; i < obj.length; i++) {
     query.push([obj[i].id_list, obj[i].old]);
   }
-  const SELECT = "SELECT id_seeds FROM cloudseed WHERE Id_list=$1 AND proxy=($2)";
+  const SELECT = "SELECT id_seed FROM cloudseed WHERE Id_list=$1 AND proxy=($2)";
   for (let i = 0; i < query.length; i++) {
     pool.query(SELECT, query[i], (error, result) => {
       if (error) {
@@ -174,7 +174,7 @@ const getProxy = (request, response) => {
   const id = parseInt(request.params.id);
   const proxy = request.query.proxy;
   pool.query(
-    "SELECT proxy,id_seeds FROM cloudseed WHERE Id_list=$1 AND proxy=($2)",
+    "SELECT proxy,id_seed FROM cloudseed WHERE Id_list=$1 AND proxy=($2)",
     [id, proxy],
     (error, results) => {
       if (error) {
@@ -211,7 +211,7 @@ const runningState = (data) => {
   for (let i = 0; i < data.length; i++) {
     query.push(["running", data[i]])
   }
-  const sql = 'UPDATE cloudseed SET status=($1) WHERE id_seeds=($2)'
+  const sql = 'UPDATE cloudseed SET status=($1) WHERE id_seed=($2)'
   query.forEach(data => {
     pool.query(sql, data, (error, result) => {
       if (error) {
@@ -226,7 +226,7 @@ const waitingState = (data) => {
   for (let i = 0; i < data.length; i++) {
     query.push(["waiting", data[i]])
   }
-  const sql = `UPDATE cloudseed SET status=($1) WHERE id_seeds=$2 AND status LIKE '%idel%' OR status LIKE '%stopped%'`
+  const sql = `UPDATE cloudseed SET status=($1) WHERE id_seed=$2 AND status LIKE '%idel%' OR status LIKE '%stopped%'`
   query.forEach(data => {
     pool.query(sql, data, (error, result) => {
       if (error) {
@@ -242,7 +242,7 @@ const stoppedState = (data) => {
   for (let i = 0; i < data.length; i++) {
     query.push(["stopped", data[i]])
   }
-  const sql = `UPDATE cloudseed SET status=($1) WHERE id_seeds=($2) AND status LIKE '%idel%' OR status LIKE '%waiting%'`
+  const sql = `UPDATE cloudseed SET status=($1) WHERE id_seed=($2) AND status LIKE '%idel%' OR status LIKE '%waiting%'`
   query.forEach(data => {
     pool.query(sql, data, (error, result) => {
       if (error) {
@@ -259,7 +259,7 @@ const successState = (data) => {
   for (let i = 0; i < data.length; i++) {
     query.push(["success", data[i]])
   }
-  const sql = `UPDATE cloudseed SET status=($1) WHERE id_seeds=($2)`
+  const sql = `UPDATE cloudseed SET status=($1) WHERE id_seed=($2)`
   query.forEach(data => {
     pool.query(sql, data, (error, result) => {
       if (error) {
