@@ -258,7 +258,8 @@ $(document).on('click', "#l_add", () => {
     let e_add_date = $('#l_add_date').val()
     let e_update_date = $('#l_update_date').val()
     let l_isp_add = $('#l_isp_add').val()
-    if (e_name == "" || e_add_date == "" || e_update_date == "" || l_isp_add == "") {
+    let l_project = $('#l_project').val()
+    if (e_name == "" || e_add_date == "" || e_update_date == "" || l_isp_add == "" || l_project == "") {
         Swal.fire('Please fill all fields')
         return
     }
@@ -266,12 +267,14 @@ $(document).on('click', "#l_add", () => {
         "nom": `${e_name}`,
         "isp": `${l_isp_add}`,
         "status": `active`,
+        "project": `${l_project}`,
         "date_add": `${e_add_date}`,
         "date_update": `${e_update_date}`,
         "id_user": `${userData.id_user}`,
         "count": `0`
     };
-    addList(data)
+    console.log(data);
+    // addList(data)
 })
 
 $(document).on('click', '#l_seeds_add', event => {
