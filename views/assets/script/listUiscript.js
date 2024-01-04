@@ -528,7 +528,7 @@ const templateSeeds = (data) => {
     tbody.empty()
     data.forEach(object => {
         let tdCheck = document.createElement('td')
-        tdCheck.innerHTML = `<input class="checkSeed" type="checkbox" value="${object.id_seeds}">`
+        tdCheck.innerHTML = `<input class="checkSeed" type="checkbox" value="${object.id_seed}">`
         let tr = document.createElement('tr')
         tr.appendChild(tdCheck)
         for (let val in object) {
@@ -544,8 +544,8 @@ const templateSeeds = (data) => {
         }
         let td_action = document.createElement('td')
         td_action.innerHTML =
-            `<button data-id="${object.id_seeds}" type="button" class="btn btn-danger remove-this-seed"><i class="far fa-trash-alt"></button>`
-        td_action.innerHTML += `<button data-id="${object.id_seeds}" type="button" class="btn btn-success edit-this-seed"><i class="fas fa-edit"></button>`
+            `<button data-id="${object.id_seed}" type="button" class="btn btn-danger remove-this-seed"><i class="far fa-trash-alt"></button>`
+        td_action.innerHTML += `<button data-id="${object.id_seed}" type="button" class="btn btn-success edit-this-seed"><i class="fas fa-edit"></button>`
         td_action.classList.add('d-flex', 'gap-1', 'justify-content-center')
         tr.appendChild(td_action)
         tbody.append(tr)
@@ -930,7 +930,7 @@ $(document).on('click', '.submit_proxy', event => {
                         "id_list": `${data}`,
                         "proxy": `${newPVal}`,
                         "old": `${oldPVal}`,
-                        "id_seed": `${json[i].id_seeds}`
+                        "id_seed": `${json[i].id_seed}`
                     }
                     send.push(proxy)
                 }
