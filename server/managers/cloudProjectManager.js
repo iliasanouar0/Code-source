@@ -19,7 +19,46 @@ const addProject = (req, res) => {
     })
 }
 
+const getProjects = (req, res) => {
+    let sql = 'SELECT * FROM cloudproject'
+    pool.query(sql, (e, r) => {
+        if (e) {
+            res.status(200).send({ name: e.name, message: e.message, stack: e.stack })
+        }
+        res.status(200).send(r.rows)
+    })
+}
 
+const getProjectById = (req, res) => {
+    let sql = 'SELECT * FROM cloudproject WHERE cloudproject.id_project'
+    pool.query(sql, (e, r) => {
+        if (e) {
+            res.status(200).send({ name: e.name, message: e.message, stack: e.stack })
+        }
+        res.status(200).send(r.rows)
+    })
+}
+
+const getProjectsData = (req, res) => {
+    let sql = 'SELECT cloudproject.*, cloudaccount.login FROM cloudproject JOIN cloudaccount ON cloudproject.id_account=cloudaccount.id'
+    pool.query(sql, (e, r) => {
+        if (e) {
+            res.status(200).send({ name: e.name, message: e.message, stack: e.stack })
+        }
+        res.status(200).send(r.rows)
+    })
+}
+
+const deleteProject = (req, res) => {
+    let id = req.params.id
+    let sql = 'DELETE FROM cloudproject WHERE cloudproject.id_project=$1'
+    pool.query(sql, [id], (e, r) => {
+        if (e) {
+            res.status(200).send({ name: e.name, message: e.message, stack: e.stack })
+        }
+        res.status(200).send(`Account deleted with id : ${id}`)
+    })
+}
 
 // id_project
 // id_account
@@ -32,4 +71,8 @@ const addProject = (req, res) => {
 
 module.exports = {
     addProject,
+    getProjects,
+    getProjectById,
+    getProjectsData,
+    deleteProject
 }

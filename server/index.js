@@ -45,6 +45,7 @@ const authorizationManager = require('./managers/authorizationManager')
 const nodeEnvManager = require('./managers/nodeEnvManager')
 const composeManager = require('./managers/composeManager');
 const cloudAccountManager = require('./managers/cloudAccountManager')
+const cloudProjectManager = require('./managers/cloudProjectManager')
 
 const port = 3000;
 const app = express(); // setup express application
@@ -3895,11 +3896,17 @@ app.listen(port, result.parsed.IP, '0.0.0.0', () => {
 
 
 // cloud accounts API
-
 app.get('/cloud/account/', cloudAccountManager.getAccountsData)
 app.get('/cloud/account/project/', cloudAccountManager.getAccounts)
 app.get('/cloud/account/:id', cloudAccountManager.getAccountsById)
 app.put('/cloud/account/', cloudAccountManager.editAccount)
 app.delete('/cloud/account/:id', cloudAccountManager.deleteAccount)
 app.post('/cloud/account/', cloudAccountManager.addAccount)
+
+// cloud project API
+app.get('/cloud/project/', cloudProjectManager.getProjectsData)
+app.get('/cloud/project/list/', cloudProjectManager.getProjects)
+app.get('/cloud/project/;id', cloudProjectManager.getProjectById)
+app.delete('/cloud/project/:id', cloudProjectManager.deleteProject)
+app.post('/cloud/project/:id', cloudProjectManager.addProject)
 
