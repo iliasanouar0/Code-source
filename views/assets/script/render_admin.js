@@ -932,6 +932,57 @@ const getDataCloudAccount = $('#cloudAccountData').DataTable({
     url: `http://${ip}:3000/cloud/account/project/`,
     dataSrc: '',
   },
+  columns: [
+    { data: 'id' },
+    {
+      data: null,
+      render: (row) => {
+        return `<div class="card m-0 bg-info">
+          <div class="card-body p-0 text-center text-light">
+          ${row.login}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (data, type, row) {
+        return `<div class="row m-0 justify-content-center">
+         <!-- <div class="card m-0 bg-danger password_show col">
+          <div class="card-body p-0 text-center blur text-light">
+          ${row.password}
+          </div>
+        </div>-->
+        <div class="col-md-auto btn btn-danger update_pass" data-id="${row.id}">
+        <i class="fas fa-cog update_pass" data-id="${row.id}"></i>
+        </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="b-action card m-0">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.project_count}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      searchable: false,
+      orderable: false,
+      render: function (data, type, row) {
+        return `<div class="text-center">
+          <button type="button" class="btn btn-success edit"  data-id="${row.id}"><i class="fas fa-edit"></i></button>
+        <button type="button" class="btn btn-danger delete" data-id="${row.id}"><i class="far fa-trash-alt"></i></button>
+          </div>`
+      }
+    },
+  ]
 })
 
 const getDataSettings = () => {
