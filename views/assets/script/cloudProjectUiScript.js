@@ -9,7 +9,11 @@ $(document).on('click', '#add_Project', e => {
     }
     $.ajax(settings).done(function (responseText) {
         console.log(responseText);
+        let options = ''
+        responseText.forEach(account => {
+            options += `<option value="${account.id}">${account.login}</option>`
+        });
+        $('#cloudaccount').html(options)
     })
-    // cloudaccount
     $('.add_Project').modal('show')
 })
