@@ -97,9 +97,43 @@ $(document).on('hide.bs.modal', '.add_Project', () => {
 $(document).on('click', '#Project_update', e => {
     let id = $(e.target).data("id")
     console.log(id);
+    let client_id = $('#project_clientId').val()
+    let client_secret = $('#project_clientSecret').val()
+    let redirect_url = $('#project_redirect').val()
+    let scope = $('#project_scope').val()
+
+    if (client_id == '' || client_secret == '' || redirect_url == '' || scope == '') {
+        Swal.fire('All fields required')
+    }
+    let obj = {
+        client_id: `${client_id}`,
+        client_secret: `${client_secret}`,
+        redirect_url: `${redirect_url}`,
+        scope: `${scope}`,
+    }
+    updateProject(obj)
 })
 
-
+const updateProject = (data) => {
+    let settings = {
+        url: `http://${ip}:3000/cloud/project/`,
+        method: "PUT",
+        timeout: 0,
+        data: data,
+    }
+    $.ajax(settings).done(function (responseText) {
+        Swal.fire({
+            title: "Added successfully!",
+            text: responseText.message,
+            icon: "success",
+            confirmButtonText: "ok",
+        })
+    }).then(() => {
+        $(".add_Project input").val("");
+        $(".add_Project").modal("hide");
+        getDataCloudProject.ajax.reload(null, false)
+    });
+}
 
 $(document).on('click', '.delete', event => {
     Swal.fire({
