@@ -116,6 +116,49 @@
         <!-- /.control-sidebar -->
 
         <!-- modal -->
+        <div class="modal fade add_Project" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">add Project</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="project_name">Name</label>
+                                <input type="text" class="form-control" id="project_name">
+                            </div>
+                            <div class="form-group">
+                                <label>Cloud Accounts</label>
+                                <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true"
+                                    id="cloudaccount">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="project_clientId">Client Id</label>
+                                <input type="text" class="form-control" id="project_clientId">
+                            </div>
+                            <div class="form-group">
+                                <label for="project_clientSecret">Client secret</label>
+                                <input type="text" class="form-control" id="project_clientSecret">
+                            </div>
+                            <div class="form-group">
+                                <label for="project_redirect">Redirect URL</label>
+                                <input type="text" class="form-control" id="project_redirect" value="https://developers.google.com/oauthplayground">
+                            </div>
+                            <div class="form-group">
+                                <label for="project_scoup">Scope</label>
+                                <input type="text" class="form-control" id="project_scoup" value="https://mail.google.com">
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="button" class="btn btn-success" id="project_add">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade user_data" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">

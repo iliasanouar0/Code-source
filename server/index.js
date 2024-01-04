@@ -3894,7 +3894,6 @@ app.listen(port, result.parsed.IP, '0.0.0.0', () => {
   console.log(`Server ip: ${result.parsed.IP} running at ${port} `);
 });
 
-
 // cloud accounts API
 app.get('/cloud/account/', cloudAccountManager.getAccountsData)
 app.get('/cloud/account/project/', cloudAccountManager.getAccounts)
@@ -3906,7 +3905,7 @@ app.post('/cloud/account/', cloudAccountManager.addAccount)
 // cloud project API
 app.get('/cloud/project/', cloudProjectManager.getProjectsData)
 app.get('/cloud/project/list/', cloudProjectManager.getProjects)
-app.get('/cloud/project/;id', cloudProjectManager.getProjectById)
+app.get('/cloud/project/:id', cloudProjectManager.getProjectById)
 app.delete('/cloud/project/:id', cloudProjectManager.deleteProject)
-app.post('/cloud/project/:id', cloudProjectManager.addProject)
+app.post('/cloud/project/', cloudProjectManager.addProject)
 
