@@ -30,13 +30,13 @@ $(document).on('click', '#add', e => {
     let password = $('#password_add').val()
     console.log(login);
     console.log(password);
-    // if (login == '' || password == '') {
-    //     Swal.fire('All felids required !!')
-    //     return
-    // }
-    // let obg = {
-    //     login: `${login}`,
-    //     password: `${password}`
-    // }
-    // addAccount(data)
+    if (login == '' || password == '') {
+        Swal.fire('All felids required !!')
+        return
+    }
+    let obg = {
+        login: `${login}`,
+        password: `${password}`
+    }
+    addAccount(data)
 })
