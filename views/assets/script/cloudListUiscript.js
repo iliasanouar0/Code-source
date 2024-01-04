@@ -113,7 +113,7 @@ $(document).on('click', '.delete-all-this', () => {
                     })
                 }).then(() => {
                     $('#action').html('Action')
-                    getDatalist.ajax.reload(null, false)
+                    getDataCloudList.ajax.reload(null, false)
                 })
             }
         } else if (result.isDismissed) {
@@ -145,7 +145,7 @@ const addList = (data) => {
         }).then(() => {
             $('.add_list #la_name').val('');
             $('.add_list').modal('hide');
-            getDatalist.ajax.reload(null, false)
+            getDataCloudList.ajax.reload(null, false)
         })
     });
 }
@@ -168,7 +168,7 @@ $(document).on('click', '.edit', event => {
 })
 
 $(document).on('click', '.cancel_name_update', () => {
-    getDatalist.ajax.reload(null, false)
+    getDataCloudList.ajax.reload(null, false)
 })
 
 $(document).on('click', '.save', event => {
@@ -192,7 +192,7 @@ $(document).on('click', '.save', event => {
             confirmButtonText: 'ok'
         })
     }).then(() => {
-        getDatalist.ajax.reload(null, false)
+        getDataCloudList.ajax.reload(null, false)
     })
 })
 
@@ -228,7 +228,7 @@ const addSeeds = (data) => {
                 confirmButtonText: 'ok'
             }).then(() => {
                 $('#demo').val('')
-                getDatalist.ajax.reload(null, false)
+                getDataCloudList.ajax.reload(null, false)
             })
         }
     });
