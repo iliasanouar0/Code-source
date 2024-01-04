@@ -90,7 +90,7 @@ const deleteSeed = (request, response) => {
 const updateSeed = (request, response) => {
   let obj = request.body;
   const sql =
-    "UPDATE cloudseed SET password=($2), proxy=($3),verification=($4), date_update=(now())  WHERE id_seed=$1";
+    "UPDATE cloudseed SET password=($2), proxy=($3),verification=($4)  WHERE id_seed=$1";
   const params = [obj.id_seed, obj.password, obj.proxy, obj.verification];
   pool.query(sql, params, (error, results) => {
     if (error) {
@@ -119,7 +119,7 @@ const updateSeeds = (request, response) => {
         }
       }
     }
-    qr += `date_update=(now()) WHERE gmail=($1)`
+    qr += ` WHERE gmail=($1)`
     query.push({ query: qr, data: data })
   }
   console.log(query);
@@ -191,7 +191,7 @@ const updateProxy = (request, response) => {
   for (let i = 0; i < obj.length; i++) {
     query.push([obj[i].proxy, obj[i].old, obj[i].id_list]);
   }
-  const Update = "UPDATE cloudseed SET proxy=($1), date_update=(now()) WHERE proxy=($2) AND id_list=($3)";
+  const Update = "UPDATE cloudseed SET proxy=($1) WHERE proxy=($2) AND id_list=($3)";
   query.forEach((data) => {
     pool.query(Update, data, (error, result) => {
       if (error) {
