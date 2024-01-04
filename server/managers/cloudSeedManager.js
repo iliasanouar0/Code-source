@@ -135,7 +135,7 @@ const updateSeeds = (request, response) => {
 const searchSeeds = (request, response) => {
   const id = (request.params.id)
   const email = (request.query.gmail)
-  let sql = `SELECT id_seed,gmail,password,proxy,isp,verification,id_list FROM cloudseed WHERE Id_list=$1 AND gmail  like $2`
+  let sql = `SELECT id_seed,gmail,password,proxy,isp,verification,id_list,refresh_token FROM cloudseed WHERE Id_list=$1 AND gmail  like $2`
   pool.query(sql, [id, `%${email}%`], (err, result) => {
     if (err) {
       response.status(409).send(err)
