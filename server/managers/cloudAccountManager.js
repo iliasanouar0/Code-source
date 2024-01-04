@@ -9,7 +9,7 @@ const pool = new pg.Pool(config);
 
 const addAccount = (req, res) => {
     let obj = (req.body)
-    let sql = 'INSERT INTO cloudaccount (login, password, date_add,update_date ) VALUES ($1,$2) RETURNING id'
+    let sql = 'INSERT INTO cloudaccount (login, password) VALUES ($1,$2) RETURNING id'
     let values = [obj.login, obj.password]
     pool.query(sql, values, (e, r) => {
         if (e) {
