@@ -677,18 +677,44 @@ $(document).on('click', '.delete-seeds', () => {
                 let ID = check[i].value
                 ides.push(ID)
             }
-            fetch(`http://${ip}:3000/cloud/seeds/`, {
-                method: "PATCH",
-                body: `${JSON.stringify(ides)}`,
-                headers: {
+            // fetch(`http://${ip}:3000/cloud/seeds/`, {
+            //     method: "PATCH",
+            //     body: `${JSON.stringify(ides)}`,
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'Access-Control-Allow-Origin': '*',
+            //         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+            //         'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH'
+            //     }
+            // }).then(response => {
+            //     return response.text()
+            // }).then(data => {
+            //     Swal.fire({
+            //         position: 'top-end',
+            //         icon: 'success',
+            //         title: data,
+            //         showConfirmButton: false,
+            //         timer: 3000
+            //     })
+            // }).then(() => {
+            //     check.parent().parent().remove()
+            //     $(".checkAllSeeds")[0].checked = false
+            // })
+
+            let settings = {
+                "url": `http://${ip}:3000/cloud/seeds/`,
+                "method": "PATCH",
+                "timeout": 0,
+                "data": `${JSON.stringify(ides)}`,
+                "headers": {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
                     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
                     'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH'
                 }
-            }).then(response => {
-                return response.text()
-            }).then(data => {
+            };
+
+            $.ajax(settings).done(function (responseText) {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -700,6 +726,7 @@ $(document).on('click', '.delete-seeds', () => {
                 check.parent().parent().remove()
                 $(".checkAllSeeds")[0].checked = false
             })
+
         } else if (result.isDismissed) {
             Swal.fire({
                 position: 'top-end',
