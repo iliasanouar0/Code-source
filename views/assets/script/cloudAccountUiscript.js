@@ -13,7 +13,7 @@ const addAccount = (data) => {
     }
     $.ajax(settings).done(function (responseText) {
         Swal.fire({
-            title: "Entity added successfully!",
+            title: "Added successfully!",
             text: responseText.message,
             icon: "success",
             confirmButtonText: "ok",
@@ -67,16 +67,31 @@ $(document).on('click', '.save_pass', event => {
         })
         return
     }
-    fetch(`http://${ip}:3000/cloud/account/`, {
+    // fetch(`http://${ip}:3000/cloud/account/`, {
+    //     method: "PUT",
+    //     body: 
+    // }).then(response => {
+    //     return response.text()
+    // }).then(data => {
+    //     Swal.fire({
+    //         title: 'updated',
+    //         text: data,
+    //         icon: 'success'
+    //     })
+    // }).finally(() => { $('#change-password-m input').val(''); $('#change-password-m').modal('hide'); getDataCloudAccount.ajax.reload(null, false) })
+
+
+    let settings = {
+        url: `http://${ip}:3000/cloud/account/`,
         method: "PUT",
-        body: { id: id, password: new_pass }
-    }).then(response => {
-        return response.text()
-    }).then(data => {
+        timeout: 0,
+        data: { id: id, password: new_pass },
+    }
+    $.ajax(settings).done(function (responseText) {
         Swal.fire({
             title: 'updated',
             text: data,
             icon: 'success'
         })
-    }).finally(() => { $('#change-password-m input').val(''); $('#change-password-m').modal('hide'); getDataCloudAccount.ajax.reload(null, false) })
+    }).then(() => { $('#change-password-m input').val(''); $('#change-password-m').modal('hide'); getDataCloudAccount.ajax.reload(null, false) })
 })
