@@ -34,9 +34,9 @@ $(document).on('click', '#add', e => {
         Swal.fire('All felids required !!')
         return
     }
-    let obg = {
+    let obj = {
         login: `${login}`,
         password: `${password}`
     }
-    addAccount(data)
+    addAccount(obj)
 })
