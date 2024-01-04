@@ -62,3 +62,8 @@ $(document).on('click', '#project_add', e => {
     }
     addProject(obj)
 })
+
+$(document).on('click', '.edit', e => {
+    let id = $(e.target).data('id')
+    console.log(id);
+})
