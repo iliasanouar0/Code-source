@@ -35,7 +35,7 @@ const createSeed = (request, response) => {
     ]);
   }
   const sql = format(
-    "INSERT INTO cloudseed (Id_seeds, gmail, password, isp,  proxy, status, date_add, date_update, verification, Id_list) values %L",
+    "INSERT INTO cloudseed (id_seed, gmail, password, isp,  proxy, status, date_add, date_update, verification, Id_list) values %L",
     query
   );
   var qr = { text: sql, values: [] };
@@ -65,7 +65,7 @@ const getSeedsById = (request, response) => {
 
 const deleteSeeds = (request, response) => {
   const ides = (request.body);
-  const sql = "DELETE FROM cloudseed WHERE Id_seeds=$1";
+  const sql = "DELETE FROM cloudseed WHERE id_seed=$1";
   const params = [];
   for (let i = 0; i < ides.length; i++) {
     params.push([ides[i]])
@@ -80,7 +80,7 @@ const deleteSeeds = (request, response) => {
 
 const deleteSeed = (request, response) => {
   const id = parseInt(request.params.id);
-  const sql = "DELETE FROM cloudseed WHERE Id_seeds=$1";
+  const sql = "DELETE FROM cloudseed WHERE id_seed=$1";
   const params = [id];
   pool.query(sql, params, (err, result) => {
     if (err) { response.status(409).send(err) } else { console.log(`${result} records deleted`) }
@@ -137,7 +137,7 @@ const updateSeeds = (request, response) => {
 const searchSeeds = (request, response) => {
   const id = (request.params.id)
   const email = (request.query.gmail)
-  let sql = `SELECT Id_seeds,gmail,password,proxy,isp,verification,id_list FROM cloudseed WHERE Id_list=$1 AND gmail  like $2`
+  let sql = `SELECT id_seed,gmail,password,proxy,isp,verification,id_list FROM cloudseed WHERE Id_list=$1 AND gmail  like $2`
   pool.query(sql, [id, `%${email}%`], (err, result) => {
     if (err) {
       response.status(409).send(err)
