@@ -40,7 +40,7 @@ const createList = (request, response) => {
 
 const getLists = (request, response) => {
   pool.query(
-    "SELECT cloudlist.*, COUNT(id_seeds) AS seeds_count, users.login, entity.nom FROM cloudlist LEFT JOIN cloudseed ON cloudseed.id_list = cloudlist.id_list JOIN users ON cloudlist.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY cloudlist.date_add DESC",
+    "SELECT cloudlist.*, COUNT(id_seed) AS seeds_count, users.login, entity.nom FROM cloudlist LEFT JOIN cloudseed ON cloudseed.id_list = cloudlist.id_list JOIN users ON cloudlist.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY cloudlist.date_add DESC",
     (error, results) => {
       if (error) {
         response.status(500).json(error.message);
@@ -52,7 +52,7 @@ const getLists = (request, response) => {
 
 const getListsSup = (req, res) => {
   pool.query(
-    "SELECT cloudlist.*, COUNT(id_seeds) AS seeds_count, users.login,users.type, entity.nom FROM cloudlist LEFT JOIN cloudseed ON cloudseed.id_list = cloudlist.id_list JOIN users ON cloudlist.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity WHERE users.type!='IT' GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY cloudlist.date_add DESC",
+    "SELECT cloudlist.*, COUNT(id_seed) AS seeds_count, users.login,users.type, entity.nom FROM cloudlist LEFT JOIN cloudseed ON cloudseed.id_list = cloudlist.id_list JOIN users ON cloudlist.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity WHERE users.type!='IT' GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY cloudlist.date_add DESC",
     (error, results) => {
       if (error) {
         res.status(500).json(error.message);
@@ -64,7 +64,7 @@ const getListsSup = (req, res) => {
 
 const getUserLists = (request, response) => {
   let id = (request.params.id)
-  let sql = "SELECT cloudlist.*, COUNT(id_seeds) AS seeds_count, users.login, entity.nom FROM cloudlist LEFT JOIN cloudseed ON cloudseed.id_list = cloudlist.id_list JOIN users ON cloudlist.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity WHERE cloudlist.id_user=($1) GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY cloudlist.date_add DESC"
+  let sql = "SELECT cloudlist.*, COUNT(id_seed) AS seeds_count, users.login, entity.nom FROM cloudlist LEFT JOIN cloudseed ON cloudseed.id_list = cloudlist.id_list JOIN users ON cloudlist.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity WHERE cloudlist.id_user=($1) GROUP BY 1,users.id_user,users.id_entity,entity.id_entity ORDER BY cloudlist.date_add DESC"
   pool.query(sql, [id], (error, results) => {
     if (error) {
       response.status(500).json(error.message);
