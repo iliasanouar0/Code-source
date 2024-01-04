@@ -1053,11 +1053,11 @@ const getDataCloudAccount = $('#cloudAccountData').DataTable({
       orderable: false,
       render: function (data, type, row) {
         return `<div class="row m-0 justify-content-center">
-         <!-- <div class="card m-0 bg-danger password_show col">
+          <div class="card m-0 bg-danger password_show col">
           <div class="card-body p-0 text-center blur text-light">
           ${row.password}
           </div>
-        </div>-->
+        </div>
         <div class="col-md-auto btn btn-danger update_pass" data-id="${row.id}">
         <i class="fas fa-cog update_pass" data-id="${row.id}"></i>
         </div>
