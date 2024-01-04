@@ -63,6 +63,7 @@ const getSeedsById = (request, response) => {
 
 const deleteSeeds = (request, response) => {
   const ides = (request.body);
+  console.log(ides);
   const sql = "DELETE FROM cloudseed WHERE id_seed=$1";
   const params = [];
   for (let i = 0; i < ides.length; i++) {
