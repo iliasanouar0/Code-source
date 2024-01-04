@@ -17,6 +17,11 @@ $(document).on('click', '#add_Project', e => {
     })
     $('#project_redirect').val('https://developers.google.com/oauthplayground')
     $('#project_scope').val('https://mail.google.com')
+    $('#projectadd_title').html('Add Project')
+    $('#project_name').removeClass('d-none')
+    $('#cloudaccount').removeClass('d-none')
+    $('.project_modal_bnt').html('Submit')
+    $('.project_modal_bnt').attr("id", "project_add");
     $('.add_Project').modal('show')
 })
 
@@ -74,5 +79,15 @@ $(document).on('click', '.edit', e => {
     }
     $.ajax(settings).done(function (responseText) {
         console.log(responseText);
+        $('#projectadd_title').html('Edit Project')
+        $('#project_name').addClass('d-none')
+        $('#cloudaccount').addClass('d-none')
+        $('#project_clientId').val(responseText[0].client_id)
+        $('#project_clientSecret').val(responseText[0].client_secret)
+        $('#project_redirect').val(responseText[0].redirect_url)
+        $('#project_scope').val(responseText[0].scope)
+        $('.project_modal_bnt').html('Update')
+        $('.project_modal_bnt').attr("id", "Project_update");
+        $('.add_Project').modal('show')
     })
 })
