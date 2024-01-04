@@ -91,3 +91,7 @@ $(document).on('click', '.edit', e => {
         $('.add_Project').modal('show')
     })
 })
+
+$(document).on('hide.bs.modal', '.add_Project', () => {
+    $('.add_Project input').val('')
+})
