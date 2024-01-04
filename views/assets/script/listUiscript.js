@@ -524,6 +524,7 @@ $(document).ready(function () {
 });
 
 const templateSeeds = (data) => {
+    console.log(data);
     let tbody = $('#seeds')
     tbody.empty()
     data.forEach(object => {
