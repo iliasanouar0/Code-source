@@ -789,6 +789,16 @@ const getDataCloudList = $("#CloudListTable").DataTable({
     {
       data: null,
       render: function (data, type, row) {
+        return `<div class="card m-0 border-dark">
+          <div class="card-body p-0 text-center text-dark">
+          ${row.project_name}
+          </div>
+        </div>`
+      }
+    },
+    {
+      data: null,
+      render: function (data, type, row) {
         let add = new Date(row.date_add).toLocaleString()
         return `<div class="b-action card m-0">
           <div class="card-body p-0 text-center text-dark">
