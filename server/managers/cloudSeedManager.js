@@ -70,7 +70,7 @@ const deleteSeeds = (request, response) => {
   }
   params.forEach(param => {
     pool.query(sql, param, (err, result) => {
-      if (err) { response.status(409).send(err) } else { console.log(`${result} records deleted`) }
+      if (err) { console.log(err);response.status(409).send(err) } else { console.log(`${result} records deleted`) }
     });
   });
   response.status(200).send('cloudseed deleted');
