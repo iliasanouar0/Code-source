@@ -44,7 +44,20 @@ $(document).on('click', '.updateOptions', event => {
 })
 
 $(document).on('click', '#add_list', () => {
-    $('.add_list').modal('show');
+    let settings = {
+        "url": `http://${ip}:3000/cloud/project/list/`,
+        "method": "GET",
+        "headers": {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+        }
+    }
+    $.ajax(settings).done(function (responseText) {
+        console.log(responseText);
+        // $('.add_list').modal('show');
+    })
 })
 
 $(document).ready(function () {
