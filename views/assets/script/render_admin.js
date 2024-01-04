@@ -1320,5 +1320,5 @@ if (path.includes("/admin/users/")) {
   })
   getDataCompose
 } else if (path.includes("/admin/cloud/account")) {
-  getDataCloudAccount()
+  getDataCloudAccount
 }
