@@ -12,13 +12,13 @@ $(document).on('click', '#add_Project', e => {
         responseText.forEach(account => {
             options += `<option value="${account.id}">${account.login}</option>`
         });
-        $('#cloudaccount').html(options)
+        $('#cloudaccount_add').html(options)
     })
     $('#project_redirect').val('https://developers.google.com/oauthplayground')
     $('#project_scope').val('https://mail.google.com')
     $('#projectadd_title').html('Add Project')
     $('.project_name').removeClass('d-none')
-    $('.cloudaccount').removeClass('d-none')
+    $('.cloudaccount_add').removeClass('d-none')
     $('.project_modal_bnt').html('Submit')
     $('.project_modal_bnt').attr("id", "project_add");
     $('.add_Project').modal('show')
@@ -47,7 +47,7 @@ const addProject = (data) => {
 
 $(document).on('click', '#project_add', e => {
     let name = $('#project_name').val()
-    let account = $('#cloudaccount').val()
+    let account = $('#cloudaccount_add').val()
     let client_id = $('#project_clientId').val()
     let client_secret = $('#project_clientSecret').val()
     let redirect_url = $('#project_redirect').val()
@@ -78,7 +78,7 @@ $(document).on('click', '.edit', e => {
     $.ajax(settings).done(function (responseText) {
         $('#projectadd_title').html('Edit Project')
         $('.project_name').addClass('d-none')
-        $('.cloudaccount').addClass('d-none')
+        $('.cloudaccount_add').addClass('d-none')
         $('#project_clientId').val(responseText[0].client_id)
         $('#project_clientSecret').val(responseText[0].client_secret)
         $('#project_redirect').val(responseText[0].redirect_url)
