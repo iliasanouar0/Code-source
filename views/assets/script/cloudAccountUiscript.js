@@ -67,8 +67,9 @@ $(document).on('click', '.save_pass', event => {
         })
         return
     }
-    fetch(`http://${ip}:3000/users/${id}?pass=${new_pass}`, {
-        method: "PATCH",
+    fetch(`http://${ip}:3000/cloud/account/`, {
+        method: "PUT",
+        body: { id: id, password: new_pass }
     }).then(response => {
         return response.text()
     }).then(data => {
