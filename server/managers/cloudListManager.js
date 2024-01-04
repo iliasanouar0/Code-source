@@ -88,7 +88,7 @@ const updateName = (request, response) => {
   const id = parseInt(request.params.id);
   const name = request.query.name;
   pool.query(
-    "UPDATE cloudlist SET name=($2), date_update=(now()) where id_list= ($1)",
+    "UPDATE cloudlist SET name=($2), update_date=(now()) where id_list= ($1)",
     [id, name],
     (error, results) => {
       if (error) {
