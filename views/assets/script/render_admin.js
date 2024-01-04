@@ -929,7 +929,7 @@ const getDataCloudAccount = $('#cloudAccountData').DataTable({
   destroy: true,
   autoWidth: false,
   ajax: {
-    url: `http://${ip}:3000/cloud/account/project/`,
+    url: `http://${ip}:3000/cloud/account/`,
     dataSrc: '',
   },
   columns: [
