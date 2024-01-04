@@ -40,3 +40,42 @@ $(document).on('click', '#add', e => {
     }
     addAccount(obj)
 })
+
+
+$(document).on('click', '.update_pass', event => {
+    let id = $(event.target).data('id')
+    $('.save_pass').data('id', id)
+    $('#change-password-m').modal('show')
+})
+
+$(document).on('click', '.save_pass', event => {
+    let id = $(event.target).data('id')
+    let new_pass = $('#n_pass_update').val()
+    let c_new_pass = $('#c_pass_update').val()
+    if (new_pass == '' || c_new_pass == '') {
+        Swal.fire({
+            title: 'All felids required !!',
+            icon: 'warning'
+        })
+        return
+    }
+    let new_check_state = new_pass == c_new_pass
+    if (!new_check_state) {
+        Swal.fire({
+            title: 'The new password confirmation is wrong',
+            icon: 'error'
+        })
+        return
+    }
+    fetch(`http://${ip}:3000/users/${id}?pass=${new_pass}`, {
+        method: "PATCH",
+    }).then(response => {
+        return response.text()
+    }).then(data => {
+        Swal.fire({
+            title: 'updated',
+            text: data,
+            icon: 'success'
+        })
+    }).finally(() => { $('#change-password-m input').val(''); $('#change-password-m').modal('hide'); getDataCloudAccount.ajax.reload(null, false) })
+})
