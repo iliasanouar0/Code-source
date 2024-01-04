@@ -55,13 +55,14 @@ $(document).on('click', '#add_list', () => {
         }
     }
     $.ajax(settings).done(function (responseText) {
+        console.log(responseText);
         let options = ''
         responseText.forEach(account => {
             options += `<option value="${account.id_project}">${account.name}</option>`
         });
         $('#l_project').html(options)
+        $('.add_list').modal('show');
     })
-    $('.add_list').modal('show');
 })
 
 $(document).ready(function () {
