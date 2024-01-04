@@ -53,7 +53,7 @@ const getAccountsById = (req, res) => {
 }
 
 const getAccountsData = (req, res) => {
-    let sql = 'SELECT cloudaccount.*, COUNT(id_project) AS project_count FROM cloudaccount LEFT JOIN cloudproject ON cloudproject.id_account = cloudaccount.id GROUP BY cloudaccount.login, cloudaccount.password, cloudaccount.date_add, cloudaccount.update_date'
+    let sql = 'SELECT cloudaccount.*, COUNT(id_project) AS project_count FROM cloudaccount LEFT JOIN cloudproject ON cloudproject.id_account = cloudaccount.id GROUP BY 1'
     pool.query(sql, (e, r) => {
         if (e) {
             res.status(200).send({ name: e.name, message: e.message, stack: e.stack })
@@ -61,6 +61,7 @@ const getAccountsData = (req, res) => {
         res.status(200).send(r.rows)
     })
 }
+// cloudaccount.login, cloudaccount.password, cloudaccount.date_add, cloudaccount.update_date
 
 const deleteAccount = (req, res) => {
     let id = req.params.id
