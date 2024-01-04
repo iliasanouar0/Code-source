@@ -40,7 +40,7 @@ const createList = (request, response) => {
 
 const getLists = (request, response) => {
   pool.query(
-    "SELECT cloudlist.*, COUNT(id_seed) AS seeds_count, users.login, entity.nom FROM cloudlist LEFT JOIN cloudseed ON cloudseed.id_list = cloudlist.id_list JOIN users ON cloudlist.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity GROUP BY 1,users.id_user,users.id_entity,entity.id_entity,cloudlist.name,cloudlist.isp,cloudlist.status,cloudlist.add_date,cloudlist.update_date ORDER BY cloudlist.add_date DESC",
+    "SELECT cloudlist.*, COUNT(id_seed) AS seeds_count, users.login, entity.nom FROM cloudlist LEFT JOIN cloudseed ON cloudseed.id_list = cloudlist.id_list JOIN users ON cloudlist.id_user=users.id_user JOIN entity ON users.id_entity=entity.id_entity GROUP BY 1,users.id_user,users.id_entity,entity.id_entity,cloudlist.name,cloudlist.isp,cloudlist.status,cloudlist.add_date,cloudlist.update_date,cloudlist.id_user ORDER BY cloudlist.add_date DESC",
     (error, results) => {
       if (error) {
         response.status(500).json(error.message);
