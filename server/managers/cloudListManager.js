@@ -25,7 +25,7 @@ const createList = (request, response) => {
       obj.isp,
       obj.status,
       obj.id_user,
-      obj.id_project
+      obj.project
     ],
     (error, results) => {
       if (error) {

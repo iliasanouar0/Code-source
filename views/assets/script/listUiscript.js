@@ -124,7 +124,7 @@ $(document).on('click', '.delete-all-this', () => {
 
 const addList = (data) => {
     let settings = {
-        "url": `http://${ip}:3000/lists`,
+        "url": `http://${ip}:3000/cloud/lists`,
         "method": "POST",
         "timeout": 0,
         "data": JSON.stringify(data),
@@ -145,7 +145,7 @@ const addList = (data) => {
         }).then(() => {
             $('.add_list #la_name').val('');
             $('.add_list').modal('hide');
-            getDatalist.ajax.reload(null, false)
+            getDataCloudList.ajax.reload(null, false)
         })
     });
 }

@@ -273,8 +273,7 @@ $(document).on('click', "#l_add", () => {
         "id_user": `${userData.id_user}`,
         "count": `0`
     };
-    console.log(data);
-    // addList(data)
+    addList(data)
 })
 
 $(document).on('click', '#l_seeds_add', event => {
