@@ -977,9 +977,7 @@ const getDataCloudAccount = $('#cloudAccountData').DataTable({
       orderable: false,
       render: function (data, type, row) {
         return `<div class="text-center">
-          <button type="button" class="btn btn-success edit"  data-id="${row.id}"><i class="fas fa-edit"></i></button>
-        <button type="button" class="btn btn-danger delete" data-id="${row.id}"><i class="far fa-trash-alt"></i></button>
-          </div>`
+        <button type="button" class="btn btn-danger delete" data-id="${row.id}"><i class="far fa-trash-alt"></i></button></div>`
       }
     },
   ]
