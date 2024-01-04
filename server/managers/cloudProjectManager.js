@@ -21,7 +21,7 @@ const addProject = (req, res) => {
 }
 
 const getProjects = (req, res) => {
-    let sql = 'SELECT cloudproject,id FROM cloudproject'
+    let sql = 'SELECT name,id_project FROM cloudproject'
     pool.query(sql, (e, r) => {
         if (e) {
             res.status(200).send({ name: e.name, message: e.message, stack: e.stack })
