@@ -9,8 +9,9 @@ const pool = new pg.Pool(config);
 
 const addProject = (req, res) => {
     let data = (req.body)
+    console.log(data);
     let sql = 'INSERT INTO cloudproject (id_account,name,client_id,client_secret,redirect_url,scope) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id_project'
-    let values = []
+    let values = [data.account, data.name, data.client_id, data.client_secret, data.redirect_url, data.scope]
     pool.query(sql, values, (e, r) => {
         if (e) {
             res.status(200).send({ name: e.name, message: e.message, stack: e.stack })
