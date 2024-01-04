@@ -983,6 +983,18 @@ const getDataCloudAccount = $('#cloudAccountData').DataTable({
   ]
 })
 
+
+const getDataCloudProject = $('#ProjectData').DataTable({
+  responsive: true,
+  deferRender: true,
+  destroy: true,
+  autoWidth: false,
+  ajax: {
+    url: `http://${ip}:3000/cloud/project/`,
+    dataSrc: '',
+  },
+})
+
 const getDataSettings = () => {
   $('.tables').empty()
   fetch(`http://${ip}:3000/settings/tables/`, { method: "GET" })
