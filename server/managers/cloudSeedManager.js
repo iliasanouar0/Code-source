@@ -52,7 +52,7 @@ const createSeed = (request, response) => {
 const getSeedsById = (request, response) => {
   const id = parseInt(request.params.id);
   pool.query(
-    "SELECT Id_seeds,gmail,password,proxy,isp,verification,id_list,refresh_token FROM cloudseed WHERE Id_list=$1",
+    "SELECT id_seed,gmail,password,proxy,isp,verification,id_list,refresh_token FROM cloudseed WHERE Id_list=$1",
     [id],
     (error, results) => {
       if (error) {
