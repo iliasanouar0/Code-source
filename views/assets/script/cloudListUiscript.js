@@ -55,9 +55,13 @@ $(document).on('click', '#add_list', () => {
         }
     }
     $.ajax(settings).done(function (responseText) {
-        console.log(responseText);
-        // $('.add_list').modal('show');
+        let options = ''
+        responseText.forEach(account => {
+            options += `<option value="${account.id}">${account.login}</option>`
+        });
+        $('#l_project').html(options)
     })
+    $('.add_list').modal('show');
 })
 
 $(document).ready(function () {
