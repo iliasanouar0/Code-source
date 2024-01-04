@@ -677,6 +677,7 @@ $(document).on('click', '.delete-seeds', () => {
                 let ID = check[i].value
                 ides.push(ID)
             }
+
             // fetch(`http://${ip}:3000/cloud/seeds/`, {
             //     method: "PATCH",
             //     body: `${JSON.stringify(ides)}`,
@@ -713,12 +714,12 @@ $(document).on('click', '.delete-seeds', () => {
                     'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH'
                 }
             };
-
+            console.log(settings);
             $.ajax(settings).done(function (responseText) {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: data,
+                    title: responseText,
                     showConfirmButton: false,
                     timer: 3000
                 })
