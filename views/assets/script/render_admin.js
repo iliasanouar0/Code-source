@@ -746,7 +746,7 @@ const getDatalist = $("#listTable").DataTable({
   ],
 })
 
-const getDataCloudList = $("#listTable").DataTable({
+const getDataCloudList = $("#CloudListTable").DataTable({
   responsive: true,
   deferRender: true,
   destroy: true,
