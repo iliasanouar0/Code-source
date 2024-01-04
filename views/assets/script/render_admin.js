@@ -993,20 +993,6 @@ const getDataCloudProject = $('#ProjectData').DataTable({
     url: `http://${ip}:3000/cloud/project/`,
     dataSrc: '',
   },
-  //   [
-  //     {
-  //         "id_account": 3,
-  //         "name": "Gmail API nodeJS",
-  //         "client_id": "936739117009-vkd4nfvpmdeqm1vo33r3s35pvb1uhu3f.apps.googleusercontent.com",
-  //         "client_secret": "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",
-  //         "redirect_url": "https://developers.google.com/oauthplayground",
-  //         "scope": "https://mail.google.com",
-  //         "add_date": "2024-01-04T11:57:34.396Z",
-  //         "update_date": null,
-  //         "id_project": 1,
-  //         "login": "iliasanouar0@gmail.com"
-  //     }
-  // ]
   columns: [
     { data: 'id_project' },
     { data: 'name' },
@@ -1071,6 +1057,7 @@ const getDataCloudProject = $('#ProjectData').DataTable({
       orderable: false,
       render: function (data, type, row) {
         return `<div class="text-center">
+        <button type="button" class="btn btn-success edit"  data-id="${row.id_project}"><i class="fas fa-edit"></i></button>
         <button type="button" class="btn btn-danger delete" data-id="${row.id_project}"><i class="far fa-trash-alt"></i></button></div>`
       }
     },
