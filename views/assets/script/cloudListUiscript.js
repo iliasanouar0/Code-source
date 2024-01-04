@@ -298,6 +298,7 @@ $(document).on('click', '#l_seeds_add', event => {
     };
     $.ajax(settings).done(function (responseText) {
         let isp = responseText.isp
+        let id_project = responseText.id_project
         data.trim()
         let dataArray = data.split(`\n`);
         console.log(dataArray);
@@ -322,7 +323,8 @@ $(document).on('click', '#l_seeds_add', event => {
                 "date_add": `${date_add}`,
                 "date_update": `${date_update}`,
                 "status": `active`,
-                "isp": `${isp}`
+                "isp": `${isp}`,
+                "id_project": `${id_project}`
             }
             console.log(seed);
             obj.push(seed)

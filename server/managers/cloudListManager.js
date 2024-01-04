@@ -101,7 +101,7 @@ const updateName = (request, response) => {
 
 const getIspList = (request, response) => {
   let id = (request.params.id)
-  let sql = 'SELECT isp FROM cloudlist WHERE id_list=($1)'
+  let sql = 'SELECT isp,id_project FROM cloudlist WHERE id_list=($1)'
   pool.query(sql, [id], (err, res) => {
     if (err) {
       response.status(500).send(err.message)
