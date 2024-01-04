@@ -64,7 +64,7 @@ const deleteProject = (req, res) => {
 
 const editProject = (req, res) => {
     let data = (req.body)
-    let sql = 'UPDATE cloudproject SET client_id=$2 client_secret=$3 redirect_url=$4 scope=$5 WHERE id_project=$1'
+    let sql = 'UPDATE cloudproject SET client_id=$2, client_secret=$3, redirect_url=$4, scope=$5 WHERE id_project=$1'
     let values = [data.id_project, data.client_id, data.client_secret, data.redirect_url, data.scope]
     pool.query(sql, values, (e, r) => {
         if (e) {
