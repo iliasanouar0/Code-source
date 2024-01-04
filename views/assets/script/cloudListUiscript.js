@@ -57,7 +57,7 @@ $(document).on('click', '#add_list', () => {
     $.ajax(settings).done(function (responseText) {
         let options = ''
         responseText.forEach(account => {
-            options += `<option value="${account.id}">${account.login}</option>`
+            options += `<option value="${account.id_project}">${account.name}</option>`
         });
         $('#l_project').html(options)
     })
