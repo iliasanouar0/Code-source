@@ -85,7 +85,7 @@ $(document).on('click', '.edit', e => {
         $('#project_scope').val(responseText[0].scope)
         $('.project_modal_bnt').html('Update')
         $('.project_modal_bnt').attr("id", "Project_update");
-        $('.project_modal_bnt').data("id", id);
+        $('.project_modal_bnt').attr("data", id);
         $('.add_Project').modal('show')
     })
 })
@@ -95,5 +95,4 @@ $(document).on('hide.bs.modal', '.add_Project', () => {
 })
 
 $(document).on('click', '#Project_update', e => {
-
 })
