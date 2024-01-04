@@ -106,6 +106,7 @@ $(document).on('click', '#Project_update', e => {
         Swal.fire('All fields required')
     }
     let obj = {
+        id_project: `${id}`,
         client_id: `${client_id}`,
         client_secret: `${client_secret}`,
         redirect_url: `${redirect_url}`,
