@@ -42,7 +42,8 @@ const createSeed = (request, response) => {
 
   pool.query(qr, (error, results) => {
     if (error) {
-      response.status(200).send(error.detail);
+      throw error
+      // response.status(200).send(error);
     }
     response.status(200).send(`records added to list`);
   });
