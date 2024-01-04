@@ -72,7 +72,7 @@ const deleteSeeds = (request, response) => {
   }
   params.forEach(param => {
     pool.query(sql, param, (err, result) => {
-      if (err) { console.log(err);response.status(409).send(err) } else { console.log(`${result} records deleted`) }
+      if (err) { console.log(err); response.status(409).send(err) } else { console.log(`${result} records deleted`) }
     });
   });
   response.status(200).send('cloudseed deleted');
@@ -94,6 +94,7 @@ const updateSeed = (request, response) => {
   const params = [obj.id_seed, obj.password, obj.proxy, obj.verification];
   pool.query(sql, params, (error, results) => {
     if (error) {
+      console.log(error);
       response.status(500).send(error);
     }
     response.status(200).send(`seed updated with ID : ${obj.id_seed}`);
