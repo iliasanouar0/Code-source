@@ -121,3 +121,7 @@ $(document).on('click', '.delete', event => {
         }
     })
 });
+
+$(document).on('click', '.password_show', event => {
+    $(event.target).toggleClass("blur")
+})
