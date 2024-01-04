@@ -28,14 +28,12 @@ const createSeed = (request, response) => {
       obj[i].isp,
       obj[i].proxy,
       obj[i].status,
-      obj[i].date_add,
-      obj[i].date_update,
       obj[i].verification,
       obj[i].id_list,
     ]);
   }
   const sql = format(
-    "INSERT INTO cloudseed (id_seed, gmail, password, isp,  proxy, status, date_add, date_update, verification, Id_list) values %L",
+    "INSERT INTO cloudseed (id_seed, gmail, password, isp,  proxy, status, verification, Id_list) values %L",
     query
   );
   var qr = { text: sql, values: [] };
