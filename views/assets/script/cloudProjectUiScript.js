@@ -60,4 +60,5 @@ $(document).on('click', '#project_add', e => {
         redirect_url: `${redirect_url}`,
         scope: `${scope}`,
     }
+    addProject(obj)
 })
