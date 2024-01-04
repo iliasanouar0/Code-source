@@ -3908,4 +3908,5 @@ app.get('/cloud/project/list/', cloudProjectManager.getProjects)
 app.get('/cloud/project/:id', cloudProjectManager.getProjectById)
 app.delete('/cloud/project/:id', cloudProjectManager.deleteProject)
 app.post('/cloud/project/', cloudProjectManager.addProject)
+app.put('/cloud/project/', cloudProjectManager.editProject)
 

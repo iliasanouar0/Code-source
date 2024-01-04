@@ -66,4 +66,13 @@ $(document).on('click', '#project_add', e => {
 $(document).on('click', '.edit', e => {
     let id = $(e.target).data('id')
     console.log(id);
+    let settings = {
+        url: `http://${ip}:3000/cloud/project/${id}`,
+        method: "GET",
+        timeout: 0,
+        data: data,
+    }
+    $.ajax(settings).done(function (responseText) {
+        console.log(responseText);
+    })
 })
