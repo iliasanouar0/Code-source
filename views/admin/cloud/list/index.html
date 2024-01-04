@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <link type="text/css" id="dark-mode" rel="stylesheet" href="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reporting | mailer | lists-panel</title>
     <link rel="icon" href="../../../assets/images/favicon_io/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="../../../assets/images/favicon_io/favicon.ico" type="image/x-icon" />
-    <title>cloud | Admin | project-panel</title>
     <script src="../../../assets/script/check.js"></script>
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -19,19 +19,19 @@
     <link rel="stylesheet" href="../../../assets/vendors/AdminLTE-3.2.0/dist/css/adminlte.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../assets/style/admin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.6.0/pagination.min.css"
         integrity="sha512-K1k7jSn9RDKEcn/ugqVVvWYu0bcS3q1w6m/5pQSnrj0bCfIqF6Wk49lkmckSb4wglvTP9V17LtS0q0XxYccXbg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../../../assets/style/main.css">
-    <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+    <link rel="stylesheet" href="../../../assets/style/admin.css">
     <link
         href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.1/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.css"
         rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini sidebar-collapse">
+
+<body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light admin-navbar">
@@ -52,12 +52,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Composing</h1>
+                            <h1 class="m-0">Cloud Lists</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Composing</li>
+                                <li class="breadcrumb-item active">Cloud lists</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -72,47 +72,29 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col">
-                                    <h3 class="card-title">compose</h3>
+                                    <h3 class="card-title">Cloud Lists</h3>
                                 </div>
                                 <div class="col text-right">
-                                    <div class="row">
-                                        <div class="col">
-                                            <button class="btn btn-success" id="add_compose">Add compose</button>
-                                        </div>
-                                        <div class="col-2">
-                                            <button class="btn btn-danger" id="restart_s">Restart</button>
-                                        </div>
-                                        <div class="col-2">
-                                            <button class="btn btn-secondary" id="refresh_process">Refresh data</button>
-                                        </div>
-                                    </div>
+                                    <button class="btn btn-success" id="add_list">Add list</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center w-100" id="action"></div>
+
                         <div class="card-body">
-                            <table id="composeData" style="width:100%" class="display">
+                            <table id="listTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <!-- id , count , User , List , ISP , Status ,Process , Start at , End at , Action -->
                                         <th><input type="checkbox" name="checkbox" class="checkAll"></th>
-                                        <th>ID</th>
-                                        <th>Count</th>
-                                        <th>User</th>
-                                        <th>List</th>
-                                        <th>Data</th>
-                                        <th>Count</th>
-                                        <th>Counter</th>
-                                        <th>Offer</th>
+                                        <th>Name</th>
                                         <th>ISP</th>
-                                        <th>Status</th>
-                                        <th>Process</th>
-                                        <th>Start at</th>
-                                        <th>End at <span class="text-danger small">[Duration]</span></th>
-                                        <th>Action</th>
+                                        <th>Add date</th>
+                                        <th>User</th>
+                                        <th>Count</th>
+                                        <th id="action">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody id="Process_data"></tbody>
+                                <tbody id="cloudlist_data"></tbody>
+
                             </table>
                         </div>
                     </div>
@@ -126,336 +108,93 @@
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
             <div class="p-3">
-                <div class="mb-4"><input type="checkbox" value="1" class="mr-1"><span>Dark Mode</span></div>
+                <h5>Title</h5>
+                <p>Sidebar content</p>
             </div>
         </aside>
         <!-- /.control-sidebar -->
 
         <!-- modal -->
-        <div class="modal fade add_compose" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="card border-success mb-0">
-                        <div class="card-header bg-transparent border-success text-center">
-                            <h3 class="card-title composeEditTitle">Create new compose</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>List :</label>
-                                <select class="form-control lists" style="width: 100%;" tabindex="-1" aria-hidden="true"
-                                    id="p_list_add">
-                                </select>
-                            </div>
-                            <div class="form-group p_data_add">
-                                <label>Data :</label>
-                                <select class="form-control data" style="width: 100%;" tabindex="-1" aria-hidden="true"
-                                    id="p_data_add">
-                                </select>
-                            </div>
-                            <small class="d-none">
-                                <div class="alert alert-sm alert-warning" role="alert">
-                                    <div class="spinner-grow-sm text-danger spinner-grow" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                    For better Performance please use Limit
-                                </div>
-                            </small>
-                            <div class="row mb-3 limit_send">
-                                <div class="col w-100">
-                                    <div class="form-group limit_send">
-                                        <label for="limit_send">Limit</label>
-                                        <div class="row g-3 align-items-center">
-                                            <div class="col">
-                                                <input type="number" class="form-control" name="limit_send"
-                                                    id="limit_send" min="0">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3 limit_options">
-                                <div class="col w-100">
-                                    <div class="form-group auto">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" name="auto_limit" id="auto_limit"
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-danger" for="auto_limit">Auto limit</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col w-100">
-                                    <div class="form-group auto">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" name="limit_fixed" id="limit_fixed"
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="limit_fixed">Limit fixed (by
-                                                seeds)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <small>
-                                <div class="alert alert-sm alert-warning" role="alert">
-                                    <div class="spinner-grow-sm text-danger spinner-grow" role="status"></div>
-                                    The default limit is <span class="default_limit"></span>
-                                </div>
-                            </small>
-                            <div class="form-group">
-                                <label class="fs-5">Actions</label>
-                                <div class="row w-100 actions">
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-proxy"
-                                                value="checkProxy" autocomplete="off">
-                                            <label class="btn btn-outline-success" for="btn-check-proxy">Check
-                                                proxy</label><br>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-verify"
-                                                value="verify" autocomplete="off">
-                                            <label class="btn btn-outline-success"
-                                                for="btn-check-verify">Verify</label><br>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-compose"
-                                                value="compose" autocomplete="off">
-                                            <label class="btn btn-outline-success"
-                                                for="btn-check-compose">Compose</label><br>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-test"
-                                                value="test-compose" autocomplete="off">
-                                            <label class="btn btn-outline-danger" for="btn-check-test">Test</label><br>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row send_message d-none">
-                                <div class="mb-3">
-                                    <label for="subject" class="form-label">Subject :</label>
-                                    <input type="text" id="subject" class="form-control" placeholder="Mail subject">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="body" class="form-label">Body :</label>
-                                    <textarea class="form-control" id="body" rows="3"
-                                        placeholder="Email body"></textarea>
-                                    <div class="d-none" id="preview"
-                                        style="overflow: scroll;width: 100%; height: 20em;">
-
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label for="messageBody" class="form-label">Upload body (offer) :</label>
-                                            <div class="input-group">
-                                                <input type="file" class="form-control" id="messageBody"
-                                                    aria-describedby="messageBody" aria-label="Upload">
-                                                <button class="btn btn-outline-danger erase" type="button">X</button>
-                                                <button class="btn btn-outline-success upload"
-                                                    type="button">Upload</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label>Offers :</label>
-                                            <div class="row">
-                                                <div class="col-9">
-                                                    <select class="form-control offers" style="width: 100%;"
-                                                        tabindex="-1" aria-hidden="true" id="p_offers_add">
-                                                    </select>
-                                                </div>
-                                                <div class="col">
-                                                    <button class="btn btn-outline-danger manage_offers">Offers</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <small>
-                                    <div class="alert alert-sm alert-warning p-0" role="alert">
-                                        <ul class="m-0">
-                                            <li>Up to 10 emails can be added using this structure :
-                                                "mail1;mail2;mail3...".</li>
-                                            <li>Be sure to use ";" not ",".</li>
-                                            <li>It's permanently denied to use "." as a separator.</li>
-                                            <!-- <li>Double checking is required and recommended.</li> -->
-                                        </ul>
-                                    </div>
-                                </small>
-                                <div class="mb-3">
-                                    <label for="to" class="form-label">To :</label>
-                                    <input type="text" id="to" class="form-control" placeholder="@email">
-                                </div>
-                                <div class="mb-3">
-                                    <div class="form-check d-none all">
-                                        <input class="form-check-input" type="checkbox" value="all" id="all">
-                                        <label class="form-check-label" for="all">
-                                            All seeds
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group d-none">
-                                <label>Status</label>
-                                <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true"
-                                    id="p_status">
-                                    <option value="idel" selected>idel</option>
-                                </select>
-                            </div>
-                            <div class="form-group d-none">
-                                <label for="login">Add date</label>
-                                <input type="date" class="form-control" id="p_add_date" readonly>
-                            </div>
-                            <div class="form-group d-none">
-                                <label for="login">Update date</label>
-                                <input type="date" class="form-control update" id="p_update_date" readonly>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-success" id="c_update">Update</button>
-                        <button type="button" class="btn btn-success d-none" id="c_add">Create</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade edit_offers" data-bs-backdrop="static" data-bs-keyboard="false" style=" display: none;"
-            aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="row w-100">
-                            <div class="col">
-                                <h4 class="modal-title">Offers managing</h4>
-                            </div>
-                        </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body justify-content-center">
-                        <table id="edit_offers">
-                            <thead>
-                                <tr>
-                                    <th>Offer</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="edit_action" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
+        <div class="modal fade add_list" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Edit process actions</h3>
+                            <h3 class="card-title">add list</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Actions</label>
-                                <div class="row w-100 actions">
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-verify-e"
-                                                value="verify" autocomplete="off">
-                                            <label class="btn btn-outline-primary"
-                                                for="btn-check-verify-e">Verify</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-n-spam-e"
-                                                value="notSpam" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-n-spam-e">Not
-                                                Spam</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-read-e"
-                                                value="markAsRead" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-read-e">Mark As
-                                                Read</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-d-inbox-e"
-                                                value="deleteInbox" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-d-inbox-e">Delete
-                                                Inbox</label><br>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-d-spam-e"
-                                                value="deleteSpam" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-d-spam-e">Delete
-                                                Spam</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-spam-e"
-                                                value="markAsSpam" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-spam-e">Mark As
-                                                Spam</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-imp-e"
-                                                value="markAsImportant" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-imp-e">Mark As
-                                                Important</label><br>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-c-link-e"
-                                                value="clickLink" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-c-link-e">Click
-                                                Link</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-started-e"
-                                                value="markAsStarted" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-started-e">Mark As
-                                                Started</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-archive-e"
-                                                value="markAsArchive" autocomplete="off">
-                                            <label class="btn btn-outline-primary"
-                                                for="btn-check-m-archive-e">Archive</label><br>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-m-unread-e"
-                                                value="markAsUnread" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-m-unread-e">Mark As
-                                                Unread</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-n-spamT-e"
-                                                value="notSpamThis" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btn-check-n-spamT-e">Not Spam
-                                                Only</label><br>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="btn-check" id="btn-check-open-e" value="open"
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-primary"
-                                                for="btn-check-open-e">Open</label><br>
-                                        </div>
-                                    </div>
+                                <label for="la_name">Name</label>
+                                <input type="text" class="form-control" id="la_name">
+                            </div>
+                            <div class="form-group" style="display: none;">
+                                <label>Status</label>
+                                <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true"
+                                    id="l_status">
+                                    <option value="active" selected>active</option>
+                                    <option value="pending">pending</option>
+                                    <option value="inactive">inactive</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>ISPs</label>
+                                <select class="form-control" data-placeholder="SELECT USER ISPs" style="width: 100%;"
+                                    id="l_isp_add">
+                                    <option value="" selected>-_-_SELECT ISP_-_-</option>
+                                    <option value="gmail">Gmail</option>
+                                    <option value="yahoo">Yahoo</option>
+                                    <option value="hotmail">Hotmail</option>
+                                    <option value="aol">AOL</option>
+                                </select>
+                            </div>
+                            <div class="form-group d-none">
+                                <label for="login">Add date</label>
+                                <input type="date" class="form-control" id="l_add_date" readonly>
+                            </div>
+
+                            <div class="form-group d-none">
+                                <label for="login">Update date</label>
+                                <input type="date" class="form-control update" id="l_update_date" readonly>
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-center">
+                            <button type="button" class="btn btn-success" id="l_add">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade add_seeds_md" tabindex="1" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <div class="row">
+                                <diV class="col">
+                                    <h3 class="card-title">add seeds</h3>
+                                </diV>
+                                <diV class="col text-right">
+                                    <button class="btn btn-danger bulk">Bulk Add</button>
+                                </diV>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <label for="note">Note :</label>
+                                <p>*** --> This stars mean that this line is invalid (refer to invalid data) .</p>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="FormControlTextarea" class="form-label">Seeds :</label>
+                                    <textarea class="form-control" id="FormControlTextarea" rows="3"
+                                        placeholder="firstaccount@gmail.com,password,172.86.177.000:1212,emailverf"></textarea>
                                 </div>
                             </div>
                         </div>
 
                         <div class="card-footer text-center">
-                            <button type="button" class="btn btn-success" id="p_a_add">Submit</button>
+                            <button type="button" class="btn btn-success" id="l_seeds_add">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -494,15 +233,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="restart" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
-            data-bs-keyboard="false" tabindex="-1">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <h5 class="text-white">You can't prevent the restart anymore</h5><br>
-                <div class="timer">
-                    <strong><q class="display-1 text-danger"><time>00:00:00</time></q></strong>
-                </div>
-            </div>
-        </div>
+
         <div class="modal fade" id="modal-danger" style="display: none;" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content bg-danger">
@@ -524,124 +255,380 @@
             </div>
 
         </div>
-        <div class="modal fade" id="modal-compose-view" style="display: none;">
+
+        <div class="modal fade" id="modal-bulk-add" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Bulk add</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="upload-widget">
+                            <div class="mb-3">
+                                <label for="sampleFile" class="form-label">choose file</label>
+                                <input class="form-control" type="file" id="demo" accept=".xls,.xlsx">
+                            </div>
+                        </form>
+                        <div class="row mb-3 px-5">
+                            <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar text-bg-warning" style="width: 0%">0%</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <a href="../../assets/files/exemple.xlsx">Download XLSX file example</a>
+                            </div>
+                            <div class="col text-right">
+                                <button class="btn btn-success preview" style="display: none;">preview data before
+                                    saving</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-seeds-view" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="row w-100">
                             <div class="col">
-                                <h4 class="modal-title">Status of process <span id="p_s"></span></h4>
+                                <h4 class="modal-title">seeds of list <span id="list_s"></span></h4>
                             </div>
-                            <div class="col text-center count">
-
-                            </div>
-                            <div class="col text-right status_bg">
-
+                            <div class="col text-center">
+                                <button class="btn btn-outline-dark updateOptions">Update Options</button>
                             </div>
                             <div class="col text-right">
-                                <button class="btn btn-secondary" id="refresh_result">Refresh data</button>
-                            </div>
-                            <div class="col-1 text-right">
-                                <button type="button" class="btn-close" aria-label="Close"></button>
+                                <input class="form-control" id="searchSeeds" type="text" placeholder="Search by email"
+                                    aria-label="default input example">
                             </div>
                         </div>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning elevation-1">
-                                        <i class="fas fa-hourglass-start"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Waiting seeds</span>
-                                        <span class="info-box-number w_seeds">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="info-box mb-3">
-                                    <span class="info-box-icon bg-info elevation-1">
-                                        <i class="fas fa-cog"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Active seeds</span>
-                                        <span class="info-box-number a_seeds">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="info-box mb-3">
-                                    <span class="info-box-icon bg-success elevation-1">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Finished seeds</span>
-                                        <span class="info-box-number f_seeds">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="info-box mb-3">
-                                    <span class="info-box-icon bg-danger elevation-1">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Failed seeds</span>
-                                        <span class="info-box-number ff_seeds">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <table class="table table-bordered table-striped text-center" id="process_result"
-                            style="width: 100%;">
+                        <table class="table table-bordered table-striped text-center" style="width: 100%;">
                             <thead>
                                 <tr>
+                                    <th><input type="checkbox" name="checkbox" class="checkAllSeeds"></th>
+                                    <th>Id seed</th>
                                     <th>Email</th>
+                                    <th>Password</th>
                                     <th>Proxy</th>
                                     <th>ISP</th>
-                                    <th>Status</th>
-                                    <th>Status details</th>
-                                    <th>Duration</th>
-                                    <th>Details</th>
+                                    <th>Verification</th>
+                                    <th>Id list</th>
+                                    <th id="actionSeeds">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody id="seeds_result"></tbody>
+                            <tbody id="seeds"></tbody>
                         </table>
-                        <div id="pagination-container">
-                            <nav aria-label="pagination">
-                                <ul class="pagination pagination-sm seeds-pagination">
-                                </ul>
-                            </nav>
-                        </div>
+                        <div id="pagination-container"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal" id="modal-result-view" style="display: none;">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
+
+        <div class="modal fade" id="updateOptions" data-bs-backdrop="static" data-bs-keyboard="false"
+            style=" display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="row w-100">
                             <div class="col">
-                                <h4 class="modal-title">Seed feedback</span></h4>
-                            </div>
-                            <div class="col text-right">
-                                <button class="btn btn-primary" id="Refresh">Refresh</button>
+                                <h4 class="modal-title">Seeds update options</h4>
                             </div>
                         </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <div class="row row-cols-1 row-cols-md-2 g-4 feedback">
+                    <div class="modal-body justify-content-center">
+                        <nav class="justify-content-center w-100">
+                            <div class="nav nav-tabs mb-3 justify-content-center w-100" id="nav-tab" role="tablist">
+                                <div class="row w-100 justify-content-center text-center">
+                                    <div class="col w-100 text-center">
+                                        <button class="nav-link active w-100" id="nav-proxy-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-proxy" type="button" role="tab"
+                                            aria-controls="nav-proxy" aria-selected="true">proxy update</button>
+                                    </div>
+                                    <div class="col w-100 text-center">
+                                        <button class="nav-link  w-100" id="nav-seeds-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-seeds" type="button" role="tab"
+                                            aria-controls="nav-seeds" aria-selected="false">Bulk update seeds</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                        <div class="tab-content p-3 border bg-light" id="nav-tabContent">
+                            <div class="tab-pane fade active show" id="nav-proxy" role="tabpanel"
+                                aria-labelledby="nav-proxy-tab">
+                                <p><strong>Updating Proxy in list <span class="list_s_u"></span>.</strong></p>
+                                <div class="row">
+                                    <form class="justify-content-center text-center">
+                                        <div class="input_way">
+                                            <div class="mb-3 text-left">
+                                                <label class="form-label" for="oldProxy">Old proxy</label>
+                                                <input type="text" class="form-control" id="oldProxy"
+                                                    placeholder="Enter old proxy">
+                                            </div>
+                                            <div class="mb-3 text-left">
+                                                <label class="form-label" for="newProxy">New proxy</label>
+                                                <input type="text" class="form-control" id="newProxy"
+                                                    placeholder="Enter new proxy">
+                                            </div>
+                                        </div>
+                                        <div style="display: none;" class="text_way mb-3">
+                                            <textarea class="form-control" name="proxy" id="proxyUpdateText"
+                                                placeholder="old proxy,new proxy" cols="30" rows="10"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-right">
+                                                <button type="button" class="btn btn-outline-dark switch_inp">
+                                                    <i class="fa fa-list"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <input class="btn btn-success submit_proxy" type="submit" value="Submit">
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-seeds" role="tabpanel" aria-labelledby="nav-seeds-tab">
+                                <div class="row">
+                                    <div class="col">
+                                        <p><strong>Updating Seeds in list <span class="list_s_u"></span>.</strong></p>
+                                    </div>
+                                    <div class="col text-right">
+                                        <i role="button" class="fa fa-question fs-3 text-danger" id="info"></i>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <form class="justify-content-center text-center">
+                                        <div class="mb-3">
+                                            <textarea class="form-control font-monospace lead" name="seeds"
+                                                id="seedsUpdateText"
+                                                placeholder="exemple@hostname.com,password,proxy,emailverf" cols="30"
+                                                rows="10"></textarea>
+                                        </div>
+                                        <input class="btn btn-success submit_bulk_edit submit" type="submit"
+                                            value="Submit">
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="fullpage" onclick="this.style.display='none';">
-            <div class="row z-3">
-                <div class="col">
-                    <img src="" alt="feedBack" id="feedback-img">
+
+        <div class="modal fade" id="info_bulk_update" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Info bulk update</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12" id="accordion">
+                                <div class="card card-primary card-outline">
+                                    <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapseOne"
+                                        aria-expanded="false">
+                                        <div class="card-header">
+                                            <h4 class="card-title w-100">
+                                                1. Data form
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            The list you will enter here should be in this form :<br><br>
+                                            <pre class="m-0 py-0">example@hostname.com,password,proxy,verification</pre>
+                                            <pre class="m-0 py-0">example@hostname.com,password,proxy,verification</pre>
+                                            <pre class="m-0 py-0">example@hostname.com,password,proxy,verification</pre>
+                                            <br>
+                                            <p class="text-danger text-center font-monospace"><small>Be carful and
+                                                    verify
+                                                    before submitting</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-primary card-outline">
+                                    <a class="d-block w-100" data-toggle="collapse" href="#collapseTwo">
+                                        <div class="card-header">
+                                            <h4 class="card-title w-100">
+                                                2. exceptions
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            If you want to update the data of a specific email in list without
+                                            updating the proxy or any other values you can add none in the value or keep
+                                            it empty or you
+                                            can writ the same value : <br><br>
+                                            <pre
+                                                class="m-0 py-0">example@hostname.com,password,<span class="text-danger"><strong>none</strong></span>,verification</pre>
+                                            <!-- <pre class="m-0 py-0">example@hostname.com,password, ,verification</pre> -->
+                                            <pre
+                                                class="m-0 py-0">example@hostname.com,password,<span class="text-danger"><strong>proxy</strong></span>,verification</pre>
+                                            <br>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-primary card-outline">
+                                    <a class="d-block w-100" data-toggle="collapse" href="#collapseThree">
+                                        <div class="card-header">
+                                            <h4 class="card-title w-100">
+                                                3. Email state
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            All emails you enter should be already stored, if you entered a new email it
+                                            will produce an <span class="text-danger"><strong>error</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-warning card-outline">
+                                    <a class="d-block w-100" data-toggle="collapse" href="#collapseFour">
+                                        <div class="card-header">
+                                            <h4 class="card-title w-100">
+                                                4. Warning 1
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseFour" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            If you entered a deferent data form the update process will be <span
+                                                class="text-warning"><strong>canceled</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-warning card-outline">
+                                    <a class="d-block w-100" data-toggle="collapse" href="#collapseFive">
+                                        <div class="card-header">
+                                            <h4 class="card-title w-100">
+                                                5. Warning 2
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseFive" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            Update is a permanent action, it can't be cancelled or prevent. <span
+                                                class="text-warning"><strong>be careful</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-warning card-outline">
+                                    <a class="d-block w-100" data-toggle="collapse" href="#collapseSix">
+                                        <div class="card-header">
+                                            <h4 class="card-title w-100">
+                                                6. Warning 3
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseSix" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            Updating data is on your responsibility, we already verified and checked all
+                                            the possible cases. if you faced any problems contact the IT team
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-danger card-outline">
+                                    <a class="d-block w-100" data-toggle="collapse" href="#collapseSeven">
+                                        <div class="card-header">
+                                            <h4 class="card-title w-100">
+                                                7. Error 4041
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseSeven" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            Not fond : data not fond or email not excite.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-danger card-outline">
+                                    <a class="d-block w-100" data-toggle="collapse" href="#collapseEight">
+                                        <div class="card-header">
+                                            <h4 class="card-title w-100">
+                                                8. Error 4011
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseEight" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            Bad request : the data form not supported or bad data structure.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-danger card-outline">
+                                    <a class="d-block w-100" data-toggle="collapse" href="#collapseNine">
+                                        <div class="card-header">
+                                            <h4 class="card-title w-100">
+                                                9. Error 5001
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseNine" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            Internal Server Error : The server encountered an internal error and was
+                                            unable to complete your request. Either the server is overloaded or there
+                                            3rd party service is down.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Understood</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-preview-data" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row w-100">
+                            <div class="col">
+                                <h4 class="modal-title">preview data</h4>
+                            </div>
+                            <div class="col text-center">
+                                <span class="badge badge-info count">0</span>
+                            </div>
+                            <div class="col text-center">
+                                <input type="text" class="form-control" id="search_preview" placeholder="search seed">
+                            </div>
+                            <div class="col text-right gap-1">
+                                <button class="btn btn-outline-dark save-bulk-data">Save</button>
+                                <button class="btn btn-outline-danger cancel" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Password</th>
+                                    <th scope="col">Proxy</th>
+                                    <th scope="col">Verification</th>
+                                    <th scope="col">action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bulk_add_table">
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -658,26 +645,28 @@
         </footer>
     </div>
     <!-- ./wrapper -->
-
-    <!-- REQUIRED SCRIPTS -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <!-- jQuery -->
     <script src="../../../assets/vendors/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
     <script
         src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.1/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.js"></script>
-    <!-- Bootstrap 4 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-
+    <script src="../../../assets/script/render_admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"
+        integrity="sha256-yVBhl8r4CaB1tt7h2g02+xnacVj/6KiOewyWxdhiPJk=" crossorigin="anonymous"></script>
+    <!-- Bootstrap 4 -->
     <script src="../../../assets/vendors/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../../assets/vendors/AdminLTE-3.2.0/dist/js/adminlte.min.js"></script>
     <!-- main admin script -->
-    <script src="../../../assets/script/render_admin.js"></script>
-    <script type="module" src="../../../assets/script/composeUiScript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.6.0/pagination.min.js"
+        integrity="sha512-GzbaI5EsNzdEUq6/2XLYpr1y9CUZRIVsUeWTAFgULtQa5jZ3Nug8i0nZKM6jp9NffBCZhymPPQFcF0DK+JkRpw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../../../assets/script/listUiscript.js" defer></script>
     <script src="../../../assets/script/index.js" defer></script>
 </body>
+
+</html>
