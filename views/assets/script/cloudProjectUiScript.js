@@ -8,7 +8,6 @@ $(document).on('click', '#add_Project', e => {
         data: data,
     }
     $.ajax(settings).done(function (responseText) {
-        console.log(responseText);
         let options = ''
         responseText.forEach(account => {
             options += `<option value="${account.id}">${account.login}</option>`
@@ -70,7 +69,6 @@ $(document).on('click', '#project_add', e => {
 
 $(document).on('click', '.edit', e => {
     let id = $(e.target).data('id')
-    console.log(id);
     let settings = {
         url: `http://${ip}:3000/cloud/project/${id}`,
         method: "GET",
@@ -78,7 +76,6 @@ $(document).on('click', '.edit', e => {
         data: data,
     }
     $.ajax(settings).done(function (responseText) {
-        console.log(responseText);
         $('#projectadd_title').html('Edit Project')
         $('#project_name').addClass('d-none')
         $('#cloudaccount').addClass('d-none')
@@ -88,10 +85,15 @@ $(document).on('click', '.edit', e => {
         $('#project_scope').val(responseText[0].scope)
         $('.project_modal_bnt').html('Update')
         $('.project_modal_bnt').attr("id", "Project_update");
+        $('.project_modal_bnt').data("id", id);
         $('.add_Project').modal('show')
     })
 })
 
 $(document).on('hide.bs.modal', '.add_Project', () => {
     $('.add_Project input').val('')
+})
+
+$(document).on('click', '#Project_update', e => {
+
 })
