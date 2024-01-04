@@ -67,20 +67,6 @@ $(document).on('click', '.save_pass', event => {
         })
         return
     }
-    // fetch(`http://${ip}:3000/cloud/account/`, {
-    //     method: "PUT",
-    //     body: 
-    // }).then(response => {
-    //     return response.text()
-    // }).then(data => {
-    //     Swal.fire({
-    //         title: 'updated',
-    //         text: data,
-    //         icon: 'success'
-    //     })
-    // }).finally(() => { $('#change-password-m input').val(''); $('#change-password-m').modal('hide'); getDataCloudAccount.ajax.reload(null, false) })
-
-
     let settings = {
         url: `http://${ip}:3000/cloud/account/`,
         method: "PUT",
@@ -90,7 +76,7 @@ $(document).on('click', '.save_pass', event => {
     $.ajax(settings).done(function (responseText) {
         Swal.fire({
             title: 'updated',
-            text: data,
+            text: responseText,
             icon: 'success'
         })
     }).then(() => { $('#change-password-m input').val(''); $('#change-password-m').modal('hide'); getDataCloudAccount.ajax.reload(null, false) })
