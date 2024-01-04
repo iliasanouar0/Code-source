@@ -46,6 +46,7 @@ const nodeEnvManager = require('./managers/nodeEnvManager')
 const composeManager = require('./managers/composeManager');
 const cloudAccountManager = require('./managers/cloudAccountManager')
 const cloudProjectManager = require('./managers/cloudProjectManager')
+const cloudListManager = require('./managers/cloudListManager')
 
 const port = 3000;
 const app = express(); // setup express application
@@ -3910,3 +3911,12 @@ app.delete('/cloud/project/:id', cloudProjectManager.deleteProject)
 app.post('/cloud/project/', cloudProjectManager.addProject)
 app.put('/cloud/project/', cloudProjectManager.editProject)
 
+// cloud list
+// lists API
+app.get("/cloud/lists", cloudListManager.getLists);
+app.get("/cloud/sup/lists", cloudListManager.getListsSup);
+app.get("/cloud/lists/:id", cloudListManager.getUserLists);
+app.get("/cloud/lists/isp/:id", cloudListManager.getIspList);
+app.post("/cloud/lists", cloudListManager.createList);
+app.put("/cloud/lists/:id", cloudListManager.updateName);
+app.delete("/cloud/lists/:id", cloudListManager.deleteList);
