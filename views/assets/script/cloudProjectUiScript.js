@@ -98,3 +98,45 @@ $(document).on('click', '#Project_update', e => {
     let id = $(e.target).data("id")
     console.log(id);
 })
+
+
+
+$(document).on('click', '.delete', event => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: 'black',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let id = $(event.target).data('id')
+            fetch(`http://${ip}:3000/cloud/project/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers":
+                        "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+                    "Access-Control-Allow-Methods":
+                        "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+                },
+            }).then((response) => {
+                return response.text();
+            }).then((data) => {
+                Swal.fire({
+                    title: "Deleted !!",
+                    text: data,
+                    icon: "warning",
+                    confirmButtonText: "ok",
+                })
+            }).then(() => {
+                getDataCloudProject.ajax.reload(null, false)
+            });
+        } else if (result.isDismissed) {
+            console.log("cancelled");
+        }
+    })
+});
