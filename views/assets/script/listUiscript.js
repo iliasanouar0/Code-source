@@ -198,7 +198,7 @@ $(document).on('click', '.save', event => {
 
 const addSeeds = (data) => {
     let settings = {
-        "url": `http://${ip}:3000/cloud/seeds`,
+        "url": `http://${ip}:3000/seeds`,
         "method": "POST",
         "timeout": 0,
         "data": JSON.stringify(data),
