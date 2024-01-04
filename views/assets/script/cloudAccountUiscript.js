@@ -20,7 +20,7 @@ const addAccount = (data) => {
         })
     }).then(() => {
         $(".add_Account input").val("");
-        $(".add_entity").modal("hide");
+        $(".add_Account").modal("hide");
         getDataCloudAccount.ajax.reload(null, false)
     });
 }
@@ -28,13 +28,15 @@ const addAccount = (data) => {
 $(document).on('click', '#add', e => {
     let login = $('#login_add')
     let password = $('#password_add')
-    if (login == '' || password == '') {
-        Swal.fire('All felids required !!')
-        return
-    }
-    let obg = {
-        login: `${login}`,
-        password: `${password}`
-    }
-    addAccount(data)
+    console.log(login);
+    console.log(password);
+    // if (login == '' || password == '') {
+    //     Swal.fire('All felids required !!')
+    //     return
+    // }
+    // let obg = {
+    //     login: `${login}`,
+    //     password: `${password}`
+    // }
+    // addAccount(data)
 })
