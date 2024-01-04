@@ -47,6 +47,7 @@ const composeManager = require('./managers/composeManager');
 const cloudAccountManager = require('./managers/cloudAccountManager')
 const cloudProjectManager = require('./managers/cloudProjectManager')
 const cloudListManager = require('./managers/cloudListManager')
+const cloudSeedManager = require('./managers/cloudSeedManager')
 
 const port = 3000;
 const app = express(); // setup express application
@@ -3912,7 +3913,6 @@ app.post('/cloud/project/', cloudProjectManager.addProject)
 app.put('/cloud/project/', cloudProjectManager.editProject)
 
 // cloud list
-// lists API
 app.get("/cloud/lists", cloudListManager.getLists);
 app.get("/cloud/sup/lists", cloudListManager.getListsSup);
 app.get("/cloud/lists/:id", cloudListManager.getUserLists);
@@ -3920,3 +3920,14 @@ app.get("/cloud/lists/isp/:id", cloudListManager.getIspList);
 app.post("/cloud/lists", cloudListManager.createList);
 app.put("/cloud/lists/:id", cloudListManager.updateName);
 app.delete("/cloud/lists/:id", cloudListManager.deleteList);
+
+// cloud seeds 
+app.patch("/cloud/seeds/bulk/", cloudSeedManager.updateSeeds);
+app.patch("/cloud/seeds/", cloudSeedManager.deleteSeeds);
+app.get("/cloud/seeds/proxy/:id", cloudSeedManager.getProxy);
+app.get("/cloud/seeds/:id", cloudSeedManager.getSeedsById);
+app.get('/cloud/seeds/search/:id', cloudSeedManager.searchSeeds);
+app.post("/cloud/seeds", cloudSeedManager.createSeed);
+app.put("/cloud/seeds/", cloudSeedManager.updateSeed);
+app.put("/cloud/seeds/proxy/", cloudSeedManager.updateProxy);
+app.delete("/cloud/seeds/:id", cloudSeedManager.deleteSeed);

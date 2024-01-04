@@ -578,7 +578,7 @@ $(document).on('click', '.view', event => {
     let update = $('.updateOptions')[0].dataset.id = data
     $('#searchSeeds')[0].dataset.id = data
     let settings = {
-        "url": `http://${ip}:3000/seeds/${data}`,
+        "url": `http://${ip}:3000/cloud/seeds/${data}`,
         "method": "GET",
         "headers": {
             'Content-Type': 'application/json',
@@ -677,7 +677,7 @@ $(document).on('click', '.delete-seeds', () => {
                 let ID = check[i].value
                 ides.push(ID)
             }
-            fetch(`http://${ip}:3000/seeds/`, {
+            fetch(`http://${ip}:3000/cloud/seeds/`, {
                 method: "PATCH",
                 body: `${JSON.stringify(ides)}`,
                 headers: {
@@ -725,7 +725,7 @@ $(document).on('click', '.remove-this-seed', event => {
         if (result.isConfirmed) {
             let data = $(event.target).data().id
             $(event.target).parent().parent().remove()
-            fetch(`http://${ip}:3000/seeds/${data}`, {
+            fetch(`http://${ip}:3000/cloud/seeds/${data}`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json',
@@ -821,7 +821,7 @@ $(document).on('click', '.edit-this-seed', event => {
 
 const seedsViewRender = data => {
     let settings = {
-        "url": `http://${ip}:3000/seeds/${data}`,
+        "url": `http://${ip}:3000/cloud/seeds/${data}`,
         "method": "GET",
         "headers": {
             'Content-Type': 'application/json',
@@ -875,7 +875,7 @@ const seedsViewRender = data => {
 
 const searchRender = (data, id) => {
     let settings = {
-        "url": `http://${ip}:3000/seeds/search/${id}?gmail=${data}`,
+        "url": `http://${ip}:3000/cloud/seeds/search/${id}?gmail=${data}`,
         "method": "GET",
         "headers": {
             'Content-Type': 'application/json',
@@ -932,7 +932,7 @@ $(document).on('click', '.submit_proxy', event => {
             })
             return
         }
-        fetch(`http://${ip}:3000/seeds/proxy/${data}?proxy=${oldPVal}`, {
+        fetch(`http://${ip}:3000/cloud/seeds/proxy/${data}?proxy=${oldPVal}`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -954,7 +954,7 @@ $(document).on('click', '.submit_proxy', event => {
                     }
                     send.push(proxy)
                 }
-                fetch(`http://${ip}:3000/seeds/proxy/`, {
+                fetch(`http://${ip}:3000/cloud/seeds/proxy/`, {
                     method: "PUT",
                     body: JSON.stringify(send),
                     headers: {
@@ -1003,7 +1003,7 @@ $(document).on('click', '.submit_proxy', event => {
             }
             updateObjects.push(prxUp)
         }
-        fetch(`http://${ip}:3000/seeds/proxy/`, {
+        fetch(`http://${ip}:3000/cloud/seeds/proxy/`, {
             method: "PUT",
             body: JSON.stringify(updateObjects),
             headers: {
@@ -1071,7 +1071,7 @@ $(document).on('click', '.submit_bulk_edit', event => {
                     verification: seed[3]
                 })
             });
-            fetch(`http://${ip}:3000/seeds/bulk/`, {
+            fetch(`http://${ip}:3000/cloud/seeds/bulk/`, {
                 method: "PATCH",
                 body: JSON.stringify(objects),
                 headers: {
