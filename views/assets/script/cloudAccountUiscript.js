@@ -26,8 +26,8 @@ const addAccount = (data) => {
 }
 
 $(document).on('click', '#add', e => {
-    let login = $('#login_add')
-    let password = $('#password_add')
+    let login = $('#login_add').val()
+    let password = $('#password_add').val()
     console.log(login);
     console.log(password);
     // if (login == '' || password == '') {
