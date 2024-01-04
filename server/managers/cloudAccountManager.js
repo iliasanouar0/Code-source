@@ -33,7 +33,7 @@ const editAccount = (req, res) => {
 }
 
 const getAccounts = (req, res) => {
-    let sql = 'SELECT * FROM cloudaccount'
+    let sql = 'SELECT login,id FROM cloudaccount'
     pool.query(sql, (e, r) => {
         if (e) {
             res.status(200).send({ name: e.name, message: e.message, stack: e.stack })
