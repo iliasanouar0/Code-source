@@ -62,12 +62,11 @@ const getAccountsData = (req, res) => {
         res.status(200).send(r.rows)
     })
 }
-// cloudaccount.login, cloudaccount.password, cloudaccount.date_add, cloudaccount.update_date
 
 const deleteAccount = (req, res) => {
     let id = req.params.id
     let sql = 'DELETE FROM cloudaccount WHERE cloudaccount.id=$1'
-    pool.query(sql, (e, r) => {
+    pool.query(sql, [id], (e, r) => {
         if (e) {
             res.status(200).send({ name: e.name, message: e.message, stack: e.stack })
         }
