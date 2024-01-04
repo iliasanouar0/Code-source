@@ -95,4 +95,6 @@ $(document).on('hide.bs.modal', '.add_Project', () => {
 })
 
 $(document).on('click', '#Project_update', e => {
+    let id = $(e.target).data("id")
+    console.log(id);
 })
