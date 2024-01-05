@@ -64,8 +64,11 @@ async function sendMail(req, res) {
             }
         }
     }
+    
     console.log('to : ' + to);
     console.log('subject : ' + subject);
+    console.log('test all : ' + methods.fixedLimit);
+    console.log('fixedLimit : ' + test.sendWithAll);
     console.log(actions);
 
 
