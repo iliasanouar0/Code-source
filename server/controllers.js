@@ -33,26 +33,27 @@ async function sendMail(req, res) {
     let actions = data[0].action
     console.log(actions);
     actions = actions.split(',')
-    let length = actions.length
-    for (let i = 0; i < length; i++) {
-        console.log(actions[length - (i + 1)].split(':')[0]);
-        switch (actions[length - (i + 1)].split(':')[0]) {
-            case 'to':
-                to = actions.pop().split(':')[1]
-                break;
-            case 'subject':
-                console.log(actions[length - (i + 1)]);
-                console.log('test');
-                console.log(actions.pop().split(':')[1]);
-                subject = actions.pop().split(':')[1]
-                break;
-            default:
-                break;
-        }
-    }
-    console.log('to : ' + to);
-    console.log('subject : ' + subject);
     console.log(actions);
+    // let length = actions.length
+    // for (let i = 0; i < length; i++) {
+    //     console.log(actions[length - (i + 1)].split(':')[0]);
+    //     switch (actions[length - (i + 1)].split(':')[0]) {
+    //         case 'to':
+    //             to = actions.pop().split(':')[1]
+    //             break;
+    //         case 'subject':
+    //             console.log(actions[length - (i + 1)]);
+    //             console.log('test');
+    //             console.log(actions.pop().split(':')[1]);
+    //             subject = actions.pop().split(':')[1]
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
+    // console.log('to : ' + to);
+    // console.log('subject : ' + subject);
+    // console.log(actions);
     res.status(200).send(data)
 
     // let list = processManager.getAllProcessSeeds(data.list)
