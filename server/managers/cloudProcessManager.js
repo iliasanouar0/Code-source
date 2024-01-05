@@ -435,12 +435,10 @@ const processing = async (data) => {
         case 'authO':
             switch (seed.isp) {
                 case 'gmail':
-                    // await gmailManagement.getRefreshToken(seed, mode).then(e => {
-                    //     result = e
-                    // })
-                    // return result
-                    console.log(seed);
-                    break
+                    await gmailManagement.getRefreshToken(seed, mode).then(e => {
+                        result = e
+                    })
+                    return result
                 default:
                     console.log('data invalid');
                     break;
