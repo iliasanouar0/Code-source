@@ -15,75 +15,77 @@ require("dotenv").config();
 
 
 async function sendMail(req, res) {
-    const oAuth2Client = new google.auth.OAuth2(
-        process.env.CLIENT_ID,
-        process.env.CLIENT_SECRET,
-        process.env.REDIRECT_URI
-    );
-    let results = []
+    // const oAuth2Client = new google.auth.OAuth2(
+    //     process.env.CLIENT_ID,
+    //     process.env.CLIENT_SECRET,
+    //     process.env.REDIRECT_URI
+    // );
+    // let results = []
     let Obj = (req.params.p)
-    let data = processManager.getProcess(Obj)
-    let to
-    let subject
-    let bcc
-    let text = data.text
-    let actions = data.action
-    actions = actions.split(';')
-    actions.shift()
-    let length = actions.length
-    for (let i = 0; i < length; i++) {
-        switch (actions[length - (i + 1)].split(':')[0]) {
-            case 'to':
-                to = actions.pop().split(':')[1]
-                break;
-            case 'subject':
-                subject = actions.pop().split(':')[1]
-                break;
-            case 'bcc':
-                bcc = actions.pop().split(':')[1]
-                break;
-            default:
-                break;
-        }
-    }
-    console.log(to);
-    console.log(subject);
-    console.log(bcc);
+    console.log(Obj);
+    res.status(200).send(Obj)
+    // let data = processManager.getProcess(Obj)
+    // let to
+    // let subject
+    // let bcc
+    // let text = data.text
+    // let actions = data.action
+    // actions = actions.split(';')
+    // actions.shift()
+    // let length = actions.length
+    // for (let i = 0; i < length; i++) {
+    //     switch (actions[length - (i + 1)].split(':')[0]) {
+    //         case 'to':
+    //             to = actions.pop().split(':')[1]
+    //             break;
+    //         case 'subject':
+    //             subject = actions.pop().split(':')[1]
+    //             break;
+    //         case 'bcc':
+    //             bcc = actions.pop().split(':')[1]
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
+    // console.log(to);
+    // console.log(subject);
+    // console.log(bcc);
 
-    console.log(actions);
+    // console.log(actions);
 
-    let list = processManager.getAllProcessSeeds(data.list)
-    console.log(list);
-    for (let i = 0; i < list.length; i++) {
-        console.log(list[i]);
-        try {
-            oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
-            const accessToken = await oAuth2Client.getAccessToken();
-            const transport = nodemailer.createTransport({
-                service: "gmail",
-                auth: {
-                    ...CONSTANTS.auth,
-                    user: list[i].gmail,
-                    refreshToken: list[i].REFRESH_TOKEN,
-                    accessToken: accessToken,
-                },
-            });
-            const mailOptions = {
-                // ...CONSTANTS.mailoptions,
-                from: list[i].gmail,
-                to: to,
-                subject: subject,
-                bcc: [bcc],
-                text: text,
-            };
-            const result = await transport.sendMail(mailOptions);
-            results.push(result)
-        } catch (error) {
-            console.log(error);
-            res.send(error);
-        }
-    }
-    res.status(200).send(results)
+    // let list = processManager.getAllProcessSeeds(data.list)
+    // console.log(list);
+    // for (let i = 0; i < list.length; i++) {
+    //     console.log(list[i]);
+    //     try {
+    //         oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
+    //         const accessToken = await oAuth2Client.getAccessToken();
+    //         const transport = nodemailer.createTransport({
+    //             service: "gmail",
+    //             auth: {
+    //                 ...CONSTANTS.auth,
+    //                 user: list[i].gmail,
+    //                 refreshToken: list[i].REFRESH_TOKEN,
+    //                 accessToken: accessToken,
+    //             },
+    //         });
+    //         const mailOptions = {
+    //             // ...CONSTANTS.mailoptions,
+    //             from: list[i].gmail,
+    //             to: to,
+    //             subject: subject,
+    //             bcc: [bcc],
+    //             text: text,
+    //         };
+    //         const result = await transport.sendMail(mailOptions);
+    //         results.push(result)
+    //     } catch (error) {
+    //         console.log(error);
+    //         res.send(error);
+    //     }
+    // }
+    // res.status(200).send(results)
 }
 
 async function getUser(req, res) {
