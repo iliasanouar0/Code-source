@@ -1874,7 +1874,7 @@ const getRefreshToken = async (data) => {
     console.log(data);
     let feedback = ''
     console.log(data);
-    let obj = await login(data)
+    let obj = await login(data, 'Cookies')
     console.log(obj);
     const page = obj.page
     const browser = obj.browser
