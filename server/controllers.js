@@ -84,6 +84,13 @@ async function sendMail(req, res) {
             if (test.sendWithAll) {
                 for (let i = 0; i < data.length; i++) {
                     try {
+                        const templatePath = `/home/offers/${data[0].offer}`;
+                        const templateFile = await fs.readFile(templatePath, 'utf-8');
+                        const template = handlebars.compile(templateFile);
+                        const replacements = {
+                            username: ""
+                        };
+                        const finalHtml = template(replacements);
                         oAuth2Client.setCredentials({ refresh_token: data[i].refresh_token });
                         const accessToken = await oAuth2Client.getAccessToken();
                         const transport = nodemailer.createTransport({
@@ -102,7 +109,7 @@ async function sendMail(req, res) {
                             from: data[i].gmail,
                             to: to,
                             subject: subject,
-                            html: offer,
+                            html: finalHtml,
                         };
                         const result = await transport.sendMail(mailOptions);
                         results.push(result)
