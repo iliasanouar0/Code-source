@@ -821,6 +821,38 @@ $(document).on('click', '.start', event => {
     }
 })
 
+$(document).on('click', '.send', e => {
+    let p = $(e.target).data('id')
+    console.log(p);
+    // $(e.target).html('<div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div>')
+    // console.log(p);
+    // var settings = {
+    //     url: `http://${ip}:8000/api/mail/send/${p}`,
+    //     method: "GET",
+    //     timeout: 0,
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Headers":
+    //             "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+    //         "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+    //     },
+    // };
+
+    // $.ajax(settings).done(function (response) {
+    //     $(e.target).html('Send')
+    //     console.log(response);
+    //     // console.log($("#result"));
+    //     // let r = ''
+    //     // for (let i = 0; i < response; i++) {
+    //     //     r += `<p>${response[i]}</p>`
+    //     //     console.log(r);
+    //     //     $("#result").html(r)
+    //     // }
+    // });
+
+})
+
 $(document).on('click', '.pause', event => {
     const id = $(event.target)[0].attributes[2].value
     const status = "PAUSED"
