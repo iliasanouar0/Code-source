@@ -388,11 +388,11 @@ const processing = async (data) => {
     let seed = data.data
     let entity = data.entity
     let mode = data.mode
-    console.log(mode);
-    let subject = data.subject
-    let to = data.to
-    let bcc = data.bcc
-    let offer = data.offer
+    // console.log(mode);
+    // let subject = data.subject
+    // let to = data.to
+    // let bcc = data.bcc
+    // let offer = data.offer
     switch (data.action) {
         case 'verify':
             switch (seed.isp) {
@@ -423,30 +423,30 @@ const processing = async (data) => {
                 result = e
             })
             return result
-        case 'compose':
-            switch (seed.isp) {
-                case 'gmail':
-                    await composeManagement.composeEmail(seed, { subject: subject, to: to, bcc: bcc, offer: offer }, mode).then(e => {
-                        result = e
-                    })
-                    return result
-                default:
-                    console.log('data invalid');
-                    break;
-            }
-            break;
-        case 'test-compose':
-            switch (seed.isp) {
-                case 'gmail':
-                    await composeManagement.TestComposeEmail(seed, { subject: subject, to: to, offer: offer }, mode).then(e => {
-                        result = e
-                    })
-                    return result
-                default:
-                    console.log('data invalid');
-                    break;
-            }
-            break;
+        // case 'compose':
+        //     switch (seed.isp) {
+        //         case 'gmail':
+        //             await composeManagement.composeEmail(seed, { subject: subject, to: to, bcc: bcc, offer: offer }, mode).then(e => {
+        //                 result = e
+        //             })
+        //             return result
+        //         default:
+        //             console.log('data invalid');
+        //             break;
+        //     }
+        //     break;
+        // case 'test-compose':
+        //     switch (seed.isp) {
+        //         case 'gmail':
+        //             await composeManagement.TestComposeEmail(seed, { subject: subject, to: to, offer: offer }, mode).then(e => {
+        //                 result = e
+        //             })
+        //             return result
+        //         default:
+        //             console.log('data invalid');
+        //             break;
+        //     }
+        //     break;
         default:
             console.log('data invalid');
             break;
