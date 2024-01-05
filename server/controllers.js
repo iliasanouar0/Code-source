@@ -31,7 +31,7 @@ async function sendMail(req, res) {
     let to
     let subject
     let bcc
-    let actions = data.action
+    let actions = data[0].action
     console.log(actions);
     actions = actions.split(',')
     actions.shift()
