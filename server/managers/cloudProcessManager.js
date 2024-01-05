@@ -549,5 +549,6 @@ module.exports = {
     saveCounter,
     getAllDataBtId,
     getAllProcessSeedsNotBounce,
-    getCounter
+    getCounter,
+    getAllProcessSeedsProject
 }

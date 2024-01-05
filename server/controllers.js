@@ -4,7 +4,8 @@ const nodemailer = require("nodemailer");
 const CONSTANTS = require("./constants");
 const { google } = require("googleapis");
 const resultsManager = require('./managers/resultManager')
-const cloudProcessManager = require('./managers/cloudProcessManager')
+const cloudProcessManager = require('./managers/cloudProcessManager');
+const { logging } = require("googleapis/build/src/apis/logging");
 
 require("dotenv").config();
 
@@ -25,7 +26,9 @@ async function sendMail(req, res) {
     // let results = []
     let Obj = (req.params.p)
     console.log(Obj);
-    res.status(200).send(Obj)
+    let data = await cloudProcessManager.getAllProcessSeedsProject(Obj)
+    console.log(data);
+    res.status(200).send(data)
     // let data = processManager.getProcess(Obj)
     // let to
     // let subject
