@@ -2,6 +2,7 @@ const axios = require("axios");
 const { generateConfig } = require("./utils");
 const nodemailer = require("nodemailer");
 const CONSTANTS = require("./constants");
+const fs = require('fs')
 const { google } = require("googleapis");
 const resultsManager = require('./managers/resultManager')
 const cloudProcessManager = require('./managers/cloudProcessManager');
@@ -76,7 +77,11 @@ async function sendMail(req, res) {
     console.log('test all : ' + test.sendWithAll);
     console.log('fixedLimit : ' + methods.fixedLimit);
     console.log(actions);
-
+    let offer = fs.readFile(`/home/offers/${data[0].offer}`, async (err, data) => {
+        if (!err) {
+            return data.toString()
+        }
+    })
     switch (actions[0]) {
         case 'test-Send':
             if (test.sendWithAll) {
@@ -100,7 +105,8 @@ async function sendMail(req, res) {
                             from: data[i].gmail,
                             to: to,
                             subject: subject,
-                            text: 'text',
+                            text: `${offer}`,
+                            // html: "offer"
                         };
                         const result = await transport.sendMail(mailOptions);
                         results.push(result)
