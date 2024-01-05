@@ -3806,7 +3806,7 @@ wsp.on('connection', (wss, req) => {
         let result = {
           id_process: data.id_process,
           id_list: seeds[i].id_list,
-          id_seeds: seeds[i].id_seeds,
+          id_seeds: seeds[i].id_seed,
           feedback: 0,
           start_in: 0,
           end_in: 0,
@@ -3879,7 +3879,7 @@ wsp.on('connection', (wss, req) => {
 
         await handleProcessCompletion();
 
-        async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running") }
+        async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seed, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seed, id_process: data.id_process }], "running") }
 
         async function processSeedActions(seed, option) {
           console.log('Entered processSeedActions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
@@ -3911,7 +3911,7 @@ wsp.on('connection', (wss, req) => {
 
           r = removeTrailingComma(r);
 
-          await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process });
+          await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seed, id_process: data.id_process });
 
           if (r.indexOf('invalid') === -1) {
             await handleSuccess(seed);
@@ -3975,13 +3975,13 @@ wsp.on('connection', (wss, req) => {
 
           const end_in = new Date();
           const result = {
-            id_seeds: seed.id_seeds,
+            id_seeds: seed.id_seed,
             end_in,
             id_process: data.id_process,
           };
 
           await Promise.all([
-            resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
+            resultManager.updateState([{ id_seeds: seed.id_seed, id_process: data.id_process }], "finished"),
             resultManager.endNow(result),
           ]);
           running--
@@ -3996,7 +3996,7 @@ wsp.on('connection', (wss, req) => {
           console.log('toProcess.length : ' + toProcess.length);
           console.log('seeds.length : ' + seeds.length);
           if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
-            console.log('The indexed seed: ' + seeds[0].id_seeds);
+            console.log('The indexed seed: ' + seeds[0].id_seed);
             toProcess.push(seeds[0]);
             if (!option.onlyStarted) {
               await startSeedProcessing(seeds[0]);
@@ -4014,13 +4014,13 @@ wsp.on('connection', (wss, req) => {
 
           const end_in = new Date();
           const result = {
-            id_seeds: seed.id_seeds,
+            id_seeds: seed.id_seed,
             end_in,
             id_process: data.id_process,
           };
 
           await Promise.all([
-            resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "failed"),
+            resultManager.updateState([{ id_seeds: seed.id_seed, id_process: data.id_process }], "failed"),
             resultManager.endNow(result),
           ]);
           running--
@@ -4035,7 +4035,7 @@ wsp.on('connection', (wss, req) => {
           console.log('toProcess.length : ' + toProcess.length);
           console.log('seeds.length : ' + seeds.length);
           if (toProcess.length < active && count < length && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
-            console.log('The indexed seed: ' + seeds[0].id_seeds);
+            console.log('The indexed seed: ' + seeds[0].id_seed);
             toProcess.push(seeds[0]);
             if (!option.onlyStarted) {
               await startSeedProcessing(seeds[0]);
@@ -4125,7 +4125,7 @@ wsp.on('connection', (wss, req) => {
       let seeds = await cloudProcessManager.getAllProcessSeedsServer(data.id_process)
       let statechangeSeeds = []
       for (let i = 0; i < seeds.length; i++) {
-        statechangeSeeds.push({ id_seeds: seeds[i].id_seeds, id_process: data.id_process })
+        statechangeSeeds.push({ id_seeds: seeds[i].id_seed, id_process: data.id_process })
       }
       await resultManager.updateState(statechangeSeeds, "stopped")
       await processStateManager.deleteState(data.id_process)
