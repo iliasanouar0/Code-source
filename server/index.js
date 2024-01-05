@@ -27,10 +27,8 @@ Date.prototype.toDateInputValue = function () {
 const wsi = new WebSocket.Server({ port: 7071 })
 const wsc = new WebSocket.Server({ port: 7072 })
 const wss = new WebSocket.Server({ port: 7073 })
-wss.broadcast = data => {
-  wss.clients.forEach(client => client.send(data));
-};
 const wsv = new WebSocket.Server({ port: 7074 })
+const wsp = new WebSocket.Server({ port: 7075 })
 
 const userManager = require("./managers/userManager");
 const entityManager = require("./managers/entityManager");
@@ -115,7 +113,7 @@ app.use(fileUpload())
  * ? wsi :
  * ~ Installation websocket.
  * ? wsp :
- * ~ Process starting state control websocket.
+ * ~ Cloud process websocket.
  * ? wss :
  * ~ Process status websocket.
  * ? wsv :
@@ -3720,6 +3718,379 @@ wsc.on('connection', (wss, req) => {
     }
   })
 })
+
+
+//~ cloud process socket
+wsp.on('connection', (wss, req) => {
+
+  let id = parseInt(url.parse(req.url).query.split('=')[1])
+
+  wss.id = id
+
+  clients.push(wss)
+  console.log(clients.length);
+  console.log('connected!')
+
+  let request = ""
+  wss.on('close', () => {
+    console.log('disconnected!');
+    clients.slice(clients.indexOf(wss), 1)
+  })
+
+  wss.on('message', async (message) => {
+
+    let data = JSON.parse(message.toString())
+    request = data.request
+
+    if (request == 'start') {
+      let Origins = await cloudProcessManager.getAllProcessSeedsServer(data.id_process)
+      let seeds = [...Origins]
+      let results = []
+      let actions = seeds[0].action
+        , subject
+        , to
+        , limit
+        , methods = { fixedLimit: false }
+        , test = { sendWithAll: false }
+
+      console.log(methods);
+      console.log(test);
+
+      if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1 && actions.indexOf('all') == -1) {
+        actions = [actions]
+      } else {
+        actions = actions.split(',')
+        let length = actions.length
+        for (let i = 0; i < length; i++) {
+          switch (actions[length - (i + 1)].split(':')[0]) {
+            case 'Fixed':
+              actions.pop()
+              methods.fixedLimit = true
+              break;
+            case 'all':
+              actions.pop()
+              test.sendWithAll = true
+              break;
+            case 'limit':
+              limit = actions.pop().split(':')[1]
+              break;
+            case 'to':
+              to = actions.pop().split(':')[1]
+              break;
+            case 'subject':
+              subject = actions.pop().split(':')[1]
+              break;
+            default:
+              break;
+          }
+        }
+      }
+      console.log(actions);
+      console.log('seeds.length : ' + seeds.length);
+      let active
+      console.log('MAX_RUNNING : ' + result.parsed.MAX_RUNNING);
+      let waiting = seeds.length - result.parsed.MAX_RUNNING
+
+      if (seeds.length >= result.parsed.MAX_RUNNING) {
+        active = result.parsed.MAX_RUNNING
+      } else {
+        active = seeds.length
+        waiting = 0
+      }
+
+      let success = 0
+      let running = 0
+      let failed = 0
+      let count = 0
+      let length = seeds.length
+      let toProcess = []
+      for (let i = 0; i < active; i++) {
+        toProcess[i] = []
+        for (let j = 0; j < active; j++) {
+          if (seeds[0] == undefined) {
+            break
+          }
+          toProcess[i].push(seeds[0])
+          seeds.shift()
+          count++
+        }
+        console.log(Origins.length / active < result.parsed.MAX_RUNNING);
+        if (Origins.length / active < result.parsed.MAX_RUNNING) {
+          break
+        }
+      }
+      console.log(toProcess);
+
+      // ~ process !1k
+      const processV = async (toProcess, start, option) => {
+        console.log('Entered Process V :' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
+        console.log(`Id process : ${data.id_process}, data : ${toProcess[0].gmail}`);
+        await time(3000)
+        let state = await cloudProcessManager.getProcessState(data.id_process)
+        console.log(state + ' ' + toProcess[0].gmail);
+        console.log(toProcess.length + ' ' + toProcess[0].gmail);
+        await time(3000)
+        while (toProcess.length !== 0 && state !== "STOPPED" && state !== "PAUSED") {
+          console.log('Entered while loop :' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
+          state = await cloudProcessManager.getProcessState(data.id_process);
+          if (state === "STOPPED") {
+            break;
+          }
+          for (let i = 0; i < toProcess.length; i++) {
+            console.log('Entered for loop :' + toProcess[0].gmail + ` ,at ${new Date().toLocaleString()}`);
+            let seed = toProcess[0];
+            console.log('defined as seed :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+            if (option.onlyStarted) {
+              await startSeedProcessing(seed);
+              console.log('set as running : ' + seed.gmail + ` ,At ${new Date().toLocaleString()}`);
+              running++
+            }
+            console.log('processing :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+            console.log('running :' + running);
+            await updateProcessState();
+            state = await cloudProcessManager.getProcessState(data.id_process);
+
+            if (state === "STOPPED" || state === "PAUSED") {
+              break;
+            }
+
+            await processSeedActions(seed, option);
+          }
+
+          await updateProcessState();
+        }
+
+        await handleProcessCompletion();
+
+        async function startSeedProcessing(seed) { await resultManager.startNow({ id_seeds: seed.id_seeds, id_process: data.id_process }); await resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "running") }
+
+        async function processSeedActions(seed, option) {
+          console.log('Entered processSeedActions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+          let { actions, subject, pages, c, options, mode } = extractActions(seed);
+
+          console.log(`Actions: ${actions} , ${seed.gmail}`);
+          console.log('defined actions : ' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+
+          let r = '';
+
+          for (let i = 0; i < actions.length; i++) {
+            console.log(`${actions[i]} action start`);
+            console.log('starting :' + seed.gmail + ` ,action : ${actions[i]} ,at ${new Date().toLocaleString()}`);
+            r += await cloudProcessManager.processing({
+              data: toProcess[0],
+              action: actions[i],
+              subject,
+              pages,
+              count: c,
+              options,
+              entity: data.entity,
+              mode,
+            });
+
+            if (i < actions.length - 1) {
+              r += ', ';
+            }
+          }
+
+          r = removeTrailingComma(r);
+
+          await resultManager.saveFeedback({ feedback: r, id_seeds: toProcess[0].id_seeds, id_process: data.id_process });
+
+          if (r.indexOf('invalid') === -1) {
+            await handleSuccess(seed);
+          } else {
+            await handleFailure(seed);
+          }
+        }
+
+        function extractActions(seed) {
+          let actions, subject, pages, c, options, mode;
+
+          if (
+            seed.action.indexOf('click') === -1 &&
+            seed.action.indexOf('count') === -1 &&
+            seed.action.indexOf('pages') === -1 &&
+            seed.action.indexOf('subject') === -1 &&
+            seed.action.indexOf('option') === -1
+          ) {
+            actions = [seed.action];
+          } else {
+            actions = seed.action.split(',');
+
+            for (let i = 0; i < actions.length; i++) {
+              switch (true) {
+                case actions[i].indexOf('option') !== -1:
+                  mode = actions.pop().split(':')[1];
+                  break;
+                case actions[i].indexOf('markAsStarted') !== -1:
+                  actions.pop();
+                  options.markAsStarted = true;
+                  break;
+                case actions[i].indexOf('click') !== -1:
+                  actions.pop();
+                  options.click = true;
+                  break;
+                case actions[i].indexOf('markAsImportant') !== -1:
+                  actions.pop();
+                  options.markAsImportant = true;
+                  break;
+                case actions[i].indexOf('count') !== -1:
+                  c = actions.pop().split(':')[1];
+                  break;
+                case actions[i].indexOf('pages') !== -1:
+                  pages = parseInt(actions.pop().split(':')[1]);
+                  break;
+                case actions[i].indexOf('subject') !== -1:
+                  subject = actions.pop().split(':')[1];
+                  break;
+              }
+            }
+          }
+
+          return { actions, subject, pages, c, options, mode };
+        }
+
+        function removeTrailingComma(str) { const array = str.split(', '); /*array.pop();*/ return array.join(', '); }
+
+        async function handleSuccess(seed) {
+          console.log('success :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+          success++;
+
+          const end_in = new Date();
+          const result = {
+            id_seeds: seed.id_seeds,
+            end_in,
+            id_process: data.id_process,
+          };
+
+          await Promise.all([
+            resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "finished"),
+            resultManager.endNow(result),
+          ]);
+          running--
+          toProcess.shift();
+          state = await cloudProcessManager.getProcessState(data.id_process);
+
+          if (state === "STOPPED" || state === "PAUSED") {
+            return;
+          }
+          console.log(seeds.length);
+          console.log('active : ' + active);
+          console.log('toProcess.length : ' + toProcess.length);
+          console.log('seeds.length : ' + seeds.length);
+          if (toProcess.length < active && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
+            console.log('The indexed seed: ' + seeds[0].id_seeds);
+            toProcess.push(seeds[0]);
+            if (!option.onlyStarted) {
+              await startSeedProcessing(seeds[0]);
+              running++
+            }
+            seeds.splice(seeds.indexOf(seeds[0]), 1);
+            count++;
+            await updateProcessState();
+          }
+        }
+
+        async function handleFailure(seed) {
+          console.log('failed :' + seed.gmail + ` ,at ${new Date().toLocaleString()}`);
+          failed++;
+
+          const end_in = new Date();
+          const result = {
+            id_seeds: seed.id_seeds,
+            end_in,
+            id_process: data.id_process,
+          };
+
+          await Promise.all([
+            resultManager.updateState([{ id_seeds: seed.id_seeds, id_process: data.id_process }], "failed"),
+            resultManager.endNow(result),
+          ]);
+          running--
+
+          toProcess.shift();
+          state = await cloudProcessManager.getProcessState(data.id_process);
+
+          if (state === "STOPPED" || state === "PAUSED") {
+            return;
+          }
+          console.log('active : ' + active);
+          console.log('toProcess.length : ' + toProcess.length);
+          console.log('seeds.length : ' + seeds.length);
+          if (toProcess.length < active && count < length && state !== "STOPPED" && state !== "PAUSED" && seeds.length !== 0) {
+            console.log('The indexed seed: ' + seeds[0].id_seeds);
+            toProcess.push(seeds[0]);
+            if (!option.onlyStarted) {
+              await startSeedProcessing(seeds[0]);
+              running++
+            }
+            seeds.splice(seeds.indexOf(seeds[0]), 1);
+            count++;
+            await updateProcessState();
+          }
+        }
+
+        async function updateProcessState() {
+          let w = waiting - success - failed
+          if (w <= 0) {
+            let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
+            processStateManager.updateState(status);
+          } else {
+            let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
+            processStateManager.updateState(status);
+          }
+        }
+
+        async function handleProcessCompletion() {
+          let w = waiting - success - failed
+          if (w <= 0) {
+            let status = { waiting: 0, active: running, finished: success, failed, id_process: data.id_process };
+            processStateManager.updateState(status);
+          } else {
+            let status = { waiting: w, active: running, finished: success, failed, id_process: data.id_process };
+            processStateManager.updateState(status);
+          }
+
+          state = await cloudProcessManager.getProcessState(data.id_process);
+
+          if (state === "STOPPED" || state === "PAUSED") {
+            return;
+          }
+          if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
+            let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
+            await processStateManager.updateState(status);
+            cloudProcessManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
+            console.log(`Process with id: ${data.id_process} finished at ${new Date().toLocaleString()} `);
+            sendToAll(clients, 'reload');
+          }
+        }
+      };
+
+      async function repeat(array, number, start, check, action) {
+        console.log("repeat action : " + action);
+        if (check) {
+          for (let i = 0; i < array[start].length; i++) {
+            processV([array[start][i]], start, { onlyStarted: false })
+          }
+        } else {
+          console.log('The entered array :')
+          console.log(array[start]);
+          processV(array[start], start, { onlyStarted: true })
+          if (number - 1 > start) await repeat(array, number, start + 1, check, action);
+        }
+      }
+
+      console.log('Origins.length : ' + Origins.length);
+      console.log('toProcess.length : ' + toProcess.length);
+      console.log("actions[0] : " + actions[0]);
+      let check = { startingIndexed: Origins.length / active < result.parsed.MAX_RUNNING ? true : false }
+      await repeat(toProcess, toProcess.length, 0, check.startingIndexed, actions[0])
+      let status = { waiting: waiting, active: active, finished: 0, failed: 0, name: data.name }
+      console.log(status)
+    }
+  })
+})
+
 
 // ~ open connection to websocket view :
 wsv.on('connection', async wsv => {
