@@ -101,7 +101,7 @@ async function sendMail(req, res) {
                             from: data[i].gmail,
                             to: to,
                             subject: subject,
-                            text: `${offer}`,
+                            html: `${offer}`,
                         };
                         const result = await transport.sendMail(mailOptions);
                         results.push(result)
