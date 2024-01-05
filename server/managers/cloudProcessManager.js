@@ -237,6 +237,15 @@ const getAllProcessSeedsServer = async (id) => {
     return cloudlist.rows;
 }
 
+const getAllProcessSeedsProject = async (id) => {
+    // let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed"
+    let sql = "SELECT cloudprocess.*, cloudseed.*, cloudproject.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list JOIN cloudproject ON cloudproject.id_project=cloudseed.id_project WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed"
+    const client = await pool.connect()
+    const cloudlist = await client.query(sql, [id])
+    client.release()
+    return cloudlist.rows;
+}
+
 const getAllProcessSeedsNotBounce = async (id) => {
     // let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed"
     let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.*,results.bounced, results.status as rstatus FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list JOIN results ON results.id_seeds=cloudseed.id_seed WHERE cloudprocess.id_process=$1 AND results.bounced IS NULL AND results.status='finished' GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed,results.bounced,results.status"

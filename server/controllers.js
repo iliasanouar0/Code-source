@@ -3,6 +3,8 @@ const { generateConfig } = require("./utils");
 const nodemailer = require("nodemailer");
 const CONSTANTS = require("./constants");
 const { google } = require("googleapis");
+const resultsManager = require('./managers/resultManager')
+const cloudProcessManager = require('./managers/cloudProcessManager')
 
 require("dotenv").config();
 
