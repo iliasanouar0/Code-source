@@ -8,7 +8,7 @@ websocket_s.onmessage = (event) => {
     switch (data) {
         case 'reload':
             $('body .tooltip').removeClass('show');
-            getDataCompose.ajax.reload(null, false)
+            getDataCloudProcess.ajax.reload(null, false)
             break;
         case 'location reload':
             location.reload()
@@ -217,7 +217,7 @@ const updateCompose = data => {
             $('.add_compose input:text').val('')
             $('.add_compose input:checkbox').prop("checked", false)
             $(".add_compose").modal("hide");
-            getDataCompose.ajax.reload(null, false)
+            getDataCloudProcess.ajax.reload(null, false)
         })
     });
 }
@@ -520,7 +520,7 @@ const addCompose = data => {
             $('.add_compose textarea').val('')
             $('.add_compose input:checkbox').prop("checked", false)
             $(".add_compose").modal("hide");
-            getDataCompose.ajax.reload(null, false)
+            getDataCloudProcess.ajax.reload(null, false)
         })
     });
 }
@@ -788,7 +788,7 @@ $(document).on('click', '.start', event => {
     let socketState = websocket_s.readyState
     if (socketState !== websocket_s.CLOSED) {
         websocket_s.send(JSON.stringify({ request: "start", id_process: id, data: obj }))
-        getDataCompose.ajax.reload(null, false)
+        getDataCloudProcess.ajax.reload(null, false)
         $('body .tooltip').removeClass('show');
     } else {
         swal.fire({
@@ -1510,7 +1510,7 @@ const editActions = (data) => {
             title: response,
             icon: 'success'
         })
-        getDataCompose.ajax.reload(null, false)
+        getDataCloudProcess.ajax.reload(null, false)
     });
 }
 
@@ -1602,7 +1602,7 @@ $(document).on('click', '.delete-all-this', () => {
             }).then(() => {
                 $('.checkAll')[0].checked = false
                 $('#action').html('')
-                getDataCompose.ajax.reload(null, false)
+                getDataCloudProcess.ajax.reload(null, false)
             })
         } else if (result.isDismissed) {
             Swal.fire({
@@ -1775,6 +1775,6 @@ $(document).on('hide.bs.modal', '.edit_offers', () => {
 $(document).on('click', '#refresh_process', e => {
     console.log('refresh process');
     $("#cloudProcessData tbody").html('')
-    getDataCompose.ajax.reload(null, false)
+    getDataCloudProcess.ajax.reload(null, false)
 })
 
