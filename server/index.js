@@ -4094,6 +4094,7 @@ wsp.on('connection', (wss, req) => {
         console.log("repeat action : " + action);
         if (check) {
           for (let i = 0; i < array[start].length; i++) {
+            console.log('the array : ' + array[start][i])
             await resultManager.startNow({ id_seeds: array[start][i].id_seed, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: array[start][i].id_seed, id_process: data.id_process }], "running")
             console.log('set as running : ' + array[start][i].gmail + ` ,At ${new Date().toLocaleString()}`);
@@ -4112,7 +4113,7 @@ wsp.on('connection', (wss, req) => {
       console.log('toProcess.length : ' + toProcess.length);
       console.log("actions[0] : " + actions[0]);
       let check = { startingIndexed: Origins.length / active < result.parsed.MAX_RUNNING ? true : false }
-      await repeat(toProcess,toProcess.length, 0, check.startingIndexed, actions[0])
+      await repeat(toProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
       console.log(status);
       processStateManager.addState(status)
