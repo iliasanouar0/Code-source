@@ -620,8 +620,7 @@ $(document).on('click', '#c_add', () => {
                 "data": `none`,
                 "count": 0,
             };
-            console.log(dataComposing);
-            // addCompose(dataComposing)
+            addCompose(dataComposing)
             break;
         case 'test-compose':
             subject = $('#subject').val()
