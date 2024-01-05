@@ -582,211 +582,211 @@ $(document).on('click', '#c_add', () => {
     let action = selected[0].value
     let dataComposing
     console.log(action);
-    // switch (action) {
-    //     case 'checkProxy':
-    //         dataComposing = {
-    //             "name": `test`,
-    //             "action": action,
-    //             "status": `idel`,
-    //             "id_user": `${user['id_user']}`,
-    //             "id_list": `${composingList}`,
-    //             "offer": `none`,
-    //             "data": `none`,
-    //             "count": 0,
-    //         };
-    //         console.log(dataComposing);
-    //         addCompose(dataComposing)
-    //         break;
-    //     case 'verify':
-    //         dataComposing = {
-    //             "name": `test`,
-    //             "action": action,
-    //             "status": `idel`,
-    //             "id_user": `${user['id_user']}`,
-    //             "id_list": `${composingList}`,
-    //             "offer": `none`,
-    //             "data": `none`,
-    //             "count": 0,
-    //         };
-    //         addCompose(dataComposing)
-    //         break;
-    //     case 'authO':
-    //         dataComposing = {
-    //             "name": `test`,
-    //             "action": action,
-    //             "status": `idel`,
-    //             "id_user": `${user['id_user']}`,
-    //             "id_list": `${composingList}`,
-    //             "offer": `none`,
-    //             "data": `none`,
-    //             "count": 0,
-    //         };
-    //         addCompose(dataComposing)
-    //         break;
-    //     case 'test-compose':
-    //         subject = $('#subject').val()
-    //         body = $('#body').val()
-    //         to = $('#to').val()
+    switch (action) {
+        case 'checkProxy':
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `none`,
+                "data": `none`,
+                "count": 0,
+            };
+            console.log(dataComposing);
+            addCompose(dataComposing)
+            break;
+        case 'verify':
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `none`,
+                "data": `none`,
+                "count": 0,
+            };
+            addCompose(dataComposing)
+            break;
+        case 'authO':
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `none`,
+                "data": `none`,
+                "count": 0,
+            };
+            addCompose(dataComposing)
+            break;
+        case 'test-Send':
+            subject = $('#subject').val()
+            body = $('#body').val()
+            to = $('#to').val()
 
-    //         if (to.includes(',')) {
-    //             swal.fire('mailto error : invalid separator use ";" instead')
-    //             return
-    //         }
+            if (to.includes(',')) {
+                swal.fire('mailto error : invalid separator use ";" instead')
+                return
+            }
 
-    //         if (to.split(';').length > 10) {
-    //             swal.fire('mailto error : maximum mail to is 10')
-    //             return
-    //         }
+            if (to.split(';').length > 10) {
+                swal.fire('mailto error : maximum mail to is 10')
+                return
+            }
 
-    //         if (subject == '' || to == '') {
-    //             swal.fire('subject and mailto are required')
-    //             return
-    //         }
+            if (subject == '' || to == '') {
+                swal.fire('subject and mailto are required')
+                return
+            }
 
-    //         let spt = to.split(';')
-    //         if (spt[spt.length - 1] == '') {
-    //             spt.pop()
-    //         }
-    //         let test
-    //         to = spt.map((e) => {
-    //             console.log(e);
-    //             test = pattern.test(e.trim())
-    //             console.log(test);
-    //             if (!test) {
-    //                 return false
-    //             }
-    //             return e.trim()
-    //         }).join(';')
-    //         console.log(to);
-    //         if (to.includes(false)) {
-    //             swal.fire('mailto error : enter valid data !!')
-    //             return
-    //         }
-    //         if (subject == '' || to == '') {
-    //             swal.fire('subject and mailto are required')
-    //             return
-    //         }
-    //         if (body == '') {
-    //             offerAdd = $('#p_offers_add option:selected').val()
-    //             // if (offerAdd == '') {
-    //             //     swal.fire('Select or upload offer !!')
-    //             //     return
-    //             // }
-    //         } else {
-    //             let time = new Date().toTimeString().split(' ')[0]
-    //             offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${time}.html`
-    //             fetch(`http://${ip}:3000/cloud/process/offers?offer=${offerAdd}`, {
-    //                 method: 'POST',
-    //                 body: `${JSON.stringify({ data: body })}`,
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     'Access-Control-Allow-Origin': '*',
-    //                     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-    //                     'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
-    //                 }
-    //             }).then(r => {
-    //                 return r.text()
-    //             }).then(d => {
-    //                 console.log(d);
-    //             })
-    //         }
-    //         action += `,subject:${subject},to:${to}`
+            let spt = to.split(';')
+            if (spt[spt.length - 1] == '') {
+                spt.pop()
+            }
+            let test
+            to = spt.map((e) => {
+                console.log(e);
+                test = pattern.test(e.trim())
+                console.log(test);
+                if (!test) {
+                    return false
+                }
+                return e.trim()
+            }).join(';')
+            console.log(to);
+            if (to.includes(false)) {
+                swal.fire('mailto error : enter valid data !!')
+                return
+            }
+            if (subject == '' || to == '') {
+                swal.fire('subject and mailto are required')
+                return
+            }
+            if (body == '') {
+                offerAdd = $('#p_offers_add option:selected').val()
+                // if (offerAdd == '') {
+                //     swal.fire('Select or upload offer !!')
+                //     return
+                // }
+            } else {
+                let time = new Date().toTimeString().split(' ')[0]
+                offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${time}.html`
+                fetch(`http://${ip}:3000/cloud/process/offers?offer=${offerAdd}`, {
+                    method: 'POST',
+                    body: `${JSON.stringify({ data: body })}`,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                        'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+                    }
+                }).then(r => {
+                    return r.text()
+                }).then(d => {
+                    console.log(d);
+                })
+            }
+            action += `,subject:${subject},to:${to}`
 
-    //         if ($('#all').is(":checked")) {
-    //             action += `,all:true`
-    //         }
-    //         dataComposing = {
-    //             "name": `test`,
-    //             "action": action,
-    //             "status": `idel`,
-    //             "id_user": `${user['id_user']}`,
-    //             "id_list": `${composingList}`,
-    //             "offer": `${offerAdd}`,
-    //             "data": `none`,
-    //             "count": 0,
-    //         };
-    //         addCompose(dataComposing)
-    //         break;
-    //     case 'compose':
-    //         subject = $('#subject').val()
-    //         body = $('#body').val()
-    //         to = $('#to').val()
+            if ($('#all').is(":checked")) {
+                action += `,all:true`
+            }
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `${offerAdd}`,
+                "data": `none`,
+                "count": 0,
+            };
+            addCompose(dataComposing)
+            break;
+        case 'Send':
+            subject = $('#subject').val()
+            body = $('#body').val()
+            to = $('#to').val()
 
-    //         if (to.includes(',')) {
-    //             swal.fire('mailto error : invalid separator use ";" instead')
-    //             return
-    //         }
-    //         if (to.split(';').length > 10) {
-    //             swal.fire('mailto error : maximum mail to is 10')
-    //             return
-    //         }
-    //         if (subject == '' || to == '') {
-    //             swal.fire('subject and mailto are required')
-    //             return
-    //         }
+            if (to.includes(',')) {
+                swal.fire('mailto error : invalid separator use ";" instead')
+                return
+            }
+            if (to.split(';').length > 10) {
+                swal.fire('mailto error : maximum mail to is 10')
+                return
+            }
+            if (subject == '' || to == '') {
+                swal.fire('subject and mailto are required')
+                return
+            }
 
-    //         let sp = to.split(';')
-    //         if (sp[sp.length - 1] == '') {
-    //             sp.pop()
-    //         }
-    //         to = sp.map((e) => {
-    //             console.log(e);
-    //             let test = pattern.test(e.trim())
-    //             console.log(test);
-    //             if (!test) {
-    //                 return false
-    //             }
-    //             return e.trim()
-    //         }).join(';')
-    //         console.log(to);
-    //         if (to.includes(false)) {
-    //             swal.fire('mailto error : enter valid data !!')
-    //             return
-    //         }
-    //         if (body == '') {
-    //             offerAdd = $('#p_offers_add option:selected').val()
-    //         } else {
-    //             let time = new Date().toTimeString().split(' ')[0]
-    //             offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${time}.html`
-    //             fetch(`http://${ip}:3000/cloud/process/offers?offer=${offerAdd}`, {
-    //                 method: 'POST',
-    //                 body: `${JSON.stringify({ data: body })}`,
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     'Access-Control-Allow-Origin': '*',
-    //                     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-    //                     'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
-    //                 }
-    //             }).then(r => {
-    //                 return r.text()
-    //             }).then(d => {
-    //                 console.log(d);
-    //             })
-    //         }
-    //         action += `,subject:${subject},to:${to}`
-    //         if (limit != '' && limit != '0') {
-    //             action += `,limit:${limit}`
-    //         } else {
-    //             action += `,limit:auto`
-    //         }
-    //         if ($('#limit_fixed').is(":checked")) {
-    //             action += `,Fixed:true`
-    //         }
-    //         dataComposing = {
-    //             "name": `test`,
-    //             "action": action,
-    //             "status": `idel`,
-    //             "id_user": `${user['id_user']}`,
-    //             "id_list": `${composingList}`,
-    //             "offer": `${offerAdd}`,
-    //             "data": `${data}`,
-    //             "count": `${count}`,
-    //         };
-    //         addCompose(dataComposing)
-    //         break;
-    //     default:
-    //         break;
-    // }
+            let sp = to.split(';')
+            if (sp[sp.length - 1] == '') {
+                sp.pop()
+            }
+            to = sp.map((e) => {
+                console.log(e);
+                let test = pattern.test(e.trim())
+                console.log(test);
+                if (!test) {
+                    return false
+                }
+                return e.trim()
+            }).join(';')
+            console.log(to);
+            if (to.includes(false)) {
+                swal.fire('mailto error : enter valid data !!')
+                return
+            }
+            if (body == '') {
+                offerAdd = $('#p_offers_add option:selected').val()
+            } else {
+                let time = new Date().toTimeString().split(' ')[0]
+                offerAdd = `${subject.substring(0, 3)}${user['id_user']}offer${time}.html`
+                fetch(`http://${ip}:3000/cloud/process/offers?offer=${offerAdd}`, {
+                    method: 'POST',
+                    body: `${JSON.stringify({ data: body })}`,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                        'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
+                    }
+                }).then(r => {
+                    return r.text()
+                }).then(d => {
+                    console.log(d);
+                })
+            }
+            action += `,subject:${subject},to:${to}`
+            if (limit != '' && limit != '0') {
+                action += `,limit:${limit}`
+            } else {
+                action += `,limit:auto`
+            }
+            if ($('#limit_fixed').is(":checked")) {
+                action += `,Fixed:true`
+            }
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `${offerAdd}`,
+                "data": `${data}`,
+                "count": `${count}`,
+            };
+            addCompose(dataComposing)
+            break;
+        default:
+            break;
+    }
 })
 
 $(document).on('click', '.start', event => {
