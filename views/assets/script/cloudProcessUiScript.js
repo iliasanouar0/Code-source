@@ -298,7 +298,7 @@ $(document).on('click', '#c_update', event => {
             };
             updateCompose(dataComposing)
             break;
-        case 'compose':
+        case 'Send':
             offerAdd
             subject = $('#subject').val()
             body = $('#body').val()
@@ -383,7 +383,7 @@ $(document).on('click', '#c_update', event => {
             };
             updateCompose(dataComposing)
             break
-        case 'test-compose':
+        case 'test-send':
             subject = $('#subject').val()
             body = $('#body').val()
             to = $('#to').val()
