@@ -111,8 +111,8 @@ async function sendMail(req, res) {
             console.log('invalid data');
             break;
     }
-    res.status(200).send(data)
-    // res.status(200).send(results)
+    // res.status(200).send(data)
+    res.status(200).send(results)
 }
 
 async function getUser(req, res) {
