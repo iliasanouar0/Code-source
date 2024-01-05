@@ -852,6 +852,8 @@ $(document).on('click', '.start', event => {
 $(document).on('click', '.send', e => {
     let p = $(e.target).data('id')
     $(e.target).html('<div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div>')
+    getDataCloudProcess.ajax.reload(null, false)
+    $('body .tooltip').removeClass('show');
     console.log(p);
     var settings = {
         url: `http://${ip}:3000/api/mail/send/${p}`,
