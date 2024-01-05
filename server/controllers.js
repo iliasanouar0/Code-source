@@ -24,6 +24,10 @@ async function sendMail(req, res) {
     let data = await cloudProcessManager.getAllProcessSeedsProject(Obj)
     console.log(data);
 
+    console.log(data[0].client_id)
+    console.log(data[0].client_secret);
+    console.log(data[0].redirect_url);
+    
     const oAuth2Client = new google.auth.OAuth2(
         data[0].client_id,
         data[0].client_secret,
