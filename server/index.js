@@ -4060,7 +4060,7 @@ wsp.on('connection', (wss, req) => {
           if (state === "STOPPED" || state === "PAUSED") {
             return;
           }
-          if (toProcess.length === 0 && seeds.length === 0 && running === 0) {
+          if (toProcess.length === 0 && seeds.length === 0) {
             let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
             await processStateManager.updateState(status);
             cloudProcessManager.finishedProcess({ id_process: data.id_process, status: `FINISHED` });
