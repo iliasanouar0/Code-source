@@ -6,6 +6,7 @@ const { google } = require("googleapis");
 
 require("dotenv").config();
 
+
 // const oAuth2Client = new google.auth.OAuth2(
 //     process.env.CLIENT_ID,
 //     process.env.CLIENT_SECRET,
@@ -21,9 +22,7 @@ async function sendMail(req, res) {
     );
     let results = []
     let Obj = (req.params.p)
-    console.log(Obj);
     let data = processManager.getProcess(Obj)
-    console.log(data);
     let to
     let subject
     let bcc
