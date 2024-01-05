@@ -1634,6 +1634,18 @@ $('#btn-check-verify').change(event => {
     }
 })
 
+$('#btn-check-authO').change(event => {
+    let status = $(event.target).is(":checked") ? true : false;
+    if (status) {
+        $('.actions .btn-check').prop("checked", false);
+        $(event.target).prop("checked", true);
+        $('.send_message').addClass('d-none');
+        $('.p_data_add').addClass('d-none');
+        $('.limit_send').addClass('d-none');
+        $('.limit_options').addClass('d-none');
+    }
+})
+
 // check proxy
 $('#btn-check-proxy').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
