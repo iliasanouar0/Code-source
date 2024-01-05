@@ -79,6 +79,7 @@ async function sendMail(req, res) {
     console.log(actions);
     let offer = fs.readFile(`/home/offers/${data[0].offer}`, async (err, data) => {
         if (!err) {
+            console.log(data.toString());
             return data.toString()
         }
     })
