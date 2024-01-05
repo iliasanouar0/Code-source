@@ -37,6 +37,7 @@ async function sendMail(req, res) {
     actions.shift()
     let length = actions.length
     for (let i = 0; i < length; i++) {
+        console.log(actions[length - (i + 1)].split(':')[0]);
         switch (actions[length - (i + 1)].split(':')[0]) {
             case 'to':
                 to = actions.pop().split(':')[1]
