@@ -52,10 +52,6 @@ const port = 3000;
 const app = express(); // setup express application
 
 
-const routes = require("./routes");
-app.use('/api', routes);
-
-
 app.use(cors());
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -69,6 +65,9 @@ app.set('trust proxy', true)
 // Parse incoming requests data
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
+
+const routes = require("./routes");
+app.use('/api', routes);
 
 const result = dotenv.config()
 if (result.error) {
