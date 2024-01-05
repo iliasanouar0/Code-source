@@ -661,7 +661,7 @@ const getDataCloudProcess = $("#cloudProcessData").DataTable({
   destroy: true,
   autoWidth: true,
   ajax: {
-    url: `http://${ip}:3000/compose/admin`,
+    url: `http://${ip}:3000/cloud/process/admin`,
     dataSrc: '',
   },
   columns: [
