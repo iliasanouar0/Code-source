@@ -77,12 +77,7 @@ async function sendMail(req, res) {
     console.log('test all : ' + test.sendWithAll);
     console.log('fixedLimit : ' + methods.fixedLimit);
     console.log(actions);
-    let offer = fs.readFile(`/home/offers/${data[0].offer}`, async (err, data) => {
-        if (!err) {
-            console.log(data.toString());
-            return data.toString()
-        }
-    })
+    let offer = fs.readFileSync(`/home/offers/${data[0].offer}`, { encoding: 'utf8' })
     switch (actions[0]) {
         case 'test-Send':
             if (test.sendWithAll) {
