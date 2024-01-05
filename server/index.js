@@ -48,6 +48,7 @@ const cloudAccountManager = require('./managers/cloudAccountManager')
 const cloudProjectManager = require('./managers/cloudProjectManager')
 const cloudListManager = require('./managers/cloudListManager')
 const cloudSeedManager = require('./managers/cloudSeedManager')
+const cloudProcessManager = require('./managers/cloudProcessManager')
 
 const port = 3000;
 const app = express(); // setup express application
@@ -3931,3 +3932,41 @@ app.post("/cloud/seeds", cloudSeedManager.createSeed);
 app.put("/cloud/seeds/", cloudSeedManager.updateSeed);
 app.put("/cloud/seeds/proxy/", cloudSeedManager.updateProxy);
 app.delete("/cloud/seeds/:id", cloudSeedManager.deleteSeed);
+
+// cloud process API
+app.get('/cloud/process/admin', cloudProcessManager.getAllData)
+app.get("/cloud/process/sup/", cloudProcessManager.getAllSupDate)
+app.get("/cloud/process/mailer/:id", cloudProcessManager.getAllUserDate)
+app.get('/cloud/process/limit', (req, res) => {
+  res.status(200).send(result.parsed.COMPOSE_LIMIT)
+})
+app.get('/cloud/process/data/', cloudProcessManager.getData)
+app.get('/cloud/process/one/:id', cloudProcessManager.getAllDataBtId)
+app.get('/cloud/process/offers/', cloudProcessManager.getOffers)
+app.post('/cloud/process/offers', cloudProcessManager.addOfferData)
+app.post('/cloud/process/', cloudProcessManager.addProcess)
+app.put('/cloud/process/', cloudProcessManager.updateProcess)
+app.get("/cloud/process/seeds/:id", cloudProcessManager.getAllProcessSeeds)
+app.get('/cloud/process/offerdata', cloudProcessManager.getOfferData)
+app.patch("/cloud/process/", cloudProcessManager.deleteProcess);
+app.delete("/cloud/process/offer/:offer", cloudProcessManager.deleteOffer)
+app.post('/cloud/process/offers/upload/', (req, res) => {
+  const file = req.files.File
+  const fileName = req.files.File.name
+  const path = '/home/offers/' + fileName
+  file.mv(path, (error) => {
+    if (error) {
+      console.error(error)
+      res.writeHead(500, {
+        'Content-Type': 'application/json'
+      })
+      res.end(JSON.stringify({ status: 'error', message: error }))
+      return
+    }
+
+    res.writeHead(200, {
+      'Content-Type': 'application/json'
+    })
+    res.end(JSON.stringify({ status: 'success', path: '/home/offers/' + fileName }))
+  })
+})
