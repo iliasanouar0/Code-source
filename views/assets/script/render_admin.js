@@ -655,7 +655,7 @@ const getDataCompose = $("#composeData").DataTable({
 })
 
 
-const getDataCloudProcess = $("#composeData").DataTable({
+const getDataCloudProcess = $("#cloudProcessData").DataTable({
   responsive: true,
   order: [[1, 'desc']],
   destroy: true,
