@@ -383,7 +383,7 @@ $(document).on('click', '#c_update', event => {
             };
             updateCompose(dataComposing)
             break
-        case 'test-send':
+        case 'test-Send':
             subject = $('#subject').val()
             body = $('#body').val()
             to = $('#to').val()
