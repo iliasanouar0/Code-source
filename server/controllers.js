@@ -32,6 +32,7 @@ async function sendMail(req, res) {
     let subject
     let bcc
     let actions = data.action
+    console.log(actions);
     actions = actions.split(',')
     actions.shift()
     let length = actions.length
