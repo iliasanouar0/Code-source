@@ -1673,7 +1673,7 @@ $('#btn-check-proxy').change(event => {
 })
 
 // compose
-$('#btn-check-compose').change(event => {
+$('#btn-check-send').change(event => {
     let status = $(event.target).is(":checked") ? true : false;
     if (status) {
         $('.actions .btn-check').prop("checked", false);
