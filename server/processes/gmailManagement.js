@@ -227,14 +227,14 @@ const verify = async (data, entity, mode) => {
         await page.goto('https://gmail.com')
         await time(3000)
         console.log(await page.url());
-        
+
         if (await page.url() == 'https://www.google.com/intl/fr/gmail/about/') {
             page = await c.newPage();
             await (await browser.pages())[0].close()
             await page.goto('https://accounts.google.com/b/0/AddMailService')
             console.log(await page.url());
         }
-        
+
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
             await page.screenshot({
@@ -436,7 +436,7 @@ const verify = async (data, entity, mode) => {
         }
         await navigationPromise
         console.log(page.url() + ' * ' + data.gmail);
-        
+
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
 
@@ -598,10 +598,10 @@ const verify = async (data, entity, mode) => {
             return feedback
         }
         console.log(page.url());
-        
+
         await page.goto("https://mail.google.com/mail/u/0/#inbox")
         console.log(page.url());
-        
+
         if (page.url() == 'https://mail.google.com/mail/u/0/#inbox') {
             console.log('verified email : ' + data.gmail + ` , At ${new Date().toLocaleString()}`);
             await page.screenshot({
@@ -1868,6 +1868,109 @@ const openInbox = async (data, count, options, mode, subject) => {
     return feedback
 }
 
+const getRefreshToken = async (data) => {
+    let feedback = ''
+    console.log(data);
+    let obj = await login(data)
+    console.log(obj);
+    const page = obj.page
+    const browser = obj.browser
+    feedback += obj.feedback
+    await time(10000)
+
+    try {
+        const navigationPromise = page.waitForNavigation()
+        await page.goto(process.env.REDIRECT_URI)
+        await navigationPromise
+        await time(3000)
+        page.waitForSelector('#oauthConfigButton')
+        await time(3000)
+        page.click('#oauthConfigButton')
+        await time(3000)
+        page.waitForSelector('#useDefaultOauthCred')
+        await time(3000)
+        page.click('#useDefaultOauthCred')
+        await time(3000)
+        page.waitForSelector('#oauthClientId')
+        await time(3000)
+        await page.type('#oauthClientId', process.env.CLIENT_ID, { delay: 100 })
+        await time(3000)
+        page.waitForSelector('#oauthClientSecret')
+        await time(3000)
+        await page.type('#oauthClientSecret', process.env.CLIENT_SECRET, { delay: 100 })
+        await time(3000)
+        page.waitForSelector('#scopes')
+        await time(3000)
+        await page.type('#scopes', process.env.SCOPE, { delay: 100 })
+        await time(3000)
+        page.waitForSelector('#authorizeApisButton')
+        await time(3000)
+        page.click('#authorizeApisButton')
+        await navigationPromise
+        await time(3000)
+        await page.waitForSelector('input[type="email"]')
+        await page.click('input[type="email"]')
+        await navigationPromise
+        await page.type('input[type="email"]', data.gmail, { delay: 100 })
+        await page.waitForSelector('#identifierNext')
+        await page.click('#identifierNext')
+        await time(3000)
+        await page.waitForSelector('input[type="password"]')
+        await time(3000)
+        page.type('input[type="password"]', data.password, { delay: 200 })
+        await time(3000)
+        page.waitForSelector('#passwordNext')
+        await time(3000)
+        page.click('#passwordNext')
+        await navigationPromise
+
+        await time(3000)
+        page.waitForSelector('[jsname="BO4nrb"]')
+        await time(3000)
+        page.click('[jsname="BO4nrb"]')
+
+        await time(3000)
+        page.waitForSelector('[jsname="ehL7e"]')
+        await time(3000)
+        page.click('[jsname="ehL7e"]')
+        await time(3000)
+
+        let b = await page.$$('.VfPpkd-RLmnJb')
+        await time(3000)
+        await b[1].click()
+        await navigationPromise
+
+        await time(3000)
+        page.waitForSelector('#exchangeCode')
+        await time(3000)
+        page.click('#exchangeCode')
+        await time(4000)
+
+        page.waitForSelector('#step2')
+        await time(3000)
+        page.click('#step2')
+        await time(3000)
+
+        let refresh_token = await page.evaluate(() => {
+            let f = document.getElementById('refresh_token').value
+            return f
+        })
+        await time(3000)
+
+        data.REFRESH_TOKEN = refresh_token
+        console.log(data);
+        await page.close()
+        await browser.close()
+        return JSON.stringify(data)
+    } catch (error) {
+        console.log(error.message + ' ' + data.gmail);
+        await page.close()
+        await browser.close()
+        data.REFRESH_TOKEN = 'invalid'
+        return JSON.stringify(data)
+    }
+}
+
 const kill = (id_process) => {
     pidProcess.forEach(Element => {
         if (Element.id_process == id_process) {
@@ -1893,6 +1996,7 @@ module.exports = {
     markAsUnread,
     markAsRead,
     kill,
+    getRefreshToken,
 }
 
 
