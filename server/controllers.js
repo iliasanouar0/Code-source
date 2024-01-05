@@ -28,36 +28,34 @@ async function sendMail(req, res) {
     console.log(Obj);
     let data = await cloudProcessManager.getAllProcessSeedsProject(Obj)
     console.log(data);
-    res.status(200).send(data)
-    // let data = processManager.getProcess(Obj)
-    // let to
-    // let subject
-    // let bcc
-    // let text = data.text
-    // let actions = data.action
-    // actions = actions.split(';')
-    // actions.shift()
-    // let length = actions.length
-    // for (let i = 0; i < length; i++) {
-    //     switch (actions[length - (i + 1)].split(':')[0]) {
-    //         case 'to':
-    //             to = actions.pop().split(':')[1]
-    //             break;
-    //         case 'subject':
-    //             subject = actions.pop().split(':')[1]
-    //             break;
-    //         case 'bcc':
-    //             bcc = actions.pop().split(':')[1]
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
-    // console.log(to);
-    // console.log(subject);
-    // console.log(bcc);
+    let to
+    let subject
+    let bcc
+    let actions = data.action
+    actions = actions.split(';')
+    actions.shift()
+    let length = actions.length
+    for (let i = 0; i < length; i++) {
+        switch (actions[length - (i + 1)].split(':')[0]) {
+            case 'to':
+                to = actions.pop().split(':')[1]
+                break;
+            case 'subject':
+                subject = actions.pop().split(':')[1]
+                break;
+            case 'bcc':
+                bcc = actions.pop().split(':')[1]
+                break;
+            default:
+                break;
+        }
+    }
+    console.log(to);
+    console.log(subject);
+    console.log(bcc);
 
-    // console.log(actions);
+    console.log(actions);
+    res.status(200).send(data)
 
     // let list = processManager.getAllProcessSeeds(data.list)
     // console.log(list);
