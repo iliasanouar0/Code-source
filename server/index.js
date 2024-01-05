@@ -4096,6 +4096,7 @@ wsp.on('connection', (wss, req) => {
           for (let i = 0; i < array[start].length; i++) {
             console.log('the array : ')
             console.log(array[start][i]);
+            console.log({ id_seeds: array[start][i].id_seed, id_process: data.id_process });
             await resultManager.startNow({ id_seeds: array[start][i].id_seed, id_process: data.id_process })
             await resultManager.updateState([{ id_seeds: array[start][i].id_seed, id_process: data.id_process }], "running")
             console.log('set as running : ' + array[start][i].gmail + ` ,At ${new Date().toLocaleString()}`);
