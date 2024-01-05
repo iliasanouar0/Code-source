@@ -106,12 +106,12 @@ $(document).on('click', '.edit', event => {
         let actions = json[0].action.split(',')
         for (let i = 0; i < actions.length; i++) {
             switch (actions[i]) {
-                case "compose":
+                case "Send":
                     $('.add_compose input:checkbox').prop("checked", false)
-                    $('#btn-check-compose').prop("checked", true);
+                    $('#btn-check-send').prop("checked", true);
                     $('.send_message').removeClass('d-none');
                     break;
-                case "test-compose":
+                case "test-Send":
                     $('.add_compose input:checkbox').prop("checked", false)
                     $('#btn-check-test').prop("checked", true);
                     $('.send_message').removeClass('d-none');
