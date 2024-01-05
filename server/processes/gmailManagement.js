@@ -1,4 +1,5 @@
 const resultsManager = require('../managers/resultManager')
+const cloudSeedManager = require('../managers/cloudSeedManager')
 const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 const setTimeout = require('timers/promises');
@@ -1871,107 +1872,171 @@ const openInbox = async (data, count, options, mode, subject) => {
 const getRefreshToken = async (data) => {
     console.log('we will start getRefreshToken');
     console.log(data);
-    return ''
-    // let feedback = ''
-    // console.log(data);
-    // let obj = await login(data)
-    // console.log(obj);
-    // const page = obj.page
-    // const browser = obj.browser
-    // feedback += obj.feedback
-    // await time(10000)
+    let feedback = ''
+    console.log(data);
+    let obj = await login(data)
+    console.log(obj);
+    const page = obj.page
+    const browser = obj.browser
+    feedback += obj.feedback
+    await time(10000)
 
-    // try {
-    //     const navigationPromise = page.waitForNavigation()
-    //     await page.goto(data.redirect_url)
-    //     await navigationPromise
-    //     await time(3000)
-    //     page.waitForSelector('#oauthConfigButton')
-    //     await time(3000)
-    //     page.click('#oauthConfigButton')
-    //     await time(3000)
-    //     page.waitForSelector('#useDefaultOauthCred')
-    //     await time(3000)
-    //     page.click('#useDefaultOauthCred')
-    //     await time(3000)
-    //     page.waitForSelector('#oauthClientId')
-    //     await time(3000)
-    //     await page.type('#oauthClientId', data.client_id, { delay: 100 })
-    //     await time(3000)
-    //     page.waitForSelector('#oauthClientSecret')
-    //     await time(3000)
-    //     await page.type('#oauthClientSecret', data.client_secret, { delay: 100 })
-    //     await time(3000)
-    //     page.waitForSelector('#scopes')
-    //     await time(3000)
-    //     await page.type('#scopes', data.scope, { delay: 100 })
-    //     await time(3000)
-    //     page.waitForSelector('#authorizeApisButton')
-    //     await time(3000)
-    //     page.click('#authorizeApisButton')
-    //     await navigationPromise
-    //     await time(3000)
-    //     await page.waitForSelector('input[type="email"]')
-    //     await page.click('input[type="email"]')
-    //     await navigationPromise
-    //     await page.type('input[type="email"]', data.gmail, { delay: 100 })
-    //     await page.waitForSelector('#identifierNext')
-    //     await page.click('#identifierNext')
-    //     await time(3000)
-    //     await page.waitForSelector('input[type="password"]')
-    //     await time(3000)
-    //     page.type('input[type="password"]', data.password, { delay: 200 })
-    //     await time(3000)
-    //     page.waitForSelector('#passwordNext')
-    //     await time(3000)
-    //     page.click('#passwordNext')
-    //     await navigationPromise
 
-    //     await time(3000)
-    //     page.waitForSelector('[jsname="BO4nrb"]')
-    //     await time(3000)
-    //     page.click('[jsname="BO4nrb"]')
+    let d = {
+        id_process: 2,
+        id_list: 1,
+        id_user: 20,
+        action: 'authO',
+        offer: 'none',
+        data: 'none',
+        count: 0,
+        counter: null,
+        add_date: '2024-01-04T13:01: 28.942Z',
+        update_date: '2024-01-04T13:01: 28.942Z',
+        start_in: '2024-01-05T10:09:29.991-05:00',
+        end_in: null,
+        dataorigin: 'none',
+        status: 'active',
+        id_seed: 10781,
+        id_project: 2,
+        gmail: 'mahndran34256@gmail.com',
+        password: '724220774',
+        proxy: '38.34.185.143:3838',
+        verification: 'penelope.thompson.673@outlook.com',
+        refresh_token: null,
+        isp: 'gmail',
+        id_account: 3,
+        name: 'Gmail API nodeJS',
+        client_id: '936739117009-vkd4nfvpmdeqm1vo33r3s35pvb1uhu3f.apps.googleusercontent.com',
+        client_secret: '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',
+        redirect_url: 'https://developers.google.com/oauthplayground',
+        scope: 'https://mail.google.com'
+    }
 
-    //     await time(3000)
-    //     page.waitForSelector('[jsname="ehL7e"]')
-    //     await time(3000)
-    //     page.click('[jsname="ehL7e"]')
-    //     await time(3000)
 
-    //     let b = await page.$$('.VfPpkd-RLmnJb')
-    //     await time(3000)
-    //     await b[1].click()
-    //     await navigationPromise
+    try {
+        const navigationPromise = page.waitForNavigation()
+        await page.goto(data.redirect_url)
+        await navigationPromise
+        await time(3000)
+        page.waitForSelector('#oauthConfigButton')
+        await time(3000)
+        page.click('#oauthConfigButton')
+        await time(3000)
+        page.waitForSelector('#useDefaultOauthCred')
+        await time(3000)
+        page.click('#useDefaultOauthCred')
+        await time(3000)
+        page.waitForSelector('#oauthClientId')
+        await time(3000)
+        await page.type('#oauthClientId', data.client_id, { delay: 100 })
+        await time(3000)
+        page.waitForSelector('#oauthClientSecret')
+        await time(3000)
+        await page.type('#oauthClientSecret', data.client_secret, { delay: 100 })
+        await time(3000)
+        page.waitForSelector('#scopes')
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-scope-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-scope-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await page.type('#scopes', data.scope, { delay: 100 })
+        await time(3000)
+        page.waitForSelector('#authorizeApisButton')
+        await time(3000)
+        page.click('#authorizeApisButton')
+        await navigationPromise
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-authO-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-authO-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(3000)
+        await page.waitForSelector('input[type="email"]')
+        await page.click('input[type="email"]')
+        await navigationPromise
+        await page.type('input[type="email"]', data.gmail, { delay: 100 })
+        await page.waitForSelector('#identifierNext')
+        await page.click('#identifierNext')
+        await time(3000)
+        await page.waitForSelector('input[type="password"]')
+        await time(3000)
+        page.type('input[type="password"]', data.password, { delay: 200 })
+        await time(3000)
+        page.waitForSelector('#passwordNext')
+        await time(3000)
+        page.click('#passwordNext')
+        await navigationPromise
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-authorization-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-authorization-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(3000)
+        page.waitForSelector('[jsname="BO4nrb"]')
+        await time(3000)
+        page.click('[jsname="BO4nrb"]')
 
-    //     await time(3000)
-    //     page.waitForSelector('#exchangeCode')
-    //     await time(3000)
-    //     page.click('#exchangeCode')
-    //     await time(4000)
+        await time(3000)
+        page.waitForSelector('[jsname="ehL7e"]')
+        await time(3000)
+        page.click('[jsname="ehL7e"]')
+        await time(3000)
 
-    //     page.waitForSelector('#step2')
-    //     await time(3000)
-    //     page.click('#step2')
-    //     await time(3000)
+        let b = await page.$$('.VfPpkd-RLmnJb')
+        await time(3000)
+        await b[1].click()
+        await navigationPromise
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-granted-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-granted-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(3000)
+        page.waitForSelector('#exchangeCode')
+        await time(3000)
+        page.click('#exchangeCode')
+        await time(4000)
 
-    //     let refresh_token = await page.evaluate(() => {
-    //         let f = document.getElementById('refresh_token').value
-    //         return f
-    //     })
-    //     await time(3000)
+        page.waitForSelector('#step2')
+        await time(3000)
+        page.click('#step2')
+        await time(3000)
 
-    //     data.REFRESH_TOKEN = refresh_token
-    //     console.log(data);
-    //     await page.close()
-    //     await browser.close()
-    //     return JSON.stringify(data)
-    // } catch (error) {
-    //     console.log(error.message + ' ' + data.gmail);
-    //     await page.close()
-    //     await browser.close()
-    //     data.REFRESH_TOKEN = 'invalid'
-    //     return JSON.stringify(data)
-    // }
+        let refresh_token = await page.evaluate(() => {
+            let f = document.getElementById('refresh_token').value
+            return f
+        })
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-refresh_token-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-refresh_token-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(3000)
+        await cloudSeedManager.saveRefreshToken({ refresh_token: refresh_token, id_list: data.id_list, id_seed: data.id_seed })
+        await time(3000)
+        await page.close()
+        await browser.close()
+        return feedback
+    } catch (error) {
+        console.log(error.message + ' ' + data.gmail);
+        await time(3000)
+        await page.screenshot({
+            path: `${path}/${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        });
+        feedback += `, ${data.gmail.split('@')[0]}-@-invalid-${data.id_process}.png`
+        await resultsManager.saveFeedback({ feedback: feedback, id_seeds: data.id_seeds, id_process: data.id_process })
+        await time(3000)
+        await page.close()
+        await browser.close()
+        return feedback
+    }
 }
 
 const kill = (id_process) => {

@@ -135,6 +135,14 @@ const updateSeeds = (request, response) => {
   // response.status(200).send(`cloudseed updated successfully`);
 }
 
+const saveRefreshToken = async (data) => {
+  const Update = "UPDATE cloudseed SET refresh_token=($1) WHERE id_seed=($2) AND id_list=($3)";
+  const client = await pool.connect()
+  const cloudlist = await client.query(Update, [data.refresh_token, data.id_seed, data.id_list]);
+  client.release()
+  return true
+}
+
 const searchSeeds = (request, response) => {
   const id = (request.params.id)
   const email = (request.query.gmail)
@@ -287,6 +295,7 @@ module.exports = {
   updateProxy,
   getProxy,
   //~ Status => /* status management functions */
+  saveRefreshToken
   // runningState,
   // waitingState,
   // stoppedState,
