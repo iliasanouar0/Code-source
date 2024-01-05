@@ -6,6 +6,8 @@ const fs = require('fs')
 const { google } = require("googleapis");
 const resultsManager = require('./managers/resultManager')
 const cloudProcessManager = require('./managers/cloudProcessManager');
+var handlebars = require('handlebars');
+
 
 require("dotenv").config();
 
