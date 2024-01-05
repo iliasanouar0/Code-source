@@ -18,16 +18,18 @@ require("dotenv").config();
 
 
 async function sendMail(req, res) {
-    // const oAuth2Client = new google.auth.OAuth2(
-    //     process.env.CLIENT_ID,
-    //     process.env.CLIENT_SECRET,
-    //     process.env.REDIRECT_URI
-    // );
-    // let results = []
+    let results = []
     let Obj = (req.params.p)
     console.log(Obj);
     let data = await cloudProcessManager.getAllProcessSeedsProject(Obj)
     console.log(data);
+
+    const oAuth2Client = new google.auth.OAuth2(
+        data[0].client_id,
+        data[0].client_secret,
+        data[0].redirect_url
+    );
+
     let actions = data[0].action
         , subject
         , to
@@ -71,40 +73,45 @@ async function sendMail(req, res) {
     console.log('fixedLimit : ' + methods.fixedLimit);
     console.log(actions);
 
-
+    switch (actions[0]) {
+        case 'test-Send':
+            for (let i = 0; i < data.length; i++) {
+                try {
+                    oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
+                    const accessToken = await oAuth2Client.getAccessToken();
+                    const transport = nodemailer.createTransport({
+                        service: "gmail",
+                        auth: {
+                            // ...CONSTANTS.auth,
+                            clientId: data[i].client_id,
+                            clientSecret: data[i].client_secret,
+                            user: data[i].gmail,
+                            refreshToken: data[i].refresh_token,
+                            accessToken: accessToken,
+                        },
+                    });
+                    const mailOptions = {
+                        from: data[i].gmail,
+                        to: to,
+                        subject: subject,
+                        text: text,
+                    };
+                    const result = await transport.sendMail(mailOptions);
+                    results.push(result)
+                } catch (error) {
+                    console.log(error);
+                    res.send(error);
+                }
+            }
+            break;
+        case 'Send':
+            console.log(actions);
+            break;
+        default:
+            console.log('invalid data');
+            break;
+    }
     res.status(200).send(data)
-
-    // let list = processManager.getAllProcessSeeds(data.list)
-    // console.log(list);
-    // for (let i = 0; i < list.length; i++) {
-    //     console.log(list[i]);
-    //     try {
-    //         oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
-    //         const accessToken = await oAuth2Client.getAccessToken();
-    //         const transport = nodemailer.createTransport({
-    //             service: "gmail",
-    //             auth: {
-    //                 ...CONSTANTS.auth,
-    //                 user: list[i].gmail,
-    //                 refreshToken: list[i].REFRESH_TOKEN,
-    //                 accessToken: accessToken,
-    //             },
-    //         });
-    //         const mailOptions = {
-    //             // ...CONSTANTS.mailoptions,
-    //             from: list[i].gmail,
-    //             to: to,
-    //             subject: subject,
-    //             bcc: [bcc],
-    //             text: text,
-    //         };
-    //         const result = await transport.sendMail(mailOptions);
-    //         results.push(result)
-    //     } catch (error) {
-    //         console.log(error);
-    //         res.send(error);
-    //     }
-    // }
     // res.status(200).send(results)
 }
 
