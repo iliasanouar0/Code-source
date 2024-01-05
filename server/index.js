@@ -4075,7 +4075,11 @@ wsp.on('connection', (wss, req) => {
           }
 
           let seedsRunning = await cloudProcessManager.getAllProcessSeedsByState({ id_process: data.id_process, status: "running" })
-
+          console.log(seeds.length);
+          console.log('active : ' + active);
+          console.log('toProcess.length : ' + toProcess.length);
+          console.log('seeds.length : ' + seeds.length);
+          console.log('seedsRunning : ' + seedsRunning);
           if (toProcess.length === 0 && seeds.length === 0 && seedsRunning.length == 0) {
             let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
             await processStateManager.updateState(status);
