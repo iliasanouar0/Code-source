@@ -1232,7 +1232,7 @@ $(document).on('click', '.details', event => {
                 card += `<div class="col">
                 <div class="card">
                 <a class="size">
-                <img src="../../assets/images/process_result/AUTO.png" class="card-img-top" alt="feedback">
+                <img src="../../../assets/images/process_result/AUTO.png" class="card-img-top" alt="feedback">
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">login</h5>
@@ -1245,7 +1245,7 @@ $(document).on('click', '.details', event => {
                 card += `<div class="col">
                 <div class="card">
                 <a class="size">
-                <img src="../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
+                <img src="../../../assets/images/process_result/${element}" class="card-img-top" alt="feedback">
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">${variables[2]}</h5>
