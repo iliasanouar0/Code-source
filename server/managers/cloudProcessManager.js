@@ -432,18 +432,19 @@ const processing = async (data) => {
                 result = e
             })
             return result
-        // case 'compose':
-        //     switch (seed.isp) {
-        //         case 'gmail':
-        //             await composeManagement.composeEmail(seed, { subject: subject, to: to, bcc: bcc, offer: offer }, mode).then(e => {
-        //                 result = e
-        //             })
-        //             return result
-        //         default:
-        //             console.log('data invalid');
-        //             break;
-        //     }
-        //     break;
+        case 'authO':
+            switch (seed.isp) {
+                case 'gmail':
+                    // await gmailManagement.getRefreshToken(seed, mode).then(e => {
+                    //     result = e
+                    // })
+                    // return result
+                    console.log(seed);
+                default:
+                    console.log('data invalid');
+                    break;
+            }
+            break;
         // case 'test-compose':
         //     switch (seed.isp) {
         //         case 'gmail':

@@ -1869,106 +1869,108 @@ const openInbox = async (data, count, options, mode, subject) => {
 }
 
 const getRefreshToken = async (data) => {
-    let feedback = ''
     console.log(data);
-    let obj = await login(data)
-    console.log(obj);
-    const page = obj.page
-    const browser = obj.browser
-    feedback += obj.feedback
-    await time(10000)
+    return ''
+    // let feedback = ''
+    // console.log(data);
+    // let obj = await login(data)
+    // console.log(obj);
+    // const page = obj.page
+    // const browser = obj.browser
+    // feedback += obj.feedback
+    // await time(10000)
 
-    try {
-        const navigationPromise = page.waitForNavigation()
-        await page.goto(process.env.REDIRECT_URI)
-        await navigationPromise
-        await time(3000)
-        page.waitForSelector('#oauthConfigButton')
-        await time(3000)
-        page.click('#oauthConfigButton')
-        await time(3000)
-        page.waitForSelector('#useDefaultOauthCred')
-        await time(3000)
-        page.click('#useDefaultOauthCred')
-        await time(3000)
-        page.waitForSelector('#oauthClientId')
-        await time(3000)
-        await page.type('#oauthClientId', process.env.CLIENT_ID, { delay: 100 })
-        await time(3000)
-        page.waitForSelector('#oauthClientSecret')
-        await time(3000)
-        await page.type('#oauthClientSecret', process.env.CLIENT_SECRET, { delay: 100 })
-        await time(3000)
-        page.waitForSelector('#scopes')
-        await time(3000)
-        await page.type('#scopes', process.env.SCOPE, { delay: 100 })
-        await time(3000)
-        page.waitForSelector('#authorizeApisButton')
-        await time(3000)
-        page.click('#authorizeApisButton')
-        await navigationPromise
-        await time(3000)
-        await page.waitForSelector('input[type="email"]')
-        await page.click('input[type="email"]')
-        await navigationPromise
-        await page.type('input[type="email"]', data.gmail, { delay: 100 })
-        await page.waitForSelector('#identifierNext')
-        await page.click('#identifierNext')
-        await time(3000)
-        await page.waitForSelector('input[type="password"]')
-        await time(3000)
-        page.type('input[type="password"]', data.password, { delay: 200 })
-        await time(3000)
-        page.waitForSelector('#passwordNext')
-        await time(3000)
-        page.click('#passwordNext')
-        await navigationPromise
+    // try {
+    //     const navigationPromise = page.waitForNavigation()
+    //     await page.goto(data.redirect_url)
+    //     await navigationPromise
+    //     await time(3000)
+    //     page.waitForSelector('#oauthConfigButton')
+    //     await time(3000)
+    //     page.click('#oauthConfigButton')
+    //     await time(3000)
+    //     page.waitForSelector('#useDefaultOauthCred')
+    //     await time(3000)
+    //     page.click('#useDefaultOauthCred')
+    //     await time(3000)
+    //     page.waitForSelector('#oauthClientId')
+    //     await time(3000)
+    //     await page.type('#oauthClientId', data.client_id, { delay: 100 })
+    //     await time(3000)
+    //     page.waitForSelector('#oauthClientSecret')
+    //     await time(3000)
+    //     await page.type('#oauthClientSecret', data.client_secret, { delay: 100 })
+    //     await time(3000)
+    //     page.waitForSelector('#scopes')
+    //     await time(3000)
+    //     await page.type('#scopes', data.scope, { delay: 100 })
+    //     await time(3000)
+    //     page.waitForSelector('#authorizeApisButton')
+    //     await time(3000)
+    //     page.click('#authorizeApisButton')
+    //     await navigationPromise
+    //     await time(3000)
+    //     await page.waitForSelector('input[type="email"]')
+    //     await page.click('input[type="email"]')
+    //     await navigationPromise
+    //     await page.type('input[type="email"]', data.gmail, { delay: 100 })
+    //     await page.waitForSelector('#identifierNext')
+    //     await page.click('#identifierNext')
+    //     await time(3000)
+    //     await page.waitForSelector('input[type="password"]')
+    //     await time(3000)
+    //     page.type('input[type="password"]', data.password, { delay: 200 })
+    //     await time(3000)
+    //     page.waitForSelector('#passwordNext')
+    //     await time(3000)
+    //     page.click('#passwordNext')
+    //     await navigationPromise
 
-        await time(3000)
-        page.waitForSelector('[jsname="BO4nrb"]')
-        await time(3000)
-        page.click('[jsname="BO4nrb"]')
+    //     await time(3000)
+    //     page.waitForSelector('[jsname="BO4nrb"]')
+    //     await time(3000)
+    //     page.click('[jsname="BO4nrb"]')
 
-        await time(3000)
-        page.waitForSelector('[jsname="ehL7e"]')
-        await time(3000)
-        page.click('[jsname="ehL7e"]')
-        await time(3000)
+    //     await time(3000)
+    //     page.waitForSelector('[jsname="ehL7e"]')
+    //     await time(3000)
+    //     page.click('[jsname="ehL7e"]')
+    //     await time(3000)
 
-        let b = await page.$$('.VfPpkd-RLmnJb')
-        await time(3000)
-        await b[1].click()
-        await navigationPromise
+    //     let b = await page.$$('.VfPpkd-RLmnJb')
+    //     await time(3000)
+    //     await b[1].click()
+    //     await navigationPromise
 
-        await time(3000)
-        page.waitForSelector('#exchangeCode')
-        await time(3000)
-        page.click('#exchangeCode')
-        await time(4000)
+    //     await time(3000)
+    //     page.waitForSelector('#exchangeCode')
+    //     await time(3000)
+    //     page.click('#exchangeCode')
+    //     await time(4000)
 
-        page.waitForSelector('#step2')
-        await time(3000)
-        page.click('#step2')
-        await time(3000)
+    //     page.waitForSelector('#step2')
+    //     await time(3000)
+    //     page.click('#step2')
+    //     await time(3000)
 
-        let refresh_token = await page.evaluate(() => {
-            let f = document.getElementById('refresh_token').value
-            return f
-        })
-        await time(3000)
+    //     let refresh_token = await page.evaluate(() => {
+    //         let f = document.getElementById('refresh_token').value
+    //         return f
+    //     })
+    //     await time(3000)
 
-        data.REFRESH_TOKEN = refresh_token
-        console.log(data);
-        await page.close()
-        await browser.close()
-        return JSON.stringify(data)
-    } catch (error) {
-        console.log(error.message + ' ' + data.gmail);
-        await page.close()
-        await browser.close()
-        data.REFRESH_TOKEN = 'invalid'
-        return JSON.stringify(data)
-    }
+    //     data.REFRESH_TOKEN = refresh_token
+    //     console.log(data);
+    //     await page.close()
+    //     await browser.close()
+    //     return JSON.stringify(data)
+    // } catch (error) {
+    //     console.log(error.message + ' ' + data.gmail);
+    //     await page.close()
+    //     await browser.close()
+    //     data.REFRESH_TOKEN = 'invalid'
+    //     return JSON.stringify(data)
+    // }
 }
 
 const kill = (id_process) => {

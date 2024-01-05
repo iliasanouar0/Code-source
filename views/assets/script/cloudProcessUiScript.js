@@ -270,6 +270,20 @@ $(document).on('click', '#c_update', event => {
             };
             updateCompose(dataComposing)
             break;
+        case 'authO':
+            dataComposing = {
+                "id_process": id,
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `none`,
+                "data": `none`,
+                "count": 0,
+            };
+            updateCompose(dataComposing)
+            break;
         case 'compose':
             offerAdd
             subject = $('#subject').val()
