@@ -44,17 +44,12 @@ async function sendMail(req, res) {
             case 'subject':
                 subject = actions.pop().split(':')[1]
                 break;
-            case 'bcc':
-                bcc = actions.pop().split(':')[1]
-                break;
             default:
                 break;
         }
     }
     console.log(to);
     console.log(subject);
-    console.log(bcc);
-
     console.log(actions);
     res.status(200).send(data)
 
