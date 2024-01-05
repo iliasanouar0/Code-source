@@ -85,7 +85,7 @@ async function sendMail(req, res) {
                 for (let i = 0; i < data.length; i++) {
                     try {
                         const templatePath = `/home/offers/${data[0].offer}`;
-                        const templateFile = await fs.readFile(templatePath, 'utf-8');
+                        const templateFile = fs.readFileSync(templatePath, { encoding: 'utf8' })
                         const template = handlebars.compile(templateFile);
                         const replacements = {
                             username: ""
