@@ -79,24 +79,54 @@ async function sendMail(req, res) {
 
     switch (actions[0]) {
         case 'test-Send':
-            for (let i = 0; i < data.length; i++) {
+            if (test.sendWithAll) {
+                for (let i = 0; i < data.length; i++) {
+                    try {
+                        oAuth2Client.setCredentials({ refresh_token: data[i].refresh_token });
+                        const accessToken = await oAuth2Client.getAccessToken();
+                        const transport = nodemailer.createTransport({
+                            service: "gmail",
+                            auth: {
+                                // ...CONSTANTS.auth,
+                                type: "OAuth2",
+                                clientId: data[i].client_id,
+                                clientSecret: data[i].client_secret,
+                                user: data[i].gmail,
+                                refreshToken: data[i].refresh_token,
+                                accessToken: accessToken,
+                            },
+                        });
+                        const mailOptions = {
+                            from: data[i].gmail,
+                            to: to,
+                            subject: subject,
+                            text: 'text',
+                        };
+                        const result = await transport.sendMail(mailOptions);
+                        results.push(result)
+                    } catch (error) {
+                        console.log(error);
+                        res.send(error);
+                    }
+                }
+            } else {
                 try {
-                    oAuth2Client.setCredentials({ refresh_token: data[i].refresh_token });
+                    oAuth2Client.setCredentials({ refresh_token: data[0].refresh_token });
                     const accessToken = await oAuth2Client.getAccessToken();
                     const transport = nodemailer.createTransport({
                         service: "gmail",
                         auth: {
                             // ...CONSTANTS.auth,
                             type: "OAuth2",
-                            clientId: data[i].client_id,
-                            clientSecret: data[i].client_secret,
-                            user: data[i].gmail,
-                            refreshToken: data[i].refresh_token,
+                            clientId: data[0].client_id,
+                            clientSecret: data[0].client_secret,
+                            user: data[0].gmail,
+                            refreshToken: data[0].refresh_token,
                             accessToken: accessToken,
                         },
                     });
                     const mailOptions = {
-                        from: data[i].gmail,
+                        from: data[0].gmail,
                         to: to,
                         subject: subject,
                         text: 'text',
