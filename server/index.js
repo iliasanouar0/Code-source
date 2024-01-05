@@ -3743,6 +3743,10 @@ wsp.on('connection', (wss, req) => {
     request = data.request
 
     if (request == 'start') {
+
+      await cloudProcessManager.startedProcess(data.data)
+
+
       let Origins = await cloudProcessManager.getAllProcessSeedsServer(data.id_process)
       let seeds = [...Origins]
       let results = []
