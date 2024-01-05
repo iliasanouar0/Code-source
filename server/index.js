@@ -3802,6 +3802,19 @@ wsp.on('connection', (wss, req) => {
         waiting = 0
       }
 
+      for (let i = 0; i < seeds.length; i++) {
+        let result = {
+          id_process: data.id_process,
+          id_list: seeds[i].id_list,
+          id_seeds: seeds[i].id_seeds,
+          feedback: 0,
+          start_in: 0,
+          end_in: 0,
+          status: 'waiting'
+        }
+        await resultManager.saveResult(result)
+      }
+
       let success = 0
       let running = 0
       let failed = 0
