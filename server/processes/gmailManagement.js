@@ -1869,6 +1869,7 @@ const openInbox = async (data, count, options, mode, subject) => {
 }
 
 const getRefreshToken = async (data) => {
+    console.log('we will start getRefreshToken');
     console.log(data);
     return ''
     // let feedback = ''
