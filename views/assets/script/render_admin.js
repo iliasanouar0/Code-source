@@ -1817,6 +1817,7 @@ if (path.includes("/admin/users/")) {
   }).then((response) => {
     return response.json();
   }).then((data) => {
+    console.log('test');
     if (data.length == 0) {
       let option = document.createElement("option");
       option.innerHTML = `No available data`
