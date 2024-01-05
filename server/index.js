@@ -51,6 +51,11 @@ const cloudProcessManager = require('./managers/cloudProcessManager')
 const port = 3000;
 const app = express(); // setup express application
 
+
+const routes = require("./routes");
+app.use('/api', routes);
+
+
 app.use(cors());
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
