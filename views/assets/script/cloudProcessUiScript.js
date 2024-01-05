@@ -609,6 +609,20 @@ $(document).on('click', '#c_add', () => {
             };
             addCompose(dataComposing)
             break;
+        case 'authO':
+            dataComposing = {
+                "name": `test`,
+                "action": action,
+                "status": `idel`,
+                "id_user": `${user['id_user']}`,
+                "id_list": `${composingList}`,
+                "offer": `none`,
+                "data": `none`,
+                "count": 0,
+            };
+            console.log(dataComposing);
+            // addCompose(dataComposing)
+            break;
         case 'test-compose':
             subject = $('#subject').val()
             body = $('#body').val()
