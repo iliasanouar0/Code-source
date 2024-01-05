@@ -3751,7 +3751,8 @@ wsp.on('connection', (wss, req) => {
       await cloudProcessManager.startedProcess(data.data)
 
 
-      let Origins = await cloudProcessManager.getAllProcessSeedsServer(data.id_process)
+      // let Origins = await cloudProcessManager.getAllProcessSeedsServer(data.id_process)
+      let Origins = await cloudProcessManager.getAllProcessSeedsProject(data.id_process)
       let seeds = [...Origins]
       let results = []
       let actions = seeds[0].action
