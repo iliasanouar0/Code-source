@@ -4104,6 +4104,22 @@ wsp.on('connection', (wss, req) => {
       await repeat(toProcess, toProcess.length, 0, check.startingIndexed, actions[0])
       let status = { waiting: waiting, active: active, finished: 0, failed: 0, name: data.name }
       console.log(status)
+    } else if (request == 'reset') {
+      await cloudProcessManager.restedProcess(data.data)
+      await resultManager.deleteResultsProcess(data.id_process)
+      let seeds = await cloudProcessManager.getAllProcessSeedsServer(data.id_process)
+      let statechangeSeeds = []
+      for (let i = 0; i < seeds.length; i++) {
+        statechangeSeeds.push({ id_seeds: seeds[i].id_seeds, id_process: data.id_process })
+      }
+      await resultManager.updateState(statechangeSeeds, "stopped")
+      await processStateManager.deleteState(data.id_process)
+      if (seeds.length > 0) {
+        cloudProcessManager.processing({ action: 'kill', isp: seeds[0].isp, id_process: data.id_process })
+      } else {
+        cloudProcessManager.processing({ action: 'kill', isp: seedsRunning[0].isp, id_process: data.id_process })
+      }
+      sendToAll(clients, 'reload')
     }
   })
 })
