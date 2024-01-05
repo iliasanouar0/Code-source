@@ -1799,7 +1799,7 @@ if (path.includes("/admin/users/")) {
   }).then((data) => {
     default_limit.innerHTML = data
   })
-  fetch(`http://${ip}:3000/lists`, {
+  fetch(`http://${ip}:3000/cloud/lists`, {
     method: "GET",
   }).then((response) => {
     return response.json();
@@ -1867,7 +1867,7 @@ if (path.includes("/admin/users/")) {
     }).then((data) => {
       default_limit.innerHTML = data
     })
-    fetch(`http://${ip}:3000/lists`, {
+    fetch(`http://${ip}:3000/cloud/lists`, {
       method: "GET",
     }).then((response) => {
       return response.json();
