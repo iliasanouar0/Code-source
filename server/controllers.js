@@ -81,7 +81,7 @@ async function sendMail(req, res) {
         case 'test-Send':
             for (let i = 0; i < data.length; i++) {
                 try {
-                    oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
+                    oAuth2Client.setCredentials({ refresh_token:  data[i].refresh_token });
                     const accessToken = await oAuth2Client.getAccessToken();
                     const transport = nodemailer.createTransport({
                         service: "gmail",
