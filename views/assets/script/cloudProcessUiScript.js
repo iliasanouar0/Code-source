@@ -124,16 +124,25 @@ $(document).on('click', '.edit', event => {
                     $('.add_compose input:checkbox').prop("checked", false)
                     $('#btn-check-verify').prop("checked", true);
                     $('.send_message').addClass('d-none');
+                    $('.p_data_add').addClass('d-none');
+                    $('.limit_send').addClass('d-none');
+                    $('.limit_options').addClass('d-none');
                     break;
                 case "authO":
                     $('.add_compose input:checkbox').prop("checked", false)
                     $('#btn-check-authO').prop("checked", true);
                     $('.send_message').addClass('d-none');
+                    $('.p_data_add').addClass('d-none');
+                    $('.limit_send').addClass('d-none');
+                    $('.limit_options').addClass('d-none');
                     break;
                 case "checkProxy":
                     $('.add_compose input:checkbox').prop("checked", false)
                     $('#btn-check-proxy').prop("checked", true);
                     $('.send_message').addClass('d-none');
+                    $('.p_data_add').addClass('d-none');
+                    $('.limit_send').addClass('d-none');
+                    $('.limit_options').addClass('d-none');
                     break;
                 default:
                     switch (actions[i].split(':')[0]) {
