@@ -5,7 +5,6 @@ const CONSTANTS = require("./constants");
 const { google } = require("googleapis");
 const resultsManager = require('./managers/resultManager')
 const cloudProcessManager = require('./managers/cloudProcessManager');
-const { logging } = require("googleapis/build/src/apis/logging");
 
 require("dotenv").config();
 
@@ -20,6 +19,7 @@ require("dotenv").config();
 async function sendMail(req, res) {
     let results = []
     let Obj = (req.params.p)
+    await cloudProcessManager.startedProcess({ status: 'RUNNING', id_process: Obj })
     console.log(Obj);
     let data = await cloudProcessManager.getAllProcessSeedsProject(Obj)
     console.log(data);
@@ -146,7 +146,7 @@ async function sendMail(req, res) {
             console.log('invalid data');
             break;
     }
-    // res.status(200).send(data)
+    cloudProcessManager.finishedProcess({ status: 'FINISHED', id_process: Obj })
     res.status(200).send(results)
 }
 
