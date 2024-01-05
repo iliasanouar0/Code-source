@@ -87,13 +87,6 @@ async function sendMail(req, res) {
             if (test.sendWithAll) {
                 for (let i = 0; i < data.length; i++) {
                     try {
-                        // const templatePath = `/home/offers/${data[0].offer}`;
-                        // const templateFile = fs.readFileSync(templatePath, { encoding: 'utf8' })
-                        // const template = handlebars.compile(templateFile);
-                        // const replacements = {
-                        //     username: "test"
-                        // };
-                        // const finalHtml = template(replacements);
                         oAuth2Client.setCredentials({ refresh_token: data[i].refresh_token });
                         const accessToken = await oAuth2Client.getAccessToken();
                         const transport = nodemailer.createTransport({
@@ -112,7 +105,7 @@ async function sendMail(req, res) {
                             from: data[i].gmail,
                             to: to,
                             subject: subject,
-                            html: ejs.render(fs.readFileSync(`/home/offers/${data[0].offer}`, 'utf-8'), { mensagem: 'olá, funciona' }),
+                            html: ejs.render(fs.readFileSync(`/home/offers/${data[0].offer}`, 'utf-8')),
                         };
                         const result = await transport.sendMail(mailOptions);
                         results.push(result)
