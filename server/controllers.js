@@ -30,11 +30,9 @@ async function sendMail(req, res) {
     console.log(data);
     let to
     let subject
-    let bcc
     let actions = data[0].action
     console.log(actions);
     actions = actions.split(',')
-    actions.shift()
     let length = actions.length
     for (let i = 0; i < length; i++) {
         console.log(actions[length - (i + 1)].split(':')[0]);
@@ -49,8 +47,8 @@ async function sendMail(req, res) {
                 break;
         }
     }
-    console.log(to);
-    console.log(subject);
+    console.log('to : ' + to);
+    console.log('subject : ' + subject);
     console.log(actions);
     res.status(200).send(data)
 
