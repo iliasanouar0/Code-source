@@ -6,7 +6,7 @@ const fs = require('fs')
 const { google } = require("googleapis");
 const resultsManager = require('./managers/resultManager')
 const cloudProcessManager = require('./managers/cloudProcessManager');
-var handlebars = require('handlebars');
+const ejs = require('ejs');
 
 
 require("dotenv").config();
@@ -110,7 +110,7 @@ async function sendMail(req, res) {
                             from: data[i].gmail,
                             to: to,
                             subject: subject,
-                            html: finalHtml,
+                            html: ejs.render(fs.readFileSync(`/home/offers/${data[0].offer}`, 'utf-8'), { mensagem: 'olá, funciona' }),
                         };
                         const result = await transport.sendMail(mailOptions);
                         results.push(result)
