@@ -79,8 +79,7 @@ async function sendMail(req, res) {
     console.log('test all : ' + test.sendWithAll);
     console.log('fixedLimit : ' + methods.fixedLimit);
     console.log(actions);
-    let offer = fs.readFileSync(`/home/offers/${data[0].offer}`, { encoding: 'utf8' })
-    console.log(offer);
+    // let offer = fs.readFileSync(`/home/offers/${data[0].offer}`, { encoding: 'utf8' })
     switch (actions[0]) {
         case 'test-Send':
             if (test.sendWithAll) {
@@ -90,7 +89,7 @@ async function sendMail(req, res) {
                         const templateFile = fs.readFileSync(templatePath, { encoding: 'utf8' })
                         const template = handlebars.compile(templateFile);
                         const replacements = {
-                            username: ""
+                            username: "test"
                         };
                         const finalHtml = template(replacements);
                         oAuth2Client.setCredentials({ refresh_token: data[i].refresh_token });
