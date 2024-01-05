@@ -72,7 +72,7 @@ const addProcess = (request, response) => {
 }
 
 const getAllData = (request, response) => {
-    let sql = "SELECT cloudprocess.*,cloudlist.name AS list_name,cloudlist.isp,users.login, COUNT(id_seeds) AS seedsCount FROM cloudprocess JOIN cloudlist ON cloudlist.id_list=cloudprocess.id_list JOIN users ON cloudprocess.id_user=users.id_user JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list GROUP BY cloudprocess.id_process,cloudlist.id_list,users.id_user"
+    let sql = "SELECT cloudprocess.*,cloudlist.name AS list_name,cloudlist.isp,users.login, COUNT(id_seed) AS seedsCount FROM cloudprocess JOIN cloudlist ON cloudlist.id_list=cloudprocess.id_list JOIN users ON cloudprocess.id_user=users.id_user JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list GROUP BY cloudprocess.id_process,cloudlist.id_list,users.id_user"
     pool.query(sql, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -187,7 +187,7 @@ const deleteOffer = (request, response) => {
 
 const getAllUserDate = (request, response) => {
     const id = (request.params.id)
-    let sql = "SELECT cloudprocess.*,cloudlist.name AS list_name,cloudlist.isp,users.login, COUNT(id_seeds) AS seedsCount FROM cloudprocess JOIN cloudlist ON cloudlist.id_list=cloudprocess.id_list JOIN users ON cloudprocess.id_user=users.id_user JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_user=($1) GROUP BY cloudprocess.id_process,cloudlist.id_list,users.id_user"
+    let sql = "SELECT cloudprocess.*,cloudlist.name AS list_name,cloudlist.isp,users.login, COUNT(id_seed) AS seedsCount FROM cloudprocess JOIN cloudlist ON cloudlist.id_list=cloudprocess.id_list JOIN users ON cloudprocess.id_user=users.id_user JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_user=($1) GROUP BY cloudprocess.id_process,cloudlist.id_list,users.id_user"
     pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -197,7 +197,7 @@ const getAllUserDate = (request, response) => {
 }
 
 const getAllSupDate = (request, response) => {
-    let sql = "SELECT cloudprocess.*,cloudlist.name AS list_name,cloudlist.isp,users.login, COUNT(id_seeds) AS seedsCount FROM cloudprocess JOIN cloudlist ON cloudlist.id_list=cloudprocess.id_list JOIN users ON cloudprocess.id_user=users.id_user JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE users.type!='IT' GROUP BY cloudprocess.id_process,cloudlist.id_list,users.id_user"
+    let sql = "SELECT cloudprocess.*,cloudlist.name AS list_name,cloudlist.isp,users.login, COUNT(id_seed) AS seedsCount FROM cloudprocess JOIN cloudlist ON cloudlist.id_list=cloudprocess.id_list JOIN users ON cloudprocess.id_user=users.id_user JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE users.type!='IT' GROUP BY cloudprocess.id_process,cloudlist.id_list,users.id_user"
     pool.query(sql, (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -208,7 +208,7 @@ const getAllSupDate = (request, response) => {
 
 const getAllProcessSeeds = (request, response) => {
     const id = (request.params.id)
-    let sql = "SELECT cloudprocess.id_process,cloudprocess.action,cloudprocess.status as pstatus, cloudseed.*,results.start_in, results.end_in, results.status as rStatus,results.statusdetails FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list  LEFT JOIN results ON results.id_process=cloudprocess.id_process AND results.id_seeds=cloudseed.id_seeds  WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seeds,results.start_in,results.end_in, results.status,cloudprocess.status,results.statusdetails ORDER BY CASE WHEN results.status = 'running' then 1 WHEN results.status = 'finished' then 2  WHEN results.status = 'failed' then 3 WHEN results.status='waiting' then 4 END ASC"
+    let sql = "SELECT cloudprocess.id_process,cloudprocess.action,cloudprocess.status as pstatus, cloudseed.*,results.start_in, results.end_in, results.status as rStatus,results.statusdetails FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list  LEFT JOIN results ON results.id_process=cloudprocess.id_process AND results.id_seeds=cloudseed.id_seed  WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed,results.start_in,results.end_in, results.status,cloudprocess.status,results.statusdetails ORDER BY CASE WHEN results.status = 'running' then 1 WHEN results.status = 'finished' then 2  WHEN results.status = 'failed' then 3 WHEN results.status='waiting' then 4 END ASC"
     pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -219,7 +219,7 @@ const getAllProcessSeeds = (request, response) => {
 
 const getAllProcessSeedsCount = (request, response) => {
     const id = (request.params.id)
-    let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seeds"
+    let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed"
     pool.query(sql, [id], (error, result) => {
         if (error) {
             response.status(500).send({ name: error.name, stack: error.stack, message: error.message, error: error })
@@ -229,8 +229,8 @@ const getAllProcessSeedsCount = (request, response) => {
 }
 
 const getAllProcessSeedsServer = async (id) => {
-    // let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seeds"
-    let sql = "SELECT cloudprocess.*, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seeds"
+    // let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed"
+    let sql = "SELECT cloudprocess.*, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed"
     const client = await pool.connect()
     const cloudlist = await client.query(sql, [id])
     client.release()
@@ -238,8 +238,8 @@ const getAllProcessSeedsServer = async (id) => {
 }
 
 const getAllProcessSeedsNotBounce = async (id) => {
-    // let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seeds"
-    let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.*,results.bounced, results.status as rstatus FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list JOIN results ON results.id_seeds=cloudseed.id_seeds WHERE cloudprocess.id_process=$1 AND results.bounced IS NULL AND results.status='finished' GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seeds,results.bounced,results.status"
+    // let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed"
+    let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.*,results.bounced, results.status as rstatus FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list JOIN results ON results.id_seeds=cloudseed.id_seed WHERE cloudprocess.id_process=$1 AND results.bounced IS NULL AND results.status='finished' GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed,results.bounced,results.status"
     const client = await pool.connect()
     const cloudlist = await client.query(sql, [id])
     client.release()
