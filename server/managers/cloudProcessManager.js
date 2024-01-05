@@ -440,6 +440,7 @@ const processing = async (data) => {
                     // })
                     // return result
                     console.log(seed);
+                    break
                 default:
                     console.log('data invalid');
                     break;
