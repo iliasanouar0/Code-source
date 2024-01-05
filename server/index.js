@@ -4079,7 +4079,7 @@ wsp.on('connection', (wss, req) => {
           console.log('active : ' + active);
           console.log('toProcess.length : ' + toProcess.length);
           console.log('seeds.length : ' + seeds.length);
-          console.log('seedsRunning : ' + seedsRunning);
+          console.log('seedsRunning : ' + seedsRunning.length);
           if (toProcess.length === 0 && seeds.length === 0 && seedsRunning.length == 0) {
             let status = { waiting: 0, active: 0, finished: success, failed: failed, id_process: data.id_process };
             await processStateManager.updateState(status);
@@ -4094,13 +4094,17 @@ wsp.on('connection', (wss, req) => {
         console.log("repeat action : " + action);
         if (check) {
           for (let i = 0; i < array[start].length; i++) {
+            await resultManager.startNow({ id_seeds: array[start][i].id_seed, id_process: data.id_process })
+            await resultManager.updateState([{ id_seeds: array[start][i].id_seed, id_process: data.id_process }], "running")
+            console.log('set as running : ' + array[start][i].gmail + ` ,At ${new Date().toLocaleString()}`);
+            running++
             processV([array[start][i]], start, { onlyStarted: false })
           }
         } else {
           console.log('The entered array :')
           console.log(array[start]);
           processV(array[start], start, { onlyStarted: true })
-          if (number - 1 > start) await repeat(array, number, start + 1, check, action);
+          if (number - 1 > start) await repeat(array, bccToProcess, number, start + 1, check, action);
         }
       }
 
@@ -4108,9 +4112,10 @@ wsp.on('connection', (wss, req) => {
       console.log('toProcess.length : ' + toProcess.length);
       console.log("actions[0] : " + actions[0]);
       let check = { startingIndexed: Origins.length / active < result.parsed.MAX_RUNNING ? true : false }
-      await repeat(toProcess, toProcess.length, 0, check.startingIndexed, actions[0])
-      let status = { waiting: waiting, active: active, finished: 0, failed: 0, name: data.name }
-      console.log(status)
+      await repeat(toProcess, bccToProcess, toProcess.length, 0, check.startingIndexed, actions[0])
+      let status = { waiting: waiting, active: active, finished: 0, failed: 0, id_process: data.id_process }
+      console.log(status);
+      processStateManager.addState(status)
     } else if (request == 'reset') {
       await cloudProcessManager.restedProcess(data.data)
       await resultManager.deleteResultsProcess(data.id_process)
