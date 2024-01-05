@@ -248,7 +248,7 @@ const getAllProcessSeedsNotBounce = async (id) => {
 
 const getAllProcessSeedsByState = async (data) => {
     let values = [data.id_process, data.status]
-    let sql = "SELECT results.status as s, cloudprocess.action, cloudseed.* FROM results JOIN cloudprocess ON cloudprocess.id_process=results.id_process JOIN cloudseed ON cloudseed.Id_seeds=results.Id_seeds WHERE results.id_process=($1) AND results.status=($2)"
+    let sql = "SELECT results.status as s, cloudprocess.action, cloudseed.* FROM results JOIN cloudprocess ON cloudprocess.id_process=results.id_process JOIN cloudseed ON cloudseed.id_seed=results.Id_seeds WHERE results.id_process=($1) AND results.status=($2)"
     const client = await pool.connect()
     const cloudlist = await client.query(sql, values);
     client.release()
