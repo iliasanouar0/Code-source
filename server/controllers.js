@@ -28,32 +28,47 @@ async function sendMail(req, res) {
     console.log(Obj);
     let data = await cloudProcessManager.getAllProcessSeedsProject(Obj)
     console.log(data);
-    let to
-    let subject
     let actions = data[0].action
+        , subject
+        , to
+        , limit
+        , methods = { fixedLimit: false }
+        , test = { sendWithAll: false }
+
+    if (actions.indexOf('subject') == -1 && actions.indexOf('to') == -1 && actions.indexOf('limit') == -1 && actions.indexOf('Fixed') == -1 && actions.indexOf('all') == -1) {
+        actions = [actions]
+    } else {
+        actions = actions.split(',')
+        let length = actions.length
+        for (let i = 0; i < length; i++) {
+            switch (actions[length - (i + 1)].split(':')[0]) {
+                case 'Fixed':
+                    actions.pop()
+                    methods.fixedLimit = true
+                    break;
+                case 'all':
+                    actions.pop()
+                    test.sendWithAll = true
+                    break;
+                case 'limit':
+                    limit = actions.pop().split(':')[1]
+                    break;
+                case 'to':
+                    to = actions.pop().split(':')[1]
+                    break;
+                case 'subject':
+                    subject = actions.pop().split(':')[1]
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    console.log('to : ' + to);
+    console.log('subject : ' + subject);
     console.log(actions);
-    actions = actions.split(',')
-    console.log(actions);
-    // let length = actions.length
-    // for (let i = 0; i < length; i++) {
-    //     console.log(actions[length - (i + 1)].split(':')[0]);
-    //     switch (actions[length - (i + 1)].split(':')[0]) {
-    //         case 'to':
-    //             to = actions.pop().split(':')[1]
-    //             break;
-    //         case 'subject':
-    //             console.log(actions[length - (i + 1)]);
-    //             console.log('test');
-    //             console.log(actions.pop().split(':')[1]);
-    //             subject = actions.pop().split(':')[1]
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
-    // console.log('to : ' + to);
-    // console.log('subject : ' + subject);
-    // console.log(actions);
+
+
     res.status(200).send(data)
 
     // let list = processManager.getAllProcessSeeds(data.list)
