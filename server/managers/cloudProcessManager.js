@@ -239,7 +239,7 @@ const getAllProcessSeedsServer = async (id) => {
 
 const getAllProcessSeedsProject = async (id) => {
     // let sql = "SELECT cloudprocess.id_process,cloudprocess.action, cloudseed.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed"
-    let sql = "SELECT cloudprocess.*, cloudseed.*, cloudproject.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list JOIN cloudproject ON cloudproject.id_project=cloudseed.id_project WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed,cloudproject.id_account"
+    let sql = "SELECT cloudprocess.*, cloudseed.*, cloudproject.* FROM cloudprocess JOIN cloudseed ON cloudseed.id_list=cloudprocess.id_list JOIN cloudproject ON cloudproject.id_project=cloudseed.id_project WHERE cloudprocess.id_process=$1 GROUP BY cloudseed.id_list,cloudprocess.id_list,cloudprocess.id_process,cloudseed.id_seed,cloudproject.id_account, cloudproject.id_account"
     const client = await pool.connect()
     const cloudlist = await client.query(sql, [id])
     client.release()
