@@ -1151,7 +1151,7 @@ $(document).on('click', '.status', event => {
                 searchable: false,
                 orderable: false,
                 render: function (row) {
-                    return `<button type="button" class="btn btn-dark details" data-id="${row.id_seeds}" data-id_process="${id}"><i class="fas fa-eye"></i></button>`
+                    return `<button type="button" class="btn btn-dark details" data-id="${row.id_seed}" data-id_process="${id}"><i class="fas fa-eye"></i></button>`
                 }
             }
         ],
