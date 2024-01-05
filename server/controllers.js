@@ -41,6 +41,7 @@ async function sendMail(req, res) {
                 to = actions.pop().split(':')[1]
                 break;
             case 'subject':
+                console.log(actions[length - (i + 1)]);
                 subject = actions.pop().split(':')[1]
                 break;
             default:
