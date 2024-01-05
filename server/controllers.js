@@ -78,7 +78,6 @@ async function sendMail(req, res) {
     console.log('fixedLimit : ' + methods.fixedLimit);
     console.log(actions);
     let offer = fs.readFileSync(`/home/offers/${data[0].offer}`, { encoding: 'utf8' })
-    console.log(offer);
     switch (actions[0]) {
         case 'test-Send':
             if (test.sendWithAll) {
@@ -103,7 +102,6 @@ async function sendMail(req, res) {
                             to: to,
                             subject: subject,
                             text: `${offer}`,
-                            // html: "offer"
                         };
                         const result = await transport.sendMail(mailOptions);
                         results.push(result)
@@ -150,6 +148,7 @@ async function sendMail(req, res) {
             break;
     }
     cloudProcessManager.finishedProcess({ status: 'FINISHED', id_process: Obj })
+    console.log(results);
     res.status(200).send(results)
 }
 
