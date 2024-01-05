@@ -871,6 +871,8 @@ $(document).on('click', '.send', e => {
     $.ajax(settings).done(function (response) {
         $(e.target).html('Send')
         console.log(response);
+        getDataCloudProcess.ajax.reload(null, false)
+        $('body .tooltip').removeClass('show');
         // console.log($("#result"));
         // let r = ''
         // for (let i = 0; i < response; i++) {
