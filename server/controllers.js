@@ -27,7 +27,7 @@ async function sendMail(req, res) {
     console.log(data[0].client_id)
     console.log(data[0].client_secret);
     console.log(data[0].redirect_url);
-    
+
     const oAuth2Client = new google.auth.OAuth2(
         data[0].client_id,
         data[0].client_secret,
@@ -81,12 +81,13 @@ async function sendMail(req, res) {
         case 'test-Send':
             for (let i = 0; i < data.length; i++) {
                 try {
-                    oAuth2Client.setCredentials({ refresh_token:  data[i].refresh_token });
+                    oAuth2Client.setCredentials({ refresh_token: data[i].refresh_token });
                     const accessToken = await oAuth2Client.getAccessToken();
                     const transport = nodemailer.createTransport({
                         service: "gmail",
                         auth: {
                             // ...CONSTANTS.auth,
+                            type: "OAuth2",
                             clientId: data[i].client_id,
                             clientSecret: data[i].client_secret,
                             user: data[i].gmail,
