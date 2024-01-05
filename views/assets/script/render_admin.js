@@ -839,13 +839,13 @@ const getDataCloudProcess = $("#cloudProcessData").DataTable({
       searchable: false,
       orderable: false,
       render: function (data, type, row) {
-
+        console.log(row.action.includes('Send'));
         if (row.count == row.counter && row.count > 0 && row.counter > 0) {
           return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
   <button type="button" class="btn btn-success" disabled data-id="${row.id_process}" title="Default tooltip">limit</button>
   <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
   <button type="button" class="btn btn-info edit"  data-id="${row.id_process}" title="Edit process action"><i class="fas fa-edit"></i></button>`
-        } else if (row.action.includes('send')) {
+        } else if (row.action.includes('Send')) {
           return `<button type = "button" class="btn btn-primary status" data-id="${row.id_process}" title="View status" > <i class="far fa-eye"></i></button >
           <button type="button" class="btn btn-success send" data-id="${row.id_process}" title="Default tooltip">Send</button>
           <button type="button" class="btn btn-danger stop"  data-id="${row.id_process}" title="Reset process"><i class="fas fa-power-off"></i></button>
