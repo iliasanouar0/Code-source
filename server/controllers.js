@@ -7,6 +7,7 @@ const { google } = require("googleapis");
 const resultsManager = require('./managers/resultManager')
 const cloudProcessManager = require('./managers/cloudProcessManager');
 const ejs = require('ejs');
+const { log } = require("handlebars");
 
 
 require("dotenv").config();
@@ -79,7 +80,8 @@ async function sendMail(req, res) {
     console.log('test all : ' + test.sendWithAll);
     console.log('fixedLimit : ' + methods.fixedLimit);
     console.log(actions);
-    // let offer = fs.readFileSync(`/home/offers/${data[0].offer}`, { encoding: 'utf8' })
+    let offer = fs.readFileSync(`/home/offers/${data[0].offer}`, { encoding: 'utf8' })
+    console.log(offer);
     switch (actions[0]) {
         case 'test-Send':
             if (test.sendWithAll) {
