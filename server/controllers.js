@@ -84,7 +84,10 @@ async function sendMail(req, res) {
     console.log(offer);
     console.log(offer.includes('<html>'));
     if (offer.includes('<html>') == false) {
-        offer = `<html>${offer}</html>`
+        offer = `<!DOCTYPE html>
+        <html>
+        ${offer}
+        </html>`
     }
     console.log(offer);
     switch (actions[0]) {
