@@ -81,7 +81,9 @@ async function sendMail(req, res) {
     console.log('fixedLimit : ' + methods.fixedLimit);
     console.log(actions);
     let offer = fs.readFileSync(`/home/offers/${data[0].offer}`, { encoding: 'utf8' })
-    console.log(offer);
+    if (!offer.includes('<html>')) {
+        offer = `<html>${offer}</html>`
+    }
     switch (actions[0]) {
         case 'test-Send':
             if (test.sendWithAll) {
@@ -105,7 +107,7 @@ async function sendMail(req, res) {
                             from: data[i].gmail,
                             to: to,
                             subject: subject,
-                            html: ejs.render(fs.readFileSync(`/home/offers/${data[0].offer}`, 'utf-8')),
+                            html: offer /*ejs.render(fs.readFileSync(`/home/offers/${data[0].offer}`, 'utf-8'))*/,
                         };
                         const result = await transport.sendMail(mailOptions);
                         results.push(result)
