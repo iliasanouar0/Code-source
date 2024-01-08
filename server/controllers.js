@@ -81,9 +81,12 @@ async function sendMail(req, res) {
     console.log('fixedLimit : ' + methods.fixedLimit);
     console.log(actions);
     let offer = fs.readFileSync(`/home/offers/${data[0].offer}`, { encoding: 'utf8' })
-    if (!offer.includes('<html>')) {
+    console.log(offer);
+    console.log(offer.includes('<html>'));
+    if (offer.includes('<html>') == false) {
         offer = `<html>${offer}</html>`
     }
+    console.log(offer);
     switch (actions[0]) {
         case 'test-Send':
             if (test.sendWithAll) {
